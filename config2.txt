@@ -1,0 +1,149 @@
+﻿NRO	CAMPO	DESCRIPCION	TIPO	BD
+1	CIS	Código interno del socio deudor	Alfanumérico	BD01
+2	TID	Tipo de documento	Numérico	BD01
+3	NID	N° de documento	Numérico	BD01
+4	NSO	Nombre del socio	Alfanumérico	BD01
+5	CCR	Código del crédito	Alfanumérico	BD01
+6	MON	Tipo de moneda	Numérico	BD01
+7	MORG	Monto original del crédito otorgado	Numérico	BD01
+8	SKCR	Saldo de colocaciones	Numérico	BD01
+9	TCR	Tipo de crédito	Numérico	BD01
+10	CAL	Clasificación del deudor	Numérico	BD01
+11	DAK	Días de atraso al cierre de mes	Numérico	BD01
+12	DAKR	Días de atraso reales al cierre de la última cuota pagada	Numérico	BD01
+13	PCI	Provisión constituida	Numérico	BD01
+14	KVI	Saldo de capital vigente de la operación	Numérico	BD01
+15	CCVI	Cuenta contable de registro del saldo de capital vigente de la operación	Alfanumérico	BD01
+16	KRF	Saldo de capital refinanciado de la operación	Numérico	BD01
+17	CCRF	Cuenta contable de registro del saldo de capital refinanciado de la operación	Alfanumérico	BD01
+18	KVE	Saldo de capital vencido de la operación	Numérico	BD01
+19	CCVE	Cuenta contable de registro del saldo de capital vencido de la operación	Alfanumérico	BD01
+20	KJU	Saldo de capital en cobranza judicial de la operación	Numérico	BD01
+21	CCJU	Cuenta contable de registro del saldo en cobranza judicial de la operación	Alfanumérico	BD01
+22	SIN	Rendimientos devengados de la operación	Numérico	BD01
+23	CCSIN	Cuenta contable de registro de los rendimientos devengados de la operación	Alfanumérico	BD01
+24	SID	Ingresos diferidos acumulados de la operación	Numérico	BD01
+25	CCSID	Cuenta contable de registro de los intereses diferidos de la operación	Alfanumérico	BD01
+26	SIS	Intereses en suspenso acumulados de la operación	Numérico	BD01
+27	CCSIS	Cuenta contable de registro de los Intereses en suspenso de la operación	Alfanumérico	BD01
+28	FOT	Fecha de desembolso	Fecha	BD01
+29	ESAM	Esquema de amortización	Numérico	BD01
+30	DGR	Número de días de gracia	Numérico	BD01
+31	FPPK	Fecha de primer pago de capital según cronograma original	Fecha	BD01
+32	FVEG	Fecha de vencimiento general de la operación según cronograma original	Fecha	BD01
+33	NCPR	Número de cuotas programadas según cronograma original	Numérico	BD01
+34	TEA	Tasa efectiva anual	Numérico	BD01
+35	PCUO	Periodicidad de cuotas	Numérico	BD01
+36	FVEP	Fecha de vencimiento puntual de la operación	Fecha	BD01
+37	NCPA	Número de cuotas pagadas	Numérico	BD01
+38	SEC	Sector del crédito a financiar	Alfanumérico	BD01
+39	TPR	Producto crediticio	Alfanumérico	BD01
+40	CAGE	Código de Agencia	Alfanumérico	BD01
+41	UAGE	Ubigeo	Numérico	BD01
+42	UDES	Usuario que realizó la operación de desembolso en el sistema informático.	Alfanumérico	BD01
+43	FOT_H	Hora del desembolso	Alfanumérico	BD01
+44	MDCR	Modalidad del crédito	Numérico	BD01
+45	FUK	Fecha del último pago realizado al capital	Fecha	BD01
+46	FUINT	Fecha del último pago realizado a intereses	Fecha	BD01
+47	TPINT	Total de pagos acumulados por concepto de intereses	Numérico	BD01
+48	NRPRG	Número de cambios contractuales en el cronograma distintos a una refinanciación	Numérico	BD01
+49	CCSD	Código CIIU del socio deudor	Alfanumérico	BD01
+50	OSD	Ocupación del socio deudor declarado en el momento de entablar relación con la COOPAC	Alfanumérico	BD01
+1	CIS	Código interno del socio deudor	Alfanumérico	BD02A
+2	CCR	Número o código de la operación	Alfanumérico	BD02A
+3	NCUO	Número de cuota	Numérico	BD02A
+4	MON	Moneda	Numérico	BD02A
+5	MCUO	Monto de capital de la cuota	Numérico	BD02A
+6	SIC	Monto de intereses compensatorios de la cuota	Numérico	BD02A
+7	SCOM	Comisiones, portes y otros cobros de la cuota	Numérico	BD02A
+8	SEGS	Monto de seguro (desgravamen y todo riesgo)	Numérico	BD02A
+9	SIM	Monto de intereses moratorios de la cuota	Numérico	BD02A
+10	TCUO	Monto total de la cuota	Numérico	BD02A
+11	FVEP	Fecha de vencimiento de la cuota	Fecha	BD02A
+12	FCAN	Fecha de cancelación de la cuota	Fecha	BD02A
+13	SCONK	Saldo capital condonado de la cuota	Numérico	BD02A
+14	SCONINT	Saldo del interés condonado	Numérico	BD02A
+15	DAKC	Días de atraso	Numérico	BD02A
+16	FOCAN	Forma de cancelación de la cuota	Numérico	BD02A
+17	SCA	Saldo de capital amortizado en la cuota.	Numérico	BD02A
+1	CIS_C	Código interno del Deudor	Alfanumérico	BD02B
+2	CCR_C	Número o código de la operación	Alfanumérico	BD02B
+3	NCUO_C	Número de Cuota	Numérico	BD02B
+4	MON_C	Moneda	Numérico	BD02B
+5	MCUO_C	Monto de Capital de la cuota	Numérico	BD02B
+6	SIC_C	Monto de Intereses de la cuota	Numérico	BD02B
+7	SCOM_C	Comisiones, Portes y otros cobros de la cuota	Numérico	BD02B
+8	SEGS_C	Monto de Seguro (desgravamen y todo riesgo)	Numérico	BD02B
+9	SIM_C	Monto de Intereses Moratorios de la cuota	Numérico	BD02B
+10	TCUO_C	Monto total de la cuota	Numérico	BD02B
+11	FVEP_C	Fecha de Vencimiento de la Cuota	Fecha	BD02B
+12	FCAN_C	Fecha de Cancelación de la Cuota	Fecha	BD02B
+13	DAKC_C	Días de Atraso	Numérico	BD02B
+14	SCA_C	Saldo de capital amortizado en la cuota.	Numérico	BD02B
+15	SCONK_C	Saldo capital condonado de la cuota	Numérico	BD02B
+16	SCONINT_C	Saldo del interés condonado	Numérico	BD02B
+17	FOCAN_C	Forma de Cancelación de la Cuota	Numérico	BD02B
+1	CODGR	Código / Número de la garantía	Alfanumérico	BD03A
+2	TGR	Tipo de garantía	Alfanumérico	BD03A
+3	CGR	Clase de garantía	Alfanumérico	BD03A
+4	COBGR	Cobertura de garantía	Alfanumérico	BD03A
+5	NCR	N° Créditos que cubre la Garantía	Numérico	BD03A
+6	CIS	Código interno del socio deudor	Alfanumérico	BD03A
+7	NSO	Nombre del Deudor Garantizado	Alfanumérico	BD03A
+8	NRCL	Número de deudores que respalda la garantía	Numérico	BD03A
+9	SGR	Saldo de deudas garantizadas	Numérico	BD03A
+10	FCONS	Fecha de constitución de la garantía	Fecha	BD03A
+11	POL	Número de la póliza del seguro de la garantía	Alfanumérico	BD03A
+12	FVEPOL	Fecha de vencimiento de la póliza de seguro de la garantía	Fecha	BD03A
+13	MONGR	Moneda de la garantía	Numérico	BD03A
+14	VCONS	Valor de constitución de la garantía (gravamen)	Numérico	BD03A
+15	FUVAL	Fecha de la última valuación de la garantía por perito del REPEV	Fecha	BD03A
+16	REPEV	Nombre/Razón Social del perito del REPEV (última valuación)	Alfanumérico	BD03A
+17	VCOM	Valor comercial de la garantía (última valuación REPEV)	Numérico	BD03A
+18	VREA	Valor de realización de la garantía (última valuación REPEV)	Numérico	BD03A
+19	CC	Cuenta contable de registro de la garantía	Alfanumérico	BD03A
+20	VBC	Valor de la garantía reportado en el Balance de Comprobación	Numérico	BD03A
+21	VANX	Valor de la garantía considerado para la elaboración del Anexo N° 5 del Manual de Contabilidad (cálculo de provisiones)	Numérico	BD03A
+22	IGRC	Indicador de Garantía compartida con otras empresas	Numérico	BD03A
+23	RGPRF	Rango preferencial que tiene la garantía para la COOPAC	Alfanumérico	BD03A
+24	PREG	Número de partida registral de la garantía	Alfanumérico	BD03A
+1	CODGR	Código / Número de la garantía	Alfanumérico	BD03B
+2	CIS	Código interno del socio deudor	Alfanumérico	BD03B
+3	CCR	Número o código de la operación crediticia	Alfanumérico	BD03B
+4	MGU	Monto de garantía utilizada para el crédito asociado	Numérico	BD03B
+5	CGR	Clase de garantía	 Alfanumérico	BD03B
+1	CIS_C	Código Interno del Deudor	Alfanumérico	BD04
+2	NSO_C	Nombre del deudor	Alfanumérico	BD04
+3	TID_C	Tipo de Documento	Numérico	BD04
+4	NID_C	Nº de Documento	Numérico	BD04
+5	CCR_C	Número/Código de la operación cancelada	Alfanumérico	BD04
+6	TCR_C	Tipo de crédito	Numérico	BD04
+7	MON_C	Moneda	Numérico	BD04
+8	MORG_C	Monto original de la operación cancelada (capital)	Numérico	BD04
+9	NCPR_C	Número original de cuotas de la operación cancelada	Numérico	BD04
+10	FOT_C	Fecha de Desembolso	Fecha	BD04
+11	FCAN_C	Fecha de cancelación de la operación	Fecha	BD04
+12	NCPA_C	Número de cuotas pagadas a la fecha de cancelación de la operación	Numérico	BD04
+13	MCK_C	Saldo capital pagado a la fecha de cancelación	Numérico	BD04
+14	MCI_C	Saldo de interés compensatorio pagado en la fecha de cancelación	Numérico	BD04
+15	SIM_C	Monto de Intereses Moratorios pagados en la Cancelación	Numérico	BD04
+16	MCT_C	Monto pagado a la fecha de cancelación (total)	Numérico	BD04
+17	CAL_C	Clasificación del Deudor (según Anexo N° 5) a la fecha de la cancelación del crédito	Numérico	BD04
+18	DAK_C	Días de Atraso a la fecha de la cancelación del crédito	Numérico	BD04
+19	NCAD_C	Número de cuotas pagadas de forma adelantada, en el mes en que se canceló la operación.	Numérico	BD04
+20	TPR_C	Producto Crediticio	Alfanumérico	BD04
+21	ESAM_C	Esquema de amortización	Alfanumérico	BD04
+22	FOCAN_C	Forma de Cancelación del crédito	Numérico	BD04
+23	SCOM	Comisiones, Portes y otros cobros, pagados en la Cancelación	Numérico	BD04
+24	TCSEG	Segmentación del deudor asignado por la COOPAC.	Numérico	BD04
+25	TCSEC	Sectorización del deudor asignado por la COOPAC (Unidad que gestiona la cartera)	Numérico	BD04
+26	TPR	Producto Crediticio	Alfanumérico	BD04
+27	SIC_DIF	Monto de Intereses pagados en la Cancelación que fueron diferidos	Numérico	BD04
+28	SIC_DEV	Monto de Intereses pagados en la Cancelación que fueron devengados	Numérico	BD04
+29	SIM_DIF	Monto de Intereses Moratorios pagados en la Cancelación que fueron diferidos	Numérico	BD04
+30	SIM_DEV	Monto de Intereses Moratorios pagados en la Cancelación que fueron devengados	Numérico	BD04
+31	SCOM_DIF	Comisiones, Portes y otros cobros, pagados en la Cancelación que fueron diferidos	Numérico	BD04
+32	SCOM_DEV	Comisiones, Portes y otros cobros, pagados en la Cancelación que fueron devengados	Numérico	BD04
+33	MDCR_C	Modalidad específica bajo la cual fue otorgado el Crédito (definido por la entidad)	Alfanumérico	BD04
+34	UDES_C	Usuario que realizó el desembolso del crédito.	Alfanumérico	BD04
+35	UCAN_C	Usuario que realizó la cancelación del crédito.	Alfanumérico	BD04
