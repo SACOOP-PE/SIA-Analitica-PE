@@ -53,12 +53,12 @@ depurarColsErrorT3 <- function(ruta, error_bucket){
 }
 restriccion_archivos_ErroresLayer4 <- function(header, error_bucket, exigibles, tipoError){
   exigibles_errorTipo <- tibble(Nombre_archivo = exigibles) %>% rowwise() %>%
-    mutate(n_cols = switch (tipoError,
-                            tipo1 = depurarColsErrorT1(getRuta(getCarpeta(header), Nombre_archivo),
-                                                       error_bucket) %>% length(),
-                            tipo3 = depurarColsErrorT3(getRuta(getCarpeta(header), Nombre_archivo),
-                                                       error_bucket) %>% length())) %>%
-    filter(n_cols > 0) %>%
+    mutate(colsfiltradas_n = switch (tipoError,
+                                     tipo1 = depurarColsErrorT1(getRuta(getCarpeta(header), Nombre_archivo),error_bucket) %>%
+                                              length(),
+                                     tipo3 = depurarColsErrorT3(getRuta(getCarpeta(header), Nombre_archivo),error_bucket) %>%
+                                              length())) %>%
+    filter(colsfiltradas_n > 0) %>%
     pull(Nombre_archivo) %>%
     return()
 }
