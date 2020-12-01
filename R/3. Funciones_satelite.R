@@ -547,6 +547,6 @@ getFechaCorte      <- function(ruta){
 }
 procesarErrorFechaDesembolso  <- function(ruta, BD =evalFile(ruta) ){
   BD %>% filter((dmy(BD %>% pull(FOT)) > getFechaCorte(ruta)) == TRUE) %>% 
-    pull(CCR) %>% toString() %>%
+    pull(CCR) %>%
     return()
 }
