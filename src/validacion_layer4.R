@@ -2,6 +2,10 @@ ejecutar_validacion_layer4 <- function(header, error_bucket){
   
   carpeta   <- getCarpeta(header)
   exigibles <- getArchivos_SinErrores(header, error_bucket, c(201, 203), c("CCR","CCR_C","CODGR"))
+  tb_main <- tibble(Nombre_archivo = exigibles) %>% rowwise() %>%
+    mutate(Ruta    = getRuta(carpeta, Nombre_archivo),
+           Periodo = getAnoMes(Ruta),
+           BDCC    = getBD(Ruta))
 
   # i. Errores tipo1 ----
   exigibles_tipo1 <- restriccion_archivos_ErroresLayer4(header, error_bucket, exigibles, "tipo1")
@@ -15,10 +19,6 @@ ejecutar_validacion_layer4 <- function(header, error_bucket){
                          ungroup()
   
   # ii. Errores tipo2 ----
-  tb_main <- tibble(Nombre_archivo = exigibles) %>% rowwise() %>%
-     mutate(Ruta    = getRuta(carpeta, Nombre_archivo),
-            Periodo = getAnoMes(Ruta),
-            BDCC    = getBD(Ruta))
   tb_error2 <- tb_main %>% filter(BDCC == "BD01") %>% rowwise() %>%
     mutate(vf_Saldos             = procesarErrorSaldosNegativos(Ruta) %>% toString(),
            vf_ModalidadPagoCouta = realizar_pasteCondicional_2(Ruta, procesarErrorModalidadCouta(Ruta)),
@@ -73,7 +73,7 @@ ejecutar_validacion_layer4 <- function(header, error_bucket){
                        mutate(vf_CodDeudor = procesarErrorcodDeudor(carpeta, Periodo, "BD03A","BD01")) %>% rowwise() %>%
                        pull(vf_CodDeudor) %>% 
                        paste(collapse = ",") %>%
-                       strsplit(","))[[1]] 
+                       strsplit(","))[[1]]
 
     if (length(errorCodDeudor[errorCodDeudor != "character(0)"]) > 0){
       error_bucket <- error_bucket %>%
@@ -92,7 +92,7 @@ ejecutar_validacion_layer4 <- function(header, error_bucket){
                           ungroup()
   
   errorFechaDesembolso <- (tb_main %>% filter(BDCC == "BD01") %>% rowwise() %>%
-                             mutate(vf_FechaDesembolso = realizar_pasteCondicional_2(Ruta, procesarErrorFechaDesembolso(Ruta))) %>%
+                             mutate(vf_FechaDesembolso = realizar_pasteCondicional_2(Ruta, procesarErrorFechaDesembolso(Ruta))) %>% rowwise() %>%
                              pull(vf_FechaDesembolso) %>% 
                              paste(collapse = ",") %>%
                              strsplit(","))[[1]]
