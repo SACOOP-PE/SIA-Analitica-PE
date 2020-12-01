@@ -414,8 +414,8 @@ procesarErrorSaldosNegativos <- function(ruta, BD = evalFile(ruta)){
   saldosCols <- c("SKCR", "PCI", "KVI", "KRF", "KVE", "KJU", "SIN", "SID", "SIS", "DGR", "NCPR", "NCPA", "TPINT", "NRPRG")
   
   tb <- tibble(Columna = saldosCols) %>% rowwise() %>%
-    mutate(procesarSaldos = BD %>% 
-                               filter(as.numeric(cgrep(BD, Columna)[[1]]) <0) %>% pull(CCR) %>% list(),
+    mutate(procesarSaldos = BD %>% filter(as.numeric(cgrep(BD, Columna)[[1]]) <0) %>%
+                                   pull(CCR) %>% list(),
            resultado      = realizar_pasteCondicional_3(ruta, Columna, procesarSaldos) %>% toString()) %>%
     filter(resultado != "character(0)") %>%
     pull(resultado) %>% 
@@ -438,7 +438,7 @@ procesarErrorVencJudRetraso  <- function(ruta, BD = evalFile(ruta)){
 }
 
  #BD01 y BD04
-numeroCaracteresDoc <- function(documento){
+numeroCaracteresDoc         <- function(documento){
   n_caracteres <- switch (documento,
                           "1" = "8",
                           "2" = "9",
@@ -449,21 +449,21 @@ numeroCaracteresDoc <- function(documento){
   return(n_caracteres)
 }
 procesarErrorDocumentoIdent <- function(ruta, BD = evalFile(ruta)){
-  vf_doc <- BD %>% rowwise() %>% 
-    mutate(vf =  switch (getBD(ruta),
+  verificar_documento <- BD %>% rowwise() %>% 
+    mutate(detectarError =  switch (getBD(ruta),
                          BD01 = if_else(numeroCaracteresDoc(TID) == (nchar(NID) %>% toString()), "TRUE", "FALSE"),
                          BD04 = if_else(numeroCaracteresDoc(TID_C) == (nchar(NID_C) %>% toString()), "TRUE", "FALSE"))) %>%
-    filter(vf == "FALSE") %>% 
+    filter(detectarError == "FALSE") %>% 
     pull(getCodigoBD(getBD(ruta))) 
   
-  realizar_pasteCondicional_2(ruta, vf_doc) %>% return()
+  realizar_pasteCondicional_2(ruta, verificar_documento) %>% return()
 }
 
  #BD03A
 procesarErrorNumCredCobertura <- function(ruta, BD = evalFile(ruta)){
   BD %>% 
-    filter(as.numeric(NCR) > 0, as.numeric(NRCL) == 0) %>% 
-    pull(getCodigoBD("BD03A")) %>% 
+    filter(as.numeric(NCR) > 0, as.numeric(NRCL) == 0) %>%
+    pull(getCodigoBD("BD03A")) %>%
     unique() %>% return()
 }
 
@@ -477,6 +477,7 @@ procesarErrorcodDeudor <- function(carpeta, periodo, BD03A, BD01){
 }
 
 # Validaciones de campos fechas                             (errores tipo3)----
+ #BD01, BD02A, BD02B, BD04
 ColumnasErrorTipo3 <- function(ruta){
   cols <- switch (getBD(ruta),
                   BD01  = {c("FOT", "FVEG", "FVEP")},
@@ -518,6 +519,7 @@ procesarErroresT3  <- function(ruta, error_bucket){
                               select(Coopac, Coopac_n, Carpeta, IdProceso, Cod, Descripcion, Detalle)) %>% return()
 }
 
+ #BD01
 getFechaCorte      <- function(ruta){
   fecha_corte <- seq(as.Date(paste(getAno(ruta),
                                     getMes(ruta),
