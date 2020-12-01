@@ -60,7 +60,7 @@ ejecutar_validacion_layer4 <- function(header, error_bucket){
   
   errorCredCobertura <- (tb_main %>% filter(BDCC == "BD03A") %>% rowwise() %>%
                   mutate(vf_CredCobertura = realizar_pasteCondicional_2(Ruta, procesarErrorNumCredCobertura(Ruta))) %>% rowwise() %>%
-                  pull(verif_ncr) %>% 
+                  pull(vf_CredCobertura) %>% 
                   paste(collapse = ",") %>%
                   strsplit(","))[[1]]
   
