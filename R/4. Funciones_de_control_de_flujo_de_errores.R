@@ -1,8 +1,8 @@
 ##### 4. Funciones de control de flujo de errores  -----
 getArchivos_Error      <- function(header, error_bucket, cod, col){
-  detalle_error_split <- unlist(error_bucket %>% filter(Cod %in% cod) %>% pull(Detalle) %>% str_split(","))
+  detallError_split <- unlist(error_bucket %>% filter(Cod %in% cod) %>% pull(Detalle) %>% str_split(","))
   
-  str_extract(detalle_error_split[str_detect(detalle_error_split, paste(col,collapse = '|'))],
+  str_extract(detallError_split[str_detect(detallError_split, paste(col, collapse = '|'))],
               paste(getArchivosExigibles(header),collapse = '|')) %>% 
     return()
 }
@@ -19,15 +19,15 @@ restriccion_archivosFaltDups <- function(error_bucket){
 }
 # layer 3 (cruces BD01/BD02A, BD03A/BD03B), layer 4 (error_cis)
 restriccion_periodos         <- function(error_bucket, name_BD1, name_BD2, columnas){
-  archivos <- intersect(getArchivos_SinErrores(header, error_bucket, c(201, 203), columnas),
+  filtrar_archivos <- intersect(getArchivos_SinErrores(header, error_bucket, c(201, 203), columnas),
                         setdiff(getArchivosExigibles(header),
                                 str_extract(filter(error_bucket, Cod %in% c(311, 312)) %>% pull(Detalle), paste(getArchivosExigibles(header), collapse = '|')) %>%
                                   unique())) %>%
-              unique()
+                      unique()
   
-  archivos_cruce <- archivos[str_detect(archivos, paste(c(name_BD1, name_BD2), collapse = '|'))]
+  archivosCruce <- filtrar_archivos[str_detect(filtrar_archivos, paste(c(name_BD1, name_BD2), collapse = '|'))]
   
-  tibble(Periodos =  str_extract(archivos_cruce, paste(as.character(alcance_general),collapse = '|'))) %>%
+  tibble(Periodos =  str_extract(archivosCruce, paste(as.character(alcance_general),collapse = '|'))) %>%
     group_by(Periodos) %>%
     filter(n() ==2) %>%
     pull(Periodos) %>% 
