@@ -29,6 +29,21 @@ ejecutar_validacion_layer4 <- function(header, error_bucket){
   errorModPagoCouta    <- (paste(tb_error2 %>% rowwise() %>% pull(vf_ModPagoCouta), collapse = ",") %>% strsplit(","))[[1]]
   errorMontoOtorgado   <- (paste(tb_error2 %>% rowwise() %>% pull(vf_MontoOtorgado), collapse = ",") %>% strsplit(","))[[1]]
   errorDiasRetraso     <- (paste(tb_error2 %>% rowwise() %>% pull(vf_DiasRetraso), collapse = ",") %>% strsplit(","))[[1]]
+  errorDocIdent <- (tb_main %>% filter(BDCC %in% c("BD01","BD04")) %>% rowwise() %>%
+                      mutate(vf_documento = procesarErrorDocumentoIdent(Ruta)) %>% rowwise() %>%
+                      pull(vf_documento) %>% 
+                      paste(collapse = ",") %>%
+                      strsplit(","))[[1]]
+  errorCredCobertura <- (tb_main %>% filter(BDCC == "BD03A") %>% rowwise() %>%
+                           mutate(vf_CredCobertura = realizar_pasteCondicional_2(Ruta, procesarErrorNumCredCobertura(Ruta))) %>% rowwise() %>%
+                           pull(vf_CredCobertura) %>% 
+                           paste(collapse = ",") %>%
+                           strsplit(","))[[1]]
+  errorCodDeudor <- (tibble(Periodo = restriccion_periodos(error_bucket, "BD01", "BD03A", "CIS")) %>% rowwise() %>%
+                       mutate(vf_CodDeudor = procesarErrorcodDeudor(carpeta, Periodo, "BD03A","BD01")) %>% rowwise() %>%
+                       pull(vf_CodDeudor) %>% 
+                       paste(collapse = ",") %>%
+                       strsplit(","))[[1]]
   
     if (length(errorSaldosNegativos) > 0){
       error_bucket <- error_bucket %>%
@@ -46,35 +61,14 @@ ejecutar_validacion_layer4 <- function(header, error_bucket){
       error_bucket <- error_bucket %>%
         addError(464, getDescError(464), (errorDiasRetraso[errorDiasRetraso != "character(0)"]) %>% toString())
       }
-  
-  errorDocIdent <- (tb_main %>% filter(BDCC %in% c("BD01","BD04")) %>% rowwise() %>%
-                            mutate(vf_documento = procesarErrorDocumentoIdent(Ruta)) %>% rowwise() %>%
-                            pull(vf_documento) %>% 
-                            paste(collapse = ",") %>%
-                            strsplit(","))[[1]]
-  
     if (length(errorDocIdent[errorDocIdent != "character(0)"]) > 0){
       error_bucket <- error_bucket %>%
         addError(465, getDescError(465), (errorDocIdent[errorDocIdent != "character(0)"]) %>% toString())
       }
-  
-  errorCredCobertura <- (tb_main %>% filter(BDCC == "BD03A") %>% rowwise() %>%
-                  mutate(vf_CredCobertura = realizar_pasteCondicional_2(Ruta, procesarErrorNumCredCobertura(Ruta))) %>% rowwise() %>%
-                  pull(vf_CredCobertura) %>% 
-                  paste(collapse = ",") %>%
-                  strsplit(","))[[1]]
-  
     if (length(errorCredCobertura[errorCredCobertura != "character(0)"]) > 0){
       error_bucket <- error_bucket %>%
         addError(466, getDescError(466), (errorCredCobertura[errorCredCobertura != "character(0)"]) %>% toString())
       }
-  
-  errorCodDeudor <- (tibble(Periodo = restriccion_periodos(error_bucket, "BD01", "BD03A", "CIS")) %>% rowwise() %>%
-                       mutate(vf_CodDeudor = procesarErrorcodDeudor(carpeta, Periodo, "BD03A","BD01")) %>% rowwise() %>%
-                       pull(vf_CodDeudor) %>% 
-                       paste(collapse = ",") %>%
-                       strsplit(","))[[1]]
-
     if (length(errorCodDeudor[errorCodDeudor != "character(0)"]) > 0){
       error_bucket <- error_bucket %>%
         addError(467, getDescError(467), (errorCodDeudor[errorCodDeudor != "character(0)"]) %>% toString())
