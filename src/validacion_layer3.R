@@ -22,7 +22,7 @@ ejecutar_validacion_layer3 <- function(header, error_bucket){
            Carpeta     = getCarpeta(header),
            IdProceso   = error_bucket %>% pull(IdProceso) %>% first(),
            Cod         = ifelse(Resultado == "ERROR",
-                                get_codError_CuadreContable(str_split(Capital, "_")[[1]][2]),0),
+                                CodErrorCuadreContable(str_split(Capital, "_")[[1]][2]),0),
            Descripcion =  getDescError(Cod)) %>%
     mutate(Detalle     = list(c(Nombre_archivo, str_split(Capital,"_")[[1]][2], round(Saldo, digits =2))))  
   
@@ -37,11 +37,11 @@ ejecutar_validacion_layer3 <- function(header, error_bucket){
     mutate(Ruta           = getRuta(carpeta, Nombre_archivo),
            BDCC           = getBD(Ruta),
            Periodo        = getAnoMes(Ruta),
-           Cod_Duplicados = get_op_duplicadas(Ruta),
-           Cod_Vacios_n   = get_op_vacias(Ruta))
+           CodDuplicados = operaciones_duplicadas(Ruta),
+           CodVacios_n   = operaciones_vacias(Ruta))
   
-  dups   <- (paste(tb2 %>% rowwise() %>% pull(Cod_Duplicados), collapse = ",") %>% strsplit(","))[[1]]
-  vacios <- tb2 %>% filter(Cod_Vacios_n != 0) %>% select(Nombre_archivo, Cod_Vacios_n)
+  dups   <- (paste(tb2 %>% rowwise() %>% pull(CodDuplicados), collapse = ",") %>% strsplit(","))[[1]]
+  vacios <- tb2 %>% filter(CodVacios_n != 0) %>% select(Nombre_archivo, CodVacios_n)
   
   if(length(dups[dups != "character(0)"]) > 0){
     error_bucket <- error_bucket %>%
@@ -55,12 +55,12 @@ ejecutar_validacion_layer3 <- function(header, error_bucket){
   # iii. cruces BD01/BD02A, BD03A/BD03B ----
   cruce1 <- tibble(Periodo = restriccion_periodos(error_bucket, "BD01", "BD02A", c("CCR", "CCR_C"))) %>% 
     rowwise() %>%
-    mutate(Op_faltantes_BD01  = realizarCuadre(carpeta, Periodo, "BD02A", "BD01"),
-           Op_faltantes_BD02A = realizarCuadre(carpeta, Periodo, "BD01", "BD02A"))
+    mutate(Op_faltantes_BD01  = realizarCruce(carpeta, Periodo, "BD02A", "BD01"),
+           Op_faltantes_BD02A = realizarCruce(carpeta, Periodo, "BD01", "BD02A"))
   
   cruce2 <- tibble(Periodo = restriccion_periodos(error_bucket, "BD03A", "BD03B", "CODGR")) %>%
     rowwise() %>%
-    mutate(Garan_faltantes_BD03A = realizarCuadre(carpeta, Periodo, "BD03B", "BD03A"))
+    mutate(Garan_faltantes_BD03A = realizarCruce(carpeta, Periodo, "BD03B", "BD03A"))
   
   f_bd01  <- (paste(cruce1 %>% rowwise() %>% pull(Op_faltantes_BD01)    , collapse = ",") %>% strsplit(","))[[1]]
   f_bd02A <- (paste(cruce1 %>% rowwise() %>% pull(Op_faltantes_BD02A)   , collapse = ",") %>% strsplit(","))[[1]]

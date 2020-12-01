@@ -173,32 +173,32 @@ evalFile             <- function(ruta){
     na_if("") %>%
     return()
 }
-get_NombreArchivo    <- function(ruta){
+getNombreArchivo    <- function(ruta){
   (basename(ruta) %>% strsplit("/"))[[1]] %>% return()
 }
 
 realizar_pasteCondicional_1 <- function(ruta, error){
-  paste_error <-  ifelse(length(error)>0,
-                         list(paste0(get_NombreArchivo(ruta), "$", error, collapse=",")),
-                         list(character(0)))
+  paste_error <- ifelse(length(error)>0,
+                        list(paste0(getNombreArchivo(ruta), "$", error, collapse=",")),
+                        list(character(0)))
   return(paste_error)
 }
 realizar_pasteCondicional_2 <- function(ruta, error){
-  paste_error <-  ifelse(length(error)>0,
-                         list(paste0(get_NombreArchivo(ruta),"(", toString(error),")")),
-                         list(character(0)))
+  paste_error <- ifelse(length(error)>0,
+                        list(paste0(getNombreArchivo(ruta),"(", toString(error),")")),
+                        list(character(0)))
   return(paste_error)
 }
 realizar_pasteCondicional_3 <- function(ruta, columna, error){
-  paste_error <-  ifelse(length(error)>0,
-                         list(paste(get_NombreArchivo(ruta), columna, paste0(toString(error), "$"), sep = "$")),
-                         list(character(0)))
+  paste_error <- ifelse(length(error)>0,
+                        list(paste(getNombreArchivo(ruta), columna, paste0(toString(error), "$"), sep = "$")),
+                        list(character(0)))
   return(paste_error)
 }
 realizar_pasteCondicional_4 <- function(periodo, error_cruce){
-  paste_error <-  ifelse(length(error_cruce)>0,
-                         list(paste0(periodo,"(",toString(error_cruce),")")),
-                         list(character(0)))
+  paste_error <- ifelse(length(error_cruce)>0,
+                        list(paste0(periodo,"(", toString(error_cruce), ")")),
+                        list(character(0)))
 }
 
 ## Funciones Ly1----
@@ -266,33 +266,32 @@ getCapitalBC   <- function(ruta){
     c(sum(tmp$KVI,na.rm=T),sum(tmp$KVE,na.rm=T),sum(tmp$KRF,na.rm=T),sum(tmp$KJU,na.rm=T)) %>% return()
   }
 }
-get_codError_CuadreContable <- function(dif_Capital){
-  cod_CuadreContable <- switch (dif_Capital,
-                                KVI = 301,
-                                KVE = 302,
-                                KRF = 303,
-                                KJU = 304)
-  return(cod_CuadreContable)
+CodErrorCuadreContable <- function(dif_Capital){
+  codError <- switch (dif_Capital,
+                      KVI = 301,
+                      KVE = 302,
+                      KRF = 303,
+                      KJU = 304)
+  return(codError)
 }
 
-get_op_duplicadas <- function(ruta){
+operaciones_duplicadas <- function(ruta){
   if (getBD(ruta) == "BD01" | getBD(ruta) == "BD03A") {
-    codigos_bd <- evalFile(ruta) %>% select(get_codigo_BD(getBD(ruta))[1]) 
-    
-    duplicados <- codigos_bd[duplicated(codigos_bd), ] %>% 
-      unique() %>%
-      pull(get_codigo_BD(getBD(ruta))[1])
+    operaciones <- evalFile(ruta) %>% select(getCodigoBD(getBD(ruta))[1]) 
+    duplicados <- operaciones[duplicated(operaciones), ] %>% 
+                      unique() %>%
+                      pull(getCodigoBD(getBD(ruta))[1])
     
     realizar_pasteCondicional_1(ruta, duplicados) %>% return()}
   list(character(0)) %>% return()
 }
-get_op_vacias     <- function(ruta, BD = evalFile(ruta)){
-  ope_vacias_n <- BD %>% 
-    select(get_codigo_BD(getBD(ruta))[1]) %>%
+operaciones_vacias     <- function(ruta, BD = evalFile(ruta)){
+  vacios <- BD %>% 
+    select(getCodigoBD(getBD(ruta))[1]) %>%
     sapply(function(x) sum(is.na(x))) %>% return()
 }
 
-getInfoTotal   <- function(carpeta, periodo, name_bd){
+getInfoTotal  <- function(carpeta, periodo, name_bd){
   ruta_bd <- paste(carpeta,
                    periodo,
                    getArchivosExigibles(header)[str_detect(getArchivosExigibles(header),
@@ -302,7 +301,7 @@ getInfoTotal   <- function(carpeta, periodo, name_bd){
   resultado <- ruta_bd %>% read_delim("\t",escape_double = FALSE, trim_ws = TRUE, col_names = TRUE,
                                       col_types = cols(.default = "c"), progress = T) %>% return()
 }
-get_codigo_BD  <- function(bd){
+getCodigoBD   <- function(bd){
   campo <- case_when(bd == "BD01"  ~ "CCR",
                      bd == "BD02A" ~ "CCR",
                      bd == "BD02B" ~ "CCR_C",
@@ -311,11 +310,11 @@ get_codigo_BD  <- function(bd){
                      bd == "BD04"  ~ "CCR_C") %>%
     return()
 }
-getInfoCruce   <- function(carpeta, periodo, name_bd){
+getInfoCruce  <- function(carpeta, periodo, name_bd){
   resultado <- getInfoTotal(carpeta, periodo, name_bd) %>%
-    pull(get_codigo_BD(name_bd)) %>% return()
+    pull(getCodigoBD(name_bd)) %>% return()
 }
-realizarCuadre <- function(carpeta, periodo, nameBD1, nameBD2){
+realizarCruce <- function(carpeta, periodo, nameBD1, nameBD2){
   cruce <-  setdiff(getInfoCruce(carpeta, periodo, nameBD1), 
                     getInfoCruce(carpeta, periodo, nameBD2)) %>% unique()
   
@@ -325,7 +324,7 @@ realizarCuadre <- function(carpeta, periodo, nameBD1, nameBD2){
 
 ## Funciones Ly4----
 # Validaciones a campos numéricos específicos de cada BD    (errores tipo1)----
-get_digitos_BD01  <- function(campo){
+DigitosBD01  <- function(campo){
   digitos <- switch (campo,
                      TID = {c(1,2,3,4,5,6,7)},
                      TCR = {c(6,7,8,9,10,11,12,13,20)},
@@ -336,31 +335,31 @@ get_digitos_BD01  <- function(campo){
                      OSD = {c(1,2,3,4,5,6,7,8,9,10,99)})
   return(digitos)
 }
-get_digitos_BD02A <- function(campo){
+DigitosBD02A <- function(campo){
   digitos <- switch (campo,
                      MON = {c(1,2,3)},
                      FOCAN = {c(1,2,3,4,5)})
   return(digitos)
 }
-get_digitos_BD02B <- function(campo){
+DigitosBD02B <- function(campo){
   digitos <- switch (campo,
                      MON_C = {c(1,2,3)},
                      FOCAN_C = {c(1,2,3,4)})
   return(digitos)
 }
-get_digitos_BD03A <- function(campo){
+DigitosBD03A <- function(campo){
   digitos <- switch (campo,
                      CGR = {c(1,2,3,4,5)},
                      COBGR = {c(1,2)},
                      MONGR = {c(1,2,3)})
   return(digitos)
 }
-get_digitos_BD03B <- function(campo){
+DigitosBD03B <- function(campo){
   digitos <- switch (campo,
                      CGR = {c(1,2,3,4,5)})
   return(digitos)
 }
-get_digitos_BD04  <- function(campo){
+DigitosBD04  <- function(campo){
   digitos <- switch (campo,
                      TID_C = {c(1,2,3,4,5,6,7)},
                      TCR_C = {c(6,7,8,9,10,11,12,13,20)},
@@ -372,17 +371,17 @@ get_digitos_BD04  <- function(campo){
   return(digitos)
 }
 
-get_digitos_BD     <- function(ruta,campo){
+elegirDigitos      <- function(ruta,campo){
   digitos <- switch (getBD(ruta),
-                     BD01  = {get_digitos_BD01(campo)},
-                     BD02A = {get_digitos_BD02A(campo)},
-                     BD02B = {get_digitos_BD02B(campo)},
-                     BD03A = {get_digitos_BD03A(campo)},
-                     BD03B = {get_digitos_BD03B(campo)},
-                     BD04  = {get_digitos_BD04(campo)})
+                     BD01  = {DigitosBD01(campo)},
+                     BD02A = {DigitosBD02A(campo)},
+                     BD02B = {DigitosBD02B(campo)},
+                     BD03A = {DigitosBD03A(campo)},
+                     BD03B = {DigitosBD03B(campo)},
+                     BD04  = {DigitosBD04(campo)})
   return(digitos)
 }
-get_colsVal        <- function(ruta){
+ColumnasErrorTipo1 <- function(ruta){
   cols <- switch (getBD(ruta),
                   BD01  = {c("TID","TCR","CAL","ESAM","SEC","MDCR","OSD")},
                   BD02A = {c("MON","FOCAN")},
@@ -392,7 +391,7 @@ get_colsVal        <- function(ruta){
                   BD04  = {c("TID_C","TCR_C","MON_C","CAL_C","ESAM_C","FOCAN_C","MDCR_C")}) 
   return(cols)
 }
-get_codError_tipo1 <- function(ruta, campo){
+CodigoErrorTipo1   <- function(ruta, campo){
   codError <- switch (getBD(ruta),
                       BD01  = {c(401,402,403,404,405,406,407)},
                       BD02A = {c(411,412)},
@@ -401,24 +400,24 @@ get_codError_tipo1 <- function(ruta, campo){
                       BD03B = {c(441)},
                       BD04  = {c(451,452,453,454,455,456,457)})
   
-  cod <- tibble(col       = get_colsVal(ruta),
+  cod <- tibble(col       = ColumnasErrorTipo1(ruta),
                 cod_error = codError) %>% 
     filter(col == campo) %>% 
     pull(cod_error)
   return(cod)
 }
-get_errorTipo1     <- function(ruta, error_bucket){
+procesarErroresT1  <- function(ruta, error_bucket){
   BD <- evalFile(ruta)
-  tb <- tibble(Columna = get_colsVal_SinErrores(ruta, error_bucket)) %>% rowwise() %>%
-    mutate(validar_col = BD %>%
-                          filter((as.numeric(cgrep(BD, Columna)[[1]]) %in% get_digitos_BD(ruta, Columna)) == FALSE) %>%
-                          pull(get_codigo_BD(getBD(ruta))) %>% unique() %>% list(),
-           resultado = realizar_pasteCondicional_2(ruta, validar_col) %>% toString(),
+  tb <- tibble(Columna = depurarColsErrorT1(ruta, error_bucket)) %>% rowwise() %>%
+    mutate(Verif_cols = BD %>%
+                          filter((as.numeric(cgrep(BD, Columna)[[1]]) %in% elegirDigitos(ruta, Columna)) == FALSE) %>%
+                          pull(getCodigoBD(getBD(ruta))) %>% unique() %>% list(),
+           resultado = realizar_pasteCondicional_2(ruta, Verif_cols) %>% toString(),
            Coopac    = getCoopac(ruta),
            Coopac_n  = getNomCoopac(ruta),
            Carpeta   = getCarpeta(header),
            IdProceso = getIdProceso(header),
-           Cod       = ifelse(resultado !="character(0)", get_codError_tipo1(ruta,Columna),0),
+           Cod       = ifelse(resultado !="character(0)", CodigoErrorTipo1(ruta,Columna),0),
            Descripcion = getDescError(Cod),
            Detalle     = resultado %>% list())
   
@@ -429,64 +428,65 @@ get_errorTipo1     <- function(ruta, error_bucket){
 
 # Validaciones condicionales relacionadas con otros campos  (errores tipo2)----
  #BD01
-vf_saldos_negativos <- function(ruta, BD = evalFile(ruta)){
+procesarErrorSaldosNegativos <- function(ruta, BD = evalFile(ruta)){
   saldosCols <- c("SKCR", "PCI", "KVI", "KRF", "KVE", "KJU", "SIN", "SID", "SIS", "DGR", "NCPR", "NCPA", "TPINT", "NRPRG")
   
   tb <- tibble(Columna = saldosCols) %>% rowwise() %>%
-    mutate(verificar_saldo = BD %>% 
+    mutate(procesarSaldos = BD %>% 
                                filter(as.numeric(cgrep(BD, Columna)[[1]]) <0) %>% pull(CCR) %>% list(),
-           resultado       = realizar_pasteCondicional_3(ruta, Columna, verificar_saldo) %>% toString()) %>%
+           resultado      = realizar_pasteCondicional_3(ruta, Columna, procesarSaldos) %>% toString()) %>%
     filter(resultado != "character(0)") %>%
     pull(resultado) %>% 
     return()
 }
-vf_PerNum_esam      <- function(ruta, BD = evalFile(ruta)){
+procesarErrorModalidadCouta  <- function(ruta, BD = evalFile(ruta)){
   BD %>%
     filter(((as.numeric(ESAM) < 5) & (as.numeric(NCPR) == 0 | as.numeric(PCUO)  == 0)) == TRUE) %>%
     pull(CCR) %>% return()
 }
-vf_MontoOtorgado    <- function(ruta, BD = evalFile(ruta)){
+procesarErrorMontoOtorgado   <- function(ruta, BD = evalFile(ruta)){
   BD %>% filter(as.numeric(MORG) < as.numeric(SKCR)) %>%
     pull(CCR) %>%
     return()
 }
-vf_KVI_KJU_dias     <- function(ruta, BD = evalFile(ruta)){
+procesarErrorVencJudRetraso  <- function(ruta, BD = evalFile(ruta)){
   BD %>% 
     filter((as.numeric(KVE) > 0 & as.numeric(DAK) == 0)|(as.numeric(KJU) > 0 & as.numeric(DAK) == 0)) %>% 
     pull (CCR) %>% return()
 }
 
  #BD01 y BD04
-get_digitosDoc <- function(documento){
-  n_Digitos <- switch (documento,
-                       "1" = "8",
-                       "2" = "9",
-                       "3" = "13",
-                       "4" = "13",
-                       "5" = "12",
-                       "6" = "11")
-  return(n_Digitos)
+numeroCaracteresDoc <- function(documento){
+  n_caracteres <- switch (documento,
+                          "1" = "8",
+                          "2" = "9",
+                          "3" = "13",
+                          "4" = "13",
+                          "5" = "12",
+                          "6" = "11")
+  return(n_caracteres)
 }
-vf_docInd      <- function(ruta, BD = evalFile(ruta)){
+procesarErrorDocumentoIdent <- function(ruta, BD = evalFile(ruta)){
   vf_doc <- BD %>% rowwise() %>% 
     mutate(vf =  switch (getBD(ruta),
-                         BD01 = if_else(get_digitosDoc(TID) == (nchar(NID) %>% toString()), "TRUE", "FALSE"),
-                         BD04 = if_else(get_digitosDoc(TID_C) == (nchar(NID_C) %>% toString()), "TRUE", "FALSE"))) %>%
+                         BD01 = if_else(numeroCaracteresDoc(TID) == (nchar(NID) %>% toString()), "TRUE", "FALSE"),
+                         BD04 = if_else(numeroCaracteresDoc(TID_C) == (nchar(NID_C) %>% toString()), "TRUE", "FALSE"))) %>%
     filter(vf == "FALSE") %>% 
-    pull(get_codigo_BD(getBD(ruta))) 
+    pull(getCodigoBD(getBD(ruta))) 
   
   realizar_pasteCondicional_2(ruta, vf_doc) %>% return()
 }
 
  #BD03A
-vf_NCR <- function(ruta, BD = evalFile(ruta)){
+procesarErrorNumCredCobertura <- function(ruta, BD = evalFile(ruta)){
   BD %>% 
-    filter(as.numeric(NCR) > 0, as.numeric(NRCL) == 0) %>% pull(get_codigo_BD("BD03A")) %>% 
+    filter(as.numeric(NCR) > 0, as.numeric(NRCL) == 0) %>% 
+    pull(getCodigoBD("BD03A")) %>% 
     unique() %>% return()
 }
 
  #BD3A y BD01
-vf_codDeudor <- function(carpeta, periodo, BD03A, BD01){
+procesarErrorcodDeudor <- function(carpeta, periodo, BD03A, BD01){
   cruce <- setdiff(getInfoTotal(carpeta, periodo, BD03A) %>% pull(CIS),
                    getInfoTotal(carpeta, periodo, BD01) %>% pull(CIS)) %>% unique()
   
@@ -495,7 +495,7 @@ vf_codDeudor <- function(carpeta, periodo, BD03A, BD01){
 }
 
 # Validaciones de campos fechas                             (errores tipo3)----
-get_colFechas       <- function(ruta){
+ColumnasErrorTipo3 <- function(ruta){
   cols <- switch (getBD(ruta),
                   BD01  = {c("FOT", "FVEG", "FVEP")},
                   BD02A = {c("FVEP")},
@@ -503,31 +503,31 @@ get_colFechas       <- function(ruta){
                   BD04  = {c("FOT_C", "FCAN_C")}) 
   return(cols)
 }
-get_codError_tipo3  <- function(ruta, campo){
+CodigoErrorTipo3   <- function(ruta, campo){
   codError <- switch (getBD(ruta),
                       BD01  = {c(471,472,473)},
                       BD02A = {c(474)},
                       BD02B = {c(475, 476)},
                       BD04  = {c(477, 478)})
   
-  cod <- tibble(col       = get_colFechas(ruta),
+  cod <- tibble(col       = ColumnasErrorTipo3(ruta),
                 cod_error = codError) %>% 
     filter(col == campo) %>% 
     pull(cod_error)
   return(cod)
 }
-get_errorTipo3      <- function(ruta, error_bucket){
+procesarErroresT3  <- function(ruta, error_bucket){
   BD <- evalFile(ruta)
-  tb <- tibble(Columna    = get_colFechas(ruta)) %>% rowwise() %>%
+  tb <- tibble(Columna    = depurarColsErrorT3(ruta, error_bucket)) %>% rowwise() %>%
     mutate(validar_fechas = BD %>%
                              filter(dmy(cgrep(BD, Columna)[[1]]) %>% is.na() == TRUE) %>% 
-                             pull(get_codigo_BD(getBD(ruta))) %>% unique() %>% list(),
+                             pull(getCodigoBD(getBD(ruta))) %>% unique() %>% list(),
            resultado   = realizar_pasteCondicional_2(ruta, validar_fechas) %>% toString(),
            Coopac      = getCoopac(ruta),
            Coopac_n    = getNomCoopac(ruta),
            Carpeta     = getCarpeta(header),
            IdProceso   = getIdProceso(header),
-           Cod         = ifelse(resultado !="character(0)", get_codError_tipo3(ruta, Columna), 0),
+           Cod         = ifelse(resultado !="character(0)", CodigoErrorTipo3(ruta, Columna), 0),
            Descripcion = getDescError(Cod),
            Detalle     = resultado %>% list())
   
@@ -536,7 +536,7 @@ get_errorTipo3      <- function(ruta, error_bucket){
                               select(Coopac, Coopac_n, Carpeta, IdProceso, Cod, Descripcion, Detalle)) %>% return()
 }
 
-get_fechaCorte      <- function(ruta){
+getFechaCorte      <- function(ruta){
   fecha_corte <- seq(as.Date(paste(getAno(ruta),
                                     getMes(ruta),
                                     "01",
@@ -545,8 +545,8 @@ get_fechaCorte      <- function(ruta){
     ceiling_date("month") - days(1)
   return(fecha_corte)
 }
-vf_fechaDesembolso  <- function(ruta, BD =evalFile(ruta) ){
-  BD %>% filter((dmy(BD %>% pull(FOT)) > get_fechaCorte(ruta)) == TRUE) %>% 
+procesarErrorFechaDesembolso  <- function(ruta, BD =evalFile(ruta) ){
+  BD %>% filter((dmy(BD %>% pull(FOT)) > getFechaCorte(ruta)) == TRUE) %>% 
     pull(CCR) %>% toString() %>%
     return()
 }
