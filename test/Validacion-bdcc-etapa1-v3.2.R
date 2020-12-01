@@ -7,6 +7,7 @@ header        <- init_header(id_coopac       = "01172",
 eb            <- init_bucket_errores(header)
 lista_errores <- main(header, eb)
 
+##########################
 # n_caracteres
 lista_errores %>%
   rowwise() %>%
@@ -20,6 +21,23 @@ lista_errores %>%
   mutate(Archivos_error = str_extract(Detalle,
                                       getArchivosExigibles(header))[is.na(str_extract(Detalle,
                                                                                       getArchivosExigibles(header))
-                                                                          ) == FALSE] %>% toString()
-         ) %>%
+                                                                          ) == FALSE] %>% toString()) %>%
   select(Cod, Descripcion, Archivos_error) %>% view()
+
+# resumen_errores_periodos
+lista_errores %>%
+  mutate(Detalle = map_chr(Detalle, ~ .[[1]] %>% str_c(collapse = ", "))) %>%
+  rowwise() %>%
+  mutate(Periodos_error = str_extract(unlist(Detalle %>%
+                                               str_split(",")),
+                                      paste(alcance_general,collapse = '|'))[is.na(str_extract(unlist(Detalle %>% str_split(",")),
+                      paste(alcance_general,collapse = '|'))) == FALSE] %>%
+    unique() %>% toString()) %>%
+  select(Descripcion, Periodos_error) %>% 
+  write.csv(paste0(paste(getwd(), "test/", sep = "/"),
+                   paste(header %>% pull(Coopac),
+                         getIdProceso(header),
+                         header %>% pull(PeriodoInicial),
+                         header %>% pull(PeriodoFinal),
+                         sep = "_"),
+                   "_resumen_periodos_error.csv"))

@@ -57,7 +57,7 @@ getDescError <- function(codigoError){
   
   init_repositorio_errores() %>% filter(Cod == codigoError) %>% pull(Descripcion) %>% first() %>% return()
 } 
-deleteError  <- function(error_bucket, arg_codigo) {
+deleteError  <- function(error_bucket, arg_codigo){
   error_bucket %>% filter(Cod != arg_codigo) %>% return()
 }
 addError     <- function(error_bucket, arg_codigo, arg_descripcion, arg_detalle){ 
@@ -83,7 +83,7 @@ finalizarProceso <- function(header, errorBucket){
 saveResults      <- function(header, error_bucket){
   ## header ----
   header %>% 
-    write.csv(paste0(paste(getwd(), "resultados/", sep = "/"),
+    write.csv(paste0(paste(getwd(), "test/", sep = "/"),
                      paste(header %>% pull(Coopac),
                            getIdProceso(header),
                            header %>% pull(PeriodoInicial),
@@ -93,31 +93,13 @@ saveResults      <- function(header, error_bucket){
   ## errorbucket ----
   error_bucket %>%
     mutate(Detalle = map_chr(Detalle, ~ .[[1]] %>% str_c(collapse = ", "))) %>%
-    write.csv(paste0(paste(getwd(), "resultados/", sep = "/"),
+    write.csv(paste0(paste(getwd(), "test/", sep = "/"),
                      paste(header %>% pull(Coopac),
                            getIdProceso(header),
                            header %>% pull(PeriodoInicial),
                            header %>% pull(PeriodoFinal),
                            sep = "_"),
                      "_errorbucket.csv"))
-  ## resumen_errores_periodos ----
-  error_bucket %>%
-    mutate(Detalle = map_chr(Detalle, ~ .[[1]] %>% str_c(collapse = ", "))) %>%
-    rowwise() %>%
-    mutate(Periodos_error = str_extract(unlist(Detalle %>% str_split(",")),
-                                        paste(alcance_general,collapse = '|')
-                                        )[is.na(str_extract(unlist(Detalle %>% str_split(",")),
-                                                            paste(alcance_general,collapse = '|'))) == FALSE] %>%
-             unique() %>% toString()
-           ) %>%
-    select(Descripcion, Periodos_error) %>% 
-    write.csv(paste0(paste(getwd(), "resultados/", sep = "/"),
-                     paste(header %>% pull(Coopac),
-                           getIdProceso(header),
-                           header %>% pull(PeriodoInicial),
-                           header %>% pull(PeriodoFinal),
-                           sep = "_"),
-                     "_resumen_errores_periodos.csv"))
 }
 
 ## Obtener informacion minima----
