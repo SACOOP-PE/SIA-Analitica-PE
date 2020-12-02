@@ -1,10 +1,10 @@
 ##### Testing -----
-header        <- init_header(id_coopac       = "01172",
+header        <- initHeader(id_coopac       = "01172",
                              coopac_carpeta  = "C:/Users/eroque/Desktop/Proyecto_BDCC",
                              periodo_inicial = "201901",
                              periodo_final   = "201912",
                              bds             = list(c("BD01", "BD02A", "BD02B", "BD03A", "BD03B", "BD04")))
-eb            <- init_bucket_errores(header)
+eb            <- initBucketErrores(header)
 listaErrores <- main(header, eb)
 
 ##########################
