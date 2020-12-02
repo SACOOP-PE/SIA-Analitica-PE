@@ -1,4 +1,11 @@
 ##### 4. Funciones de control de flujo de errores  -----
+#layer 1
+restriccionArchivosFaltDups <- function(errorBucket){
+  if (filter(errorBucket, Cod %in% c("101","102")) %>% nrow()){return(1)}
+  return(0)
+}
+
+#layer 3 (cruces BD01/BD02A, BD03A/BD03B), layer 4 (error_cis)
 getArchivosError      <- function(header, errorBucket, codError, col){
   filterError <- unlist(errorBucket %>% filter(Cod %in% codError) %>% pull(Detalle) %>% str_split(","))
   
@@ -11,13 +18,6 @@ getArchivosSinErrores <- function(header, errorBucket, codError, col){
           getArchivosError(header, errorBucket, codError, col)) %>% 
     return()
 }
-
-#layer 1
-restriccionArchivosFaltDups <- function(errorBucket){
-  if (filter(errorBucket, Cod %in% c("101","102")) %>% nrow()){return(1)}
-  return(0)
-}
-#layer 3 (cruces BD01/BD02A, BD03A/BD03B), layer 4 (error_cis)
 restriccionPeriodos         <- function(errorBucket, BD1, BD2, columnas){
   filtrarArchivos <- intersect(getArchivosSinErrores(header, errorBucket, c(201, 203), columnas),
                                setdiff(getArchivosExigibles(header),
@@ -34,6 +34,7 @@ restriccionPeriodos         <- function(errorBucket, BD1, BD2, columnas){
     unique() %>%
     return()
 }
+
 #layer 4 (tipo 1 y 3)
 depurarColsErrorT1 <- function(ruta, errorBucket){
   filterError <- unlist(errorBucket %>% filter(Cod %in% c(201,203)) %>% pull(Detalle) %>%
