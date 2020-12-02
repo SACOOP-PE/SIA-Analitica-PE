@@ -1,7 +1,7 @@
 ##### 3. Funciones satelite -----
 ## Archivos precargados ----
-init_cuadre_contable     <- function(){
-  read_delim(file_cuadre_contable, 
+initCuadreContable     <- function(){
+  read_delim(fileCuadreContable, 
              "\t", escape_double = FALSE, col_types = cols(ANO = col_double(), 
                                                            CODIGO_ENTIDAD = col_double(), ENTIDAD = col_character(), 
                                                            KJU = col_double(), KRF = col_double(), 
@@ -9,16 +9,16 @@ init_cuadre_contable     <- function(){
                                                            PERIODO = col_double(), TIPOENTIDAD = col_character()), 
              trim_ws = TRUE, progress = T) %>% return()
 }
-init_estructura_base     <- function(){ 
- read_delim(file_estructura_base, 
+initEstructuraBase     <- function(){ 
+ read_delim(fileEstructuraBase, 
             "\t", escape_double = FALSE, col_types = cols(BD = col_character(), 
                                                           CAMPO = col_character(), 
                                                           DESCRIPCION = col_character(),  
                                                           NRO = col_double(), 
                                                           TIPO = col_character()), progress = T)  %>% return()
 }
-init_repositorio_errores <- function(){
-  read_delim(file_repositorio_errores, 
+initRepositorioErrores <- function(){
+  read_delim(fileRepositorioErrores, 
              "\t", escape_double = FALSE, col_types = cols(Cod = col_double(), 
                                                            Descripcion = col_character(), 
                                                            Tipo = col_character()),
@@ -26,10 +26,10 @@ init_repositorio_errores <- function(){
 }
 
 ## Archivos de inicializacion----
-init_header         <- function(id_coopac, coopac_carpeta, periodo_inicial, periodo_final, bds = c("BD01","BD02A","BD02B","BD03A","BD03B","BD04")){
+initHeader         <- function(id_coopac, coopac_carpeta, periodo_inicial, periodo_final, bds = c("BD01","BD02A","BD02B","BD03A","BD03B","BD04")){
   round((runif(1,0,2) * 1000000),0) %>%   
     tibble(Coopac       = id_coopac,
-           NombreCoopac = init_cuadre_contable() %>% 
+           NombreCoopac = initCuadreContable() %>% 
                               filter(CODIGO_ENTIDAD == as.integer(id_coopac)) %>%
                               pull(ENTIDAD) %>% first(),
            Carpeta      = coopac_carpeta,
@@ -39,7 +39,7 @@ init_header         <- function(id_coopac, coopac_carpeta, periodo_inicial, peri
            PeriodoFinal   = periodo_final,
            Alcance        = bds) %>% return() 
 }
-init_bucket_errores <- function(header) {
+initBucketErrores <- function(header) {
   tibble(Coopac    = header %>% pull(Coopac) %>% first(),
          Coopac_n  =  header %>% pull(NombreCoopac) %>% first(),
          Carpeta   = header %>% pull(Carpeta) %>% first(),
@@ -52,10 +52,10 @@ init_bucket_errores <- function(header) {
 
 ## Gestion de errores----
 getDescError <- function(codigoError){
-  if ((length(init_repositorio_errores() %>% filter(Cod == codigoError) %>% pull(Descripcion)) == 0)){
+  if ((length(initRepositorioErrores() %>% filter(Cod == codigoError) %>% pull(Descripcion)) == 0)){
     return("Descripción del error no encontrada")}
   
-  init_repositorio_errores() %>% filter(Cod == codigoError) %>% pull(Descripcion) %>% first() %>% return()
+  initRepositorioErrores() %>% filter(Cod == codigoError) %>% pull(Descripcion) %>% first() %>% return()
 } 
 deleteError  <- function(error_bucket, arg_codigo){
   error_bucket %>% filter(Cod != arg_codigo) %>% return()
@@ -120,7 +120,7 @@ getCoopac <- function(ruta) {
 }
 getNomCoopac <- function(ruta) {
   i <- (basename(ruta) %>% strsplit("_"))[[1]][1]
-  init_cuadre_contable() %>% filter(CODIGO_ENTIDAD == as.numeric(i)) %>% pull(ENTIDAD) %>% first() %>% return()
+  initCuadreContable() %>% filter(CODIGO_ENTIDAD == as.numeric(i)) %>% pull(ENTIDAD) %>% first() %>% return()
 }
 getBD        <- function(ruta) {
   (basename(ruta) %>% strsplit("_"))[[1]][2] %>% return()
@@ -159,25 +159,25 @@ getNombreArchivo    <- function(ruta){
   (basename(ruta) %>% strsplit("/"))[[1]] %>% return()
 }
 
-realizar_pasteCondicional_1 <- function(ruta, error){
+generarDetalleError1 <- function(ruta, error){
   paste_error <- ifelse(length(error)>0,
                         list(paste0(getNombreArchivo(ruta), "$", error, collapse=",")),
                         list(character(0)))
   return(paste_error)
 }
-realizar_pasteCondicional_2 <- function(ruta, error){
+generarDetalleError2 <- function(ruta, error){
   paste_error <- ifelse(length(error)>0,
                         list(paste0(getNombreArchivo(ruta),"(", toString(error),")")),
                         list(character(0)))
   return(paste_error)
 }
-realizar_pasteCondicional_3 <- function(ruta, columna, error){
+generarDetalleError3 <- function(ruta, columna, error){
   paste_error <- ifelse(length(error)>0,
                         list(paste(getNombreArchivo(ruta), columna, paste0(toString(error), "$"), sep = "$")),
                         list(character(0)))
   return(paste_error)
 }
-realizar_pasteCondicional_4 <- function(periodo, error_cruce){
+generarDetalleError4 <- function(periodo, error_cruce){
   paste_error <- ifelse(length(error_cruce)>0,
                         list(paste0(periodo,"(", toString(error_cruce), ")")),
                         list(character(0)))
@@ -202,19 +202,19 @@ getFaltantes  <- function(carpeta, exigibles){
 ## Funciones Ly2----
 getColumnasOM <- function(BDCC){ 
   cols_base <- switch (BDCC,
-                       BD01  = {init_estructura_base() %>% filter(BD == "BD01") %>% pull(CAMPO) %>% list()},
-                       BD02A = {init_estructura_base() %>% filter(BD == "BD02A") %>% pull(CAMPO) %>% list()},
-                       BD02B = {init_estructura_base() %>% filter(BD == "BD02B") %>% pull(CAMPO) %>% list()},
-                       BD03A = {init_estructura_base() %>% filter(BD == "BD03A") %>% pull(CAMPO) %>% list()},
-                       BD03B = {init_estructura_base() %>% filter(BD == "BD03B") %>% pull(CAMPO) %>% list()},
-                       BD04  = {init_estructura_base() %>% filter(BD == "BD04") %>% pull(CAMPO) %>% list()})
+                       BD01  = {initEstructuraBase() %>% filter(BD == "BD01") %>% pull(CAMPO) %>% list()},
+                       BD02A = {initEstructuraBase() %>% filter(BD == "BD02A") %>% pull(CAMPO) %>% list()},
+                       BD02B = {initEstructuraBase() %>% filter(BD == "BD02B") %>% pull(CAMPO) %>% list()},
+                       BD03A = {initEstructuraBase() %>% filter(BD == "BD03A") %>% pull(CAMPO) %>% list()},
+                       BD03B = {initEstructuraBase() %>% filter(BD == "BD03B") %>% pull(CAMPO) %>% list()},
+                       BD04  = {initEstructuraBase() %>% filter(BD == "BD04") %>% pull(CAMPO) %>% list()})
   cols_base %>% return()
 }
 getColVacias  <- function(ruta, BD = evalFile(ruta)){
   cols_vacias <- intersect(BD[sapply(BD, function(x) all(is.na(x)))] %>% colnames(), 
                            getColumnasOM(getBD(ruta)) %>% unlist())
   
-  resultado <- realizar_pasteCondicional_1(ruta, cols_vacias)
+  resultado <- generarDetalleError1(ruta, cols_vacias)
   return(resultado)
 }
 
@@ -241,7 +241,7 @@ getCapitalBDCC <- function(ruta){
   c(sum(tmp$KVI,na.rm=T),sum(tmp$KVE,na.rm=T),sum(tmp$KRF,na.rm=T),sum(tmp$KJU,na.rm=T)) %>% return()
 }
 getCapitalBC   <- function(ruta){
-  tmp <- init_cuadre_contable() %>% 
+  tmp <- initCuadreContable() %>% 
     filter(CODIGO_ENTIDAD ==  as.double(getCoopac(ruta)), PERIODO == getAnoMes(ruta))
   
   if (nrow(tmp)==1){ 
@@ -264,7 +264,7 @@ operaciones_duplicadas <- function(ruta){
                       unique() %>%
                       pull(getCodigoBD(getBD(ruta))[1])
     
-    realizar_pasteCondicional_1(ruta, duplicados) %>% return()}
+    generarDetalleError1(ruta, duplicados) %>% return()}
   list(character(0)) %>% return()
 }
 operaciones_vacias     <- function(ruta, BD = evalFile(ruta)){
@@ -300,7 +300,7 @@ realizarCruce <- function(carpeta, periodo, nameBD1, nameBD2){
   cruce <-  setdiff(getInfoCruce(carpeta, periodo, nameBD1), 
                     getInfoCruce(carpeta, periodo, nameBD2)) %>% unique()
   
-  resultado <- realizar_pasteCondicional_4(periodo, cruce)
+  resultado <- generarDetalleError4(periodo, cruce)
   return(resultado)
 }
 
@@ -394,7 +394,7 @@ procesarErroresT1  <- function(ruta, error_bucket){
     mutate(Verif_cols = BD %>%
                           filter((as.numeric(cgrep(BD, Columna)[[1]]) %in% elegirDigitos(ruta, Columna)) == FALSE) %>%
                           pull(getCodigoBD(getBD(ruta))) %>% unique() %>% list(),
-           resultado = realizar_pasteCondicional_2(ruta, Verif_cols) %>% toString(),
+           resultado = generarDetalleError2(ruta, Verif_cols) %>% toString(),
            Coopac    = getCoopac(ruta),
            Coopac_n  = getNomCoopac(ruta),
            Carpeta   = getCarpeta(header),
@@ -416,7 +416,7 @@ procesarErrorSaldosNegativos <- function(ruta, BD = evalFile(ruta)){
   tb <- tibble(Columna = saldosCols) %>% rowwise() %>%
     mutate(procesarSaldos = BD %>% filter(as.numeric(cgrep(BD, Columna)[[1]]) <0) %>%
                                    pull(CCR) %>% list(),
-           resultado      = realizar_pasteCondicional_3(ruta, Columna, procesarSaldos) %>% toString()) %>%
+           resultado      = generarDetalleError3(ruta, Columna, procesarSaldos) %>% toString()) %>%
     filter(resultado != "character(0)") %>%
     pull(resultado) %>% 
     return()
@@ -456,7 +456,7 @@ procesarErrorDocumentoIdent <- function(ruta, BD = evalFile(ruta)){
     filter(detectarError == "FALSE") %>% 
     pull(getCodigoBD(getBD(ruta))) 
   
-  realizar_pasteCondicional_2(ruta, verificar_documento) %>% return()
+  generarDetalleError2(ruta, verificar_documento) %>% return()
 }
 
  #BD03A
@@ -472,7 +472,7 @@ procesarErrorcodDeudor <- function(carpeta, periodo, BD03A, BD01){
   cruce <- setdiff(getInfoTotal(carpeta, periodo, BD03A) %>% pull(CIS),
                    getInfoTotal(carpeta, periodo, BD01) %>% pull(CIS)) %>% unique()
   
-  resultado <- realizar_pasteCondicional_4(periodo, cruce)
+  resultado <- generarDetalleError4(periodo, cruce)
   return(resultado)
 }
 
@@ -505,7 +505,7 @@ procesarErroresT3  <- function(ruta, error_bucket){
     mutate(validar_fechas = BD %>%
                              filter(dmy(cgrep(BD, Columna)[[1]]) %>% is.na() == TRUE) %>% 
                              pull(getCodigoBD(getBD(ruta))) %>% unique() %>% list(),
-           resultado   = realizar_pasteCondicional_2(ruta, validar_fechas) %>% toString(),
+           resultado   = generarDetalleError2(ruta, validar_fechas) %>% toString(),
            Coopac      = getCoopac(ruta),
            Coopac_n    = getNomCoopac(ruta),
            Carpeta     = getCarpeta(header),

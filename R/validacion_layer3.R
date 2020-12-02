@@ -1,12 +1,12 @@
-ejecutar_validacion_layer3 <- function(header, error_bucket){
+ejecutarValidacionLayer3 <- function(header, error_bucket){
   carpeta <- getCarpeta(header)
   
   # i. cuadre contable ----
   exigibles1 <- getArchivos_SinErrores(header, error_bucket, c(201,203), c("KVI","KVE","KRF","KJU"))
   exigibles1 <- exigibles1[str_detect(exigibles1, "BD01")]
   
-  tb1 <- tibble(Nombre_archivo = exigibles1) %>% rowwise() %>% 
-    mutate(Ruta    = getRuta(carpeta, Nombre_archivo),
+  tb1 <- tibble(NombreArchivo = exigibles1) %>% rowwise() %>% 
+    mutate(Ruta    = getRuta(carpeta, NombreArchivo),
            Coopac  = as.numeric(getCoopac(Ruta)),
            Periodo = getAnoMes(Ruta),
            KVI_BC   = sum(getCapitalBC(Ruta)[[1]], na.rm=T),
@@ -24,24 +24,24 @@ ejecutar_validacion_layer3 <- function(header, error_bucket){
            Cod         = ifelse(Resultado == "ERROR",
                                 CodErrorCuadreContable(str_split(Capital, "_")[[1]][2]),0),
            Descripcion =  getDescError(Cod)) %>%
-    mutate(Detalle     = list(c(Nombre_archivo, str_split(Capital,"_")[[1]][2], round(Saldo, digits =2))))  
+    mutate(Detalle     = list(c(NombreArchivo, str_split(Capital,"_")[[1]][2], round(Saldo, digits =2))))  
   
   error_bucket <- bind_rows(error_bucket, tb1 %>% 
                               filter(Resultado == "ERROR") %>%  
                               select(Coopac, Coopac_n, Carpeta, IdProceso, Cod, Descripcion, Detalle))
 
   # ii. verificar dups y vacíos ----
-  exigibles2 <- getArchivos_SinErrores(header, error_bucket, c(201, 203), c("CCR", "CCR_C", "CODGR"))
+  exigibles2 <- getArchivosSinErrores(header, error_bucket, c(201, 203), c("CCR", "CCR_C", "CODGR"))
   
-  tb2 <- tibble(Nombre_archivo = exigibles2) %>% rowwise() %>% 
-    mutate(Ruta           = getRuta(carpeta, Nombre_archivo),
+  tb2 <- tibble(NombreArchivo = exigibles2) %>% rowwise() %>% 
+    mutate(Ruta           = getRuta(carpeta, NombreArchivo),
            BDCC           = getBD(Ruta),
            Periodo        = getAnoMes(Ruta),
            CodDuplicados = operaciones_duplicadas(Ruta),
            CodVacios_n   = operaciones_vacias(Ruta))
   
   dups   <- (paste(tb2 %>% rowwise() %>% pull(CodDuplicados), collapse = ",") %>% strsplit(","))[[1]]
-  vacios <- tb2 %>% filter(CodVacios_n != 0) %>% select(Nombre_archivo, CodVacios_n)
+  vacios <- tb2 %>% filter(CodVacios_n != 0) %>% select(NombreArchivo, CodVacios_n)
   
   if(length(dups[dups != "character(0)"]) > 0){
     error_bucket <- error_bucket %>%
@@ -53,18 +53,16 @@ ejecutar_validacion_layer3 <- function(header, error_bucket){
   }
   
   # iii. cruces BD01/BD02A, BD03A/BD03B ----
-  cruce1 <- tibble(Periodo = restriccion_periodos(error_bucket, "BD01", "BD02A", c("CCR", "CCR_C"))) %>% 
-    rowwise() %>%
-    mutate(Op_faltantes_BD01  = realizarCruce(carpeta, Periodo, "BD02A", "BD01"),
-           Op_faltantes_BD02A = realizarCruce(carpeta, Periodo, "BD01", "BD02A"))
+  cruce1 <- tibble(Periodo = restriccionPeriodos(error_bucket, "BD01", "BD02A", c("CCR", "CCR_C"))) %>% rowwise() %>%
+    mutate(OpFaltantes_BD01  = realizarCruce(carpeta, Periodo, "BD02A", "BD01"),
+           OpFaltantes_BD02A = realizarCruce(carpeta, Periodo, "BD01", "BD02A"))
   
-  cruce2 <- tibble(Periodo = restriccion_periodos(error_bucket, "BD03A", "BD03B", "CODGR")) %>%
-    rowwise() %>%
-    mutate(Garan_faltantes_BD03A = realizarCruce(carpeta, Periodo, "BD03B", "BD03A"))
+  cruce2 <- tibble(Periodo = restriccionPeriodos(error_bucket, "BD03A", "BD03B", "CODGR")) %>% rowwise() %>%
+    mutate(GaranFaltantes_BD03A = realizarCruce(carpeta, Periodo, "BD03B", "BD03A"))
   
-  f_bd01  <- (paste(cruce1 %>% rowwise() %>% pull(Op_faltantes_BD01)    , collapse = ",") %>% strsplit(","))[[1]]
-  f_bd02A <- (paste(cruce1 %>% rowwise() %>% pull(Op_faltantes_BD02A)   , collapse = ",") %>% strsplit(","))[[1]]
-  f_bd03A <- (paste(cruce2 %>% rowwise() %>% pull(Garan_faltantes_BD03A), collapse = ",") %>% strsplit(","))[[1]]
+  f_bd01  <- (paste(cruce1 %>% rowwise() %>% pull(OpFaltantes_BD01)    , collapse = ",") %>% strsplit(","))[[1]]
+  f_bd02A <- (paste(cruce1 %>% rowwise() %>% pull(OpFaltantes_BD02A)   , collapse = ",") %>% strsplit(","))[[1]]
+  f_bd03A <- (paste(cruce2 %>% rowwise() %>% pull(GaranFaltantes_BD03A), collapse = ",") %>% strsplit(","))[[1]]
   
   if(length(f_bd01 [f_bd01  != "character(0)"]) > 0){
     error_bucket <- error_bucket %>%

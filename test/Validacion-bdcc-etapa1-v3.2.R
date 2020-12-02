@@ -5,17 +5,17 @@ header        <- init_header(id_coopac       = "01172",
                              periodo_final   = "201912",
                              bds             = list(c("BD01", "BD02A", "BD02B", "BD03A", "BD03B", "BD04")))
 eb            <- init_bucket_errores(header)
-lista_errores <- main(header, eb)
+listaErrores <- main(header, eb)
 
 ##########################
 # n_caracteres
-lista_errores %>%
+listaErrores %>%
   rowwise() %>%
   mutate(n_caracteres = nchar(Detalle)) %>% 
   select(Cod, Descripcion, n_caracteres)
 
-# encontrar archivos en cada errror de la lista_errores
-lista_errores %>%
+# encontrar archivos en cada errror de la listaErrores
+listaErrores %>%
   mutate(Detalle = map_chr(Detalle, ~ .[[1]] %>% str_c(collapse = ", "))) %>%
   rowwise() %>%
   mutate(Archivos_error = str_extract(Detalle,
@@ -25,7 +25,7 @@ lista_errores %>%
   select(Cod, Descripcion, Archivos_error) %>% view()
 
 # resumen_errores_periodos
-lista_errores %>%
+listaErrores %>%
   mutate(Detalle = map_chr(Detalle, ~ .[[1]] %>% str_c(collapse = ", "))) %>%
   rowwise() %>%
   mutate(Periodos_error = str_extract(unlist(Detalle %>%

@@ -1,4 +1,4 @@
-ejecutar_validacion_layer1 <- function(header, error_bucket){
+ejecutarValidacionLayer1 <- function(header, error_bucket){
   
   carpeta <- getCarpeta(header)
   exigibles <- getArchivosExigibles(header)

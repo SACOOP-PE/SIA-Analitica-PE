@@ -1,25 +1,25 @@
-ejecutar_validacion_layer2 <- function(header, error_bucket){
+ejecutarValidacionLayer2 <- function(header, error_bucket){
   carpeta   <- getCarpeta(header)
   exigibles <- getArchivosExigibles(header)
   
-  tbl1_ctrl1 <- tibble(Nombre_archivo = exigibles) %>% rowwise() %>%
-    mutate(Ruta          = getRuta(carpeta, Nombre_archivo),
+  tbl1_ctrl1 <- tibble(NombreArchivo = exigibles) %>% rowwise() %>%
+    mutate(Ruta          = getRuta(carpeta, NombreArchivo),
            Coopac        = as.numeric(getCoopac(Ruta)),
            Periodo       = getAnoMes(Ruta),
            BDCC          = getBD(Ruta), 
            Columnas      = list(colnames(evalFile(Ruta))), 
-           Columnas_OM   = getColumnasOM(BDCC),    
-           Col_faltantes = ifelse(length(setdiff(Columnas_OM, Columnas))>0,
-                                  list(paste(Nombre_archivo, (setdiff(Columnas_OM, Columnas)), sep ="$", collapse=",")),
-                                  list(character(0))),
-           Col_sobrantes = ifelse(length(setdiff(Columnas, Columnas_OM))>0,
-                                  list(paste(Nombre_archivo, (setdiff(Columnas, Columnas_OM)), sep ="$", collapse=",")),
-                                  list(character(0))),
-           Col_vacias    = getColVacias(Ruta))
+           ColumnasOM   = getColumnasOM(BDCC),    
+           ColFaltantes = ifelse(length(setdiff(ColumnasOM, Columnas))>0,
+                                 list(paste(NombreArchivo, (setdiff(ColumnasOM, Columnas)), sep ="$", collapse=",")),
+                                 list(character(0))),
+           ColSobrantes = ifelse(length(setdiff(Columnas, Columnas_OM))>0,
+                                 list(paste(NombreArchivo, (setdiff(Columnas, ColumnasOM)), sep ="$", collapse=",")),
+                                 list(character(0))),
+           ColVacias    = getColVacias(Ruta))
   
-   cf  <- (paste(tbl1_ctrl1 %>% rowwise() %>% pull(Col_faltantes), collapse = ",") %>% strsplit(","))[[1]] 
-   cs  <- (paste(tbl1_ctrl1 %>% rowwise() %>% pull(Col_sobrantes), collapse = ",") %>% strsplit(","))[[1]] 
-   cv  <- (paste(tbl1_ctrl1 %>% rowwise() %>% pull(Col_vacias), collapse = ",") %>% strsplit(","))[[1]]
+   cf  <- (paste(tbl1_ctrl1 %>% rowwise() %>% pull(ColFaltantes), collapse = ",") %>% strsplit(","))[[1]] 
+   cs  <- (paste(tbl1_ctrl1 %>% rowwise() %>% pull(ColSobrantes), collapse = ",") %>% strsplit(","))[[1]] 
+   cv  <- (paste(tbl1_ctrl1 %>% rowwise() %>% pull(ColVacias), collapse = ",") %>% strsplit(","))[[1]]
   
    if(length(cf[cf != "character(0)"]) > 0){
      error_bucket <- error_bucket %>%
