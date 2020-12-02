@@ -26,7 +26,7 @@ initRepositorioErrores <- function(){
 }
 
 ## Archivos de inicializacion----
-initHeader         <- function(idCoopac, coopacCarpeta, periodoInicial, periodoFinal, bds = c("BD01","BD02A","BD02B","BD03A","BD03B","BD04")){
+initHeader        <- function(idCoopac, coopacCarpeta, periodoInicial, periodoFinal, bds = c("BD01","BD02A","BD02B","BD03A","BD03B","BD04")){
   round((runif(1,0,2) * 1000000),0) %>%   
     tibble(Coopac       = idCoopac,
            NombreCoopac = initCuadreContable() %>% 
@@ -155,7 +155,7 @@ evalFile             <- function(ruta){
     na_if("") %>%
     return()
 }
-getNombreArchivo    <- function(ruta){
+getNombreArchivo     <- function(ruta){
   (basename(ruta) %>% strsplit("/"))[[1]] %>% return()
 }
 
@@ -520,7 +520,7 @@ procesarErroresT3  <- function(ruta, errorBucket){
 }
 
  #BD01
-getFechaCorte      <- function(ruta){
+getFechaCorte <- function(ruta){
   fecha_corte <- seq(as.Date(paste(getAno(ruta),
                                     getMes(ruta),
                                     "01",
