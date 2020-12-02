@@ -57,8 +57,8 @@ restriccionArchivosErroresLayer4 <- function(header, errorBucket, exigibles, tip
   archivosErrorTipo <- tibble(NombreArchivo = exigibles) %>% rowwise() %>%
     mutate(colsFiltradas_n = switch (tipoError,
                                      tipo1 = depurarColsErrorT1(getRuta(getCarpeta(header), NombreArchivo), errorBucket),
-                                     tipo3 = depurarColsErrorT3(getRuta(getCarpeta(header), NombreArchivo), errorBucket)) %>% 
-             length()
+                                     tipo3 = depurarColsErrorT3(getRuta(getCarpeta(header), NombreArchivo), errorBucket)
+                                     ) %>% length()
            ) %>%
     filter(colsFiltradas_n > 0) %>%
     pull(NombreArchivo) %>%
