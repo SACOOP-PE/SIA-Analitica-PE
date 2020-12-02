@@ -1,5 +1,4 @@
 ejecutarValidacionLayer4 <- function(header, errorBucket){
-  
   carpeta   <- getCarpeta(header)
   exigibles <- getArchivosSinErrores(header, errorBucket, c(201, 203), c("CCR","CCR_C","CODGR"))
   tb_main <- tibble(NombreArchivo = exigibles) %>% rowwise() %>%
