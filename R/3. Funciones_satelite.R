@@ -26,24 +26,24 @@ initRepositorioErrores <- function(){
 }
 
 ## Archivos de inicializacion----
-initHeader         <- function(id_coopac, coopac_carpeta, periodo_inicial, periodo_final, bds = c("BD01","BD02A","BD02B","BD03A","BD03B","BD04")){
+initHeader         <- function(idCoopac, coopacCarpeta, periodoInicial, periodoFinal, bds = c("BD01","BD02A","BD02B","BD03A","BD03B","BD04")){
   round((runif(1,0,2) * 1000000),0) %>%   
-    tibble(Coopac       = id_coopac,
+    tibble(Coopac       = idCoopac,
            NombreCoopac = initCuadreContable() %>% 
-                              filter(CODIGO_ENTIDAD == as.integer(id_coopac)) %>%
+                              filter(CODIGO_ENTIDAD == as.integer(idCoopac)) %>%
                               pull(ENTIDAD) %>% first(),
-           Carpeta      = coopac_carpeta,
+           Carpeta      = coopacCarpeta,
            IdProceso    = .,
            InicioProceso  = format(Sys.time(), "%a %b %d %X %Y"), 
-           PeriodoInicial = periodo_inicial,
-           PeriodoFinal   = periodo_final,
+           PeriodoInicial = periodoInicial,
+           PeriodoFinal   = periodoFinal,
            Alcance        = bds) %>% return() 
 }
-initBucketErrores <- function(header) {
-  tibble(Coopac    = header %>% pull(Coopac) %>% first(),
-         Coopac_n  =  header %>% pull(NombreCoopac) %>% first(),
-         Carpeta   = header %>% pull(Carpeta) %>% first(),
-         IdProceso = header %>% pull(IdProceso) %>% first(),
+initBucketErrores <- function(header){
+  tibble(Coopac     = header %>% pull(Coopac) %>% first(),
+         NombCoopac = header %>% pull(NombreCoopac) %>% first(),
+         Carpeta    = header %>% pull(Carpeta) %>% first(),
+         IdProceso  = header %>% pull(IdProceso) %>% first(),
          #Informaci?n temporal
          Cod         = 999999,
          Descripcion = "Lorem ipsum ... ",
@@ -57,17 +57,17 @@ getDescError <- function(codigoError){
   
   initRepositorioErrores() %>% filter(Cod == codigoError) %>% pull(Descripcion) %>% first() %>% return()
 } 
-deleteError  <- function(error_bucket, arg_codigo){
-  error_bucket %>% filter(Cod != arg_codigo) %>% return()
+deleteError  <- function(errorBucket, codigoError){
+  errorBucket %>% filter(Cod != codigoError) %>% return()
 }
-addError     <- function(error_bucket, arg_codigo, arg_descripcion, arg_detalle){ 
-  rbind(error_bucket, tibble(Coopac    = error_bucket %>% pull(Coopac) %>% first(),
-                             Coopac_n  = error_bucket %>% pull(Coopac_n) %>% first(),
-                             Carpeta   = error_bucket %>% pull(Carpeta) %>% first(),
-                             IdProceso = error_bucket %>% pull(IdProceso) %>% first(),
-                             Cod         = arg_codigo, 
-                             Descripcion = arg_descripcion,
-                             Detalle     = list(arg_detalle))) %>%
+addError     <- function(errorBucket, codigoError, DescripcionError, DetalleError){ 
+  rbind(errorBucket, tibble(Coopac     = errorBucket %>% pull(Coopac) %>% first(),
+                            NombCoopac = errorBucket %>% pull(NombCoopac) %>% first(),
+                            Carpeta    = errorBucket %>% pull(Carpeta) %>% first(),
+                            IdProceso  = errorBucket %>% pull(IdProceso) %>% first(),
+                            Cod         = codigoError, 
+                            Descripcion = DescripcionError,
+                            Detalle     = list(DetalleError))) %>%
     deleteError(999999) %>% return()
 }
 
@@ -80,7 +80,7 @@ finalizarProceso <- function(header, errorBucket){
     select(Coopac, NombreCoopac, IdProceso, InicioProceso, FinProceso, Tramo, NroErrores, PeriodoInicial, PeriodoFinal) %>%
     return()
 }
-saveResults      <- function(header, error_bucket){
+saveResults      <- function(header, errorBucket){
   ## header ----
   header %>% 
     write.csv(paste0(paste(getwd(), "test/", sep = "/"),
@@ -91,7 +91,7 @@ saveResults      <- function(header, error_bucket){
                            sep = "_"),
                      "_header.csv"))
   ## errorbucket ----
-  error_bucket %>%
+  errorBucket %>%
     mutate(Detalle = map_chr(Detalle, ~ .[[1]] %>% str_c(collapse = ", "))) %>%
     write.csv(paste0(paste(getwd(), "test/", sep = "/"),
                      paste(header %>% pull(Coopac),
@@ -177,9 +177,9 @@ generarDetalleError3 <- function(ruta, columna, error){
                         list(character(0)))
   return(paste_error)
 }
-generarDetalleError4 <- function(periodo, error_cruce){
-  paste_error <- ifelse(length(error_cruce)>0,
-                        list(paste0(periodo,"(", toString(error_cruce), ")")),
+generarDetalleError4 <- function(periodo, errorCruce){
+  paste_error <- ifelse(length(errorCruce)>0,
+                        list(paste0(periodo,"(", toString(errorCruce), ")")),
                         list(character(0)))
 }
 
@@ -388,24 +388,24 @@ CodigoErrorTipo1   <- function(ruta, campo){
     pull(cod_error)
   return(cod)
 }
-procesarErroresT1  <- function(ruta, error_bucket){
+procesarErroresT1  <- function(ruta, errorBucket){
   BD <- evalFile(ruta)
-  tb <- tibble(Columna = depurarColsErrorT1(ruta, error_bucket)) %>% rowwise() %>%
-    mutate(Verif_cols = BD %>%
+  tb <- tibble(Columna = depurarColsErrorT1(ruta, errorBucket)) %>% rowwise() %>%
+    mutate(VerifCols = BD %>%
                           filter((as.numeric(cgrep(BD, Columna)[[1]]) %in% elegirDigitos(ruta, Columna)) == FALSE) %>%
                           pull(getCodigoBD(getBD(ruta))) %>% unique() %>% list(),
-           resultado = generarDetalleError2(ruta, Verif_cols) %>% toString(),
-           Coopac    = getCoopac(ruta),
-           Coopac_n  = getNomCoopac(ruta),
-           Carpeta   = getCarpeta(header),
-           IdProceso = getIdProceso(header),
-           Cod       = ifelse(resultado !="character(0)", CodigoErrorTipo1(ruta,Columna),0),
+           resultado  = generarDetalleError2(ruta, VerifCols) %>% toString(),
+           Coopac     = getCoopac(ruta),
+           NombCoopac = getNomCoopac(ruta),
+           Carpeta    = getCarpeta(header),
+           IdProceso  = getIdProceso(header),
+           Cod        = ifelse(resultado !="character(0)", CodigoErrorTipo1(ruta,Columna),0),
            Descripcion = getDescError(Cod),
            Detalle     = resultado %>% list())
   
-  error_bucket <- bind_rows(error_bucket, tb %>% 
+  errorBucket <- bind_rows(errorBucket, tb %>% 
                               filter(resultado !="character(0)") %>%  
-                              select(Coopac, Coopac_n, Carpeta, IdProceso, Cod, Descripcion, Detalle)) %>% return()
+                              select(Coopac, NombCoopac, Carpeta, IdProceso, Cod, Descripcion, Detalle)) %>% return()
 }
 
 # Validaciones condicionales relacionadas con otros campos  (errores tipo2)----
@@ -499,24 +499,24 @@ CodigoErrorTipo3   <- function(ruta, campo){
     pull(cod_error)
   return(cod)
 }
-procesarErroresT3  <- function(ruta, error_bucket){
+procesarErroresT3  <- function(ruta, errorBucket){
   BD <- evalFile(ruta)
-  tb <- tibble(Columna    = depurarColsErrorT3(ruta, error_bucket)) %>% rowwise() %>%
-    mutate(validar_fechas = BD %>%
+  tb <- tibble(Columna    = depurarColsErrorT3(ruta, errorBucket)) %>% rowwise() %>%
+    mutate(validarFechas = BD %>%
                              filter(dmy(cgrep(BD, Columna)[[1]]) %>% is.na() == TRUE) %>% 
                              pull(getCodigoBD(getBD(ruta))) %>% unique() %>% list(),
-           resultado   = generarDetalleError2(ruta, validar_fechas) %>% toString(),
+           resultado   = generarDetalleError2(ruta, validarFechas) %>% toString(),
            Coopac      = getCoopac(ruta),
-           Coopac_n    = getNomCoopac(ruta),
+           NombCoopac  = getNomCoopac(ruta),
            Carpeta     = getCarpeta(header),
            IdProceso   = getIdProceso(header),
            Cod         = ifelse(resultado !="character(0)", CodigoErrorTipo3(ruta, Columna), 0),
            Descripcion = getDescError(Cod),
            Detalle     = resultado %>% list())
   
-  error_bucket <- bind_rows(error_bucket, tb %>%
+  errorBucket <- bind_rows(errorBucket, tb %>%
                               filter(resultado !="character(0)") %>%
-                              select(Coopac, Coopac_n, Carpeta, IdProceso, Cod, Descripcion, Detalle)) %>% return()
+                              select(Coopac, NombCoopac, Carpeta, IdProceso, Cod, Descripcion, Detalle)) %>% return()
 }
 
  #BD01

@@ -1,4 +1,4 @@
-ejecutarValidacionLayer2 <- function(header, error_bucket){
+ejecutarValidacionLayer2 <- function(header, errorBucket){
   carpeta   <- getCarpeta(header)
   exigibles <- getArchivosExigibles(header)
   
@@ -22,18 +22,18 @@ ejecutarValidacionLayer2 <- function(header, error_bucket){
    cv  <- (paste(tbl1_ctrl1 %>% rowwise() %>% pull(ColVacias), collapse = ",") %>% strsplit(","))[[1]]
   
    if(length(cf[cf != "character(0)"]) > 0){
-     error_bucket <- error_bucket %>%
+     errorBucket <- errorBucket %>%
        addError(201,getDescError(201), (cf[cf != "character(0)"]) %>% toString())
      }
    if(length(cs[cs != "character(0)"]) > 0){
-     error_bucket <- error_bucket %>%
+     errorBucket <- errorBucket %>%
        addError(202,getDescError(202), (cs[cs != "character(0)"]) %>% toString())
      }
    if(length(cv[cv != "character(0)"]) > 0){
-     error_bucket <- error_bucket %>%
+     errorBucket <- errorBucket %>%
        addError(203,getDescError(203), (cv[cv != "character(0)"]) %>% toString())
      }
 
   print(paste0("El layer 2 terminó: ", format(Sys.time(), "%a %b %d %X %Y")))
-  return(error_bucket)
+  return(errorBucket)
 }

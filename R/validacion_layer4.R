@@ -1,20 +1,20 @@
-ejecutarValidacionLayer4 <- function(header, error_bucket){
+ejecutarValidacionLayer4 <- function(header, errorBucket){
   
   carpeta   <- getCarpeta(header)
-  exigibles <- getArchivosSinErrores(header, error_bucket, c(201, 203), c("CCR","CCR_C","CODGR"))
+  exigibles <- getArchivosSinErrores(header, errorBucket, c(201, 203), c("CCR","CCR_C","CODGR"))
   tb_main <- tibble(NombreArchivo = exigibles) %>% rowwise() %>%
     mutate(Ruta    = getRuta(carpeta, NombreArchivo),
            Periodo = getAnoMes(Ruta),
            BDCC    = getBD(Ruta))
 
   # i. Errores tipo1 ----
-  exigiblesT1 <- restriccionArchivosErroresLayer4(header, error_bucket, exigibles, "tipo1")
-  error_bucket_i <- error_bucket
+  exigiblesT1 <- restriccionArchivosErroresLayer4(header, errorBucket, exigibles, "tipo1")
+  errorBucket_i <- errorBucket
    for (i in 1:length(exigiblesT1)){
      ruta_i         <- getRuta(carpeta, exigiblesT1[i])
-     error_bucket_i <- procesarErroresT1(ruta_i, error_bucket_i)
+     errorBucket_i <- procesarErroresT1(ruta_i, errorBucket_i)
     }
-   error_bucket <- error_bucket_i %>% group_by(Coopac, Coopac_n, Carpeta, IdProceso, Cod, Descripcion) %>%
+   errorBucket <- errorBucket_i %>% group_by(Coopac, NombCoopac, Carpeta, IdProceso, Cod, Descripcion) %>%
                          summarise(Detalle = toString(Detalle)) %>%
                          ungroup()
   
@@ -39,49 +39,49 @@ ejecutarValidacionLayer4 <- function(header, error_bucket){
                            pull(vf_CredCobertura) %>% 
                            paste(collapse = ",") %>%
                            strsplit(","))[[1]]
-  errorCodDeudor <- (tibble(Periodo = restriccionPeriodos(error_bucket, "BD01", "BD03A", "CIS")) %>% rowwise() %>%
+  errorCodDeudor <- (tibble(Periodo = restriccionPeriodos(errorBucket, "BD01", "BD03A", "CIS")) %>% rowwise() %>%
                        mutate(vf_CodDeudor = procesarErrorcodDeudor(carpeta, Periodo, "BD03A","BD01")) %>% rowwise() %>%
                        pull(vf_CodDeudor) %>% 
                        paste(collapse = ",") %>%
                        strsplit(","))[[1]]
   
     if (length(errorSaldosNegativos) > 0){
-      error_bucket <- error_bucket %>%
+      errorBucket <- errorBucket %>%
         addError(461, getDescError(461), errorSaldosNegativos %>% toString())
       }
     if (length(errorModPagoCouta[errorModPagoCouta != "character(0)"]) > 0){
-      error_bucket <- error_bucket %>%
+      errorBucket <- errorBucket %>%
         addError(462, getDescError(462), (errorModPagoCouta[errorModPagoCouta != "character(0)"]) %>% toString())
       }
     if (length(errorMontoOtorgado[errorMontoOtorgado != "character(0)"]) > 0){
-      error_bucket <- error_bucket %>%
+      errorBucket <- errorBucket %>%
         addError(463, getDescError(463), (errorMontoOtorgado[errorMontoOtorgado != "character(0)"]) %>% toString())
       }
     if (length(errorDiasRetraso[errorDiasRetraso != "character(0)"]) > 0){
-      error_bucket <- error_bucket %>%
+      errorBucket <- errorBucket %>%
         addError(464, getDescError(464), (errorDiasRetraso[errorDiasRetraso != "character(0)"]) %>% toString())
       }
     if (length(errorDocIdent[errorDocIdent != "character(0)"]) > 0){
-      error_bucket <- error_bucket %>%
+      errorBucket <- errorBucket %>%
         addError(465, getDescError(465), (errorDocIdent[errorDocIdent != "character(0)"]) %>% toString())
       }
     if (length(errorCredCobertura[errorCredCobertura != "character(0)"]) > 0){
-      error_bucket <- error_bucket %>%
+      errorBucket <- errorBucket %>%
         addError(466, getDescError(466), (errorCredCobertura[errorCredCobertura != "character(0)"]) %>% toString())
       }
     if (length(errorCodDeudor[errorCodDeudor != "character(0)"]) > 0){
-      error_bucket <- error_bucket %>%
+      errorBucket <- errorBucket %>%
         addError(467, getDescError(467), (errorCodDeudor[errorCodDeudor != "character(0)"]) %>% toString())
       }
     
   # iii. Errores tipo3 ----
-  exigiblesT3 <- restriccionArchivosErroresLayer4(header, error_bucket, exigibles[str_detect(exigibles, paste(c("BD01","BD02A","BD02B","BD04"), collapse = '|'))], "tipo3")
-  error_bucket_ii <- error_bucket
+  exigiblesT3 <- restriccionArchivosErroresLayer4(header, errorBucket, exigibles[str_detect(exigibles, paste(c("BD01","BD02A","BD02B","BD04"), collapse = '|'))], "tipo3")
+  errorBucket_ii <- errorBucket
     for (ii in 1:length(exigiblesT3)){
       ruta_ii         <- getRuta(carpeta, exigiblesT3[ii])
-      error_bucket_ii <- procesarErroresT3(ruta_ii, error_bucket_ii)
+      errorBucket_ii <- procesarErroresT3(ruta_ii, errorBucket_ii)
     }
-    error_bucket <- error_bucket_ii %>% group_by(Coopac, Coopac_n, Carpeta, IdProceso, Cod, Descripcion) %>% 
+    errorBucket <- errorBucket_ii %>% group_by(Coopac, NombCoopac, Carpeta, IdProceso, Cod, Descripcion) %>% 
                           summarise(Detalle = toString(Detalle)) %>%
                           ungroup()
   
@@ -92,10 +92,10 @@ ejecutarValidacionLayer4 <- function(header, error_bucket){
                              strsplit(","))[[1]]
   
     if (length(errorFechaDesembolso[errorFechaDesembolso != "character(0)"]) > 0){
-      error_bucket <- error_bucket %>%
+      errorBucket <- errorBucket %>%
         addError(479, getDescError(479), (errorFechaDesembolso[errorFechaDesembolso != "character(0)"]) %>% toString())
       }
   
   print(paste0("El layer 4 terminó: ", format(Sys.time(), "%a %b %d %X %Y")))
-  return(error_bucket)
+  return(errorBucket)
 }
