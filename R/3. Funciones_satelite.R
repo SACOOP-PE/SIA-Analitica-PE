@@ -399,9 +399,9 @@ procesarErroresT1  <- function(ruta, errorBucket){
            NombCoopac = getNomCoopac(ruta),
            Carpeta    = getCarpeta(header),
            IdProceso  = getIdProceso(header),
-           Cod        = ifelse(resultado !="character(0)", CodigoErrorTipo1(ruta,Columna),0),
+           Cod        = ifelse(resultado !="character(0)", CodigoErrorTipo1(ruta, Columna), 0),
            Descripcion = getDescError(Cod),
-           Detalle     = resultado %>% list())
+           Detalle     = list(resultado))
   
   errorBucket <- bind_rows(errorBucket, tb %>% 
                               filter(resultado !="character(0)") %>%  
@@ -512,7 +512,7 @@ procesarErroresT3  <- function(ruta, errorBucket){
            IdProceso   = getIdProceso(header),
            Cod         = ifelse(resultado !="character(0)", CodigoErrorTipo3(ruta, Columna), 0),
            Descripcion = getDescError(Cod),
-           Detalle     = resultado %>% list())
+           Detalle     = list(resultado))
   
   errorBucket <- bind_rows(errorBucket, tb %>%
                               filter(resultado !="character(0)") %>%

@@ -18,7 +18,7 @@ getArchivosSinErrores <- function(header, errorBucket, codError, col){
           getArchivosError(header, errorBucket, codError, col)) %>% 
     return()
 }
-restriccionPeriodos         <- function(errorBucket, BD1, BD2, columnas){
+restriccionPeriodos   <- function(errorBucket, BD1, BD2, columnas){
   filtrarArchivos <- intersect(getArchivosSinErrores(header, errorBucket, c(201, 203), columnas),
                                setdiff(getArchivosExigibles(header),
                                        str_extract(filter(errorBucket, Cod %in% c(311, 312)) %>% pull(Detalle), paste(getArchivosExigibles(header), collapse = '|')) %>% unique()
