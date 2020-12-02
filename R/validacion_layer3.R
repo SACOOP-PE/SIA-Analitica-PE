@@ -2,7 +2,7 @@ ejecutarValidacionLayer3 <- function(header, error_bucket){
   carpeta <- getCarpeta(header)
   
   # i. cuadre contable ----
-  exigibles1 <- getArchivos_SinErrores(header, error_bucket, c(201,203), c("KVI","KVE","KRF","KJU"))
+  exigibles1 <- getArchivosSinErrores(header, error_bucket, c(201,203), c("KVI","KVE","KRF","KJU"))
   exigibles1 <- exigibles1[str_detect(exigibles1, "BD01")]
   
   tb1 <- tibble(NombreArchivo = exigibles1) %>% rowwise() %>% 

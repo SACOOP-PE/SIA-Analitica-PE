@@ -130,7 +130,7 @@ getBD        <- function(ruta) {
 getArchivosExigibles <- function(header){
   cod_coopac <- header %>% pull(Coopac) %>% first()
   id_bds     <- (header %>% pull(Alcance))[[1]]
-  periodos   <- alcance_general
+  periodos   <- alcanceGeneral
   periodo_inicio <- header %>% pull(PeriodoInicial) %>% first()
   periodo_final  <- header %>% pull(PeriodoFinal) %>% first()
   

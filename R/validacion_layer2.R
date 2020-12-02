@@ -12,7 +12,7 @@ ejecutarValidacionLayer2 <- function(header, error_bucket){
            ColFaltantes = ifelse(length(setdiff(ColumnasOM, Columnas))>0,
                                  list(paste(NombreArchivo, (setdiff(ColumnasOM, Columnas)), sep ="$", collapse=",")),
                                  list(character(0))),
-           ColSobrantes = ifelse(length(setdiff(Columnas, Columnas_OM))>0,
+           ColSobrantes = ifelse(length(setdiff(Columnas, ColumnasOM))>0,
                                  list(paste(NombreArchivo, (setdiff(Columnas, ColumnasOM)), sep ="$", collapse=",")),
                                  list(character(0))),
            ColVacias    = getColVacias(Ruta))

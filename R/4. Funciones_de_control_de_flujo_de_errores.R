@@ -27,7 +27,7 @@ restriccionPeriodos         <- function(error_bucket, name_BD1, name_BD2, column
   
   archivosCruce <- filtrar_archivos[str_detect(filtrar_archivos, paste(c(name_BD1, name_BD2), collapse = '|'))]
   
-  tibble(Periodos =  str_extract(archivosCruce, paste(as.character(alcance_general),collapse = '|'))) %>%
+  tibble(Periodos =  str_extract(archivosCruce, paste(as.character(alcanceGeneral),collapse = '|'))) %>%
     group_by(Periodos) %>%
     filter(n() ==2) %>%
     pull(Periodos) %>% 

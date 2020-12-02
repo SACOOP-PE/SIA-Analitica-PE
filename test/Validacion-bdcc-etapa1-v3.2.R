@@ -18,22 +18,22 @@ listaErrores %>%
 listaErrores %>%
   mutate(Detalle = map_chr(Detalle, ~ .[[1]] %>% str_c(collapse = ", "))) %>%
   rowwise() %>%
-  mutate(Archivos_error = str_extract(Detalle,
+  mutate(ArchivosError = str_extract(Detalle,
                                       getArchivosExigibles(header))[is.na(str_extract(Detalle,
-                                                                                      getArchivosExigibles(header))
-                                                                          ) == FALSE] %>% toString()) %>%
-  select(Cod, Descripcion, Archivos_error) %>% view()
+                                                                                      getArchivosExigibles(header))) == FALSE] %>%
+           toString()) %>%
+  select(Cod, Descripcion, ArchivosError) %>% view()
 
 # resumen_errores_periodos
 listaErrores %>%
   mutate(Detalle = map_chr(Detalle, ~ .[[1]] %>% str_c(collapse = ", "))) %>%
   rowwise() %>%
-  mutate(Periodos_error = str_extract(unlist(Detalle %>%
+  mutate(PeriodosError = str_extract(unlist(Detalle %>%
                                                str_split(",")),
-                                      paste(alcance_general,collapse = '|'))[is.na(str_extract(unlist(Detalle %>% str_split(",")),
-                      paste(alcance_general,collapse = '|'))) == FALSE] %>%
+                                      paste(alcanceGeneral, collapse = '|'))[is.na(str_extract(unlist(Detalle %>% str_split(",")),
+                                                                                               paste(alcanceGeneral,collapse = '|'))) == FALSE] %>%
     unique() %>% toString()) %>%
-  select(Descripcion, Periodos_error) %>% 
+  select(Descripcion, PeriodosError) %>% 
   write.csv(paste0(paste(getwd(), "test/", sep = "/"),
                    paste(header %>% pull(Coopac),
                          getIdProceso(header),
