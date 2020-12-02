@@ -6,9 +6,9 @@ ejecutarValidacionLayer2 <- function(header, errorBucket){
     mutate(Ruta          = getRuta(carpeta, NombreArchivo),
            Coopac        = as.numeric(getCoopac(Ruta)),
            Periodo       = getAnoMes(Ruta),
-           BDCC          = getBD(Ruta), 
-           Columnas      = list(colnames(evalFile(Ruta))), 
-           ColumnasOM   = getColumnasOM(BDCC),    
+           BDCC          = getBD(Ruta),
+           Columnas      = list(colnames(evalFile(Ruta))),
+           ColumnasOM   = getColumnasOM(BDCC),
            ColFaltantes = ifelse(length(setdiff(ColumnasOM, Columnas))>0,
                                  list(paste(NombreArchivo, (setdiff(ColumnasOM, Columnas)), sep ="$", collapse=",")),
                                  list(character(0))),
@@ -17,8 +17,8 @@ ejecutarValidacionLayer2 <- function(header, errorBucket){
                                  list(character(0))),
            ColVacias    = getColVacias(Ruta))
   
-   cf  <- (paste(tbl1_ctrl1 %>% rowwise() %>% pull(ColFaltantes), collapse = ",") %>% strsplit(","))[[1]] 
-   cs  <- (paste(tbl1_ctrl1 %>% rowwise() %>% pull(ColSobrantes), collapse = ",") %>% strsplit(","))[[1]] 
+   cf  <- (paste(tbl1_ctrl1 %>% rowwise() %>% pull(ColFaltantes), collapse = ",") %>% strsplit(","))[[1]]
+   cs  <- (paste(tbl1_ctrl1 %>% rowwise() %>% pull(ColSobrantes), collapse = ",") %>% strsplit(","))[[1]]
    cv  <- (paste(tbl1_ctrl1 %>% rowwise() %>% pull(ColVacias), collapse = ",") %>% strsplit(","))[[1]]
   
    if(length(cf[cf != "character(0)"]) > 0){

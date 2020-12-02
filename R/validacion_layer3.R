@@ -1,9 +1,9 @@
 ejecutarValidacionLayer3 <- function(header, errorBucket){
   carpeta <- getCarpeta(header)
+  exigibles <- getArchivosSinErrores(header, errorBucket, c(201,203), c("KVI","KVE","KRF","KJU"))
   
   # i. cuadre contable ----
-  exigibles1 <- getArchivosSinErrores(header, errorBucket, c(201,203), c("KVI","KVE","KRF","KJU"))
-  exigibles1 <- exigibles1[str_detect(exigibles1, "BD01")]
+  exigibles1 <- exigibles[str_detect(exigibles, "BD01")]
   
   tb1 <- tibble(NombreArchivo = exigibles1) %>% rowwise() %>% 
     mutate(Ruta    = getRuta(carpeta, NombreArchivo),
@@ -14,7 +14,7 @@ ejecutarValidacionLayer3 <- function(header, errorBucket){
            Dif_KVI = sum(getCapitalBDCC(Ruta)[[1]], na.rm=T) - sum(getCapitalBC(Ruta)[[1]], na.rm=T),
            Dif_KVE = sum(getCapitalBDCC(Ruta)[[2]], na.rm=T) - sum(getCapitalBC(Ruta)[[2]], na.rm=T),
            Dif_KRF = sum(getCapitalBDCC(Ruta)[[3]], na.rm=T) - sum(getCapitalBC(Ruta)[[3]], na.rm=T),
-           Dif_KJU = sum(getCapitalBDCC(Ruta)[[4]], na.rm=T) - sum(getCapitalBC(Ruta)[[4]], na.rm=T)) %>% 
+           Dif_KJU = sum(getCapitalBDCC(Ruta)[[4]], na.rm=T) - sum(getCapitalBC(Ruta)[[4]], na.rm=T)) %>%
     pivot_longer(starts_with("Dif"),names_to = "Capital", values_to = "Saldo") %>% rowwise() %>%
     mutate(Resultado   = ifelse(abs(Saldo)>100, "ERROR", ""),
            Coopac      = getCoopac(Ruta),
@@ -24,10 +24,10 @@ ejecutarValidacionLayer3 <- function(header, errorBucket){
            Cod         = ifelse(Resultado == "ERROR",
                                 CodErrorCuadreContable(str_split(Capital, "_")[[1]][2]),0),
            Descripcion =  getDescError(Cod)) %>%
-    mutate(Detalle     = list(c(NombreArchivo, str_split(Capital,"_")[[1]][2], round(Saldo, digits =2))))  
+    mutate(Detalle     = list(c(NombreArchivo, str_split(Capital,"_")[[1]][2], round(Saldo, digits =2)))) 
   
-  errorBucket <- bind_rows(errorBucket, tb1 %>% 
-                              filter(Resultado == "ERROR") %>%  
+  errorBucket <- bind_rows(errorBucket, tb1 %>%
+                              filter(Resultado == "ERROR") %>%
                               select(Coopac, NombCoopac, Carpeta, IdProceso, Cod, Descripcion, Detalle))
 
   # ii. verificar dups y vacíos ----
