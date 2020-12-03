@@ -1,13 +1,13 @@
 ##### Testing -----
 header        <- initHeader(idCoopac = "01172",
-                             coopacCarpeta  = "C:/Users/eroque/Desktop/Proyecto_BDCC",
-                             periodoInicial = "201901",
-                             periodoFinal   = "201912",
+                             coopacCarpeta  = "test/datatest/",
+                             periodoInicial = "202001",
+                             periodoFinal   = "202002",
                              bds            = list(c("BD01", "BD02A", "BD02B", "BD03A", "BD03B", "BD04")))
 eb            <- initBucketErrores(header)
 listaErrores <- main(header, eb)
 
-##########################
+#############################3
 # n_caracteres
 listaErrores %>%
   rowwise() %>%
