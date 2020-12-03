@@ -1,0 +1,35 @@
+CodAlerta	Responsable	Descripcion
+2001	jz	Desembolsos de créditos por monto superior a USD 50,000 o equivalente en soles en ubigeos de agencias de alto riesgo LAFT (MORG) en la BD01
+2002	jz	Desembolsos de créditos por monto superior a USD 50,000 o equivalente en soles en ubigeos de agencias de alto riesgo LAFT (UAGE) en la BD01
+2003
+2002
+2003
+2004
+2005
+2006
+2007
+2008
+2009
+2010
+2011
+2012
+2013
+2014
+2015
+2016
+2017
+2018
+2019
+2020
+2021
+2022
+2023
+2024
+2025
+2026
+2027
+2028
+2029
+2030
+2031
+2032
