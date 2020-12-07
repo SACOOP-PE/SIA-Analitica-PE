@@ -2,7 +2,7 @@ CodAlerta	Responsable	Descripcion
 2001	mb	Se detectaron créditos con un MORG superior a USD 50,000 o equivalente en soles en ubigeos de agencias de alto riesgo LAFT en la BD01.
 2002	mb	Se detectaron créditos con un UAGE superior a USD 50,000 o equivalente en soles en ubigeos de agencias de alto riesgo LAFT en la BD01.
 2003	mb	Se detectaron créditos con un MORG superior a USD 100,000 o equivalente en soles en los sectores de alto riesgo SEC(3, 6, 8, 9, 10) de LAFT en la BD01.
-2004	mb	Se detectaron créditos con un MORG superior a USD 500,000 o equivalente en soles a deudores con ocupaciones de alto riesgo LAFT (OSD=1, 2, 5, 9)
+2004	mb	Se detectaron créditos con un MORG superior a USD 500,000 o equivalente en soles a deudores con ocupaciones de alto riesgo LAFT OSD(1, 2, 5, 9) en la BD01.
 2005	jz	Se detectaron créditos con TEA menor del 1% en la BD01.
 2006	jz	Se detectaron créditos con Días de Gracias (DGR) mayores a 90 días en la BD01.
 2007	jz	Se detectaron créditos donde el monto original del credito (MORG) es mayor o igual al saldo de de capital vigente (SKCR) en la BD01.
@@ -12,4 +12,11 @@ CodAlerta	Responsable	Descripcion
 2011	av	Se detectaron créditos cuyo esquema de amortización (ESAM_C) correspondiente a cuotas reporta número de cuotas pagadas igual a 1 (NCPA) en la BD01.
 2012	av	Se detectaron códigos de socios (CIS) de deudores con calificación Dudoso o Pérdida CAL(3,4) que generen intereses devengados (SIN) en la BD01
 2013	av	Se detectaron créditos diferentes a vigente (refinanciados, estructurados, judicial, vencidos) que generen intereses devengados (SIN) en la BD01.
-2014	av	Se detectaron códigos de socios (CIS) de deudores con calificación normal y CPP CAL(0,1) que registran situacion contable vencido (CCVI) en la BD01.
+2014	av	Se detectaron códigos de socios (CIS) de deudores con calificación normal y CPP CAL(0,1) que registran situacion contable vencido (KVE) en la BD01.
+2015	dp	Se detectaron créditos con calificación dudosa o pérdida CAL(3,4) que se encuentren vigentes (KVI) en la BD01.
+2016	dp	Se detectaron créditos con días de atraso (DAK) mayor a 120 que no hayan pasado a Judicial (KJU) en la BD01.
+2017	dp	Se detectaron créditos en cobranza judicial (KJU) que esten en clasificaciones Normal, CPP o Deficiente (CAL = 0, 1, 2) en la BD01.
+2018	dp	Se detectaron créditos unicuota en el campo ESAM con fecha de cancelación pactada a más de un año (FOT, FVEG) en la BD01.
+2027	jz	Se detectaron créditos donde el monto otorgado (MORG) en la BD01 es mayor que elcapital por cobrar (MCUO) en el cronograma (BD02).
+2033	ja	Se detectaron créditos con la misma fecha de desembolso(FOT_C) y cancelación(FCAN_C) en la BD04.
+2034	ja	Se detectaron créditos con el mismo número original de cuotas de la operación cancelada (NCPA_C) y el número de cuotas pagadas a la fecha de cancelación de la operación (NCPA_C) en la BD04.
