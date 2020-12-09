@@ -44,35 +44,6 @@ addAlerta       <- function(alertBucket, codigoAlerta, responsableAlerta, descri
     deleteAlerta(999999) %>% return()
 }
 
-# getExigiblesAlertas <- function(exigibles, codigoAlerta, BD){
-# 
-#   if (codigoAlerta == 2001 || codigoAlerta == 2002) {
-#     exigiblesAlerta <- getArchivosSinErrores(header, listaErrores, c(201,203), c("MORG","UAGE")) %>%
-#       intersect(exigibles)
-# 
-#     exigiblesAlerta <- exigiblesAlerta[str_detect(exigiblesAlerta, BD)]
-#       return(exigiblesAlerta)
-#   }
-#   exigiblesAlerta <- switch (toString(codigoAlerta),
-#                              "2003" = getArchivosSinErrores(header, listaErrores, c(201,203), c("SEC", "MORG")),
-#                              "2004" = getArchivosSinErrores(header, listaErrores, c(201,203), c("OSD", "MORG")),
-#                              "2005" = getArchivosSinErrores(header, listaErrores, c(201,203), "TEA"),
-#                              "2006" = getArchivosSinErrores(header, listaErrores, c(201,203), "DGR"),
-#                              "2007" = getArchivosSinErrores(header, listaErrores, c(201,203), c("MORG","SKCR")),
-#                              "2008" = getArchivosSinErrores(header, listaErrores, c(201,203), c("CAL", "KRF", "KJU", "SIN")),
-#                              "2009" = getArchivosSinErrores(header, listaErrores, c(201,203), c("CIS", "CAL")),
-#                              "2010" = getArchivosSinErrores(header, listaErrores, c(201,203), "DAKR"),
-#                              "2011" = getArchivosSinErrores(header, listaErrores, c(201,203), c("ESAM", "NCPR")),
-#                              "2012" = getArchivosSinErrores(header, listaErrores, c(201,203), c("CAL", "SIN")),
-#                              "2013" = getArchivosSinErrores(header, listaErrores, c(201,203), c("KRF", "KVE", "KJU", "SIN")),
-#                              "2014" = getArchivosSinErrores(header, listaErrores, c(201,203), c("CAL", "KVE"))
-#                              ) %>%
-#     intersect(exigibles)
-# 
-#   exigiblesAlerta <- exigiblesAlerta[str_detect(exigiblesAlerta, BD)]
-#   return(exigiblesAlerta)
-# }
-
 #alertas BD01 ----
 # Codigos2001 ,2002
 alertMontosuperiorAgencias       <- function(ruta, alertBucket){
@@ -128,7 +99,7 @@ alertTea                         <- function(ruta, BD = evalFile(ruta)){
 # Codigo 2006
 alertDiasGracia                  <- function(ruta, BD = evalFile(ruta)){
   BD %>% 
-    filter(as.numeric(DGR) > 90) %>% pull(getCodigoBD("BD01")) %>% list() %>% 
+    filter(as.numeric(DGR) > 90) %>% pull(getCodigoBD("BD01")) %>% 
     return() 
 }
 
