@@ -17,7 +17,7 @@ initBucketAlertas      <- function(header){
          Detalle     = list(c("1", "3", "2"))) %>% return()
 }
 
-getDescAlerta <- function(codigoAlerta){
+getDescAlerta   <- function(codigoAlerta){
   if ((length(initRepositorioAlertas() %>% filter(CodAlerta == codigoAlerta) %>% pull(Descripcion)) == 0)){
     return("Descripción de alerta no encontrada")}
   
@@ -29,20 +29,49 @@ getResponAlerta <- function(codigoAlerta){
   
   initRepositorioAlertas() %>% filter(CodAlerta == codigoAlerta) %>% pull(Responsable) %>% first() %>% return()
 }
-deleteAlerta  <- function(alertBucket, codigoAlerta){
+deleteAlerta    <- function(alertBucket, codigoAlerta){
   alertBucket %>% filter(CodAlerta != codigoAlerta) %>% return()
 }
-addAlerta     <- function(alertBucket, codigoAlerta, responsableAlerta, DescripcionAlerta, DetalleAlerta){ 
+addAlerta       <- function(alertBucket, codigoAlerta, responsableAlerta, descripcionAlerta, DetalleAlerta){ 
   rbind(alertBucket, tibble(Coopac     = alertBucket %>% pull(Coopac) %>% first(),
                             NombCoopac = alertBucket %>% pull(NombCoopac) %>% first(),
                             Carpeta    = alertBucket %>% pull(Carpeta) %>% first(),
                             IdProceso  = alertBucket %>% pull(IdProceso) %>% first(),
                             CodAlerta  = codigoAlerta,
-                            Responsable = alertBucket %>% pull(responsableAlerta),
-                            Descripcion = DescripcionAlerta,
+                            Responsable = responsableAlerta,
+                            Descripcion = descripcionAlerta,
                             Detalle     = list(DetalleAlerta))) %>%
     deleteAlerta(999999) %>% return()
 }
+
+# getExigiblesAlertas <- function(exigibles, codigoAlerta, BD){
+# 
+#   if (codigoAlerta == 2001 || codigoAlerta == 2002) {
+#     exigiblesAlerta <- getArchivosSinErrores(header, listaErrores, c(201,203), c("MORG","UAGE")) %>%
+#       intersect(exigibles)
+# 
+#     exigiblesAlerta <- exigiblesAlerta[str_detect(exigiblesAlerta, BD)]
+#       return(exigiblesAlerta)
+#   }
+#   exigiblesAlerta <- switch (toString(codigoAlerta),
+#                              "2003" = getArchivosSinErrores(header, listaErrores, c(201,203), c("SEC", "MORG")),
+#                              "2004" = getArchivosSinErrores(header, listaErrores, c(201,203), c("OSD", "MORG")),
+#                              "2005" = getArchivosSinErrores(header, listaErrores, c(201,203), "TEA"),
+#                              "2006" = getArchivosSinErrores(header, listaErrores, c(201,203), "DGR"),
+#                              "2007" = getArchivosSinErrores(header, listaErrores, c(201,203), c("MORG","SKCR")),
+#                              "2008" = getArchivosSinErrores(header, listaErrores, c(201,203), c("CAL", "KRF", "KJU", "SIN")),
+#                              "2009" = getArchivosSinErrores(header, listaErrores, c(201,203), c("CIS", "CAL")),
+#                              "2010" = getArchivosSinErrores(header, listaErrores, c(201,203), "DAKR"),
+#                              "2011" = getArchivosSinErrores(header, listaErrores, c(201,203), c("ESAM", "NCPR")),
+#                              "2012" = getArchivosSinErrores(header, listaErrores, c(201,203), c("CAL", "SIN")),
+#                              "2013" = getArchivosSinErrores(header, listaErrores, c(201,203), c("KRF", "KVE", "KJU", "SIN")),
+#                              "2014" = getArchivosSinErrores(header, listaErrores, c(201,203), c("CAL", "KVE"))
+#                              ) %>%
+#     intersect(exigibles)
+# 
+#   exigiblesAlerta <- exigiblesAlerta[str_detect(exigiblesAlerta, BD)]
+#   return(exigiblesAlerta)
+# }
 
 #alertas BD01 ----
 # Codigos2001 ,2002
@@ -60,9 +89,7 @@ alertMontosuperiorAgencias       <- function(ruta, alertBucket){
            Carpeta    = getCarpeta(header),
            IdProceso  = getIdProceso(header),
            CodAlerta  = ifelse(resultado !="character(0)", 
-                               switch (Columna,
-                                       MORG = 2001,
-                                       UAGE = 2002), 
+                               switch (Columna, MORG = 2001, UAGE = 2002),
                                0),
            Responsable = getResponAlerta(CodAlerta),
            Descripcion = getDescAlerta(CodAlerta),
@@ -77,24 +104,24 @@ alertMontosuperiorAgencias       <- function(ruta, alertBucket){
 
 # Codigo 2003
 alertMontosuperiorSector         <- function(ruta, BD = evalFile(ruta)){
-  alert <-  BD %>% 
-             filter((as.numeric(SEC) %in% c(3,6,8,9,10)) & (as.numeric(MORG) > 27778) == TRUE) %>%
-             pull(getCodigoBD("BD01")) %>% list()
-  return(alert)
+  BD %>% 
+    filter((as.numeric(SEC) %in% c(3,6,8,9,10)) & (as.numeric(MORG) > 27778) == TRUE) %>%
+    pull(getCodigoBD("BD01")) %>% 
+    return()
 }
 
 # Codigo 2004
 alertMontosuperiorOcupaciones    <- function(ruta, BD = evalFile(ruta)){
   alert <-  BD %>% 
     filter((as.numeric(OSD) %in% c(1,2,5,9)) & (as.numeric(MORG) > 138889) == TRUE) %>%
-    pull(getCodigoBD("BD01")) %>% list() %>%
+    pull(getCodigoBD("BD01")) %>%
     return()
 }
 
 # Codigo 2005
 alertTea                         <- function(ruta, BD = evalFile(ruta)){
   BD %>% 
-    filter(as.numeric(TEA) < 1) %>% pull(getCodigoBD("BD01")) %>% list() %>% 
+    filter(as.numeric(TEA) < 1) %>% pull(getCodigoBD("BD01")) %>% 
     return()
 }
 
@@ -108,7 +135,7 @@ alertDiasGracia                  <- function(ruta, BD = evalFile(ruta)){
 # Codigo 2007
 alertMontOtorsuperiorCapitalVig  <- function(ruta, BD = evalFile(ruta)){
   BD %>% 
-    filter(as.numeric(MORG) >= as.numeric(SKCR)) %>% pull(getCodigoBD("BD01")) %>% list() %>%
+    filter(as.numeric(MORG) >= as.numeric(SKCR)) %>% pull(getCodigoBD("BD01")) %>%
     return() 
 }
 
@@ -116,7 +143,7 @@ alertMontOtorsuperiorCapitalVig  <- function(ruta, BD = evalFile(ruta)){
 alertRendimientoDevengado        <- function(ruta, BD = evalFile(ruta)){
   BD %>%
     filter(CAL %in% c(3,4) & (as.numeric(KRF) >0 | as.numeric(KJU) >0) & as.numeric(SIN) >0) %>%
-    pull(getCodigoBD("BD01")) %>% list() %>%
+    pull(getCodigoBD("BD01")) %>%
     return() 
 }
 
@@ -137,7 +164,7 @@ alertDeudorCal                   <- function(ruta, BD = evalFile(ruta)){
 alertDiasAtrasonegativo          <- function(ruta, BD = evalFile(ruta)){
   BD %>%
     filter(as.numeric(DAKR) < 0) %>%
-    pull(getCodigoBD("BD01")) %>% list() %>%
+    pull(getCodigoBD("BD01")) %>%
     return() 
 }
 
@@ -145,7 +172,7 @@ alertDiasAtrasonegativo          <- function(ruta, BD = evalFile(ruta)){
 alertEsquemaAmortizaCuotaPagadas <- function(ruta, BD = evalFile(ruta)){
   BD %>%
     filter((as.numeric(ESAM) %in% c(3,4)) & as.numeric(NCPR) == 1) %>%
-    pull(getCodigoBD("BD01")) %>% list() %>%
+    pull(getCodigoBD("BD01")) %>%
     return()
 }
 
@@ -153,7 +180,7 @@ alertEsquemaAmortizaCuotaPagadas <- function(ruta, BD = evalFile(ruta)){
 alertDeudorInteresDevengado      <- function(ruta, BD = evalFile(ruta)){
   BD %>%
     filter((CAL %in%  c(3,4)) & as.numeric(SIN) > 0) %>%
-    pull(CIS) %>% list() %>%
+    pull(CIS) %>%
     return()
 }
 
@@ -161,7 +188,7 @@ alertDeudorInteresDevengado      <- function(ruta, BD = evalFile(ruta)){
 alertCreditoInteresDevengado     <- function(ruta, BD = evalFile(ruta)){
   BD %>%
   filter((as.numeric(KRF) >0 | as.numeric(KVE) >0 | as.numeric(KJU) >0) & as.numeric(SIN) > 0) %>%
-    pull(getCodigoBD("BD01")) %>% list() %>%
+    pull(getCodigoBD("BD01")) %>%
     return()
 }
 
@@ -169,7 +196,7 @@ alertCreditoInteresDevengado     <- function(ruta, BD = evalFile(ruta)){
 alertDeudorContableVencido       <- function(ruta, BD = evalFile(ruta)){
   BD %>%
     filter((CAL %in%  c(0,1)) & as.numeric(KVE) > 0) %>%
-    pull(CIS) %>% list() %>%
+    pull(CIS) %>%
     return()
 }
 
@@ -177,7 +204,7 @@ alertDeudorContableVencido       <- function(ruta, BD = evalFile(ruta)){
 alertCreditoContableVigente      <- function(ruta, BD = evalFile(ruta)){
   BD %>%
     filter((CAL %in%  c(3,4)) & as.numeric(KVI) > 0) %>%
-    pull(CIS) %>% list() %>%
+    pull(CIS) %>%
     return()
 }
 
@@ -185,7 +212,7 @@ alertCreditoContableVigente      <- function(ruta, BD = evalFile(ruta)){
 alertDiasAtrasoJudicial          <- function(ruta, BD = evalFile(ruta)){
   BD %>%
     filter(as.numeric(DAK) > 120 & as.numeric(KJU) == 0) %>%
-    pull(getCodigoBD("BD01")) %>% list() %>%
+    pull(getCodigoBD("BD01")) %>%
     return()
 }
 
@@ -193,7 +220,7 @@ alertDiasAtrasoJudicial          <- function(ruta, BD = evalFile(ruta)){
 alertCreditoCobranzaJudicial     <- function(ruta, BD = evalFile(ruta)){
   BD %>%
     filter(as.numeric(KJU) > 0 & (CAL %in%  c(0,1,2))) %>%
-    pull(CIS) %>% list() %>%
+    pull(CIS) %>%
     return()
 }
 
@@ -216,7 +243,7 @@ alertCreditosHipotecario         <- function(ruta, BD = evalFile(ruta)){
 
 # Codigo 2022
 
-#alerta BD02A y 2B ----
+#alertas BD02A y 2B ----
 # Codigos 2025, 2026
 ocupacionesAltoRiesgo <- function(periodo) {
   getInfoTotal(getCarpeta(header), periodo, "BD01") %>% 
@@ -235,7 +262,7 @@ alertMontosuperiorOcupaciones2  <- function(BD2, periodo){
                                 pull(getCodigoBD(BD2))) 
     return(credicronogramas %>% unique())
 }
-#alerta BD01 y BD02A ----
+#alertas BD01 y BD02A ----
 # Codigo 2027
 creditosComunes <- function(periodo, BD1, BD2){
   comunes <- intersect(getInfoCruce(getCarpeta(header), periodo, BD1), 
@@ -301,4 +328,4 @@ alertNumeroCanceladosyOriginales <- function(ruta, BD = evalFile(ruta)){
 }
 
 #una tabla donde varíe los exigibles segú el código de alerta, los exigibles cambien según el flijo de errores(cols <- error 201,203)
-alertMontosuperiorAgencias("C:/Users/eroque/Desktop/Proyecto_BDCC/SIA-Analitica-PE/test/datatest/202001/01172_BD01_202001.txt") %>% view()
+# alertMontosuperiorAgencias("C:/Users/eroque/Desktop/Proyecto_BDCC/SIA-Analitica-PE/test/datatest/202001/01172_BD01_202001.txt") %>% view()
