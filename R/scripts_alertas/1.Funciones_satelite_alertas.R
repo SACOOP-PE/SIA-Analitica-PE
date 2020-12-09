@@ -178,14 +178,14 @@ alertCreditosUnicouta            <- function(ruta, BD = evalFile(ruta)){
     filter(as.numeric(ESAM) %in% c(1,2) & (dmy(BD %>% pull(FVEG)) - dmy(BD %>% pull(FOT))) > 365) %>%
     pull(getCodigoBD("BD01")) %>%
     return()
-} 
+}
 # Codigo 2019
 alertCreditosHipotecario         <- function(ruta, BD = evalFile(ruta)){
   BD %>%
     filter(as.numeric(TCR) != 13 & (dmy(BD %>% pull(FVEG)) - dmy(BD %>% pull(FOT))) > 3650) %>%
     pull(getCodigoBD("BD01")) %>%
     return()
-} 
+}
 
 # Codigo 2020
 # Codigo 2021
