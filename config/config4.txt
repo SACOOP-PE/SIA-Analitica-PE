@@ -18,10 +18,13 @@ CodAlerta	Responsable	Descripcion
 2017	dp	Se detectaron créditos en cobranza judicial (KJU) que esten en clasificaciones Normal, CPP o Deficiente (CAL = 0, 1, 2) en la BD01.
 2018	dp	Se detectaron créditos unicuota en el campo ESAM con fecha de cancelación pactada a más de un año (FOT, FVEG) en la BD01.
 2019	dp	Se detectaron créditos con antigüedad mayor a 10 años que no correspondan al tipo de créditos hipotecarios TCR(menos el 13) en la BD01.
-2022	hl	Se detectaron créditos con días de atraso (DAKR) calculados desde la última cuota pagada.
+2020	dp	Se detectaron créditos sin garantia que tengan tasa de provisión distinta a los porcentajes establecidos en la Tabla 1 de la Rs. 11356 en la BD01
+2022	hl	Se detectaron créditos con días de atraso (DAKR) calculados desde la última cuota pagada en la BD01.
 2025	mb	Se detectaron créditos con un importe en la cancelación de cuota superior a USD 100,000 o equivalente en soles realizados por deudores con ocupaciones de alto riesgo LAFT (OSD=1, 2, 5, 9) en la BD2A.
 2026	mb	Se detectaron créditos con un importe en la cancelación de cuota superior a USD 100,000 o equivalente en soles realizados por deudores con ocupaciones de alto riesgo LAFT (OSD=1, 2, 5, 9) en la BD2B.
 2027	jz	Se detectaron créditos donde el monto otorgado (MORG) en la BD01 es mayor que elcapital por cobrar (MCUO) en el cronograma (BD02).
+2028	ja	Se detectaron garantías que presentan diferencias entre las provisiones requeridas en la BDC 01 y en el Anexo 5 en la BD3A.
+2029	hl	Se detectaron garantías que coberturan más de 3 créditos a la vez NCR y que registran el mismo importe de cobertura en la BD3A.
 2030	mb	Se detectaron créditos cancelados con fondos en efectivo FOCAN_C = 1 por un monto superior (MCT_C) a los USD 100,000 o equivalente en soles en la BD04. 
 2031	mb	Se detectaron créditos cancelados con montos superiores a USD 1 MM que se hayan producido antes de los 30 días de haber sido desembolsado en la BD04.
 2032	mb	Se detectaron créditos cancelados con montos superiores a USD 1 MM de deudores con ocupaciones de alto riesgo LAFT (OSD= 1, 2, 5, 9) en la BD04.
