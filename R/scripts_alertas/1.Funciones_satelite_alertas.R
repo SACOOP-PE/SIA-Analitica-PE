@@ -123,12 +123,16 @@ alertDeudorCal                   <- function(ruta, BD = evalFile(ruta)){
   cis_deudor <- BD %>% select(CIS) 
   duplicados <- cis_deudor[duplicated(cis_deudor), ] %>% unique()
   
-  tibble(Deudor = duplicados) %>% rowwise() %>% 
+  codDeudor <- tibble(Deudor = duplicados) %>% rowwise() %>% 
     mutate(NumeroCalificaciones = BD %>% filter(CIS %in% Deudor) %>% 
              pull(CAL) %>% unique() %>% length()) %>% 
     filter(NumeroCalificaciones > 1) %>%
-    pull(Deudor) %>%
-    return()
+    pull(Deudor) %>% toString()
+  
+  paste_error <- ifelse(codDeudor != "character(0)",
+                        list(paste0(getNombreArchivo(ruta),"(", toString(error),")")),
+                        list(character(0)))
+  return(paste_error)
 }
 
 # Codigo 2010
@@ -202,6 +206,7 @@ alertCreditosUnicouta            <- function(ruta, BD = evalFile(ruta)){
     pull(getCodigoBD("BD01")) %>%
     return()
 }
+
 # Codigo 2019
 alertCreditosHipotecario         <- function(ruta, BD = evalFile(ruta)){
   BD %>%
@@ -250,6 +255,7 @@ alertMontOrtorgadoCronograma <- function(periodo){
     pull(MCUO)
   
   creditosComun <- creditosComun[montoOtorgado > capitalPorCobrar] %>% 
+    unique() %>%  
     return()
 }
 #alertas BD03A ----

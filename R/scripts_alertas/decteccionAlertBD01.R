@@ -29,7 +29,7 @@ ejecutarDecteccionAlertBD01 <-function(header, listaErrores, alertBucket){
            alerta2006 = generarDetalleError2(Ruta, alertDiasGracia(Ruta)),
            alerta2007 = generarDetalleError2(Ruta, alertMontOtorsuperiorCapitalVig(Ruta)),
            alerta2008 = generarDetalleError2(Ruta, alertRendimientoDevengado(Ruta)),
-           alerta2009 = generarDetalleError2(Ruta, alertDeudorCal(Ruta)),
+           alerta2009 = alertDeudorCal(Ruta),
            alerta2010 = generarDetalleError2(Ruta, alertDiasAtrasonegativo(Ruta)),
            alerta2011 = generarDetalleError2(Ruta, alertEsquemaAmortizaCuotaPagadas(Ruta)),
            alerta2012 = generarDetalleError2(Ruta, alertDeudorInteresDevengado(Ruta)),
@@ -69,10 +69,7 @@ ejecutarDecteccionAlertBD01 <-function(header, listaErrores, alertBucket){
 
     if (length(alerta_i) > 0){
       alertBucket <- alertBucket %>%
-        addAlerta(codigoAlerta,
-                  getResponAlerta(codigoAlerta),
-                  getDescAlerta(codigoAlerta),
-                  (alerta_i) %>% toString())
+        addAlerta(codigoAlerta, getResponAlerta(codigoAlerta), getDescAlerta(codigoAlerta), (alerta_i) %>% toString())
     }
     codigoAlerta <- codigoAlerta + 1
   }
