@@ -1,7 +1,4 @@
 ejecutarDecteccionAlertBD02 <-function(header, listaErrores, alertBucket){
-  exigibles <- getArchivosSinErrores(header, listaErrores, c(201, 203), c("CCR","CCR_C","CODGR"))
-  carpeta   <- getCarpeta(header)
-  
   alertaBD02A<- tibble(Periodo = restriccionPeriodos(listaErrores, "BD01", "BD02A", "CCR")) %>% rowwise() %>%
     mutate(alerta2025  = generarDetalleError4(Periodo, alertMontosuperiorOcupaciones2("BD02A", Periodo)),
            alerta2027  = generarDetalleError4(Periodo, alertMontOrtorgadoCronograma(Periodo)))

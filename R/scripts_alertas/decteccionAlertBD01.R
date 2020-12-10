@@ -2,11 +2,6 @@ ejecutarDecteccionAlertBD01 <-function(header, listaErrores, alertBucket){
   exigibles <- getArchivosSinErrores(header, listaErrores, c(201, 203), c("CCR","CCR_C","CODGR"))
   carpeta   <- getCarpeta(header)
   
-  tb_main <- tibble(NombreArchivo = exigibles) %>% rowwise() %>%
-    mutate(Ruta    = getRuta(carpeta, NombreArchivo),
-           Periodo = getAnoMes(Ruta),
-           BDCC    = getBD(Ruta))
- 
   #2001, 2002
   exigiblesAlert1 <- getArchivosSinErrores(header, listaErrores, c(201,203), c("MORG","UAGE")) %>%
     intersect(exigibles)
@@ -22,8 +17,9 @@ ejecutarDecteccionAlertBD01 <-function(header, listaErrores, alertBucket){
     ungroup()
   
   # 2003 ++
-  alertasBD01 <- tb_main %>% filter(BDCC == "BD01") %>% rowwise() %>%
-    mutate(alerta2003 = generarDetalleError2(Ruta, alertMontosuperiorSector(Ruta)),
+  alertasBD01 <- tibble(NombreArchivo = exigibles[str_detect(exigibles,"BD01")]) %>% rowwise() %>%
+    mutate(Ruta    = getRuta(carpeta, NombreArchivo),
+           alerta2003 = generarDetalleError2(Ruta, alertMontosuperiorSector(Ruta)),
            alerta2004 = generarDetalleError2(Ruta, alertMontosuperiorOcupaciones(Ruta)),
            alerta2005 = generarDetalleError2(Ruta, alertTea(Ruta)),
            alerta2006 = generarDetalleError2(Ruta, alertDiasGracia(Ruta)),

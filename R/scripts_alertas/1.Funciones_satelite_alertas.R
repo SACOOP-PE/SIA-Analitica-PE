@@ -285,7 +285,7 @@ alertMontosuperiorOcupaciones3   <- function(periodo){
     creditos <- bd4 %>% filter(cgrep(bd4, getCodigoBD("BD04"))[[1]] %in% ocupacionesAltoRiesgo(periodo) &
                                as.numeric(MCT_C) > 277778) %>%
       pull(getCodigoBD("BD04"))
-    return(creditos %>% unique())
+    generarDetalleError4(periodo, creditos) %>% return()
   }
   list("character(0)") %>% return()
 }
@@ -303,6 +303,4 @@ alertNumeroCanceladosyOriginales <- function(ruta, BD = evalFile(ruta)){
     pull(getCodigoBD("BD04")) %>%
     return()
 }
-
-#una tabla donde varíe los exigibles segú el código de alerta, los exigibles cambien según el flijo de errores(cols <- error 201,203)
 # alertMontosuperiorAgencias("C:/Users/eroque/Desktop/Proyecto_BDCC/SIA-Analitica-PE/test/datatest/202001/01172_BD01_202001.txt") %>% view()
