@@ -218,6 +218,12 @@ alertCreditosHipotecario         <- function(ruta, BD = evalFile(ruta)){
 # Codigo 2020
 
 # Codigo 2022
+alertDiasAtrasoUltimaCouta       <- function(ruta, BD = evalFile(ruta)){
+  BD %>% 
+    filter(dmy(BD %>% pull(FVEG)) < dmy(BD %>% pull(FOT))) %>%
+    pull(getCodigoBD("BD01")) %>%
+    return() 
+}
 
 #alertas BD02A y 2B ----
 # Codigos 2025, 2026
