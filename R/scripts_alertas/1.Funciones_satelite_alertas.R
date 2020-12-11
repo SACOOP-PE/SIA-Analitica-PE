@@ -216,6 +216,52 @@ alertCreditosHipotecario         <- function(ruta, BD = evalFile(ruta)){
 }
 
  # Codigo 2020
+getCreditosSinGarantia   <- function(periodo){
+  credSinGarantias <- setdiff(getInfoTotal(getCarpeta(header), periodo, "BD01") %>% pull(CIS),
+                              getInfoTotal(getCarpeta(header), periodo, "BD03A") %>% pull(CIS))
+  
+  getInfoTotal(getCarpeta(header), periodo, "BD01") %>% filter(CIS %in% credSinGarantias) %>% 
+    pull(CCR) %>% 
+    return()
+}
+asignarProvision         <- function(calificacion, tipoCredito){
+  if (toString(calificacion) == "0"){
+    provisiones <- switch (toString(tipoCredito),
+                           "6"  = 0.7,
+                           "7"  = 0.7,
+                           "8"  = 1,
+                           "9"  = 1,
+                           "10" = 1,
+                           "11" = 1,
+                           "12" = 1,
+                           "13" = 0.7) 
+    return(provisiones)
+  }
+  if (toString(calificacion) == "1"){
+    provisiones <- switch (toString(tipoCredito),
+                           "6"  = 5,
+                           "7"  = 5,
+                           "8"  = 5,
+                           "9"  = 5,
+                           "10" = 5,
+                           "13" = 5)
+    return(provisiones)
+  }
+  
+  provisiones <- switch (toString(tipoCredito),
+                         "6"  = 0.7,
+                         "7"  = 0.7,
+                         "8"  = 1,
+                         "9"  = 1,
+                         "10" = 1,
+                         "11" = 1,
+                         "12" = 1,
+                         "13" = 0.7)
+  return(provisiones)
+}
+alertCreditosProvisiones <- function(ruta, BD = evalFile(ruta)){
+  
+} 
 
  # Codigo 2022
 alertDiasAtrasoUltimaCouta       <- function(ruta, BD = evalFile(ruta)){
