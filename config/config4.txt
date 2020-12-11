@@ -9,7 +9,7 @@ CodAlerta	Responsable	Descripcion
 2008	jz	Se detectaron créditos en situación contable refinanciada, judicial, con clasificación dudoso o perdida CAL(3,4) con rendimientos devengados (SIN) en la BD01.
 2009	jz	Se detectaron códigos de socios (CIS) de deudores con más de una clasificación (CAL) en la BD01.
 2010	ja	Se detectaron créditos con días de atraso(DAKR) negativos en la BD01.
-2011	av	Se detectaron créditos cuyo esquema de amortización (ESAM_C) correspondiente a cuotas reporta número de cuotas pagadas igual a 1 (NCPA) en la BD01.
+2011	av	Se detectaron créditos cuyo esquema de amortización (ESAM_C) correspondiente a cuotas reporta número de cuotas pactadas igual a 1 (NCPR) en la BD01.
 2012	av	Se detectaron códigos de socios (CIS) de deudores con calificación Dudoso o Pérdida CAL(3,4) que generen intereses devengados (SIN) en la BD01
 2013	av	Se detectaron créditos diferentes a vigente (refinanciados, estructurados, judicial, vencidos) que generen intereses devengados (SIN) en la BD01.
 2014	av	Se detectaron códigos de socios (CIS) de deudores con calificación normal y CPP CAL(0,1) que registran situacion contable vencido (KVE) en la BD01.
