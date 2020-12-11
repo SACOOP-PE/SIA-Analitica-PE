@@ -23,5 +23,6 @@ ejecutarDecteccionAlertBD02 <-function(header, listaErrores, alertBucket){
       addAlerta(2027, getResponAlerta(2027), getDescAlerta(2027), (alert2027[alert2027 != "character(0)"]) %>% toString())
   }
   
+  print(paste0("Terminó la detectación de alertas BD02: ", format(Sys.time(), "%a %b %d %X %Y")))
   return(alertBucket)
 }

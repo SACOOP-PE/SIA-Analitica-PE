@@ -45,7 +45,7 @@ addAlerta       <- function(alertBucket, codigoAlerta, responsableAlerta, descri
 }
 
 #alertas BD01 ----
-# Codigos2001 ,2002
+ # Codigos2001 ,2002
 alertMontosuperiorAgencias       <- function(ruta, alertBucket){
   agenciasAltoriesgo <- c("MORG", "UAGE")
   BD = evalFile(ruta)
@@ -73,7 +73,7 @@ alertMontosuperiorAgencias       <- function(ruta, alertBucket){
     return()
 }
 
-# Codigo 2003
+ # Codigo 2003
 alertMontosuperiorSector         <- function(ruta, BD = evalFile(ruta)){
   BD %>% 
     filter((as.numeric(SEC) %in% c(3,6,8,9,10)) & (as.numeric(MORG) > 27778) == TRUE) %>%
@@ -81,7 +81,7 @@ alertMontosuperiorSector         <- function(ruta, BD = evalFile(ruta)){
     return()
 }
 
-# Codigo 2004
+ # Codigo 2004
 alertMontosuperiorOcupaciones    <- function(ruta, BD = evalFile(ruta)){
   alert <-  BD %>% 
     filter((as.numeric(OSD) %in% c(1,2,5,9)) & (as.numeric(MORG) > 138889) == TRUE) %>%
@@ -89,28 +89,28 @@ alertMontosuperiorOcupaciones    <- function(ruta, BD = evalFile(ruta)){
     return()
 }
 
-# Codigo 2005
+ # Codigo 2005
 alertTea                         <- function(ruta, BD = evalFile(ruta)){
   BD %>% 
     filter(as.numeric(TEA) < 1) %>% pull(getCodigoBD("BD01")) %>% 
     return()
 }
 
-# Codigo 2006
+ # Codigo 2006
 alertDiasGracia                  <- function(ruta, BD = evalFile(ruta)){
   BD %>% 
     filter(as.numeric(DGR) > 90) %>% pull(getCodigoBD("BD01")) %>% 
     return() 
 }
 
-# Codigo 2007
+ # Codigo 2007
 alertMontOtorsuperiorCapitalVig  <- function(ruta, BD = evalFile(ruta)){
   BD %>% 
     filter(as.numeric(MORG) >= as.numeric(SKCR)) %>% pull(getCodigoBD("BD01")) %>%
     return() 
 }
 
-# Codigo 2008
+ # Codigo 2008
 alertRendimientoDevengado        <- function(ruta, BD = evalFile(ruta)){
   BD %>%
     filter(CAL %in% c(3,4) & (as.numeric(KRF) >0 | as.numeric(KJU) >0) & as.numeric(SIN) >0) %>%
@@ -118,7 +118,7 @@ alertRendimientoDevengado        <- function(ruta, BD = evalFile(ruta)){
     return() 
 }
 
-# Codigo 2009
+ # Codigo 2009
 alertDeudorCal                   <- function(ruta, BD = evalFile(ruta)){
   cis_deudor <- BD %>% select(CIS) 
   duplicados <- cis_deudor[duplicated(cis_deudor), ] %>% unique()
@@ -135,7 +135,7 @@ alertDeudorCal                   <- function(ruta, BD = evalFile(ruta)){
   return(paste_error)
 }
 
-# Codigo 2010
+ # Codigo 2010
 alertDiasAtrasonegativo          <- function(ruta, BD = evalFile(ruta)){
   BD %>%
     filter(as.numeric(DAKR) < 0) %>%
@@ -143,7 +143,7 @@ alertDiasAtrasonegativo          <- function(ruta, BD = evalFile(ruta)){
     return() 
 }
 
-# Codigo 2011
+ # Codigo 2011
 alertEsquemaAmortizaCuotaPagadas <- function(ruta, BD = evalFile(ruta)){
   BD %>%
     filter((as.numeric(ESAM) %in% c(3,4)) & as.numeric(NCPR) == 1) %>%
@@ -151,7 +151,7 @@ alertEsquemaAmortizaCuotaPagadas <- function(ruta, BD = evalFile(ruta)){
     return()
 }
 
-# Codigo 2012
+ # Codigo 2012
 alertDeudorInteresDevengado      <- function(ruta, BD = evalFile(ruta)){
   BD %>%
     filter((CAL %in%  c(3,4)) & as.numeric(SIN) > 0) %>%
@@ -159,7 +159,7 @@ alertDeudorInteresDevengado      <- function(ruta, BD = evalFile(ruta)){
     return()
 }
 
-# Codigo 2013
+ # Codigo 2013
 alertCreditoInteresDevengado     <- function(ruta, BD = evalFile(ruta)){
   BD %>%
   filter((as.numeric(KRF) >0 | as.numeric(KVE) >0 | as.numeric(KJU) >0) & as.numeric(SIN) > 0) %>%
@@ -167,7 +167,7 @@ alertCreditoInteresDevengado     <- function(ruta, BD = evalFile(ruta)){
     return()
 }
 
-# Codigo 2014
+ # Codigo 2014
 alertDeudorContableVencido       <- function(ruta, BD = evalFile(ruta)){
   BD %>%
     filter((CAL %in%  c(0,1)) & as.numeric(KVE) > 0) %>%
@@ -175,7 +175,7 @@ alertDeudorContableVencido       <- function(ruta, BD = evalFile(ruta)){
     return()
 }
 
-# Codigo 2015
+ # Codigo 2015
 alertCreditoContableVigente      <- function(ruta, BD = evalFile(ruta)){
   BD %>%
     filter((CAL %in%  c(3,4)) & as.numeric(KVI) > 0) %>%
@@ -183,7 +183,7 @@ alertCreditoContableVigente      <- function(ruta, BD = evalFile(ruta)){
     return()
 }
 
-# Codigo 2016
+ # Codigo 2016
 alertDiasAtrasoJudicial          <- function(ruta, BD = evalFile(ruta)){
   BD %>%
     filter(as.numeric(DAK) > 120 & as.numeric(KJU) == 0) %>%
@@ -191,7 +191,7 @@ alertDiasAtrasoJudicial          <- function(ruta, BD = evalFile(ruta)){
     return()
 }
 
-# Codigo 2017
+ # Codigo 2017
 alertCreditoCobranzaJudicial     <- function(ruta, BD = evalFile(ruta)){
   BD %>%
     filter(as.numeric(KJU) > 0 & (CAL %in%  c(0,1,2))) %>%
@@ -199,7 +199,7 @@ alertCreditoCobranzaJudicial     <- function(ruta, BD = evalFile(ruta)){
     return()
 }
 
-# Codigo 20218
+ # Codigo 20218
 alertCreditosUnicouta            <- function(ruta, BD = evalFile(ruta)){
   BD %>%
     filter(as.numeric(ESAM) %in% c(1,2) & (dmy(BD %>% pull(FVEG)) - dmy(BD %>% pull(FOT))) > 365) %>%
@@ -207,7 +207,7 @@ alertCreditosUnicouta            <- function(ruta, BD = evalFile(ruta)){
     return()
 }
 
-# Codigo 2019
+ # Codigo 2019
 alertCreditosHipotecario         <- function(ruta, BD = evalFile(ruta)){
   BD %>%
     filter(as.numeric(TCR) != 13 & (dmy(BD %>% pull(FVEG)) - dmy(BD %>% pull(FOT))) > 3650) %>%
@@ -215,9 +215,9 @@ alertCreditosHipotecario         <- function(ruta, BD = evalFile(ruta)){
     return()
 }
 
-# Codigo 2020
+ # Codigo 2020
 
-# Codigo 2022
+ # Codigo 2022
 alertDiasAtrasoUltimaCouta       <- function(ruta, BD = evalFile(ruta)){
   BD %>% 
     filter(dmy(BD %>% pull(FVEG)) < dmy(BD %>% pull(FOT))) %>%
@@ -265,26 +265,31 @@ alertMontOrtorgadoCronograma <- function(periodo){
     return()
 }
 #alertas BD03A ----
-# Codigo 2028
+ # Codigo 2028
 
-# Codigo 2029
-
+ # Codigo 2029
+alertGarantiasNumerocobertura    <- function(ruta, BD = evalFile(ruta)){
+  BD %>%
+    filter(as.numeric(NCR) > 3) %>%
+    pull(getCodigoBD("BD03A")) %>% 
+    return()
+}
 #alertas BD04 ----
-# Codigo 2030
+ # Codigo 2030
 alertCreditosEfectivo            <- function(ruta, BD = evalFile(ruta)){
   BD %>%
     filter(as.numeric(FOCAN_C) == 1 & as.numeric(MCT_C) > 27778) %>%
     pull(getCodigoBD("BD04")) %>%
     return()
 }
-# Codigo 2031
+ # Codigo 2031
 alertCreditosAntesDesembolso     <- function(ruta, BD = evalFile(ruta)){
   BD %>% 
     filter(as.numeric(MCT_C) > 277778 & (dmy(BD %>% pull(FCAN_C)) - dmy(BD %>% pull(FOT_C))) > 30) %>%
     pull(getCodigoBD("BD04")) %>%
     return()
 }
-# Codigo 2032
+ # Codigo 2032
 alertMontosuperiorOcupaciones3   <- function(periodo){
   bd4 <- getInfoTotal(getCarpeta(header), periodo, "BD04")
   if (length(intersect(creditosComunes(periodo, "BD01", "BD04"), ocupacionesAltoRiesgo(periodo))) >0) {
@@ -295,14 +300,14 @@ alertMontosuperiorOcupaciones3   <- function(periodo){
   }
   list("character(0)") %>% return()
 }
-# Codigo 2033
+ # Codigo 2033
 alertFechaDesembolsoCancelacion  <- function(ruta, BD = evalFile(ruta)){
   BD %>%
     filter(dmy(BD %>% pull(FOT_C)) == (dmy(BD %>% pull(FCAN_C)))) %>% 
     pull(getCodigoBD("BD04")) %>%
     return()
 }
-# Codigo 2034
+ # Codigo 2034
 alertNumeroCanceladosyOriginales <- function(ruta, BD = evalFile(ruta)){
   BD %>%
     filter(as.numeric(NCPR_C) == as.numeric(NCPA_C)) %>%
