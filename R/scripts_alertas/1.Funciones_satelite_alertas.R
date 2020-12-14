@@ -226,7 +226,7 @@ getCreditosSinGarantia   <- function(periodo){
 }
 asignarProvision         <- function(calificacion, tipoCredito){
   if (toString(calificacion) == "0"){
-    provisiones <- switch (toString(tipoCredito),
+    provision <- switch (toString(tipoCredito),
                            "6"  = 0.7,
                            "7"  = 0.7,
                            "8"  = 1,
@@ -235,36 +235,23 @@ asignarProvision         <- function(calificacion, tipoCredito){
                            "11" = 1,
                            "12" = 1,
                            "13" = 0.7) 
-    return(provisiones)
+    return(provision)
   }
-  if (toString(calificacion) == "1"){
-    provisiones <- switch (toString(tipoCredito),
-                           "6"  = 5,
-                           "7"  = 5,
-                           "8"  = 5,
-                           "9"  = 5,
-                           "10" = 5,
-                           "13" = 5)
-    return(provisiones)
-  }
-  if (toString(calificacion) > "1"){
-    provisiones <- switch (toString(tipoCredito),
-                           "6"  = 0.7,
-                           "7"  = 0.7,
-                           "8"  = 1,
-                           "9"  = 1,
-                           "10" = 1,
-                           "11" = 1,
-                           "12" = 1,
-                           "13" = 0.7)
-    return(provisiones)
+  if (toString(calificacion) > "0"){
+    provision <- if_else(calificacion == 1, 5,
+                         if_else(calificacion == 2, 25,
+                                 if_else(calificacion == 3, 60, if_else(calificacion == 4, 100, 0))))
+    return(provision)
   }
 }
 alertCreditosProvisiones <- function(ruta, BD = evalFile(ruta)){
-  tbAlerta <- BD %>% rowwise() %>%
-    mutate(porcentajeProvision = asignarProvision(CAL, TCR) %>% toString()) %>%
-    select(CCR, porcentajeProvision) %>%
-  return()
+  tbAlerta <- BD %>% 
+    filter(CCR %in% getCreditosSinGarantia(getAnoMes(ruta))) %>%  rowwise() %>%
+    mutate(porcentajeProvision = asignarProvision(as.numeric(CAL),as.numeric(TCR)) %>% toString(),
+           calcularProvision = (as.numeric(PCI)/as.numeric(SKCR) *100) %>% round(0)) %>%
+    filter(porcentajeProvision != calcularProvision) %>% 
+    pull(CCR) %>%
+  return() 
 }
 
  # Codigo 2022
