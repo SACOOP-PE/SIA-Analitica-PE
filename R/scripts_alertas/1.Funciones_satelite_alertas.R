@@ -247,17 +247,18 @@ asignarProvision         <- function(calificacion, tipoCredito){
                            "13" = 5)
     return(provisiones)
   }
-  
-  provisiones <- switch (toString(tipoCredito),
-                         "6"  = 0.7,
-                         "7"  = 0.7,
-                         "8"  = 1,
-                         "9"  = 1,
-                         "10" = 1,
-                         "11" = 1,
-                         "12" = 1,
-                         "13" = 0.7)
-  return(provisiones)
+  if (toString(calificacion) > "1"){
+    provisiones <- switch (toString(tipoCredito),
+                           "6"  = 0.7,
+                           "7"  = 0.7,
+                           "8"  = 1,
+                           "9"  = 1,
+                           "10" = 1,
+                           "11" = 1,
+                           "12" = 1,
+                           "13" = 0.7)
+    return(provisiones)
+  }
 }
 alertCreditosProvisiones <- function(ruta, BD = evalFile(ruta)){
   
