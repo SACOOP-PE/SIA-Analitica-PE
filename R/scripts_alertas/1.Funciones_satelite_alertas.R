@@ -261,8 +261,11 @@ asignarProvision         <- function(calificacion, tipoCredito){
   }
 }
 alertCreditosProvisiones <- function(ruta, BD = evalFile(ruta)){
-  
-} 
+  tbAlerta <- BD %>% rowwise() %>%
+    mutate(porcentajeProvision = asignarProvision(CAL, TCR) %>% toString()) %>%
+    select(CCR, porcentajeProvision) %>%
+  return()
+}
 
  # Codigo 2022
 alertDiasAtrasoUltimaCouta       <- function(ruta, BD = evalFile(ruta)){
