@@ -1,11 +1,11 @@
 ejecutarDecteccionAlertBD01 <-function(header, listaErrores, alertBucket){
   exigibles <- getArchivosSinErrores(header, listaErrores, c(201, 203), c("CCR","CCR_C","CODGR"))
+  exigibles <- exigibles[str_detect(exigibles,"BD01")]
   carpeta   <- getCarpeta(header)
   
   #2001, 2002
   exigiblesAlert1 <- getArchivosSinErrores(header, listaErrores, c(201,203), c("MORG","UAGE")) %>%
     intersect(exigibles)
-  exigiblesAlert1 <- exigiblesAlert1[str_detect(exigiblesAlert1, "BD01")]
   alertBucket_i   <- alertBucket
   for (i in 1:length(exigiblesAlert1)){
     ruta_i        <- getRuta(carpeta, exigiblesAlert1[i])
@@ -17,7 +17,7 @@ ejecutarDecteccionAlertBD01 <-function(header, listaErrores, alertBucket){
     ungroup()
   
   # 2003 ++
-  alertasBD01 <- tibble(NombreArchivo = exigibles[str_detect(exigibles,"BD01")]) %>% rowwise() %>%
+  alertasBD01 <- tibble(NombreArchivo = exigibles) %>% rowwise() %>%
     mutate(Ruta    = getRuta(carpeta, NombreArchivo),
            alerta2003 = generarDetalleError2(Ruta, alertMontosuperiorSector(Ruta)),
            alerta2004 = generarDetalleError2(Ruta, alertMontosuperiorOcupaciones(Ruta)),
@@ -36,9 +36,9 @@ ejecutarDecteccionAlertBD01 <-function(header, listaErrores, alertBucket){
            alerta2017 = generarDetalleError2(Ruta, alertCreditoCobranzaJudicial(Ruta)),
            alerta2018 = generarDetalleError2(Ruta, alertCreditosUnicouta(Ruta)),
            alerta2019 = generarDetalleError2(Ruta, alertCreditosHipotecario(Ruta)),
-           alerta2020 = generarDetalleError2(Ruta, alertCreditosProvisiones(Ruta)),
            alerta2022 = generarDetalleError2(Ruta, alertDiasAtrasoUltimaCouta(Ruta)))
-  
+
+
   alert2003 <- (paste(alertasBD01 %>% rowwise() %>% pull(alerta2003), collapse = ",") %>% strsplit(","))[[1]]
   alert2004 <- (paste(alertasBD01 %>% rowwise() %>% pull(alerta2004), collapse = ",") %>% strsplit(","))[[1]]
   alert2005 <- (paste(alertasBD01 %>% rowwise() %>% pull(alerta2005), collapse = ",") %>% strsplit(","))[[1]]
@@ -56,13 +56,18 @@ ejecutarDecteccionAlertBD01 <-function(header, listaErrores, alertBucket){
   alert2017 <- (paste(alertasBD01 %>% rowwise() %>% pull(alerta2017), collapse = ",") %>% strsplit(","))[[1]]
   alert2018 <- (paste(alertasBD01 %>% rowwise() %>% pull(alerta2018), collapse = ",") %>% strsplit(","))[[1]]
   alert2019 <- (paste(alertasBD01 %>% rowwise() %>% pull(alerta2019), collapse = ",") %>% strsplit(","))[[1]]
-  alert2020 <- (paste(alertasBD01 %>% rowwise() %>% pull(alerta2020), collapse = ",") %>% strsplit(","))[[1]]
+  alert2020 <- (paste(tibble(NombreArchivo = exigibles[str_detect(exigibles, restriccionPeriodos(listaErrores, "BD01", "BD03A", "CIS"))]) %>%
+                        rowwise() %>%
+                        mutate(Ruta = getRuta(carpeta, NombreArchivo),
+                               alerta2020 = generarDetalleError2(Ruta, alertCreditosProvisiones(Ruta))) %>%
+                        rowwise() %>%
+                        pull(alerta2020), collapse = ",") %>% strsplit(","))[[1]]
   alert2022 <- (paste(alertasBD01 %>% rowwise() %>% pull(alerta2022), collapse = ",") %>% strsplit(","))[[1]]
-  
+
   listAlertBD01 <- list(alert2003, alert2004, alert2005, alert2006, alert2007, alert2008, alert2009, alert2010, alert2011,
-                        alert2012, alert2013, alert2014, alert2015, alert2016, alert2017, alert2018, alert2019, alert2022,
+                        alert2012, alert2013, alert2014, alert2015, alert2016, alert2017, alert2018, alert2019, alert2020,
                         alert2022)
-  
+
   codigoAlerta     <- 2003
   for (i in 1:length(listAlertBD01)){
     alertcodAlerta_i <- listAlertBD01[[i]]
@@ -72,10 +77,13 @@ ejecutarDecteccionAlertBD01 <-function(header, listaErrores, alertBucket){
       alertBucket <- alertBucket %>%
         addAlerta(codigoAlerta, getResponAlerta(codigoAlerta), getDescAlerta(codigoAlerta), (alerta_i) %>% toString())
     }
-    codigoAlerta <- codigoAlerta + 1
+      codigoAlerta <- codigoAlerta + 1
+      if (codigoAlerta == 2021) {
+        codigoAlerta <- codigoAlerta + 1
+      }
   }
   alertBucket  <- alertBucket
-  
+
   print(paste0("Terminó la detectación de alertas BD01: ", format(Sys.time(), "%a %b %d %X %Y")))
   return(alertBucket)
 }
