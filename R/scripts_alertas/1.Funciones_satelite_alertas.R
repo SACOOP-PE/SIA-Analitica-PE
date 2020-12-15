@@ -327,6 +327,52 @@ alertMontOrtorgadoCronograma <- function(periodo){
 }
 #alertas BD03A ----
  # Codigo 2028
+getCreditosConGarantia <- function(periodo){
+  credSinGarantias <- intersect(getInfoTotal(getCarpeta(header), periodo, "BD01") %>% pull(CIS),
+                                getInfoTotal(getCarpeta(header), periodo, "BD03A") %>% pull(CIS))
+  
+  getInfoTotal(getCarpeta(header), periodo, "BD01") %>% filter(CIS %in% credSinGarantias) %>% 
+    pull(CCR) %>% 
+    return()
+}
+asignarProvisionGarantia    <- function(claseGarantia, calificacion){
+  if (claseGarantia == 2) {
+    provision <- 2 %>% return()
+  }
+  if (claseGarantia == 3) {
+    provision <- switch (calificacion %>% toString(),
+                         "1" = 1.25,
+                         "2" = 6.25,
+                         "3" = 15,
+                         "4" = 30
+                         )
+    return(provision)
+  }
+  if (claseGarantia == 4) {
+    provision <- switch (calificacion %>% toString(),
+                         "1" = 2.5,
+                         "2" = 12.50,
+                         "3" = 30,
+                         "4" = 60
+    )
+    return(provision)
+  }
+}
+alertGarantiaProvisiones <- function(periodo){
+  tibble(calificacion = getInfoTotal(getCarpeta(header),periodo,"BD01") %>%
+                            filter(CIS %in% getCreditosConGarantia(periodo)) %>% pull(CAL),
+         claseGaranti = getInfoTotal(getCarpeta(header),periodo,"BD01")) %>%
+    rowwise() %>%
+    mutate()
+  
+  tbAlerta <- BD %>% 
+    filter(CIS %in% getCreditosConGarantia(getAnoMes(ruta))) %>%  rowwise() %>%
+    mutate(porcentajeProvision = asignarProvision(as.numeric(CGR), calificacion) %>% toString(),
+           calcularProvision = (as.numeric(PCI)/as.numeric(SKCR) *100) %>% round(0)) %>%
+    filter(porcentajeProvision != calcularProvision) %>% 
+    pull(CCR) %>%
+    return()
+}
 
  # Codigo 2029
 alertGarantiasNumerocobertura    <- function(ruta, BD = evalFile(ruta)){
@@ -343,6 +389,7 @@ alertCreditosEfectivo            <- function(ruta, BD = evalFile(ruta)){
     pull(getCodigoBD("BD04")) %>%
     return()
 }
+
  # Codigo 2031
 alertCreditosAntesDesembolso     <- function(ruta, BD = evalFile(ruta)){
   BD %>% 
@@ -350,6 +397,7 @@ alertCreditosAntesDesembolso     <- function(ruta, BD = evalFile(ruta)){
     pull(getCodigoBD("BD04")) %>%
     return()
 }
+
  # Codigo 2032
 alertMontosuperiorOcupaciones3   <- function(periodo){
   bd4 <- getInfoTotal(getCarpeta(header), periodo, "BD04")
@@ -361,6 +409,7 @@ alertMontosuperiorOcupaciones3   <- function(periodo){
   }
   list("character(0)") %>% return()
 }
+
  # Codigo 2033
 alertFechaDesembolsoCancelacion  <- function(ruta, BD = evalFile(ruta)){
   BD %>%
@@ -368,6 +417,7 @@ alertFechaDesembolsoCancelacion  <- function(ruta, BD = evalFile(ruta)){
     pull(getCodigoBD("BD04")) %>%
     return()
 }
+
  # Codigo 2034
 alertNumeroCanceladosyOriginales <- function(ruta, BD = evalFile(ruta)){
   BD %>%
