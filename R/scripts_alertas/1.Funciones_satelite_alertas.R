@@ -1,3 +1,4 @@
+## Gestion de alertas----
 initRepositorioAlertas <- function(){
   read_delim(fileRepositorioAlertas, 
              "\t", escape_double = FALSE, col_types = cols(CodAlerta   = col_double(), 
@@ -327,12 +328,12 @@ alertMontOrtorgadoCronograma <- function(periodo){
 }
 #alertas BD03A ----
  # Codigo 2028
-getCreditosConGarantia   <- function(periodo){
+getCreditosConGarantia   <- function(periodo, BD){
   credConGarantias <- intersect(getInfoTotal(getCarpeta(header), periodo, "BD01") %>% pull(CIS),
                                 getInfoTotal(getCarpeta(header), periodo, "BD03A") %>% pull(CIS))
   
-  getInfoTotal(getCarpeta(header), periodo, "BD01") %>% filter(CIS %in% credConGarantias) %>% 
-    pull(CCR) %>% 
+  getInfoTotal(getCarpeta(header), periodo, BD) %>% filter(CIS %in% credConGarantias) %>% 
+    pull(getCodigoBD(BD)) %>% 
     return()
 }
 asignarProvisionGarantia <- function(claseGarantia, calificacion){
@@ -359,6 +360,7 @@ asignarProvisionGarantia <- function(claseGarantia, calificacion){
   }
 }
 alertGarantiaProvisiones <- function(periodo){
+  
   getInfoTotal(getCarpeta(header), periodo, "BD03A") %>% 
     filter(CIS %in% getCreditosConGarantia(periodo)) %>% rowwise() %>% 
   mutate(calificacion = getInfoTotal(getCarpeta(header), periodo, "BD01") %>%
