@@ -359,18 +359,13 @@ asignarProvisionGarantia    <- function(claseGarantia, calificacion){
   }
 }
 alertGarantiaProvisiones <- function(periodo){
-  tibble(calificacion = getInfoTotal(getCarpeta(header),periodo,"BD01") %>%
+  getInfoTotal(getCarpeta(header), periodo, "BD03A") %>% 
+    filter(CIS %in% getCreditosConGarantia(periodo)) %>% rowwise() %>% 
+  mutate(calificacion = getInfoTotal(getCarpeta(header), periodo, "BD01") %>%
                             filter(CIS %in% getCreditosConGarantia(periodo)) %>% pull(CAL),
-         claseGaranti = getInfoTotal(getCarpeta(header),periodo,"BD01")) %>%
-    rowwise() %>%
-    mutate()
-  
-  tbAlerta <- BD %>% 
-    filter(CIS %in% getCreditosConGarantia(getAnoMes(ruta))) %>%  rowwise() %>%
-    mutate(porcentajeProvision = asignarProvision(as.numeric(CGR), calificacion) %>% toString(),
-           calcularProvision = (as.numeric(PCI)/as.numeric(SKCR) *100) %>% round(0)) %>%
-    filter(porcentajeProvision != calcularProvision) %>% 
-    pull(CCR) %>%
+         porcentajeProvision = asignarProvision(as.numeric(CGR), 
+                                                as.numeric(calificacion)) %>% toString(),
+         calcularProvision = (as.numeric(PCI)/as.numeric(SKCR) *100) %>% round(0)) %>% 
     return()
 }
 
