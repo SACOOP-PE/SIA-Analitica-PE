@@ -1,7 +1,7 @@
 ##### Testing -----
 header        <- initHeader(idCoopac = "01172",
                              coopacCarpeta  = "test/datatest/",
-                             periodoInicial = "202001",
+                             periodoInicial = "201901",
                              periodoFinal   = "202002",
                              bds            = list(c("BD01", "BD02A", "BD02B", "BD03A", "BD03B", "BD04")))
 eb            <- initBucketErrores(header)
