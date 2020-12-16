@@ -328,10 +328,10 @@ alertMontOrtorgadoCronograma <- function(periodo){
 #alertas BD03A ----
  # Codigo 2028
 getCreditosConGarantia <- function(periodo){
-  credSinGarantias <- intersect(getInfoTotal(getCarpeta(header), periodo, "BD01") %>% pull(CIS),
+  credConGarantias <- intersect(getInfoTotal(getCarpeta(header), periodo, "BD01") %>% pull(CIS),
                                 getInfoTotal(getCarpeta(header), periodo, "BD03A") %>% pull(CIS))
   
-  getInfoTotal(getCarpeta(header), periodo, "BD01") %>% filter(CIS %in% credSinGarantias) %>% 
+  getInfoTotal(getCarpeta(header), periodo, "BD01") %>% filter(CIS %in% credConGarantias) %>% 
     pull(CCR) %>% 
     return()
 }
@@ -365,7 +365,8 @@ alertGarantiaProvisiones <- function(periodo){
                             filter(CIS %in% getCreditosConGarantia(periodo)) %>% pull(CAL),
          porcentajeProvision = asignarProvision(as.numeric(CGR), 
                                                 as.numeric(calificacion)) %>% toString(),
-         calcularProvision = (as.numeric(PCI)/as.numeric(SKCR) *100) %>% round(0)) %>% 
+         calcularProvision = (as.numeric(VANX)/as.numeric(VREA) *100) %>% round(0)) %>% 
+    select(CODGR, calificacion, porcentajeProvision, calcularProvision) %>% 
     return()
 }
 
