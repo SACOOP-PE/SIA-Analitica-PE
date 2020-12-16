@@ -328,12 +328,9 @@ alertMontOrtorgadoCronograma <- function(periodo){
 }
 #alertas BD03A ----
  # Codigo 2028
-getCreditosConGarantia   <- function(periodo, BD){
+getCreditosConGarantia   <- function(periodo){
   credConGarantias <- intersect(getInfoTotal(getCarpeta(header), periodo, "BD01") %>% pull(CIS),
-                                getInfoTotal(getCarpeta(header), periodo, "BD03A") %>% pull(CIS))
-  
-  getInfoTotal(getCarpeta(header), periodo, BD) %>% filter(CIS %in% credConGarantias) %>% 
-    pull(getCodigoBD(BD)) %>% 
+                                getInfoTotal(getCarpeta(header), periodo, "BD03A") %>% pull(CIS)) %>% 
     return()
 }
 asignarProvisionGarantia <- function(claseGarantia, calificacion){
@@ -359,17 +356,51 @@ asignarProvisionGarantia <- function(claseGarantia, calificacion){
     return(provision)
   }
 }
+getDuplicadosCIS  <- function(periodo, BD) {
+  cis_deudor <- getInfoTotal(getCarpeta(header), periodo, BD) %>%
+    filter(CIS %in% getCreditosConGarantia(periodo)) %>%
+    select(CIS)
+  duplicados <- cis_deudor[duplicated(cis_deudor), ] %>%
+    unique() %>% 
+    return()
+}
 alertGarantiaProvisiones <- function(periodo){
   
-  getInfoTotal(getCarpeta(header), periodo, "BD03A") %>% 
-    filter(CIS %in% getCreditosConGarantia(periodo)) %>% rowwise() %>% 
-  mutate(calificacion = getInfoTotal(getCarpeta(header), periodo, "BD01") %>%
-                            filter(CIS %in% getCreditosConGarantia(periodo)) %>% pull(CAL),
-         porcentajeProvision = asignarProvision(as.numeric(CGR), 
-                                                as.numeric(calificacion)) %>% toString(),
-         calcularProvision = (as.numeric(VANX)/as.numeric(VREA) *100) %>% round(0)) %>% 
-    select(CODGR, calificacion, porcentajeProvision, calcularProvision) %>% 
-    return()
+  deudorBD03 <- getInfoTotal(getCarpeta(header), 201902, "BD03A") %>%
+    filter(CIS %in% getCreditosConGarantia(201902)) %>%
+    select(CIS, CGR)
+  
+  cis_deudor <- getInfoTotal(getCarpeta(header), 201902, "BD03A") %>%
+    filter(CIS %in% getCreditosConGarantia(201902)) %>% select(CIS) 
+  duplicados <- select(getInfoTotal(getCarpeta(header), 201902, "BD03A") %>%
+                         filter(CIS %in% getCreditosConGarantia(201902)),
+                       CIS)[duplicated(select(getInfoTotal(getCarpeta(header), 201902, "BD03A") %>%
+                                                filter(CIS %in% getCreditosConGarantia(201902)),
+                                              CIS)
+                                       ), ] %>%
+    unique()
+  
+  deudorBD01 <- getInfoTotal(getCarpeta(header), 201902, "BD03A") %>%
+    filter(CIS %in% getCreditosConGarantia(201902)) %>%
+    select(CIS, CGR)
+  
+  
+  
+ tibble(deudorCartera = getInfoTotal(getCarpeta(header), 201902, "BD01") %>%
+            filter(CIS %in% getCreditosConGarantia(201902))) %>%
+   rowwise() %>%
+   mutate(claseDeGarantia = getInfoTotal(getCarpeta(header), 201902, "BD03A") %>%
+            filter(CIS %in% getCreditosConGarantia(201902)) %>%
+            select(CIS, CGR) %>%
+            filter(CIS %in% deudorCartera$CIS) %>%
+            pull(CGR) %>% unique() %>% toString()) %>% 
+   select(deudorCartera$claseDeGarantia, )
+   #        ,
+   #        porcentajeProvision = asignarProvision(as.numeric(claseDeGarantia), as.numeric(CAL)) %>%
+   #                             toString(),
+   #        calcularProvision   = (as.numeric(PCI)/as.numeric(SKCR) *100) %>% round(0)) %>%
+   # select(CCR, CIS, claseDeGarantia, porcentajeProvision, calcularProvision) %>%
+   # return()
 }
 
  # Codigo 2029
