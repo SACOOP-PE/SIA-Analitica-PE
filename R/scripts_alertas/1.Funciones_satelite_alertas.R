@@ -327,7 +327,7 @@ alertMontOrtorgadoCronograma <- function(periodo){
 }
 #alertas BD03A ----
  # Codigo 2028
-getCreditosConGarantia <- function(periodo){
+getCreditosConGarantia   <- function(periodo){
   credConGarantias <- intersect(getInfoTotal(getCarpeta(header), periodo, "BD01") %>% pull(CIS),
                                 getInfoTotal(getCarpeta(header), periodo, "BD03A") %>% pull(CIS))
   
@@ -335,7 +335,7 @@ getCreditosConGarantia <- function(periodo){
     pull(CCR) %>% 
     return()
 }
-asignarProvisionGarantia    <- function(claseGarantia, calificacion){
+asignarProvisionGarantia <- function(claseGarantia, calificacion){
   if (claseGarantia == 2) {
     provision <- 2 %>% return()
   }
