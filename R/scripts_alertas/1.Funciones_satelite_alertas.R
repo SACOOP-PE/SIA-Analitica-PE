@@ -368,23 +368,16 @@ alertGarantiaProvisiones <- function(periodo){
   
   deudorBD03 <- getInfoTotal(getCarpeta(header), 201902, "BD03A") %>%
     filter(CIS %in% getCreditosConGarantia(201902)) %>%
-    select(CIS, CGR)
+    select(CIS, CGR) %>% 
+    group_by(CIS) %>%
+    summarize(n=n())
   
-  cis_deudor <- getInfoTotal(getCarpeta(header), 201902, "BD03A") %>%
-    filter(CIS %in% getCreditosConGarantia(201902)) %>% select(CIS) 
-  duplicados <- select(getInfoTotal(getCarpeta(header), 201902, "BD03A") %>%
-                         filter(CIS %in% getCreditosConGarantia(201902)),
-                       CIS)[duplicated(select(getInfoTotal(getCarpeta(header), 201902, "BD03A") %>%
-                                                filter(CIS %in% getCreditosConGarantia(201902)),
-                                              CIS)
-                                       ), ] %>%
-    unique()
-  
-  deudorBD01 <- getInfoTotal(getCarpeta(header), 201902, "BD03A") %>%
+  deudorBD01 <- getInfoTotal(getCarpeta(header), 201902, "BD01") %>%
     filter(CIS %in% getCreditosConGarantia(201902)) %>%
-    select(CIS, CGR)
-  
-  
+    select(CCR, CIS)  %>% 
+    group_by(CIS) %>%
+    summarize(n=n()) %>% 
+    select(CIS)
   
  tibble(deudorCartera = getInfoTotal(getCarpeta(header), 201902, "BD01") %>%
             filter(CIS %in% getCreditosConGarantia(201902))) %>%
