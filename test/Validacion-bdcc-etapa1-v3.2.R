@@ -33,7 +33,7 @@ listaErrores %>%
                                      paste(alcanceGeneral, collapse = '|'))[is.na(str_extract(unlist(Detalle %>% str_split(",")),
                                                                                               paste(alcanceGeneral,collapse = '|'))) == FALSE] %>%
     unique() %>% toString()) %>%
-  select(Descripcion, PeriodosError) %>%
+  select(Cod, Descripcion, PeriodosError) %>%
   view()
 
 #####
