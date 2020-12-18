@@ -300,6 +300,8 @@ realizarCruce <- function(carpeta, periodo, nameBD1, nameBD2){
   cruce <-  setdiff(getInfoCruce(carpeta, periodo, nameBD1), 
                     getInfoCruce(carpeta, periodo, nameBD2)) %>% unique()
   
+  
+  
   resultado <- generarDetalleError4(periodo, cruce)
   return(resultado)
 }
