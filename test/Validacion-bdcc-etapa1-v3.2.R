@@ -21,7 +21,8 @@ listaErrores %>%
   mutate(ArchivosError = str_extract(Detalle,
                                      getArchivosExigibles(header))[is.na(str_extract(Detalle,
                                                                                      getArchivosExigibles(header))) == FALSE] %>%
-           toString()) %>%
+           toString()
+         ) %>%
   select(Cod, Descripcion, ArchivosError) %>% view()
 
 # resumen_errores_periodos
@@ -37,7 +38,8 @@ listaErrores %>%
   view()
 
 #####
-
+# archivos : 301,302,303,304,311, 401- 465, 471- 479
+# periodos : 322,
 #periodos en un error de terminado:
 saveObservacion <- function(codError){
  tb <- tibble(creditos_split = listaErrores %>% filter(Cod == codError) %>% pull(Detalle) %>% 
@@ -88,9 +90,7 @@ saveObservacion <- function(codError){
   observacionBD %>% return()
 }
 
-saveCadaObservacion <- function(){
-  
-}
+
 
 
 
