@@ -21,9 +21,14 @@ listaErrores %>%
   mutate(ArchivosError = str_extract(Detalle,
                                      getArchivosExigibles(header))[is.na(str_extract(Detalle,
                                                                                      getArchivosExigibles(header))) == FALSE] %>%
-           toString()
+           toString(),
+         PeriodosError = str_extract(unlist(Detalle %>%
+                                              str_split(",")),
+                                     paste(alcanceGeneral, collapse = '|'))[is.na(str_extract(unlist(Detalle %>% str_split(",")),
+                                                                                              paste(alcanceGeneral,collapse = '|'))) == FALSE] %>%
+           unique() %>% toString()
          ) %>%
-  select(Cod, Descripcion, ArchivosError) %>% view()
+  select(Cod, Descripcion, ArchivosError, PeriodosError) %>% view()
 
 # resumen_errores_periodos
 listaErrores %>%
