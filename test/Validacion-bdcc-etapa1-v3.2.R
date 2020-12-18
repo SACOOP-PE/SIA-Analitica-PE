@@ -43,14 +43,13 @@ listaErrores %>%
   view()
 
 #####
-# archivos : 301,302,303,304,311, 401- 465, 471- 479
-# periodos : 322,
 #periodos en un error de terminado:
 saveObservacion <- function(codError){
  tb <- tibble(creditos_split = listaErrores %>% filter(Cod == codError) %>% pull(Detalle) %>% 
                                   strsplit(split = ")") %>% unlist(),
               PeriodosError  = creditos_split %>% 
-                                  str_extract(paste(alcanceGeneral, collapse = '|'))) %>%
+                                  str_extract(paste(alcanceGeneral, collapse = '|')) %>% 
+                unique()) %>%
    rowwise() %>% 
    mutate(creditosPeriodo = str_extract(creditos_split %>% str_split(pattern = ",") %>% unlist(),
                                         paste(getInfoTotal(getCarpeta(header), PeriodosError, "BD01") %>% pull(CCR),
@@ -67,8 +66,15 @@ saveObservacion <- function(codError){
                 str_split(pattern = ",") %>% unlist() %>% 
                 str_replace_all(pattern=" ", repl="")
   
-  observacionBD <- getInfoTotal(getCarpeta(header), periodos[1], "BD01") %>%
-    filter(CCR %in% creditos) %>% mutate(Periodo = periodos[1])
+
+  if (length(periodos) == 1) {
+    observacionBD <- getInfoTotal(getCarpeta(header), periodos[1], "BD01") %>%
+      filter(CCR %in% creditos) %>% mutate(Periodo = periodos[1])
+    
+    observacionBD <- observacionBD %>%
+      select(Periodo, unlist(getColumnasOM("BD01"))) %>% 
+      return()
+  }
   for (i in 1:(length(periodos)-1)){
     creditos_i <- tb %>% 
       filter(PeriodosError == periodos[i+1]) %>%
@@ -83,40 +89,22 @@ saveObservacion <- function(codError){
   }
   
   observacionBD <- observacionBD %>%
-    select(Periodo, unlist(getColumnasOM("BD01")))
-  
-  observacionBD %>%
-    write.csv(paste0(paste(getwd(), "test/observaciones/", sep = "/"),
-                     paste(header %>% pull(Coopac),
-                           getIdProceso(header),
-                           sep = "_"),
-                     paste0("_", codError),
-                     ".csv"))
-  observacionBD %>% return()
+    select(Periodo, unlist(getColumnasOM("BD01"))) %>%
+    return()
 }
 
 saveObservaciones <- function(){
-  codErroresActuales <- listaErrores %>% pull(Cod)
+  codErroresActuales <- listaErrores %>% pull(Cod) %>% 
+    setdiff(c(201, 202, 203, 301, 302, 303, 304, 431, 432, 441, 466, 467))
   
   for (i in 1:length(codErroresActuales)){
-    saveObservacion(codErroresActuales[i])
+   obs <- saveObservacion(codErroresActuales[i])   
+   obs %>%
+     write.csv(paste0(paste(getwd(), "test/observaciones/", sep = "/"),
+                      paste(header %>% pull(Coopac),
+                            getIdProceso(header),
+                            sep = "_"),
+                      paste0("_", codErroresActuales[i]),
+                      ".csv"))
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
