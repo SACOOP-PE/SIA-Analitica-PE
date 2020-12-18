@@ -2,7 +2,7 @@
 header        <- initHeader(idCoopac = "01172",
                              coopacCarpeta  = "test/datatest/",
                              periodoInicial = "201901",
-                             periodoFinal   = "201903",
+                             periodoFinal   = "202010",
                              bds            = list(c("BD01", "BD02A", "BD02B", "BD03A", "BD03B", "BD04")))
 eb            <- initBucketErrores(header)
 listaErrores <- main(header, eb)
@@ -39,8 +39,8 @@ listaErrores %>%
 #####
 
 #periodos en un error de terminado:
-saveObservacion <- function(){
- tb <- tibble(creditos_split = listaErrores %>% filter(Cod == 322) %>% pull(Detalle) %>% 
+saveObservacion <- function(codError){
+ tb <- tibble(creditos_split = listaErrores %>% filter(Cod == codError) %>% pull(Detalle) %>% 
                                   strsplit(split = ")") %>% unlist(),
               PeriodosError  = creditos_split %>% 
                                   str_extract(paste(alcanceGeneral, collapse = '|'))) %>%
@@ -74,12 +74,23 @@ saveObservacion <- function(){
      
     observacionBD <- bind_rows(observacionBD, observacionBD_i)
   }
+  
   observacionBD <- observacionBD %>%
     select(Periodo, unlist(getColumnasOM("BD01")))
   
-  
+  observacionBD %>%
+    writexl::write_xlsx(paste0(paste(getwd(), "test/observaciones/", sep = "/"),
+                               paste(header %>% pull(Coopac),
+                                     getIdProceso(header),
+                                     sep = "_"),
+                               paste0("_", codError),
+                               ".xlsx"))
+  observacionBD %>% return()
 }
 
+saveCadaObservacion <- function(){
+  
+}
 
 
 
