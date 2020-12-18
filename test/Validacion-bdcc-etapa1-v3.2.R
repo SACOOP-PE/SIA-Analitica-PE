@@ -14,14 +14,14 @@ listaErrores %>%
   mutate(n_caracteres = nchar(Detalle)) %>% 
   select(Cod, Descripcion, n_caracteres)
 
-# encontrar archivos en cada errror de la listaErrores
+#### encontrar archivos en cada errror de la listaErrores
 listaErrores %>%
   mutate(Detalle = map_chr(Detalle, ~ .[[1]] %>% str_c(collapse = ", "))) %>%
   rowwise() %>%
   mutate(ArchivosError = str_extract(Detalle,
                                      getArchivosExigibles(header))[is.na(str_extract(Detalle,
                                                                                      getArchivosExigibles(header))) == FALSE] %>%
-           toString(),
+           unique() %>% toString(),
          PeriodosError = str_extract(unlist(Detalle %>%
                                               str_split(",")),
                                      paste(alcanceGeneral, collapse = '|'))[is.na(str_extract(unlist(Detalle %>% str_split(",")),
@@ -86,13 +86,21 @@ saveObservacion <- function(codError){
     select(Periodo, unlist(getColumnasOM("BD01")))
   
   observacionBD %>%
-    writexl::write_xlsx(paste0(paste(getwd(), "test/observaciones/", sep = "/"),
-                               paste(header %>% pull(Coopac),
-                                     getIdProceso(header),
-                                     sep = "_"),
-                               paste0("_", codError),
-                               ".xlsx"))
+    write.csv(paste0(paste(getwd(), "test/observaciones/", sep = "/"),
+                     paste(header %>% pull(Coopac),
+                           getIdProceso(header),
+                           sep = "_"),
+                     paste0("_", codError),
+                     ".csv"))
   observacionBD %>% return()
+}
+
+saveObservaciones <- function(){
+  codErroresActuales <- listaErrores %>% pull(Cod)
+  
+  for (i in 1:length(codErroresActuales)){
+    saveObservacion(codErroresActuales[i])
+  }
 }
 
 
