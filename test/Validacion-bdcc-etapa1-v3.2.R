@@ -7,7 +7,7 @@ header        <- initHeader(idCoopac = "01172",
 eb            <- initBucketErrores(header)
 listaErrores <- main(header, eb)
 
-#############
+############# 
 # n_caracteres
 listaErrores %>%
   rowwise() %>%
