@@ -45,7 +45,7 @@ listaErrores %>%
 #####
 #periodos en un error de terminado:
 saveObservacion <- function(codError){
- tb <- tibble(creditos_split = listaErrores %>% filter(Cod == 464) %>% pull(Detalle) %>% 
+ tb <- tibble(creditos_split = listaErrores %>% filter(Cod == codError) %>% pull(Detalle) %>% 
                                   strsplit(split = ")") %>% unlist(),
               PeriodosError  = creditos_split %>% 
                                   str_extract(paste(alcanceGeneral, collapse = '|')) %>% 
@@ -66,10 +66,18 @@ saveObservacion <- function(codError){
                 str_split(pattern = ",") %>% unlist() %>% 
                 str_replace_all(pattern=" ", repl="") %>% return()
   
-  if (length(periodos) > 1) {
-    observacionBD <- getInfoTotal(getCarpeta(header), periodos[1], "BD01") %>%
+  if(length(periodos) == 1){
+    observacionBD <- getInfoTotal(getCarpeta(header), periodos, "BD01") %>%
+      filter(CCR %in% creditos) %>% mutate(Periodo = periodos)
+    
+    observacionBD <- observacionBD %>%
+      select(Periodo, unlist(getColumnasOM("BD01")))
+      return(observacionBD)
+  }
+  if(length(periodos) > 1){
+  observacionBD <- getInfoTotal(getCarpeta(header), periodos[1], "BD01") %>%
                         filter(CCR %in% creditos) %>% mutate(Periodo = periodos[1])
-    for (i in 1:(length(periodos)-1)){
+  for (i in 1:(length(periodos)-1)){
       creditos_i <- tb %>% filter(PeriodosError == periodos[i+1]) %>% pull(creditosPeriodo) %>%
                             str_split(pattern = ",") %>% unlist() %>%
                             str_replace_all(pattern=" ", repl="")
@@ -79,17 +87,10 @@ saveObservacion <- function(codError){
 
       observacionBD <- bind_rows(observacionBD, observacionBD_i)
       }
-    observacionBD <- observacionBD %>%
-    select(Periodo, unlist(getColumnasOM("BD01"))) %>%
-    return()
-  }
-  
-  observacionBD <- getInfoTotal(getCarpeta(header), periodos, "BD01") %>%
-    filter(CCR %in% creditos) %>% mutate(Periodo = periodos)
-  
   observacionBD <- observacionBD %>%
-    select(Periodo, unlist(getColumnasOM("BD01"))) %>%
-    return()
+    select(Periodo, unlist(getColumnasOM("BD01")))
+    return(observacionBD)
+  }
 }
 
 saveObservaciones <- function(){
