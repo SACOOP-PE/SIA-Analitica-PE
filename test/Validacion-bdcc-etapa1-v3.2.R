@@ -8,13 +8,7 @@ eb            <- initBucketErrores(header)
 listaErrores <- main(header, eb)
 
 ############# 
-# n_caracteres por error
-listaErrores %>%
-  rowwise() %>%
-  mutate(n_caracteres = nchar(Detalle)) %>% 
-  select(Cod, Descripcion, n_caracteres)
-
-#### encontrar archivos y periodos por cada errror en la listaErrores
+#### encontrar archivos, periodos y n_caracteres por cada errror en la listaErrores
 listaErrores %>%
   mutate(Detalle = map_chr(Detalle, ~ .[[1]] %>% str_c(collapse = ", "))) %>%
   rowwise() %>%
@@ -25,8 +19,9 @@ listaErrores %>%
          PeriodosError = str_extract(unlist(str_split(Detalle, ",")),
                                      paste(alcanceGeneral, collapse = '|'))[is.na(str_extract(unlist(str_split(Detalle, ",")),
                                                                                               paste(alcanceGeneral,collapse = '|'))) == FALSE] %>%
-           unique() %>% toString()) %>%
-  select(Cod, Descripcion, ArchivosError, PeriodosError) %>% view()
+           unique() %>% toString(),
+         n_caracteres = nchar(Detalle)) %>%
+  select(Cod, Descripcion, ArchivosError, PeriodosError, n_caracteres) %>% view()
 
 #####
 #guardar algunas observaciones en cvs:
