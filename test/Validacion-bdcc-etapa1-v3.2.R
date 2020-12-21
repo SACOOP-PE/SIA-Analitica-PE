@@ -8,13 +8,13 @@ eb            <- initBucketErrores(header)
 listaErrores <- main(header, eb)
 
 ############# 
-# n_caracteres
+# n_caracteres por error
 listaErrores %>%
   rowwise() %>%
   mutate(n_caracteres = nchar(Detalle)) %>% 
   select(Cod, Descripcion, n_caracteres)
 
-#### encontrar archivos y periodos en cada errror de la listaErrores
+#### encontrar archivos y periodos por cada errror en la listaErrores
 listaErrores %>%
   mutate(Detalle = map_chr(Detalle, ~ .[[1]] %>% str_c(collapse = ", "))) %>%
   rowwise() %>%
@@ -31,24 +31,24 @@ listaErrores %>%
 #####
 #guardar algunas observaciones en cvs:
 saveObservacion <- function(codError){
-  tb <- tibble(creditos_split = listaErrores %>% filter(Cod == codError) %>% pull(Detalle) %>% 
+  tb <- tibble(creditos_split = listaErrores %>% filter(Cod == 322) %>% pull(Detalle) %>% 
                                   strsplit(split = ")") %>% unlist(),
               PeriodosError  = str_extract(creditos_split, paste(alcanceGeneral, collapse = '|')) %>% 
                 unique()) %>%
     rowwise() %>% 
     mutate(creditosPeriodo = str_extract(unlist(creditos_split %>% str_split(pattern = ",")),
                                          paste(getInfoTotal(getCarpeta(header), PeriodosError, "BD01") %>% pull(CCR),
-                                               collapse = '|'))[is.na(str_extract(unlist(creditos_split %>% str_split(pattern = ",")),
-                                                                                  paste(getInfoTotal(getCarpeta(header), PeriodosError, "BD01") %>% pull(CCR),
-                                                                                        collapse = '|')))==FALSE] %>%
-             unique %>% toString()) %>% 
-    select(PeriodosError, creditosPeriodo)
+                                               collapse = '|')) %>% 
+             unique %>% toString(), 
+           Creditos = unlist(creditosPeriodo %>% str_split(pattern = ","))[unlist(creditosPeriodo %>% str_split(pattern = ",")) != "NA"] %>%
+             toString()) %>% 
+    select(PeriodosError, Creditos)
   
   periodos <- tb %>% pull(PeriodosError)
   creditos <- tb %>% 
-                filter(PeriodosError == periodos[1]) %>% pull(creditosPeriodo) %>%
+                filter(PeriodosError == periodos[1]) %>% pull(Creditos) %>%
                 str_split(pattern = ",") %>% unlist() %>% 
-                str_replace_all(pattern=" ", repl="") %>% return()
+                str_replace_all(pattern=" ", repl="")
   observacionBD <- getInfoTotal(getCarpeta(header), periodos[1], "BD01") %>%
                         filter(CCR %in% creditos) %>% mutate(Periodo = periodos[1])
   
