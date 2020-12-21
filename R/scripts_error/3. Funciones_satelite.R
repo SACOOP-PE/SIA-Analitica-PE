@@ -523,11 +523,8 @@ procesarErroresT3  <- function(ruta, errorBucket){
 
  #BD01
 getFechaCorte <- function(ruta){
-  fecha_corte <- seq(as.Date(paste(getAno(ruta),
-                                    getMes(ruta),
-                                    "01",
-                                    sep = "-")),
-                      length=1, by="months") %>%
+  fecha_corte <- seq(as.Date(paste(getAno(ruta),getMes(ruta),"01", sep = "-")),
+                     length=1, by="months") %>%
     ceiling_date("month") - days(1)
   return(fecha_corte)
 }
