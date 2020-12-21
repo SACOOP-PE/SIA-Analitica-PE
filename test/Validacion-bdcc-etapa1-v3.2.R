@@ -7,8 +7,7 @@ header        <- initHeader(idCoopac = "01172",
 eb            <- initBucketErrores(header)
 listaErrores <- main(header, eb)
 
-############# 
-#### encontrar archivos, periodos y n_caracteres por cada errror en la listaErrores
+## Obtener archivos, periodos y n_caracteres por cada errror en la listaErrores ----
 listaErrores %>%
   mutate(Detalle = map_chr(Detalle, ~ .[[1]] %>% str_c(collapse = ", "))) %>%
   rowwise() %>%
@@ -23,8 +22,7 @@ listaErrores %>%
          n_caracteres = nchar(Detalle)) %>%
   select(Cod, Descripcion, ArchivosError, PeriodosError, n_caracteres) %>% view()
 
-#####
-#guardar algunas observaciones en cvs:
+## Exportar observaciones (errores) en cvs ----
 saveObservacion <- function(codError){
   tb <- tibble(creditos_split = listaErrores %>% filter(Cod == 322) %>% pull(Detalle) %>% 
                                   strsplit(split = ")") %>% unlist(),
