@@ -22,9 +22,8 @@ listaErrores %>%
                                      getArchivosExigibles(header))[is.na(str_extract(Detalle,
                                                                                      getArchivosExigibles(header))) == FALSE] %>%
            unique() %>% toString(),
-         PeriodosError = str_extract(unlist(Detalle %>%
-                                              str_split(",")),
-                                     paste(alcanceGeneral, collapse = '|'))[is.na(str_extract(unlist(Detalle %>% str_split(",")),
+         PeriodosError = str_extract(unlist(str_split(Detalle, ",")),
+                                     paste(alcanceGeneral, collapse = '|'))[is.na(str_extract(unlist(str_split(Detalle, ",")),
                                                                                               paste(alcanceGeneral,collapse = '|'))) == FALSE] %>%
            unique() %>% toString()) %>%
   select(Cod, Descripcion, ArchivosError, PeriodosError) %>% view()
@@ -75,9 +74,9 @@ saveObservacion <- function(codError){
   }
 }
 saveObservaciones <- function(){
-  codErroresActuales <- listaErrores %>% pull(Cod) %>% 
+  codErroresActuales <- listaErrores %>% pull(Cod) %>%
     setdiff(c(201, 202, 203, 301, 302, 303, 304, 431, 432, 441, 461, 466, 467))
-  
+    
   for (i in 1:length(codErroresActuales)){
    obs <- saveObservacion(codErroresActuales[i])   
    obs %>%
@@ -85,7 +84,7 @@ saveObservaciones <- function(){
                       paste(header %>% pull(Coopac),
                             getIdProceso(header),
                             sep = "_"),
-                      paste0("_", codErroresActuales[i]),
+                      paste0("_", "Observacion", which(listaErrores$Cod == codErroresActuales[i])),
                       ".csv"))
   }
 }
