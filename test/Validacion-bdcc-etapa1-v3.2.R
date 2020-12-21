@@ -1,9 +1,9 @@
 ##### Testing -----
-header      <- initHeader(idCoopac = "01172",
-                          coopacCarpeta  = "test/datatest/",
-                          periodoInicial = "201901",
-                          periodoFinal   = "202010",
-                          bds            = list(c("BD01", "BD02A", "BD02B", "BD03A", "BD03B", "BD04")))
+header       <- initHeader(idCoopac = "01172",
+                           coopacCarpeta  = "test/datatest/",
+                           periodoInicial = "201901",
+                           periodoFinal   = "202010",
+                           bds            = list(c("BD01", "BD02A", "BD02B", "BD03A", "BD03B", "BD04")))
 eb           <- initBucketErrores(header)
 listaErrores <- main(header, eb)
 
