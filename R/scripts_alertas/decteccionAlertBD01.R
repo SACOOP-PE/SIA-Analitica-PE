@@ -67,19 +67,20 @@ ejecutarDecteccionAlertBD01 <-function(header, listaErrores, alertBucket){
   listAlertBD01 <- list(alert2003, alert2004, alert2005, alert2006, alert2007, alert2008, alert2009, alert2010, alert2011,
                         alert2012, alert2013, alert2014, alert2015, alert2016, alert2017, alert2018, alert2019, alert2020,
                         alert2022)
-
-  codigoAlerta     <- 2003
+  codigoAlerta  <- 2003
+  
   for (i in 1:length(listAlertBD01)){
     alertcodAlerta_i <- listAlertBD01[[i]]
     alerta_i         <- alertcodAlerta_i[alertcodAlerta_i != "character(0)"]
 
-    if (length(alerta_i) > 0){
+    if(length(alerta_i) > 0){
       alertBucket <- alertBucket %>%
         addAlerta(codigoAlerta, getResponAlerta(codigoAlerta), getDescAlerta(codigoAlerta), (alerta_i) %>% toString())
-    }
+      }
+    
+    codigoAlerta <- codigoAlerta + 1
+    if(codigoAlerta == 2021){
       codigoAlerta <- codigoAlerta + 1
-      if (codigoAlerta == 2021) {
-        codigoAlerta <- codigoAlerta + 1
       }
   }
   alertBucket  <- alertBucket
