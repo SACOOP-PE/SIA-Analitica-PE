@@ -11,3 +11,13 @@ listaAlertas %>%
                                                                                        getArchivosExigibles(header))) == FALSE] %>%
            toString()) %>%
   select(CodAlerta, Descripcion, ArchivosAlertas) %>% view()
+
+listaAlertas %>% 
+  mutate(Detalle = map_chr(Detalle, ~ .[[1]] %>% str_c(collapse = ", "))) %>%
+  write.csv(paste0(paste(getwd(), "test/", sep = "/"),
+                   paste(header %>% pull(Coopac),
+                         getIdProceso(header),
+                         header %>% pull(PeriodoInicial),
+                         header %>% pull(PeriodoFinal),
+                         sep = "_"),
+                   "_alertbucket.csv"))
