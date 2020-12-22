@@ -46,27 +46,42 @@ addAlerta       <- function(alertBucket, codigoAlerta, responsableAlerta, descri
 }
 
 getArchivosExigiblesAlertas <- function(exigibles, codigoAlerta){
-  archivos <- switch (codigoAlerta %>% toString(),
-                      "2003"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("SEC", "MORG")),
-                      "2004"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("OSD", "MORG")),
-                      "2005"= getArchivosSinErrores(header, listaErrores, c(201, 203), "TEA"),
-                      "2006"= getArchivosSinErrores(header, listaErrores, c(201, 203), "DGR"),
-                      "2007"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("MORG", "SKCR")),
-                      "2008"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("CAL", "KRF", "KJU", "SIN")),
-                      "2009"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("CIS", "CAL")),
-                      "2010"= getArchivosSinErrores(header, listaErrores, c(201, 203), "DARK"),
-                      "2011"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("ESAM", "NCPR")),
-                      "2012"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("CAL", "SIN")),
-                      "2013"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("KRF", "KVE", "KJU", "SIN")),
-                      "2014"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("CAL", "KVE", "CIS")),
-                      "2015"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("CAL", "KVI", "CIS")),
-                      "2016"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("DAK", "KJU")),
-                      "2017"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("CAL", "KJU")),
-                      "2018"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("ESAM", "FVEG", "FOT")),
-                      "2019"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("TCR", "FVEG", "FOT"))
-                      ) %>% 
-    intersect(exigibles[str_detect(exigibles, "BD01")]) %>%
-    return()
+  if(codigoAlerta >= 2003 & codigoAlerta <= 2022) {
+    
+    archivos <- switch (codigoAlerta %>% toString(),
+                        "2003"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("SEC", "MORG")),
+                        "2004"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("OSD", "MORG")),
+                        "2005"= getArchivosSinErrores(header, listaErrores, c(201, 203), "TEA"),
+                        "2006"= getArchivosSinErrores(header, listaErrores, c(201, 203), "DGR"),
+                        "2007"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("MORG", "SKCR")),
+                        "2008"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("CAL", "KRF", "KJU", "SIN")),
+                        "2009"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("CIS", "CAL")),
+                        "2010"= getArchivosSinErrores(header, listaErrores, c(201, 203), "DARK"),
+                        "2011"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("ESAM", "NCPR")),
+                        "2012"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("CAL", "SIN")),
+                        "2013"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("KRF", "KVE", "KJU", "SIN")),
+                        "2014"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("CAL", "KVE", "CIS")),
+                        "2015"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("CAL", "KVI", "CIS")),
+                        "2016"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("DAK", "KJU")),
+                        "2017"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("CAL", "KJU")),
+                        "2018"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("ESAM", "FVEG", "FOT")),
+                        "2019"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("TCR", "FVEG", "FOT"))
+                        ) %>% 
+      intersect(exigibles[str_detect(exigibles, "BD01")])
+    return(archivos)
+  }
+  
+  if(codigoAlerta > 2029){
+    archivos <- switch (codigoAlerta %>% toString(),
+                        "2030"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("FOCAN_C", "MCT_C")),
+                        "2031"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("FOCAN_C", "MCT_C", "FOT_C")),
+                        "2032"= getArchivosSinErrores(header, listaErrores, c(201, 203), "MCT_C"),
+                        "2033"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("FOT_C", "FCAN_C")),
+                        "2034"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("NCPR_C", "NCPA_C")),
+                        ) %>% 
+      intersect(exigibles[str_detect(exigibles, "BD04")])
+    return(archivos)
+  }
 }
 
 #alertas BD01 ----
