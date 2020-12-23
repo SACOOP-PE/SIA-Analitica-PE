@@ -41,12 +41,12 @@ ejecutarDecteccionAlertBD01 <-function(header, listaErrores, alertBucket){
   codigoAlerta  <- 2003
   
   for (i in 1:length(listAlertBD01)){
-    alertcodAlerta_i <- listAlertBD01[[i]]
-    alerta_i         <- alertcodAlerta_i[alertcodAlerta_i != "character(0)"]
-
-    if(length(alerta_i) > 0){
+    alert_i <- listAlertBD01[[i]]
+    alert_i <- alert_i[alert_i != "character(0)"]
+    
+    if(length(alert_i) > 0){
       alertBucket <- alertBucket %>%
-        addAlerta(codigoAlerta, getResponAlerta(codigoAlerta), getDescAlerta(codigoAlerta), (alerta_i) %>% toString())
+        addAlerta(codigoAlerta, getResponAlerta(codigoAlerta), getDescAlerta(codigoAlerta), (alert_i) %>% toString())
       }
     
     codigoAlerta <- codigoAlerta + 1

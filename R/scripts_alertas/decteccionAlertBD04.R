@@ -1,23 +1,11 @@
 ejecutarDecteccionAlertBD04 <-function(header, listaErrores, alertBucket){
   exigibles <- getArchivosSinErrores(header, listaErrores, c(201, 203), "CCR_C")
-  carpeta   <- getCarpeta(header)
   
-  alertasBD04 <- tibble(NombreArchivo = exigibles[str_detect(exigibles,"BD04")]) %>% rowwise() %>%
-    mutate(Ruta    = getRuta(carpeta, NombreArchivo),
-           alerta2030 = generarDetalleError2(Ruta, alertCreditosEfectivo(Ruta)),
-           alerta2031 = generarDetalleError2(Ruta, alertCreditosAntesDesembolso(Ruta)),
-           alerta2033 = generarDetalleError2(Ruta, alertFechaDesembolsoCancelacion(Ruta)),
-           alerta2034 = generarDetalleError2(Ruta, alertNumeroCanceladosyOriginales(Ruta)))
-  
-  alert2030 <- (paste(alertasBD04 %>% rowwise() %>% pull(alerta2030) , collapse = ",") %>% strsplit(","))[[1]]
-  alert2031 <- (paste(alertasBD04 %>% rowwise() %>% pull(alerta2031) , collapse = ",") %>% strsplit(","))[[1]]
-  alert2032 <- (tibble(Periodo = restriccionPeriodos(listaErrores, "BD01", "BD04", c("CCR","CCR_C"))) %>% rowwise() %>%
-                  mutate(alerta2032  = alertMontosuperiorOcupaciones3(Periodo)) %>% rowwise() %>%
-                  pull(alerta2032) %>% 
-                  paste(collapse = ",") %>%
-                  strsplit(","))[[1]]
-  alert2033 <- (paste(alertasBD04 %>% rowwise() %>% pull(alerta2033) , collapse = ",") %>% strsplit(","))[[1]]
-  alert2034 <- (paste(alertasBD04 %>% rowwise() %>% pull(alerta2034) , collapse = ",") %>% strsplit(","))[[1]]
+  alert2030 <- paste(procesarAlertas(exigibles, "BD04", 2030), sep= ",")
+  alert2031 <- paste(procesarAlertas(exigibles, "BD04", 2031), sep= ",")
+  alert2032 <- paste(procesarAlertas(exigibles, "BD04", 2032), sep= ",")
+  alert2033 <- paste(procesarAlertas(exigibles, "BD04", 2033), sep= ",")
+  alert2034 <- paste(procesarAlertas(exigibles, "BD04", 2034), sep= ",")
   
     if(length(alert2030[alert2030 != "character(0)"]) > 0){
       alertBucket <- alertBucket %>%
