@@ -71,7 +71,6 @@ getArchivosExigiblesAlertas <- function(exigibles, codigoAlerta){
       intersect(exigibles[str_detect(exigibles, "BD01")])
     return(archivos)
   }
-  
   if(codigoAlerta > 2029){
     archivos <- switch (codigoAlerta %>% toString(),
                         "2030"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("FOCAN_C", "MCT_C")),
@@ -86,8 +85,16 @@ getArchivosExigiblesAlertas <- function(exigibles, codigoAlerta){
 }
 getcodigoAlerta <- function(BD){
   cod <- switch (BD,
-    BD01 = c(2001, 203)
-  )
+                 BD01 = c(2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2022),
+                 BD04 = c(2030, 2031, 2032, 2033, 2034)
+                 )
+  return(cod)
+}
+procesarAlertas <- function(exigibles, BD){
+  tb <- tibble(CodigoAlerta = getcodigoAlerta(BD)) %>% rowwise() %>%
+    mutate(Archivos = getArchivosExigiblesAlertas(exigibles, CodigoAlerta) %>% list())
+  
+  return(tb)
 }
 
 #alertas BD01 ----
