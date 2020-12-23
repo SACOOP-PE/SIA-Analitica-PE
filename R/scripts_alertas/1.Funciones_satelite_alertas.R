@@ -48,7 +48,6 @@ addAlerta       <- function(alertBucket, codigoAlerta, responsableAlerta, descri
 ## Restricciones de archivos ----
 getArchivosExigiblesAlertas <- function(exigibles, codigoAlerta){
   if(codigoAlerta >= 2003 & codigoAlerta <= 2022) {
-    
     archivos <- switch (codigoAlerta %>% toString(),
                         "2003"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("SEC", "MORG")),
                         "2004"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("OSD", "MORG")),
@@ -66,7 +65,9 @@ getArchivosExigiblesAlertas <- function(exigibles, codigoAlerta){
                         "2016"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("DAK", "KJU")),
                         "2017"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("CAL", "KJU")),
                         "2018"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("ESAM", "FVEG", "FOT")),
-                        "2019"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("TCR", "FVEG", "FOT"))
+                        "2019"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("TCR", "FVEG", "FOT")),
+                        "2020"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("CAL", "TCR", "PCI", "SKCR")),
+                        "2022"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("FVEG", "FOT"))
                         ) %>% 
       intersect(exigibles[str_detect(exigibles, "BD01")])
     return(archivos)
@@ -77,7 +78,7 @@ getArchivosExigiblesAlertas <- function(exigibles, codigoAlerta){
                         "2031"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("FOCAN_C", "MCT_C", "FOT_C")),
                         "2032"= getArchivosSinErrores(header, listaErrores, c(201, 203), "MCT_C"),
                         "2033"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("FOT_C", "FCAN_C")),
-                        "2034"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("NCPR_C", "NCPA_C")),
+                        "2034"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("NCPR_C", "NCPA_C"))
                         ) %>% 
       intersect(exigibles[str_detect(exigibles, "BD04")])
     return(archivos)
@@ -85,17 +86,59 @@ getArchivosExigiblesAlertas <- function(exigibles, codigoAlerta){
 }
 getcodigoAlerta <- function(BD){
   cod <- switch (BD,
-                 BD01 = c(2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2022),
+                 BD01 = c(2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2022),
                  BD04 = c(2030, 2031, 2032, 2033, 2034)
                  )
   return(cod)
+}
+elegiralertasBD <- function(BD, cod, ruta){
+  if (BD == "BD01") {
+    alerta <- switch (toString(cod),
+                      "2003"= alertMontosuperiorSector(ruta),
+                      "2004"= alertMontosuperiorOcupaciones(ruta),
+                      "2005"= alertTea(ruta),
+                      "2006"= alertDiasGracia(ruta),
+                      "2007"= alertMontOtorsuperiorCapitalVig(ruta),
+                      "2008"= alertRendimientoDevengado(ruta),
+                      "2009"= alertDeudorCal(ruta),
+                      "2010"= alertDiasAtrasonegativo(ruta),
+                      "2011"= alertEsquemaAmortizaCuotaPagadas(ruta),
+                      "2012"= alertDeudorInteresDevengado(ruta),
+                      "2013"= alertCreditoInteresDevengado(ruta),
+                      "2014"= alertDeudorContableVencido(ruta),
+                      "2015"= alertCreditoContableVigente(ruta),
+                      "2016"= alertDiasAtrasoJudicial(ruta),
+                      "2017"= alertCreditoCobranzaJudicial(ruta),
+                      "2018"= getArchivosSinErrores(ruta),
+                      "2019"= alertCreditosUnicouta(ruta),
+                      "2020"= alertCreditosProvisiones(ruta),
+                      "2022"= alertDiasAtrasoUltimaCouta(ruta)
+                      )
+    return(alerta) 
+  }
+  if (BD == "BD04") {
+   alerta <- switch (toString(cod),
+                     "2030"= alertCreditosEfectivo(ruta),
+                     "2031"= alertCreditosAntesDesembolso(ruta),
+                     "2032"= alertMontosuperiorOcupaciones3(getAnoMes(ruta)),
+                     "2033"= alertFechaDesembolsoCancelacion(ruta),
+                     "2034"= alertNumeroCanceladosyOriginales(ruta)
+                     )
+   return(alerta)
+   }
 }
 procesarAlertas <- function(exigibles, BD, cod){
   tb <- tibble(CodigoAlerta = getcodigoAlerta(BD)) %>% rowwise() %>%
     mutate(Archivos = getArchivosExigiblesAlertas(exigibles, CodigoAlerta) %>% list())
   
   alertas <- tibble(NombreArchivo = unlist(tb %>% filter(CodigoAlerta == cod) %>% pull(Archivos))) %>% rowwise() %>%
-    mutate(Ruta = getRuta(getCarpeta(header), NombreArchivo))
+    mutate(BDCC = BD,
+           Ruta = getRuta(getCarpeta(header), NombreArchivo), 
+           Alerta = if_else(BD == "BD04" & cod != 2032, 
+                            generarDetalleError2(Ruta, elegiralertasBD(BDCC, cod, Ruta)),
+                            generarDetalleError4(getAnoMes(ruta), elegiralertasBD(BDCC, cod, Ruta))) 
+           )
+  
   return(alertas)
 }
 
