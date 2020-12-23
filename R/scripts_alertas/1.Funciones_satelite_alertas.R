@@ -66,7 +66,7 @@ getArchivosExigiblesAlertas <- function(exigibles, codigoAlerta){
                         "2017"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("CAL", "KJU")),
                         "2018"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("ESAM", "FVEG", "FOT")),
                         "2019"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("TCR", "FVEG", "FOT")),
-                        "2020"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("CAL", "TCR", "PCI", "SKCR")),
+                        "2020"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("CIS", "CAL", "TCR", "PCI", "SKCR")),
                         "2022"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("FVEG", "FOT"))
                         ) %>% 
       intersect(exigibles[str_detect(exigibles, "BD01")])
@@ -338,7 +338,8 @@ asignarProvision         <- function(calificacion, tipoCredito){
   if (toString(calificacion) > "0"){
     provision <- if_else(calificacion == 1, 5,
                          if_else(calificacion == 2, 25,
-                                 if_else(calificacion == 3, 60, if_else(calificacion == 4, 100, 0))))
+                                 if_else(calificacion == 3, 60, 
+                                         if_else(calificacion == 4, 100, 0))))
     return(provision)
   }
 }

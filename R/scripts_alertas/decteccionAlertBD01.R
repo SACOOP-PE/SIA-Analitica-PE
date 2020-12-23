@@ -1,11 +1,10 @@
 ejecutarDecteccionAlertBD01 <-function(header, listaErrores, alertBucket){
-  exigibles <- getArchivosSinErrores(header, listaErrores, c(201, 203), c("CCR","CCR_C","CODGR"))
-  exigibles <- exigibles[str_detect(exigibles,"BD01")]
+  exigibles <- getArchivosSinErrores(header, listaErrores, c(201, 203), c("CCR","CCR_C"))
   carpeta   <- getCarpeta(header)
   
   #2001, 2002
   exigiblesAlert1 <- getArchivosSinErrores(header, listaErrores, c(201,203), c("MORG","UAGE")) %>%
-    intersect(exigibles)
+    intersect(exigibles[str_detect(exigibles,"BD01")])
   alertBucket_i   <- alertBucket
   for (i in 1:length(exigiblesAlert1)){
     ruta_i        <- getRuta(carpeta, exigiblesAlert1[i])
@@ -16,54 +15,27 @@ ejecutarDecteccionAlertBD01 <-function(header, listaErrores, alertBucket){
     summarise(Detalle = toString(Detalle)) %>%
     ungroup()
   
-  # 2003 ++
-  alertasBD01 <- tibble(NombreArchivo = exigibles) %>% rowwise() %>%
-    mutate(Ruta    = getRuta(carpeta, NombreArchivo),
-           alerta2003 = generarDetalleError2(Ruta, alertMontosuperiorSector(Ruta)),
-           alerta2004 = generarDetalleError2(Ruta, alertMontosuperiorOcupaciones(Ruta)),
-           alerta2005 = generarDetalleError2(Ruta, alertTea(Ruta)),
-           alerta2006 = generarDetalleError2(Ruta, alertDiasGracia(Ruta)),
-           alerta2007 = generarDetalleError2(Ruta, alertMontOtorsuperiorCapitalVig(Ruta)),
-           alerta2008 = generarDetalleError2(Ruta, alertRendimientoDevengado(Ruta)),
-           alerta2009 = alertDeudorCal(Ruta),
-           alerta2010 = generarDetalleError2(Ruta, alertDiasAtrasonegativo(Ruta)),
-           alerta2011 = generarDetalleError2(Ruta, alertEsquemaAmortizaCuotaPagadas(Ruta)),
-           alerta2012 = generarDetalleError2(Ruta, alertDeudorInteresDevengado(Ruta)),
-           alerta2013 = generarDetalleError2(Ruta, alertCreditoInteresDevengado(Ruta)),
-           alerta2014 = generarDetalleError2(Ruta, alertDeudorContableVencido(Ruta)),
-           alerta2015 = generarDetalleError2(Ruta, alertCreditoContableVigente(Ruta)),
-           alerta2016 = generarDetalleError2(Ruta, alertDiasAtrasoJudicial(Ruta)),
-           alerta2017 = generarDetalleError2(Ruta, alertCreditoCobranzaJudicial(Ruta)),
-           alerta2018 = generarDetalleError2(Ruta, alertCreditosUnicouta(Ruta)),
-           alerta2019 = generarDetalleError2(Ruta, alertCreditosHipotecario(Ruta)),
-           alerta2022 = generarDetalleError2(Ruta, alertDiasAtrasoUltimaCouta(Ruta)))
-
-
-  alert2003 <- (paste(alertasBD01 %>% rowwise() %>% pull(alerta2003), collapse = ",") %>% strsplit(","))[[1]]
-  alert2004 <- (paste(alertasBD01 %>% rowwise() %>% pull(alerta2004), collapse = ",") %>% strsplit(","))[[1]]
-  alert2005 <- (paste(alertasBD01 %>% rowwise() %>% pull(alerta2005), collapse = ",") %>% strsplit(","))[[1]]
-  alert2006 <- (paste(alertasBD01 %>% rowwise() %>% pull(alerta2006), collapse = ",") %>% strsplit(","))[[1]]
-  alert2007 <- (paste(alertasBD01 %>% rowwise() %>% pull(alerta2007), collapse = ",") %>% strsplit(","))[[1]]
-  alert2008 <- (paste(alertasBD01 %>% rowwise() %>% pull(alerta2008), collapse = ",") %>% strsplit(","))[[1]]
-  alert2009 <- (paste(alertasBD01 %>% rowwise() %>% pull(alerta2009), collapse = ",") %>% strsplit(","))[[1]]
-  alert2010 <- (paste(alertasBD01 %>% rowwise() %>% pull(alerta2010), collapse = ",") %>% strsplit(","))[[1]]
-  alert2011 <- (paste(alertasBD01 %>% rowwise() %>% pull(alerta2011), collapse = ",") %>% strsplit(","))[[1]]
-  alert2012 <- (paste(alertasBD01 %>% rowwise() %>% pull(alerta2012), collapse = ",") %>% strsplit(","))[[1]]
-  alert2013 <- (paste(alertasBD01 %>% rowwise() %>% pull(alerta2013), collapse = ",") %>% strsplit(","))[[1]]
-  alert2014 <- (paste(alertasBD01 %>% rowwise() %>% pull(alerta2014), collapse = ",") %>% strsplit(","))[[1]]
-  alert2015 <- (paste(alertasBD01 %>% rowwise() %>% pull(alerta2015), collapse = ",") %>% strsplit(","))[[1]]
-  alert2016 <- (paste(alertasBD01 %>% rowwise() %>% pull(alerta2016), collapse = ",") %>% strsplit(","))[[1]]
-  alert2017 <- (paste(alertasBD01 %>% rowwise() %>% pull(alerta2017), collapse = ",") %>% strsplit(","))[[1]]
-  alert2018 <- (paste(alertasBD01 %>% rowwise() %>% pull(alerta2018), collapse = ",") %>% strsplit(","))[[1]]
-  alert2019 <- (paste(alertasBD01 %>% rowwise() %>% pull(alerta2019), collapse = ",") %>% strsplit(","))[[1]]
-  alert2020 <- (paste(tibble(NombreArchivo = exigibles[str_detect(exigibles, restriccionPeriodos(listaErrores, "BD01", "BD03A", "CIS"))]) %>%
-                        rowwise() %>%
-                        mutate(Ruta = getRuta(carpeta, NombreArchivo),
-                               alerta2020 = generarDetalleError2(Ruta, alertCreditosProvisiones(Ruta))) %>%
-                        rowwise() %>%
-                        pull(alerta2020), collapse = ",") %>% strsplit(","))[[1]]
-  alert2022 <- (paste(alertasBD01 %>% rowwise() %>% pull(alerta2022), collapse = ",") %>% strsplit(","))[[1]]
-
+  # 2003+
+  alert2003 <- (paste(procesarAlertas(exigibles, "BD01", 2003) %>% pull(Alerta), collapse = ",") %>% strsplit(","))[[1]]
+  alert2004 <- (paste(procesarAlertas(exigibles, "BD01", 2004) %>% pull(Alerta), collapse = ",") %>% strsplit(","))[[1]]
+  alert2005 <- (paste(procesarAlertas(exigibles, "BD01", 2005) %>% pull(Alerta), collapse = ",") %>% strsplit(","))[[1]]
+  alert2006 <- (paste(procesarAlertas(exigibles, "BD01", 2006) %>% pull(Alerta), collapse = ",") %>% strsplit(","))[[1]]
+  alert2007 <- (paste(procesarAlertas(exigibles, "BD01", 2007) %>% pull(Alerta), collapse = ",") %>% strsplit(","))[[1]]
+  alert2008 <- (paste(procesarAlertas(exigibles, "BD01", 2008) %>% pull(Alerta), collapse = ",") %>% strsplit(","))[[1]]
+  alert2009 <- (paste(procesarAlertas(exigibles, "BD01", 2009) %>% pull(Alerta), collapse = ",") %>% strsplit(","))[[1]]
+  alert2010 <- (paste(procesarAlertas(exigibles, "BD01", 2010) %>% pull(Alerta), collapse = ",") %>% strsplit(","))[[1]]
+  alert2011 <- (paste(procesarAlertas(exigibles, "BD01", 2011) %>% pull(Alerta), collapse = ",") %>% strsplit(","))[[1]]
+  alert2012 <- (paste(procesarAlertas(exigibles, "BD01", 2012) %>% pull(Alerta), collapse = ",") %>% strsplit(","))[[1]]
+  alert2013 <- (paste(procesarAlertas(exigibles, "BD01", 2013) %>% pull(Alerta), collapse = ",") %>% strsplit(","))[[1]]
+  alert2014 <- (paste(procesarAlertas(exigibles, "BD01", 2014) %>% pull(Alerta), collapse = ",") %>% strsplit(","))[[1]]
+  alert2015 <- (paste(procesarAlertas(exigibles, "BD01", 2015) %>% pull(Alerta), collapse = ",") %>% strsplit(","))[[1]]
+  alert2016 <- (paste(procesarAlertas(exigibles, "BD01", 2016) %>% pull(Alerta), collapse = ",") %>% strsplit(","))[[1]]
+  alert2017 <- (paste(procesarAlertas(exigibles, "BD01", 2017) %>% pull(Alerta), collapse = ",") %>% strsplit(","))[[1]]
+  alert2018 <- (paste(procesarAlertas(exigibles, "BD01", 2018) %>% pull(Alerta), collapse = ",") %>% strsplit(","))[[1]]
+  alert2019 <- (paste(procesarAlertas(exigibles, "BD01", 2019) %>% pull(Alerta), collapse = ",") %>% strsplit(","))[[1]]
+  alert2020 <- (paste(procesarAlertas(exigibles, "BD01", 2020) %>% pull(Alerta), collapse = ",") %>% strsplit(","))[[1]]
+  alert2022 <- (paste(procesarAlertas(exigibles, "BD01", 2022) %>% pull(Alerta), collapse = ",") %>% strsplit(","))[[1]]
+  
   listAlertBD01 <- list(alert2003, alert2004, alert2005, alert2006, alert2007, alert2008, alert2009, alert2010, alert2011,
                         alert2012, alert2013, alert2014, alert2015, alert2016, alert2017, alert2018, alert2019, alert2020,
                         alert2022)
