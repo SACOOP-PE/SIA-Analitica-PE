@@ -109,8 +109,8 @@ elegiralertasBD <- function(BD, cod, ruta){
                       "2015"= alertCreditoContableVigente(ruta),
                       "2016"= alertDiasAtrasoJudicial(ruta),
                       "2017"= alertCreditoCobranzaJudicial(ruta),
-                      "2018"= getArchivosSinErrores(ruta),
-                      "2019"= alertCreditosUnicouta(ruta),
+                      "2018"= alertCreditosUnicouta(ruta),
+                      "2019"= alertCreditosHipotecario(ruta),
                       "2020"= alertCreditosProvisiones(ruta),
                       "2022"= alertDiasAtrasoUltimaCouta(ruta)
                       )
@@ -134,10 +134,10 @@ procesarAlertas <- function(exigibles, BD, cod){
   alertas <- tibble(NombreArchivo = unlist(tb %>% filter(CodigoAlerta == cod) %>% pull(Archivos))) %>% rowwise() %>%
     mutate(BDCC = BD,
            Ruta = getRuta(getCarpeta(header), NombreArchivo), 
-           Alerta = ifelse(cod != 2032, 
-                           generarDetalleError2(Ruta, elegiralertasBD(BDCC, cod, Ruta)),
-                           elegiralertasBD(BDCC, cod, Ruta)) 
-           ) %>%
+           Alerta = ifelse(cod == 2032,
+                           elegiralertasBD(BDCC, cod, Ruta),
+                           generarDetalleError2(Ruta, elegiralertasBD(BDCC, cod, Ruta))) 
+           ) %>% 
     pull(Alerta)
   return(alertas)
 }
@@ -501,9 +501,10 @@ alertMontosuperiorOcupaciones3   <- function(periodo){
     creditos <- bd4 %>% filter(cgrep(bd4, getCodigoBD("BD04"))[[1]] %in% ocupacionesAltoRiesgo(periodo) &
                                as.numeric(MCT_C) > 277778) %>%
       pull(getCodigoBD("BD04"))
-    generarDetalleError4(periodo, creditos) %>% return()
+    alerta <- generarDetalleError4(periodo, creditos)
+    return(alerta)
   }
-  list("character(0)") %>% return()
+  return(list("character(0)"))
 }
 
  # Codigo 2033
