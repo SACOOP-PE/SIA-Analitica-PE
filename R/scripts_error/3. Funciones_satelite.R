@@ -181,6 +181,7 @@ generarDetalleError4 <- function(periodo, errorCruce){
   paste_error <- ifelse(length(errorCruce)>0,
                         list(paste0(periodo,"(", toString(errorCruce), ")")),
                         list(character(0)))
+  return(paste_error)
 }
 
 ## Funciones Ly1----
