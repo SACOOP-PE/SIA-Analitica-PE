@@ -45,6 +45,7 @@ addAlerta       <- function(alertBucket, codigoAlerta, responsableAlerta, descri
     deleteAlerta(999999) %>% return()
 }
 
+## Restricciones de archivos ----
 getArchivosExigiblesAlertas <- function(exigibles, codigoAlerta){
   if(codigoAlerta >= 2003 & codigoAlerta <= 2022) {
     
@@ -82,6 +83,11 @@ getArchivosExigiblesAlertas <- function(exigibles, codigoAlerta){
       intersect(exigibles[str_detect(exigibles, "BD04")])
     return(archivos)
   }
+}
+getcodigoAlerta <- function(BD){
+  cod <- switch (BD,
+    BD01 = c(2001, 203)
+  )
 }
 
 #alertas BD01 ----
@@ -342,7 +348,7 @@ alertMontOrtorgadoCronograma <- function(periodo){
     return()
 }
 #alertas BD03A ----
- # Codigo 2028
+ # Codigo 2028 (aún por terminar)
 getCreditosConGarantia   <- function(periodo){
   credConGarantias <- intersect(getInfoTotal(getCarpeta(header), periodo, "BD01") %>% pull(CIS),
                                 getInfoTotal(getCarpeta(header), periodo, "BD03A") %>% pull(CIS)) %>% 
