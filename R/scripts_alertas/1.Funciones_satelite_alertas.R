@@ -134,9 +134,9 @@ procesarAlertas <- function(exigibles, BD, cod){
   alertas <- tibble(NombreArchivo = unlist(tb %>% filter(CodigoAlerta == cod) %>% pull(Archivos))) %>% rowwise() %>%
     mutate(BDCC = BD,
            Ruta = getRuta(getCarpeta(header), NombreArchivo), 
-           Alerta = if_else(cod != 2032, 
-                            generarDetalleError2(Ruta, elegiralertasBD(BDCC, cod, Ruta)),
-                            elegiralertasBD(BDCC, cod, Ruta)) 
+           Alerta = ifelse(cod != 2032, 
+                           generarDetalleError2(Ruta, elegiralertasBD(BDCC, cod, Ruta)),
+                           elegiralertasBD(BDCC, cod, Ruta)) 
            ) %>%
     pull(Alerta)
   return(alertas)
