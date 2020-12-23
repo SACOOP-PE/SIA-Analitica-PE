@@ -137,8 +137,8 @@ procesarAlertas <- function(exigibles, BD, cod){
            Alerta = if_else(cod != 2032, 
                             generarDetalleError2(Ruta, elegiralertasBD(BDCC, cod, Ruta)),
                             elegiralertasBD(BDCC, cod, Ruta) %>% list()) 
-           )
-  
+           ) %>%
+    pull(Alerta)
   return(alertas)
 }
 
