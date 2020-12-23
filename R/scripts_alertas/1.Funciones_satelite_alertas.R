@@ -90,11 +90,13 @@ getcodigoAlerta <- function(BD){
                  )
   return(cod)
 }
-procesarAlertas <- function(exigibles, BD){
+procesarAlertas <- function(exigibles, BD, cod){
   tb <- tibble(CodigoAlerta = getcodigoAlerta(BD)) %>% rowwise() %>%
     mutate(Archivos = getArchivosExigiblesAlertas(exigibles, CodigoAlerta) %>% list())
   
-  return(tb)
+  alertas <- tibble(NombreArchivo = unlist(tb %>% filter(CodigoAlerta == cod) %>% pull(Archivos))) %>% rowwise() %>%
+    mutate(Ruta = getRuta(getCarpeta(header), NombreArchivo))
+  return(alertas)
 }
 
 #alertas BD01 ----
