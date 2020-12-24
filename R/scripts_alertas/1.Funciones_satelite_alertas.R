@@ -47,8 +47,8 @@ addAlerta       <- function(alertBucket, codigoAlerta, responsableAlerta, descri
 
 ## Restricciones de archivos ----
 getArchivosExigiblesAlertas <- function(exigibles, codigoAlerta){
-  if(codigoAlerta >= 2003 & codigoAlerta <= 2022) {
-    archivos <- switch (codigoAlerta %>% toString(),
+  if(codigoAlerta >= 2003 & codigoAlerta <= 2022){
+    archivos <- switch (toString(codigoAlerta),
                         "2003"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("SEC", "MORG")),
                         "2004"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("OSD", "MORG")),
                         "2005"= getArchivosSinErrores(header, listaErrores, c(201, 203), "TEA"),
@@ -72,8 +72,16 @@ getArchivosExigiblesAlertas <- function(exigibles, codigoAlerta){
       intersect(exigibles[str_detect(exigibles, "BD01")])
     return(archivos)
   }
+  if(codigoAlerta >= 2025 & codigoAlerta <= 2027){
+    periodos <- switch (toString(codigoAlerta),
+                        "2025" = restriccionPeriodos(listaErrores, "BD01", "BD02A", c("CCR", "CCR_C", "OSD", "TCUO")),
+                        "2026" = restriccionPeriodos(listaErrores, "BD01", "BD02A", c("CCR", "CCR_C", "OSD", "TCUO_C")),
+                        "2027" = restriccionPeriodos(listaErrores, "BD01", "BD02B", c("CCR", "CCR_C", "MORG", "MCUO"))
+                        )
+    return(periodos)
+  }
   if(codigoAlerta > 2029){
-    archivos <- switch (codigoAlerta %>% toString(),
+    archivos <- switch (toString(codigoAlerta),
                         "2030"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("FOCAN_C", "MCT_C")),
                         "2031"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("FOCAN_C", "MCT_C", "FOT_C")),
                         "2032"= getArchivosSinErrores(header, listaErrores, c(201, 203), "MCT_C"),
@@ -362,7 +370,7 @@ alertDiasAtrasoUltimaCouta       <- function(ruta, BD = evalFile(ruta)){
 
 #alertas BD02A y 2B ----
 # Codigos 2025, 2026
-ocupacionesAltoRiesgo <- function(periodo) {
+ocupacionesAltoRiesgo <- function(periodo){
   getInfoTotal(getCarpeta(header), periodo, "BD01") %>% 
     filter(OSD %in% c(1, 2, 5, 9)) %>%
     pull(getCodigoBD("BD01")) %>%
@@ -395,8 +403,8 @@ alertMontOrtorgadoCronograma <- function(periodo){
   capitalPorCobrar <- getInfoTotal(getCarpeta(header), periodo, "BD02A") %>% filter(CCR %in% creditosComun) %>%
     pull(MCUO)
   
-  creditosComun <- creditosComun[montoOtorgado > capitalPorCobrar] %>% 
-    unique() %>%  
+  creditosComun <- creditosComun[montoOtorgado > capitalPorCobrar] %>%
+    unique() %>%
     return()
 }
 #alertas BD03A ----
@@ -429,7 +437,7 @@ asignarProvisionGarantia <- function(claseGarantia, calificacion){
     return(provision)
   }
 }
-getDuplicadosCIS  <- function(periodo, BD) {
+getDuplicadosCIS  <- function(periodo, BD){
   cis_deudor <- getInfoTotal(getCarpeta(header), periodo, BD) %>%
     filter(CIS %in% getCreditosConGarantia(periodo)) %>%
     select(CIS)
