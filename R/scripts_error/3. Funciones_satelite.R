@@ -402,7 +402,13 @@ CodigoErrorTipo1   <- function(ruta, campo){
 }
 procesarErroresT1  <- function(ruta, errorBucket){
   BD <- evalFile(ruta)
-  tb <- tibble(Columna = depurarColsErrorT1(ruta, errorBucket)) %>% rowwise() %>%
+  cols <- depurarColsErrorT1(ruta, errorBucket)
+  if (header %>% pull(Coopac) == "01138"){
+   cols <- tolower(cols)
+  }
+  
+  tb <- tibble(Columna = cols) %>%
+    rowwise() %>%
     mutate(VerifCols = BD %>%
                           filter((as.numeric(cgrep(BD, Columna)[[1]]) %in% elegirDigitos(ruta, Columna)) == FALSE) %>%
                           pull(getCodigoBD(getBD(ruta))) %>% unique() %>% list(),
@@ -424,14 +430,17 @@ procesarErroresT1  <- function(ruta, errorBucket){
  #BD01
 procesarErrorSaldosNegativos <- function(ruta, BD = evalFile(ruta)){
   saldosCols <- c("SKCR", "PCI", "KVI", "KRF", "KVE", "KJU", "SIN", "SID", "SIS", "DGR", "NCPR", "NCPA", "TPINT", "NRPRG")
-  
-  tb <- tibble(Columna = saldosCols) %>% rowwise() %>%
+  if (header %>% pull(Coopac) == "01138"){
+    saldosCols <- tolower(saldosCols)
+  }
+
+  tb <- tibble(Columna = depurarColsSaldos(saldosCols, errorBucket)) %>% rowwise() %>%
     mutate(procesarSaldos = BD %>% filter(as.numeric(cgrep(BD, Columna)[[1]]) <0) %>%
-                                   pull(CCR) %>% list(),
+                                   pull(getCodigoBD("BD01")) %>% list(),
            resultado      = generarDetalleError3(ruta, Columna, procesarSaldos) %>% toString()) %>%
     filter(resultado != "character(0)") %>%
-    pull(resultado) %>% 
-    return()
+    pull(resultado)  
+    return(tb)
 }
 procesarErrorModalidadCouta  <- function(ruta, BD = evalFile(ruta)){
   BD %>%
@@ -513,7 +522,13 @@ CodigoErrorTipo3   <- function(ruta, campo){
 }
 procesarErroresT3  <- function(ruta, errorBucket){
   BD <- evalFile(ruta)
-  tb <- tibble(Columna    = depurarColsErrorT3(ruta, errorBucket)) %>% rowwise() %>%
+  cols <- depurarColsErrorT1(ruta, errorBucket)
+  if (header %>% pull(Coopac) == "01138"){
+    cols <- tolower(cols)
+  }
+  
+  tb <- tibble(Columna    = cols) %>%
+    rowwise() %>%
     mutate(validarFechas = BD %>%
                              filter(dmy(cgrep(BD, Columna)[[1]]) %>% is.na() == TRUE) %>% 
                              pull(getCodigoBD(getBD(ruta))) %>% unique() %>% list(),
@@ -539,7 +554,12 @@ getFechaCorte <- function(ruta){
   return(fecha_corte)
 }
 procesarErrorFechaDesembolso  <- function(ruta, BD =evalFile(ruta) ){
-  BD %>% filter((dmy(BD %>% pull(FOT)) > getFechaCorte(ruta)) == TRUE) %>% 
-    pull(CCR) %>%
-    return()
+  if (header %>% pull(Coopac) == "01138"){
+    error <- BD %>% filter((dmy(BD %>% pull(fot)) > getFechaCorte(ruta)) == TRUE) %>% 
+      pull(getCodigoBD("BD01")) 
+      return(error)
+  }
+  error <- BD %>% filter((dmy(BD %>% pull(FOT)) > getFechaCorte(ruta)) == TRUE) %>% 
+    pull(getCodigoBD("BD01")) 
+  return(error)
 }

@@ -36,9 +36,17 @@ restriccionPeriodos   <- function(errorBucket, BD1, BD2, columnas){
 }
 
 #layer 4 (tipo 1 y 3)
+depurarColsSaldos <- function(saldos, errorBucket){
+  filterError <- unlist(errorBucket %>% filter(Cod %in% c(201,203)) %>% pull(Detalle) %>% str_split(","))
+  
+  setdiff(saldos,
+          str_extract(filterError[str_detect(filterError, getNombreArchivo(ruta))],
+                      paste(getColumnasOM("BD01") %>% tolower(), collapse = '|')
+                      )
+          ) %>% return()  
+}
 depurarColsErrorT1 <- function(ruta, errorBucket){
-  filterError <- unlist(errorBucket %>% filter(Cod %in% c(201,203)) %>% pull(Detalle) %>%
-                                  str_split(","))
+  filterError <- unlist(errorBucket %>% filter(Cod %in% c(201,203)) %>% pull(Detalle) %>% str_split(","))
   
   setdiff(ColumnasErrorTipo1(ruta),
           str_extract(filterError[str_detect(filterError, getNombreArchivo(ruta))],
