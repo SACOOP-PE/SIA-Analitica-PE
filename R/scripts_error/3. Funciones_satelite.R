@@ -434,7 +434,7 @@ procesarErrorSaldosNegativos <- function(ruta, BD = evalFile(ruta)){
     saldosCols <- tolower(saldosCols)
   }
 
-  tb <- tibble(Columna = depurarColsSaldos(saldosCols, errorBucket)) %>% rowwise() %>%
+  tb <- tibble(Columna = depurarColsSaldos(ruta, saldosCols, errorBucket)) %>% rowwise() %>%
     mutate(procesarSaldos = BD %>% filter(as.numeric(cgrep(BD, Columna)[[1]]) <0) %>%
                                    pull(getCodigoBD("BD01")) %>% list(),
            resultado      = generarDetalleError3(ruta, Columna, procesarSaldos) %>% toString()) %>%
