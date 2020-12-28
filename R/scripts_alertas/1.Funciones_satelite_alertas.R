@@ -45,7 +45,7 @@ addAlerta       <- function(alertBucket, codigoAlerta, responsableAlerta, descri
     deleteAlerta(999999) %>% return()
 }
 
-## Restricciones de archivos ----
+## Restricciones de archivos en alertas----
 getArchivosExigiblesAlertas <- function(exigibles, codigoAlerta){
   if(codigoAlerta >= 2003 & codigoAlerta <= 2022){
     archivos <- switch (toString(codigoAlerta),
@@ -72,14 +72,6 @@ getArchivosExigiblesAlertas <- function(exigibles, codigoAlerta){
       intersect(exigibles[str_detect(exigibles, "BD01")])
     return(archivos)
   }
-  if(codigoAlerta >= 2025 & codigoAlerta <= 2027){
-    periodos <- switch (toString(codigoAlerta),
-                        "2025" = restriccionPeriodos(listaErrores, "BD01", "BD02A", c("CCR", "CCR_C", "OSD", "TCUO")),
-                        "2026" = restriccionPeriodos(listaErrores, "BD01", "BD02A", c("CCR", "CCR_C", "OSD", "TCUO_C")),
-                        "2027" = restriccionPeriodos(listaErrores, "BD01", "BD02B", c("CCR", "CCR_C", "MORG", "MCUO"))
-                        )
-    return(periodos)
-  }
   if(codigoAlerta > 2029){
     archivos <- switch (toString(codigoAlerta),
                         "2030"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("FOCAN_C", "MCT_C")),
@@ -92,15 +84,25 @@ getArchivosExigiblesAlertas <- function(exigibles, codigoAlerta){
     return(archivos)
   }
 }
-getcodigoAlerta <- function(BD){
+getPeriodosAlertas <- function(codigoAlerta){
+  periodos <- switch (toString(codigoAlerta),
+                      "2025" = restriccionPeriodos(listaErrores, "BD01", "BD02A", c("CCR", "CCR_C", "OSD", "TCUO")),
+                      "2026" = restriccionPeriodos(listaErrores, "BD01", "BD02A", c("CCR", "CCR_C", "OSD", "TCUO_C")),
+                      "2027" = restriccionPeriodos(listaErrores, "BD01", "BD02B", c("CCR", "CCR_C", "MORG", "MCUO"))
+                      )
+  return(periodos)
+}
+getcodigoAlerta    <- function(BD){
   cod <- switch (BD,
                  BD01 = c(2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2022),
                  BD04 = c(2030, 2031, 2032, 2033, 2034)
                  )
   return(cod)
 }
+
 elegiralertasBD <- function(BD, cod, ruta){
-  if (BD == "BD01") {
+#La "ruta" puede ser también periodos
+  if (BD == "BD01"){
     alerta <- switch (toString(cod),
                       "2003"= alertMontosuperiorSector(ruta),
                       "2004"= alertMontosuperiorOcupaciones(ruta),
@@ -124,7 +126,15 @@ elegiralertasBD <- function(BD, cod, ruta){
                       )
     return(alerta) 
   }
-  if (BD == "BD04") {
+  if (BD == "BD02"){
+    alerta <- switch (toString(cod),
+                      "2025"= alertMontosuperiorOcupaciones2("BD02A", ruta),
+                      "2026"= alertMontosuperiorOcupaciones2("BD02B", ruta),
+                      "2027"= alertMontOrtorgadoCronograma(ruta)
+                      )
+    return(alerta)
+  }
+  if (BD == "BD04"){
    alerta <- switch (toString(cod),
                      "2030"= alertCreditosEfectivo(ruta),
                      "2031"= alertCreditosAntesDesembolso(ruta),
@@ -135,7 +145,8 @@ elegiralertasBD <- function(BD, cod, ruta){
    return(alerta)
    }
 }
-procesarAlertas <- function(exigibles, BD, cod){
+
+procesarAlertas  <- function(exigibles, BD, cod){
   tb <- tibble(CodigoAlerta = getcodigoAlerta(BD)) %>% rowwise() %>%
     mutate(Archivos = list(getArchivosExigiblesAlertas(exigibles, CodigoAlerta)))
   
@@ -147,6 +158,12 @@ procesarAlertas <- function(exigibles, BD, cod){
                            generarDetalleError2(Ruta, elegiralertasBD(BDCC, cod, Ruta)))) %>% 
     pull(Alerta)
   return(alertas)
+}
+procesarAlertas2 <- function(cod){
+  tb <- tibble(Periodos = getPeriodosAlertas(2025)) %>% rowwise() %>%
+    mutate(Alerta = generarDetalleError4(Periodos, elegiralertasBD("BD02", cod, Periodos))) %>% 
+    pull(Alerta)
+  return(tb)
 }
 
 #alertas BD01 ----
