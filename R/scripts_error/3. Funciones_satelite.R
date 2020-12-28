@@ -287,8 +287,7 @@ getInfoTotal  <- function(carpeta, periodo, name_bd){
                                                            paste0(name_bd, "_", periodo))], 
                    sep = "/")
   
-  resultado <- ruta_bd %>% read_delim("\t",escape_double = FALSE, trim_ws = TRUE, col_names = TRUE,
-                                      col_types = cols(.default = "c"), progress = T) %>% return()
+  return(setBD(ruta_bd))
 }
 getCodigoBD   <- function(bd){
     campo <- case_when(bd == "BD01"  ~ "CCR",
@@ -298,11 +297,11 @@ getCodigoBD   <- function(bd){
                        bd == "BD03B" ~ "CODGR",
                        bd == "BD04"  ~ "CCR_C")
     return(campo)
-
 }
 getInfoCruce  <- function(carpeta, periodo, name_bd){
-  resultado <- getInfoTotal(carpeta, periodo, name_bd) %>%
-    pull(getCodigoBD(name_bd)) %>% return()
+  BD <- getInfoTotal(carpeta, periodo, name_bd) %>%
+    pull(getCodigoBD(name_bd))
+  return(BD)
 }
 realizarCruce <- function(carpeta, periodo, nameBD1, nameBD2){
   cruce <-  setdiff(getInfoCruce(carpeta, periodo, nameBD1), 
