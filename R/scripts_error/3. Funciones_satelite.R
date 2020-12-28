@@ -187,7 +187,6 @@ generarDetalleError4 <- function(periodo, errorCruce){
 setBD <- function(ruta){
   BD <- evalFile(ruta) 
   colnames(BD) <- toupper(colnames(BD))
-  
   return(BD)
 }
 
@@ -308,8 +307,6 @@ getInfoCruce  <- function(carpeta, periodo, name_bd){
 realizarCruce <- function(carpeta, periodo, nameBD1, nameBD2){
   cruce <-  setdiff(getInfoCruce(carpeta, periodo, nameBD1), 
                     getInfoCruce(carpeta, periodo, nameBD2)) %>% unique()
-  
-  
   
   resultado <- generarDetalleError4(periodo, cruce)
   return(resultado)
