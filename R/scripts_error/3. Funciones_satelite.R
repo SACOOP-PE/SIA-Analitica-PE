@@ -285,13 +285,22 @@ getInfoTotal  <- function(carpeta, periodo, name_bd){
                                       col_types = cols(.default = "c"), progress = T) %>% return()
 }
 getCodigoBD   <- function(bd){
-  campo <- case_when(bd == "BD01"  ~ "CCR",
-                     bd == "BD02A" ~ "CCR",
-                     bd == "BD02B" ~ "CCR_C",
-                     bd == "BD03A" ~ "CODGR",
-                     bd == "BD03B" ~ "CODGR",
-                     bd == "BD04"  ~ "CCR_C") %>%
-    return()
+  if (header %>% pull(Coopac) != "01138") {
+    campo <- case_when(bd == "BD01"  ~ "CCR",
+                       bd == "BD02A" ~ "CCR",
+                       bd == "BD02B" ~ "CCR_C",
+                       bd == "BD03A" ~ "CODGR",
+                       bd == "BD03B" ~ "CODGR",
+                       bd == "BD04"  ~ "CCR_C")
+    return(campo)
+  }
+  campo <- case_when(bd == "BD01"  ~ "ccr",
+                     bd == "BD02A" ~ "ccr",
+                     bd == "BD02B" ~ "ccr_c",
+                     bd == "BD03A" ~ "codgr",
+                     bd == "BD03B" ~ "codgr",
+                     bd == "BD04"  ~ "ccr_c")
+  return(campo)
 }
 getInfoCruce  <- function(carpeta, periodo, name_bd){
   resultado <- getInfoTotal(carpeta, periodo, name_bd) %>%

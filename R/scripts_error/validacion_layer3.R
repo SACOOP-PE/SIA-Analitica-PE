@@ -4,7 +4,7 @@ ejecutarValidacionLayer3 <- function(header, errorBucket){
   
   # i. cuadre contable ----
   exigibles1 <- exigibles[str_detect(exigibles, "BD01")]
-  exigibles1 <- exigibles1[str_detect(exigible1,
+  exigibles1 <- exigibles1[str_detect(exigibles1,
                                       paste(unique(initCuadreContable() %>% pull(PERIODO)), collapse = '|'))]
   
   tb1 <- tibble(NombreArchivo = exigibles1) %>% rowwise() %>% 

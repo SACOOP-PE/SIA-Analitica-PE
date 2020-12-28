@@ -7,7 +7,7 @@ ejecutarValidacionLayer2 <- function(header, errorBucket){
            Coopac        = as.numeric(getCoopac(Ruta)),
            Periodo       = getAnoMes(Ruta),
            BDCC          = getBD(Ruta),
-           Columnas      = list(colnames(evalFile(Ruta))),
+           Columnas      = list(toupper(colnames(evalFile(Ruta)))),
            ColumnasOM   = getColumnasOM(BDCC),
            ColFaltantes = ifelse(length(setdiff(ColumnasOM, Columnas))>0,
                                  list(paste(NombreArchivo, (setdiff(ColumnasOM, Columnas)), sep ="$", collapse=",")),
