@@ -512,7 +512,7 @@ CodigoErrorTipo3   <- function(ruta, campo){
 procesarErroresT3  <- function(ruta, errorBucket){
   BD <- setBD(ruta)
   
-  tb <- tibble(Columna    = depurarColsErrorT1(ruta, errorBucket)) %>%
+  tb <- tibble(Columna    = depurarColsErrorT3(ruta, errorBucket)) %>%
     rowwise() %>%
     mutate(validarFechas = BD %>%
                              filter(dmy(cgrep(BD, Columna)[[1]]) %>% is.na() == TRUE) %>% 
