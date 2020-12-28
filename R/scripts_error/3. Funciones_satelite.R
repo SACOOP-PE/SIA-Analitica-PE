@@ -420,7 +420,7 @@ procesarErroresT1  <- function(ruta, errorBucket){
 # Validaciones condicionales relacionadas con otros campos  (errores tipo2)----
  #BD01
 procesarErrorSaldosNegativos <- function(ruta, errorBucket){
-  BD <- setCols(ruta)
+  BD <- setBD(ruta)
   saldosCols <- c("SKCR", "PCI", "KVI", "KRF", "KVE", "KJU", "SIN", "SID", "SIS", "DGR", "NCPR", "NCPA", "TPINT", "NRPRG")
 
   tb <- tibble(Columna = depurarColsSaldos(ruta, saldosCols, errorBucket)) %>% rowwise() %>%
