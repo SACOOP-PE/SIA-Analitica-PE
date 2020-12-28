@@ -184,6 +184,13 @@ generarDetalleError4 <- function(periodo, errorCruce){
   return(paste_error)
 }
 
+setBD <- function(ruta){
+  BD <- evalFile(ruta) 
+  colnames(BD) <- toupper(colnames(BD))
+  
+  return(BD)
+}
+
 ## Funciones Ly1----
 getDuplicados <- function(carpeta, exigibles){ 
   tibble(files = basename(list.files(path=carpeta, full.names = F, recursive =  TRUE))) %>%
@@ -211,7 +218,7 @@ getColumnasOM <- function(BDCC){
                        BD04  = {initEstructuraBase() %>% filter(BD == "BD04") %>% pull(CAMPO) %>% list()})
   cols_base %>% return()
 }
-getColVacias  <- function(ruta, BD = evalFile(ruta)){
+getColVacias  <- function(ruta, BD = setBD(ruta)){
   cols_vacias <- intersect(BD[sapply(BD, function(x) all(is.na(x)))] %>% colnames(), 
                            getColumnasOM(getBD(ruta)) %>% unlist())
   
@@ -260,7 +267,7 @@ CodErrorCuadreContable <- function(dif_Capital){
 
 operaciones_duplicadas <- function(ruta){
   if (getBD(ruta) == "BD01" | getBD(ruta) == "BD03A") {
-    operaciones <- evalFile(ruta) %>% select(getCodigoBD(getBD(ruta))[1]) 
+    operaciones <- setBD(ruta) %>% select(getCodigoBD(getBD(ruta))[1]) 
     duplicados <- operaciones[duplicated(operaciones), ] %>% 
                       unique() %>%
                       pull(getCodigoBD(getBD(ruta))[1])
@@ -268,7 +275,7 @@ operaciones_duplicadas <- function(ruta){
     generarDetalleError1(ruta, duplicados) %>% return()}
   list(character(0)) %>% return()
 }
-operaciones_vacias     <- function(ruta, BD = evalFile(ruta)){
+operaciones_vacias     <- function(ruta, BD = setBD(ruta)){
   vacios <- BD %>% 
     select(getCodigoBD(getBD(ruta))[1]) %>%
     sapply(function(x) sum(is.na(x))) %>% return()
@@ -285,7 +292,6 @@ getInfoTotal  <- function(carpeta, periodo, name_bd){
                                       col_types = cols(.default = "c"), progress = T) %>% return()
 }
 getCodigoBD   <- function(bd){
-  if (header %>% pull(Coopac) != "01138") {
     campo <- case_when(bd == "BD01"  ~ "CCR",
                        bd == "BD02A" ~ "CCR",
                        bd == "BD02B" ~ "CCR_C",
@@ -293,14 +299,7 @@ getCodigoBD   <- function(bd){
                        bd == "BD03B" ~ "CODGR",
                        bd == "BD04"  ~ "CCR_C")
     return(campo)
-  }
-  campo <- case_when(bd == "BD01"  ~ "ccr",
-                     bd == "BD02A" ~ "ccr",
-                     bd == "BD02B" ~ "ccr_c",
-                     bd == "BD03A" ~ "codgr",
-                     bd == "BD03B" ~ "codgr",
-                     bd == "BD04"  ~ "ccr_c")
-  return(campo)
+
 }
 getInfoCruce  <- function(carpeta, periodo, name_bd){
   resultado <- getInfoTotal(carpeta, periodo, name_bd) %>%
@@ -401,13 +400,9 @@ CodigoErrorTipo1   <- function(ruta, campo){
   return(cod)
 }
 procesarErroresT1  <- function(ruta, errorBucket){
-  BD <- evalFile(ruta)
-  cols <- depurarColsErrorT1(ruta, errorBucket)
-  if (header %>% pull(Coopac) == "01138"){
-   cols <- tolower(cols)
-  }
+  BD <- setBD(ruta)
   
-  tb <- tibble(Columna = cols) %>%
+  tb <- tibble(Columna = depurarColsErrorT1(ruta, errorBucket)) %>%
     rowwise() %>%
     mutate(VerifCols = BD %>%
                           filter((as.numeric(cgrep(BD, Columna)[[1]]) %in% elegirDigitos(ruta, Columna)) == FALSE) %>%
@@ -428,11 +423,9 @@ procesarErroresT1  <- function(ruta, errorBucket){
 
 # Validaciones condicionales relacionadas con otros campos  (errores tipo2)----
  #BD01
-procesarErrorSaldosNegativos <- function(ruta, BD = evalFile(ruta)){
+procesarErrorSaldosNegativos <- function(ruta, errorBucket){
+  BD <- setCols(ruta)
   saldosCols <- c("SKCR", "PCI", "KVI", "KRF", "KVE", "KJU", "SIN", "SID", "SIS", "DGR", "NCPR", "NCPA", "TPINT", "NRPRG")
-  if (header %>% pull(Coopac) == "01138"){
-    saldosCols <- tolower(saldosCols)
-  }
 
   tb <- tibble(Columna = depurarColsSaldos(ruta, saldosCols, errorBucket)) %>% rowwise() %>%
     mutate(procesarSaldos = BD %>% filter(as.numeric(cgrep(BD, Columna)[[1]]) <0) %>%
@@ -442,17 +435,17 @@ procesarErrorSaldosNegativos <- function(ruta, BD = evalFile(ruta)){
     pull(resultado)  
     return(tb)
 }
-procesarErrorModalidadCouta  <- function(ruta, BD = evalFile(ruta)){
+procesarErrorModalidadCouta  <- function(ruta, BD = setBD(ruta)){
   BD %>%
     filter(((as.numeric(ESAM) < 5) & (as.numeric(NCPR) == 0 | as.numeric(PCUO)  == 0)) == TRUE) %>%
     pull(CCR) %>% return()
 }
-procesarErrorMontoOtorgado   <- function(ruta, BD = evalFile(ruta)){
+procesarErrorMontoOtorgado   <- function(ruta, BD = setBD(ruta)){
   BD %>% filter(as.numeric(MORG) < as.numeric(SKCR)) %>%
     pull(CCR) %>%
     return()
 }
-procesarErrorVencJudRetraso  <- function(ruta, BD = evalFile(ruta)){
+procesarErrorVencJudRetraso  <- function(ruta, BD = setBD(ruta)){
   BD %>% 
     filter((as.numeric(KVE) > 0 & as.numeric(DAK) == 0)|(as.numeric(KJU) > 0 & as.numeric(DAK) == 0)) %>% 
     pull (CCR) %>% return()
@@ -469,7 +462,7 @@ numeroCaracteresDoc         <- function(documento){
                           "6" = "11")
   return(n_caracteres)
 }
-procesarErrorDocumentoIdent <- function(ruta, BD = evalFile(ruta)){
+procesarErrorDocumentoIdent <- function(ruta, BD = setBD(ruta)){
   verificar_documento <- BD %>% rowwise() %>% 
     mutate(detectarError =  switch (getBD(ruta),
                          BD01 = if_else(numeroCaracteresDoc(TID) == (nchar(NID) %>% toString()), "TRUE", "FALSE"),
@@ -481,7 +474,7 @@ procesarErrorDocumentoIdent <- function(ruta, BD = evalFile(ruta)){
 }
 
  #BD03A
-procesarErrorNumCredCobertura <- function(ruta, BD = evalFile(ruta)){
+procesarErrorNumCredCobertura <- function(ruta, BD = setBD(ruta)){
   BD %>% 
     filter(as.numeric(NCR) > 0, as.numeric(NRCL) == 0) %>%
     pull(getCodigoBD("BD03A")) %>%
@@ -521,13 +514,9 @@ CodigoErrorTipo3   <- function(ruta, campo){
   return(cod)
 }
 procesarErroresT3  <- function(ruta, errorBucket){
-  BD <- evalFile(ruta)
-  cols <- depurarColsErrorT1(ruta, errorBucket)
-  if (header %>% pull(Coopac) == "01138"){
-    cols <- tolower(cols)
-  }
+  BD <- setBD(ruta)
   
-  tb <- tibble(Columna    = cols) %>%
+  tb <- tibble(Columna    = depurarColsErrorT1(ruta, errorBucket)) %>%
     rowwise() %>%
     mutate(validarFechas = BD %>%
                              filter(dmy(cgrep(BD, Columna)[[1]]) %>% is.na() == TRUE) %>% 
@@ -553,12 +542,7 @@ getFechaCorte <- function(ruta){
     ceiling_date("month") - days(1)
   return(fecha_corte)
 }
-procesarErrorFechaDesembolso  <- function(ruta, BD =evalFile(ruta) ){
-  if (header %>% pull(Coopac) == "01138"){
-    error <- BD %>% filter((dmy(BD %>% pull(fot)) > getFechaCorte(ruta)) == TRUE) %>% 
-      pull(getCodigoBD("BD01")) 
-      return(error)
-  }
+procesarErrorFechaDesembolso  <- function(ruta, BD = setBD(ruta) ){
   error <- BD %>% filter((dmy(BD %>% pull(FOT)) > getFechaCorte(ruta)) == TRUE) %>% 
     pull(getCodigoBD("BD01")) 
   return(error)

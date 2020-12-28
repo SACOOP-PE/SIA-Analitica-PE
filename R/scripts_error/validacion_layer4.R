@@ -19,7 +19,7 @@ ejecutarValidacionLayer4 <- function(header, errorBucket){
   
   # ii. Errores tipo2 ----
   tb_error2 <- tb_main %>% filter(BDCC == "BD01") %>% rowwise() %>%
-    mutate(vf_Saldos             = procesarErrorSaldosNegativos(Ruta) %>% toString(),
+    mutate(vf_Saldos             = procesarErrorSaldosNegativos(Ruta, errorBucket) %>% toString(),
            vf_ModPagoCouta       = generarDetalleError2(Ruta, procesarErrorModalidadCouta(Ruta)),
            vf_MontoOtorgado      = generarDetalleError2(Ruta, procesarErrorMontoOtorgado(Ruta)),
            vf_DiasRetraso        = generarDetalleError2(Ruta, procesarErrorVencJudRetraso(Ruta)))

@@ -45,6 +45,7 @@ depurarColsSaldos <- function(ruta, saldos, errorBucket){
                       )
           ) %>% return()  
 }
+
 depurarColsErrorT1 <- function(ruta, errorBucket){
   filterError <- unlist(errorBucket %>% filter(Cod %in% c(201,203)) %>% pull(Detalle) %>% str_split(","))
   
