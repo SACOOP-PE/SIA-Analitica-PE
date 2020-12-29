@@ -25,7 +25,7 @@ ejecutarValidacionLayer3 <- function(header, errorBucket){
            IdProceso   = errorBucket %>% pull(IdProceso) %>% first(),
            Cod         = ifelse(Resultado == "ERROR",
                                 CodErrorCuadreContable(str_split(Capital, "_")[[1]][2]),0),
-           Descripcion =  getDescError(Cod)) %>%
+           Descripcion = getDescError(Cod)) %>%
     mutate(Detalle     = list(c(NombreArchivo, str_split(Capital,"_")[[1]][2], round(Saldo, digits =2)))) 
   
   errorBucket <- bind_rows(errorBucket, tb1 %>%

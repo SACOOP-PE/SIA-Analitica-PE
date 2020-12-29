@@ -20,8 +20,14 @@ listaErrores %>%
                                                                                               paste(alcanceGeneral,collapse = '|'))) == FALSE] %>%
            unique() %>% toString(),
          n_caracteres = nchar(Detalle)) %>%
-  select(Cod, Descripcion, ArchivosError, PeriodosError, n_caracteres) %>% view()
-
+  select(Cod, Descripcion, ArchivosError, PeriodosError, n_caracteres) %>% 
+  write.csv(paste0(paste(getwd(), "test/", sep = "/"),
+                   paste(header %>% pull(Coopac),
+                         getIdProceso(header),
+                         header %>% pull(PeriodoInicial),
+                         header %>% pull(PeriodoFinal),
+                         sep = "_"),
+                   "_listaErrore.csv"))
 ## Exportar observaciones (errores) en cvs ----
 saveObservacion <- function(codError){
   tb <- tibble(creditos_split = listaErrores %>% filter(Cod == 322) %>% pull(Detalle) %>% 
