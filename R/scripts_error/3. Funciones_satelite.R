@@ -295,7 +295,10 @@ getInfoTotal  <- function(carpeta, periodo, name_bd){
                    getArchivosExigibles(header)[str_detect(getArchivosExigibles(header), paste0(name_bd, "_", periodo))], 
                    sep = "/")
   
-  return(setBD(ruta_bd))
+  read_delim(ruta_bd,"\t",escape_double = FALSE, trim_ws = TRUE, col_names = TRUE,
+             col_types = cols(.default = "c"), progress = T, na = "NA" ) %>% 
+    na_if("") %>%
+    return()
 }
 getInfoCruce  <- function(carpeta, periodo, name_bd){
   BD <- getInfoTotal(carpeta, periodo, name_bd) %>%
