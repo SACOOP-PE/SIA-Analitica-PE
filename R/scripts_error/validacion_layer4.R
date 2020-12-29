@@ -7,10 +7,11 @@ ejecutarValidacionLayer4 <- function(header, errorBucket){
            BDCC    = getBD(Ruta))
 
   # i. Errores tipo1 ----
-  exigiblesT1 <- restriccionArchivosErroresLayer4(header, errorBucket, exigibles, "tipo1")
+  exigiblesT1   <- restriccionArchivosErroresLayer4(header, errorBucket, exigibles, "tipo1")
   errorBucket_i <- errorBucket
+  
    for (i in 1:length(exigiblesT1)){
-     ruta_i         <- getRuta(carpeta, exigiblesT1[i])
+     ruta_i        <- getRuta(carpeta, exigiblesT1[i])
      errorBucket_i <- procesarErroresT1(ruta_i, errorBucket_i)
     }
    errorBucket <- errorBucket_i %>% group_by(Coopac, NombCoopac, Carpeta, IdProceso, Cod, Descripcion) %>%
@@ -74,10 +75,11 @@ ejecutarValidacionLayer4 <- function(header, errorBucket){
       }
     
   # iii. Errores tipo3 ----
-  exigiblesT3 <- restriccionArchivosErroresLayer4(header, errorBucket, exigibles[str_detect(exigibles, paste(c("BD01","BD02A","BD02B","BD04"), collapse = '|'))], "tipo3")
+  exigiblesT3    <- restriccionArchivosErroresLayer4(header, errorBucket, exigibles[str_detect(exigibles, paste(c("BD01","BD02A","BD02B","BD04"), collapse = '|'))], "tipo3")
   errorBucket_ii <- errorBucket
+  
     for (ii in 1:length(exigiblesT3)){
-      ruta_ii         <- getRuta(carpeta, exigiblesT3[ii])
+      ruta_ii        <- getRuta(carpeta, exigiblesT3[ii])
       errorBucket_ii <- procesarErroresT3(ruta_ii, errorBucket_ii)
     }
     errorBucket <- errorBucket_ii %>% group_by(Coopac, NombCoopac, Carpeta, IdProceso, Cod, Descripcion) %>% 
