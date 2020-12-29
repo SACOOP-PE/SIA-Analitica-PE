@@ -28,7 +28,6 @@ ejecutarValidacionLayer3 <- function(header, errorBucket){
            Descripcion = getDescError(Cod)) %>%
     mutate(Detalle     = list(c(NombreArchivo, str_split(Capital,"_")[[1]][2], round(Saldo, digits =2)))) 
   
-  view(tb1)
   errorBucket <- bind_rows(errorBucket, tb1 %>%
                               filter(Resultado == "ERROR") %>%
                               select(Coopac, NombCoopac, Carpeta, IdProceso, Cod, Descripcion, Detalle))
