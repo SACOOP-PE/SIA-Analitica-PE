@@ -55,7 +55,7 @@ ejecutarValidacionLayer3 <- function(header, errorBucket){
   }
   
   # iii. cruces BD01/BD02A, BD03A/BD03B ----
-  cruce1 <- tibble(Periodo = restriccionPeriodos(errorBucket, "BD01", "BD02A", c("CCR", "CCR_C"))) %>% rowwise() %>%
+  cruce1 <- tibble(Periodo = restriccionPeriodos(errorBucket, "BD01", "BD02A", "CCR")) %>% rowwise() %>%
     mutate(OpFaltantes_BD01  = realizarCruce(carpeta, Periodo, "BD02A", "BD01"),
            OpFaltantes_BD02A = realizarCruce(carpeta, Periodo, "BD01", "BD02A"))
   
