@@ -280,6 +280,15 @@ operaciones_vacias     <- function(ruta, BD = setBD(ruta)){
     sapply(function(x) sum(is.na(x))) %>% return()
 }
 
+getCodigoBD   <- function(bd){
+  campo <- case_when(bd == "BD01"  ~ "CCR",
+                     bd == "BD02A" ~ "CCR",
+                     bd == "BD02B" ~ "CCR_C",
+                     bd == "BD03A" ~ "CODGR",
+                     bd == "BD03B" ~ "CODGR",
+                     bd == "BD04"  ~ "CCR_C")
+  return(campo)
+}
 getInfoTotal  <- function(carpeta, periodo, name_bd){
   ruta_bd <- paste(carpeta,
                    periodo,
@@ -288,15 +297,6 @@ getInfoTotal  <- function(carpeta, periodo, name_bd){
                    sep = "/")
   
   return(setBD(ruta_bd))
-}
-getCodigoBD   <- function(bd){
-    campo <- case_when(bd == "BD01"  ~ "CCR",
-                       bd == "BD02A" ~ "CCR",
-                       bd == "BD02B" ~ "CCR_C",
-                       bd == "BD03A" ~ "CODGR",
-                       bd == "BD03B" ~ "CODGR",
-                       bd == "BD04"  ~ "CCR_C")
-    return(campo)
 }
 getInfoCruce  <- function(carpeta, periodo, name_bd){
   BD <- getInfoTotal(carpeta, periodo, name_bd) %>%
