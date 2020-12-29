@@ -292,8 +292,7 @@ getCodigoBD   <- function(bd){
 getInfoTotal  <- function(carpeta, periodo, name_bd){
   ruta_bd <- paste(carpeta,
                    periodo,
-                   getArchivosExigibles(header)[str_detect(getArchivosExigibles(header),
-                                                           paste0(name_bd, "_", periodo))], 
+                   getArchivosExigibles(header)[str_detect(getArchivosExigibles(header), paste0(name_bd, "_", periodo))], 
                    sep = "/")
   
   return(setBD(ruta_bd))
