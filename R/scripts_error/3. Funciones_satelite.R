@@ -315,6 +315,15 @@ realizarCruce <- function(carpeta, periodo, nameBD1, nameBD2){
 
 ## Funciones Ly4----
 # Validaciones a campos numéricos específicos de cada BD    (errores tipo1)----
+detectarVacios <- function(ruta,campo){
+  BD    <- evalFile(ruta) 
+  vacio <- BD %>% 
+    filter(is.na(cgrep(BD, campo))) %>% 
+    pull(getCodigoBD(getBD(ruta)))
+   
+  return(vacio)
+}
+
 DigitosBD01  <- function(campo){
   digitos <- switch (campo,
                      TID = {c(1,2,3,4,5,6,7)},
@@ -422,7 +431,7 @@ procesarErroresT1  <- function(ruta, errorBucket){
 # Validaciones condicionales relacionadas con otros campos  (errores tipo2)----
  #BD01
 procesarErrorSaldosNegativos <- function(ruta, errorBucket){
-  BD <- setBD(ruta)
+  BD <- evalFile(ruta)
   saldosCols <- c("SKCR", "PCI", "KVI", "KRF", "KVE", "KJU", "SIN", "SID", "SIS", "DGR", "NCPR", "NCPA", "TPINT", "NRPRG")
 
   tb <- tibble(Columna = depurarColsSaldos(ruta, saldosCols, errorBucket)) %>% rowwise() %>%
@@ -460,15 +469,31 @@ numeroCaracteresDoc         <- function(documento){
                           "6" = "11")
   return(n_caracteres)
 }
-procesarErrorDocumentoIdent <- function(ruta, BD = setBD(ruta)){
-  verificar_documento <- BD %>% rowwise() %>% 
-    mutate(detectarError =  switch (getBD(ruta),
-                         BD01 = if_else(numeroCaracteresDoc(TID) == (nchar(NID) %>% toString()), "TRUE", "FALSE"),
-                         BD04 = if_else(numeroCaracteresDoc(TID_C) == (nchar(NID_C) %>% toString()), "TRUE", "FALSE"))) %>%
-    filter(detectarError == "FALSE") %>% 
-    pull(getCodigoBD(getBD(ruta))) 
-  
-  generarDetalleError2(ruta, verificar_documento) %>% return()
+procesarErrorDocumentoIdent <- function(ruta, BD = evalFile(ruta)){
+  if (getBD(ruta) =="BD01"){
+    verificar_documento <- BD %>%
+      filter((CCR %in% detectarVacios(ruta, "TID")) == FALSE) %>% 
+      rowwise() %>%
+      mutate(detectarError = if_else(numeroCaracteresDoc(TID) == (nchar(NID) %>% toString()), "TRUE", "FALSE")
+             ) %>%
+      filter(detectarError == "FALSE") %>%
+      pull(getCodigoBD(getBD(ruta))) %>%
+      union(detectarVacios(ruta, "TID")) 
+    
+    return(verificar_documento)
+  }
+  if (getBD(ruta) =="BD04"){
+    verificar_documento <- BD %>%
+      filter((CCR_C %in% detectarVacios(ruta, "TID_C")) == FALSE) %>% 
+      rowwise() %>%
+      mutate(detectarError = if_else(numeroCaracteresDoc(TID_C) == (nchar(NID_C) %>% toString()), "TRUE", "FALSE")
+      ) %>%
+      filter(detectarError == "FALSE") %>%
+      pull(getCodigoBD(getBD(ruta))) %>%
+      union(detectarVacios(ruta, "TID_C")) 
+    
+    return(verificar_documento)
+  }
 }
 
  #BD03A

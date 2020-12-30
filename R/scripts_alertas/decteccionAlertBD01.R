@@ -19,7 +19,7 @@ ejecutarDecteccionAlertBD01 <-function(header, listaErrores, alertBucket){
   codigoAlerta  <- 2003
   
   for (i in 1:19){
-    alert_i <- alert2003 <- paste(procesarAlertas(exigibles, "BD01", codigoAlerta), sep= ",")
+    alert_i <- paste(procesarAlertas(exigibles, "BD01", codigoAlerta), sep= ",")
     alert_i <- alert_i[alert_i != "character(0)"]
     
     if(length(alert_i) > 0){
