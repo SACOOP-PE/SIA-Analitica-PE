@@ -103,14 +103,19 @@ saveObservaciones <- function(){
   }
 }
 
-tibble(creditos_split = listaErrores %>% filter(Cod == 401) %>% pull(Detalle) %>% 
+tibble(creditos_split = listaErrores %>% filter(Cod == 476) %>% pull(Detalle) %>% 
          strsplit(split = ")") %>% unlist(),
-       PeriodosError  = str_extract(creditos_split, paste(alcanceGeneral, collapse = '|')) %>% 
-         unique()) %>%
+       PeriodosError  = str_extract(creditos_split, paste(alcanceGeneral, collapse = '|')) %>% unique()) %>%
   rowwise() %>% 
   mutate(ArchivosError = str_extract(creditos_split,
                                      getArchivosExigibles(header))[is.na(str_extract(creditos_split,
                                                                                      getArchivosExigibles(header))) == FALSE] %>%
-           unique() %>% toString()) %>% View()
-         
+           unique() %>% toString(),
+         Creditos = unlist(str_split(gsub("\\(", "",gsub(ArchivosError, "",creditos_split)), pattern = ","))[ unlist(str_split(gsub("\\(", "",gsub(ArchivosError, "",creditos_split)), pattern = ","))!= ""] %>% 
+           toString(),
+         nCreditos = str_split(Creditos, pattern = ",") %>% unlist() %>% length()
+         ) %>% 
+  select(PeriodosError, ArchivosError, Creditos, nCreditos) %>% 
+  View()
+
 
