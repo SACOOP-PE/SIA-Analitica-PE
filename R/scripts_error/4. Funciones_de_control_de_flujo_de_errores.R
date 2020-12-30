@@ -14,14 +14,14 @@ getArchivosError      <- function(header, errorBucket, codError, col){
     return()
 }
 getArchivosSinErrores <- function(header, errorBucket, codError, col){
-  descarte <- setdiff(getArchivosError(header, errorBucket, c(201, 203), "CCRF"),
-                      getArchivosError(header, errorBucket, c(201, 203), "CCR")) %>% list()
-  if (col == "CCR" | 
-      col == "CCRF" & descarte == "character(0)") {
+  if (col == "CCR" & 
+      all(getArchivosError(header, errorBucket, c(201, 203), "CCR") == getArchivosError(header, errorBucket, c(201, 203), "CCRF"))== TRUE &
+      length(getArchivosError(header, errorBucket, c(201, 203), "CCR")) > 0){
+    
     errorCCRF <- getArchivosError(header, errorBucket, c(201, 203), "CCRF")
-    archivos <- setdiff(getArchivosExigibles(header),
-                        getArchivosError(header, errorBucket, codError, col)) %>% 
-      union(errorCCRF) %>% unique()
+    archivos  <- setdiff(getArchivosExigibles(header),
+                         getArchivosError(header, errorBucket, codError, col)) %>% 
+                  union(errorCCRF) %>% unique()
     
     archivos <- intersect(getArchivosExigibles(header), 
                           archivos) %>% unique()
@@ -33,13 +33,9 @@ getArchivosSinErrores <- function(header, errorBucket, codError, col){
   return(archivos)
 }
 restriccionPeriodos   <- function(errorBucket, BD1, BD2, columnas){
-  descarte <- setdiff(getArchivosError(header, errorBucket, c(201, 203), "CCRF"),
-                      getArchivosError(header, errorBucket, c(201, 203), "CCR")) %>% list()
-  
-  if (columnas == "CCR" | 
-      columnas == "CCRF" & 
-      descarte == "character(0)"){
-    
+  if (columnas == "CCR" & 
+      all(getArchivosError(header, errorBucket, c(201, 203), "CCR") == getArchivosError(header, errorBucket, c(201, 203), "CCRF"))== TRUE &
+      length(getArchivosError(header, errorBucket, c(201, 203), "CCR")) > 0){
     filtrarArchivos <- getArchivosError(header, errorBucket, c(201, 203), "CCR")
     filtrarArchivos <- union(filtrarArchivos, 
                              getArchivosExigibles(header)[str_detect(getArchivosExigibles(header), "BD02A")])
@@ -53,7 +49,7 @@ restriccionPeriodos   <- function(errorBucket, BD1, BD2, columnas){
   }
   
   filtrarArchivos <- getArchivosSinErrores(header, errorBucket, c(201, 203), columnas)
-  archivosCruce  <- filtrarArchivos[str_detect(filtrarArchivos, paste(c(BD1, BD2), collapse = '|'))]
+  archivosCruce   <- filtrarArchivos[str_detect(filtrarArchivos, paste(c(BD1, BD2), collapse = '|'))]
   
   PeriodosFiltro <- tibble(Periodos =  str_extract(archivosCruce, paste(as.character(alcanceGeneral),collapse = '|'))) %>%
                       group_by(Periodos) %>%
@@ -147,5 +143,3 @@ restriccionArchivosErroresLayer4 <- function(header, errorBucket, exigibles, tip
     pull(NombreArchivo) %>%
     return()
 }
-
-
