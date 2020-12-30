@@ -60,15 +60,17 @@ ejecutarValidacionLayer4 <- function(header, errorBucket){
       errorBucket <- errorBucket %>%
         addError(466, getDescError(466), (error466[error466 != "character(0)"]) %>% toString())
       }
-    if (length(errorCodDeudor[errorCodDeudor != "character(0)"]) > 0){
+    if (length(error467[error467 != "character(0)"]) > 0){
       errorBucket <- errorBucket %>%
-        addError(467, getDescError(467), (errorCodDeudor[errorCodDeudor != "character(0)"]) %>% toString())
+        addError(467, getDescError(467), (error467[error467 != "character(0)"]) %>% toString())
       }
     
   # iii. Errores tipo3 ----
-  exigiblesT3    <- restriccionArchivosErroresLayer4(header, errorBucket, exigibles[str_detect(exigibles, paste(c("BD01","BD02A","BD02B","BD04"), collapse = '|'))], "tipo3")
+  exigiblesT3    <- restriccionArchivosErroresLayer4(header,
+                                                     errorBucket, 
+                                                     exigibles[str_detect(exigibles, paste(c("BD01","BD02A","BD02B","BD04"), collapse = '|'))],
+                                                     "tipo3")
   errorBucket_ii <- errorBucket
-  
     for (ii in 1:length(exigiblesT3)){
       ruta_ii        <- getRuta(carpeta, exigiblesT3[ii])
       errorBucket_ii <- procesarErroresT3(ruta_ii, errorBucket_ii)
