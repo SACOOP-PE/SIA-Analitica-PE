@@ -470,8 +470,7 @@ procesarErrorDocumentoIdent <- function(ruta, BD = evalFile(ruta)){
     verificar_documento <- BD %>%
       filter((CCR %in% detectarVacios(ruta, "TID")) == FALSE) %>% 
       rowwise() %>%
-      mutate(detectarError = if_else(numeroCaracteresDoc(TID) == (nchar(NID) %>% toString()), "TRUE", "FALSE")
-             ) %>%
+      mutate(detectarError = if_else(numeroCaracteresDoc(TID) == (nchar(NID) %>% toString()), "TRUE", "FALSE")) %>%
       filter(detectarError == "FALSE") %>%
       pull(getCodigoBD(getBD(ruta))) %>%
       union(detectarVacios(ruta, "TID")) 
@@ -482,8 +481,7 @@ procesarErrorDocumentoIdent <- function(ruta, BD = evalFile(ruta)){
     verificar_documento <- BD %>%
       filter((CCR_C %in% detectarVacios(ruta, "TID_C")) == FALSE) %>% 
       rowwise() %>%
-      mutate(detectarError = if_else(numeroCaracteresDoc(TID_C) == (nchar(NID_C) %>% toString()), "TRUE", "FALSE")
-      ) %>%
+      mutate(detectarError = if_else(numeroCaracteresDoc(TID_C) == (nchar(NID_C) %>% toString()), "TRUE", "FALSE")) %>%
       filter(detectarError == "FALSE") %>%
       pull(getCodigoBD(getBD(ruta))) %>%
       union(detectarVacios(ruta, "TID_C")) 

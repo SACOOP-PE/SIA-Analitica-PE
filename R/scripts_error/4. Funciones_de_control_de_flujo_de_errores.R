@@ -63,11 +63,10 @@ restriccionPeriodos   <- function(errorBucket, BD1, BD2, columnas){
 depurarColsSaldos <- function(ruta, saldos, errorBucket){
   filterError <- unlist(listaErrores %>% filter(Cod %in% c(201,203)) %>% pull(Detalle) %>% str_split(","))
   
-  setdiff(saldos,
-          str_extract(filterError[str_detect(filterError, getNombreArchivo(ruta))],
-                      paste(unlist(getColumnasOM("BD01")), collapse = '|')
-                      )
-          ) %>% return()  
+  saldos <- setdiff(saldos,
+                    str_extract(filterError[str_detect(filterError, getNombreArchivo(ruta))],
+                                paste(unlist(getColumnasOM("BD01")), collapse = '|')))
+  return(saldos)  
 }
 
 getArchivosExigiblesErrores <- function(errorBucket, exigibles, codigoError){
@@ -107,12 +106,11 @@ procesarErroresT2           <- function(errorBucket, exigibles, codigoError){
     resultado <- list("character(0)") 
     return(resultado)
   }
-  tb <- tibble(NombreArchivo = archivos) %>% rowwise() %>% 
-    mutate(Ruta = getRuta(getCarpeta(header), NombreArchivo),
-           Errores = generarDetalleError2(Ruta, elegirErrorLayer4(codigoError, Ruta))
-    ) %>% 
+  resultado <- tibble(NombreArchivo = archivos) %>% rowwise() %>% 
+    mutate(Ruta    = getRuta(getCarpeta(header), NombreArchivo),
+           Errores = generarDetalleError2(Ruta, elegirErrorLayer4(codigoError, Ruta))) %>% 
     pull(Errores)
-  return(tb)
+  return(resultado)
 }
 
 depurarColsErrorT1 <- function(ruta, errorBucket){
