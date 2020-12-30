@@ -61,7 +61,7 @@ restriccionPeriodos   <- function(errorBucket, BD1, BD2, columnas){
 
 #layer 4 (tipo 1, 2, 3)
 depurarColsSaldos <- function(ruta, saldos, errorBucket){
-  filterError <- unlist(listaErrores %>% filter(Cod %in% c(201,203)) %>% pull(Detalle) %>% str_split(","))
+  filterError <- unlist(errorBucket %>% filter(Cod %in% c(201,203)) %>% pull(Detalle) %>% str_split(","))
   
   saldos <- setdiff(saldos,
                     str_extract(filterError[str_detect(filterError, getNombreArchivo(ruta))],
@@ -72,7 +72,7 @@ depurarColsSaldos <- function(ruta, saldos, errorBucket){
 getArchivosExigiblesErrores <- function(errorBucket, exigibles, codigoError){
   if (codigoError >= 462 & codigoError <= 464) {
     archivos <- switch (toString(codigoError),
-                        "462"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("ESAM","NCPR", "PCUO")),
+                        "462"= getArchivosSinErrores(header, errorBucket, c(201, 203), c("ESAM","NCPR", "PCUO")),
                         "463"= getArchivosSinErrores(header, errorBucket, c(201, 203), c("MORG", "SKCR")),
                         "464"= getArchivosSinErrores(header, errorBucket, c(201, 203), c("KVE", "DAK", "KJU"))) %>% 
       intersect(exigibles[str_detect(exigibles, "BD01")])
