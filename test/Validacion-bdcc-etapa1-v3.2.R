@@ -42,7 +42,7 @@ listaErrores %>%
            unique() %>% toString()
          ) %>%
   view()
-  
+
 ## Exportar observaciones (errores) en cvs ----
 saveObservacion <- function(codError){
   tb <- tibble(creditos_split = listaErrores %>% filter(Cod == 322) %>% pull(Detalle) %>% 
