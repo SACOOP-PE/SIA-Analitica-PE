@@ -45,7 +45,7 @@ listaErrores %>%
 
 ## Exportar observaciones (errores) en cvs ----
 saveObservacion   <- function(codError){
-  tb <- tibble(creditos_split = listaErrores %>% filter(Cod == 322) %>% pull(Detalle) %>% 
+  tb <- tibble(creditos_split = listaErrores %>% filter(Cod == codError) %>% pull(Detalle) %>% 
                                   strsplit(split = ")") %>% unlist(),
                PeriodosError  = str_extract(creditos_split, paste(alcanceGeneral, collapse = '|')) %>% 
                 unique()) %>%
@@ -102,3 +102,15 @@ saveObservaciones <- function(){
                       ".csv"))
   }
 }
+
+tibble(creditos_split = listaErrores %>% filter(Cod == 401) %>% pull(Detalle) %>% 
+         strsplit(split = ")") %>% unlist(),
+       PeriodosError  = str_extract(creditos_split, paste(alcanceGeneral, collapse = '|')) %>% 
+         unique()) %>%
+  rowwise() %>% 
+  mutate(ArchivosError = str_extract(creditos_split,
+                                     getArchivosExigibles(header))[is.na(str_extract(creditos_split,
+                                                                                     getArchivosExigibles(header))) == FALSE] %>%
+           unique() %>% toString()) %>% View()
+         
+
