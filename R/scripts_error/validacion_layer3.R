@@ -55,28 +55,34 @@ ejecutarValidacionLayer3 <- function(header, errorBucket){
   }
   
   # iii. cruces BD01/BD02A, BD03A/BD03B ----
-  cruce1 <- tibble(Periodo = restriccionPeriodos(errorBucket, "BD01", "BD02A", "CCR")) %>% rowwise() %>%
-    mutate(OpFaltantes_BD01  = realizarCruce(carpeta, Periodo, "BD02A", "BD01"),
-           OpFaltantes_BD02A = realizarCruce(carpeta, Periodo, "BD01", "BD02A"))
-  
-  cruce2 <- tibble(Periodo = restriccionPeriodos(errorBucket, "BD03A", "BD03B", "CODGR")) %>% rowwise() %>%
-    mutate(GaranFaltantes_BD03A = realizarCruce(carpeta, Periodo, "BD03B", "BD03A"))
-  
-  f_bd01  <- (paste(cruce1 %>% rowwise() %>% pull(OpFaltantes_BD01)    , collapse = ",") %>% strsplit(","))[[1]]
-  f_bd02A <- (paste(cruce1 %>% rowwise() %>% pull(OpFaltantes_BD02A)   , collapse = ",") %>% strsplit(","))[[1]]
-  f_bd03A <- (paste(cruce2 %>% rowwise() %>% pull(GaranFaltantes_BD03A), collapse = ",") %>% strsplit(","))[[1]]
-  
-  if(length(f_bd01 [f_bd01  != "character(0)"]) > 0){
-    errorBucket <- errorBucket %>%
-      addError(321,getDescError(321), (f_bd01[f_bd01 != "character(0)"]) %>% toString())
+  if (length(restriccionPeriodos(errorBucket, "BD01", "BD02A", "CCR")) >0){
+    cruce1 <- tibble(Periodo = restriccionPeriodos(errorBucket, "BD01", "BD02A", "CCR")) %>% rowwise() %>%
+      mutate(OpFaltantes_BD01  = realizarCruce(carpeta, Periodo, "BD02A", "BD01"),
+             OpFaltantes_BD02A = realizarCruce(carpeta, Periodo, "BD01", "BD02A"))
+    
+    f_bd01  <- (paste(cruce1 %>% rowwise() %>% pull(OpFaltantes_BD01) , collapse = ",") %>% strsplit(","))[[1]]
+    f_bd02A <- (paste(cruce1 %>% rowwise() %>% pull(OpFaltantes_BD02A), collapse = ",") %>% strsplit(","))[[1]]
+    
+    if(length(f_bd01 [f_bd01  != "character(0)"]) > 0){
+      errorBucket <- errorBucket %>%
+        addError(321,getDescError(321), (f_bd01[f_bd01 != "character(0)"]) %>% toString())
+    }
+    if(length(f_bd02A[f_bd02A != "character(0)"]) > 0){
+      errorBucket <- errorBucket %>%
+        addError(322,getDescError(322), (f_bd02A[f_bd02A != "character(0)"]) %>% toString())
+    }
+    
   }
-  if(length(f_bd02A[f_bd02A != "character(0)"]) > 0){
-    errorBucket <- errorBucket %>%
-      addError(322,getDescError(322), (f_bd02A[f_bd02A != "character(0)"]) %>% toString())
-  }
-  if(length(f_bd03A[f_bd03A != "character(0)"]) > 0){
-    errorBucket <- errorBucket %>%
-      addError(323,getDescError(323), (f_bd03A[f_bd03A != "character(0)"]) %>% toString())
+  if (length(restriccionPeriodos(errorBucket, "BD03A", "BD03B", "CODGR")) >0){
+    cruce2 <- tibble(Periodo = restriccionPeriodos(listaErrores, "BD03A", "BD03B", "CODGR")) %>% rowwise() %>%
+      mutate(GaranFaltantes_BD03A = realizarCruce(carpeta, Periodo, "BD03B", "BD03A"))
+    
+   f_bd03A <- (paste(cruce2 %>% rowwise() %>% pull(GaranFaltantes_BD03A), collapse = ",") %>% strsplit(","))[[1]]
+   if(length(f_bd03A[f_bd03A != "character(0)"]) > 0){
+      errorBucket <- errorBucket %>%
+        addError(323,getDescError(323), (f_bd03A[f_bd03A != "character(0)"]) %>% toString())
+   } 
+   
   }
   
   print(paste0("El layer 3 terminó: ", format(Sys.time(), "%a %b %d %X %Y")))

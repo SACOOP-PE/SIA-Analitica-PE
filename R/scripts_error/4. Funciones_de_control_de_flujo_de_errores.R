@@ -91,7 +91,7 @@ getArchivosExigiblesErrores <- function(errorBucket, exigibles, codigoError){
     return(archivos)
   }
 }
-elegirErrorLayer4 <- function(codigoError, ruta){
+elegirErrorLayer4           <- function(codigoError, ruta){
   error <- switch (toString(codigoError),
                    "462"= procesarErrorModalidadCouta(ruta),
                    "463"= procesarErrorMontoOtorgado(ruta),
@@ -100,7 +100,7 @@ elegirErrorLayer4 <- function(codigoError, ruta){
                    "466"= procesarErrorNumCredCobertura(ruta))
   return(error)
 }
-procesarErroresT2  <- function(errorBucket, exigibles, codigoError){
+procesarErroresT2           <- function(errorBucket, exigibles, codigoError){
   archivos <- getArchivosExigiblesErrores(errorBucket, exigibles, codigoError)
   
   if (list(archivos) == "character(0)"){
