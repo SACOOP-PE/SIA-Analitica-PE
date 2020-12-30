@@ -59,7 +59,7 @@ restriccionPeriodos   <- function(errorBucket, BD1, BD2, columnas){
   return(PeriodosFiltro)
 }
 
-#layer 4 (tipo 1 y 3)
+#layer 4 (tipo 1, 2, 3)
 depurarColsSaldos <- function(ruta, saldos, errorBucket){
   filterError <- unlist(listaErrores %>% filter(Cod %in% c(201,203)) %>% pull(Detalle) %>% str_split(","))
   
