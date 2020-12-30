@@ -47,7 +47,7 @@ listaErrores %>%
 saveObservacion   <- function(codError){
   tb <- tibble(creditos_split = listaErrores %>% filter(Cod == 322) %>% pull(Detalle) %>% 
                                   strsplit(split = ")") %>% unlist(),
-              PeriodosError  = str_extract(creditos_split, paste(alcanceGeneral, collapse = '|')) %>% 
+               PeriodosError  = str_extract(creditos_split, paste(alcanceGeneral, collapse = '|')) %>% 
                 unique()) %>%
     rowwise() %>% 
     mutate(creditosPeriodo = str_extract(unlist(creditos_split %>% str_split(pattern = ",")),
