@@ -27,7 +27,22 @@ listaErrores %>%
                          header %>% pull(PeriodoInicial),
                          header %>% pull(PeriodoFinal),
                          sep = "_"),
-                   "_listaErrore.csv"))
+                   "_listaErrores.csv"))
+
+listaErrores %>%
+  mutate(Detalle = map_chr(Detalle, ~ .[[1]] %>% str_c(collapse = ", "))) %>%
+  rowwise() %>% 
+  filter(Cod %in% c(201,202,203)) %>% 
+  mutate(Campos = str_extract(unlist(str_split(Detalle, ",")),
+                              paste(unique(union(unlist(getColumnasOM("BD01")), unlist(getColumnasOM("BD02A"))) %>%
+                                             union(unlist(getColumnasOM("BD02B"))) %>% 
+                                             union(unlist(getColumnasOM("BD03A"))) %>% 
+                                             union(unlist(getColumnasOM("BD03B"))) %>% 
+                                             union(unlist(getColumnasOM("BD04")))),collapse = '|')) %>%
+           unique() %>% toString()
+         ) %>%
+  view()
+  
 ## Exportar observaciones (errores) en cvs ----
 saveObservacion <- function(codError){
   tb <- tibble(creditos_split = listaErrores %>% filter(Cod == 322) %>% pull(Detalle) %>% 

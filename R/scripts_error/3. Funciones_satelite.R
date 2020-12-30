@@ -407,7 +407,7 @@ CodigoErrorTipo1   <- function(ruta, campo){
   return(cod)
 }
 procesarErroresT1  <- function(ruta, errorBucket){
-  BD <- setBD(ruta)
+  BD <- evalFile(ruta)
   
   tb <- tibble(Columna = depurarColsErrorT1(ruta, errorBucket)) %>%
     rowwise() %>%
@@ -537,7 +537,7 @@ CodigoErrorTipo3   <- function(ruta, campo){
   return(cod)
 }
 procesarErroresT3  <- function(ruta, errorBucket){
-  BD <- setBD(ruta)
+  BD <- evalFile(ruta)
   
   tb <- tibble(Columna    = depurarColsErrorT3(ruta, errorBucket)) %>%
     rowwise() %>%
@@ -565,7 +565,7 @@ getFechaCorte <- function(ruta){
     ceiling_date("month") - days(1)
   return(fecha_corte)
 }
-procesarErrorFechaDesembolso  <- function(ruta, BD = setBD(ruta) ){
+procesarErrorFechaDesembolso  <- function(ruta, BD = evalFile(ruta) ){
   error <- BD %>% filter((dmy(BD %>% pull(FOT)) > getFechaCorte(ruta)) == TRUE) %>% 
     pull(getCodigoBD("BD01")) 
   return(error)

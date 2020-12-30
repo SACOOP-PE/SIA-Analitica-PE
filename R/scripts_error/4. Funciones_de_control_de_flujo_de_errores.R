@@ -74,6 +74,51 @@ depurarColsSaldos <- function(ruta, saldos, errorBucket){
           ) %>% return()  
 }
 
+getArchivosExigiblesErrores <- function(errorBucket, exigibles, codigoError){
+  if (codigoError >= 462 & codigoError <= 464) {
+    archivos <- switch (toString(codigoError),
+                        "462"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("ESAM","NCPR", "PCUO")),
+                        "463"= getArchivosSinErrores(header, errorBucket, c(201, 203), c("MORG", "SKCR")),
+                        "464"= getArchivosSinErrores(header, errorBucket, c(201, 203), c("KVE", "DAK", "KJU"))) %>% 
+      intersect(exigibles[str_detect(exigibles, "BD01")])
+    return(archivos)
+  }
+  if (codigoError == 465){
+    archivos <- getArchivosSinErrores(header, errorBucket, c(201, 203), c("TID", "NID", "TID_C", "NID_C")) %>% 
+      intersect(exigibles[str_detect(exigibles,
+                                     paste(c("BD01","BD04"), collapse = '|'))])
+    return(archivos)
+  }
+  if (codigoError == 466){
+    archivos <- getArchivosSinErrores(header, errorBucket, c(201, 203), c("NCR", "NRCL")) %>% 
+      intersect(exigibles[str_detect(exigibles, "BD03A")])
+    return(archivos)
+  }
+}
+elegirErrorLayer4 <- function(codigoError, ruta){
+  error <- switch (toString(codigoError),
+                   "462"= procesarErrorModalidadCouta(ruta),
+                   "463"= procesarErrorMontoOtorgado(ruta),
+                   "464"= procesarErrorVencJudRetraso(ruta),
+                   "465"= procesarErrorDocumentoIdent(ruta),
+                   "466"= procesarErrorNumCredCobertura(ruta))
+  return(error)
+}
+procesarErroresT2  <- function(errorBucket, exigibles, codigoError){
+  archivos <- getArchivosExigiblesErrores(errorBucket, exigibles, codigoError)
+  
+  if (list(archivos) == "character(0)"){
+    resultado <- list("character(0)") 
+    return(resultado)
+  }
+  tb <- tibble(NombreArchivo = archivos) %>% rowwise() %>% 
+    mutate(Ruta = getRuta(getCarpeta(header), NombreArchivo),
+           Errores = generarDetalleError2(Ruta, elegirErrorLayer4(codigoError, Ruta))
+    ) %>% 
+    pull(Errores)
+  return(tb)
+}
+
 depurarColsErrorT1 <- function(ruta, errorBucket){
   filterError <- unlist(errorBucket %>% filter(Cod %in% c(201,203)) %>% pull(Detalle) %>% str_split(","))
   
@@ -103,47 +148,4 @@ restriccionArchivosErroresLayer4 <- function(header, errorBucket, exigibles, tip
     return()
 }
 
-getArchivosExigiblesErrores <- function(errorBucket, exigibles, codigoError){
-  if (codigoError >= 462 & codigoError <= 464) {
-    archivos <- switch (toString(codigoError),
-                        "462"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("ESAM","NCPR", "PCUO")),
-                        "463"= getArchivosSinErrores(header, errorBucket, c(201, 203), c("MORG", "SKCR")),
-                        "464"= getArchivosSinErrores(header, errorBucket, c(201, 203), c("KVE", "DAK", "KJU"))) %>% 
-      intersect(exigibles[str_detect(exigibles, "BD01")])
-    return(archivos)
-  }
-  if (codigoError == 465){
-    archivos <- getArchivosSinErrores(header, errorBucket, c(201, 203), c("TID", "NID", "TID_C", "NID_C")) %>% 
-      intersect(exigibles[str_detect(exigibles,
-                                     paste(c("BD01","BD04"), collapse = '|'))])
-    return(archivos)
-  }
-  if (codigoError == 466){
-    archivos <- getArchivosSinErrores(header, errorBucket, c(201, 203), c("NCR", "NRCL")) %>% 
-      intersect(exigibles[str_detect(exigibles, "BD03A")])
-    return(archivos)
-  }
-}
-elegirErrorLayer4 <- function(codigoError, ruta){
- error <- switch (toString(codigoError),
-                  "462"= procesarErrorModalidadCouta(ruta),
-                  "463"= procesarErrorMontoOtorgado(ruta),
-                  "464"= procesarErrorVencJudRetraso(ruta),
-                  "465"= procesarErrorDocumentoIdent(ruta),
-                  "466"= procesarErrorNumCredCobertura(ruta))
- return(error)
-}
-procesarErroresT2  <- function(errorBucket, exigibles, codigoError){
-  archivos <- getArchivosExigiblesErrores(errorBucket, exigibles, codigoError)
-  
-  if (list(archivos) == "character(0)"){
-    resultado <- list("character(0)") 
-    return(resultado)
-  }
-  tb <- tibble(NombreArchivo = archivos) %>% rowwise() %>% 
-    mutate(Ruta = getRuta(getCarpeta(header), NombreArchivo),
-           Errores = generarDetalleError2(Ruta, elegirErrorLayer4(codigoError, Ruta))
-           ) %>% 
-    pull(Errores)
-  return(tb)
-}
+
