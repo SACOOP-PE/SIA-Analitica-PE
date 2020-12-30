@@ -184,12 +184,6 @@ generarDetalleError4 <- function(periodo, errorCruce){
   return(paste_error)
 }
 
-setBD <- function(ruta){
-  BD <- evalFile(ruta) 
-  colnames(BD) <- toupper(colnames(BD))
-  return(BD)
-}
-
 ## Funciones Ly1----
 getDuplicados <- function(carpeta, exigibles){ 
   tibble(files = basename(list.files(path=carpeta, full.names = F, recursive =  TRUE))) %>%
@@ -217,7 +211,7 @@ getColumnasOM <- function(BDCC){
                        BD04  = {initEstructuraBase() %>% filter(BD == "BD04") %>% pull(CAMPO) %>% list()})
   cols_base %>% return()
 }
-getColVacias  <- function(ruta, BD = setBD(ruta)){
+getColVacias  <- function(ruta, BD = evalFile(ruta)){
   cols_vacias <- intersect(BD[sapply(BD, function(x) all(is.na(x)))] %>% colnames(), 
                            getColumnasOM(getBD(ruta)) %>% unlist())
   
@@ -264,17 +258,19 @@ CodErrorCuadreContable <- function(dif_Capital){
   return(codError)
 }
 
-operaciones_duplicadas <- function(ruta){
+operaciones_duplicadas <- function(ruta, BD = evalFile(ruta)){
   if (getBD(ruta) == "BD01" | getBD(ruta) == "BD03A") {
-    operaciones <- setBD(ruta) %>% select(getCodigoBD(getBD(ruta))[1]) 
-    duplicados <- operaciones[duplicated(operaciones), ] %>% 
-                      unique() %>%
-                      pull(getCodigoBD(getBD(ruta))[1])
+    operaciones <- BD %>%
+                     select(getCodigoBD(getBD(ruta))[1])
+    
+    duplicados  <- operaciones[duplicated(operaciones), ] %>% 
+                     unique() %>%
+                     pull(getCodigoBD(getBD(ruta))[1])
     
     generarDetalleError1(ruta, duplicados) %>% return()}
   list(character(0)) %>% return()
 }
-operaciones_vacias     <- function(ruta, BD = setBD(ruta)){
+operaciones_vacias     <- function(ruta, BD = evalFile(ruta)){
   vacios <- BD %>% 
     select(getCodigoBD(getBD(ruta))[1]) %>%
     sapply(function(x) sum(is.na(x))) %>% return()
@@ -442,17 +438,17 @@ procesarErrorSaldosNegativos <- function(ruta, errorBucket){
     pull(resultado)  
     return(tb)
 }
-procesarErrorModalidadCouta  <- function(ruta, BD = setBD(ruta)){
+procesarErrorModalidadCouta  <- function(ruta, BD = evalFile(ruta)){
   BD %>%
     filter(((as.numeric(ESAM) < 5) & (as.numeric(NCPR) == 0 | as.numeric(PCUO)  == 0)) == TRUE) %>%
     pull(CCR) %>% return()
 }
-procesarErrorMontoOtorgado   <- function(ruta, BD = setBD(ruta)){
+procesarErrorMontoOtorgado   <- function(ruta, BD = evalFile(ruta)){
   BD %>% filter(as.numeric(MORG) < as.numeric(SKCR)) %>%
     pull(CCR) %>%
     return()
 }
-procesarErrorVencJudRetraso  <- function(ruta, BD = setBD(ruta)){
+procesarErrorVencJudRetraso  <- function(ruta, BD = evalFile(ruta)){
   BD %>% 
     filter((as.numeric(KVE) > 0 & as.numeric(DAK) == 0)|(as.numeric(KJU) > 0 & as.numeric(DAK) == 0)) %>% 
     pull (CCR) %>% return()
@@ -497,7 +493,7 @@ procesarErrorDocumentoIdent <- function(ruta, BD = evalFile(ruta)){
 }
 
  #BD03A
-procesarErrorNumCredCobertura <- function(ruta, BD = setBD(ruta)){
+procesarErrorNumCredCobertura <- function(ruta, BD = evalFile(ruta)){
   BD %>% 
     filter(as.numeric(NCR) > 0, as.numeric(NRCL) == 0) %>%
     pull(getCodigoBD("BD03A")) %>%
