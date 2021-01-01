@@ -103,7 +103,7 @@ saveObservaciones <- function(){
   }
 }
 
-tibble(creditos_split = listaErrores %>% filter(Cod == 476) %>% pull(Detalle) %>% 
+tibble(creditos_split = listaErrores %>% filter(Cod == 402) %>% pull(Detalle) %>% 
          strsplit(split = ")") %>% unlist(),
        PeriodosError  = str_extract(creditos_split, paste(alcanceGeneral, collapse = '|')) %>% unique()) %>%
   rowwise() %>% 
