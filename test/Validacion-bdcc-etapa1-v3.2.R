@@ -103,19 +103,22 @@ saveObservaciones <- function(){
   }
 }
 
-tibble(creditos_split = listaErrores %>% filter(Cod == 402) %>% pull(Detalle) %>% 
+
+tibble(CodigoError = 465,
+       creditos_split = listaErrores %>% filter(Cod == 466) %>% pull(Detalle) %>% 
          strsplit(split = ")") %>% unlist(),
-       PeriodosError  = str_extract(creditos_split, paste(alcanceGeneral, collapse = '|')) %>% unique()) %>%
+       PeriodosError  = str_extract(creditos_split, paste(alcanceGeneral, collapse = '|'))) %>%
   rowwise() %>% 
-  mutate(ArchivosError = str_extract(creditos_split,
+  mutate(ArchivoError = str_extract(creditos_split,
                                      getArchivosExigibles(header))[is.na(str_extract(creditos_split,
                                                                                      getArchivosExigibles(header))) == FALSE] %>%
-           unique() %>% toString(),
-         Creditos = unlist(str_split(gsub("\\(", "",gsub(ArchivosError, "",creditos_split)), pattern = ","))[ unlist(str_split(gsub("\\(", "",gsub(ArchivosError, "",creditos_split)), pattern = ","))!= ""] %>% 
+           toString(),
+         BDCC = (basename(ArchivoError) %>% strsplit("_"))[[1]][2],
+         Creditos = unlist(str_split(gsub("\\(", "",gsub(ArchivoError, "",creditos_split)), 
+                                     pattern = ","))[unlist(str_split(gsub("\\(", "",gsub(ArchivoError, "",creditos_split)), pattern = ","))!= ""] %>%
            toString(),
          nCreditos = str_split(Creditos, pattern = ",") %>% unlist() %>% length()
-         ) %>% 
-  select(PeriodosError, ArchivosError, Creditos, nCreditos) %>% 
+         ) %>%
+  select(CodigoError, PeriodosError, BDCC, ArchivoError, Creditos, nCreditos) %>%
   View()
-
 
