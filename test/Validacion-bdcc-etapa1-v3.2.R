@@ -104,18 +104,18 @@ saveObservaciones <- function(){
 }
 
 
-tibble(CodigoError = 473,
-       creditos_split = listaErrores %>% filter(Cod == CodigoError) %>% pull(Detalle) %>% 
+tibble(CodigoError = 412,
+       detalleError_split = listaErrores %>% filter(Cod == CodigoError) %>% pull(Detalle) %>% 
          strsplit(split = ")") %>% unlist(),
-       PeriodosError  = str_extract(creditos_split, paste(alcanceGeneral, collapse = '|'))) %>%
+       PeriodosError  = str_extract(detalleError_split, paste(alcanceGeneral, collapse = '|'))) %>%
   rowwise() %>% 
-  mutate(ArchivoError = str_extract(creditos_split,
-                                     getArchivosExigibles(header))[is.na(str_extract(creditos_split,
-                                                                                     getArchivosExigibles(header))) == FALSE] %>%
+  mutate(ArchivoError = str_extract(detalleError_split,
+                                    getArchivosExigibles(header))[is.na(str_extract(detalleError_split,
+                                                                                    getArchivosExigibles(header))) == FALSE] %>%
            toString(),
          BDCC = (basename(ArchivoError) %>% strsplit("_"))[[1]][2],
-         Creditos = unlist(str_split(gsub("\\(", "",gsub(ArchivoError, "",creditos_split)), 
-                                     pattern = ","))[unlist(str_split(gsub("\\(", "",gsub(ArchivoError, "",creditos_split)), pattern = ","))!= ""] %>%
+         Creditos = unlist(str_split(gsub("\\(", "",gsub(ArchivoError, "", detalleError_split)), 
+                                     pattern = ","))[unlist(str_split(gsub("\\(", "",gsub(ArchivoError, "",detalleError_split)), pattern = ","))!= ""] %>%
            toString(),
          nCreditos = str_split(Creditos, pattern = ",") %>% unlist() %>% length()
          ) %>%
