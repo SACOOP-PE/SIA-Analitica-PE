@@ -35,9 +35,11 @@ getArchivosSinErrores <- function(header, errorBucket, codError, col){
 restriccionPeriodos   <- function(errorBucket, BD1, BD2, columnas){
   if (columnas == "CCR" & 
       all(getArchivosError(header, errorBucket, c(201, 203), "CCR") == getArchivosError(header, errorBucket, c(201, 203), "CCRF"))== TRUE &
-      length(getArchivosError(header, errorBucket, c(201, 203), "CCR")) > 0){
+      length(getArchivosError(header, errorBucket, c(201, 203), "CCR")) > 0 &
+      length(getArchivosError(header, errorBucket, c(201, 203), "CCRF")) > 0){
+    
     filtrarArchivos <- getArchivosError(header, errorBucket, c(201, 203), "CCR")
-    filtrarArchivos <- union(filtrarArchivos, 
+    filtrarArchivos <- union(filtrarArchivos,
                              getArchivosExigibles(header)[str_detect(getArchivosExigibles(header), "BD02A")])
 
     PeriodosFiltro <-  tibble(Periodos =  str_extract(filtrarArchivos, paste(as.character(alcanceGeneral),collapse = '|'))) %>%
