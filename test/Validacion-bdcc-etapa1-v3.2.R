@@ -1,6 +1,6 @@
 ##### Testing -----
 header       <- initHeader(idCoopac = "01172",
-                           coopacCarpeta  = "test/datatest/SMP",
+                           coopacCarpeta  = "test/datatest",
                            periodoInicial = "201901",
                            periodoFinal   = "201902",
                            bds            = list(c("BD01", "BD02A", "BD02B", "BD03A", "BD03B", "BD04")))
