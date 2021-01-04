@@ -104,7 +104,7 @@ saveObservaciones <- function(){
 }
 
 
-tibble(CodigoError = 478,
+tibble(CodigoError = 473,
        creditos_split = listaErrores %>% filter(Cod == CodigoError) %>% pull(Detalle) %>% 
          strsplit(split = ")") %>% unlist(),
        PeriodosError  = str_extract(creditos_split, paste(alcanceGeneral, collapse = '|'))) %>%
