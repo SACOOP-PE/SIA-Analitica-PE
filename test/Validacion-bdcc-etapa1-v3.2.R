@@ -2,10 +2,11 @@
 header       <- initHeader(idCoopac = "01172",
                            coopacCarpeta  = "test/datatest",
                            periodoInicial = "201901",
-                           periodoFinal   = "201901",
+                           periodoFinal   = "202010",
                            bds            = list(c("BD01", "BD02A", "BD02B", "BD03A", "BD03B", "BD04")))
 eb           <- initBucketErrores(header)
 listaErrores <- main(header, eb)
+listaErroresFinal <- procesarUlimaListaErrores(listaErrores)
 
 ## Obtener archivos, periodos y n_caracteres por cada errror en la listaErrores ----
 listaErrores %>%
@@ -43,7 +44,7 @@ listaErrores %>%
          ) %>%
   view()
 
-## Exportar observaciones (errores) en cvs ----
+## Análisis de errores ----
 saveObservacion   <- function(codError){
   tb <- tibble(creditos_split = listaErrores %>% filter(Cod == codError) %>% pull(Detalle) %>% 
                                   strsplit(split = ")") %>% unlist(),
@@ -103,22 +104,96 @@ saveObservaciones <- function(){
   }
 }
 
+generarBucketErroresFinal1 <- function(codigoError){
+  tblError <- tibble(Codigo = codigoError,
+                     DetalleError =(listaErrores %>% filter(Cod == Codigo) %>%
+                                      pull(Detalle) %>% str_split(","))[[1]],
+                     Descripcion  = getDescError(Codigo),
+                     Periodo      = str_extract(DetalleError, paste(alcanceGeneral, collapse = '|'))) %>%
+    rowwise() %>% 
+    mutate(Archivo = str_extract(DetalleError,
+                                 getArchivosExigibles(header))[is.na(str_extract(DetalleError,
+                                                                                 getArchivosExigibles(header))) == FALSE],
+           BDCC          =(basename(Archivo) %>% strsplit("_"))[[1]][2],
+           Cols_Creditos = gsub("\\$","",str_split(DetalleError, pattern = "txt")[[1]][2])
+    ) %>% 
+    select(Codigo, Descripcion, Periodo, BDCC, Archivo, Cols_Creditos)
+  
+  return(tblError)
+}
+generarBucketErroresFinal2 <- function(codigoError){
+  if (codigoError == 321 |
+      codigoError == 322 | codigoError == 323 | codigoError == 467){
+    
+    tblError <- tibble(Codigo = codigoError,
+                       DetalleError =  listaErrores %>% filter(Cod == Codigo) %>% pull(Detalle) %>%
+                                            strsplit(split = ")") %>% unlist(),
+                       Descripcion   = getDescError(Codigo),
+                       Periodo      = str_extract(DetalleError, paste(alcanceGeneral, collapse = '|'))) %>%
+      rowwise() %>%
+      mutate(Archivo = "",
+             BDCC    = switch(toString(codigoError),
+                              "321" = "BD01, BD02A",
+                              "322" = "BD01, BD02A",
+                              "323" = "BD03A, BD03B",
+                              "467" = "BD01, BD03A"),
+             Cols_Creditos = unlist(str_split(gsub("\\(", "",gsub(Periodo, "", DetalleError)),
+                                              pattern = ","))[unlist(str_split(gsub("\\(", "",gsub(Periodo, "",DetalleError)), pattern = ","))!= ""] %>%
+               toString(),
+             nErrores = str_split(Cols_Creditos, pattern = ",") %>% unlist() %>% length()
+      ) %>%
+      select(Codigo, Descripcion, Periodo, BDCC, Archivo, Cols_Creditos, nErrores)
+    
+    return(tblError)
+  }
+  
+  tblError <- tibble(Codigo = codigoError,
+                     DetalleError =  listaErrores %>% filter(Cod == Codigo) %>% pull(Detalle) %>%
+                                          strsplit(split = ")") %>% unlist(),
+                     Descripcion   = getDescError(Codigo),
+                     Periodo      = str_extract(DetalleError, paste(alcanceGeneral, collapse = '|'))) %>%
+    rowwise() %>%
+    mutate(Archivo = str_extract(DetalleError,
+                                 getArchivosExigibles(header))[is.na(str_extract(DetalleError,
+                                                                                 getArchivosExigibles(header))) == FALSE] %>%
+             toString(),
+           BDCC     = (basename(Archivo) %>% strsplit("_"))[[1]][2],
+           Cols_Creditos = unlist(str_split(gsub("\\(", "",gsub(Archivo, "", DetalleError)),
+                                            pattern = ","))[unlist(str_split(gsub("\\(", "",gsub(Archivo, "",DetalleError)), pattern = ","))!= ""] %>%
+             toString(),
+           nErrores = str_split(Cols_Creditos, pattern = ",") %>% unlist() %>% length()
+    ) %>%
+    select(Codigo, Descripcion, Periodo, BDCC, Archivo, Cols_Creditos, nErrores)
+  
+  return(tblError)
+}
+procesarUlimaListaErrores <- function(listaErrores){
+  codigosErroresCols <- listaErrores %>% filter(Cod %in% c(201, 202, 203)) %>% pull(Cod)
+  codigosErroresCred <- listaErrores %>% pull(Cod) %>% setdiff(codigosErroresCols)
+  
+  tblError <- generarBucketErroresFinal1(codigosErroresCols[1])
+  
+  for (i in 1:length(codigosErroresCols)) {
+   tblError_i <- generarBucketErroresFinal1(codigosErroresCols[i])
+   tblError <- bind_rows(tblError, tblError_i)
+  }
+   tblError <- tblError %>% 
+                  group_by(Codigo, Descripcion, Periodo, BDCC, Archivo) %>% 
+                  summarise(Cols_Creditos = toString(Cols_Creditos)) %>% 
+                  mutate(nErrores = str_split(Cols_Creditos, ",")[[1]] %>% length()) %>% 
+                  ungroup() %>% 
+                  select(Codigo, Descripcion, Periodo, BDCC, Archivo, Cols_Creditos, nErrores) 
 
-tibble(CodigoError = 412,
-       detalleError_split = listaErrores %>% filter(Cod == CodigoError) %>% pull(Detalle) %>% 
-         strsplit(split = ")") %>% unlist(),
-       PeriodosError  = str_extract(detalleError_split, paste(alcanceGeneral, collapse = '|'))) %>%
-  rowwise() %>% 
-  mutate(ArchivoError = str_extract(detalleError_split,
-                                    getArchivosExigibles(header))[is.na(str_extract(detalleError_split,
-                                                                                    getArchivosExigibles(header))) == FALSE] %>%
-           toString(),
-         BDCC = (basename(ArchivoError) %>% strsplit("_"))[[1]][2],
-         Creditos = unlist(str_split(gsub("\\(", "",gsub(ArchivoError, "", detalleError_split)), 
-                                     pattern = ","))[unlist(str_split(gsub("\\(", "",gsub(ArchivoError, "",detalleError_split)), pattern = ","))!= ""] %>%
-           toString(),
-         nCreditos = str_split(Creditos, pattern = ",") %>% unlist() %>% length()
-         ) %>%
-  select(CodigoError, PeriodosError, BDCC, ArchivoError, Creditos, nCreditos) %>%
-  View()
+   for (i in 1:length(codigosErroresCred)) {
+     tblError_i <- generarBucketErroresFinal2(codigosErroresCred[i])
+     tblError   <- bind_rows(tblError, tblError_i)
+   }
+   
+   return(tblError)
+}
+
+  
+
+
+
 
