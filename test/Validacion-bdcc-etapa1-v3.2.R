@@ -5,7 +5,8 @@ header       <- initHeader(idCoopac = "01172",
                            periodoFinal   = "202010",
                            bds            = list(c("BD01", "BD02A", "BD02B", "BD03A", "BD03B", "BD04")))
 eb           <- initBucketErrores(header)
-listaErrores <- main(header, eb)
+
+listaErrores      <- main(header, eb)
 listaErroresFinal <- procesarUlimaListaErrores(listaErrores)
 
 ## Obtener archivos, periodos y n_caracteres por cada errror en la listaErrores ----
@@ -188,6 +189,15 @@ procesarUlimaListaErrores <- function(listaErrores){
      tblError_i <- generarBucketErroresFinal2(codigosErroresCred[i])
      tblError   <- bind_rows(tblError, tblError_i)
    }
+   
+   tblError %>% 
+     write.csv(paste0(paste(getwd(), "test/", sep = "/"),
+                      paste(header %>% pull(Coopac),
+                            getIdProceso(header),
+                            header %>% pull(PeriodoInicial),
+                            header %>% pull(PeriodoFinal),
+                            sep = "_"),
+                      "_listaErroresFinal.csv"))
    
    return(tblError)
 }
