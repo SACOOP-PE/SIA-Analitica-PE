@@ -36,7 +36,7 @@ interrogate <- function(agent) {
   #
   eb <- layer1(agent, eb) #estructura de columnas
   eb <- layer2(agent, eb) #errores OM 22269-2020
-  eb <- layer3(agent, eb) #alertas ad-hoc 11356
+  # eb <- layer3(agent, eb) #alertas ad-hoc 11356
   return(eb)
 }
 
