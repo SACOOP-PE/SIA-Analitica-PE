@@ -32,8 +32,8 @@ getArchivosError      <- function(agente, errorBucket, codError, col){
   return(archivosError)
 }
 getArchivosSinErrores <- function(agente, errorBucket, codError, col){
-  if (identical(getArchivosError(agente, bucket, c(201, 203), "CCR"),
-                getArchivosError(agente, bucket, c(201, 203), "CCRF")) == TRUE){
+  if (identical(getArchivosError(agente, errorBucket, c(201, 203), "CCR"),
+                getArchivosError(agente, errorBucket, c(201, 203), "CCRF")) == TRUE){
     
     archivos  <- setdiff(getArchivosExigibles(agente), 
                          getArchivosError(agent, errorBucket, codError, col)) %>% 
