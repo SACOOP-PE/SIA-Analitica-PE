@@ -18,10 +18,14 @@ return(eb)
 
 #Issue https://github.com/SACOOP-PE/SIA-Analitica-PE/issues/12#issue-775181380
 validarCuadreContable        <- function(agente, eb){
-  carpeta    <- getCarpeta(agente)
-  exigibles  <- getArchivosSinErrores(agente, eb, c(201,203), c("KVI","KVE","KRF","KJU"))
-  
-  tb1 <- tibble(NombreArchivo = exigibles[str_detect(exigibles, "BD01")]) %>% rowwise() %>% 
+  carpeta   <- getCarpeta(agente)
+  exigibles <- getArchivosSinErrores(agente, eb, c(201,203), c("KVI","KVE","KRF","KJU"))
+  exigibles <- exigibles[str_detect(exigibles, "BD01")]
+
+  tb1 <- tibble(NombreArchivo = exigibles[str_detect(exigibles, 
+                                                     paste(unique(initCuadreContable() %>% pull(PERIODO)), collapse = '|'))]
+                ) %>%
+    rowwise() %>% 
     mutate(Ruta    = getRuta(carpeta, NombreArchivo),
            Coopac  = as.numeric(getCoopac(Ruta)),
            Periodo = getAnoMes(Ruta),

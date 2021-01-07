@@ -21,7 +21,7 @@ deleteError  <- function(errorBucket, codigoError){
   errorBucket %>% filter(Cod != codigoError) %>% return()
 }
 
-## Restricciones archivos-columnas a partir de los errores que se encuentre en el Layer1----
+## Restricciones archivos-columnas a partir de los errores del Layer1----
 
 #layer 2 validarCruceInterno (BD01/BD02A, BD03A/BD03B)
 getArchivosError      <- function(agente, errorBucket, codError, col){

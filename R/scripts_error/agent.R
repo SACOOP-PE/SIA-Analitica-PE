@@ -49,3 +49,4 @@ close_agent <- function(agent, error_bucket) {
     select(Coopac, NombreCoopac, IdProceso, InicioProceso, FinProceso, Tramo, NroErrores, PeriodoInicial, PeriodoFinal) %>%
     return()
 }
+

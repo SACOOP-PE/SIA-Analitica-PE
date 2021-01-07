@@ -11,7 +11,7 @@ source("R/scripts_error/layer2-validation-error2.R")
 # Inicializar
 agent <- create_agent(idCoopac = "01172",
                       coopacCarpeta  = "test/datatest/",
-                      periodoInicial = "201901", 
+                      periodoInicial = "201901",
                       periodoFinal   = "202010",
                       bds            = list(c("BD01", "BD02A", "BD02B", "BD03A", "BD03B", "BD04")))
 
