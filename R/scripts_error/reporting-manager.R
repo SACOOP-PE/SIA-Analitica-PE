@@ -50,10 +50,10 @@ generarBucketErroresFinal2 <- function(codigoError){
       rowwise() %>%
       mutate(Archivo = "",
              BDCC    = switch(toString(codigoError),
-                              "321" = "BD01, BD02A",
-                              "322" = "BD01, BD02A",
-                              "323" = "BD03A, BD03B",
-                              "467" = "BD01, BD03A"),
+                              "321" = "BD02A",
+                              "322" = "BD01",
+                              "323" = "BD03A",
+                              "467" = "BD03A"),
              Cols_Creditos = unlist(str_split(gsub("\\(", "",gsub(Periodo, "", DetalleError)),
                                               pattern = ","))[unlist(str_split(gsub("\\(", "",gsub(Periodo, "",DetalleError)), pattern = ","))!= ""] %>%
                toString(),
