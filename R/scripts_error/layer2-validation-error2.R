@@ -148,7 +148,7 @@ validarCampos                <- function(agente, eb){
   exigibles <- getArchivosSinErrores(agente, eb, c(201, 203), c("CCR","CCR_C","CODGR"))
   
   # i. Errores tipo1 ----
-  exigiblesT1 <- filtrarArchivosErrorT13(agente, eb, exigibles, "tipo1")
+  exigiblesT1 <- filtrarArchivosErrorT1_T3(agente, eb, exigibles, "tipo1")
   eb_i        <- eb
   for (i in 1:length(exigiblesT1)){
     ruta_i <- getRuta(carpeta, exigiblesT1[i])
