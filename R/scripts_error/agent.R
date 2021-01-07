@@ -29,15 +29,14 @@ create_bucket <- function(agent){
 interrogate <- function(agent) {
   eb <- create_bucket(agent)
   eb <- layer0(agent, eb) #pre-requisitos
-  
+
   if ((eb %>% pull(Cod)) %in% c(101,102)) {
     return(eb)
   }
-  # 
+  #
   eb <- layer1(agent, eb) #estructura de columnas
-  
   eb <- layer2(agent, eb) #errores OM 22269-2020
-  #eb <- layer3(agent, eb) #alertas ad-hoc 11356 
+  eb <- layer3(agent, eb) #alertas ad-hoc 11356
   return(eb)
 }
 

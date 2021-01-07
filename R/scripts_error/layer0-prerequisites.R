@@ -1,16 +1,16 @@
 #' Función principal 
 
 layer0 <- function(agent, eb){
-  carpeta <- getCarpeta(agent)
+  carpeta   <- getCarpeta(agent)
   exigibles <- getArchivosExigibles(agent)
   
   if (length(getDuplicados(carpeta, exigibles)) != 0) { 
     eb <- eb %>% addError(101,getDescError(101),
-                                              paste0("Archivos duplicados: ",toString(getDuplicados(carpeta, exigibles))))
+                          paste0("Archivos duplicados: ",toString(getDuplicados(carpeta, exigibles))))
   }
   if (length(getFaltantes(carpeta, exigibles)) != 0) { 
     eb <- eb %>% addError(102,getDescError(102), 
-                                              paste0("Archivos faltantes: ",toString(getFaltantes(carpeta,exigibles))))
+                          paste0("Archivos faltantes: ",toString(getFaltantes(carpeta,exigibles))))
   }
   
   print(paste0("Se validaron los prerequisitos satisfactoriamente. (~ly) ", format(Sys.time(), "%a %b %d %X %Y")))

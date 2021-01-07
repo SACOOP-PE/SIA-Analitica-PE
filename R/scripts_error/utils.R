@@ -21,11 +21,11 @@ getBD        <- function(ruta){
   (basename(ruta) %>% strsplit("_"))[[1]][2] %>% return()
 }
 
-getCarpeta           <- function(header){ 
-  header %>% pull(Carpeta) %>% first() %>% return()
+getCarpeta           <- function(agente){ 
+  agente %>% pull(Carpeta) %>% first() %>% return()
 }
-getIdProceso         <- function(header){
-  header %>% pull(IdProceso) %>% first() %>% return()
+getIdProceso         <- function(agente){
+  agente %>% pull(IdProceso) %>% first() %>% return()
 }
 getRuta              <- function(carpeta, filename){
   lista_rutas <- list.files(path=carpeta, full.names = TRUE, recursive =  TRUE)
@@ -47,4 +47,3 @@ getArchivosExigibles <- function(agente){
                                       (periodos <= periodo_final)], ".txt")),
         1, paste, collapse = "_") %>% return()
 }
- 

@@ -62,16 +62,19 @@ getColumnasOM <- function(BDCC){
                        BD04  = {initEstructuraBase() %>% filter(BD == "BD04") %>% pull(CAMPO) %>% list()})
   cols_base %>% return()
 }
-getColVacia  <- function(ruta, BD = evaluarFile(ruta)){
+getColVacia   <- function(ruta, BD = evaluarFile(ruta)){
   cols_vacias <- intersect(BD[sapply(BD, function(x) all(is.na(x)))] %>% colnames(), 
                            getColumnasOM(getBD(ruta)) %>% unlist())
   
   resultado <- generarDetalleError1(ruta, cols_vacias)
   return(resultado)
 }
-evaluarFile  <- function(ruta){
+evaluarFile   <- function(ruta){
   read_delim(ruta,"\t",escape_double = FALSE, trim_ws = TRUE, col_names = TRUE,
              col_types = cols(.default = "c"), progress = T, na = "NA" ) %>% 
     na_if("") %>%
     return()
 }
+
+
+
