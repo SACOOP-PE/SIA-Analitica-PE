@@ -403,7 +403,7 @@ getCodErrorT1   <- function(ruta, campo){
                       BD03B = {c(441)},
                       BD04  = {c(451,452,453,454,455,456,457)})
   
-  cod <- tibble(col       = getColumnasErrorT1(ruta),
+  cod <- tibble(col       = getColsErrorT1(ruta),
                 cod_error = codError) %>% 
     filter(col == campo) %>% 
     pull(cod_error)
