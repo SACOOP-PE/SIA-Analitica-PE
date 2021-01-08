@@ -17,4 +17,3 @@ agent <- create_agent(idCoopac = "01172",
 
 bucket  <- interrogate(agent)
 bucket2 <- procesarBucket2(agent, bucket)
-agent   <- agent %>% close_agent(bucket)

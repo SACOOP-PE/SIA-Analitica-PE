@@ -110,28 +110,29 @@ create_bucket2  <- function(errorBucket, codigoError){
   }
 }
 procesarBucket2 <- function(agente, errorBucket){
-  codErrores <- errorBucket %>% pull(Cod)
-  tblError   <- create_bucket2(errorBucket, codErrores[1])
+  codErrores   <- errorBucket %>% pull(Cod)
+  errorBucket2 <- create_bucket2(errorBucket, codErrores[1])
   
   for (i in 1:length(codErrores)){
-    tblError_i <- create_bucket2(errorBucket, codErrores[i])
-    tblError   <- bind_rows(tblError, tblError_i)
-    }
-  tblError <- tblError %>% 
+    errorBucket2_i <- create_bucket2(errorBucket, codErrores[i])
+    errorBucket2   <- bind_rows(errorBucket2, errorBucket2_i)
+  }
+  
+  errorBucket2 <- errorBucket2 %>% 
     group_by(Codigo, Descripcion, Periodo, BDCC, Archivo) %>% 
     summarise(Cols_Creditos = toString(Cols_Creditos)) %>% 
     mutate(nErrores = str_split(Cols_Creditos, ",")[[1]] %>% length()) %>% 
     ungroup() %>%
     select(Codigo, Descripcion, Periodo, BDCC, Archivo, Cols_Creditos, nErrores) 
   
-  tblError %>%
+  errorBucket2 %>%
     write.csv(paste0(paste(getwd(), "test/", sep = "/"),
                      paste(agente %>% pull(Coopac),
                            getIdProceso(agente),
                            agente %>% pull(PeriodoInicial),
                            agente %>% pull(PeriodoFinal),
                            sep = "_"),
-                     "_errorBucket.csv"))
+                     "_errorBucket2.csv"))
   
   return(tblError)
 }
