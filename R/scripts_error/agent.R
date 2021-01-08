@@ -5,8 +5,7 @@ create_agent  <- function(idCoopac,
                           bds = c("BD01","BD02A","BD02B","BD03A","BD03B","BD04")){
   round((runif(1,0,2) * 1000000),0) %>%   
     tibble(Coopac       = idCoopac,
-           NombreCoopac = initCuadreContable() %>% 
-             filter(CODIGO_ENTIDAD == as.integer(idCoopac)) %>%
+           NombreCoopac = initCuadreContable() %>% filter(CODIGO_ENTIDAD == as.integer(idCoopac)) %>%
              pull(ENTIDAD) %>% first(),
            Carpeta      = coopacCarpeta,
            IdProceso    = .,
