@@ -112,32 +112,39 @@ validarOperacionesDuplicadas <- function(agente, eb){
 validarCruceInterno          <- function(agente, eb){
   exigibles <- getArchivosSinErrores(agent, eb,  c(201, 203), c("CCR", "CODGR"))
   
-  cruce1 <- tibble(Periodo   = restriccionPeriodos(eb, "BD01", "BD02A", "CCR")) %>%
-    rowwise() %>%
-    mutate(OpFaltantes_BD01  = realizarCruce(agente, exigibles, Periodo, "BD02A", "BD01"),
-           OpFaltantes_BD02A = realizarCruce(agente, exigibles, Periodo, "BD01", "BD02A"))
+  if (length(restriccionPeriodos(eb, "BD01", "BD02A", "CCR")) >0){
+    
+    cruce1 <- tibble(Periodo   = restriccionPeriodos(eb, "BD01", "BD02A", "CCR")) %>% rowwise() %>%
+      mutate(OpFaltantes_BD01  = realizarCruce(agente, exigibles, Periodo, "BD02A", "BD01"),
+             OpFaltantes_BD02A = realizarCruce(agente, exigibles, Periodo, "BD01", "BD02A"))
+    
+    f_bd01  <- (paste(cruce1 %>% rowwise() %>% pull(OpFaltantes_BD01)    , collapse = ",") %>% strsplit(","))[[1]]
+    f_bd02A <- (paste(cruce1 %>% rowwise() %>% pull(OpFaltantes_BD02A)   , collapse = ",") %>% strsplit(","))[[1]]
+    
+    
+    if(length(f_bd01[f_bd01   != "character(0)"]) > 0){
+      eb <- eb %>%
+        addError(321,getDescError(321), (f_bd01[f_bd01 != "character(0)"]) %>% toString())
+    }
+    if(length(f_bd02A[f_bd02A != "character(0)"]) > 0){
+      eb <- eb %>%
+        addError(322,getDescError(322), (f_bd02A[f_bd02A != "character(0)"]) %>% toString())
+    }
+  }
   
-  cruce2 <- tibble(Periodo      = restriccionPeriodos(eb, "BD03A", "BD03B", "CODGR")) %>%
-    rowwise() %>%
-    mutate(GaranFaltantes_BD03A = realizarCruce(agente, exigibles, Periodo, "BD03B", "BD03A"))
-  
-  f_bd01  <- (paste(cruce1 %>% rowwise() %>% pull(OpFaltantes_BD01)    , collapse = ",") %>% strsplit(","))[[1]]
-  f_bd02A <- (paste(cruce1 %>% rowwise() %>% pull(OpFaltantes_BD02A)   , collapse = ",") %>% strsplit(","))[[1]]
-  f_bd03A <- (paste(cruce2 %>% rowwise() %>% pull(GaranFaltantes_BD03A), collapse = ",") %>% strsplit(","))[[1]]
+  if (length(restriccionPeriodos(eb, "BD03A", "BD03B", "CODGR")) >0){
+    
+    cruce2 <- tibble(Periodo = restriccionPeriodos(eb, "BD03A", "BD03B", "CODGR")) %>% rowwise() %>%
+      mutate(GaranFaltantes_BD03A = realizarCruce(agente, exigibles, Periodo, "BD03B", "BD03A"))
+    
+    f_bd03A <- (paste(cruce2 %>% rowwise() %>% pull(GaranFaltantes_BD03A), collapse = ",") %>% strsplit(","))[[1]]
+    
+    if(length(f_bd03A[f_bd03A != "character(0)"]) > 0){
+      eb <- eb %>%
+        addError(323, getDescError(323), (f_bd03A[f_bd03A != "character(0)"]) %>% toString())
+    }
+  }
 
-  if(length(f_bd01[f_bd01   != "character(0)"]) > 0){
-    eb <- eb %>%
-      addError(321,getDescError(321), (f_bd01[f_bd01 != "character(0)"]) %>% toString())
-  }
-  if(length(f_bd02A[f_bd02A != "character(0)"]) > 0){
-    eb <- eb %>%
-      addError(322,getDescError(322), (f_bd02A[f_bd02A != "character(0)"]) %>% toString())
-  }
-  if(length(f_bd03A[f_bd03A != "character(0)"]) > 0){
-    eb <- eb %>%
-      addError(323,getDescError(323), (f_bd03A[f_bd03A != "character(0)"]) %>% toString())
-  }
-  
   n <- eb %>% filter(Cod %in% c(321, 322, 323)) %>% nrow()
   print(paste0("La validación interna BD01/BD02A y BD03A/BD03B concluyó con ", n, " observaciones. (~ly2) ", format(Sys.time(), "%a %b %d %X %Y")))
   

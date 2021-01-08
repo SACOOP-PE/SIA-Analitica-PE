@@ -1,4 +1,4 @@
-rm(list=ls()) 
+rm(list=ls())
 source("R/scripts_error/libraries-and-options.R")
 source("R/scripts_error/agent.R")
 source("R/scripts_error/utils.R")
