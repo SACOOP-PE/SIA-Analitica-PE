@@ -15,5 +15,6 @@ agent <- create_agent(idCoopac = "01172",
                       periodoFinal   = "202010",
                       bds            = list(c("BD01", "BD02A", "BD02B", "BD03A", "BD03B", "BD04")))
 
-bucket <- interrogate(agent)
-agent  <- agent %>% close_agent(bucket)
+bucket  <- interrogate(agent)
+bucket2 <- procesarBucket2(agent, bucket)
+agent   <- agent %>% close_agent(bucket)

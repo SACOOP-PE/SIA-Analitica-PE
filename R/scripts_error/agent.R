@@ -16,32 +16,30 @@ create_agent  <- function(idCoopac,
            Alcance        = bds) %>% return() 
 }
 
-create_bucket <- function(agent){
-  tibble(Coopac     = agent %>% pull(Coopac) %>% first(),
-         NombCoopac = agent %>% pull(NombreCoopac) %>% first(),
-         Carpeta    = agent %>% pull(Carpeta) %>% first(),
-         IdProceso  = agent %>% pull(IdProceso) %>% first(), 
+create_bucket <- function(agente){
+  tibble(Coopac     = agente %>% pull(Coopac) %>% first(),
+         NombCoopac = agente %>% pull(NombreCoopac) %>% first(),
+         Carpeta    = agente %>% pull(Carpeta) %>% first(),
+         IdProceso  = agente %>% pull(IdProceso) %>% first(), 
          Cod         = 100,
          Descripcion = "Lorem ipsum ... ",
          Detalle     = list(c("1", "3", "2"))) %>% return()
 }
-
-interrogate <- function(agent) {
-  eb <- create_bucket(agent)
+interrogate   <- function(agente) {
+  eb <- create_bucket(agente)
   eb <- layer0(agent, eb) #pre-requisitos
 
   if ((eb %>% pull(Cod)) %in% c(101,102)) {
     return(eb)
   }
   #
-  eb <- layer1(agent, eb) #estructura de columnas
-  eb <- layer2(agent, eb) #errores OM 22269-2020
+  eb <- layer1(agente, eb) #estructura de columnas
+  eb <- layer2(agente, eb) #errores OM 22269-2020
   # eb <- layer3(agent, eb) #alertas ad-hoc 11356
   return(eb)
 }
-
-close_agent <- function(agent, errorBucket) {
-  agent <- agent %>% 
+close_agent   <- function(agente, errorBucket) {
+  agente <- agente %>% 
     mutate(
       FinProceso = format(Sys.time(), "%a %b %d %X %Y"),
       NroErrores = nrow(errorBucket),
@@ -124,14 +122,14 @@ procesarBucket2 <- function(agente, errorBucket){
     ungroup() %>%
     select(Codigo, Descripcion, Periodo, BDCC, Archivo, Cols_Creditos, nErrores) 
   
-  # tblError %>% 
-  #   write.csv(paste0(paste(getwd(), "test/", sep = "/"),
-  #                    paste(agente %>% pull(Coopac),
-  #                          getIdProceso(agente),
-  #                          agente %>% pull(PeriodoInicial),
-  #                          agente %>% pull(PeriodoFinal),
-  #                          sep = "_"),
-  #                    "_errorBucket.csv"))
+  tblError %>%
+    write.csv(paste0(paste(getwd(), "test/", sep = "/"),
+                     paste(agente %>% pull(Coopac),
+                           getIdProceso(agente),
+                           agente %>% pull(PeriodoInicial),
+                           agente %>% pull(PeriodoFinal),
+                           sep = "_"),
+                     "_errorBucket.csv"))
   
   return(tblError)
 }
