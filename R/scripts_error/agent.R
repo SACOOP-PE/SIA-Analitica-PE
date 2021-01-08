@@ -53,8 +53,8 @@ interrogate   <- function(agente) {
 create_bucket2  <- function(errorBucket, codigoError){
   if (codigoError == 201 | codigoError == 202 | codigoError == 203) {
     tblError <- tibble(Codigo = codigoError,
-                       DetalleError =(errorBucket %>% filter(Cod == Codigo) %>% pull(Detalle) %>% str_split(","))[[1]],
                        Descripcion  = errorBucket %>% filter(Cod == Codigo) %>% pull(Descripcion),
+                       DetalleError =(errorBucket %>% filter(Cod == Codigo) %>% pull(Detalle) %>% str_split(","))[[1]],
                        Periodo      = str_extract(DetalleError, paste(alcanceGeneral, collapse = '|'))) %>%
       rowwise() %>% 
       mutate(Archivo = str_extract(DetalleError,
