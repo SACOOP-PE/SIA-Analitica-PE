@@ -68,9 +68,9 @@ create_bucket2  <- function(errorBucket, codigoError){
     }
   if (codigoError == 321 | codigoError == 322 | codigoError == 323 | codigoError == 467){
     tblError <- tibble(Codigo = codigoError,
+                       Descripcion   = errorBucket %>% filter(Cod == Codigo) %>% pull(Descripcion),
                        DetalleError =  errorBucket %>% filter(Cod == Codigo) %>% pull(Detalle) %>%
                          strsplit(split = ")") %>% unlist(),
-                       Descripcion   = errorBucket %>% filter(Cod == Codigo) %>% pull(Descripcion),
                        Periodo      = str_extract(DetalleError, paste(alcanceGeneral, collapse = '|'))) %>%
       rowwise() %>%
       mutate(Archivo = "",
@@ -89,9 +89,9 @@ create_bucket2  <- function(errorBucket, codigoError){
     }
   else{
     tblError <- tibble(Codigo = codigoError,
+                       Descripcion  = errorBucket %>% filter(Cod == Codigo) %>% pull(Descripcion),
                        DetalleError =  errorBucket %>% filter(Cod == Codigo) %>% pull(Detalle) %>%
                          strsplit(split = ")") %>% unlist(),
-                       Descripcion  = errorBucket %>% filter(Cod == Codigo) %>% pull(Descripcion),
                        Periodo      = str_extract(DetalleError, paste(alcanceGeneral, collapse = '|'))) %>%
       rowwise() %>%
       mutate(Archivo = str_extract(DetalleError,
@@ -131,7 +131,7 @@ procesarBucket2 <- function(agente, errorBucket){
                                      agente %>% pull(PeriodoInicial),
                                      agente %>% pull(PeriodoFinal),
                                      sep = "_"),
-                               "_errorBucket2.csv"))
+                               "_errorBucket2.xlsx"))
   
   return(errorBucket2)
 }
