@@ -51,9 +51,8 @@ close_agent   <- function(agente, errorBucket) {
 create_bucket2  <- function(errorBucket, codigoError){
   if (codigoError == 201 | codigoError == 202 | codigoError == 203) {
     tblError <- tibble(Codigo = codigoError,
-                       DetalleError =(errorBucket %>% filter(Cod == Codigo) %>%
-                                        pull(Detalle) %>% str_split(","))[[1]],
-                       Descripcion  = getDescError(Codigo),
+                       DetalleError =(errorBucket %>% filter(Cod == Codigo) %>% pull(Detalle) %>% str_split(","))[[1]],
+                       Descripcion  = errorBucket %>% filter(Cod == Codigo) %>% pull(Descripcion),
                        Periodo      = str_extract(DetalleError, paste(alcanceGeneral, collapse = '|'))) %>%
       rowwise() %>% 
       mutate(Archivo = str_extract(DetalleError,
@@ -69,7 +68,7 @@ create_bucket2  <- function(errorBucket, codigoError){
     tblError <- tibble(Codigo = codigoError,
                        DetalleError =  errorBucket %>% filter(Cod == Codigo) %>% pull(Detalle) %>%
                          strsplit(split = ")") %>% unlist(),
-                       Descripcion   = getDescError(Codigo),
+                       Descripcion   = errorBucket %>% filter(Cod == Codigo) %>% pull(Descripcion),
                        Periodo      = str_extract(DetalleError, paste(alcanceGeneral, collapse = '|'))) %>%
       rowwise() %>%
       mutate(Archivo = "",
@@ -90,7 +89,7 @@ create_bucket2  <- function(errorBucket, codigoError){
     tblError <- tibble(Codigo = codigoError,
                        DetalleError =  errorBucket %>% filter(Cod == Codigo) %>% pull(Detalle) %>%
                          strsplit(split = ")") %>% unlist(),
-                       Descripcion   = getDescError(Codigo),
+                       Descripcion  = errorBucket %>% filter(Cod == Codigo) %>% pull(Descripcion),
                        Periodo      = str_extract(DetalleError, paste(alcanceGeneral, collapse = '|'))) %>%
       rowwise() %>%
       mutate(Archivo = str_extract(DetalleError,
@@ -132,4 +131,12 @@ procesarBucket2 <- function(agente, errorBucket){
                      "_errorBucket.csv"))
   
   return(tblError)
+}
+
+ejecutarValidador <- function(agente){
+  errorBucket  <- interrogate(agente)
+  errorBucket2 <- procesarBucket2(agente, errorBucket)
+  
+  agente <- close_agent(agente, errorBucket2)
+  save
 }

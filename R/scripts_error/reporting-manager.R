@@ -1,22 +1,23 @@
 
-saveResults      <- function(agente, errorBucket){
-  ## header ----
-  header %>% 
-    write.csv(paste0(paste(getwd(), "test/", sep = "/"),
-                     paste(header %>% pull(Coopac),
-                           getIdProceso(header),
-                           header %>% pull(PeriodoInicial),
-                           header %>% pull(PeriodoFinal),
-                           sep = "_"),
-                     "_header.csv"))
+saveResults <- function(agente, errorBucket){
+  ## agente ----
+  agente %>%
+    mutate(Alcance = unlist(Alcance) %>%  toString()) %>%
+    writexl::write_xlsx(paste0(paste(getwd(), "test/", sep = "/"),
+                               paste(agente %>% pull(Coopac),
+                                     getIdProceso(agente),
+                                     agente %>% pull(PeriodoInicial),
+                                     agente %>% pull(PeriodoFinal),
+                                     sep = "_"),
+                               "_agent.xlsx"))
   ## errorbucket ----
   errorBucket %>%
     mutate(Detalle = map_chr(Detalle, ~ .[[1]] %>% str_c(collapse = "; "))) %>%
-    write.csv(paste0(paste(getwd(), "test/", sep = "/"),
-                     paste(header %>% pull(Coopac),
-                           getIdProceso(header),
-                           header %>% pull(PeriodoInicial),
-                           header %>% pull(PeriodoFinal),
-                           sep = "_"),
-                     "_errorbucket.csv"))
+    writexl::write_xlsx(paste0(paste(getwd(), "test/", sep = "/"),
+                               paste(agente %>% pull(Coopac),
+                                     getIdProceso(header),
+                                     agente %>% pull(PeriodoInicial),
+                                     agente %>% pull(PeriodoFinal),
+                                     sep = "_"),
+                               "_errorbucket.xlsx"))
 }
