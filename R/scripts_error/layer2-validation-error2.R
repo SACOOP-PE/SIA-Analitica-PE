@@ -228,9 +228,8 @@ validarCampos                <- function(agente, eb){
     summarise(Detalle = toString(Detalle)) %>%
     ungroup()
 
-  error479 <- (tibble(NombreArchivo = filtrarArchivosErrorT2(agente, eb, exigibles, 479)) %>%
-    rowwise() %>% 
-    mutate(Ruta = getRuta(carpeta, NombreArchivo),
+  error479 <- (tibble(NombreArchivo = filtrarArchivosErrorT2(agente, eb, exigibles, 479)) %>% rowwise() %>% 
+    mutate(Ruta               = getRuta(carpeta, NombreArchivo),
            vf_FechaDesembolso = generarDetalleError3(Ruta, procesarErrorFechaDesembolso(Ruta))) %>%
     pull(vf_FechaDesembolso) %>%
     paste(collapse = ",") %>%

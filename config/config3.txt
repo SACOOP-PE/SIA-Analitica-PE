@@ -9,31 +9,31 @@ Cod	Descripcion	Tipo
 303	El capital refinanciado no cuadra con el balance de comprobación. 	Error no crítico
 304	El capital de cobranza judicial no cuadra con el balance de comprobación. 	Error no crítico
 311	Se detectaron créditos/garantias duplicadas.	Error crítico
-312	Se detectaron una cantidad de créditos/garantías vacias.	Error crítico
+312	Se detectaron créditos/garantías vacias.	Error crítico
 321	Se identificaron operaciones que no figuran en la cartera de créditos (BD01).	Error no crítico
 322	Se identificaron operaciones que no figuran en los cronogramas (BD02A).	Error no crítico
 323	Se identificaron garantías no reportadas en la base de datos de garantía entregada. 	Error no crítico
-401	Se detectaron algunos dígitos diferentes o vacíos en el Tipo de documento (TID) en la BD01.	Error crítico
-402	Se detectaron algunos dígitos diferentes o vacíos en el Tipo de crédito (TCR) en la BD01.	Error crítico
-403	Se detectaron algunos dígitos diferentes o vacíos en la Clasificación del deudor (CAL) en la BD01.	Error crítico
-404	Se detectaron algunos dígitos diferentes o vacíos en el Esquema de amortización (ESAM) en la BD01.	Error crítico
-405	Se detectaron algunos dígitos diferentes o vacíos en el Sector del crédito a financiar (SEC) en la BD01.	Error crítico
-406	Se detectaron algunos dígitos diferentes o vacíos en el Modalidad del crédito (MDCR) en la BD01.	Error crítico
-407	Se detectaron algunos dígitos diferentes o vacíos en el Ocupación del socio deudor declarado (OSD) en la BD01.	Error crítico
-411	Se detectaron algunos dígitos diferentes o vacíos en la Moneda (MON) de la BD02A	Error crítico
-412	Se detectaron algunos dígitos diferentes o vacíos en la Forma de cancelación de la cuota (FOCAN) de la BD02A	Error crítico
-421	Se detectaron algunos dígitos diferentes o vacíos en la Moneda (MON_C) de la BD02B	Error crítico
-422	Se detectaron algunos dígitos diferentes o vacíos en la Forma de cancelación de la cuota (FOCAN_C) de la BD02B	Error crítico
-431	Se detectaron algunos dígitos diferentes o vacíos en la Clase de garantía (CGR) de la BD03A	Error crítico
-432	Se detectaron algunos dígitos diferentes o vacíos en la Cobertura de garantía (COBGR) de la BD03A	Error crítico
-441	Se detectaron algunos dígitos diferentes o vacíos en la Clase de garantía (CGR) de la BD03B	Error crítico
-451	Se detectaron algunos dígitos diferentes o vacíos en la Tipo de documento (TID_C) de la BD04	Error crítico
-452	Se detectaron algunos dígitos diferentes o vacíos en la Tipo de crédito (TCR_C) de la BD04	Error crítico
-453	Se detectaron algunos dígitos diferentes o vacíos en la Moneda (MON_C) de la BD04	Error crítico
-454	Se detectaron algunos dígitos diferentes o vacíos en la Clasificación del Deudor a la fecha de cancelación del crédito (CAL_C) de la BD04	Error crítico
-455	Se detectaron algunos dígitos diferentes o vacíos en la Esquema de amortización (ESAM_C) de la BD04	Error crítico
-456	Se detectaron algunos dígitos diferentes o vacíos en la Forma de Cancelación del crédito (FOCAN_C) de la BD04	Error crítico
-457	Se detectaron algunos dígitos diferentes o vacíos en la Modalidad específica bajo la cual fue otorgado el Crédito(MDCR_C) de la BD04	Error crítico
+401	Se detectaron créditos con algunos dígitos diferentes o vacíos en el Tipo de documento (TID) en la BD01.	Error crítico
+402	Se detectaron créditos con algunos dígitos diferentes o vacíos en el Tipo de crédito (TCR) en la BD01.	Error crítico
+403	Se detectaron créditos con algunos dígitos diferentes o vacíos en la Clasificación del deudor (CAL) en la BD01.	Error crítico
+404	Se detectaron créditos con algunos dígitos diferentes o vacíos en el Esquema de amortización (ESAM) en la BD01.	Error crítico
+405	Se detectaron créditos con algunos dígitos diferentes o vacíos en el Sector del crédito a financiar (SEC) en la BD01.	Error crítico
+406	Se detectaron créditos con algunos dígitos diferentes o vacíos en el Modalidad del crédito (MDCR) en la BD01.	Error crítico
+407	Se detectaron créditos con algunos dígitos diferentes o vacíos en el Ocupación del socio deudor declarado (OSD) en la BD01.	Error crítico
+411	Se detectaron créditos con algunos dígitos diferentes o vacíos en la Moneda (MON) de la BD02A	Error crítico
+412	Se detectaron créditos con algunos dígitos diferentes o vacíos en la Forma de cancelación de la cuota (FOCAN) de la BD02A	Error crítico
+421	Se detectaron créditos con algunos dígitos diferentes o vacíos en la Moneda (MON_C) de la BD02B	Error crítico
+422	Se detectaron créditos con algunos dígitos diferentes o vacíos en la Forma de cancelación de la cuota (FOCAN_C) de la BD02B	Error crítico
+431	Se detectaron garantías con algunos dígitos diferentes o vacíos en la Clase de garantía (CGR) de la BD03A	Error crítico
+432	Se detectaron garantías con algunos dígitos diferentes o vacíos en la Cobertura de garantía (COBGR) de la BD03A	Error crítico
+441	Se detectaron garantías con algunos dígitos diferentes o vacíos en la Clase de garantía (CGR) de la BD03B	Error crítico
+451	Se detectaron créditos con algunos dígitos diferentes o vacíos en la Tipo de documento (TID_C) de la BD04	Error crítico
+452	Se detectaron créditos con algunos dígitos diferentes o vacíos en la Tipo de crédito (TCR_C) de la BD04	Error crítico
+453	Se detectaron créditos con algunos dígitos diferentes o vacíos en la Moneda (MON_C) de la BD04	Error crítico
+454	Se detectaron créditos con algunos dígitos diferentes o vacíos en la Clasificación del Deudor a la fecha de cancelación del crédito (CAL_C) de la BD04	Error crítico
+455	Se detectaron créditos con algunos dígitos diferentes o vacíos en la Esquema de amortización (ESAM_C) de la BD04	Error crítico
+456	Se detectaron créditos con algunos dígitos diferentes o vacíos en la Forma de Cancelación del crédito (FOCAN_C) de la BD04	Error crítico
+457	Se detectaron créditos con algunos dígitos diferentes o vacíos en la Modalidad específica bajo la cual fue otorgado el Crédito(MDCR_C) de la BD04	Error crítico
 461	Se detectaron créditos con saldos negativos en la cartera de créditos (BD01)	Error crítico
 462	Se detectaron créditos con modalidad de coutas sin periocidad o número de cuotas pactas igual a 0 cartera de créditos (BD01)	Error crítico
 463	Se detectaron créditos con MORG menor que el saldo de colocaciones en la cartera de créditos (BD01)	Error crítico
