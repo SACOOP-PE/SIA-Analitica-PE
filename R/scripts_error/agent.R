@@ -45,7 +45,7 @@ interrogate   <- function(agente) {
   eb <- layer2(agente, eb) #errores OM 22269-2020
   # eb <- layer3(agent, eb) #alertas ad-hoc 11356
   
-  agente <- agente %>% close_agent(bucket)
+  agente <- agente %>% close_agent(eb)
   saveResults(agente, eb)
   return(eb)
 }
@@ -125,13 +125,13 @@ procesarBucket2 <- function(agente, errorBucket){
     select(Codigo, Descripcion, Periodo, BDCC, Archivo, Cols_Creditos, nErrores) 
   
   errorBucket2 %>%
-    write.csv(paste0(paste(getwd(), "test/", sep = "/"),
-                     paste(agente %>% pull(Coopac),
-                           getIdProceso(agente),
-                           agente %>% pull(PeriodoInicial),
-                           agente %>% pull(PeriodoFinal),
-                           sep = "_"),
-                     "_errorBucket2.csv"))
+    writexl::write_xlsx(paste0(paste(getwd(), "test/", sep = "/"),
+                               paste(agente %>% pull(Coopac),
+                                     getIdProceso(agente),
+                                     agente %>% pull(PeriodoInicial),
+                                     agente %>% pull(PeriodoFinal),
+                                     sep = "_"),
+                               "_errorBucket2.csv"))
   
-  return(tblError)
+  return(errorBucket2)
 }
