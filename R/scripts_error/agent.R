@@ -121,25 +121,34 @@ procesarBucket2 <- function(agente, errorBucket){
     group_by(Codigo, Descripcion, Periodo, BDCC, Archivo) %>% 
     summarise(Cols_Creditos = toString(Cols_Creditos)) %>% 
     mutate(nErrores = str_split(Cols_Creditos, ",")[[1]] %>% length(),
-           DescripcionFinal = paste(paste0((Descripcion %>% str_split(" ") %>% unlist())[1:2], collapse = " "),
-                                    nErrores,
-                                    paste0((Descripcion %>% str_split(" ") %>% unlist())[3:length((Descripcion %>% str_split(" ") %>% unlist()))], collapse = " "),
-                                    " en el Periodo ",
-                                    Periodo,
-                                    " en la ",
-                                    BDCC)
-           ) %>% 
+           DescripcionFinal = if_else(nErrores == 1, 
+                                      paste(paste0((Descripcion %>% str_split(" ") %>% unlist())[1], " detectó", collapse = " "),
+                                            nErrores,
+                                            (Descripcion %>% str_split(" ") %>% unlist())[3] %>% str_remove("s"),
+                                            paste0((Descripcion %>% str_split(" ") %>% unlist())[4:length((Descripcion %>% str_split(" ") %>% unlist()))], collapse = " "),
+                                            " en el Periodo ",
+                                            Periodo,
+                                            " en la ",
+                                            BDCC),
+                                      paste(paste0((Descripcion %>% str_split(" ") %>% unlist())[1:2], collapse = " "),
+                                            nErrores,
+                                            paste0((Descripcion %>% str_split(" ") %>% unlist())[3:length((Descripcion %>% str_split(" ") %>% unlist()))], collapse = " "),
+                                            " en el Periodo ",
+                                            Periodo,
+                                            " en la ",
+                                            BDCC)
+                                      )) %>% 
     ungroup() %>%
     select(Codigo, DescripcionFinal, Periodo, BDCC, Archivo, Cols_Creditos, nErrores) 
   
-  # errorBucket2 %>%
-  #   writexl::write_xlsx(paste0(paste(getwd(), "test/", sep = "/"),
-  #                              paste(agente %>% pull(Coopac),
-  #                                    getIdProceso(agente),
-  #                                    agente %>% pull(PeriodoInicial),
-  #                                    agente %>% pull(PeriodoFinal),
-  #                                    sep = "_"),
-  #                              "_errorBucket2.xlsx"))
+  errorBucket2 %>%
+    writexl::write_xlsx(paste0(paste(getwd(), "test/", sep = "/"),
+                               paste(agente %>% pull(Coopac),
+                                     getIdProceso(agente),
+                                     agente %>% pull(PeriodoInicial),
+                                     agente %>% pull(PeriodoFinal),
+                                     sep = "_"),
+                               "_errorBucket2.xlsx"))
   
   return(errorBucket2)
 }
