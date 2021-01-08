@@ -124,14 +124,14 @@ procesarBucket2 <- function(agente, errorBucket){
     ungroup() %>%
     select(Codigo, Descripcion, Periodo, BDCC, Archivo, Cols_Creditos, nErrores) 
   
-  tblError %>% 
-    write.csv(paste0(paste(getwd(), "test/", sep = "/"),
-                     paste(agente %>% pull(Coopac),
-                           getIdProceso(agente),
-                           agente %>% pull(PeriodoInicial),
-                           agente %>% pull(PeriodoFinal),
-                           sep = "_"),
-                     "_errorBucket.csv"))
+  # tblError %>% 
+  #   write.csv(paste0(paste(getwd(), "test/", sep = "/"),
+  #                    paste(agente %>% pull(Coopac),
+  #                          getIdProceso(agente),
+  #                          agente %>% pull(PeriodoInicial),
+  #                          agente %>% pull(PeriodoFinal),
+  #                          sep = "_"),
+  #                    "_errorBucket.csv"))
   
   return(tblError)
 }
