@@ -36,6 +36,9 @@ interrogate   <- function(agente) {
   eb <- layer1(agente, eb) #estructura de columnas
   eb <- layer2(agente, eb) #errores OM 22269-2020
   # eb <- layer3(agent, eb) #alertas ad-hoc 11356
+  
+  agente <- agente %>% close_agent(bucket)
+  saveResults(agente, eb)
   return(eb)
 }
 close_agent   <- function(agente, errorBucket) {
@@ -131,12 +134,4 @@ procesarBucket2 <- function(agente, errorBucket){
                      "_errorBucket.csv"))
   
   return(tblError)
-}
-
-ejecutarValidador <- function(agente){
-  errorBucket  <- interrogate(agente)
-  errorBucket2 <- procesarBucket2(agente, errorBucket)
-  
-  agente <- close_agent(agente, errorBucket2)
-  save
 }
