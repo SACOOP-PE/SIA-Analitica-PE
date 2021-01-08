@@ -25,10 +25,19 @@ create_bucket <- function(agente){
          Descripcion = "Lorem ipsum ... ",
          Detalle     = list(c("1", "3", "2"))) %>% return()
 }
+close_agent   <- function(agente, errorBucket){
+  agente <- agente %>% 
+    mutate(
+      FinProceso = format(Sys.time(), "%a %b %d %X %Y"),
+      NroErrores = nrow(errorBucket),
+      Tramo      = paste0(PeriodoInicial, ":", PeriodoFinal)) %>% 
+    select(Coopac, NombreCoopac, IdProceso, InicioProceso, FinProceso, Tramo, NroErrores, PeriodoInicial, PeriodoFinal) %>%
+    return()
+}
 interrogate   <- function(agente) {
   eb <- create_bucket(agente)
   eb <- layer0(agent, eb) #pre-requisitos
-
+  
   if ((eb %>% pull(Cod)) %in% c(101,102)) {
     return(eb)
   }
@@ -40,15 +49,6 @@ interrogate   <- function(agente) {
   agente <- agente %>% close_agent(bucket)
   saveResults(agente, eb)
   return(eb)
-}
-close_agent   <- function(agente, errorBucket) {
-  agente <- agente %>% 
-    mutate(
-      FinProceso = format(Sys.time(), "%a %b %d %X %Y"),
-      NroErrores = nrow(errorBucket),
-      Tramo      = paste0(PeriodoInicial, ":", PeriodoFinal)) %>% 
-    select(Coopac, NombreCoopac, IdProceso, InicioProceso, FinProceso, Tramo, NroErrores, PeriodoInicial, PeriodoFinal) %>%
-    return()
 }
 
 create_bucket2  <- function(errorBucket, codigoError){
