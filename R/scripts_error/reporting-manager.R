@@ -2,7 +2,6 @@
 saveResults <- function(agente, errorBucket){
   ## agente ----
   agente %>%
-    mutate(Alcance = unlist(Alcance) %>%  toString()) %>%
     writexl::write_xlsx(paste0(paste(getwd(), "test/", sep = "/"),
                                paste(agente %>% pull(Coopac),
                                      getIdProceso(agente),
@@ -15,7 +14,7 @@ saveResults <- function(agente, errorBucket){
     mutate(Detalle = map_chr(Detalle, ~ .[[1]] %>% str_c(collapse = "; "))) %>%
     writexl::write_xlsx(paste0(paste(getwd(), "test/", sep = "/"),
                                paste(agente %>% pull(Coopac),
-                                     getIdProceso(header),
+                                     getIdProceso(agente),
                                      agente %>% pull(PeriodoInicial),
                                      agente %>% pull(PeriodoFinal),
                                      sep = "_"),
