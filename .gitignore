@@ -1,8 +1,6 @@
 test/datatest
-test/observaciones
 .Rproj.user
 .Rhistory
 .RData
 .Ruserdata
 *.txt
-*.xlsx
