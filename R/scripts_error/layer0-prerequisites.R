@@ -1,22 +1,46 @@
 #' Función principal 
 
 layer0 <- function(agent, eb){
-  carpeta   <- getCarpeta(agent)
+  
+  carpeta <- getCarpetaFromAgent(agent)
   exigibles <- getArchivosExigibles(agent)
   
+  eb <- eb %>% filter(Cod != 100) 
+  
   if (length(getDuplicados(carpeta, exigibles)) != 0) { 
-    eb <- eb %>% addError(101,getDescError(101),
-                          paste0("Archivos duplicados: ",toString(getDuplicados(carpeta, exigibles))))
+    
+    eb <- eb %>% addErrorIndividual(codcoopac = getCoopacFromAgent(agent),
+                                    idproceso = getIdProcesoFromAgent(agent),
+                                    cod = 101,
+                                    periodo = "",
+                                    bd = "",
+                                    arg_txt1 = toString(getDuplicados(carpeta, exigibles)),
+                                    arg_txt2 ="",
+                                    arg_txt3 = "",
+                                    arg_num1 = length(getDuplicados(carpeta, exigibles)),
+                                    arg_num2 = 0,
+                                    arg_num3 = 0)
+    
   }
   if (length(getFaltantes(carpeta, exigibles)) != 0) { 
-    eb <- eb %>% addError(102,getDescError(102), 
-                          paste0("Archivos faltantes: ",toString(getFaltantes(carpeta,exigibles))))
+    
+    eb <- eb %>% addErrorIndividual(codcoopac = getCoopacFromAgent(agent),
+                                    idproceso = getIdProcesoFromAgent(agent),
+                                    cod = 102,
+                                    periodo = "",
+                                    bd = "",
+                                    arg_txt1 = toString(getFaltantes(carpeta, exigibles)),
+                                    arg_txt2 ="",
+                                    arg_txt3 = "",
+                                    arg_num1 = length(getFaltantes(carpeta, exigibles)),
+                                    arg_num2 = 0,
+                                    arg_num3 = 0)
   }
   
-  print(paste0("Se validaron los prerequisitos satisfactoriamente. (~ly) ", format(Sys.time(), "%a %b %d %X %Y")))
+  print(eb)
   return(eb)
 }
-
+# eb, cod, periodo, bd, arg_txt1, arg_txt2, arg_txt3, arg_num1, arg_num2, arg_num3
 #' Funciones secundarias
 
 getDuplicados <- function(carpeta, exigibles){ 
@@ -28,9 +52,10 @@ getDuplicados <- function(carpeta, exigibles){
     unique() %>%  
     return()
 }
-
 getFaltantes  <- function(carpeta, exigibles){
   setdiff(exigibles,
           basename(list.files(path = carpeta, full.names = FALSE, recursive =  TRUE,  include.dirs = FALSE))) %>%
     return() 
 }
+
+

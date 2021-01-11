@@ -1,49 +1,66 @@
 #' función principal 
 #' layer1()
+#' 
+#' #errorBucket, codigoError, DescripcionError, PeriodoError, BDError, DetalleError01, DetalleError02, DetalleError03
 layer1 <- function(agent, eb){
-
-  carpeta   <- getCarpeta(agent)
-  exigibles <- getArchivosExigibles(agent)
+  
+  carpeta   <- getCarpetaFromAgent(agent)
+  exigibles <- getArchivosExigibles(agent) 
   
   tbl1_ctrl1 <- tibble(NombreArchivo = exigibles) %>% rowwise() %>%
-    mutate(Ruta          = getRuta(carpeta, NombreArchivo),
-           Coopac        = as.numeric(getCoopac(Ruta)),
-           Periodo       = getAnoMes(Ruta),
-           BDCC          = getBD(Ruta),
-           Columnas      = list(colnames(evaluarFile(Ruta))),
-           ColumnasOM   = getColumnasOM(BDCC),
+    mutate(ruta      = getRuta(carpeta, NombreArchivo),
+           CodCoopac = getCoopacFromAgent(agent),
+           IdProceso = getIdProcesoFromAgent(agent),
+           BD        = getBDFromRuta(ruta),
+           Columnas     = list(colnames(evaluarFile(ruta))),
+           ColumnasOM   = getColumnasOM(BD),
            ColFaltantes = ifelse(length(setdiff(ColumnasOM, Columnas))>0,
-                                 list(paste(NombreArchivo, (setdiff(ColumnasOM, Columnas)), sep ="$", collapse=",")),
-                                 list(character(0))),
+                                 toString(setdiff(ColumnasOM, Columnas)),
+                                 ""),
            ColSobrantes = ifelse(length(setdiff(Columnas, ColumnasOM))>0,
-                                 list(paste(NombreArchivo, (setdiff(Columnas, ColumnasOM)), sep ="$", collapse=",")),
-                                 list(character(0))),
-           ColVacias    = getColVacia(Ruta))
+                                 toString(setdiff(Columnas, ColumnasOM)),
+                                 ""),
+           ColVacias    = toString(getColVacia(ruta)),
+           is201        = ifelse(str_replace_all(ColFaltantes, pattern = " ", replacement = "") == "",0,1),
+           is202        = ifelse(str_replace_all(ColSobrantes, pattern = " ", replacement = "") == "",0,1),
+           is203        = ifelse(str_replace_all(ColVacias, pattern = " ", replacement = "") == "",0,1)) %>% 
+    filter(is201 == 1 | is202 == 1 | is203 == 1)
   
-   cf  <- (paste(tbl1_ctrl1 %>% rowwise() %>% pull(ColFaltantes), collapse = ",") %>% strsplit(","))[[1]]
-   cs  <- (paste(tbl1_ctrl1 %>% rowwise() %>% pull(ColSobrantes), collapse = ",") %>% strsplit(","))[[1]]
-   cv  <- (paste(tbl1_ctrl1 %>% rowwise() %>% pull(ColVacias), collapse = ",") %>% strsplit(","))[[1]]
+  print(tbl1_ctrl1)
   
-   if(length(cf[cf != "character(0)"]) > 0){
-     eb <- eb %>%
-       addError(201,getDescError(201), (cf[cf != "character(0)"]) %>% toString())
-     }
-   if(length(cs[cs != "character(0)"]) > 0){
-     eb <- eb %>%
-       addError(202,getDescError(202), (cs[cs != "character(0)"]) %>% toString())
-     }
-   if(length(cv[cv != "character(0)"]) > 0){
-     eb <- eb %>%
-       addError(203,getDescError(203), (cv[cv != "character(0)"]) %>% toString())
-   }
-   
-   n <- eb %>% filter(Cod %in% c(201,202,203)) %>% nrow()
-   if(n==1){
-     print(paste0("La revisión de consistencia concluyó con ",n, " observación. (~ly1) [", format(Sys.time(), "%a %b %d %X %Y"),"]"))
-   } else {
-     print(paste0("La revisión de consistencia concluyó con ",n, " observaciones. (~ly1) [", format(Sys.time(), "%a %b %d %X %Y"),"]"))
-   }
-
+  chunk_201 <- tbl1_ctrl1 %>% 
+    filter(is201 == 1) %>% rowwise() %>% 
+    mutate(Cod = 201,
+           Periodo = GetAnoMesFromRuta(toString(ruta)),
+           BD          = getBDFromRuta(toString(ruta)),
+           txt1 = str_replace_all(ColFaltantes, pattern = " ", replacement =""), 
+           num1 = ifelse(!is.na(txt1),length(str_split(string=txt1 ,pattern = ",")[[1]]),0)) %>%  
+    select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
+  
+  eb <- addErrorMasivo(eb, chunk_201)
+  
+  chunk_202 <- tbl1_ctrl1 %>% 
+    filter(is202 == 1) %>% rowwise() %>% 
+    mutate(Cod = 202,
+           Periodo = GetAnoMesFromRuta(toString(ruta)),
+           BD          = getBDFromRuta(toString(ruta)),
+           txt1 = str_replace_all(ColSobrantes, pattern = " ", replacement =""),  
+           num1 = ifelse(!is.na(txt1),length(str_split(string=txt1 ,pattern = ",")[[1]]),0)) %>% 
+    select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
+  
+  eb <- addErrorMasivo(eb, chunk_202)
+  
+  chunk_203 <- tbl1_ctrl1 %>%
+    filter(is203 == 1) %>% rowwise() %>%
+    mutate(Cod = 203,
+           Periodo = GetAnoMesFromRuta(toString(ruta)),
+           BD          = getBDFromRuta(toString(ruta)),
+           txt1 = str_replace_all(ColVacias, pattern = " ", replacement =""),  
+           num1 = ifelse(!is.na(txt1),length(str_split(string=txt1 ,pattern = ",")[[1]]),0)) %>%
+    select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1) 
+  
+  eb <- addErrorMasivo(eb, chunk_203)
+  print(eb)
   return(eb)
 }
 
@@ -52,8 +69,10 @@ layer1 <- function(agent, eb){
 #' getColVacia()
 #' evaluarFile()
 #' 
-getColumnasOM <- function(BDCC){ 
-  cols_base <- switch (BDCC,
+#' 
+
+getColumnasOM <- function(BD){ 
+  cols_base <- switch (BD,
                        BD01  = {initEstructuraBase() %>% filter(BD == "BD01") %>% pull(CAMPO) %>% list()},
                        BD02A = {initEstructuraBase() %>% filter(BD == "BD02A") %>% pull(CAMPO) %>% list()},
                        BD02B = {initEstructuraBase() %>% filter(BD == "BD02B") %>% pull(CAMPO) %>% list()},
@@ -62,19 +81,14 @@ getColumnasOM <- function(BDCC){
                        BD04  = {initEstructuraBase() %>% filter(BD == "BD04") %>% pull(CAMPO) %>% list()})
   cols_base %>% return()
 }
-getColVacia   <- function(ruta, BD = evaluarFile(ruta)){
+getColVacia  <- function(ruta, BD = evaluarFile(ruta)){
   cols_vacias <- intersect(BD[sapply(BD, function(x) all(is.na(x)))] %>% colnames(), 
-                           getColumnasOM(getBD(ruta)) %>% unlist())
+                           getColumnasOM(GetAnoMesFromRuta(ruta)) %>% unlist()) %>% return()
   
-  resultado <- generarDetalleError1(ruta, cols_vacias)
-  return(resultado)
 }
-evaluarFile   <- function(ruta){
+evaluarFile <- function(ruta){
   read_delim(ruta,"\t",escape_double = FALSE, trim_ws = TRUE, col_names = TRUE,
-             col_types = cols(.default = "c"), progress = T, na = "NA" ) %>% 
-    na_if("") %>%
+             col_types = cols(.default = "c")) %>%
     return()
+  
 }
-
-
-

@@ -1,154 +1,82 @@
-create_agent  <- function(idCoopac, 
-                          coopacCarpeta, 
-                          periodoInicial, 
-                          periodoFinal, 
-                          bds = c("BD01","BD02A","BD02B","BD03A","BD03B","BD04")){
-  round((runif(1,0,2) * 1000000),0) %>%   
-    tibble(Coopac       = idCoopac,
-           NombreCoopac = initCuadreContable() %>% filter(CODIGO_ENTIDAD == as.integer(idCoopac)) %>%
-             pull(ENTIDAD) %>% first(),
-           Carpeta      = coopacCarpeta,
-           IdProceso    = .,
-           InicioProceso  = format(Sys.time(), "%a %b %d %X %Y"), 
-           PeriodoInicial = periodoInicial,
-           PeriodoFinal   = periodoFinal,
-           Alcance        = bds) %>% return() 
+createAgent <- function(idCoopac,
+                        usuarioSIA,
+                        coopacCarpeta, 
+                        periodoInicial, 
+                        periodoFinal, 
+                        bds = c("BD01","BD02A","BD02B","BD03A","BD03B","BD04")){
+  
+  agent <- tibble(Coopac       = idCoopac,
+                  NombreCoopac = getNombreCoopacFromIdCoopac(Coopac),
+                  Carpeta      = coopacCarpeta,
+                  IdProceso    = getNextIdProceso(getLogObject("logging/log.txt")),
+                  Usuario      = usuarioSIA,
+                  InicioProceso  = format(Sys.time(), "%a %b %d %X %Y"), 
+                  PeriodoInicial = periodoInicial,
+                  PeriodoFinal   = periodoFinal,
+                  Alcance        = bds) 
+  
+  addEventLog(agent, paste0("Se da inicio al proceso ", agent %>% pull(IdProceso) %>% first(),". ~ Validador SIA 1.2.2021"), "I", "B")
+  return(agent)
 }
 
-create_bucket <- function(agente){
-  tibble(Coopac     = agente %>% pull(Coopac) %>% first(),
-         NombCoopac = agente %>% pull(NombreCoopac) %>% first(),
-         Carpeta    = agente %>% pull(Carpeta) %>% first(),
-         IdProceso  = agente %>% pull(IdProceso) %>% first(), 
+createBucket <- function(agent){
+  tibble(CodCoopac     = agent %>% pull(Coopac) %>% first(),
+         IdProceso  = agent %>% pull(IdProceso) %>% first(), 
          Cod         = 100,
-         Descripcion = "Lorem ipsum ... ",
-         Detalle     = list(c("1", "3", "2"))) %>% return()
+         Periodo = "",
+         BD = "",
+         txt1 = "",
+         txt2 = "",
+         txt3 = "",
+         num1 = 0,
+         num2 = 0,
+         num3 = 0) %>% return()
 }
-close_agent   <- function(agente, errorBucket){
-  agente <- agente %>% 
+
+interrogateAgent   <- function(agent) {
+  eb <- createBucket(agent)
+  
+  eb <- layer0(agent, eb) #pre-requisitos
+  
+  if (nrow(eb) > 0) {
+    if ((eb %>% pull(Cod)) %in% c(101,102)) {
+      print("Resultado final - El proceso se interrumpió debido a que no se cumplen los pre requisitos. Elaborar el PY. DE OFICIO y remitirlo al analista.")
+      return(eb)
+    }
+  }
+
+  #
+  eb <- layer1(agent, eb) #estructura de columnas
+  
+  if (nrow(eb) > 0) {
+    if ((eb %>% pull(Cod)) %in% c(201,202)) {
+       print("Resultado final - El proceso se interrumpió debido a que hay columnas sobrantes o faltantes. Elaborar el CORREO y remitirlo al analista.")
+       return(eb)
+    }
+  print("pass")
+  
+  #eb <- layer2a(agent,eb)
+  }
+  
+ 
+  #eb <- layer2(agent, eb) #errores OM 22269-2020
+  # eb <- layer3(agent, eb) #alertas ad-hoc 11356
+  
+  #Aqui estaba "closeAgent(eb)" lo saque por que solo retorna elbucket, no retorna el agent, por eso lo saco al .R test-agent.R 
+  #saveResults deprecated! 
+   
+  return(eb)
+}
+
+closeAgent   <- function(agent, eb){
+  agent <- agent %>% 
     mutate(
       FinProceso = format(Sys.time(), "%a %b %d %X %Y"),
-      NroErrores = nrow(errorBucket),
+      NroErrores = nrow(eb),
       Tramo      = paste0(PeriodoInicial, ":", PeriodoFinal)) %>% 
     select(Coopac, NombreCoopac, IdProceso, InicioProceso, FinProceso, Tramo, NroErrores, PeriodoInicial, PeriodoFinal) %>%
     return()
 }
-interrogate   <- function(agente) {
-  eb <- create_bucket(agente)
-  eb <- layer0(agent, eb) #pre-requisitos
-  
-  if ((eb %>% pull(Cod)) %in% c(101,102)) {
-    return(eb)
-  }
-  #
-  eb <- layer1(agente, eb) #estructura de columnas
-  eb <- layer2(agente, eb) #errores OM 22269-2020
-  # eb <- layer3(agent, eb) #alertas ad-hoc 11356
-  
-  agente <- agente %>% close_agent(eb)
-  saveResults(agente, eb)
-  return(eb)
-}
 
-create_bucket2  <- function(errorBucket, codigoError){
-  if (codigoError == 201 | codigoError == 202 | codigoError == 203) {
-    tblError <- tibble(Codigo = codigoError,
-                       Descripcion  = errorBucket %>% filter(Cod == Codigo) %>% pull(Descripcion),
-                       DetalleError =(errorBucket %>% filter(Cod == Codigo) %>% pull(Detalle) %>% str_split(","))[[1]],
-                       Periodo      = str_extract(DetalleError, paste(alcanceGeneral, collapse = '|'))) %>%
-      rowwise() %>% 
-      mutate(Archivo = str_extract(DetalleError,
-                                   getArchivosExigibles(agente = agent))[is.na(str_extract(DetalleError,
-                                                                                   getArchivosExigibles(agente = agent))) == FALSE],
-             BDCC          =(basename(Archivo) %>% strsplit("_"))[[1]][2],
-             Cols_Creditos = gsub("\\$","",str_split(DetalleError, pattern = "txt")[[1]][2])) %>% 
-      select(Codigo, Descripcion, Periodo, BDCC, Archivo, Cols_Creditos)
-    
-    return(tblError)
-    }
-  if (codigoError == 321 | codigoError == 322 | codigoError == 323 | codigoError == 467){
-    tblError <- tibble(Codigo = codigoError,
-                       Descripcion   = errorBucket %>% filter(Cod == Codigo) %>% pull(Descripcion),
-                       DetalleError =  errorBucket %>% filter(Cod == Codigo) %>% pull(Detalle) %>%
-                         strsplit(split = ")") %>% unlist(),
-                       Periodo      = str_extract(DetalleError, paste(alcanceGeneral, collapse = '|'))) %>%
-      rowwise() %>%
-      mutate(Archivo = "",
-             BDCC    = switch(toString(codigoError),
-                              "321" = "BD02A",
-                              "322" = "BD01",
-                              "323" = "BD03A",
-                              "467" = "BD03A"),
-             Cols_Creditos = unlist(str_split(gsub("\\(", "",gsub(Periodo, "", DetalleError)),
-                                              pattern = ","))[unlist(str_split(gsub("\\(", "",gsub(Periodo, "",DetalleError)), pattern = ","))!= ""] %>%
-               toString(),
-             nErrores = str_split(Cols_Creditos, pattern = ",") %>% unlist() %>% length()) %>%
-      select(Codigo, Descripcion, Periodo, BDCC, Archivo, Cols_Creditos, nErrores)
-    
-    return(tblError)
-    }
-  else{
-    tblError <- tibble(Codigo = codigoError,
-                       Descripcion  = errorBucket %>% filter(Cod == Codigo) %>% pull(Descripcion),
-                       DetalleError =  errorBucket %>% filter(Cod == Codigo) %>% pull(Detalle) %>%
-                         strsplit(split = ")") %>% unlist(),
-                       Periodo      = str_extract(DetalleError, paste(alcanceGeneral, collapse = '|'))) %>%
-      rowwise() %>%
-      mutate(Archivo = str_extract(DetalleError,
-                                   getArchivosExigibles(agente = agent))[is.na(str_extract(DetalleError,
-                                                                                   getArchivosExigibles(agente = agent))) == FALSE] %>%
-               toString(),
-             BDCC     = (basename(Archivo) %>% strsplit("_"))[[1]][2],
-             Cols_Creditos = unlist(str_split(gsub("\\(", "",gsub(Archivo, "", DetalleError)),
-                                              pattern = ","))[unlist(str_split(gsub("\\(", "",gsub(Archivo, "",DetalleError)), pattern = ","))!= ""] %>%
-               toString(),
-             nErrores = str_split(Cols_Creditos, pattern = ",") %>% unlist() %>% length()) %>%
-      select(Codigo, Descripcion, Periodo, BDCC, Archivo, Cols_Creditos, nErrores)
-    
-    return(tblError)
-  }
-}
-procesarBucket2 <- function(agente, errorBucket){
-  codErrores   <- errorBucket %>% pull(Cod)
-  errorBucket2 <- create_bucket2(errorBucket, codErrores[1])
-  
-  for (i in 1:length(codErrores)){
-    errorBucket2_i <- create_bucket2(errorBucket, codErrores[i])
-    errorBucket2   <- bind_rows(errorBucket2, errorBucket2_i)
-  }
-  
-  errorBucket2 <- errorBucket2 %>% 
-    group_by(Codigo, Descripcion, Periodo, BDCC, Archivo) %>% 
-    summarise(Cols_Creditos = toString(Cols_Creditos)) %>% 
-    mutate(nErrores = str_split(Cols_Creditos, ",")[[1]] %>% length(),
-           DescripcionFinal = if_else(nErrores == 1, 
-                                      paste(paste0((Descripcion %>% str_split(" ") %>% unlist())[1], " detectó", collapse = " "),
-                                            nErrores,
-                                            (Descripcion %>% str_split(" ") %>% unlist())[3] %>% str_remove("s"),
-                                            paste0((Descripcion %>% str_split(" ") %>% unlist())[4:length((Descripcion %>% str_split(" ") %>% unlist()))], collapse = " "),
-                                            " en el Periodo ",
-                                            Periodo,
-                                            " en la ",
-                                            BDCC),
-                                      paste(paste0((Descripcion %>% str_split(" ") %>% unlist())[1:2], collapse = " "),
-                                            nErrores,
-                                            paste0((Descripcion %>% str_split(" ") %>% unlist())[3:length((Descripcion %>% str_split(" ") %>% unlist()))], collapse = " "),
-                                            " en el Periodo ",
-                                            Periodo,
-                                            " en la ",
-                                            BDCC)
-                                      )) %>% 
-    ungroup() %>%
-    select(Codigo, DescripcionFinal, Periodo, BDCC, Archivo, Cols_Creditos, nErrores) 
-  
-  errorBucket2 %>%
-    writexl::write_xlsx(paste0(paste(getwd(), "test/", sep = "/"),
-                               paste(agente %>% pull(Coopac),
-                                     getIdProceso(agente),
-                                     agente %>% pull(PeriodoInicial),
-                                     agente %>% pull(PeriodoFinal),
-                                     sep = "_"),
-                               "_errorBucket2.xlsx"))
-  
-  return(errorBucket2)
-}
+ 
+
