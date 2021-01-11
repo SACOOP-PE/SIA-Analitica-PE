@@ -29,9 +29,9 @@ agent <- createAgent(idCoopac = "01172",
                      periodoInicial = "201907",
                      bds            = list(c("BD01", "BD02A", "BD02B", "BD03A", "BD03B", "BD04")))
 
-agent       <- closeAgent(agent, bucket)
 bucket      <- interrogateAgent(agent)
 ebFormatted <- formatBucket(bucket)
+agent       <- closeAgent(agent, bucket)
 print("**")
 print(agent)
 print(bucket)
