@@ -1,4 +1,5 @@
 test/datatest
-.Rhistory
 .Rproj.user
+.Rhistory
+.RData
 .Ruserdata
