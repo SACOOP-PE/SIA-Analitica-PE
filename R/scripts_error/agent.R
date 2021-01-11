@@ -77,6 +77,3 @@ closeAgent   <- function(agent, eb){
     select(Coopac, NombreCoopac, IdProceso, InicioProceso, FinProceso, Tramo, NroErrores, PeriodoInicial, PeriodoFinal) %>%
     return()
 }
-
- 
-

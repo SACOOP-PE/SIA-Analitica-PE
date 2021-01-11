@@ -17,7 +17,7 @@ getMesFromRuta    <- function(ruta){
   strsplit((basename(ruta) %>% strsplit("_"))[[1]][3], ".", fixed = TRUE)[[1]][1] %>%
     substr(5, 6) %>% return()
 }
-GetAnoMesFromRuta <- function(ruta){
+getAnoMesFromRuta <- function(ruta){
   strsplit((basename(ruta) %>% strsplit("_"))[[1]][3], ".", fixed = TRUE)[[1]][1] %>%
     return()
 }
