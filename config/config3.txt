@@ -8,8 +8,8 @@ Cod	Descripcion	Tipo
 302	El capital vencido de la cartera no cuadra con el balance de comprobación. 	Error no crítico
 303	El capital refinanciado no cuadra con el balance de comprobación. 	Error no crítico
 304	El capital de cobranza judicial no cuadra con el balance de comprobación. 	Error no crítico
-311	Se detectaron créditos/garantias duplicadas.	Error crítico
-312	Se detectaron créditos/garantías vacias.	Error crítico
+311	Se detectaron créditos/garantías vacias.	Error crítico
+312	Se detectaron créditos/garantias duplicadas.	Error crítico
 321	Se identificaron operaciones que no figuran en la cartera de créditos (BD01).	Error no crítico
 322	Se identificaron operaciones que no figuran en los cronogramas (BD02A).	Error no crítico
 323	Se identificaron garantías no reportadas en la base de datos de garantía entregada. 	Error no crítico
