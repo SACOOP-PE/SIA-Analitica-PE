@@ -1,6 +1,6 @@
-Cod	Descripcion	Tipo 
-101	Se interrumpió el proceso de análisis debido a que existen archivos duplicados en la ruta indicada. 	Error crítico
-102	Se interrumpió el proceso de análisis debido a que faltan archivos según lo indicado en la Coopac. 	Error crítico
+Cod	Descripcion	Tipo
+101	archivo(s) duplicados en la ruta indicada. 	Error crítico
+102	archivo(s) faltantes dentro de la ruta especificada. 	Error crítico
 201	Se identificaron columnas faltantes de acuerdo a lo especificado en el OM SBS N° 22269-2020.	Error no crítico
 202	Se identificaron columnas sobrantes de acuerdo a lo especificado en el OM SBS N° 22269-2020.	Error no crítico
 203	Se identificaron campos totalmente vacíos en la información proporcionada. 	Error no crítico
