@@ -253,7 +253,6 @@ realizarCruce <- function(agente, eb, periodo, BD1, BD2){
 }
 
 #Validar campos
-
 # Tipo1 ----
 getDigitosBD01  <- function(campo){
   digitos <- switch (campo,
