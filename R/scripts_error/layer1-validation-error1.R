@@ -1,16 +1,15 @@
 #' función principal 
 #' layer1()
 #' 
-#' #errorBucket, codigoError, DescripcionError, PeriodoError, BDError, DetalleError01, DetalleError02, DetalleError03
-layer1 <- function(agent, eb){
+layer1 <- function(agente, eb){
   
-  carpeta   <- getCarpetaFromAgent(agent)
-  exigibles <- getArchivosExigibles(agent) 
+  carpeta   <- getCarpetaFromAgent(agente)
+  exigibles <- getArchivosExigiblesFromAgent(agente) 
   
   tbl1_ctrl1 <- tibble(NombreArchivo = exigibles) %>% rowwise() %>%
     mutate(ruta      = getRuta(carpeta, NombreArchivo),
-           CodCoopac = getCoopacFromAgent(agent),
-           IdProceso = getIdProcesoFromAgent(agent),
+           CodCoopac = getCoopacFromAgent(agente),
+           IdProceso = getIdProcesoFromAgent(agente),
            BD        = getBDFromRuta(ruta),
            Columnas     = list(colnames(evaluarFile(ruta))),
            ColumnasOM   = getColumnasOM(BD),
@@ -26,12 +25,10 @@ layer1 <- function(agent, eb){
            is203        = ifelse(str_replace_all(ColVacias, pattern = " ", replacement = "") == "",0,1)) %>% 
     filter(is201 == 1 | is202 == 1 | is203 == 1)
   
-  print(tbl1_ctrl1)
-  
   chunk_201 <- tbl1_ctrl1 %>% 
     filter(is201 == 1) %>% rowwise() %>% 
     mutate(Cod = 201,
-           Periodo = GetAnoMesFromRuta(toString(ruta)),
+           Periodo = getAnoMesFromRuta(toString(ruta)),
            BD          = getBDFromRuta(toString(ruta)),
            txt1 = str_replace_all(ColFaltantes, pattern = " ", replacement =""), 
            num1 = ifelse(!is.na(txt1),length(str_split(string=txt1 ,pattern = ",")[[1]]),0)) %>%  
@@ -42,7 +39,7 @@ layer1 <- function(agent, eb){
   chunk_202 <- tbl1_ctrl1 %>% 
     filter(is202 == 1) %>% rowwise() %>% 
     mutate(Cod = 202,
-           Periodo = GetAnoMesFromRuta(toString(ruta)),
+           Periodo = getAnoMesFromRuta(toString(ruta)),
            BD          = getBDFromRuta(toString(ruta)),
            txt1 = str_replace_all(ColSobrantes, pattern = " ", replacement =""),  
            num1 = ifelse(!is.na(txt1),length(str_split(string=txt1 ,pattern = ",")[[1]]),0)) %>% 
@@ -53,14 +50,13 @@ layer1 <- function(agent, eb){
   chunk_203 <- tbl1_ctrl1 %>%
     filter(is203 == 1) %>% rowwise() %>%
     mutate(Cod = 203,
-           Periodo = GetAnoMesFromRuta(toString(ruta)),
+           Periodo = getAnoMesFromRuta(toString(ruta)),
            BD          = getBDFromRuta(toString(ruta)),
            txt1 = str_replace_all(ColVacias, pattern = " ", replacement =""),  
            num1 = ifelse(!is.na(txt1),length(str_split(string=txt1 ,pattern = ",")[[1]]),0)) %>%
     select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1) 
   
   eb <- addErrorMasivo(eb, chunk_203)
-  print(eb)
   return(eb)
 }
 
@@ -81,12 +77,12 @@ getColumnasOM <- function(BD){
                        BD04  = {initEstructuraBase() %>% filter(BD == "BD04") %>% pull(CAMPO) %>% list()})
   cols_base %>% return()
 }
-getColVacia  <- function(ruta, BD = evaluarFile(ruta)){
+getColVacia   <- function(ruta, BD = evaluarFile(ruta)){
   cols_vacias <- intersect(BD[sapply(BD, function(x) all(is.na(x)))] %>% colnames(), 
-                           getColumnasOM(GetAnoMesFromRuta(ruta)) %>% unlist()) %>% return()
+                           getColumnasOM(getAnoMesFromRuta(ruta)) %>% unlist()) %>% return()
   
 }
-evaluarFile <- function(ruta){
+evaluarFile   <- function(ruta){
   read_delim(ruta,"\t",escape_double = FALSE, trim_ws = TRUE, col_names = TRUE,
              col_types = cols(.default = "c")) %>%
     return()

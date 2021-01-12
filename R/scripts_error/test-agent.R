@@ -10,28 +10,29 @@ source("R/scripts_error/log-manager.R")
 source("R/scripts_error/reporting-manager.R")
 source("R/scripts_error/utils.R")
 
+# Inicializar agente.
+# Interrogar agente - Layer del 0 al 3. 
 # Cerrar agente.
-# Formatear bucket generado para comunicarlo por correo o por Oficio SBS. 
+# Formatear bucket generado para comunicarlo por correo o por Oficio SBS.
+
 # getArchivosFromAgent(agent)
 # getArchivosNoObservados(agent,bucket)
 # getArchivosNoObservadosByCols(agent, bucket, c("MON_C", "MCUO_C", "X29"))
 # getArchivosNoObservadosByErrors(agent,bucket,c(201))
 # getArchivosObservadosFromBucket(bucket)
-# Inicializar agente.
-# Interrogar agente - Layer del 0 al 3. 
+
 # Nuevas funciones para error-handling
-# print(ebFormatted)
 ##### Testing -----
 agent <- createAgent(idCoopac = "01172",
                      usuarioSIA = "DPACHECO",
                      coopacCarpeta  = "test/datatest",
-                     periodoFinal   = "202006",
-                     periodoInicial = "201907",
+                     periodoInicial = "201901",
+                     periodoFinal   = "201910",
                      bds            = list(c("BD01", "BD02A", "BD02B", "BD03A", "BD03B", "BD04")))
 
 bucket      <- interrogateAgent(agent)
-ebFormatted <- formatBucket(bucket)
 agent       <- closeAgent(agent, bucket)
+ebFormatted <- formatBucket(bucket)
 print("**")
 print(agent)
 print(bucket)

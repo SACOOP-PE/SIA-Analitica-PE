@@ -55,7 +55,7 @@ getArchivosExigiblesFromAgent <- function(agent){
   id_bds     <- (agent %>% pull(Alcance))[[1]]
   periodos   <- global.alcance
   periodo_inicio <- agent %>% pull(PeriodoInicial) %>% first()
-  periodo_final  <- agent %>% pull(PeriodoFinal) %>% first()
+  periodo_final  <- agent %>% pull(PeriodoFinal)
   
   apply(expand.grid(cod_coopac, id_bds,
                     paste0(periodos[(periodos >= periodo_inicio) &

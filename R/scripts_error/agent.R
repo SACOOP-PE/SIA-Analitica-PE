@@ -19,7 +19,7 @@ createAgent <- function(idCoopac,
   return(agent)
 }
 
-createBucket <- function(agent){
+createBucket     <- function(agent){
   tibble(CodCoopac     = agent %>% pull(Coopac) %>% first(),
          IdProceso  = agent %>% pull(IdProceso) %>% first(), 
          Cod         = 100,
@@ -32,8 +32,7 @@ createBucket <- function(agent){
          num2 = 0,
          num3 = 0) %>% return()
 }
-
-interrogateAgent   <- function(agent) {
+interrogateAgent <- function(agent){
   eb <- createBucket(agent)
   
   eb <- layer0(agent, eb) #pre-requisitos
@@ -67,8 +66,7 @@ interrogateAgent   <- function(agent) {
    
   return(eb)
 }
-
-closeAgent   <- function(agent, eb){
+closeAgent       <- function(agent, eb){
   agent <- agent %>% 
     mutate(
       FinProceso = format(Sys.time(), "%a %b %d %X %Y"),
