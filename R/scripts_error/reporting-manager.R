@@ -4,9 +4,9 @@ formatBucket <- function(bucket) {
     rowwise() %>% 
     mutate(Descripcion = case_when(Cod == 101 ~ paste0("Se identificaron ", pad2(num1), " archivo(s) duplicados dentro de la ruta especificada. (",txt1,")"),
                                Cod == 102 ~ paste0("Se identificaron ", pad2(num1)," archivo(s) faltantes dentro de la ruta especificada. (",txt1,")"),
-                               Cod == 201 ~ paste0("Se identificaron ", pad2(num1), " columna(s) faltantes en la ", BD, " correspondiente al periodo de ", Periodo, ".(",txt1,")"),
-                               Cod == 202 ~ paste0("Se identificaron ", pad2(num1), " columna(s) sobrantes en la ", BD, " correspondiente al periodo de ", Periodo, ".(", txt1, ")"),
-                               Cod == 203 ~ paste0("Se identificaron ", pad2(num1), " columna(s) sobrantes en la ", BD, " correspondiente al periodo de ", Periodo, ".(", txt1, ")"))) %>% 
+                               Cod == 201 ~ paste0("Se identificaron ", pad2(num1), " columna(s) faltantes en la ", BD, " correspondiente al periodo de ", periodoEscrito(Periodo), ".(",txt1,")"),
+                               Cod == 202 ~ paste0("Se identificaron ", pad2(num1), " columna(s) sobrantes en la ", BD, " correspondiente al periodo de ", periodoEscrito(Periodo), ".(", txt1, ")"),
+                               Cod == 203 ~ paste0("Se identificaron ", pad2(num1), " columna(s) vacias en la ", BD, " correspondiente al periodo de ", periodoEscrito(Periodo), ".(", txt1, ")"))) %>% 
     select(Cod, Descripcion)
   
   return(output)

@@ -66,6 +66,12 @@ layer1 <- function(agente, eb){
 #' evaluarFile()
 #' 
 #' 
+evaluarFile   <- function(ruta){
+  read_delim(ruta,"\t",escape_double = FALSE, trim_ws = TRUE, col_names = TRUE,
+             col_types = cols(.default = "c")) %>%
+    return()
+  
+}
 
 getColumnasOM <- function(BD){ 
   cols_base <- switch (BD,
@@ -78,13 +84,11 @@ getColumnasOM <- function(BD){
   cols_base %>% return()
 }
 getColVacia   <- function(ruta, BD = evaluarFile(ruta)){
-  cols_vacias <- intersect(BD[sapply(BD, function(x) all(is.na(x)))] %>% colnames(), 
-                           getColumnasOM(getAnoMesFromRuta(ruta)) %>% unlist()) %>% return()
-  
+  colsVacias <- intersect(BD[sapply(BD, function(x) all(is.na(x)))] %>% colnames(),
+                            getColumnasOM(getBDFromRuta(ruta)) %>% unlist())
+
+  return(colsVacias)
 }
-evaluarFile   <- function(ruta){
-  read_delim(ruta,"\t",escape_double = FALSE, trim_ws = TRUE, col_names = TRUE,
-             col_types = cols(.default = "c")) %>%
-    return()
-  
-}
+
+
+
