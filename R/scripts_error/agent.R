@@ -52,17 +52,11 @@ interrogateAgent <- function(agent){
        print("Resultado final - El proceso se interrumpió debido a que hay columnas sobrantes o faltantes. Elaborar el CORREO y remitirlo al analista.")
        return(eb)
     }
-  print("pass")
-  
-  #eb <- layer2a(agent,eb)
   }
   
- 
-  #eb <- layer2(agent, eb) #errores OM 22269-2020
+  #
+  eb <- layer2(agent, eb) #errores OM 22269-2020
   # eb <- layer3(agent, eb) #alertas ad-hoc 11356
-  
-  #Aqui estaba "closeAgent(eb)" lo saque por que solo retorna elbucket, no retorna el agent, por eso lo saco al .R test-agent.R 
-  #saveResults deprecated! 
    
   return(eb)
 }
