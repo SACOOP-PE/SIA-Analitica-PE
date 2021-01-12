@@ -166,26 +166,26 @@ validarCampos                <- function(agente, eb){
   cod <- 462
   for (z in 462:467){
     eb <- procesarErroresT2(agente, eb, exigibles, cod)
-    cod <- cod + 1
+    cod <- cod +1
   }
-
+  
   # iii. Errores tipo3 ----
   exigibles <- exigibles[str_detect(exigibles, paste(c("BD01","BD02A","BD02B","BD04"), collapse = '|'))]
-  
+
   for (m in 1:length(exigibles)) {
     ruta_m <- getRuta(carpeta, exigibles[m])
     eb     <- procesarErroresT3(agente, ruta_m, eb)
   }
-  
+
   exigibles <- intersect(exigibles[str_detect(exigibles, "BD01")], getArchivosNoObservadosByCols(agent, eb, "FOT"))
-  
+
     error479 <- tibble(Archivo = exigibles) %>% rowwise() %>%
       mutate(ruta      = getRuta(getCarpetaFromAgent(agente), Archivo),
              verificar = procesarErrorFechaDesembolso(ruta) %>%
                             unique() %>% toString(),
-             Cod       = 479) %>% 
+             Cod       = 479) %>%
       filter(verificar != "")
-  
+
     if (nrow(error479) >0) {
       chunk479 <- error479 %>% rowwise() %>%
         mutate(CodCoopac = getCoopacFromAgent(agente),
@@ -195,10 +195,9 @@ validarCampos                <- function(agente, eb){
                txt2 = verificar,
                num2 = length(str_split(string=txt2 ,pattern = ",")[[1]])) %>%
         select(CodCoopac, IdProceso, Cod, Periodo, BD, txt2, num2)
-      
+
       eb <- addErrorMasivo(eb, chunk479)
     }
-    
   
   n <- eb %>% filter(Cod %in% c(400:500)) %>% nrow()
   print(paste0("La validación interna de acuerdo a la Res.SBS N°22269-2020 concluyó con ", n, " observaciones. (~ly2) ", format(Sys.time(), "%a %b %d %X %Y")))
@@ -424,8 +423,8 @@ procesarErroresT2 <- function(agente, eb, exigibles, codigoError){
         select(CodCoopac, IdProceso, Cod, Periodo, BD, txt2, num2)
       
       eb <- addErrorMasivo(eb, chunkT2)
-    }
-    return(bucket)
+      }
+    return(eb)
     }
 }
 
@@ -532,9 +531,10 @@ procesarErrorNumCredCobertura <- function(ruta, BD = evaluarFile(ruta)){
 
 #BD3A y BD01
 procesarErrorcodDeudor <- function(agente, eb, periodo){
-  archivos      <- getArchivosNoObservadosByCols(agente, eb, "CIS")
+  archivos  <- getArchivosNoObservadosByCols(agente, eb, "CIS")
   archCruce <- archivos[str_detect(archivos, 
-                                        paste(c(paste("BD03A", periodo, sep = "_"), paste("BD01", periodo, sep = "_")), collapse = '|'))]
+                                   paste(c(paste0("BD03A", "_", periodo), paste0("BD01", "_", periodo)), collapse = '|'))]
+  
   
   cruce <- setdiff(evaluarFile(getRuta(getCarpetaFromAgent(agente), archCruce[str_detect(archCruce, "BD03A")])) %>% pull(CIS),
                    evaluarFile(getRuta(getCarpetaFromAgent(agente), archCruce[str_detect(archCruce, "BD01")])) %>% pull(CIS)
