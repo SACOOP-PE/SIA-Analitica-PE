@@ -44,41 +44,41 @@ getNombreArchivoFromRuta  <- function(ruta){
 
 
 # Funciones auxiliares - Agent
-getCarpetaFromAgent           <- function(agent){ 
-  agent %>% pull(Carpeta) %>% first() %>% return()
+getCarpetaFromAgent           <- function(agente){ 
+  agente %>% pull(Carpeta) %>% first() %>% return()
 }
-getIdProcesoFromAgent         <- function(agent){
-  agent %>% pull(IdProceso) %>% first() %>% return()
+getIdProcesoFromAgent         <- function(agente){
+  agente %>% pull(IdProceso) %>% first() %>% return()
 }
-getArchivosExigiblesFromAgent <- function(agent){
-  cod_coopac <- agent %>% pull(Coopac) %>% first()
-  id_bds     <- (agent %>% pull(Alcance))[[1]]
+getArchivosExigiblesFromAgent <- function(agente){
+  cod_coopac <- agente %>% pull(Coopac) %>% first()
+  id_bds     <- (agente %>% pull(Alcance))[[1]]
   periodos   <- global.alcance
-  periodo_inicio <- agent %>% pull(PeriodoInicial) %>% first()
-  periodo_final  <- agent %>% pull(PeriodoFinal)
+  periodo_inicio <- agente %>% pull(PeriodoInicial) %>% first()
+  periodo_final  <- agente %>% pull(PeriodoFinal)
   
   apply(expand.grid(cod_coopac, id_bds,
                     paste0(periodos[(periodos >= periodo_inicio) &
                                       (periodos <= periodo_final)], ".txt")),
         1, paste, collapse = "_") %>% return()
 }
-getNombreCoopacFromAgent      <- function(agent){ 
-  agent %>% pull(NombreCoopac) %>% first() %>% return()
+getNombreCoopacFromAgent      <- function(agente){ 
+  agente %>% pull(NombreCoopac) %>% first() %>% return()
 }
-getCoopacFromAgent            <- function(agent){ 
-  agent %>% pull(Coopac) %>% first() %>% return()
+getCoopacFromAgent            <- function(agente){ 
+  agente %>% pull(Coopac) %>% first() %>% return()
 }
-getUsuarioFromAgent           <- function(agent){ 
-  agent %>% pull(Usuario) %>% first() %>% return()
+getUsuarioFromAgent           <- function(agente){ 
+  agente %>% pull(Usuario) %>% first() %>% return()
 }
-getInicioProcesoFromAgent     <- function(agent){ 
-  agent %>% pull(PeriodoInicial) %>% first() %>% return()
+getInicioProcesoFromAgent     <- function(agente){ 
+  agente %>% pull(PeriodoInicial) %>% first() %>% return()
 }
-getFinProcesoFromAgent        <- function(agent){ 
-  agent %>% pull(PeriodoFinal) %>% first() %>% return()
+getFinProcesoFromAgent        <- function(agente){ 
+  agente %>% pull(PeriodoFinal) %>% first() %>% return()
 }
-getAlcanceFromAgent           <- function(agent){ 
-  agent %>% pull(Alcance) %>% first() %>% return()
+getAlcanceFromAgent           <- function(agente){ 
+  agente %>% pull(Alcance) %>% first() %>% return()
 }
 getNombreCoopacFromIdCoopac   <- function(idCoopac){
   initCuadreContable() %>% filter(CODIGO_ENTIDAD == as.integer(idCoopac)) %>% pull(ENTIDAD) %>% first()
