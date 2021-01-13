@@ -255,21 +255,17 @@ getoperacionesDuplicadas <- function(ruta){
 }
 
 #validarCruceInterno
-realizarCruce <- function(agente, eb, periodo, BD1, BD2){ #redundancia, nombre variables
-  archivos  <- getArchivosNoObservados(agent, eb) # eliminar
-  archCruce <- archivos[str_detect(archivos, 
-                                   paste(c(paste0(BD1, "_", periodo), paste0(BD2, "_", periodo)), collapse = '|'))]
-
-  #variables para cada evaluarFile
+realizarCruce <- function(agente, periodo, data1, data2){
   
-  cruce <- setdiff(evaluarFile(getRuta(getCarpetaFromAgent(agente), archCruce[str_detect(archCruce, BD1)])) %>%
-                     pull(getCodigoBD(BD1)),
-                   evaluarFile(getRuta(getCarpetaFromAgent(agente), archCruce[str_detect(archCruce, BD2)])) %>%
-                     pull(getCodigoBD(BD2))) %>%
+  archivo1 <- getRuta(getCarpetaFromAgent(agente), 
+                      paste0(paste(getCoopacFromAgent(agente), data1, periodo, sep  = "_"), ".txt"))
+  archivo2 <- getRuta(getCarpetaFromAgent(agente), 
+                      paste0(paste(getCoopacFromAgent(agente), data2, periodo, sep  = "_"), ".txt"))
+  
+  setdiff(evaluarFile(getRuta(getCarpetaFromAgent(agente), archivo1)) %>% pull(getCodigoBD(data1)),
+          evaluarFile(getRuta(getCarpetaFromAgent(agente), archivo2)) %>% pull(getCodigoBD(data2))) %>%
     unique() %>%
-    toString()
-  
-  return(cruce)
+    return()
 }
 
 #Validar campos
