@@ -60,4 +60,3 @@ getFaltantes  <- function(carpeta, exigibles){
           basename(list.files(path = carpeta, full.names = FALSE, recursive =  TRUE,  include.dirs = FALSE))) %>%
     return() 
 }
- 

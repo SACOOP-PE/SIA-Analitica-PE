@@ -87,6 +87,7 @@ validarOperacionesDuplicadas <- function(agente, eb){
   return(eb)
 }
 validarCruceInterno          <- function(agente, eb){
+  
   if (length(getPeriodosNoObservados(agente, eb, "CCR")) >0){
     
     cruce1 <- tibble(Periodo   = getPeriodosNoObservados(agente, eb, "CCR")) %>% rowwise() %>%
@@ -144,7 +145,14 @@ validarCruceInterno          <- function(agente, eb){
   }
 
   n <- eb %>% filter(Cod %in% c(321, 322, 323)) %>% nrow()
-  print(paste0("La validación interna BD01/BD02A y BD03A/BD03B concluyó con ", n, " observaciones. (~ly2) ", format(Sys.time(), "%a %b %d %X %Y")))
+  
+  if (n == 0) {
+    addEventLog(agente, paste0("La validación cruce interno concluyó sin observaciones. (~ly2) "), "I", "B")
+  }
+  else{
+    
+    addEventLog(agente, paste0("La validación cruce interno concluyó con ", n, " observación. (~ly2) "), "I", "B")
+  }
   
   return(eb)
 }
@@ -179,15 +187,14 @@ validarCampos                <- function(agente, eb){
   }
 
   exigibles <- intersect(exigibles[str_detect(exigibles, "BD01")], getArchivosNoObservadosByCols(agent, eb, "FOT"))
-
-    error479 <- tibble(Archivo = exigibles) %>% rowwise() %>%
-      mutate(ruta      = getRuta(getCarpetaFromAgent(agente), Archivo),
-             verificar = procesarErrorFechaDesembolso(ruta) %>%
-                            unique() %>% toString(),
-             Cod       = 479) %>%
-      filter(verificar != "")
-
-    if (nrow(error479) >0) {
+  error479 <- tibble(Archivo = exigibles) %>% rowwise() %>%
+    mutate(ruta      = getRuta(getCarpetaFromAgent(agente), Archivo),
+           verificar = procesarErrorFechaDesembolso(ruta) %>%
+                          unique() %>% toString(),
+           Cod       = 479) %>%
+    filter(verificar != "")
+  
+  if (nrow(error479) >0) {
       chunk479 <- error479 %>% rowwise() %>%
         mutate(CodCoopac = getCoopacFromAgent(agente),
                IdProceso = getIdProcesoFromAgent(agente),
@@ -201,7 +208,15 @@ validarCampos                <- function(agente, eb){
     }
   
   n <- eb %>% filter(Cod %in% c(400:500)) %>% nrow()
-  print(paste0("La validación interna de acuerdo a la Res.SBS N°22269-2020 concluyó con ", n, " observaciones. (~ly2) ", format(Sys.time(), "%a %b %d %X %Y")))
+  
+  if (n == 0) {
+    addEventLog(agente, paste0("La validación de los campos concluyó sin observaciones. (~ly2) "), "I", "B")
+  }
+  else{
+    
+    addEventLog(agente, paste0("La validación de los campos concluyó con ", n, " observación. (~ly2) "), "I", "B")
+  }
+  
   return(eb)
 }
 
@@ -215,6 +230,14 @@ getCodigoBD <- function(bd){
                      bd == "BD04"  ~ "CCR_C")
   return(campo)
 }
+
+#validarOperacionesVacias
+operacionesVacias <- function(ruta, BD = evaluarFile(ruta)){
+  vacios <- BD %>% 
+    select(getCodigoBD(getBDFromRuta(ruta))[1]) %>%
+    sapply(function(x) sum(is.na(x))) %>% return()
+}
+
 #validarOperacionesDuplicadas
 operacionesDuplicadas <- function(ruta){
   if (getBDFromRuta(ruta) == "BD01" | getBDFromRuta(ruta) == "BD03A") {
@@ -228,13 +251,6 @@ operacionesDuplicadas <- function(ruta){
   else {
     return(list(character(0)))
     }  
-}
-
-#validarOperacionesVacias
-operacionesVacias <- function(ruta, BD = evaluarFile(ruta)){
-  vacios <- BD %>% 
-    select(getCodigoBD(getBDFromRuta(ruta))[1]) %>%
-    sapply(function(x) sum(is.na(x))) %>% return()
 }
 
 #validarCruceInterno
@@ -386,7 +402,7 @@ procesarErroresT2 <- function(agente, eb, exigibles, codigoError){
              verificar = switch (toString(codigoError),
                                  "462"= procesarErrorModalidadCouta(ruta),
                                  "463"= procesarErrorMontoOtorgado(ruta),
-                                 "464"= procesarErrorVencJudRetraso(ruta),
+                                 "464"= procesarErrorVencRetraso(ruta),
                                  "465"= procesarErrorDocumentoIdent(ruta),
                                  "466"= procesarErrorNumCredCobertura(ruta)) %>%
                  unique() %>% toString(),
@@ -431,9 +447,7 @@ procesarErroresT2 <- function(agente, eb, exigibles, codigoError){
 #BD01
 procesarErrorSaldosNegativos <- function(agente, ruta, eb){
   BD         <- evaluarFile(ruta)
-  saldosCols <- setdiff(c("SKCR", "PCI", "KVI", "KRF", "KVE", "KJU", "SIN", "SID", "SIS", "DGR", "NCPR", "NCPA", "TPINT", "NRPRG"),
-                        unlist(eb %>% filter(BD == getBDFromRuta(ruta) & Periodo == getAnoMesFromRuta(ruta) & Cod == 203) %>% pull(txt1) %>%
-                                 str_split(",")))
+  saldosCols <- getColsNoObservadas(ruta, eb, saldos)
   
   if (length(saldosCols) >0) {
     errorSaldos <- tibble(Columna = saldosCols) %>%
@@ -460,17 +474,17 @@ procesarErrorSaldosNegativos <- function(agente, ruta, eb){
   }
   return(eb)
 }
-procesarErrorModalidadCouta  <- function(ruta, BD = evaluarFile(ruta)){
+procesarErrorModalidadCouta <- function(ruta, BD = evaluarFile(ruta)){
   BD %>%
     filter(((as.numeric(ESAM) < 5) & (as.numeric(NCPR) == 0 | as.numeric(PCUO)  == 0)) == TRUE) %>%
     pull(CCR) %>% return()
 }
-procesarErrorMontoOtorgado   <- function(ruta, BD = evaluarFile(ruta)){
+procesarErrorMontoOtorgado  <- function(ruta, BD = evaluarFile(ruta)){
   BD %>% filter(as.numeric(MORG) < as.numeric(SKCR)) %>%
     pull(CCR) %>%
     return()
 }
-procesarErrorVencJudRetraso  <- function(ruta, BD = evaluarFile(ruta)){
+procesarErrorVencRetraso    <- function(ruta, BD = evaluarFile(ruta)){
   BD %>% 
     filter((as.numeric(KVE) > 0 & as.numeric(DAK) == 0)) %>% 
     pull (CCR) %>% return()
@@ -671,7 +685,9 @@ getColsNoObservadas             <- function(ruta, eb, tipoError){
   
   cols <- switch (tipoError,
                   T1 = setdiff(getColsErrorT1(ruta), colsError),
-                  T3 = setdiff(getColsErrorT3(ruta), colsError))
+                  T3 = setdiff(getColsErrorT3(ruta), colsError),
+                  saldos = setdiff(c("SKCR", "PCI", "KVI", "KRF", "KVE", "KJU", "SIN", "SID", "SIS", "DGR", "NCPR", "NCPA", "TPINT", "NRPRG"),
+                                   colsError))
   
   return(cols)
 }

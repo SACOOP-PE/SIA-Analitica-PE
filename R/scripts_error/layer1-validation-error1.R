@@ -81,7 +81,7 @@ getColumnasOM <- function(BD){
                        BD03A = {initEstructuraBase() %>% filter(BD == "BD03A") %>% pull(CAMPO) %>% list()},
                        BD03B = {initEstructuraBase() %>% filter(BD == "BD03B") %>% pull(CAMPO) %>% list()},
                        BD04  = {initEstructuraBase() %>% filter(BD == "BD04") %>% pull(CAMPO) %>% list()})
-  cols_base %>% return()
+  return(cols_base)
 }
 getColVacia   <- function(ruta, BD = evaluarFile(ruta)){
   colsVacias <- intersect(BD[sapply(BD, function(x) all(is.na(x)))] %>% colnames(),
@@ -89,6 +89,3 @@ getColVacia   <- function(ruta, BD = evaluarFile(ruta)){
 
   return(colsVacias)
 }
-
-
-
