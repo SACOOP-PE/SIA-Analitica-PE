@@ -13,6 +13,6 @@ ejecutarDecteccionAlertBD03 <-function(header, listaErrores, alertBucket){
         addAlerta(2029, getResponAlerta(2029), getDescAlerta(2029), (alert2029[alert2029 != "character(0)"]) %>% toString())
     }
     
-  print(paste0("Terminó la detectación de alertas BD03: ", format(Sys.time(), "%a %b %d %X %Y")))
+  print(paste0("Terminó la detección de alertas BD03: ", format(Sys.time(), "%a %b %d %X %Y")))
   return(alertBucket)
 }

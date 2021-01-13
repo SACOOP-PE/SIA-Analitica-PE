@@ -1,5 +1,5 @@
 ## Gestion de errores----
-addErrorIndividual <- function(agente, codcoopac, errorbucket, idproceso, cod, periodo, bd, 
+addErrorIndividual <- function(errorbucket, agente, codcoopac, idproceso, cod, periodo, bd, 
                                arg_txt1, arg_txt2, arg_txt3,
                                arg_num1, arg_num2, arg_num3){
   t <- tibble(CodCoopac = codcoopac,
@@ -13,8 +13,8 @@ addErrorIndividual <- function(agente, codcoopac, errorbucket, idproceso, cod, p
               num1    = arg_num1,
               num2    = arg_num2,
               num3    = arg_num3)
-  
-  addEventLog(agente, paste0("Bucket de errores actualizado. PID-", agente %>% pull(IdProceso) %>% first(),"."), "I", "B")
+ 
+
   return(bind_rows(errorbucket,t))
 } 
 

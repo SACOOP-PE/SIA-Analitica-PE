@@ -15,7 +15,7 @@ return(eb)
 #' validarCruceInterno
 #' validarCampos
 
-#Issue https://github.com/SACOOP-PE/SIA-Analitica-PE/issues/12#issue-775181380
+ 
 validarOperacionesVacias     <- function(agente, eb){
   carpeta   <- getCarpetaFromAgent(agente)
   exigibles <- getArchivosNoObservadosByCols(agente, eb, c("CCR", "CCR_C", "CODGR"))
@@ -41,11 +41,11 @@ validarOperacionesVacias     <- function(agente, eb){
   
   n <- eb %>% filter(Cod %in% c(311)) %>% nrow()
   
-  if (n == 0) {
-    print(paste0("La validación de operaciones vacías concluyó con ", n, " observaciones. (~ly2) ", format(Sys.time(), "%a %b %d %X %Y")))
+  if (n == 0) {  
+    addEventLog(agente, paste0("La validación de operaciones vacías concluyó sin observaciones. (~ly2)"), "I", "B") 
   }
   else{
-    print(paste0("La validación de operaciones vacías concluyó con ", n, " observación. (~ly2) ", format(Sys.time(), "%a %b %d %X %Y")))
+    addEventLog(agente, paste0("La validación de operaciones vacías concluyó con ", n, " observaciones. (~ly2)"), "I", "B")
   }
   
   return(eb)
@@ -77,10 +77,11 @@ validarOperacionesDuplicadas <- function(agente, eb){
   n <- eb %>% filter(Cod %in% c(312)) %>% nrow()
   
   if (n == 0) {
-    print(paste0("La validación de operaciones duplicadas concluyó con ", n, " observaciones. (~ly2) ", format(Sys.time(), "%a %b %d %X %Y")))
+    addEventLog(agente, paste0("La validación de operaciones duplicadas concluyó sin observaciones. (~ly2) "), "I", "B")
   }
   else{
-    print(paste0("La validación de operaciones duplicadas concluyó con ", n, " observación. (~ly2) ", format(Sys.time(), "%a %b %d %X %Y")))
+    
+    addEventLog(agente, paste0("La validación de operaciones duplicadas concluyó con ", n, " observación. (~ly2) "), "I", "B")
   }
   
   return(eb)
@@ -238,7 +239,7 @@ operacionesVacias <- function(ruta, BD = evaluarFile(ruta)){
 
 #validarCruceInterno
 realizarCruce <- function(agente, eb, periodo, BD1, BD2){
-  archivos  <- getArchivosNoObservados(agent, bucket)
+  archivos  <- getArchivosNoObservados(agent, eb)
   archCruce <- archivos[str_detect(archivos, 
                                    paste(c(paste0(BD1, "_", periodo), paste0(BD2, "_", periodo)), collapse = '|'))]
   

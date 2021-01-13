@@ -9,7 +9,7 @@ layer0 <- function(agente, errorBucket){
   
   if (length(getDuplicados(carpeta, exigibles)) != 0) { 
     
-    errorBucket <- errorBucket %>% addErrorIndividual(codcoopac = getCoopacFromAgent(agente),
+    errorBucket <- errorBucket %>% addErrorIndividual(agente, codcoopac = getCoopacFromAgent(agente),
                                     idproceso = getIdProcesoFromAgent(agente),
                                     cod = 101,
                                     periodo = "",
@@ -20,11 +20,13 @@ layer0 <- function(agente, errorBucket){
                                     arg_num1 = length(getDuplicados(carpeta, exigibles)),
                                     arg_num2 = 0,
                                     arg_num3 = 0)
-    
+    addEventLog(agent, paste0("    Error: Se identificaron archivos duplicados."), "I", "B")
   }
+ 
+  
   if (length(getFaltantes(carpeta, exigibles)) != 0) { 
     
-    errorBucket <- errorBucket %>% addErrorIndividual(codcoopac = getCoopacFromAgent(agente),
+    errorBucket <- errorBucket %>% addErrorIndividual(agente, codcoopac = getCoopacFromAgent(agente),
                                     idproceso = getIdProcesoFromAgent(agente),
                                     cod = 102,
                                     periodo = "",
@@ -35,7 +37,9 @@ layer0 <- function(agente, errorBucket){
                                     arg_num1 = length(getFaltantes(carpeta, exigibles)),
                                     arg_num2 = 0,
                                     arg_num3 = 0)
+    addEventLog(agent, paste0("    Error: Se identificaron archivos faltantes."), "I", "B")
   }
+ 
   
   return(errorBucket)
 }
@@ -56,3 +60,4 @@ getFaltantes  <- function(carpeta, exigibles){
           basename(list.files(path = carpeta, full.names = FALSE, recursive =  TRUE,  include.dirs = FALSE))) %>%
     return() 
 }
+ 

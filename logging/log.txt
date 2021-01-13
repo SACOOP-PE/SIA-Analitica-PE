@@ -94,3 +94,246 @@ IdProceso	Fecha	Hora	Usuario	Coopac	Carpeta	Descripcion	Categoria	Criticidad
 100082	2021-01-11	2021-01-11 10:24:31	DPACHECO	SAN MARTÍN DE PORRES	test/datatest2	Se da inicio al proceso 100082. ~ Validador SIA 1.2.2021	Informativo	Baja
 100083	2021-01-11	2021-01-11 16:27:05	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	Se da inicio al proceso 100083. ~ Validador SIA 1.2.2021	Informativo	Baja
 100084	2021-01-12	2021-01-12 12:38:15	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	Se da inicio al proceso 100084. ~ Validador SIA 1.2.2021	Informativo	Baja
+100085	2021-01-12	2021-01-12 21:01:02	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	Se da inicio al proceso 100085. ~ Validador SIA 1.2.2021	Informativo	Baja
+100086	2021-01-12	2021-01-12 21:20:45	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	Se da inicio al proceso 100086. ~ Validador SIA 1.2.2021	Informativo	Baja
+100087	2021-01-12	2021-01-12 21:21:27	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	Se da inicio al proceso 100087. ~ Validador SIA 1.2.2021	Informativo	Baja
+100088	2021-01-12	2021-01-12 21:33:06	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	Se da inicio al proceso 100088. ~ Validador SIA 1.2.2021	Informativo	Baja
+100089	2021-01-12	2021-01-12 21:33:11	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	Se da inicio al proceso 100089. ~ Validador SIA 1.2.2021	Informativo	Baja
+100090	2021-01-12	2021-01-12 21:33:40	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	Se da inicio al proceso 100090. ~ Validador SIA 1.2.2021	Informativo	Baja
+100091	2021-01-12	2021-01-12 21:34:40	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	Se da inicio al proceso 100091. ~ Validador SIA 1.2.2021	Informativo	Baja
+100092	2021-01-12	2021-01-12 21:35:27	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	Se da inicio al proceso 100092. ~ Validador SIA 1.2.2021	Informativo	Baja
+100093	2021-01-12	2021-01-12 21:52:23	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	Se da inicio al proceso 100093. ~ Validador SIA 1.2.2021	Informativo	Baja
+100094	2021-01-12	2021-01-12 22:04:53	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	Se da inicio al proceso 100094. ~ Validador SIA 1.2.2021	Informativo	Baja
+100095	2021-01-12	2021-01-12 22:08:30	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	Se da inicio al proceso 100095. ~ Validador SIA 1.2.2021	Informativo	Baja
+100095	2021-01-12	2021-01-12 22:08:31	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	Bucket de errores actualizado. PID-100095.	Informativo	Baja
+100096	2021-01-12	2021-01-12 22:08:52	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	Se da inicio al proceso 100096. ~ Validador SIA 1.2.2021	Informativo	Baja
+100096	2021-01-12	2021-01-12 22:08:52	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	Bucket de errores actualizado. PID-100096.	Informativo	Baja
+100097	2021-01-12	2021-01-12 22:09:03	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	Se da inicio al proceso 100097. ~ Validador SIA 1.2.2021	Informativo	Baja
+100097	2021-01-12	2021-01-12 22:09:04	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	Bucket de errores actualizado. PID-100097.	Informativo	Baja
+100098	2021-01-12	2021-01-12 22:14:13	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	Se da inicio al proceso 100098. ~ Validador SIA 1.2.2021	Informativo	Baja
+100098	2021-01-12	2021-01-12 22:14:14	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	Bucket de errores actualizado. PID-100098.	Informativo	Baja
+100098	2021-01-12	2021-01-12 22:14:14	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	Proceso de validación finalizado - El proceso se interrumpió debido a que no se cumplen los pre requisitos. Elaborar el PY. DE OFICIO y remitirlo al analista.	Informativo	Baja
+100099	2021-01-12	2021-01-12 22:15:19	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	Se da inicio al proceso 100099. ~ Validador SIA 1.2.2021	Informativo	Baja
+100099	2021-01-12	2021-01-12 22:15:19	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	Bucket de errores actualizado. PID-100099.	Informativo	Baja
+100099	2021-01-12	2021-01-12 22:15:19	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	Proceso de validación finalizado - El proceso se interrumpió debido a que no se cumplen los pre requisitos. Elaborar el PY. DE OFICIO y remitirlo al analista.	Informativo	Baja
+100100	2021-01-12	2021-01-12 22:18:37	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:18:37] - Se da inicio al proceso 100100. ~ Validador SIA 1.2.2021	Informativo	Baja
+100100	2021-01-12	2021-01-12 22:18:37	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:18:37] - Bucket de errores actualizado. PID-100100.	Informativo	Baja
+100100	2021-01-12	2021-01-12 22:18:37	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:18:37] - Proceso de validación finalizado - El proceso se interrumpió debido a que no se cumplen los pre requisitos. Elaborar el PY. DE OFICIO y remitirlo al analista.	Informativo	Baja
+100101	2021-01-12	2021-01-12 22:19:32	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:19:32] - Se da inicio al proceso 100101. ~ Validador SIA 1.2.2021	Informativo	Baja
+100102	2021-01-12	2021-01-12 22:20:37	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:20:37] - Se da inicio al proceso 100102. ~ Validador SIA 1.2.2021	Informativo	Baja
+100102	2021-01-12	2021-01-12 22:20:37	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:20:37] - Bucket de errores actualizado. PID-100102.	Informativo	Baja
+100102	2021-01-12	2021-01-12 22:20:37	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:20:37] - Proceso de validación finalizado - El proceso se interrumpió debido a que no se cumplen los pre requisitos. Elaborar el PY. DE OFICIO y remitirlo al analista.	Informativo	Baja
+100103	2021-01-12	2021-01-12 22:22:38	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:22:38] - Se da inicio al proceso 100103. ~ Validador SIA 1.2.2021	Informativo	Baja
+100103	2021-01-12	2021-01-12 22:22:38	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:22:38] - Bucket de errores actualizado. PID-100103.	Informativo	Baja
+100103	2021-01-12	2021-01-12 22:22:38	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:22:38] - Proceso de validación finalizado - El proceso se interrumpió debido a que no se cumplen los pre requisitos. Elaborar el PY. DE OFICIO y remitirlo al analista.	Informativo	Baja
+100104	2021-01-12	2021-01-12 22:23:19	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:23:19] - Se da inicio al proceso 100104. ~ Validador SIA 1.2.2021	Informativo	Baja
+100104	2021-01-12	2021-01-12 22:23:20	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:23:19] - Bucket de errores actualizado. PID-100104.	Informativo	Baja
+100104	2021-01-12	2021-01-12 22:23:20	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:23:20] - Proceso de validación finalizado - El proceso se interrumpió debido a que no se cumplen los pre requisitos. Elaborar el PY. DE OFICIO y remitirlo al analista.	Informativo	Baja
+100105	2021-01-12	2021-01-12 22:23:42	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:23:42] - Se da inicio al proceso 100105. ~ Validador SIA 1.2.2021	Informativo	Baja
+100105	2021-01-12	2021-01-12 22:23:42	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:23:42] - Bucket de errores actualizado. PID-100105.	Informativo	Baja
+100105	2021-01-12	2021-01-12 22:23:42	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:23:42] - Bucket de errores actualizado. PID-100105.	Informativo	Baja
+100105	2021-01-12	2021-01-12 22:23:42	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:23:42] - Proceso de validación finalizado - El proceso se interrumpió debido a que no se cumplen los pre requisitos. Elaborar el PY. DE OFICIO y remitirlo al analista.	Informativo	Baja
+100106	2021-01-12	2021-01-12 22:23:52	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:23:52] - Se da inicio al proceso 100106. ~ Validador SIA 1.2.2021	Informativo	Baja
+100106	2021-01-12	2021-01-12 22:23:52	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:23:52] - Bucket de errores actualizado. PID-100106.	Informativo	Baja
+100106	2021-01-12	2021-01-12 22:23:52	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:23:52] - Bucket de errores actualizado. PID-100106.	Informativo	Baja
+100106	2021-01-12	2021-01-12 22:23:52	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:23:52] - Proceso de validación finalizado - El proceso se interrumpió debido a que no se cumplen los pre requisitos. Elaborar el PY. DE OFICIO y remitirlo al analista.	Informativo	Baja
+100107	2021-01-12	2021-01-12 22:24:03	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:24:03] - Se da inicio al proceso 100107. ~ Validador SIA 1.2.2021	Informativo	Baja
+100108	2021-01-12	2021-01-12 22:32:58	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:32:58] - Se da inicio al proceso 100108. ~ Validador SIA 1.2.2021	Informativo	Baja
+100108	2021-01-12	2021-01-12 22:33:09	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:33:09] - La validación de operaciones vacías concluyó sin observaciones. (~ly2)	Informativo	Baja
+100108	2021-01-12	2021-01-12 22:33:10	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:33:10] - La validación de operaciones duplicadas concluyó sin observaciones. (~ly2) 	Informativo	Baja
+100109	2021-01-12	2021-01-12 22:34:59	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:34:59] - Se da inicio al proceso 100109. ~ Validador SIA 1.2.2021	Informativo	Baja
+100109	2021-01-12	2021-01-12 22:35:10	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:35:10] - La validación de operaciones vacías concluyó sin observaciones. (~ly2)	Informativo	Baja
+100109	2021-01-12	2021-01-12 22:35:11	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:35:11] - La validación de operaciones duplicadas concluyó sin observaciones. (~ly2) 	Informativo	Baja
+100110	2021-01-12	2021-01-12 22:36:29	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:36:29] - Se da inicio al proceso 100110. ~ Validador SIA 1.2.2021	Informativo	Baja
+100110	2021-01-12	2021-01-12 22:36:40	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:36:40] - La validación de operaciones vacías concluyó sin observaciones. (~ly2)	Informativo	Baja
+100110	2021-01-12	2021-01-12 22:36:41	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:36:41] - La validación de operaciones duplicadas concluyó sin observaciones. (~ly2) 	Informativo	Baja
+100111	2021-01-12	2021-01-12 22:38:27	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:38:27] - Se da inicio al proceso 100111. ~ Validador SIA 1.2.2021	Informativo	Baja
+100111	2021-01-12	2021-01-12 22:38:37	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:38:37] - La validación de operaciones vacías concluyó sin observaciones. (~ly2)	Informativo	Baja
+100111	2021-01-12	2021-01-12 22:38:38	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:38:38] - La validación de operaciones duplicadas concluyó sin observaciones. (~ly2) 	Informativo	Baja
+100112	2021-01-12	2021-01-12 22:40:00	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:40:00] - Se da inicio al proceso 100112. ~ Validador SIA 1.2.2021	Informativo	Baja
+100112	2021-01-12	2021-01-12 22:40:10	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:40:10] - La validación de operaciones vacías concluyó sin observaciones. (~ly2)	Informativo	Baja
+100112	2021-01-12	2021-01-12 22:40:11	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:40:11] - La validación de operaciones duplicadas concluyó sin observaciones. (~ly2) 	Informativo	Baja
+100113	2021-01-12	2021-01-12 22:41:05	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:41:05] - Se da inicio al proceso 100113. ~ Validador SIA 1.2.2021	Informativo	Baja
+100113	2021-01-12	2021-01-12 22:41:15	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:41:15] - La validación de operaciones vacías concluyó sin observaciones. (~ly2)	Informativo	Baja
+100113	2021-01-12	2021-01-12 22:41:15	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:41:15] - La validación de operaciones duplicadas concluyó sin observaciones. (~ly2) 	Informativo	Baja
+100114	2021-01-12	2021-01-12 22:41:43	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:41:43] - Se da inicio al proceso 100114. ~ Validador SIA 1.2.2021	Informativo	Baja
+100114	2021-01-12	2021-01-12 22:41:53	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:41:53] - La validación de operaciones vacías concluyó sin observaciones. (~ly2)	Informativo	Baja
+100114	2021-01-12	2021-01-12 22:41:54	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:41:54] - La validación de operaciones duplicadas concluyó sin observaciones. (~ly2) 	Informativo	Baja
+100115	2021-01-12	2021-01-12 22:45:14	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:45:14] - Se da inicio al proceso 100115. ~ Validador SIA 1.2.2021	Informativo	Baja
+100115	2021-01-12	2021-01-12 22:45:14	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:45:14] - No se identificaron archivos duplicados.	Informativo	Baja
+100115	2021-01-12	2021-01-12 22:45:14	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:45:14] - No se identificaron archivos faltantes.	Informativo	Baja
+100115	2021-01-12	2021-01-12 22:45:23	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:45:23] - La validación de operaciones vacías concluyó sin observaciones. (~ly2)	Informativo	Baja
+100115	2021-01-12	2021-01-12 22:45:24	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:45:24] - La validación de operaciones duplicadas concluyó sin observaciones. (~ly2) 	Informativo	Baja
+100116	2021-01-12	2021-01-12 22:47:30	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:47:30] - Se da inicio al proceso 100116. ~ Validador SIA 1.2.2021	Informativo	Baja
+100116	2021-01-12	2021-01-12 22:47:30	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:47:30] - La información no tiene archivos duplicados.	Informativo	Baja
+100116	2021-01-12	2021-01-12 22:47:30	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:47:30] - La información no tiene archivos faltantes.	Informativo	Baja
+100116	2021-01-12	2021-01-12 22:47:40	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:47:40] - La validación de operaciones vacías concluyó sin observaciones. (~ly2)	Informativo	Baja
+100116	2021-01-12	2021-01-12 22:47:40	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:47:40] - La validación de operaciones duplicadas concluyó sin observaciones. (~ly2) 	Informativo	Baja
+100117	2021-01-12	2021-01-12 22:47:59	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:47:59] - Se da inicio al proceso 100117. ~ Validador SIA 1.2.2021	Informativo	Baja
+100117	2021-01-12	2021-01-12 22:47:59	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:47:59] - Bucket de errores actualizado. PID-100117.	Informativo	Baja
+100117	2021-01-12	2021-01-12 22:47:59	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:47:59] - Cuidado! Se identificaron archivos duplicados.	Informativo	Baja
+100117	2021-01-12	2021-01-12 22:47:59	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:47:59] - Bucket de errores actualizado. PID-100117.	Informativo	Baja
+100117	2021-01-12	2021-01-12 22:47:59	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:47:59] - Cuidado! Se identificaron archivos faltantes	Informativo	Baja
+100117	2021-01-12	2021-01-12 22:47:59	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:47:59] - Proceso de validación finalizado - El proceso se interrumpió debido a que no se cumplen los pre requisitos. Elaborar el PY. DE OFICIO y remitirlo al analista.	Informativo	Baja
+100118	2021-01-12	2021-01-12 22:49:33	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:49:33] - Se da inicio al proceso 100118. ~ Validador SIA 1.2.2021	Informativo	Baja
+100118	2021-01-12	2021-01-12 22:49:33	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:49:33] - Bucket de errores actualizado. PID-100118| Código de error:101.	Informativo	Baja
+100118	2021-01-12	2021-01-12 22:49:33	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:49:33] - Cuidado! Se identificaron archivos duplicados.	Informativo	Baja
+100118	2021-01-12	2021-01-12 22:49:33	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:49:33] - Bucket de errores actualizado. PID-100118| Código de error:102.	Informativo	Baja
+100118	2021-01-12	2021-01-12 22:49:33	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:49:33] - Cuidado! Se identificaron archivos faltantes	Informativo	Baja
+100118	2021-01-12	2021-01-12 22:49:33	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:49:33] - Proceso de validación finalizado - El proceso se interrumpió debido a que no se cumplen los pre requisitos. Elaborar el PY. DE OFICIO y remitirlo al analista.	Informativo	Baja
+100119	2021-01-12	2021-01-12 22:51:46	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:51:46] - Se da inicio al proceso 100119. ~ Validador SIA 1.2.2021	Informativo	Baja
+100119	2021-01-12	2021-01-12 22:51:47	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:51:46] - Bucket de errores actualizado. PID-100119| Código de error:101.	Informativo	Baja
+100119	2021-01-12	2021-01-12 22:51:47	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:51:47] - Cuidado! Se identificaron archivos duplicados.	Informativo	Baja
+100119	2021-01-12	2021-01-12 22:51:47	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:51:47] - Bucket de errores actualizado. PID-100119| Código de error:102.	Informativo	Baja
+100119	2021-01-12	2021-01-12 22:51:47	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:51:47] - Cuidado! Se identificaron archivos faltantes	Informativo	Baja
+100119	2021-01-12	2021-01-12 22:51:47	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 22:51:47] - La información presenta errores 101-102. No puede continuar.	Informativo	Baja
+100120	2021-01-12	2021-01-12 23:11:48	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:11:48] - Se da inicio al proceso 100120. ~ Validador SIA 1.2.2021	Informativo	Baja
+100120	2021-01-12	2021-01-12 23:11:48	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:11:48] - Bucket de errores actualizado. PID-100120| Código de error:101.	Informativo	Baja
+100120	2021-01-12	2021-01-12 23:11:48	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:11:48] - Error: Se identificaron archivos duplicados.	Informativo	Baja
+100120	2021-01-12	2021-01-12 23:11:48	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:11:48] - Bucket de errores actualizado. PID-100120| Código de error:102.	Informativo	Baja
+100120	2021-01-12	2021-01-12 23:11:48	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:11:48] - Error: Se identificaron archivos faltantes	Informativo	Baja
+100120	2021-01-12	2021-01-12 23:11:48	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:11:48] - La información presenta errores 101-102. No puede continuar.	Informativo	Baja
+100121	2021-01-12	2021-01-12 23:20:08	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	"[2021-01-12 23:20:08] - Agente creado. PID-100121. [201901-201909] - [c(""BD01"", ""BD02A"", ""BD02B"", ""BD03A"", ""BD03B"", ""BD04"")] ~ Validador SIA 1.2.2021"	Informativo	Baja
+100121	2021-01-12	2021-01-12 23:20:08	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:20:08] - Bucket de errores actualizado. PID-100121| Código de error:101.	Informativo	Baja
+100121	2021-01-12	2021-01-12 23:20:08	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:20:08] - Error: Se identificaron archivos duplicados.	Informativo	Baja
+100121	2021-01-12	2021-01-12 23:20:08	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:20:08] - Bucket de errores actualizado. PID-100121| Código de error:102.	Informativo	Baja
+100121	2021-01-12	2021-01-12 23:20:08	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:20:08] - Error: Se identificaron archivos faltantes	Informativo	Baja
+100121	2021-01-12	2021-01-12 23:20:08	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:20:08] - La información presenta errores 101-102. No puede continuar.	Informativo	Baja
+100122	2021-01-12	2021-01-12 23:22:00	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	"[2021-01-12 23:22:00] - Agente creado. PID-100122. [201901-201909] - [c(""BD01"", ""BD02A"", ""BD02B"", ""BD03A"", ""BD03B"", ""BD04"")] ~ Validador SIA 1.2.2021"	Informativo	Baja
+100122	2021-01-12	2021-01-12 23:22:00	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:22:00] - Bucket de errores actualizado. PID-100122| Código de error:101.	Informativo	Baja
+100122	2021-01-12	2021-01-12 23:22:01	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:22:00] - Error: Se identificaron archivos duplicados.	Informativo	Baja
+100122	2021-01-12	2021-01-12 23:22:01	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:22:01] - Bucket de errores actualizado. PID-100122| Código de error:102.	Informativo	Baja
+100122	2021-01-12	2021-01-12 23:22:01	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:22:01] - Error: Se identificaron archivos faltantes	Informativo	Baja
+100122	2021-01-12	2021-01-12 23:22:01	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:22:01] - La información presenta errores 101-102. No puede continuar.	Informativo	Baja
+100123	2021-01-12	2021-01-12 23:22:33	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:22:33] - Agente creado. PID-100123. [201901-201909] ~ Validador SIA 1.3.2021	Informativo	Baja
+100123	2021-01-12	2021-01-12 23:22:33	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:22:33] - Bucket de errores actualizado. PID-100123| Código de error:101.	Informativo	Baja
+100123	2021-01-12	2021-01-12 23:22:33	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:22:33] - Error: Se identificaron archivos duplicados.	Informativo	Baja
+100123	2021-01-12	2021-01-12 23:22:33	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:22:33] - Bucket de errores actualizado. PID-100123| Código de error:102.	Informativo	Baja
+100123	2021-01-12	2021-01-12 23:22:33	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:22:33] - Error: Se identificaron archivos faltantes	Informativo	Baja
+100123	2021-01-12	2021-01-12 23:22:33	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:22:33] - La información presenta errores 101-102. No puede continuar.	Informativo	Baja
+100124	2021-01-12	2021-01-12 23:24:58	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:24:58] - Agente creado. PID-100124. [201901-201909] ~ Validador SIA 1.3.2021	Informativo	Baja
+100124	2021-01-12	2021-01-12 23:24:58	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:24:58] - Bucket de errores creado. PID-100124.	Informativo	Baja
+100124	2021-01-12	2021-01-12 23:24:58	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:24:58] - Bucket de errores actualizado. PID-100124| Código de error:101.	Informativo	Baja
+100124	2021-01-12	2021-01-12 23:24:58	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:24:58] - Error: Se identificaron archivos duplicados.	Informativo	Baja
+100124	2021-01-12	2021-01-12 23:24:58	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:24:58] - Bucket de errores actualizado. PID-100124| Código de error:102.	Informativo	Baja
+100124	2021-01-12	2021-01-12 23:24:58	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:24:58] - Error: Se identificaron archivos faltantes	Informativo	Baja
+100124	2021-01-12	2021-01-12 23:24:58	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:24:58] - La información presenta errores 101-102. No puede continuar.	Informativo	Baja
+100125	2021-01-12	2021-01-12 23:29:19	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:29:19] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100125	2021-01-12	2021-01-12 23:29:19	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:29:19] - Agente creado. PID-100125. [ rev.201901-201909]	Informativo	Baja
+100125	2021-01-12	2021-01-12 23:29:19	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:29:19] - Bucket de errores creado. PID-100125.	Informativo	Baja
+100125	2021-01-12	2021-01-12 23:29:19	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:29:19] - Inicio del interrogatorio. PID-100125.	Informativo	Baja
+100125	2021-01-12	2021-01-12 23:29:19	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:29:19] - Bucket de errores actualizado. PID-100125| Código de error:101.	Informativo	Baja
+100125	2021-01-12	2021-01-12 23:29:19	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:29:19] - Error: Se identificaron archivos duplicados.	Informativo	Baja
+100125	2021-01-12	2021-01-12 23:29:19	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:29:19] - Bucket de errores actualizado. PID-100125| Código de error:102.	Informativo	Baja
+100125	2021-01-12	2021-01-12 23:29:19	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:29:19] - Error: Se identificaron archivos faltantes	Informativo	Baja
+100125	2021-01-12	2021-01-12 23:29:19	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:29:19] - La información presenta errores 101-102. No puede continuar.	Informativo	Baja
+100126	2021-01-12	2021-01-12 23:33:42	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:33:42] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100126	2021-01-12	2021-01-12 23:33:42	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:33:42] - Agente creado. PID-100126. [201901~201909]	Informativo	Baja
+100126	2021-01-12	2021-01-12 23:33:42	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:33:42] - Bucket de errores creado. PID-100126.	Informativo	Baja
+100126	2021-01-12	2021-01-12 23:33:42	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:33:42] - Inicio del interrogatorio. PID-100126.	Informativo	Baja
+100126	2021-01-12	2021-01-12 23:33:42	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:33:42] - Apertura de revisión de pre-requisitos. PID-100126.	Informativo	Baja
+100126	2021-01-12	2021-01-12 23:33:42	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:33:42] - Bucket de errores actualizado. PID-100126| Código de error:101.	Informativo	Baja
+100126	2021-01-12	2021-01-12 23:33:42	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:33:42] - Error: Se identificaron archivos duplicados.	Informativo	Baja
+100126	2021-01-12	2021-01-12 23:33:42	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:33:42] - Bucket de errores actualizado. PID-100126| Código de error:102.	Informativo	Baja
+100126	2021-01-12	2021-01-12 23:33:42	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:33:42] - Error: Se identificaron archivos faltantes	Informativo	Baja
+100126	2021-01-12	2021-01-12 23:33:42	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:33:42] - La información presenta errores 101-102. No puede continuar.	Informativo	Baja
+100127	2021-01-12	2021-01-12 23:34:29	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:34:29] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100127	2021-01-12	2021-01-12 23:34:29	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:34:29] - Agente creado. PID-100127. [201901~201909]	Informativo	Baja
+100127	2021-01-12	2021-01-12 23:34:29	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:34:29] - Bucket de errores creado. PID-100127.	Informativo	Baja
+100127	2021-01-12	2021-01-12 23:34:29	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:34:29] - Inicio del interrogatorio. PID-100127.	Informativo	Baja
+100127	2021-01-12	2021-01-12 23:34:29	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:34:29] - Apertura de revisión de pre-requisitos. PID-100127.	Informativo	Baja
+100127	2021-01-12	2021-01-12 23:34:30	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:34:30] - Error: Se identificaron archivos duplicados.	Informativo	Baja
+100127	2021-01-12	2021-01-12 23:34:30	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:34:30] - Error: Se identificaron archivos faltantes	Informativo	Baja
+100127	2021-01-12	2021-01-12 23:34:30	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:34:30] - La información presenta errores 101-102. No puede continuar.	Informativo	Baja
+100128	2021-01-12	2021-01-12 23:35:40	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:35:40] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100128	2021-01-12	2021-01-12 23:35:40	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:35:40] - Agente creado. PID-100128. [201901~201909]	Informativo	Baja
+100128	2021-01-12	2021-01-12 23:35:40	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:35:40] - Bucket de errores creado. PID-100128.	Informativo	Baja
+100128	2021-01-12	2021-01-12 23:35:40	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:35:40] - Inicio del interrogatorio. PID-100128.	Informativo	Baja
+100128	2021-01-12	2021-01-12 23:35:40	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:35:40] - Apertura de revisión de pre-requisitos. PID-100128.	Informativo	Baja
+100128	2021-01-12	2021-01-12 23:35:41	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:35:41] - Error: Se identificaron archivos duplicados.	Informativo	Baja
+100128	2021-01-12	2021-01-12 23:35:41	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	"[2021-01-12 23:35:41] - 	Error: Se identificaron archivos faltantes"	Informativo	Baja
+100128	2021-01-12	2021-01-12 23:35:41	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:35:41] - La información presenta errores 101-102. No puede continuar.	Informativo	Baja
+100129	2021-01-12	2021-01-12 23:35:56	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:35:56] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100129	2021-01-12	2021-01-12 23:35:56	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:35:56] - Agente creado. PID-100129. [201901~201909]	Informativo	Baja
+100129	2021-01-12	2021-01-12 23:35:56	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:35:56] - Bucket de errores creado. PID-100129.	Informativo	Baja
+100129	2021-01-12	2021-01-12 23:35:56	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:35:56] - Inicio del interrogatorio. PID-100129.	Informativo	Baja
+100129	2021-01-12	2021-01-12 23:35:56	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:35:56] - Apertura de revisión de pre-requisitos. PID-100129.	Informativo	Baja
+100129	2021-01-12	2021-01-12 23:35:56	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:35:56] - Error: Se identificaron archivos duplicados.	Informativo	Baja
+100129	2021-01-12	2021-01-12 23:35:56	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:35:56] - /tError: Se identificaron archivos faltantes	Informativo	Baja
+100129	2021-01-12	2021-01-12 23:35:56	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:35:56] - La información presenta errores 101-102. No puede continuar.	Informativo	Baja
+100130	2021-01-12	2021-01-12 23:36:53	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:36:53] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100130	2021-01-12	2021-01-12 23:36:53	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:36:53] - Agente creado. PID-100130. [201901~201909]	Informativo	Baja
+100130	2021-01-12	2021-01-12 23:36:53	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:36:53] - Bucket de errores creado. PID-100130.	Informativo	Baja
+100130	2021-01-12	2021-01-12 23:36:53	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:36:53] - Inicio del interrogatorio. PID-100130.	Informativo	Baja
+100130	2021-01-12	2021-01-12 23:36:53	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:36:53] - Apertura de revisión de pre-requisitos. PID-100130.	Informativo	Baja
+100130	2021-01-12	2021-01-12 23:36:54	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:36:54] - Error: Se identificaron archivos duplicados.	Informativo	Baja
+100130	2021-01-12	2021-01-12 23:36:54	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:36:54] -     Error: Se identificaron archivos faltantes	Informativo	Baja
+100130	2021-01-12	2021-01-12 23:36:54	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:36:54] - La información presenta errores 101-102. No puede continuar.	Informativo	Baja
+100131	2021-01-12	2021-01-12 23:39:25	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:39:25] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100131	2021-01-12	2021-01-12 23:39:25	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:39:25] - Agente creado. PID-100131. [201901~201909]	Informativo	Baja
+100131	2021-01-12	2021-01-12 23:39:25	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:39:25] - Bucket de errores creado. PID-100131.	Informativo	Baja
+100131	2021-01-12	2021-01-12 23:39:25	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:39:25] - Inicio del interrogatorio. PID-100131.	Informativo	Baja
+100131	2021-01-12	2021-01-12 23:39:25	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:39:25] - Apertura de revisión de pre-requisitos. PID-100131.	Informativo	Baja
+100131	2021-01-12	2021-01-12 23:39:25	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:39:25] -     Error: Se identificaron archivos duplicados.	Informativo	Baja
+100131	2021-01-12	2021-01-12 23:39:25	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:39:25] -     Error: Se identificaron archivos faltantes	Informativo	Baja
+100131	2021-01-12	2021-01-12 23:39:25	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:39:25] - La información presenta errores 101-102. No puede continuar.	Informativo	Baja
+100132	2021-01-12	2021-01-12 23:41:29	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:41:29] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100132	2021-01-12	2021-01-12 23:41:29	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:41:29] - Agente creado. PID-100132. [201901~201909]	Informativo	Baja
+100132	2021-01-12	2021-01-12 23:41:29	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:41:29] - Bucket de errores creado. PID-100132.	Informativo	Baja
+100132	2021-01-12	2021-01-12 23:41:29	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:41:29] - Inicio del interrogatorio. PID-100132.	Informativo	Baja
+100132	2021-01-12	2021-01-12 23:41:29	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:41:29] - Apertura de revisión de pre-requisitos. PID-100132.	Informativo	Baja
+100132	2021-01-12	2021-01-12 23:41:29	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:41:29] -     Error: Se identificaron archivos duplicados.	Informativo	Baja
+100132	2021-01-12	2021-01-12 23:41:29	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:41:29] -     Error: Se identificaron archivos faltantes	Informativo	Baja
+100132	2021-01-12	2021-01-12 23:41:29	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:41:29] - Fin del proceso de revisión por errores críticos 101-102.	Informativo	Baja
+100133	2021-01-12	2021-01-12 23:43:45	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:43:45] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100133	2021-01-12	2021-01-12 23:43:45	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:43:45] - Agente creado. PID-100133. [01172|201901~201909]	Informativo	Baja
+100133	2021-01-12	2021-01-12 23:43:45	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:43:45] - Bucket de errores creado. PID-100133.	Informativo	Baja
+100133	2021-01-12	2021-01-12 23:43:45	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:43:45] - Inicio del interrogatorio. PID-100133.	Informativo	Baja
+100133	2021-01-12	2021-01-12 23:43:45	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:43:45] - Apertura de revisión de pre-requisitos.	Informativo	Baja
+100133	2021-01-12	2021-01-12 23:43:46	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:43:46] -     Error: Se identificaron archivos duplicados.	Informativo	Baja
+100133	2021-01-12	2021-01-12 23:43:46	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:43:46] -     Error: Se identificaron archivos faltantes	Informativo	Baja
+100133	2021-01-12	2021-01-12 23:43:46	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:43:46] - Fin del proceso de revisión por errores críticos 101-102.	Informativo	Baja
+100134	2021-01-12	2021-01-12 23:44:57	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:44:57] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100134	2021-01-12	2021-01-12 23:44:57	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:44:57] - Agente creado. PID-100134. [01172|201901~201909]	Informativo	Baja
+100134	2021-01-12	2021-01-12 23:44:57	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:44:57] - Bucket de errores creado. PID-100134.	Informativo	Baja
+100134	2021-01-12	2021-01-12 23:44:57	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:44:57] - Inicio del interrogatorio. PID-100134.	Informativo	Baja
+100134	2021-01-12	2021-01-12 23:44:57	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:44:57] - Apertura de revisión de pre-requisitos.	Informativo	Baja
+100134	2021-01-12	2021-01-12 23:44:57	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:44:57] -     Error: Se identificaron archivos duplicados.	Informativo	Baja
+100134	2021-01-12	2021-01-12 23:44:57	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:44:57] -     Error: Se identificaron archivos faltantes.	Informativo	Baja
+100134	2021-01-12	2021-01-12 23:44:57	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:44:57] - Fin del proceso de revisión por errores críticos 101-102.	Informativo	Baja
+100135	2021-01-12	2021-01-12 23:45:08	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:45:08] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100135	2021-01-12	2021-01-12 23:45:08	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:45:08] - Agente creado. PID-100135. [01172|201907~201909]	Informativo	Baja
+100135	2021-01-12	2021-01-12 23:45:08	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:45:08] - Bucket de errores creado. PID-100135.	Informativo	Baja
+100135	2021-01-12	2021-01-12 23:45:08	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:45:08] - Inicio del interrogatorio. PID-100135.	Informativo	Baja
+100135	2021-01-12	2021-01-12 23:45:08	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:45:08] - Apertura de revisión de pre-requisitos.	Informativo	Baja
+100135	2021-01-12	2021-01-12 23:45:30	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:45:30] - La validación de operaciones vacías concluyó sin observaciones. (~ly2)	Informativo	Baja
+100135	2021-01-12	2021-01-12 23:45:31	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:45:31] - La validación de operaciones duplicadas concluyó sin observaciones. (~ly2) 	Informativo	Baja
+100135	2021-01-12	2021-01-12 23:46:24	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:46:24] - Apertura de revisión de estructura de datos.	Informativo	Baja
+100136	2021-01-12	2021-01-12 23:49:20	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:49:20] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100136	2021-01-12	2021-01-12 23:49:20	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:49:20] - Agente creado. PID-100136. [01172|201907~201909]	Informativo	Baja
+100136	2021-01-12	2021-01-12 23:49:21	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:49:21] - Bucket de errores creado. PID-100136.	Informativo	Baja
+100136	2021-01-12	2021-01-12 23:49:21	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:49:21] - Inicio del interrogatorio. PID-100136.	Informativo	Baja
+100136	2021-01-12	2021-01-12 23:49:21	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:49:21] - Apertura de revisión de pre-requisitos.	Informativo	Baja
+100136	2021-01-12	2021-01-12 23:49:21	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:49:21] - Apertura de revisión de estructura de datos.	Informativo	Baja
+100136	2021-01-12	2021-01-12 23:49:39	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:49:39] - Revisión de estructura de datos satisfatoria.	Informativo	Baja
+100136	2021-01-12	2021-01-12 23:49:43	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:49:43] - La validación de operaciones vacías concluyó sin observaciones. (~ly2)	Informativo	Baja
+100136	2021-01-12	2021-01-12 23:49:43	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:49:43] - La validación de operaciones duplicadas concluyó sin observaciones. (~ly2) 	Informativo	Baja
+100137	2021-01-12	2021-01-12 23:51:37	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:51:36] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100137	2021-01-12	2021-01-12 23:51:37	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:51:37] - Agente creado. PID-100137. [01172|201907~201909]	Informativo	Baja
+100137	2021-01-12	2021-01-12 23:51:37	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:51:37] - Bucket de errores creado. PID-100137.	Informativo	Baja
+100137	2021-01-12	2021-01-12 23:51:37	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:51:37] - Inicio del interrogatorio. PID-100137.	Informativo	Baja
+100137	2021-01-12	2021-01-12 23:51:37	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:51:37] - Apertura de revisión de pre-requisitos.	Informativo	Baja
+100137	2021-01-12	2021-01-12 23:51:37	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:51:37] - Apertura de revisión de estructura de datos.	Informativo	Baja
+100137	2021-01-12	2021-01-12 23:51:44	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:51:44] - Revisión de estructura de datos satisfatoria.	Informativo	Baja
+100137	2021-01-12	2021-01-12 23:51:48	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:51:48] - La validación de operaciones vacías concluyó sin observaciones. (~ly2)	Informativo	Baja
+100137	2021-01-12	2021-01-12 23:51:48	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:51:48] - La validación de operaciones duplicadas concluyó sin observaciones. (~ly2) 	Informativo	Baja
+100138	2021-01-12	2021-01-12 23:52:54	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:52:54] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100138	2021-01-12	2021-01-12 23:52:54	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:52:54] - Agente creado. PID-100138. [01172|201907~201909]	Informativo	Baja
+100138	2021-01-12	2021-01-12 23:52:54	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:52:54] - Bucket de errores creado. PID-100138.	Informativo	Baja
+100138	2021-01-12	2021-01-12 23:52:54	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:52:54] - Inicio del interrogatorio. PID-100138.	Informativo	Baja
+100138	2021-01-12	2021-01-12 23:52:54	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:52:54] - Apertura de revisión de pre-requisitos.	Informativo	Baja
+100138	2021-01-12	2021-01-12 23:52:54	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:52:54] - Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100138	2021-01-12	2021-01-12 23:52:54	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:52:54] - Apertura de revisión de estructura de datos.	Informativo	Baja
+100138	2021-01-12	2021-01-12 23:53:01	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:53:01] - Revisión de estructura de datos satisfatoria.	Informativo	Baja
+100138	2021-01-12	2021-01-12 23:53:04	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:53:04] - La validación de operaciones vacías concluyó sin observaciones. (~ly2)	Informativo	Baja
+100138	2021-01-12	2021-01-12 23:53:05	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:53:05] - La validación de operaciones duplicadas concluyó sin observaciones. (~ly2) 	Informativo	Baja
