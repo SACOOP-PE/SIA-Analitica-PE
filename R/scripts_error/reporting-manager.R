@@ -88,11 +88,6 @@ saveOutputs <- function(agente, ebFormatt, pidlog) {
   
   #log----
   pidlog %>%
-    write_delim(paste0(getwd(), 
-                       "/logging/",
-                       "PID-", 
-                       getIdProcesoFromAgent(agente), 
-                       ".log",
-                       ".txt"),
-                delim = "\t")
+    write_delim(path = paste0("/logging/", "PID-", getIdProcesoFromAgent(agente), "_log.txt"), delim = "\t",
+                col_names = F, append = T)
 }

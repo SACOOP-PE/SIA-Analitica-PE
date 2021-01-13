@@ -15,7 +15,8 @@ getLogObject     <- function(path){
                                                                 Descripcion = col_character(),  Carpeta = col_character(), Fecha = col_character(), 
                                                                 Hora = col_character(), 
                                                                 IdProceso = col_integer(),
-                                                                Usuario = col_character()), trim_ws = TRUE) %>% return()
+                                                                Usuario = col_character()), 
+             locale = locale(encoding = "ISO-8859-1"), trim_ws = TRUE) %>% return()
 }
 getNextIdProceso <- function(logObject){
   if (logObject %>% pull(IdProceso) %>% max(na.rm = T) > 0)
@@ -51,6 +52,14 @@ timehead <- function() {
   paste0("[",Sys.time()[1],"] - ")}
 
 getlog <- function(pid) {
-  contents <- getLogObject(path = "logging/log.txt") %>% filter(IdProceso == pid) %>% pull(Descripcion) 
-  return(contents)
+  contents <- getLogObject(path = "logging/log.txt") %>% filter(IdProceso == pid) %>% pull(Descripcion)
+  
+  pidlog <- tibble(logEncontrado = contents) %>% rowwise() %>% 
+    mutate(Time = str_split(logEncontrado, pattern = " - ")[[1]][1],
+           logEncontrado = str_split(logEncontrado, pattern = " - ")[[1]][2]) %>% 
+    select(Time, logEncontrado)
+
+  return(pidlog)
 }
+
+
