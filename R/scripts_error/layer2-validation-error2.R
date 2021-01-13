@@ -5,7 +5,7 @@ layer2 <- function(agente, eb){
 eb <- validarOperacionesVacias(agente, eb)
 eb <- validarOperacionesDuplicadas(agente, eb)
 eb <- validarCruceInterno(agente, eb)
-# eb <- validarCampos(agente, eb)
+eb <- validarCampos(agente, eb)
 return(eb)
 }
 
