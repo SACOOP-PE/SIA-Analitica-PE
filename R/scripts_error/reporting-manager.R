@@ -86,8 +86,8 @@ saveOutputs <- function(agente, ebFormatt, pidlog) {
                                      sep = "_"),
                                "_reportErrores.xlsx"))
   
-  #log----
+  #pidlog----
   pidlog %>%
-    write_delim(path = paste0("/logging/", "PID-", getIdProcesoFromAgent(agente), "_log.txt"), delim = "\t",
-                col_names = F, append = T)
+    write_delim(path = paste0(getwd(), "/logging/", "PID-", getIdProcesoFromAgent(agente), "_log.txt"), delim = "\t",
+                col_names = T, append = T)
 }
