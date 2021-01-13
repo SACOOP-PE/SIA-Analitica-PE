@@ -78,7 +78,6 @@ interrogateAgent <- function(agente){
     if ((eb %>% pull(Cod)) %in% c(201,202)) { 
       
       addEventLog(agente, paste0("La revisión de estructura de datos tiene observaciones. Continuar con discreción."), "I", "B")
-      return(eb)
     }
     else {
       addEventLog(agente, paste0("Revisión de estructura de datos satisfatoria."), "I", "B")
