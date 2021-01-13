@@ -88,10 +88,11 @@ saveOutputs <- function(agente, ebFormatt, pidlog) {
   
   #log----
   pidlog %>%
-    write_de(paste0(paste(getwd(), "logging/", sep = "/"),
-                               paste(agente %>% pull(Coopac),
-                                     getIdProcesoFromAgent(agente),
-                                     paste0("(",agente %>% pull(PeriodoInicial),"-", agente %>% pull(PeriodoFinal),")"),
-                                     sep = "_"),
-                               "_PID-3424234.log"))
+    write_delim(paste0(getwd(), 
+                       "/logging/",
+                       "PID-", 
+                       getIdProcesoFromAgent(agente), 
+                       ".log",
+                       ".txt"),
+                delim = "\t")
 }
