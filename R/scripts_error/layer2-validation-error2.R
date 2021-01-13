@@ -89,8 +89,8 @@ validarCruceInterno          <- function(agente, eb){
   if (length(getPeriodosNoObservados(agente, eb, "CCR")) >0){
     
     cruce1 <- tibble(Periodo   = getPeriodosNoObservados(agente, eb, "CCR")) %>% rowwise() %>%
-      mutate(OpFaltantes_BD01  = realizarCruce(agente, eb, Periodo, "BD02A", "BD01"),
-             OpFaltantes_BD02A = realizarCruce(agente, eb, Periodo, "BD01", "BD02A"))
+      mutate(OpFaltantes_BD01  = realizarCruce(agente, Periodo, "BD02A", "BD01"),
+             OpFaltantes_BD02A = realizarCruce(agente, Periodo, "BD01", "BD02A"))
     
     f_bd01  <- cruce1 %>% filter(OpFaltantes_BD01 != "") %>% select(Periodo, OpFaltantes_BD01)
     f_bd02A <- cruce1 %>% filter(OpFaltantes_BD02A != "") %>% select(Periodo, OpFaltantes_BD02A)
@@ -101,9 +101,9 @@ validarCruceInterno          <- function(agente, eb){
                IdProceso = getIdProcesoFromAgent(agente),
                Cod = 312,
                BD  = "BD01",
-               txt2 = OpFaltantes_BD01,
-               num2 = length(str_split(string=txt2 ,pattern = ",")[[1]])) %>%
-        select(CodCoopac, IdProceso, Cod, Periodo, BD, txt2, num2)
+               txt1 = OpFaltantes_BD01,
+               num1 = length(str_split(string=txt2 ,pattern = ",")[[1]])) %>%
+        select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
       
       eb <- addErrorMasivo(eb, chunk_321)
     }
@@ -113,9 +113,9 @@ validarCruceInterno          <- function(agente, eb){
                IdProceso = getIdProcesoFromAgent(agente),
                Cod = 322,
                BD  = "BD02A",
-               txt2 = OpFaltantes_BD02A,
-               num2 = length(str_split(string=txt2 ,pattern = ",")[[1]])) %>%
-        select(CodCoopac, IdProceso, Cod, Periodo, BD, txt2, num2)
+               txt1 = OpFaltantes_BD02A,
+               num1 = length(str_split(string=txt2 ,pattern = ",")[[1]])) %>%
+        select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
       
       eb <- addErrorMasivo(eb, chunk_322)
     }
@@ -124,7 +124,7 @@ validarCruceInterno          <- function(agente, eb){
   if (length(getPeriodosNoObservados(agente, eb, "CODGR")) >0){
     
     cruce2 <- tibble(Periodo = getPeriodosNoObservados(agente, eb, "CODGR")) %>% rowwise() %>%
-      mutate(GaranFaltantes_BD03A = realizarCruce(agente, eb, Periodo, "BD03B", "BD03A"))
+      mutate(GaranFaltantes_BD03A = realizarCruce(agente, Periodo, "BD03B", "BD03A"))
     
     f_bd03A <- cruce2 %>% filter(GaranFaltantes_BD03A != "") %>% select(Periodo, GaranFaltantes_BD03A)
     
@@ -134,9 +134,9 @@ validarCruceInterno          <- function(agente, eb){
                IdProceso = getIdProcesoFromAgent(agente),
                Cod = 323,
                BD  = "BD03A",
-               txt2 = GaranFaltantes_BD03A,
-               num2 = length(str_split(string=txt2 ,pattern = ",")[[1]])) %>%
-        select(CodCoopac, IdProceso, Cod, Periodo, BD, txt2, num2)
+               txt1 = GaranFaltantes_BD03A,
+               num1 = length(str_split(string=txt2 ,pattern = ",")[[1]])) %>%
+        select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
       
       eb <- addErrorMasivo(eb, chunk_323)
     }
