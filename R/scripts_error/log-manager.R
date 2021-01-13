@@ -61,5 +61,3 @@ getlog <- function(pid) {
 
   return(pidlog)
 }
-
-
