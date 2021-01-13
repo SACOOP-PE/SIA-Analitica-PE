@@ -85,7 +85,7 @@ getColumnasOM <- function(BD){
 }
 getColVacia   <- function(ruta, BD = evaluarFile(ruta)){
   colsVacias <- intersect(BD[sapply(BD, function(x) all(is.na(x)))] %>% colnames(),
-                            getColumnasOM(getBDFromRuta(ruta)) %>% unlist())
+                          getColumnasOM(getBDFromRuta(ruta)) %>% unlist())
 
   return(colsVacias)
 }
