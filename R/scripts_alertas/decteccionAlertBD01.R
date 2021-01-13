@@ -34,6 +34,6 @@ ejecutarDecteccionAlertBD01 <-function(header, listaErrores, alertBucket){
   }
   alertBucket  <- alertBucket
 
-  print(paste0("Terminó la detectación de alertas BD01: ", format(Sys.time(), "%a %b %d %X %Y")))
+  print(paste0("Terminó la detección de alertas BD01: ", format(Sys.time(), "%a %b %d %X %Y")))
   return(alertBucket)
 }

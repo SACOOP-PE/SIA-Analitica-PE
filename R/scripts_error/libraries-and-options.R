@@ -26,7 +26,7 @@ initCuadreContable     <- function(){
                                                            KJU = col_double(), KRF = col_double(), 
                                                            KVE = col_double(), KVI = col_double(), 
                                                            PERIODO = col_double(), TIPOENTIDAD = col_character()), 
-             trim_ws = TRUE, progress = T) %>% return()
+             trim_ws = TRUE, progress = F) %>% return()
 }
 initEstructuraBase     <- function(){ 
   read_delim(archivo.EstructuraBase, 
@@ -34,12 +34,12 @@ initEstructuraBase     <- function(){
                                                            CAMPO = col_character(), 
                                                            DESCRIPCION = col_character(),  
                                                            NRO = col_double(), 
-                                                           TIPO = col_character()), progress = T)  %>% return()
+                                                           TIPO = col_character()), progress = F)  %>% return()
 }
 initRepositorioErrores <- function(){
   read_delim(archivo.RepositorioErrores, 
              "\t", escape_double = FALSE, col_types = cols(Cod = col_double(), 
                                                            Descripcion = col_character(), 
                                                            Tipo = col_character()),
-             locale = locale(encoding = "ISO-8859-1"), trim_ws = TRUE, progress = T) %>% return()
+             locale = locale(encoding = "ISO-8859-1"), trim_ws = TRUE, progress = F) %>% return()
 }

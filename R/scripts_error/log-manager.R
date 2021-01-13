@@ -1,9 +1,14 @@
 # Create log
+
 getNombreCoopac  <- function(cod){
+  #cod - number
+  
   initCuadreContable() %>% 
     filter(CODIGO_ENTIDAD == as.integer(cod)) %>%
     pull(ENTIDAD) %>% first()
 }
+
+ 
 getLogObject     <- function(path){
   read_delim(path, "\t", escape_double = FALSE,col_types = cols(Categoria = col_character(), 
                                                                 Coopac = col_character(), Criticidad = col_character(), 
@@ -18,10 +23,13 @@ getNextIdProceso <- function(logObject){
   else 
     return(1) 
 }
+
 addEventLog      <- function(agent,
                              descripcion,
                              categoria, 
                              criticidad){
+  
+  descripcion <- paste0(timehead(),descripcion)
   
   myLog <- getLogObject("logging/log.txt")
   event <- tibble(IdProceso = getIdProcesoFromAgent(agent),
@@ -35,5 +43,9 @@ addEventLog      <- function(agent,
                   Criticidad = ifelse(criticidad == "B", "Baja", ifelse(criticidad == "M",Media, Alta)))
   
   write_delim(x = event,path = "logging/log.txt", delim = "\t", col_names = F, append = T)
+  
   print(descripcion)
 }
+
+timehead <- function() {
+  paste0("[",Sys.time()[1],"] - ")}

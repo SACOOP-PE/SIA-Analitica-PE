@@ -4,7 +4,7 @@ initRepositorioAlertas <- function(){
              "\t", escape_double = FALSE, col_types = cols(CodAlerta   = col_double(), 
                                                            Responsable = col_character(), 
                                                            Descripcion = col_character()),
-             locale = locale(encoding = "ISO-8859-1"), trim_ws = TRUE, progress = T) %>% return()
+             locale = locale(encoding = "ISO-8859-1"), trim_ws = TRUE, progress = F) %>% return()
 }
 initBucketAlertas      <- function(header){
   tibble(Coopac     = header %>% pull(Coopac) %>% first(),

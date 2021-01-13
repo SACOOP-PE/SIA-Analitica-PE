@@ -15,12 +15,19 @@ createAgent <- function(idCoopac,
                   PeriodoFinal   = periodoFinal,
                   Alcance        = bds) 
   
-  addEventLog(agent, paste0("Se da inicio al proceso ", agent %>% pull(IdProceso) %>% first(),". ~ Validador SIA 1.2.2021"), "I", "B")
+  addEventLog(agent, paste0("Validador SIA 1.3.2021 --------------------------------------"), 
+              "I", "B")
+  
+  addEventLog(agent, paste0("Agente creado. PID-", agent %>% pull(IdProceso) %>% first(),
+                            ". [",idCoopac,"|", periodoInicial, "~", periodoFinal, "]"), 
+              "I", "B")
+  
   return(agent)
 }
 
+ 
 createBucket     <- function(agent){
-  tibble(CodCoopac     = agent %>% pull(Coopac) %>% first(),
+  eb <- tibble(CodCoopac     = agent %>% pull(Coopac) %>% first(),
          IdProceso  = agent %>% pull(IdProceso) %>% first(), 
          Cod         = 100,
          Periodo = "",
@@ -30,29 +37,54 @@ createBucket     <- function(agent){
          txt3 = "",
          num1 = 0,
          num2 = 0,
-         num3 = 0) %>% return()
+         num3 = 0) 
+  
+  addEventLog(agent, paste0("Bucket de errores creado. PID-", agent %>% pull(IdProceso) %>% first(),"."), 
+              "I", "B")
+  
+  return(eb)
 }
+
 interrogateAgent <- function(agent){
   eb <- createBucket(agent)
+  
+  addEventLog(agent, paste0("Inicio del interrogatorio. PID-", agent %>% pull(IdProceso) %>% first(),"."), 
+              "I", "B")
+  
+  addEventLog(agent, paste0("Apertura de revisión de pre-requisitos."),  "I", "B")
   
   eb <- layer0(agent, eb) #pre-requisitos
   
   if (nrow(eb) > 0) {
-    if ((eb %>% pull(Cod)) %in% c(101,102)) {
-      print("Resultado final - El proceso se interrumpió debido a que no se cumplen los pre requisitos. Elaborar el PY. DE OFICIO y remitirlo al analista.")
+    if ((eb %>% pull(Cod)) %in% c(101,102)) { 
+      
+      addEventLog(agent, paste0("Fin del proceso de revisión por errores críticos 101-102."), "I", "B")
       return(eb)
+      
+    }
+    else {
+      addEventLog(agent, paste0("Revisión de pre-requisitos satisfactoria."), "I", "B")
     }
   }
-
-  #
+  else {
+    addEventLog(agent, paste0("Revisión de pre-requisitos satisfactoria."), "I", "B")
+  }
+  
+  addEventLog(agent, paste0("Apertura de revisión de estructura de datos."),  "I", "B")
+  
   eb <- layer1(agent, eb) #estructura de columnas
   
   if (nrow(eb) > 0) {
-    if ((eb %>% pull(Cod)) %in% c(201,202)) {
-       print("Resultado final - El proceso se interrumpió debido a que hay columnas sobrantes o faltantes. Elaborar el CORREO y remitirlo al analista.")
-       return(eb)
+    if ((eb %>% pull(Cod)) %in% c(201,202)) { 
+      
+      addEventLog(agent, paste0("La revisión de estructura de datos tiene observaciones. Continuar con discreción."), "I", "B")
+      return(eb)
     }
-  }
+    else
+    {
+      addEventLog(agent, paste0("Revisión de estructura de datos satisfatoria."), "I", "B")
+    }
+  } 
   
   #
   eb <- layer2(agent, eb) #errores OM 22269-2020

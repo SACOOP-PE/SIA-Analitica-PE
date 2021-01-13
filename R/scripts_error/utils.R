@@ -62,7 +62,7 @@ getArchivosExigiblesFromAgent <- function(agente){
                                       (periodos <= periodo_final)], ".txt")),
         1, paste, collapse = "_") %>% return()
 }
-getNombreCoopacFromAgent      <- function(agente){ 
+getNombreCoopacFromAgent      <- function(agente){  
   agente %>% pull(NombreCoopac) %>% first() %>% return()
 }
 getCoopacFromAgent            <- function(agente){ 
