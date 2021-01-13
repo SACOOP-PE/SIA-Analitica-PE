@@ -54,8 +54,8 @@ validarOperacionesDuplicadas <- function(agente, eb){
   exigibles <- getArchivosNoObservadosByCols(agente, eb, c("CCR", "CCR_C", "CODGR"))
   
   dups <- tibble(NombreArchivo = exigibles) %>% rowwise() %>% 
-    mutate(ruta          = getRuta(carpeta, NombreArchivo),
-           Duplicados = operacionesDuplicadas(ruta)) %>%
+    mutate(ruta       = getRuta(carpeta, NombreArchivo),
+           Duplicados = getoperacionesDuplicadas(ruta)) %>%
     filter(Duplicados != "")
   
   if (nrow(dups) > 0) {
