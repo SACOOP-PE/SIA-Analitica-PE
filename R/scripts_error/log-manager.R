@@ -49,3 +49,8 @@ addEventLog      <- function(agent,
 
 timehead <- function() {
   paste0("[",Sys.time()[1],"] - ")}
+
+getlog <- function(pid) {
+  contents <- getLogObject(path = "logging/log.txt") %>% filter(IdProceso == pid) %>% pull(Descripcion) 
+  return(contents)
+}
