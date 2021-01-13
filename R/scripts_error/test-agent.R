@@ -32,7 +32,7 @@
   agent       <- closeAgent(agent, bucket)
   ebFormatted <- formatBucket(bucket)
   
-  PIDlog      <- tibble(logEncontrados = getlog(getIdProcesoFromAgent(agent)))
+  PIDlog      <- getlog(getIdProcesoFromAgent(agent))
   
   saveOutputs(agent, ebFormatted, PIDlog)
   
