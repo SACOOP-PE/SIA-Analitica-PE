@@ -25,13 +25,10 @@
   agent <- createAgent(idCoopac = "01172",
                        usuarioSIA = "DPACHECO",
                        coopacCarpeta  = "test/datatest",
-                       periodoInicial = "201907",
-                       periodoFinal   = "201909",
+                       periodoInicial = "201901",
+                       periodoFinal   = "2020",
                        bds            = list(c("BD01", "BD02A", "BD02B", "BD03A", "BD03B", "BD04")))
   bucket      <- interrogateAgent(agent)
   agent       <- closeAgent(agent, bucket)
   ebFormatted <- formatBucket(bucket)
- 
-  #Mostrar log - Edwin si puedes codea para que este log mostrado se puede guardar en un archivo PID-3424234.log
-  getlog(getIdProcesoFromAgent(agent))
-  
+  PIDlog      <- getlog(getIdProcesoFromAgent(agent))

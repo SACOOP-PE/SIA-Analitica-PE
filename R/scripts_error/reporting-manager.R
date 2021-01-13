@@ -1,6 +1,6 @@
-formatBucket <- function(bucket) {
+formatBucket <- function(eb) {
     
-  output <- bucket %>% 
+  output <- eb %>% 
     rowwise() %>% 
     mutate(Descripcion = switch (toString(Cod),
                                  "101" = paste0("Se identificaron ", pad2(num1)," archivo(s) duplicados dentro de la ruta especificada. (",txt1,")"),
@@ -49,8 +49,7 @@ formatBucket <- function(bucket) {
                                  "476" = paste0("Se identificaron ", pad2(num2), " crédito(s) con fechas vacías o erróneas en la Fecha de Desembolso (FOT_C) en la BD04", " correspondiente al periodo de ", periodoEscrito(Periodo), ".(", txt2, ")"),
                                  "477" = paste0("Se identificaron ", pad2(num2), " crédito(s) con fechas vacías o erróneas en la Fecha de cancelación de la operación (FCAN_C) en la BD04", " correspondiente al periodo de ", periodoEscrito(Periodo), ".(", txt2, ")"),
                                  "478" = paste0("Se identificaron ", pad2(num2), " crédito(s) con fecha de desembolso posterior a la fecha de corte en la cartera de créditos (BD01)", " correspondiente al periodo de ", periodoEscrito(Periodo), ".(", txt2, ")")
-                                 )
-           ) %>% 
+                                 )) %>% 
     select(Cod, Descripcion)
   
   return(output)
@@ -66,4 +65,33 @@ periodoEscrito <- function(periodo) {
   m <- base %>% filter(pad2(MES) %in% substr(periodo,5,6)) %>% pull(ESCRITO)
   
   return(paste(m, "del", substr(periodo, 1, 4)))
+}
+
+saveOutputs <- function(agente, ebFormatt, pidlog) {
+  #agent----
+  agente %>% 
+    writexl::write_xlsx(paste0(paste(getwd(), "test/", sep = "/"),
+                               paste(agente %>% pull(Coopac),
+                                     getIdProcesoFromAgent(agente),
+                                     paste0("(",agente %>% pull(PeriodoInicial),"-", agente %>% pull(PeriodoFinal),")"),
+                                     sep = "_"),
+                               "_agente.xlsx"))
+  
+  #ebFormatted ----
+  ebFormatt %>%
+    writexl::write_xlsx(paste0(paste(getwd(), "test/", sep = "/"),
+                               paste(agente %>% pull(Coopac),
+                                     getIdProcesoFromAgent(agente),
+                                     paste0("(",agente %>% pull(PeriodoInicial),"-", agente %>% pull(PeriodoFinal),")"),
+                                     sep = "_"),
+                               "_reportErrores.xlsx"))
+  
+  #log----
+  pidlog %>%
+    write_de(paste0(paste(getwd(), "logging/", sep = "/"),
+                               paste(agente %>% pull(Coopac),
+                                     getIdProcesoFromAgent(agente),
+                                     paste0("(",agente %>% pull(PeriodoInicial),"-", agente %>% pull(PeriodoFinal),")"),
+                                     sep = "_"),
+                               "_PID-3424234.log"))
 }

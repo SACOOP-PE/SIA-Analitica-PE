@@ -691,8 +691,3 @@ getColsNoObservadas             <- function(ruta, eb, tipoError){
   
   return(cols)
 }
-
-
-
-
-
