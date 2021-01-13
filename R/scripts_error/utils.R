@@ -4,7 +4,7 @@ getRuta           <- function(carpeta, filename){
   lista_rutas <- list.files(path=carpeta, full.names = TRUE, recursive =  TRUE)
   (lista_rutas[str_detect(lista_rutas, filename)])[1]  %>% return()
 }
-# Funciones auxiliares - Ruta }
+# Funciones auxiliares - Ruta
 getAnoFromRuta    <- function(ruta){
   if (is.na(ruta) | ruta == "" ) {
     return("")
