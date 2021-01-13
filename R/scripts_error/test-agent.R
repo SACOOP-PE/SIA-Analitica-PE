@@ -13,12 +13,8 @@
   # Interrogar agente - Layer del 0 al 3. 
   # Cerrar agente.
   # Formatear bucket generado para comunicarlo por correo o por Oficio SBS.
-  
-  # getArchivosFromAgent(agent)
-  # getArchivosNoObservados(agent,bucket)
-  # getArchivosNoObservadosByCols(agent, bucket, c("MON_C", "MCUO_C", "X29"))
-  # getArchivosNoObservadosByErrors(agent,bucket,c(201))
-  # getArchivosObservadosFromBucket(bucket)
+  # Obtener el Log (Time - Descripción)
+  # Exportar agent, ebFormatted y PIDlog
   
   # Nuevas funciones para error-handling
   ##### Testing -----

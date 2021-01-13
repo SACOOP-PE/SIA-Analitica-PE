@@ -564,11 +564,11 @@ procesarErrorcodDeudor <- function(agente, eb, periodo){
 
 
 # Tipo3----
-#BD01, BD02A, BD02B, BD04  #no evaluar en la Bd02""
+#BD01, BD02A, BD02B, BD04 
 getColsErrorT3 <- function(ruta){
   cols <- switch (getBDFromRuta(ruta),
                   BD01  = {c("FOT", "FVEG", "FVEP")},
-                  BD02A = {c("FVEP")}
+                  BD02A = {c("FVEP")},
                   BD02B = {c("FVEP_C")},
                   BD04  = {c("FOT_C", "FCAN_C")}) 
   return(cols)
@@ -654,7 +654,7 @@ getArchivosNoObservadosByErrors <- function(agente, eb, cods) {
 }
 getArchivosNoObservadosByCols   <- function(agente, eb, cols) {
   v <- eb %>%
-    filter(Cod %in% c(201, 202, 203))
+    filter(Cod %in% c(201, 202, 203)) %>% 
     rowwise() %>% 
     filter_at(.vars = vars(txt1),
               .vars_predicate = any_vars(str_detect(., paste0(paste(cols, collapse = "|"))))) %>% 

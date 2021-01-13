@@ -53,56 +53,56 @@ interrogateAgent <- function(agente){
   
   addEventLog(agente, paste0("Apertura de revisión de pre-requisitos."),  "I", "B")
   
-  eb <- layer0(agente, eb) #pre-requisitos
+    eb <- layer0(agente, eb) #pre-requisitos
   
-  if (nrow(eb) > 0) {
-    if ((eb %>% pull(Cod)) %in% c(101,102)) { 
+    if (nrow(eb) > 0) {
+      if ((eb %>% pull(Cod)) %in% c(101,102)) { 
       
-      addEventLog(agente, paste0("Fin del proceso de revisión por errores críticos 101-102."), "I", "B")
-      return(eb)
+        addEventLog(agente, paste0("Fin del proceso de revisión por errores críticos 101-102."), "I", "B")
+        return(eb)
     }
-    else {
-      addEventLog(agente, paste0("Revisión de pre-requisitos satisfactoria."), "I", "B")
+      else {
+        addEventLog(agente, paste0("Revisión de pre-requisitos satisfactoria."), "I", "B")
     }
   }
-  else {
+    else {
     addEventLog(agente, paste0("Revisión de pre-requisitos satisfactoria."), "I", "B")
   }
   
   addEventLog(agente, paste0("Apertura de revisión de estructura de datos."),  "I", "B")
   
-  eb <- layer1(agente, eb) #estructura de columnas
+    eb <- layer1(agente, eb) #estructura de columnas
   
-  if (nrow(eb) > 0) {
-    if ((eb %>% pull(Cod)) %in% c(201,202)) { 
+    if (nrow(eb) > 0) {
+      if ((eb %>% pull(Cod)) %in% c(201,202)) { 
       
       addEventLog(agente, paste0("La revisión de estructura de datos tiene observaciones. Continuar con discreción."), "I", "B")
-    }
+        }
+      else {
+      addEventLog(agente, paste0("Revisión de estructura de datos satisfatoria."), "I", "B")
+        }
+  }
     else {
       addEventLog(agente, paste0("Revisión de estructura de datos satisfatoria."), "I", "B")
-    }
-  }
-  else {
-    addEventLog(agente, paste0("Revisión de estructura de datos satisfatoria."), "I", "B")
-  }
+      }
   
   addEventLog(agente, paste0("Apertura de revisión de errores OM 22269-2020."),  "I", "B")
   
-  eb <- layer2(agente, eb) #errores OM 22269-2020
-  
-  if (nrow(eb) > 0) {
-    if ((eb %>% pull(Cod)) %in% c(400:500)) { 
-      
-      addEventLog(agente, paste0("La revisión errores OM 22269-2020 tiene observaciones."), "I", "B")
-    }
+    eb <- layer2(agente, eb) #errores OM 22269-2020
+
+    if (nrow(eb) > 0) {
+      if ((eb %>% pull(Cod)) %in% c(400:500)) {
+
+        addEventLog(agente, paste0("La revisión errores OM 22269-2020 tiene observaciones."), "I", "B")
+        }
+      else {
+        addEventLog(agente, paste0("Revisión de errores OM 22269-2020 fue satisfatoria."), "I", "B")
+        }
+      }
     else {
       addEventLog(agente, paste0("Revisión de errores OM 22269-2020 fue satisfatoria."), "I", "B")
-    }
-  }
-  else {
-    addEventLog(agente, paste0("Revisión de errores OM 22269-2020 fue satisfatoria."), "I", "B")
-  }
-  
+      }
+
   # eb <- layer3(agent, eb) #alertas ad-hoc 11356
    
   return(eb)
