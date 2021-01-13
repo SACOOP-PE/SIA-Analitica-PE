@@ -60,7 +60,6 @@ interrogateAgent <- function(agente){
       
       addEventLog(agente, paste0("Fin del proceso de revisión por errores críticos 101-102."), "I", "B")
       return(eb)
-      
     }
     else {
       addEventLog(agente, paste0("Revisión de pre-requisitos satisfactoria."), "I", "B")
@@ -87,8 +86,23 @@ interrogateAgent <- function(agente){
     addEventLog(agente, paste0("Revisión de estructura de datos satisfatoria."), "I", "B")
   }
   
-  #
+  addEventLog(agente, paste0("Apertura de revisión de errores OM 22269-2020."),  "I", "B")
+  
   eb <- layer2(agente, eb) #errores OM 22269-2020
+  
+  if (nrow(eb) > 0) {
+    if ((eb %>% pull(Cod)) %in% c(400:500)) { 
+      
+      addEventLog(agente, paste0("La revisión errores OM 22269-2020 tiene observaciones."), "I", "B")
+    }
+    else {
+      addEventLog(agente, paste0("Revisión de errores OM 22269-2020 fue satisfatoria."), "I", "B")
+    }
+  }
+  else {
+    addEventLog(agente, paste0("Revisión de errores OM 22269-2020 fue satisfatoria."), "I", "B")
+  }
+  
   # eb <- layer3(agent, eb) #alertas ad-hoc 11356
    
   return(eb)
