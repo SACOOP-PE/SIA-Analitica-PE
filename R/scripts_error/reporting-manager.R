@@ -70,7 +70,7 @@ periodoEscrito <- function(periodo) {
 saveOutputs <- function(agente, ebFormatt, pidlog) {
   #agent----
   agente %>% 
-    writexl::write_xlsx(paste0(paste(getwd(), "test/", sep = "/"),
+    writexl::write_xlsx(paste0(paste0(getwd(), "/test/"),
                                paste(agente %>% pull(Coopac),
                                      getIdProcesoFromAgent(agente),
                                      paste0("(",agente %>% pull(PeriodoInicial),"-", agente %>% pull(PeriodoFinal),")"),
@@ -79,7 +79,7 @@ saveOutputs <- function(agente, ebFormatt, pidlog) {
   
   #ebFormatted ----
   ebFormatt %>%
-    writexl::write_xlsx(paste0(paste(getwd(), "test/", sep = "/"),
+    writexl::write_xlsx(paste0(paste0(getwd(), "/test/"),
                                paste(agente %>% pull(Coopac),
                                      getIdProcesoFromAgent(agente),
                                      paste0("(",agente %>% pull(PeriodoInicial),"-", agente %>% pull(PeriodoFinal),")"),
