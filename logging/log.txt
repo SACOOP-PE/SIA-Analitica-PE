@@ -337,3 +337,23 @@ IdProceso	Fecha	Hora	Usuario	Coopac	Carpeta	Descripcion	Categoria	Criticidad
 100138	2021-01-12	2021-01-12 23:53:01	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:53:01] - Revisión de estructura de datos satisfatoria.	Informativo	Baja
 100138	2021-01-12	2021-01-12 23:53:04	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:53:04] - La validación de operaciones vacías concluyó sin observaciones. (~ly2)	Informativo	Baja
 100138	2021-01-12	2021-01-12 23:53:05	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-12 23:53:05] - La validación de operaciones duplicadas concluyó sin observaciones. (~ly2) 	Informativo	Baja
+100139	2021-01-13	2021-01-13 09:15:40	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-13 09:15:40] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100139	2021-01-13	2021-01-13 09:15:40	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-13 09:15:40] - Agente creado. PID-100139. [01172|201907~201909]	Informativo	Baja
+100139	2021-01-13	2021-01-13 09:15:40	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-13 09:15:40] - Bucket de errores creado. PID-100139.	Informativo	Baja
+100139	2021-01-13	2021-01-13 09:15:40	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-13 09:15:40] - Inicio del interrogatorio. PID-100139.	Informativo	Baja
+100139	2021-01-13	2021-01-13 09:15:40	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-13 09:15:40] - Apertura de revisión de pre-requisitos.	Informativo	Baja
+100139	2021-01-13	2021-01-13 09:15:40	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-13 09:15:40] - Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100139	2021-01-13	2021-01-13 09:15:40	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-13 09:15:40] - Apertura de revisión de estructura de datos.	Informativo	Baja
+100139	2021-01-13	2021-01-13 09:15:50	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-13 09:15:50] - Revisión de estructura de datos satisfatoria.	Informativo	Baja
+100139	2021-01-13	2021-01-13 09:15:54	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-13 09:15:54] - La validación de operaciones vacías concluyó sin observaciones. (~ly2)	Informativo	Baja
+100139	2021-01-13	2021-01-13 09:15:55	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-13 09:15:55] - La validación de operaciones duplicadas concluyó sin observaciones. (~ly2) 	Informativo	Baja
+100140	2021-01-13	2021-01-13 09:32:17	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-13 09:32:17] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100140	2021-01-13	2021-01-13 09:32:17	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-13 09:32:17] - Agente creado. PID-100140. [01172|201907~201909]	Informativo	Baja
+100140	2021-01-13	2021-01-13 09:32:17	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-13 09:32:17] - Bucket de errores creado. PID-100140.	Informativo	Baja
+100140	2021-01-13	2021-01-13 09:32:17	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-13 09:32:17] - Inicio del interrogatorio. PID-100140.	Informativo	Baja
+100140	2021-01-13	2021-01-13 09:32:17	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-13 09:32:17] - Apertura de revisión de pre-requisitos.	Informativo	Baja
+100140	2021-01-13	2021-01-13 09:32:17	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-13 09:32:17] - Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100140	2021-01-13	2021-01-13 09:32:17	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-13 09:32:17] - Apertura de revisión de estructura de datos.	Informativo	Baja
+100140	2021-01-13	2021-01-13 09:33:10	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-13 09:33:10] - Revisión de estructura de datos satisfatoria.	Informativo	Baja
+100140	2021-01-13	2021-01-13 09:33:14	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-13 09:33:14] - La validación de operaciones vacías concluyó sin observaciones. (~ly2)	Informativo	Baja
+100140	2021-01-13	2021-01-13 09:33:14	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-13 09:33:14] - La validación de operaciones duplicadas concluyó sin observaciones. (~ly2) 	Informativo	Baja

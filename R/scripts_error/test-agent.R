@@ -32,5 +32,6 @@
   agent       <- closeAgent(agent, bucket)
   ebFormatted <- formatBucket(bucket)
  
-  print(ebFormatted)
+  #Mostrar log - Edwin si puedes codea para que este log mostrado se puede guardar en un archivo PID-3424234.log
+  getlog(getIdProcesoFromAgent(agent))
   
