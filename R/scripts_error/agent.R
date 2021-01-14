@@ -1,9 +1,9 @@
 createAgent <- function(idCoopac,
-                        usuarioSIA,
-                        coopacCarpeta, 
                         periodoInicial, 
                         periodoFinal, 
-                        bds = c("BD01","BD02A","BD02B","BD03A","BD03B","BD04")){
+                        usuarioSIA = default.usuario,
+                        coopacCarpeta = default.carpeta, 
+                        bds = default.bd){
   
   agente <- tibble(Coopac       = idCoopac,
                   NombreCoopac = getNombreCoopacFromIdCoopac(Coopac),
@@ -24,6 +24,7 @@ createAgent <- function(idCoopac,
   
   return(agente)
 }
+
 
  
 createBucket     <- function(agente){

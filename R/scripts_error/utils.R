@@ -1,8 +1,14 @@
 # Version utils v2. 
 
-getRuta           <- function(carpeta, filename){
-  lista_rutas <- list.files(path=carpeta, full.names = TRUE, recursive =  TRUE)
-  (lista_rutas[str_detect(lista_rutas, filename)])[1]  %>% return()
+getRuta           <- function(carpeta, 
+                              filename){
+  
+  lista_rutas <- list.files(path=carpeta, 
+                            full.names = TRUE, 
+                            recursive =  TRUE)
+  
+  return((lista_rutas[str_detect(lista_rutas, filename)])[1])
+  
 }
 # Funciones auxiliares - Ruta
 getAnoFromRuta    <- function(ruta){
