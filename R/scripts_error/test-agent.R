@@ -19,8 +19,9 @@
 
   ##### Testing -----
   agent <- createAgent(idCoopac = "01172", 
-                       periodoInicial = "201907",
-                       periodoFinal   = "202010")
+                       periodoInicial = "201901",
+                       periodoFinal   = "202010",
+                       bds = list(c("BD01", "BD02A", "BD02B", "BD03A", "BD03B", "BD04")))
   
   bucket      <- interrogateAgent(agent)
   agent       <- closeAgent(agent, bucket)

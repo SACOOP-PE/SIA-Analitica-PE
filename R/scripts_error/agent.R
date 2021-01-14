@@ -3,7 +3,7 @@ createAgent <- function(idCoopac,
                         periodoFinal, 
                         usuarioSIA = default.usuario,
                         coopacCarpeta = default.carpeta, 
-                        bds = default.bd){
+                        bds = ""){
   
   agente <- tibble(Coopac       = idCoopac,
                   NombreCoopac = getNombreCoopacFromIdCoopac(Coopac),

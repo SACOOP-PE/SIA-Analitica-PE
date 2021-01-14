@@ -21,6 +21,8 @@ layer1 <- function(agente, eb){
                                  ""),
            ColVacias    = toString(getColVacia(ruta)))
 
+  view(tbl1_ctrl1)
+  
   fal <- tbl1_ctrl1 %>% filter(ColFaltantes != "")
   sob <- tbl1_ctrl1 %>% filter(ColSobrantes != "")
   vac <- tbl1_ctrl1 %>% filter(ColVacias != "")
