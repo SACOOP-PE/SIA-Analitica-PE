@@ -355,7 +355,7 @@ procesarErroresT1 <- function(agente, ruta, eb){
   BD <- evaluarFile(ruta)
   
   if (length(getColsNoObservadas(ruta, eb, "T1")) >0) {
-    erroresTipo1 <- tibble(Columna = filtrarColsErrorT1(ruta, eb)) %>%
+    erroresTipo1 <- tibble(Columna = getColsNoObservadas(ruta, eb, "T1")) %>%
       rowwise() %>%
       mutate(verificar = BD %>% 
                           filter((as.numeric(cgrep(BD, Columna)[[1]]) %in% getDigitosBD(ruta, Columna)) == FALSE) %>%
