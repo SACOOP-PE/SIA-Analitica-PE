@@ -299,6 +299,12 @@ realizarCruce <- function(agente, periodo, data1, data2){
 }
 
 #Validar campos
+
+#´´Tipo 1: validaciones a campos con dígitos específicos
+#´´Tipo 2: validaciones con condiciones entre campos
+#´´Tipo 3: validaciones a campos fecha
+
+
 # Tipo1 ----
 getDigitosBD01  <- function(campo){
   digitos <- switch (campo,
