@@ -164,6 +164,16 @@ validarCampos                <- function(agente, eb){
     eb     <- procesarErroresT1(agente, ruta_x, eb)
   }
   
+  n <- eb %>% filter(Cod %>% c(401:457)) %>% nrow()
+  if (n == 0) {
+    addEventLog(agente, paste0("La validación de los campos concluyó sin observaciones tipo1. (~ly2) "), "I", "B")
+  }
+  else{
+    
+    addEventLog(agente, paste0("La validación de los campos concluyó con ",n," observaciones tipo1. (~ly2) "), "I", "B")
+  }
+  
+  
   # ii. Errores tipo2 ----
   for (y in 1:length(exigibles[str_detect(exigibles, "BD01")])){
     ruta_y <- getRuta(carpeta, exigibles[str_detect(exigibles, "BD01")][y])
@@ -175,6 +185,16 @@ validarCampos                <- function(agente, eb){
     eb <- procesarErroresT2(agente, eb, exigibles, cod)
     cod <- cod +1
   }
+  
+  n <- eb %>% filter(Cod %>% c(461:467)) %>% nrow()
+  if (n == 0) {
+    addEventLog(agente, paste0("La validación de los campos concluyó sin observaciones tipo2. (~ly2) "), "I", "B")
+  }
+  else{
+    
+    addEventLog(agente, paste0("La validación de los campos concluyó con ",n," observaciones tipo2. (~ly2) "), "I", "B")
+  }
+  
   
   # iii. Errores tipo2 ----
   exigibles <- exigibles[str_detect(exigibles, paste(c("BD01","BD02A","BD02B","BD04"), collapse = '|'))]
@@ -203,16 +223,28 @@ validarCampos                <- function(agente, eb){
         select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
 
       eb <- addErrorMasivo(eb, chunk479)
-    }
+  }
   
-  n <- eb %>% filter(Cod %in% c(400:500)) %>% nrow()
+  
+  n <- eb %>% filter(Cod %>% c(471:479)) %>% nrow()
+  if (n == 0) {
+    addEventLog(agente, paste0("La validación de los campos concluyó sin observaciones tipo3. (~ly2) "), "I", "B")
+  }
+  else{
+    
+    addEventLog(agente, paste0("La validación de los campos concluyó con ",n," observación(es) tipo3. (~ly2) "), "I", "B")
+  }
+  
+  
+  ####
+  n <- eb %>% filter(Cod %in% c(401:479)) %>% nrow()
   
   if (n == 0) {
     addEventLog(agente, paste0("La validación de los campos concluyó sin observaciones. (~ly2) "), "I", "B")
   }
   else{
     
-    addEventLog(agente, paste0("La validación de los campos concluyó con ", n, " observación. (~ly2) "), "I", "B")
+    addEventLog(agente, paste0("La validación de los campos concluyó con un total de ", n, " observación(es). (~ly2) "), "I", "B")
   }
   
   return(eb)
@@ -446,7 +478,7 @@ procesarErroresT2 <- function(agente, eb, exigibles, codigoError){
 #BD01
 procesarErrorSaldosNegativos <- function(agente, ruta, eb){
   BD         <- evaluarFile(ruta)
-  saldosCols <- getColsNoObservadas(ruta, eb, saldos)
+  saldosCols <- getColsNoObservadas(ruta, eb, "saldos")
   
   if (length(saldosCols) >0) {
     errorSaldos <- tibble(Columna = saldosCols) %>%
