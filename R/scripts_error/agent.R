@@ -74,24 +74,28 @@ interrogateAgent <- function(agente){
     eb <- layer1(agente, eb) #estructura de columnas
   
     if (nrow(eb) > 0) {
+      
       if ((eb %>% pull(Cod)) %in% c(201,202)) { 
       
+      n <- eb %>% filter(Cod %in% c(201,202)) %>% nrow()
       addEventLog(agente, paste0("La revisión de estructura de datos tiene observaciones. Continuar con discreción."), "I", "B")
-        }
+        
+      }
       else {
       addEventLog(agente, paste0("Revisión de estructura de datos satisfatoria."), "I", "B")
-        }
-  }
+      }
+      
+    }
     else {
       addEventLog(agente, paste0("Revisión de estructura de datos satisfatoria."), "I", "B")
-      }
+    }
   
   addEventLog(agente, paste0("Apertura de revisión de errores OM 22269-2020."),  "I", "B")
   
     eb <- layer2(agente, eb) #errores OM 22269-2020
 
     if (nrow(eb) > 0) {
-      if ((eb %>% pull(Cod)) %in% c(400:500)) {
+      if (nrow(eb %>% filter(Cod %in% c(311:478)) >0)) {
 
         addEventLog(agente, paste0("La revisión errores OM 22269-2020 tiene observaciones."), "I", "B")
         }

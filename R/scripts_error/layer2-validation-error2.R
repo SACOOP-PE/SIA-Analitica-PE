@@ -263,7 +263,7 @@ realizarCruce <- function(agente, periodo, data1, data2){
   setdiff(evaluarFile(getRuta(getCarpetaFromAgent(agente), archivo1)) %>% pull(getCodigoBD(data1)),
           evaluarFile(getRuta(getCarpetaFromAgent(agente), archivo2)) %>% pull(getCodigoBD(data2))) %>%
     unique() %>%
-    return()
+    toString() %>% return()
 }
 
 #Validar campos
@@ -564,7 +564,7 @@ procesarErrorcodDeudor <- function(agente, periodo){
   setdiff(evaluarFile(getRuta(getCarpetaFromAgent(agente), archivo1)) %>% pull(getCodigoBD("BD03A")),
           evaluarFile(getRuta(getCarpetaFromAgent(agente), archivo2)) %>% pull(getCodigoBD("BD01"))) %>%
     unique() %>%
-    return()
+    toString() %>% return()
 }
 
 
