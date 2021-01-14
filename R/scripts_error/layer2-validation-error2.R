@@ -66,7 +66,7 @@ validarOperacionesDuplicadas <- function(agente, eb){
              Periodo = getAnoMesFromRuta(toString(ruta)),
              BD      = getBDFromRuta(toString(ruta)),
              txt1 = Duplicados,
-             num1 = length(str_split(string=txt2 ,pattern = ",")[[1]])) %>%
+             num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
       select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
 
     eb <- addErrorMasivo(eb, chunk_312)
@@ -102,7 +102,7 @@ validarCruceInterno          <- function(agente, eb){
                Cod = 312,
                BD  = "BD01",
                txt1 = OpFaltantes_BD01,
-               num1 = length(str_split(string=txt2 ,pattern = ",")[[1]])) %>%
+               num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
         select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
       
       eb <- addErrorMasivo(eb, chunk_321)
@@ -114,7 +114,7 @@ validarCruceInterno          <- function(agente, eb){
                Cod = 322,
                BD  = "BD02A",
                txt1 = OpFaltantes_BD02A,
-               num1 = length(str_split(string=txt2 ,pattern = ",")[[1]])) %>%
+               num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
         select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
       
       eb <- addErrorMasivo(eb, chunk_322)
@@ -135,7 +135,7 @@ validarCruceInterno          <- function(agente, eb){
                Cod = 323,
                BD  = "BD03A",
                txt1 = GaranFaltantes_BD03A,
-               num1 = length(str_split(string=txt2 ,pattern = ",")[[1]])) %>%
+               num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
         select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
       
       eb <- addErrorMasivo(eb, chunk_323)
@@ -158,15 +158,13 @@ validarCampos                <- function(agente, eb){
   carpeta   <- getCarpetaFromAgent(agente)
   exigibles <- getArchivosNoObservadosByCols(agente, eb, c("CCR","CCR_C","CODGR"))
   
-  # i. Errores tipo1 ---- (vacios)
-  
-  # i. Errores tipo2 ----
+  # i. Errores tipo1 ----
   for (x in 1:length(exigibles)){
     ruta_x <- getRuta(carpeta, exigibles[x])
     eb     <- procesarErroresT1(agente, ruta_x, eb)
   }
   
-  # ii. Errores tipo3 ----
+  # ii. Errores tipo2 ----
   for (y in 1:length(exigibles[str_detect(exigibles, "BD01")])){
     ruta_y <- getRuta(carpeta, exigibles[str_detect(exigibles, "BD01")][y])
     eb     <- procesarErrorSaldosNegativos(agente, ruta_y, eb)
@@ -178,7 +176,7 @@ validarCampos                <- function(agente, eb){
     cod <- cod +1
   }
   
-  # iii. Errores tipo4 ----
+  # iii. Errores tipo2 ----
   exigibles <- exigibles[str_detect(exigibles, paste(c("BD01","BD02A","BD02B","BD04"), collapse = '|'))]
 
   for (m in 1:length(exigibles)) {
@@ -200,9 +198,9 @@ validarCampos                <- function(agente, eb){
                IdProceso = getIdProcesoFromAgent(agente),
                Periodo = getAnoMesFromRuta(toString(ruta)),
                BD      = getBDFromRuta(toString(ruta)),
-               txt2 = verificar,
-               num2 = length(str_split(string=txt2 ,pattern = ",")[[1]])) %>%
-        select(CodCoopac, IdProceso, Cod, Periodo, BD, txt2, num2)
+               txt1 = verificar,
+               num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
+        select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
 
       eb <- addErrorMasivo(eb, chunk479)
     }
@@ -436,7 +434,7 @@ procesarErroresT2 <- function(agente, eb, exigibles, codigoError){
                IdProceso = getIdProcesoFromAgent(agente),
                BD   = "BD03A",
                txt1 = error467,
-               num1 = length(str_split(string=txt2 ,pattern = ",")[[1]])) %>%
+               num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
         select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
       
       eb <- addErrorMasivo(eb, chunkT2)
@@ -527,10 +525,11 @@ procesarErrorDocumentoIdent <- function(ruta){
       mutate(detectarError = if_else(getnumCaracteresDoc(TID) == (nchar(NID) %>% toString()), "TRUE", "FALSE")) %>%
       filter(detectarError == "FALSE") %>%
       pull(getCodigoBD(getBDFromRuta(ruta))) %>%
-      union(detectarVacios(ruta, "TID")) 
+      union(detectarVacios(ruta, "TID")) %>% toString()
     
     return(verificar_documento)
   }
+  
   if (getBDFromRuta(ruta) =="BD04"){
     verificar_documento <- BD %>%
       filter((CCR_C %in% detectarVacios(ruta, "TID_C")) == FALSE) %>% 
@@ -538,7 +537,7 @@ procesarErrorDocumentoIdent <- function(ruta){
       mutate(detectarError = if_else(getnumCaracteresDoc(TID_C) == (nchar(NID_C) %>% toString()), "TRUE", "FALSE")) %>%
       filter(detectarError == "FALSE") %>%
       pull(getCodigoBD(getBDFromRuta(ruta))) %>%
-      union(detectarVacios(ruta, "TID_C")) 
+      union(detectarVacios(ruta, "TID_C")) %>% toString()
     
     return(verificar_documento)
   }

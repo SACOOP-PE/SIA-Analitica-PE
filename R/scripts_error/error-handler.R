@@ -1,5 +1,5 @@
 ## Gestion de errores----
-addErrorIndividual <- function(errorbucket, agente, codcoopac, idproceso, cod, periodo, bd, 
+addErrorIndividual <- function(eb, agente, codcoopac, idproceso, cod, periodo, bd, 
                                arg_txt1, arg_txt2, arg_txt3,
                                arg_num1, arg_num2, arg_num3){
   t <- tibble(CodCoopac = codcoopac,
@@ -15,9 +15,9 @@ addErrorIndividual <- function(errorbucket, agente, codcoopac, idproceso, cod, p
               num3    = arg_num3)
  
 
-  return(bind_rows(errorbucket,t))
+  return(bind_rows(eb, t))
 } 
 
-addErrorMasivo <- function(errorbucket, parte1){
-  bind_rows(errorbucket, parte1) %>% return()
+addErrorMasivo <- function(eb, parte1){
+  bind_rows(eb, parte1) %>% return()
 }
