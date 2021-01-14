@@ -1,15 +1,15 @@
 #' Función principal 
 
-layer0 <- function(agente, errorBucket){
+layer0 <- function(agente, eb){
   
   carpeta <- getCarpetaFromAgent(agente)
   exigibles <- getArchivosExigiblesFromAgent(agente)
   
-  errorBucket <- errorBucket %>% filter(Cod != 100) 
+  eb <- eb %>% filter(Cod != 100) 
   
   if (length(getDuplicados(carpeta, exigibles)) != 0) { 
     
-    errorBucket <- errorBucket %>% addErrorIndividual(agente, codcoopac = getCoopacFromAgent(agente),
+    eb <- eb %>% addErrorIndividual(agente, codcoopac = getCoopacFromAgent(agente),
                                     idproceso = getIdProcesoFromAgent(agente),
                                     cod = 101,
                                     periodo = "",
@@ -26,7 +26,7 @@ layer0 <- function(agente, errorBucket){
   
   if (length(getFaltantes(carpeta, exigibles)) != 0) { 
     
-    errorBucket <- errorBucket %>% addErrorIndividual(agente, codcoopac = getCoopacFromAgent(agente),
+    eb <- eb %>% addErrorIndividual(agente, codcoopac = getCoopacFromAgent(agente),
                                     idproceso = getIdProcesoFromAgent(agente),
                                     cod = 102,
                                     periodo = "",
@@ -41,7 +41,7 @@ layer0 <- function(agente, errorBucket){
   }
  
   
-  return(errorBucket)
+  return(eb)
 }
 # eb, cod, periodo, bd, arg_txt1, arg_txt2, arg_txt3, arg_num1, arg_num2, arg_num3
 #' Funciones secundarias

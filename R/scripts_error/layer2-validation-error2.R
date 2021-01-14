@@ -164,7 +164,7 @@ validarCampos                <- function(agente, eb){
     eb     <- procesarErroresT1(agente, ruta_x, eb)
   }
   
-  n <- eb %>% filter(Cod %>% c(401:457)) %>% nrow()
+  n <- eb %>% filter(Cod %in% c(401:457)) %>% nrow()
   if (n == 0) {
     addEventLog(agente, paste0("La validación de los campos concluyó sin observaciones tipo1. (~ly2) "), "I", "B")
   }
@@ -186,7 +186,7 @@ validarCampos                <- function(agente, eb){
     cod <- cod +1
   }
   
-  n <- eb %>% filter(Cod %>% c(461:467)) %>% nrow()
+  n <- eb %>% filter(Cod %in% c(461:467)) %>% nrow()
   if (n == 0) {
     addEventLog(agente, paste0("La validación de los campos concluyó sin observaciones tipo2. (~ly2) "), "I", "B")
   }
@@ -226,7 +226,7 @@ validarCampos                <- function(agente, eb){
   }
   
   
-  n <- eb %>% filter(Cod %>% c(471:479)) %>% nrow()
+  n <- eb %>% filter(Cod %in% c(471:479)) %>% nrow()
   if (n == 0) {
     addEventLog(agente, paste0("La validación de los campos concluyó sin observaciones tipo3. (~ly2) "), "I", "B")
   }
