@@ -9,12 +9,21 @@ library(lubridate)
 options(warn = -1)
 options(scipen = 999)
 
-#####3. Parametros de inicio ----- 
+##### 3. Archivos de configuración ----- 
 archivo.CuadreContable     = "config/config1.txt"
 archivo.EstructuraBase     = "config/config2.txt"
 archivo.RepositorioErrores = "config/config3.txt"
 archivo.RepositorioAlertas = "config/config4.txt"
+
+#### 4. Parametros globales ----- 
+
 global.alcance = c(201901:201912, 202001:202012, 202101:202112)
+
+#### 5. Parametros por defecto ----- 
+
+default.usuario <- "ANONYM"
+default.carpeta  <- "test/datatest" 
+default.bd <- c("BD01","BD02A","BD02B","BD03A","BD03B","BD04")
 
 #####4. Inicializar archivos de configuracion
 

@@ -27,8 +27,8 @@ getNextIdProceso <- function(logObject){
 
 addEventLog      <- function(agent,
                              descripcion,
-                             categoria, 
-                             criticidad){
+                             categoria = "I", 
+                             criticidad = "B"){
   
   descripcion <- paste0(timehead(),descripcion)
   

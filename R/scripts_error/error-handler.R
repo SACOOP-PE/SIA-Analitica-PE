@@ -21,3 +21,18 @@ addErrorIndividual <- function(eb, agente, codcoopac, idproceso, cod, periodo, b
 addErrorMasivo <- function(eb, parte1){
   bind_rows(eb, parte1) %>% return()
 }
+
+
+
+# Edwin reducir las dos funciones a esto: 
+
+addError <- function(eb, 
+                     obj = NULL) {
+  
+  eb <- bind_rows(eb, obj)
+  return(eb)
+  
+}
+
+# vamos a estandarizar las estructuras y resumir la mayor cantidad de codigo posible. 
+# desde ahora, mala practica aplicar return() usando pipes.

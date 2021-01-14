@@ -410,3 +410,46 @@ IdProceso	Fecha	Hora	Usuario	Coopac	Carpeta	Descripcion	Categoria	Criticidad
 100145	2021-01-13	2021-01-13 21:09:54	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-13 21:09:54] - La validación de operaciones vacías concluyó sin observaciones. (~ly2)	Informativo	Baja
 100145	2021-01-13	2021-01-13 21:09:58	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-13 21:09:58] - La validación de operaciones duplicadas concluyó con 6 observación. (~ly2) 	Informativo	Baja
 100145	2021-01-13	2021-01-13 21:10:53	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-13 21:10:52] - La validación cruce interno concluyó con 20 observación. (~ly2) 	Informativo	Baja
+100146	2021-01-13	2021-01-13 23:49:48	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-13 23:49:48] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100146	2021-01-13	2021-01-13 23:49:48	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-13 23:49:48] - Agente creado. PID-100146. [01172|201907~202010]	Informativo	Baja
+100146	2021-01-13	2021-01-13 23:49:48	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-13 23:49:48] - Bucket de errores creado. PID-100146.	Informativo	Baja
+100146	2021-01-13	2021-01-13 23:49:48	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-13 23:49:48] - Inicio del interrogatorio. PID-100146.	Informativo	Baja
+100146	2021-01-13	2021-01-13 23:49:49	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-13 23:49:48] - Apertura de revisión de pre-requisitos.	Informativo	Baja
+100146	2021-01-13	2021-01-13 23:49:49	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-13 23:49:49] - Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100146	2021-01-13	2021-01-13 23:49:49	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-13 23:49:49] - Apertura de revisión de estructura de datos.	Informativo	Baja
+100146	2021-01-13	2021-01-13 23:49:55	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-13 23:49:55] - La revisión de estructura de datos tiene observaciones. Continuar con discreción.	Informativo	Baja
+100146	2021-01-13	2021-01-13 23:49:55	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-13 23:49:55] - Apertura de revisión de errores OM 22269-2020.	Informativo	Baja
+100146	2021-01-13	2021-01-13 23:49:57	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-13 23:49:57] - La validación de operaciones vacías concluyó sin observaciones. (~ly2)	Informativo	Baja
+100147	2021-01-14	2021-01-14 09:05:42	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-14 09:05:42] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100147	2021-01-14	2021-01-14 09:05:43	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-14 09:05:42] - Agente creado. PID-100147. [01172|201907~202010]	Informativo	Baja
+100147	2021-01-14	2021-01-14 09:05:43	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-14 09:05:43] - Bucket de errores creado. PID-100147.	Informativo	Baja
+100147	2021-01-14	2021-01-14 09:05:43	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-14 09:05:43] - Inicio del interrogatorio. PID-100147.	Informativo	Baja
+100147	2021-01-14	2021-01-14 09:05:43	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-14 09:05:43] - Apertura de revisión de pre-requisitos.	Informativo	Baja
+100147	2021-01-14	2021-01-14 09:05:43	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-14 09:05:43] - Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100147	2021-01-14	2021-01-14 09:05:44	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-14 09:05:43] - Apertura de revisión de estructura de datos.	Informativo	Baja
+100148	2021-01-14	2021-01-14 09:06:27	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-14 09:06:26] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100148	2021-01-14	2021-01-14 09:06:27	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-14 09:06:27] - Agente creado. PID-100148. [01172|201907~202010]	Informativo	Baja
+100148	2021-01-14	2021-01-14 09:06:27	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-14 09:06:27] - Bucket de errores creado. PID-100148.	Informativo	Baja
+100148	2021-01-14	2021-01-14 09:06:27	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-14 09:06:27] - Inicio del interrogatorio. PID-100148.	Informativo	Baja
+100148	2021-01-14	2021-01-14 09:06:27	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-14 09:06:27] - Apertura de revisión de pre-requisitos.	Informativo	Baja
+100148	2021-01-14	2021-01-14 09:06:27	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-14 09:06:27] - Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100148	2021-01-14	2021-01-14 09:06:27	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-14 09:06:27] - Apertura de revisión de estructura de datos.	Informativo	Baja
+100148	2021-01-14	2021-01-14 09:06:38	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-14 09:06:38] - La revisión de estructura de datos tiene observaciones. Continuar con discreción.	Informativo	Baja
+100148	2021-01-14	2021-01-14 09:06:38	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-14 09:06:38] - Apertura de revisión de errores OM 22269-2020.	Informativo	Baja
+100148	2021-01-14	2021-01-14 09:06:42	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-14 09:06:42] - La validación de operaciones vacías concluyó sin observaciones. (~ly2)	Informativo	Baja
+100148	2021-01-14	2021-01-14 09:06:45	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-14 09:06:45] - La validación de operaciones duplicadas concluyó sin observaciones. (~ly2) 	Informativo	Baja
+100148	2021-01-14	2021-01-14 09:06:46	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-14 09:06:46] - La validación cruce interno concluyó sin observaciones. (~ly2) 	Informativo	Baja
+100148	2021-01-14	2021-01-14 09:06:52	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-14 09:06:52] - La validación de los campos concluyó con 8 observaciones tipo1. (~ly2) 	Informativo	Baja
+100149	2021-01-14	2021-01-14 09:10:36	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-14 09:10:36] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100149	2021-01-14	2021-01-14 09:10:36	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-14 09:10:36] - Agente creado. PID-100149. [01172|201907~202010]	Informativo	Baja
+100149	2021-01-14	2021-01-14 09:10:36	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-14 09:10:36] - Bucket de errores creado. PID-100149.	Informativo	Baja
+100149	2021-01-14	2021-01-14 09:10:36	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-14 09:10:36] - Inicio del interrogatorio. PID-100149.	Informativo	Baja
+100149	2021-01-14	2021-01-14 09:10:36	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-14 09:10:36] - Apertura de revisión de pre-requisitos.	Informativo	Baja
+100149	2021-01-14	2021-01-14 09:10:37	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-14 09:10:37] - Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100149	2021-01-14	2021-01-14 09:10:37	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-14 09:10:37] - Apertura de revisión de estructura de datos.	Informativo	Baja
+100149	2021-01-14	2021-01-14 09:10:42	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-14 09:10:42] - La revisión de estructura de datos tiene observaciones. Continuar con discreción.	Informativo	Baja
+100149	2021-01-14	2021-01-14 09:10:42	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-14 09:10:42] - Apertura de revisión de errores OM 22269-2020.	Informativo	Baja
+100149	2021-01-14	2021-01-14 09:10:45	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-14 09:10:45] - La validación de operaciones vacías concluyó sin observaciones. (~ly2)	Informativo	Baja
+100149	2021-01-14	2021-01-14 09:10:48	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-14 09:10:48] - La validación de operaciones duplicadas concluyó sin observaciones. (~ly2) 	Informativo	Baja
+100149	2021-01-14	2021-01-14 09:10:48	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-14 09:10:48] - La validación cruce interno concluyó sin observaciones. (~ly2) 	Informativo	Baja
+100149	2021-01-14	2021-01-14 09:10:53	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-01-14 09:10:53] - La validación de los campos concluyó con 8 observaciones tipo1. (~ly2) 	Informativo	Baja

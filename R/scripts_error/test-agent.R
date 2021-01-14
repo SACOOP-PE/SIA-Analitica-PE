@@ -16,19 +16,16 @@
   # Obtener el Log (Time - Descripción)
   # Exportar agent, ebFormatted y PIDlog
   
-  # Nuevas funciones para error-handling
+
   ##### Testing -----
-  agent <- createAgent(idCoopac = "01172",
-                       usuarioSIA = "DPACHECO",
-                       coopacCarpeta  = "test/datatest",
+  agent <- createAgent(idCoopac = "01172", 
                        periodoInicial = "201907",
-                       periodoFinal   = "202010",
-                       bds            = list(c("BD01", "BD02A", "BD02B", "BD03A", "BD03B", "BD04")))
+                       periodoFinal   = "202010")
+  
   bucket      <- interrogateAgent(agent)
   agent       <- closeAgent(agent, bucket)
   ebFormatted <- formatBucket(bucket)
   
   PIDlog      <- getlog(getIdProcesoFromAgent(agent))
   
-  saveOutputs(agent, ebFormatted, PIDlog)
-  print(ebFormatted)
+  saveOutputs(agent, ebFormatted, PIDlog) 
