@@ -32,8 +32,8 @@ validarOperacionesVacias     <- function(agente, eb){
              Cod = 311,
              Periodo = getAnoMesFromRuta(toString(ruta)),
              BD      = getBDFromRuta(toString(ruta)),
-             num2 = Vacios) %>%  
-      select(CodCoopac, IdProceso, Cod, Periodo, BD, num2)
+             num1 = Vacios) %>%  
+      select(CodCoopac, IdProceso, Cod, Periodo, BD, num1)
     
     eb <- addErrorMasivo(eb, chunk_311)
   }
@@ -65,9 +65,9 @@ validarOperacionesDuplicadas <- function(agente, eb){
              Cod = 312,
              Periodo = getAnoMesFromRuta(toString(ruta)),
              BD      = getBDFromRuta(toString(ruta)),
-             txt2 = Duplicados,
-             num2 = length(str_split(string=txt2 ,pattern = ",")[[1]])) %>%
-      select(CodCoopac, IdProceso, Cod, Periodo, BD, txt2, num2)
+             txt1 = Duplicados,
+             num1 = length(str_split(string=txt2 ,pattern = ",")[[1]])) %>%
+      select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
 
     eb <- addErrorMasivo(eb, chunk_312)
   }
@@ -372,10 +372,10 @@ procesarErroresT1 <- function(agente, ruta, eb){
                IdProceso = getIdProcesoFromAgent(agente),
                Periodo = getAnoMesFromRuta(toString(ruta)),
                BD      = getBDFromRuta(toString(ruta)),
-               txt2 = verificar,
-               txt3 = Columna,
-               num2 = length(str_split(string=txt2 ,pattern = ",")[[1]])) %>%
-        select(CodCoopac, IdProceso, Cod, Periodo, BD, txt2, txt3, num2)
+               txt1 = verificar,
+               txt2 = Columna,
+               num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
+        select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, txt2, num1)
       
       eb <- addErrorMasivo(eb, chunkT1)
       }
@@ -396,6 +396,7 @@ procesarErroresT2 <- function(agente, eb, exigibles, codigoError){
 
   # errores t2:
   if (codigoError < 467 & length(archivos) >0){
+    
     erroresTipo2 <- tibble(Archivo = archivos) %>% rowwise() %>%
       mutate(ruta    = getRuta(getCarpetaFromAgent(agente), Archivo),
              verificar = switch (toString(codigoError),
@@ -414,17 +415,18 @@ procesarErroresT2 <- function(agente, eb, exigibles, codigoError){
                IdProceso = getIdProcesoFromAgent(agente),
                Periodo = getAnoMesFromRuta(toString(ruta)),
                BD      = getBDFromRuta(toString(ruta)),
-               txt2 = verificar,
-               num2 = length(str_split(string=txt2 ,pattern = ",")[[1]])) %>%
-        select(CodCoopac, IdProceso, Cod, Periodo, BD, txt2, num2)
+               txt1 = verificar,
+               num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
+        select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
         
         eb <- addErrorMasivo(eb, chunkT2)
       }
     return(eb)
     }
   if (codigoError == 467 & length(getPeriodosNoObservados(agente, eb, "CIS")) > 0) {
+    
     erroresTipo2 <- tibble(Periodo = getPeriodosNoObservados(agente, eb, "CIS")) %>% rowwise() %>%
-      mutate(error467 = procesarErrorcodDeudor(agente, eb, Periodo),
+      mutate(error467 = procesarErrorcodDeudor(agente, Periodo),
              Cod = codigoError)%>% 
       filter(error467 != "")
     
@@ -433,9 +435,9 @@ procesarErroresT2 <- function(agente, eb, exigibles, codigoError){
         mutate(CodCoopac = getCoopacFromAgent(agente),
                IdProceso = getIdProcesoFromAgent(agente),
                BD   = "BD03A",
-               txt2 = error467,
-               num2 = length(str_split(string=txt2 ,pattern = ",")[[1]])) %>%
-        select(CodCoopac, IdProceso, Cod, Periodo, BD, txt2, num2)
+               txt1 = error467,
+               num1 = length(str_split(string=txt2 ,pattern = ",")[[1]])) %>%
+        select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
       
       eb <- addErrorMasivo(eb, chunkT2)
       }
@@ -462,10 +464,10 @@ procesarErrorSaldosNegativos <- function(agente, ruta, eb){
                IdProceso = getIdProcesoFromAgent(agente),
                Periodo = getAnoMesFromRuta(toString(ruta)),
                BD      = getBDFromRuta(toString(ruta)),
-               txt2 = verificarSaldos,
-               txt3 = Columna,
-               num2 = length(str_split(string=txt2 ,pattern = ",")[[1]])) %>%
-        select(CodCoopac, IdProceso, Cod, Periodo, BD, txt2, txt3, num2)
+               txt1 = verificarSaldos,
+               txt2 = Columna,
+               num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
+        select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, txt2, num1)
       
       eb <- addErrorMasivo(eb, chunkSaldos)
     }
@@ -473,17 +475,23 @@ procesarErrorSaldosNegativos <- function(agente, ruta, eb){
   }
   return(eb)
 }
-procesarErrorModalidadCouta <- function(ruta, BD = evaluarFile(ruta)){
+procesarErrorModalidadCouta  <- function(ruta){
+  BD <- evaluarFile(ruta)
+  
   BD %>%
     filter(((as.numeric(ESAM) < 5) & (as.numeric(NCPR) == 0 | as.numeric(PCUO)  == 0)) == TRUE) %>%
     pull(CCR) %>% return()
 }
-procesarErrorMontoOtorgado  <- function(ruta, BD = evaluarFile(ruta)){
+procesarErrorMontoOtorgado   <- function(ruta){
+  BD <- evaluarFile(ruta)
+  
   BD %>% filter(as.numeric(MORG) < as.numeric(SKCR)) %>%
     pull(CCR) %>%
     return()
 }
-procesarErrorVencRetraso    <- function(ruta, BD = evaluarFile(ruta)){
+procesarErrorVencRetraso     <- function(ruta){
+  BD <- evaluarFile(ruta)
+  
   BD %>% 
     filter((as.numeric(KVE) > 0 & as.numeric(DAK) == 0)) %>% 
     pull (CCR) %>% return()
@@ -509,7 +517,9 @@ getnumCaracteresDoc         <- function(documento){
                           "6" = "11")
   return(n_caracteres)
 }
-procesarErrorDocumentoIdent <- function(ruta, BD = evaluarFile(ruta)){
+procesarErrorDocumentoIdent <- function(ruta){
+  BD <- evaluarFile(ruta)
+  
   if (getBDFromRuta(ruta) =="BD01"){
     verificar_documento <- BD %>%
       filter((CCR %in% detectarVacios(ruta, "TID")) == FALSE) %>% 
@@ -535,7 +545,9 @@ procesarErrorDocumentoIdent <- function(ruta, BD = evaluarFile(ruta)){
 }
 
 #BD03A
-procesarErrorNumCredCobertura <- function(ruta, BD = evaluarFile(ruta)){
+procesarErrorNumCredCobertura <- function(ruta){
+  BD <- evaluarFile(ruta)
+  
   BD %>% 
     filter(as.numeric(NCR) > 0, as.numeric(NRCL) == 0) %>%
     pull(getCodigoBD("BD03A")) %>%
@@ -543,19 +555,17 @@ procesarErrorNumCredCobertura <- function(ruta, BD = evaluarFile(ruta)){
 }
 
 #BD3A y BD01
-procesarErrorcodDeudor <- function(agente, eb, periodo){
-  archivos  <- getArchivosNoObservadosByCols(agente, eb, "CIS")
-  archCruce <- archivos[str_detect(archivos, 
-                                   paste(c(paste0("BD03A", "_", periodo), paste0("BD01", "_", periodo)), collapse = '|'))]
+procesarErrorcodDeudor <- function(agente, periodo){
   
+  archivo1 <- getRuta(getCarpetaFromAgent(agente), 
+                      paste0(paste(getCoopacFromAgent(agente), "BD03A", periodo, sep  = "_"), ".txt"))
+  archivo2 <- getRuta(getCarpetaFromAgent(agente), 
+                      paste0(paste(getCoopacFromAgent(agente), "BD01", periodo, sep  = "_"), ".txt"))
   
-  cruce <- setdiff(evaluarFile(getRuta(getCarpetaFromAgent(agente), archCruce[str_detect(archCruce, "BD03A")])) %>% pull(CIS),
-                   evaluarFile(getRuta(getCarpetaFromAgent(agente), archCruce[str_detect(archCruce, "BD01")])) %>% pull(CIS)
-                   ) %>%
+  setdiff(evaluarFile(getRuta(getCarpetaFromAgent(agente), archivo1)) %>% pull(getCodigoBD("BD03A")),
+          evaluarFile(getRuta(getCarpetaFromAgent(agente), archivo2)) %>% pull(getCodigoBD("BD01"))) %>%
     unique() %>%
-    toString()
-  
-  return(cruce)
+    return()
 }
 
 
@@ -602,10 +612,10 @@ procesarErroresT3 <- function(agente, ruta, eb){
                IdProceso = getIdProcesoFromAgent(agente),
                Periodo = getAnoMesFromRuta(toString(ruta)),
                BD      = getBDFromRuta(toString(ruta)),
-               txt2 = verificar,
-               txt3 = Columna,
-               num2 = length(str_split(string=txt2 ,pattern = ",")[[1]])) %>%
-        select(CodCoopac, IdProceso, Cod, Periodo, BD, txt2, txt3, num2)
+               txt1 = verificar,
+               txt2 = Columna,
+               num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
+        select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, txt2, num1)
       
       eb <- addErrorMasivo(eb, chunkT3)
     }
@@ -621,10 +631,11 @@ getFechaCorte                <- function(ruta){
     ceiling_date("month") - days(1)
   return(fecha_corte)
 }
-procesarErrorFechaDesembolso <- function(ruta, BD = evaluarFile(ruta)){
-  error <- BD %>% filter((dmy(BD %>% pull(FOT)) > getFechaCorte(ruta)) == TRUE) %>% 
-    pull(getCodigoBD("BD01")) 
-  return(error)
+procesarErrorFechaDesembolso <- function(ruta){
+  BD <- evaluarFile(ruta)
+  
+  BD %>% filter((dmy(BD %>% pull(FOT)) > getFechaCorte(ruta)) == TRUE) %>% 
+    pull(getCodigoBD("BD01")) %>% return()
 }
 
 ####
