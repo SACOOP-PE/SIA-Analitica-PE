@@ -205,7 +205,7 @@ validarCampos                <- function(agente, eb){
   }
   
   exigibles <- intersect(exigibles[str_detect(exigibles, "BD01")], getArchivosNoObservadosByCols(agent, eb, "FOT"))
-  error479 <- tibble(Archivo = exigibles) %>% rowwise() %>%
+  error479  <- tibble(Archivo = exigibles) %>% rowwise() %>%
     mutate(ruta      = getRuta(getCarpetaFromAgent(agente), Archivo),
            verificar = procesarErrorFechaDesembolso(ruta) %>%
                           unique() %>% toString(),
@@ -621,6 +621,7 @@ getCodErrorT3  <- function(ruta, campo){
                 cod_error = codError) %>% 
     filter(col == campo) %>% 
     pull(cod_error)
+  
   return(cod)
 }
 

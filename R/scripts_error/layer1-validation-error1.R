@@ -19,44 +19,49 @@ layer1 <- function(agente, eb){
            ColSobrantes = ifelse(length(setdiff(Columnas, ColumnasOM))>0,
                                  toString(setdiff(Columnas, ColumnasOM)),
                                  ""),
-           ColVacias    = toString(getColVacia(ruta)),
-           is201        = ifelse(str_replace_all(ColFaltantes, pattern = " ", replacement = "") == "",0,1),
-           is202        = ifelse(str_replace_all(ColSobrantes, pattern = " ", replacement = "") == "",0,1),
-           is203        = ifelse(str_replace_all(ColVacias, pattern = " ", replacement = "") == "",0,1)) %>% 
-    filter(is201 == 1 | is202 == 1 | is203 == 1)
+           ColVacias    = toString(getColVacia(ruta)))
+
+  fal <- tbl1_ctrl1 %>% filter(ColFaltantes != "")
+  sob <- tbl1_ctrl1 %>% filter(ColSobrantes != "")
+  vac <- tbl1_ctrl1 %>% filter(ColVacias != "")
   
-  chunk_201 <- tbl1_ctrl1 %>% 
-    filter(is201 == 1) %>% rowwise() %>% 
-    mutate(Cod = 201,
-           Periodo = getAnoMesFromRuta(toString(ruta)),
-           BD          = getBDFromRuta(toString(ruta)),
-           txt1 = str_replace_all(ColFaltantes, pattern = " ", replacement =""), 
-           num1 = ifelse(!is.na(txt1),length(str_split(string=txt1 ,pattern = ",")[[1]]),0)) %>%  
-    select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
+  if (nrow(fal)>0) {
+    chunk_201 <- fal %>% rowwise() %>% 
+      mutate(Cod = 201,
+             Periodo = getAnoMesFromRuta(toString(ruta)),
+             BD      = getBDFromRuta(toString(ruta)),
+             txt1 = ColFaltantes, 
+             num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%  
+      select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
+    
+    addEventLog(agente, paste0("La validación de Columnas faltantes concluyó con ", nrow(fal), " observación(es). (~ly2)"), "I", "B")
+    eb <- addErrorMasivo(eb, chunk_201)
+  }
+  if (nrow(sob)>0) {
+    chunk_202 <- sob %>% rowwise() %>% 
+      mutate(Cod = 202,
+             Periodo = getAnoMesFromRuta(toString(ruta)),
+             BD      = getBDFromRuta(toString(ruta)),
+             txt1 = ColSobrantes, 
+             num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%  
+      select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
+    
+    addEventLog(agente, paste0("La validación de Columnas sobrantes concluyó con ", nrow(sob), " observación(es). (~ly2)"), "I", "B")
+    eb <- addErrorMasivo(eb, chunk_202)
+  }
+  if (nrow(vac)>0) {
+    chunk_203 <- vac %>% rowwise() %>% 
+      mutate(Cod = 203,
+             Periodo = getAnoMesFromRuta(toString(ruta)),
+             BD      = getBDFromRuta(toString(ruta)),
+             txt1 = ColSobrantes, 
+             num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%  
+      select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
+    
+    addEventLog(agente, paste0("La validación de Columnas vacías concluyó con ", nrow(vac), " observación(es). (~ly2)"), "I", "B")
+    eb <- addErrorMasivo(eb, chunk_203)
+  }
   
-  eb <- addErrorMasivo(eb, chunk_201)
-  
-  chunk_202 <- tbl1_ctrl1 %>% 
-    filter(is202 == 1) %>% rowwise() %>% 
-    mutate(Cod = 202,
-           Periodo = getAnoMesFromRuta(toString(ruta)),
-           BD          = getBDFromRuta(toString(ruta)),
-           txt1 = str_replace_all(ColSobrantes, pattern = " ", replacement =""),  
-           num1 = ifelse(!is.na(txt1),length(str_split(string=txt1 ,pattern = ",")[[1]]),0)) %>% 
-    select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
-  
-  eb <- addErrorMasivo(eb, chunk_202)
-  
-  chunk_203 <- tbl1_ctrl1 %>%
-    filter(is203 == 1) %>% rowwise() %>%
-    mutate(Cod = 203,
-           Periodo = getAnoMesFromRuta(toString(ruta)),
-           BD          = getBDFromRuta(toString(ruta)),
-           txt1 = str_replace_all(ColVacias, pattern = " ", replacement =""),  
-           num1 = ifelse(!is.na(txt1),length(str_split(string=txt1 ,pattern = ",")[[1]]),0)) %>%
-    select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1) 
-  
-  eb <- addErrorMasivo(eb, chunk_203)
   return(eb)
 }
 

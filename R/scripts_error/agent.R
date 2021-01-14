@@ -25,8 +25,6 @@ createAgent <- function(idCoopac,
   return(agente)
 }
 
-
- 
 createBucket     <- function(agente){
   eb <- tibble(CodCoopac     = agente %>% pull(Coopac) %>% first(),
          IdProceso  = agente %>% pull(IdProceso) %>% first(), 
@@ -46,15 +44,17 @@ createBucket     <- function(agente){
   return(eb)
 }
 
+
 interrogateAgent <- function(agente){
   eb <- createBucket(agente)
   
   addEventLog(agente, paste0("Inicio del interrogatorio. PID-", agente %>% pull(IdProceso) %>% first(),"."), 
               "I", "B")
   
+  #pre-requisitos
   addEventLog(agente, paste0("Apertura de revisión de pre-requisitos."),  "I", "B")
   
-    eb <- layer0(agente, eb) #pre-requisitos
+    eb <- layer0(agente, eb)
   
     if (nrow(eb) > 0) {
       if ((eb %>% pull(Cod)) %in% c(101,102)) { 
@@ -70,9 +70,10 @@ interrogateAgent <- function(agente){
     addEventLog(agente, paste0("Revisión de pre-requisitos satisfactoria."), "I", "B")
   }
   
+  #estructura de columnas
   addEventLog(agente, paste0("Apertura de revisión de estructura de datos."),  "I", "B")
   
-    eb <- layer1(agente, eb) #estructura de columnas
+    eb <- layer1(agente, eb)
   
     if (nrow(eb) > 0) {
       
@@ -91,9 +92,10 @@ interrogateAgent <- function(agente){
       addEventLog(agente, paste0("Revisión de estructura de datos satisfatoria."), "I", "B")
     }
   
+  #errores OM 22269-2020
   addEventLog(agente, paste0("Apertura de revisión de errores OM 22269-2020."),  "I", "B")
   
-    eb <- layer2(agente, eb) #errores OM 22269-2020
+    eb <- layer2(agente, eb)
 
     if (nrow(eb) > 0) {
       if (nrow(eb %>% filter(Cod %in% c(311:478)) >0)) {

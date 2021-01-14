@@ -23,7 +23,6 @@ layer0 <- function(agente, eb){
     addEventLog(agent, paste0("    Error: Se identificaron archivos duplicados."), "I", "B")
   }
  
-  
   if (length(getFaltantes(carpeta, exigibles)) != 0) { 
     
     eb <- eb %>% addErrorIndividual(agente, codcoopac = getCoopacFromAgent(agente),
@@ -43,20 +42,21 @@ layer0 <- function(agente, eb){
   
   return(eb)
 }
-# eb, cod, periodo, bd, arg_txt1, arg_txt2, arg_txt3, arg_num1, arg_num2, arg_num3
+
 #' Funciones secundarias
 
 getDuplicados <- function(carpeta, exigibles){ 
-  tibble(files = basename(list.files(path = carpeta, full.names = F, recursive =  TRUE))) %>%
-    group_by(files) %>%
-    filter(files %in% exigibles) %>% 
-    filter(n() > 1) %>% 
-    pull(files) %>% 
-    unique() %>%  
-    return()
+ dups <- tibble(files = basename(list.files(path = carpeta, full.names = F, recursive =  TRUE))) %>%
+            group_by(files) %>%
+            filter(files %in% exigibles) %>% 
+            filter(n() > 1) %>% 
+            pull(files) %>% 
+            unique()
+ 
+ return(dups)
 }
 getFaltantes  <- function(carpeta, exigibles){
-  setdiff(exigibles,
-          basename(list.files(path = carpeta, full.names = FALSE, recursive =  TRUE,  include.dirs = FALSE))) %>%
-    return() 
+  fal <- setdiff(exigibles,
+                 basename(list.files(path = carpeta, full.names = FALSE, recursive =  TRUE,  include.dirs = FALSE)))
+  return(fal) 
 }
