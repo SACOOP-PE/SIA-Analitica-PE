@@ -451,7 +451,8 @@ procesarErroresT2 <- function(agente, eb, exigibles, codigoError){
       
       if (nrow(errorSaldos) >0) {
         chunkSaldos <- errorSaldos %>% rowwise() %>%
-          mutate(CodCoopac = getCoopacFromAgent(agente),
+          mutate(ruta = getRuta(getCarpetaFromAgent(agente), archivos[i]),
+                 CodCoopac = getCoopacFromAgent(agente),
                  IdProceso = getIdProcesoFromAgent(agente),
                  Periodo = getAnoMesFromRuta(toString(ruta)),
                  BD      = getBDFromRuta(toString(ruta)),
