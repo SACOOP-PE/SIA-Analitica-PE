@@ -160,8 +160,7 @@ validarCampos                <- function(agente, eb){
   
   # i. Errores tipo1 ----
   for (x in 1:length(exigibles)){
-    ruta_x <- getRuta(carpeta, exigibles[x])
-    eb     <- procesarErroresT1(agente, ruta_x, eb)
+    eb     <- procesarErroresT1(agente, getRuta(carpeta, exigibles[x]), eb)
   }
   
   n <- eb %>% filter(Cod %in% c(401:457)) %>% nrow()
@@ -177,13 +176,14 @@ validarCampos                <- function(agente, eb){
   # ii. Errores tipo2 ----
   #error 461
   for (y in 1:length(exigibles[str_detect(exigibles, "BD01")])){
-    ruta_y <- getRuta(carpeta, exigibles[str_detect(exigibles, "BD01")][y])
-    eb     <- procesarErrorSaldosNegativos(agente, ruta_y, eb)
+    eb     <- procesarErrorSaldosNegativos(agente, 
+                                           getRuta(carpeta, exigibles[str_detect(exigibles, "BD01")][y]), 
+                                           eb)
   }
   
   #error 462:467
-  cod <- 462
-  for (z in 462:467){
+  cod <- 461
+  for (z in 461:467){
     eb <- procesarErroresT2(agente, eb, exigibles, cod)
     cod <- cod +1
   }
@@ -203,8 +203,7 @@ validarCampos                <- function(agente, eb){
   exigibles <- exigibles[str_detect(exigibles, paste(c("BD01","BD02A","BD02B","BD04"), collapse = '|'))]
 
   for (m in 1:length(exigibles)) {
-    ruta_m <- getRuta(carpeta, exigibles[m])
-    eb     <- procesarErroresT3(agente, ruta_m, eb)
+    eb     <- procesarErroresT3(agente, getRuta(carpeta, exigibles[m]), eb)
   }
   
   #error 479
@@ -241,6 +240,7 @@ validarCampos                <- function(agente, eb){
   
   
   ######
+  
   n <- eb %>% filter(Cod %in% c(401:479)) %>% nrow()
   
   if (n == 0) {
@@ -443,6 +443,7 @@ procesarErroresT1 <- function(agente, ruta, eb){
 procesarErroresT2 <- function(agente, eb, exigibles, codigoError){
   #filter files:
   archivos <- switch (toString(codigoError),
+                      "461"= exigibles[str_detect(exigibles, "BD01")],
                       "462"= getArchivosNoObservadosByCols(agente, eb, c("ESAM","NCPR", "PCUO")) %>% intersect(exigibles[str_detect(exigibles, "BD01")]),
                       "463"= getArchivosNoObservadosByCols(agente, eb, c("MORG", "SKCR")) %>% intersect(exigibles[str_detect(exigibles, "BD01")]),
                       "464"= getArchivosNoObservadosByCols(agente, eb, c("KVE", "DAK", "KJU")) %>% intersect(exigibles[str_detect(exigibles, "BD01")]),
@@ -450,7 +451,30 @@ procesarErroresT2 <- function(agente, eb, exigibles, codigoError){
                       "466"= getArchivosNoObservadosByCols(agente, eb, c("NCR", "NRCL")) %>% intersect(exigibles[str_detect(exigibles, "BD03A")]))
 
   # errores t2:
-  if (codigoError < 467 & length(archivos) >0){
+  if (codigoError == 461 & length(archivos) >0) {
+    for (i in 1:length(archivos)) {
+      errorSaldos <- procesarErrorSaldosNegativos(agente, 
+                                                  getRuta(getCarpetaFromAgent(agente), archivos[i]),
+                                                  eb)
+      
+      if (nrow(errorSaldos) >0) {
+        chunkSaldos <- errorSaldos %>% rowwise() %>%
+          mutate(CodCoopac = getCoopacFromAgent(agente),
+                 IdProceso = getIdProcesoFromAgent(agente),
+                 Periodo = getAnoMesFromRuta(toString(ruta)),
+                 BD      = getBDFromRuta(toString(ruta)),
+                 txt1 = verificarSaldos,
+                 txt2 = Columna,
+                 num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
+          select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, txt2, num1)
+        
+        eb <- addErrorMasivo(eb, chunkSaldos)
+      }
+    }
+    return(eb)
+  }
+  
+  if (codigoError >= 462 & codigoError <= 466 & length(archivos) >0){
     
     erroresTipo2 <- tibble(Archivo = archivos) %>% rowwise() %>%
       mutate(ruta    = getRuta(getCarpetaFromAgent(agente), Archivo),
@@ -477,7 +501,8 @@ procesarErroresT2 <- function(agente, eb, exigibles, codigoError){
         eb <- addErrorMasivo(eb, chunkT2)
       }
     return(eb)
-    }
+  }
+  
   if (codigoError == 467 & length(getPeriodosNoObservados(agente, eb, "CIS")) > 0) {
     
     erroresTipo2 <- tibble(Periodo = getPeriodosNoObservados(agente, eb, "CIS")) %>% rowwise() %>%
@@ -513,22 +538,9 @@ procesarErrorSaldosNegativos <- function(agente, ruta, eb){
              Cod             = 461) %>%
       filter(verificarSaldos != "")
     
-    if (nrow(errorSaldos) >0) {
-      chunkSaldos <- errorSaldos %>% rowwise() %>%
-        mutate(CodCoopac = getCoopacFromAgent(agente),
-               IdProceso = getIdProcesoFromAgent(agente),
-               Periodo = getAnoMesFromRuta(toString(ruta)),
-               BD      = getBDFromRuta(toString(ruta)),
-               txt1 = verificarSaldos,
-               txt2 = Columna,
-               num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
-        select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, txt2, num1)
-      
-      eb <- addErrorMasivo(eb, chunkSaldos)
-    }
-    return(eb)
+    return(errorSaldos)
   }
-  return(eb)
+  return("")
 }
 procesarErrorModalidadCouta  <- function(ruta){
   BD <- evaluarFile(ruta)
