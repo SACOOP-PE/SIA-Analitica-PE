@@ -1,23 +1,23 @@
-##convertir a UTF8 solo archivos que sean "01172_BD03"
+##convertir a UTF8 solo archivos que sean "01172_BD0"
 Get-ChildItem "C:\Users\eroque\Desktop\Proyecto_BDCC\SIA-Analitica-PE\test\datatest" -Recurse|
-     where {$_.name -match "01172_BD03"}|
+     where {$_.name -match "01172_BD0"}|
      Foreach-Object {
      Write-Host (Get-Date).ToString() $_.FullName
      Get-Content $_.FullName | Set-Content -Encoding UTF8 ($_.FullName  + '.txt')
 }
-##Renonmbrar los ".txt.txt" a " " para que los archivos convertidos no tengan extensión
+##Renonmbrar los ".txt.txt" a "" que devolverá tipo archivo sin extensión
 Get-ChildItem -Recurse| 
-	Where-Object {($_.name -match "01172_BD03" -and $_.name -match ".txt.txt" )} | 
+	Where-Object {($_.name -match "01172_BD0" -and $_.name -match ".txt.txt" )} | 
 	Rename-Item -NewName { $_.Name -replace '.txt.txt',' '}
 
-##Luego mover a otra carpeta exterior los archivos con extensión .txt de "01172_BD03 pues no están codificados
+##Para luego mover a otra carpeta exterior los archivos con extensión .txt de "01172_BD0" pues no están codificados
 Get-ChildItem -Filter *.txt -Recurse |
-	Where-Object {($_.name -match "01172_BD03" )}  | 
-	Move-Item -Destination "C:\Users\eroque\Documents\testdir\BD03"
+	Where-Object {($_.name -match "01172_BD0" )}  | 
+	Move-Item -Destination "C:\Users\eroque\Documents\testdir\BD´s_unicode"
 
-##Finalmente convertir a UTF8 solo archivos que sean "01172_BD03" que coinciden con los que no tiene una extensión y ya se codificaron anteriormente  
-Get-ChildItem "C:\Users\eroque\Desktop\Proyecto_BDCC\SIA-Analitica-PE\test\datatest" -Recurse|
-     where {$_.name -match "01172_BD03"}|
+## luego convertir a UTF8 solo archivos que sean "01172_BD0" que coinciden con los que no tiene una extensión y ya se codificaron anteriormente  
+Get-ChildItem "Z:\Diego Pacheco\smp\2dacarga\BD ANO2019" -Recurse|
+     where {$_.name -match "01172_BD0"}|
      Foreach-Object {
      Write-Host (Get-Date).ToString() $_.FullName
      Get-Content $_.FullName | Set-Content -Encoding UTF8 ($_.FullName  + '.txt')
