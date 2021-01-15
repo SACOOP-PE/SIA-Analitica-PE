@@ -618,10 +618,12 @@ procesarErrorcodDeudor <- function(agente, periodo){
   archivo2 <- getRuta(getCarpetaFromAgent(agente), 
                       paste0(paste(getCoopacFromAgent(agente), "BD01", periodo, sep  = "_"), ".txt"))
   
-  setdiff(evaluarFile(getRuta(getCarpetaFromAgent(agente), archivo1)) %>% pull(getCodigoBD("BD03A")),
-          evaluarFile(getRuta(getCarpetaFromAgent(agente), archivo2)) %>% pull(getCodigoBD("BD01"))) %>%
+  cruce <- setdiff(evaluarFile(getRuta(getCarpetaFromAgent(agente), archivo1)) %>% pull(CIS),
+          evaluarFile(getRuta(getCarpetaFromAgent(agente), archivo2)) %>% pull(CIS)) %>%
     unique() %>%
-    toString() %>% return()
+    toString()
+  
+  return(cruce)
 }
 
 

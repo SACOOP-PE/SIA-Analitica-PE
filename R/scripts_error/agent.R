@@ -123,9 +123,5 @@ closeAgent       <- function(agente, eb){
       Tramo      = paste0(PeriodoInicial, ":", PeriodoFinal)) %>% 
     select(Coopac, NombreCoopac, IdProceso, InicioProceso, FinProceso, Tramo, NroErrores, PeriodoInicial, PeriodoFinal)
   
-  addEventLog(agente, paste0("Agente cerrado PID-", agente %>% pull(IdProceso) %>% first(),
-                             ". [",idCoopac,"|", periodoInicial, "~", periodoFinal, "]"), 
-              "I", "B")
-  
   return(agente)
 }

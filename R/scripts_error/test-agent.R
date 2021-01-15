@@ -28,4 +28,4 @@
   
   PIDlog      <- getlog(getIdProcesoFromAgent(agent))
   
-  saveOutputs(agent, ebFormatted, PIDlog) 
+  saveOutputs(agent, ebFormatted, PIDlog)

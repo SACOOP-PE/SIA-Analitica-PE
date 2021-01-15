@@ -25,7 +25,7 @@ getNextIdProceso <- function(logObject){
     return(1) 
 }
 
-addEventLog      <- function(agent,
+addEventLog      <- function(agente,
                              descripcion,
                              categoria = "I", 
                              criticidad = "B"){
@@ -33,12 +33,12 @@ addEventLog      <- function(agent,
   descripcion <- paste0(timehead(),descripcion)
   
   myLog <- getLogObject("logging/log.txt")
-  event <- tibble(IdProceso = getIdProcesoFromAgent(agent),
+  event <- tibble(IdProceso = getIdProcesoFromAgent(agente),
                   Fecha = toString(Sys.Date()),
                   Hora  = toString(Sys.time()),
                   Usuario = "DPACHECO", 
-                  Coopac  = getNombreCoopacFromAgent(agent) ,
-                  Carpeta = getCarpetaFromAgent(agent) , 
+                  Coopac  = getNombreCoopacFromAgent(agente) ,
+                  Carpeta = getCarpetaFromAgent(agente), 
                   Descripcion = descripcion ,
                   Categoria  = ifelse(categoria == "I", "Informativo", "Advertencia"),
                   Criticidad = ifelse(criticidad == "B", "Baja", ifelse(criticidad == "M",Media, Alta)))
