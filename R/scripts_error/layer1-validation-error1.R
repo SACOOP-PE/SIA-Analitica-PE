@@ -56,7 +56,7 @@ layer1 <- function(agente, eb){
       mutate(Cod = 203,
              Periodo = getAnoMesFromRuta(toString(ruta)),
              BD      = getBDFromRuta(toString(ruta)),
-             txt1 = ColSobrantes, 
+             txt1 = ColVacias, 
              num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%  
       select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
     
