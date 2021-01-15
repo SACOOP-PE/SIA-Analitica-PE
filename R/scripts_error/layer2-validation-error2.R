@@ -175,11 +175,13 @@ validarCampos                <- function(agente, eb){
   
   
   # ii. Errores tipo2 ----
+  #error 461
   for (y in 1:length(exigibles[str_detect(exigibles, "BD01")])){
     ruta_y <- getRuta(carpeta, exigibles[str_detect(exigibles, "BD01")][y])
     eb     <- procesarErrorSaldosNegativos(agente, ruta_y, eb)
   }
   
+  #error 462:467
   cod <- 462
   for (z in 462:467){
     eb <- procesarErroresT2(agente, eb, exigibles, cod)
@@ -196,7 +198,8 @@ validarCampos                <- function(agente, eb){
   }
   
   
-  # iii. Errores tipo2 ----
+  # iii. Errores tipo3 ----
+  #error 471:478
   exigibles <- exigibles[str_detect(exigibles, paste(c("BD01","BD02A","BD02B","BD04"), collapse = '|'))]
 
   for (m in 1:length(exigibles)) {
@@ -204,6 +207,7 @@ validarCampos                <- function(agente, eb){
     eb     <- procesarErroresT3(agente, ruta_m, eb)
   }
   
+  #error 479
   exigibles <- intersect(exigibles[str_detect(exigibles, "BD01")], getArchivosNoObservadosByCols(agent, eb, "FOT"))
   error479  <- tibble(Archivo = exigibles) %>% rowwise() %>%
     mutate(ruta      = getRuta(getCarpetaFromAgent(agente), Archivo),
@@ -236,7 +240,7 @@ validarCampos                <- function(agente, eb){
   }
   
   
-  ####
+  ######
   n <- eb %>% filter(Cod %in% c(401:479)) %>% nrow()
   
   if (n == 0) {
