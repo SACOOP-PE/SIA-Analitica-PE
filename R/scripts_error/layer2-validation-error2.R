@@ -748,7 +748,8 @@ getColsNoObservadas             <- function(ruta, eb, tipoError){
     filter(BD == getBDFromRuta(ruta) & Periodo == getAnoMesFromRuta(ruta) & Cod %in%  c(201, 203)) %>% 
     pull(txt1) %>%
     str_split(",") %>% 
-    unlist() %>% unique()
+    unlist() %>% 
+    str_replace_all(pattern=" ", repl="") %>% unique()
   
   
   cols <- switch (tipoError,
