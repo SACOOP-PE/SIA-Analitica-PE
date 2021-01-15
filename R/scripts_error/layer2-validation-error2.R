@@ -174,16 +174,8 @@ validarCampos                <- function(agente, eb){
   
   
   # ii. Errores tipo2 ----
-  #error 461
-  for (y in 1:length(exigibles[str_detect(exigibles, "BD01")])){
-    eb     <- procesarErrorSaldosNegativos(agente, 
-                                           getRuta(carpeta, exigibles[str_detect(exigibles, "BD01")][y]), 
-                                           eb)
-  }
-  
-  #error 462:467
   cod <- 461
-  for (z in 461:467){
+  for (y in 461:467){
     eb <- procesarErroresT2(agente, eb, exigibles, cod)
     cod <- cod +1
   }
@@ -202,8 +194,8 @@ validarCampos                <- function(agente, eb){
   #error 471:478
   exigibles <- exigibles[str_detect(exigibles, paste(c("BD01","BD02A","BD02B","BD04"), collapse = '|'))]
 
-  for (m in 1:length(exigibles)) {
-    eb     <- procesarErroresT3(agente, getRuta(carpeta, exigibles[m]), eb)
+  for (z in 1:length(exigibles)) {
+    eb     <- procesarErroresT3(agente, getRuta(carpeta, exigibles[z]), eb)
   }
   
   #error 479
