@@ -92,9 +92,9 @@ interrogateAgent <- function(agente){
       addEventLog(agente, paste0("Revisión de estructura de datos satisfatoria."), "I", "B")
     }
   
-  #errores OM 22269-2020
+  # errores OM 22269-2020
   addEventLog(agente, paste0("Apertura de revisión de errores OM 22269-2020."),  "I", "B")
-  
+
     eb <- layer2(agente, eb)
 
     if (nrow(eb) > 0) {
@@ -114,12 +114,18 @@ interrogateAgent <- function(agente){
    
   return(eb)
 }
+
 closeAgent       <- function(agente, eb){
   agente <- agente %>% 
     mutate(
       FinProceso = format(Sys.time(), "%a %b %d %X %Y"),
       NroErrores = nrow(eb),
       Tramo      = paste0(PeriodoInicial, ":", PeriodoFinal)) %>% 
-    select(Coopac, NombreCoopac, IdProceso, InicioProceso, FinProceso, Tramo, NroErrores, PeriodoInicial, PeriodoFinal) %>%
-    return()
+    select(Coopac, NombreCoopac, IdProceso, InicioProceso, FinProceso, Tramo, NroErrores, PeriodoInicial, PeriodoFinal)
+  
+  addEventLog(agente, paste0("Agente cerrado PID-", agente %>% pull(IdProceso) %>% first(),
+                             ". [",idCoopac,"|", periodoInicial, "~", periodoFinal, "]"), 
+              "I", "B")
+  
+  return(agente)
 }
