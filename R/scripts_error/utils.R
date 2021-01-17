@@ -58,7 +58,7 @@ getIdProcesoFromAgent         <- function(agente){
 }
 getArchivosExigiblesFromAgent <- function(agente){
   cod_coopac <- agente %>% pull(Coopac) %>% first()
-  id_bds     <- (agente %>% pull(Alcance))[[1]]
+  id_bds     <- (agente %>% pull(BD))[[1]]
   periodos   <- global.alcance
   periodo_inicio <- agente %>% pull(PeriodoInicial) %>% first()
   periodo_final  <- agente %>% pull(PeriodoFinal)
@@ -83,8 +83,8 @@ getInicioProcesoFromAgent     <- function(agente){
 getFinProcesoFromAgent        <- function(agente){ 
   agente %>% pull(PeriodoFinal) %>% first() %>% return()
 }
-getAlcanceFromAgent           <- function(agente){ 
-  agente %>% pull(Alcance) %>% first() %>% return()
+getBDFromAgent           <- function(agente){ 
+  agente %>% pull(BD) %>% first() %>% return()
 }
 getNombreCoopacFromIdCoopac   <- function(idCoopac){
   initCuadreContable() %>% filter(CODIGO_ENTIDAD == as.integer(idCoopac)) %>% pull(ENTIDAD) %>% first()

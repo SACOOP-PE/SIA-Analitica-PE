@@ -20,7 +20,7 @@ layer0 <- function(agente, eb){
                                     arg_num1 = length(getDuplicados(carpeta, exigibles)),
                                     arg_num2 = 0,
                                     arg_num3 = 0)
-    addEventLog(agent, paste0("    Error: Se identificaron archivos duplicados."), "I", "B")
+    addEventLog(agent, paste0("    Error: Se identificaron archivos duplicados."))
   }
  
   if (length(getFaltantes(carpeta, exigibles)) != 0) { 
@@ -36,12 +36,13 @@ layer0 <- function(agente, eb){
                                     arg_num1 = length(getFaltantes(carpeta, exigibles)),
                                     arg_num2 = 0,
                                     arg_num3 = 0)
-    addEventLog(agent, paste0("    Error: Se identificaron archivos faltantes."), "I", "B")
+    addEventLog(agent, paste0("      Error: Se identificaron archivos faltantes."))
   }
  
-  
+ 
   return(eb)
 }
+
 
 #' Funciones secundarias
 
