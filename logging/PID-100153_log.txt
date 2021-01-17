@@ -1,0 +1,19 @@
+Time	logEncontrado
+[2021-01-17 09:55:05]	Validador SIA 1.3.2021 --------------------------------------
+[2021-01-17 09:55:05]	Agente creado. PID-100153. [01172|201901~202010]
+[2021-01-17 09:55:05]	Bucket de errores creado. PID-100153.
+[2021-01-17 09:55:05]	Inicio del interrogatorio. PID-100153.
+[2021-01-17 09:55:05]	Apertura de revisiÃ³n de pre-requisitos.
+[2021-01-17 09:55:05]	RevisiÃ³n de pre-requisitos satisfactoria.
+[2021-01-17 09:55:05]	Apertura de revisiÃ³n de estructura de datos.
+[2021-01-17 09:56:38]	La validaciÃ³n de Columnas vacÃ­as concluyÃ³ con 1 observaciÃ³n(es). (~ly2)
+[2021-01-17 09:56:38]	RevisiÃ³n de estructura de datos satisfatoria.
+[2021-01-17 09:56:39]	Apertura de revisiÃ³n de errores OM 22269-2020.
+[2021-01-17 09:57:15]	La validaciÃ³n de operaciones vacÃ­as concluyÃ³ sin observaciones. (~ly2)
+[2021-01-17 09:57:22]	La validaciÃ³n de operaciones duplicadas concluyÃ³ con 11 observaciÃ³n. (~ly2)
+[2021-01-17 09:58:31]	La validaciÃ³n cruce interno concluyÃ³ con 24 observaciÃ³n. (~ly2)
+[2021-01-17 09:59:21]	La validaciÃ³n de los campos concluyÃ³ con 4 observaciones tipo1. (~ly2)
+[2021-01-17 10:01:08]	La validaciÃ³n de los campos concluyÃ³ con 35 observaciones tipo2. (~ly2)
+[2021-01-17 10:01:56]	La validaciÃ³n de los campos concluyÃ³ con 4 observaciÃ³n(es) tipo3. (~ly2)
+[2021-01-17 10:01:56]	La validaciÃ³n de los campos concluyÃ³ con un total de 43 observaciÃ³n(es). (~ly2)
+[2021-01-17 10:01:56]	La revisiÃ³n errores OM 22269-2020 tiene observaciones.

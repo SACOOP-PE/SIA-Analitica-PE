@@ -513,3 +513,21 @@ IdProceso	Fecha	Hora	Usuario	Coopac	Carpeta	Descripcion	Categoria	Criticidad
 100152	2021-01-15	2021-01-15 15:36:28	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/smp_15012021	[2021-01-15 15:36:28] - La validación de los campos concluyó con 4 observación(es) tipo3. (~ly2) 	Informativo	Baja
 100152	2021-01-15	2021-01-15 15:36:28	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/smp_15012021	[2021-01-15 15:36:28] - La validación de los campos concluyó con un total de 43 observación(es). (~ly2) 	Informativo	Baja
 100152	2021-01-15	2021-01-15 15:36:28	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/smp_15012021	[2021-01-15 15:36:28] - La revisión errores OM 22269-2020 tiene observaciones.	Informativo	Baja
+100153	2021-01-17	2021-01-17 09:55:05	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/smp_15012021	[2021-01-17 09:55:05] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100153	2021-01-17	2021-01-17 09:55:05	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/smp_15012021	[2021-01-17 09:55:05] - Agente creado. PID-100153. [01172|201901~202010]	Informativo	Baja
+100153	2021-01-17	2021-01-17 09:55:05	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/smp_15012021	[2021-01-17 09:55:05] - Bucket de errores creado. PID-100153.	Informativo	Baja
+100153	2021-01-17	2021-01-17 09:55:05	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/smp_15012021	[2021-01-17 09:55:05] - Inicio del interrogatorio. PID-100153.	Informativo	Baja
+100153	2021-01-17	2021-01-17 09:55:05	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/smp_15012021	[2021-01-17 09:55:05] - Apertura de revisión de pre-requisitos.	Informativo	Baja
+100153	2021-01-17	2021-01-17 09:55:05	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/smp_15012021	[2021-01-17 09:55:05] - Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100153	2021-01-17	2021-01-17 09:55:05	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/smp_15012021	[2021-01-17 09:55:05] - Apertura de revisión de estructura de datos.	Informativo	Baja
+100153	2021-01-17	2021-01-17 09:56:38	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/smp_15012021	[2021-01-17 09:56:38] - La validación de Columnas vacías concluyó con 1 observación(es). (~ly2)	Informativo	Baja
+100153	2021-01-17	2021-01-17 09:56:39	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/smp_15012021	[2021-01-17 09:56:38] - Revisión de estructura de datos satisfatoria.	Informativo	Baja
+100153	2021-01-17	2021-01-17 09:56:39	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/smp_15012021	[2021-01-17 09:56:39] - Apertura de revisión de errores OM 22269-2020.	Informativo	Baja
+100153	2021-01-17	2021-01-17 09:57:15	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/smp_15012021	[2021-01-17 09:57:15] - La validación de operaciones vacías concluyó sin observaciones. (~ly2)	Informativo	Baja
+100153	2021-01-17	2021-01-17 09:57:22	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/smp_15012021	[2021-01-17 09:57:22] - La validación de operaciones duplicadas concluyó con 11 observación. (~ly2) 	Informativo	Baja
+100153	2021-01-17	2021-01-17 09:58:31	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/smp_15012021	[2021-01-17 09:58:31] - La validación cruce interno concluyó con 24 observación. (~ly2) 	Informativo	Baja
+100153	2021-01-17	2021-01-17 09:59:21	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/smp_15012021	[2021-01-17 09:59:21] - La validación de los campos concluyó con 4 observaciones tipo1. (~ly2) 	Informativo	Baja
+100153	2021-01-17	2021-01-17 10:01:08	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/smp_15012021	[2021-01-17 10:01:08] - La validación de los campos concluyó con 35 observaciones tipo2. (~ly2) 	Informativo	Baja
+100153	2021-01-17	2021-01-17 10:01:56	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/smp_15012021	[2021-01-17 10:01:56] - La validación de los campos concluyó con 4 observación(es) tipo3. (~ly2) 	Informativo	Baja
+100153	2021-01-17	2021-01-17 10:01:56	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/smp_15012021	[2021-01-17 10:01:56] - La validación de los campos concluyó con un total de 43 observación(es). (~ly2) 	Informativo	Baja
+100153	2021-01-17	2021-01-17 10:01:56	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/smp_15012021	[2021-01-17 10:01:56] - La revisión errores OM 22269-2020 tiene observaciones.	Informativo	Baja
