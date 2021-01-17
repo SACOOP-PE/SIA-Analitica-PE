@@ -20,8 +20,6 @@ layer1 <- function(agente, eb){
                                  toString(setdiff(Columnas, ColumnasOM)),
                                  ""),
            ColVacias    = toString(getColVacia(ruta)))
-
-  view(tbl1_ctrl1)
   
   fal <- tbl1_ctrl1 %>% filter(ColFaltantes != "")
   sob <- tbl1_ctrl1 %>% filter(ColSobrantes != "")
