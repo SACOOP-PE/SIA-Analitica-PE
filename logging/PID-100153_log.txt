@@ -1,0 +1,9 @@
+Time	logEncontrado
+[2021-01-16 15:46:21]	Validador SIA 1.3.2021 --------------------------------------
+[2021-01-16 15:46:21]	Agente creado. PID-100153. [01172|201901~202010]
+[2021-01-16 15:46:22]	Bucket de errores creado. PID-100153.
+[2021-01-16 15:46:22]	Inicio del interrogatorio. PID-100153.
+[2021-01-16 15:46:22]	Apertura de revisiÃ³n de pre-requisitos.
+[2021-01-16 15:46:22]	    Error: Se identificaron archivos duplicados.
+[2021-01-16 15:46:22]	    Error: Se identificaron archivos faltantes.
+[2021-01-16 15:46:22]	Fin del proceso de revisiÃ³n por errores crÃ­ticos 101-102.

@@ -14,13 +14,9 @@ createAgent <- function(idCoopac,
                   PeriodoInicial = periodoInicial,
                   PeriodoFinal   = periodoFinal,
                   Alcance        = bds) 
-  
-  addEventLog(agente, paste0("Validador SIA 1.3.2021 --------------------------------------"), 
-              "I", "B")
-  
-  addEventLog(agente, paste0("Agente creado. PID-", agente %>% pull(IdProceso) %>% first(),
-                            ". [",idCoopac,"|", periodoInicial, "~", periodoFinal, "]"), 
-              "I", "B")
+ 
+  addEventLog(agente, log.msg.01)
+  addEventLog(agente, log.msg.02)
   
   return(agente)
 }
@@ -38,9 +34,7 @@ createBucket     <- function(agente){
          num2 = 0,
          num3 = 0) 
   
-  addEventLog(agente, paste0("Bucket de errores creado. PID-", agente %>% pull(IdProceso) %>% first(),"."), 
-              "I", "B")
-  
+  addEventLog(agente, log.msg.03) 
   return(eb)
 }
 
@@ -48,66 +42,52 @@ createBucket     <- function(agente){
 interrogateAgent <- function(agente){
   eb <- createBucket(agente)
   
-  addEventLog(agente, paste0("Inicio del interrogatorio. PID-", agente %>% pull(IdProceso) %>% first(),"."), 
-              "I", "B")
+  addEventLog(agente, log.msg.04)
+  addEventLog(agente, log.msg.05)
   
-  #pre-requisitos
-  addEventLog(agente, paste0("Apertura de revisión de pre-requisitos."),  "I", "B")
-  
-    eb <- layer0(agente, eb)
+  eb <- layer0(agente, eb)
   
     if (nrow(eb) > 0) {
       if ((eb %>% pull(Cod)) %in% c(101,102)) { 
-      
-        addEventLog(agente, paste0("Fin del proceso de revisión por errores críticos 101-102."), "I", "B")
+        addEventLog(agente, log.msg.06)
         return(eb)
+    } else {
+      addEventLog(agente, log.msg.07)
     }
-      else {
-        addEventLog(agente, paste0("Revisión de pre-requisitos satisfactoria."), "I", "B")
-    }
-  }
-    else {
-    addEventLog(agente, paste0("Revisión de pre-requisitos satisfactoria."), "I", "B")
+  } else {
+    addEventLog(agente, log.msg.07)
   }
   
   #estructura de columnas
-  addEventLog(agente, paste0("Apertura de revisión de estructura de datos."),  "I", "B")
-  
-    eb <- layer1(agente, eb)
+  addEventLog(agente, log.msg.08)
+  eb <- layer1(agente, eb)
   
     if (nrow(eb) > 0) {
       
       if ((eb %>% pull(Cod)) %in% c(201,202)) { 
       
       n <- eb %>% filter(Cod %in% c(201,202)) %>% nrow()
-      addEventLog(agente, paste0("La revisión de estructura de datos tiene observaciones. Continuar con discreción."), "I", "B")
-        
+      addEventLog(agente, log.msg.09)
+      } else {
+        addEventLog(agente, log.msg.10)
       }
-      else {
-      addEventLog(agente, paste0("Revisión de estructura de datos satisfatoria."), "I", "B")
-      }
-      
-    }
-    else {
-      addEventLog(agente, paste0("Revisión de estructura de datos satisfatoria."), "I", "B")
+    } else {
+      addEventLog(agente, log.msg.10)
     }
   
   # errores OM 22269-2020
-  addEventLog(agente, paste0("Apertura de revisión de errores OM 22269-2020."),  "I", "B")
+  addEventLog(agente, log.msg.11)
 
     eb <- layer2(agente, eb)
 
     if (nrow(eb) > 0) {
-      if (nrow(eb %>% filter(Cod %in% c(311:478)) >0)) {
-
-        addEventLog(agente, paste0("La revisión errores OM 22269-2020 tiene observaciones."), "I", "B")
+      if (nrow(eb %>% filter(Cod %in% c(311:478)) > 0)) {
+        addEventLog(agente, log.msg.12)
+      } else {
+        addEventLog(agente, log.msg.13)
         }
-      else {
-        addEventLog(agente, paste0("Revisión de errores OM 22269-2020 fue satisfatoria."), "I", "B")
-        }
-      }
-    else {
-      addEventLog(agente, paste0("Revisión de errores OM 22269-2020 fue satisfatoria."), "I", "B")
+      } else {
+        addEventLog(agente, log.msg.13)
       }
 
   # eb <- layer3(agent, eb) #alertas ad-hoc 11356
@@ -125,3 +105,17 @@ closeAgent       <- function(agente, eb){
   
   return(agente)
 }
+
+log.msg.01 <- "Validador SIA 1.3.2021 --------------------------------------"
+log.msg.02 <- paste0("Agente creado. PID-", agente %>% pull(IdProceso) %>% first(),". [",idCoopac,"|", periodoInicial, "~", periodoFinal, "]")
+log.msg.03 <- paste0("Bucket de errores creado. PID-", agente %>% pull(IdProceso) %>% first(),".")
+log.msg.04 <- paste0("Inicio del interrogatorio. PID-", agente %>% pull(IdProceso) %>% first(),".")
+log.msg.05 <- paste0("Apertura de revisión de pre-requisitos.")
+log.msg.06 <- paste0("   Fin del proceso de revisión por errores críticos 101-102.")
+log.msg.07 <- paste0("   Revisión de pre-requisitos satisfactoria.")
+log.msg.08 <- paste0("Apertura de revisión de estructura de datos.")
+log.msg.09 <- paste0("   La revisión de estructura de datos tiene observaciones. Continuar con discreción.")
+log.msg.10 <- paste0("   Revisión de estructura de datos satisfatoria.")
+log.msg.11 <- paste0("Apertura de revisión de errores OM 22269-2020.")
+log.msg.12 <- paste0("   La revisión errores OM 22269-2020 tiene observaciones.")
+log.msg.13 <- paste0("   La Revisión de errores OM 22269-2020 fue satisfatoria.")

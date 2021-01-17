@@ -22,8 +22,8 @@ global.alcance = c(201901:201912, 202001:202012, 202101:202112)
 #### 5. Parametros por defecto ----- 
 
 default.usuario <- "ANONYM"
-default.carpeta <- "test/datatest/smp_15012021" 
 default.bd <- c("BD01","BD02A","BD02B","BD03A","BD03B","BD04")
+default.carpeta <- "test/datatest/" 
 
 ### 6. Inicializar archivos de configuracion ----
 
