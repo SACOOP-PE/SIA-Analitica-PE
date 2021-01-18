@@ -1169,3 +1169,366 @@ IdProceso	Fecha	Hora	Usuario	Coopac	Carpeta	Descripcion	Categoria	Criticidad
 100218	2021-01-17	2021-01-17 16:22:55	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:22:55] - La validación de los campos concluyó sin observaciones tipo3. (~ly2) 	Informativo	Baja
 100218	2021-01-17	2021-01-17 16:22:55	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:22:55] - La validación de los campos concluyó con un total de 11 observación(es). (~ly2) 	Informativo	Baja
 100218	2021-01-17	2021-01-17 16:22:55	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:22:55] -    La revisión errores OM 22269-2020 tiene observaciones.	Informativo	Baja
+100219	2021-01-17	2021-01-17 16:53:23	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:53:23] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100219	2021-01-17	2021-01-17 16:53:23	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:53:23] - Agente creado.	Informativo	Baja
+100219	2021-01-17	2021-01-17 16:53:23	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:53:23] - Bucket de errores creado.	Informativo	Baja
+100219	2021-01-17	2021-01-17 16:53:23	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:53:23] - Inicio del interrogatorio. PID-100219	Informativo	Baja
+100219	2021-01-17	2021-01-17 16:53:23	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:53:23] - Apertura de revisión de pre-requisitos.	Informativo	Baja
+100219	2021-01-17	2021-01-17 16:53:23	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:53:23] -    Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100219	2021-01-17	2021-01-17 16:53:23	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:53:23] - Apertura de revisión de estructura de datos.	Informativo	Baja
+100219	2021-01-17	2021-01-17 16:53:57	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:53:57] -    Revisión de estructura de datos satisfatoria.	Informativo	Baja
+100219	2021-01-17	2021-01-17 16:53:57	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:53:57] - Apertura de revisión de errores OM 22269-2020.	Informativo	Baja
+100219	2021-01-17	2021-01-17 16:54:08	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:54:08] - La validación de operaciones vacías concluyó sin observaciones. (~ly2)	Informativo	Baja
+100219	2021-01-17	2021-01-17 16:54:11	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:54:11] - La validación de operaciones duplicadas concluyó con 1 observación. (~ly2) 	Informativo	Baja
+100219	2021-01-17	2021-01-17 16:54:11	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:54:11] -    La revisión errores OM 22269-2020 tiene observaciones.	Informativo	Baja
+100220	2021-01-17	2021-01-17 16:55:47	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:55:47] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100220	2021-01-17	2021-01-17 16:55:47	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:55:47] - Agente creado.	Informativo	Baja
+100220	2021-01-17	2021-01-17 16:55:47	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:55:47] - Bucket de errores creado.	Informativo	Baja
+100220	2021-01-17	2021-01-17 16:55:47	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:55:47] - Inicio del interrogatorio. PID-100220	Informativo	Baja
+100220	2021-01-17	2021-01-17 16:55:47	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:55:47] - Apertura de revisión de pre-requisitos.	Informativo	Baja
+100220	2021-01-17	2021-01-17 16:55:47	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:55:47] -    Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100220	2021-01-17	2021-01-17 16:55:47	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:55:47] - Apertura de revisión de estructura de datos.	Informativo	Baja
+100220	2021-01-17	2021-01-17 16:56:38	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:56:38] - La validación de Columnas vacías concluyó con 1 observación(es). (~ly2)	Informativo	Baja
+100220	2021-01-17	2021-01-17 16:56:38	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:56:38] -    Revisión de estructura de datos satisfatoria.	Informativo	Baja
+100220	2021-01-17	2021-01-17 16:56:38	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:56:38] - Apertura de revisión de errores OM 22269-2020.	Informativo	Baja
+100220	2021-01-17	2021-01-17 16:56:47	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:56:47] - La validación de operaciones vacías concluyó sin observaciones. (~ly2)	Informativo	Baja
+100220	2021-01-17	2021-01-17 16:56:49	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:56:49] - La validación de operaciones duplicadas concluyó con 7 observación. (~ly2) 	Informativo	Baja
+100220	2021-01-17	2021-01-17 16:56:49	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:56:49] -    La revisión errores OM 22269-2020 tiene observaciones.	Informativo	Baja
+100221	2021-01-17	2021-01-17 16:58:36	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:58:36] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100221	2021-01-17	2021-01-17 16:58:36	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:58:36] - Agente creado.	Informativo	Baja
+100221	2021-01-17	2021-01-17 16:58:36	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:58:36] - Bucket de errores creado.	Informativo	Baja
+100221	2021-01-17	2021-01-17 16:58:36	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:58:36] - Inicio del interrogatorio. PID-100221	Informativo	Baja
+100221	2021-01-17	2021-01-17 16:58:36	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:58:36] - Apertura de revisión de pre-requisitos.	Informativo	Baja
+100221	2021-01-17	2021-01-17 16:58:36	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:58:36] -    Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100221	2021-01-17	2021-01-17 16:58:36	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:58:36] - Apertura de revisión de estructura de datos.	Informativo	Baja
+100221	2021-01-17	2021-01-17 16:58:51	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:58:51] - La validación de Columnas vacías concluyó con 1 observación(es). (~ly2)	Informativo	Baja
+100221	2021-01-17	2021-01-17 16:58:51	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:58:51] -    Revisión de estructura de datos satisfatoria.	Informativo	Baja
+100221	2021-01-17	2021-01-17 16:58:51	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:58:51] - Apertura de revisión de errores OM 22269-2020.	Informativo	Baja
+100221	2021-01-17	2021-01-17 16:58:59	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:58:59] - La validación de operaciones vacías concluyó sin observaciones. (~ly2)	Informativo	Baja
+100221	2021-01-17	2021-01-17 16:59:00	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:59:00] - La validación de operaciones duplicadas concluyó con 7 observación. (~ly2) 	Informativo	Baja
+100221	2021-01-17	2021-01-17 16:59:01	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:59:01] -    La revisión errores OM 22269-2020 tiene observaciones.	Informativo	Baja
+100222	2021-01-17	2021-01-17 16:59:24	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:59:24] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100222	2021-01-17	2021-01-17 16:59:24	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:59:24] - Agente creado.	Informativo	Baja
+100222	2021-01-17	2021-01-17 16:59:24	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:59:24] - Bucket de errores creado.	Informativo	Baja
+100222	2021-01-17	2021-01-17 16:59:24	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:59:24] - Inicio del interrogatorio. PID-100222	Informativo	Baja
+100222	2021-01-17	2021-01-17 16:59:24	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:59:24] - Apertura de revisión de pre-requisitos.	Informativo	Baja
+100222	2021-01-17	2021-01-17 16:59:25	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:59:25] -    Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100222	2021-01-17	2021-01-17 16:59:25	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:59:25] - Apertura de revisión de estructura de datos.	Informativo	Baja
+100222	2021-01-17	2021-01-17 16:59:52	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:59:52] - La validación de Columnas vacías concluyó con 1 observación(es). (~ly2)	Informativo	Baja
+100222	2021-01-17	2021-01-17 16:59:52	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:59:52] -    Revisión de estructura de datos satisfatoria.	Informativo	Baja
+100222	2021-01-17	2021-01-17 16:59:52	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 16:59:52] - Apertura de revisión de errores OM 22269-2020.	Informativo	Baja
+100222	2021-01-17	2021-01-17 17:00:03	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:00:03] - La validación de operaciones vacías concluyó con 1 observaciones. (~ly2)	Informativo	Baja
+100222	2021-01-17	2021-01-17 17:00:06	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:00:06] - La validación de operaciones duplicadas concluyó con 10 observación. (~ly2) 	Informativo	Baja
+100222	2021-01-17	2021-01-17 17:00:06	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:00:06] -    La revisión errores OM 22269-2020 tiene observaciones.	Informativo	Baja
+100223	2021-01-17	2021-01-17 17:20:48	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:20:48] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100223	2021-01-17	2021-01-17 17:20:48	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:20:48] - Agente creado.	Informativo	Baja
+100223	2021-01-17	2021-01-17 17:20:48	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:20:48] - Bucket de errores creado.	Informativo	Baja
+100223	2021-01-17	2021-01-17 17:20:48	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:20:48] - Inicio del interrogatorio. PID-100223	Informativo	Baja
+100223	2021-01-17	2021-01-17 17:20:48	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:20:48] - Apertura de revisión de pre-requisitos.	Informativo	Baja
+100223	2021-01-17	2021-01-17 17:20:48	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:20:48] -    Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100223	2021-01-17	2021-01-17 17:20:48	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:20:48] - Apertura de revisión de estructura de datos.	Informativo	Baja
+100224	2021-01-17	2021-01-17 17:22:21	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:22:21] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100224	2021-01-17	2021-01-17 17:22:21	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:22:21] - Agente creado.	Informativo	Baja
+100224	2021-01-17	2021-01-17 17:22:21	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:22:21] - Bucket de errores creado.	Informativo	Baja
+100224	2021-01-17	2021-01-17 17:22:21	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:22:21] - Inicio del interrogatorio. PID-100224	Informativo	Baja
+100224	2021-01-17	2021-01-17 17:22:21	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:22:21] - Apertura de revisión de pre-requisitos.	Informativo	Baja
+100224	2021-01-17	2021-01-17 17:22:21	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:22:21] -    Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100224	2021-01-17	2021-01-17 17:22:21	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:22:21] - Apertura de revisión de estructura de datos.	Informativo	Baja
+100225	2021-01-17	2021-01-17 17:23:43	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:23:43] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100225	2021-01-17	2021-01-17 17:23:43	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:23:43] - Agente creado.	Informativo	Baja
+100225	2021-01-17	2021-01-17 17:23:44	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:23:43] - Bucket de errores creado.	Informativo	Baja
+100225	2021-01-17	2021-01-17 17:23:44	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:23:44] - Inicio del interrogatorio. PID-100225	Informativo	Baja
+100225	2021-01-17	2021-01-17 17:23:44	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:23:44] - Apertura de revisión de pre-requisitos.	Informativo	Baja
+100225	2021-01-17	2021-01-17 17:23:44	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:23:44] -    Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100225	2021-01-17	2021-01-17 17:23:44	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:23:44] - Apertura de revisión de estructura de datos.	Informativo	Baja
+100226	2021-01-17	2021-01-17 17:26:00	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:25:59] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100226	2021-01-17	2021-01-17 17:26:00	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:26:00] - Agente creado.	Informativo	Baja
+100226	2021-01-17	2021-01-17 17:26:00	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:26:00] - Bucket de errores creado.	Informativo	Baja
+100226	2021-01-17	2021-01-17 17:26:00	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:26:00] - Inicio del interrogatorio. PID-100226	Informativo	Baja
+100226	2021-01-17	2021-01-17 17:26:00	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:26:00] - Apertura de revisión de pre-requisitos.	Informativo	Baja
+100226	2021-01-17	2021-01-17 17:26:00	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:26:00] -    Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100226	2021-01-17	2021-01-17 17:26:00	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:26:00] - Apertura de revisión de estructura de datos.	Informativo	Baja
+100226	2021-01-17	2021-01-17 17:26:24	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:26:24] - La validación de Columnas vacías concluyó con 1 observación(es). (~ly2)	Informativo	Baja
+100226	2021-01-17	2021-01-17 17:26:24	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:26:24] -    Revisión de estructura de datos satisfatoria.	Informativo	Baja
+100226	2021-01-17	2021-01-17 17:26:24	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:26:24] - Apertura de revisión de errores OM 22269-2020.	Informativo	Baja
+100226	2021-01-17	2021-01-17 17:26:37	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:26:37] - La validación de operaciones vacías concluyó con 1 observaciones. (~ly2)	Informativo	Baja
+100226	2021-01-17	2021-01-17 17:26:40	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:26:40] - La validación de operaciones duplicadas concluyó con 10 observación. (~ly2) 	Informativo	Baja
+100226	2021-01-17	2021-01-17 17:26:40	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:26:40] -    La revisión errores OM 22269-2020 tiene observaciones.	Informativo	Baja
+100227	2021-01-17	2021-01-17 17:29:32	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:29:32] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100227	2021-01-17	2021-01-17 17:29:32	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:29:32] - Agente creado.	Informativo	Baja
+100227	2021-01-17	2021-01-17 17:29:32	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:29:32] - Bucket de errores creado.	Informativo	Baja
+100227	2021-01-17	2021-01-17 17:29:32	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:29:32] - Inicio del interrogatorio. PID-100227	Informativo	Baja
+100227	2021-01-17	2021-01-17 17:29:32	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:29:32] - Apertura de revisión de pre-requisitos.	Informativo	Baja
+100227	2021-01-17	2021-01-17 17:29:32	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:29:32] -    Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100227	2021-01-17	2021-01-17 17:29:32	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:29:32] - Apertura de revisión de estructura de datos.	Informativo	Baja
+100227	2021-01-17	2021-01-17 17:29:55	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:29:55] - La validación de Columnas vacías concluyó con 1 observación(es). (~ly2)	Informativo	Baja
+100227	2021-01-17	2021-01-17 17:29:55	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:29:55] -    Revisión de estructura de datos satisfatoria.	Informativo	Baja
+100227	2021-01-17	2021-01-17 17:29:55	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:29:55] - Apertura de revisión de errores OM 22269-2020.	Informativo	Baja
+100227	2021-01-17	2021-01-17 17:30:07	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:30:07] - La validación de operaciones vacías concluyó con 1 observaciones. (~ly2)	Informativo	Baja
+100227	2021-01-17	2021-01-17 17:30:09	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:30:09] - La validación de operaciones duplicadas concluyó con 10 observación. (~ly2) 	Informativo	Baja
+100227	2021-01-17	2021-01-17 17:30:09	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:30:09] -    La revisión errores OM 22269-2020 tiene observaciones.	Informativo	Baja
+100228	2021-01-17	2021-01-17 17:43:26	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:43:26] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100228	2021-01-17	2021-01-17 17:43:26	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:43:26] - Agente creado.	Informativo	Baja
+100228	2021-01-17	2021-01-17 17:43:26	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:43:26] - Bucket de errores creado.	Informativo	Baja
+100228	2021-01-17	2021-01-17 17:43:26	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:43:26] - Inicio del interrogatorio. PID-100228	Informativo	Baja
+100228	2021-01-17	2021-01-17 17:43:27	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:43:26] - Apertura de revisión de pre-requisitos.	Informativo	Baja
+100228	2021-01-17	2021-01-17 17:43:27	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:43:27] -    Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100228	2021-01-17	2021-01-17 17:43:27	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:43:27] - Apertura de revisión de estructura de datos.	Informativo	Baja
+100228	2021-01-17	2021-01-17 17:43:51	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:43:51] - La validación de Columnas vacías concluyó con 1 observación(es). (~ly2)	Informativo	Baja
+100228	2021-01-17	2021-01-17 17:43:52	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:43:51] -    Revisión de estructura de datos satisfatoria.	Informativo	Baja
+100228	2021-01-17	2021-01-17 17:43:52	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:43:52] - Apertura de revisión de errores OM 22269-2020.	Informativo	Baja
+100228	2021-01-17	2021-01-17 17:44:02	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:44:02] - La validación de operaciones vacías concluyó con 1 observaciones. (~ly2)	Informativo	Baja
+100228	2021-01-17	2021-01-17 17:44:04	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:44:04] - La validación de operaciones duplicadas concluyó con 10 observación. (~ly2) 	Informativo	Baja
+100228	2021-01-17	2021-01-17 17:44:05	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:44:04] -    La revisión errores OM 22269-2020 tiene observaciones.	Informativo	Baja
+100229	2021-01-17	2021-01-17 17:45:49	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:45:48] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100229	2021-01-17	2021-01-17 17:45:49	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:45:49] - Agente creado.	Informativo	Baja
+100229	2021-01-17	2021-01-17 17:45:49	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:45:49] - Bucket de errores creado.	Informativo	Baja
+100229	2021-01-17	2021-01-17 17:45:49	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:45:49] - Inicio del interrogatorio. PID-100229	Informativo	Baja
+100229	2021-01-17	2021-01-17 17:45:49	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:45:49] - Apertura de revisión de pre-requisitos.	Informativo	Baja
+100229	2021-01-17	2021-01-17 17:45:49	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:45:49] -    Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100229	2021-01-17	2021-01-17 17:45:49	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:45:49] - Apertura de revisión de estructura de datos.	Informativo	Baja
+100229	2021-01-17	2021-01-17 17:46:08	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:46:08] - La validación de Columnas vacías concluyó con 1 observación(es). (~ly2)	Informativo	Baja
+100229	2021-01-17	2021-01-17 17:46:08	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:46:08] -    Revisión de estructura de datos satisfatoria.	Informativo	Baja
+100229	2021-01-17	2021-01-17 17:46:09	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:46:08] - Apertura de revisión de errores OM 22269-2020.	Informativo	Baja
+100229	2021-01-17	2021-01-17 17:46:19	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:46:19] - La validación de operaciones vacías concluyó con 1 observaciones. (~ly2)	Informativo	Baja
+100229	2021-01-17	2021-01-17 17:46:21	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:46:21] - La validación de operaciones duplicadas concluyó con 10 observación. (~ly2) 	Informativo	Baja
+100229	2021-01-17	2021-01-17 17:46:21	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:46:21] -    La revisión errores OM 22269-2020 tiene observaciones.	Informativo	Baja
+100229	2021-01-17	2021-01-17 17:46:44	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:46:43] - La validación cruce interno concluyó con 12 observación. (~ly2) 	Informativo	Baja
+100229	2021-01-17	2021-01-17 17:47:03	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:47:03] - La validación de los campos concluyó con 2 observaciones tipo1. (~ly2) 	Informativo	Baja
+100229	2021-01-17	2021-01-17 17:47:33	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:47:33] - La validación de los campos concluyó con 18 observaciones tipo2. (~ly2) 	Informativo	Baja
+100229	2021-01-17	2021-01-17 17:47:45	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:47:45] - La validación de los campos concluyó con 2 observación(es) tipo3. (~ly2) 	Informativo	Baja
+100229	2021-01-17	2021-01-17 17:47:45	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:47:45] - La validación de los campos concluyó con un total de 22 observación(es). (~ly2) 	Informativo	Baja
+100229	2021-01-17	2021-01-17 17:48:09	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:48:09] - La validación cruce interno concluyó con 24 observación. (~ly2) 	Informativo	Baja
+100230	2021-01-17	2021-01-17 17:59:49	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:59:49] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100230	2021-01-17	2021-01-17 17:59:49	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:59:49] - Agente creado.	Informativo	Baja
+100230	2021-01-17	2021-01-17 17:59:49	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:59:49] - Bucket de errores creado.	Informativo	Baja
+100230	2021-01-17	2021-01-17 17:59:49	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:59:49] - Inicio del interrogatorio. PID-100230	Informativo	Baja
+100230	2021-01-17	2021-01-17 17:59:49	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:59:49] - Apertura de revisión de pre-requisitos.	Informativo	Baja
+100230	2021-01-17	2021-01-17 17:59:49	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:59:49] -    Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100230	2021-01-17	2021-01-17 17:59:49	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 17:59:49] - Apertura de revisión de estructura de datos.	Informativo	Baja
+100231	2021-01-17	2021-01-17 18:00:07	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:00:07] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100231	2021-01-17	2021-01-17 18:00:07	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:00:07] - Agente creado.	Informativo	Baja
+100231	2021-01-17	2021-01-17 18:00:07	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:00:07] - Bucket de errores creado.	Informativo	Baja
+100231	2021-01-17	2021-01-17 18:00:07	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:00:07] - Inicio del interrogatorio. PID-100231	Informativo	Baja
+100231	2021-01-17	2021-01-17 18:00:07	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:00:07] - Apertura de revisión de pre-requisitos.	Informativo	Baja
+100231	2021-01-17	2021-01-17 18:00:07	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:00:07] -       Error: Se identificaron archivos faltantes.	Informativo	Baja
+100231	2021-01-17	2021-01-17 18:00:07	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:00:07] -    Fin del proceso de revisión por errores críticos 101-102.	Informativo	Baja
+100232	2021-01-17	2021-01-17 18:00:24	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:00:24] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100232	2021-01-17	2021-01-17 18:00:24	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:00:24] - Agente creado.	Informativo	Baja
+100232	2021-01-17	2021-01-17 18:00:24	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:00:24] - Bucket de errores creado.	Informativo	Baja
+100232	2021-01-17	2021-01-17 18:00:24	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:00:24] - Inicio del interrogatorio. PID-100232	Informativo	Baja
+100232	2021-01-17	2021-01-17 18:00:24	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:00:24] - Apertura de revisión de pre-requisitos.	Informativo	Baja
+100232	2021-01-17	2021-01-17 18:00:24	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:00:24] -       Error: Se identificaron archivos faltantes.	Informativo	Baja
+100232	2021-01-17	2021-01-17 18:00:24	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:00:24] -    Fin del proceso de revisión por errores críticos 101-102.	Informativo	Baja
+100233	2021-01-17	2021-01-17 18:00:37	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:00:37] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100233	2021-01-17	2021-01-17 18:00:37	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:00:37] - Agente creado.	Informativo	Baja
+100233	2021-01-17	2021-01-17 18:00:37	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:00:37] - Bucket de errores creado.	Informativo	Baja
+100233	2021-01-17	2021-01-17 18:00:37	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:00:37] - Inicio del interrogatorio. PID-100233	Informativo	Baja
+100233	2021-01-17	2021-01-17 18:00:37	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:00:37] - Apertura de revisión de pre-requisitos.	Informativo	Baja
+100233	2021-01-17	2021-01-17 18:00:37	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:00:37] -    Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100233	2021-01-17	2021-01-17 18:00:37	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:00:37] - Apertura de revisión de estructura de datos.	Informativo	Baja
+100233	2021-01-17	2021-01-17 18:01:11	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:01:11] - La validación de Columnas vacías concluyó con 1 observación(es). (~ly2)	Informativo	Baja
+100233	2021-01-17	2021-01-17 18:01:11	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:01:11] -    Revisión de estructura de datos satisfatoria.	Informativo	Baja
+100233	2021-01-17	2021-01-17 18:01:11	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:01:11] - Apertura de revisión de errores OM 22269-2020.	Informativo	Baja
+100233	2021-01-17	2021-01-17 18:01:27	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:01:27] - La validación de operaciones vacías concluyó con 1 observaciones. (~ly2)	Informativo	Baja
+100233	2021-01-17	2021-01-17 18:01:30	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:01:30] - La validación de operaciones duplicadas concluyó con 11 observación. (~ly2) 	Informativo	Baja
+100233	2021-01-17	2021-01-17 18:01:30	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:01:30] -    La revisión errores OM 22269-2020 tiene observaciones.	Informativo	Baja
+100233	2021-01-17	2021-01-17 18:02:03	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:02:03] - La validación cruce interno concluyó con 15 observación. (~ly2) 	Informativo	Baja
+100233	2021-01-17	2021-01-17 18:02:31	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:02:31] - La validación de los campos concluyó con 4 observaciones tipo1. (~ly2) 	Informativo	Baja
+100233	2021-01-17	2021-01-17 18:03:10	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:03:10] - La validación de los campos concluyó con 23 observaciones tipo2. (~ly2) 	Informativo	Baja
+100233	2021-01-17	2021-01-17 18:03:27	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:03:27] - La validación de los campos concluyó con 4 observación(es) tipo3. (~ly2) 	Informativo	Baja
+100233	2021-01-17	2021-01-17 18:03:27	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:03:27] - La validación de los campos concluyó con un total de 31 observación(es). (~ly2) 	Informativo	Baja
+100233	2021-01-17	2021-01-17 18:04:01	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:04:01] - La validación cruce interno concluyó con 30 observación. (~ly2) 	Informativo	Baja
+100234	2021-01-17	2021-01-17 18:30:01	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:30:01] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100234	2021-01-17	2021-01-17 18:30:01	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:30:01] - Agente creado.	Informativo	Baja
+100234	2021-01-17	2021-01-17 18:30:01	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:30:01] - Bucket de errores creado.	Informativo	Baja
+100234	2021-01-17	2021-01-17 18:30:43	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:30:43] - La validación de Columnas vacías concluyó con 1 observación(es). (~ly2)	Informativo	Baja
+100234	2021-01-17	2021-01-17 18:30:59	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:30:59] - La validación de operaciones vacías concluyó con 1 observaciones. (~ly2)	Informativo	Baja
+100234	2021-01-17	2021-01-17 18:31:02	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:31:02] - La validación de operaciones duplicadas concluyó con 11 observación. (~ly2) 	Informativo	Baja
+100234	2021-01-17	2021-01-17 18:31:23	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:31:23] - La validación de los campos concluyó con 4 observaciones tipo1. (~ly2) 	Informativo	Baja
+100234	2021-01-17	2021-01-17 18:32:06	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:32:06] - La validación de los campos concluyó con 23 observaciones tipo2. (~ly2) 	Informativo	Baja
+100234	2021-01-17	2021-01-17 18:32:24	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:32:24] - La validación de los campos concluyó con 4 observación(es) tipo3. (~ly2) 	Informativo	Baja
+100234	2021-01-17	2021-01-17 18:32:24	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:32:24] - La validación de los campos concluyó con un total de 31 observación(es). (~ly2) 	Informativo	Baja
+100234	2021-01-17	2021-01-17 18:33:09	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:33:09] - La validación cruce interno concluyó con 15 observación. (~ly2) 	Informativo	Baja
+100235	2021-01-17	2021-01-17 18:33:10	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:33:10] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100235	2021-01-17	2021-01-17 18:33:10	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:33:10] - Agente creado.	Informativo	Baja
+100235	2021-01-17	2021-01-17 18:33:10	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:33:10] - Bucket de errores creado.	Informativo	Baja
+100236	2021-01-17	2021-01-17 18:33:50	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:33:49] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100236	2021-01-17	2021-01-17 18:33:50	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:33:50] - Agente creado.	Informativo	Baja
+100236	2021-01-17	2021-01-17 18:33:50	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:33:50] - Bucket de errores creado.	Informativo	Baja
+100236	2021-01-17	2021-01-17 18:34:19	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:34:19] - La validación de Columnas vacías concluyó con 1 observación(es). (~ly2)	Informativo	Baja
+100236	2021-01-17	2021-01-17 18:34:34	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:34:34] - La validación de operaciones vacías concluyó con 1 observaciones. (~ly2)	Informativo	Baja
+100236	2021-01-17	2021-01-17 18:34:38	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:34:38] - La validación de operaciones duplicadas concluyó con 11 observación. (~ly2) 	Informativo	Baja
+100236	2021-01-17	2021-01-17 18:34:57	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:34:57] - La validación de los campos concluyó con 4 observaciones tipo1. (~ly2) 	Informativo	Baja
+100237	2021-01-17	2021-01-17 18:36:55	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:36:55] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100237	2021-01-17	2021-01-17 18:36:55	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:36:55] - Agente creado.	Informativo	Baja
+100237	2021-01-17	2021-01-17 18:36:56	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:36:56] - Bucket de errores creado.	Informativo	Baja
+100237	2021-01-17	2021-01-17 18:37:27	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:37:27] - La validación de Columnas vacías concluyó con 1 observación(es). (~ly2)	Informativo	Baja
+100237	2021-01-17	2021-01-17 18:37:45	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:37:45] - La validación de operaciones vacías concluyó con 1 observaciones. (~ly2)	Informativo	Baja
+100237	2021-01-17	2021-01-17 18:37:49	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:37:49] - La validación de operaciones duplicadas concluyó con 11 observación. (~ly2) 	Informativo	Baja
+100238	2021-01-17	2021-01-17 18:37:56	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:37:56] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100238	2021-01-17	2021-01-17 18:37:56	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:37:56] - Agente creado.	Informativo	Baja
+100238	2021-01-17	2021-01-17 18:37:56	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:37:56] - Bucket de errores creado.	Informativo	Baja
+100239	2021-01-17	2021-01-17 18:38:05	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:38:05] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100239	2021-01-17	2021-01-17 18:38:05	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:38:05] - Agente creado.	Informativo	Baja
+100239	2021-01-17	2021-01-17 18:38:05	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:38:05] - Bucket de errores creado.	Informativo	Baja
+100240	2021-01-17	2021-01-17 18:38:29	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:38:29] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100240	2021-01-17	2021-01-17 18:38:29	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:38:29] - Agente creado.	Informativo	Baja
+100240	2021-01-17	2021-01-17 18:38:29	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:38:29] - Bucket de errores creado.	Informativo	Baja
+100240	2021-01-17	2021-01-17 18:38:56	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:38:56] - La validación de Columnas vacías concluyó con 1 observación(es). (~ly2)	Informativo	Baja
+100240	2021-01-17	2021-01-17 18:39:11	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:39:11] - La validación de operaciones vacías concluyó con 1 observaciones. (~ly2)	Informativo	Baja
+100240	2021-01-17	2021-01-17 18:39:14	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:39:14] - La validación de operaciones duplicadas concluyó con 11 observación. (~ly2) 	Informativo	Baja
+100240	2021-01-17	2021-01-17 18:39:32	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:39:32] - La validación de los campos concluyó con 4 observaciones tipo1. (~ly2) 	Informativo	Baja
+100240	2021-01-17	2021-01-17 18:40:09	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:40:09] - La validación de los campos concluyó con 23 observaciones tipo2. (~ly2) 	Informativo	Baja
+100240	2021-01-17	2021-01-17 18:40:25	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:40:25] - La validación de los campos concluyó con 4 observación(es) tipo3. (~ly2) 	Informativo	Baja
+100240	2021-01-17	2021-01-17 18:40:25	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:40:25] - La validación de los campos concluyó con un total de 31 observación(es). (~ly2) 	Informativo	Baja
+100240	2021-01-17	2021-01-17 18:40:56	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:40:56] - La validación cruce interno concluyó con 15 observación. (~ly2) 	Informativo	Baja
+100241	2021-01-17	2021-01-17 18:44:15	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:44:15] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100241	2021-01-17	2021-01-17 18:44:15	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:44:15] - Agente creado.	Informativo	Baja
+100241	2021-01-17	2021-01-17 18:44:15	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:44:15] - Bucket de errores creado.	Informativo	Baja
+100241	2021-01-17	2021-01-17 18:44:48	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:44:48] - La validación de Columnas vacías concluyó con 1 observación(es). (~ly2)	Informativo	Baja
+100242	2021-01-17	2021-01-17 18:44:55	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:44:55] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100242	2021-01-17	2021-01-17 18:44:55	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:44:55] - Agente creado.	Informativo	Baja
+100243	2021-01-17	2021-01-17 18:45:22	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:45:22] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100243	2021-01-17	2021-01-17 18:45:22	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:45:22] - Agente creado.	Informativo	Baja
+100243	2021-01-17	2021-01-17 18:45:22	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:45:22] - Bucket de errores creado.	Informativo	Baja
+100243	2021-01-17	2021-01-17 18:45:52	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:45:52] - La validación de Columnas vacías concluyó con 1 observación(es). (~ly2)	Informativo	Baja
+100243	2021-01-17	2021-01-17 18:46:07	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:46:07] - La validación de operaciones vacías concluyó con 1 observaciones. (~ly2)	Informativo	Baja
+100243	2021-01-17	2021-01-17 18:46:11	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:46:11] - La validación de operaciones duplicadas concluyó con 11 observación. (~ly2) 	Informativo	Baja
+100243	2021-01-17	2021-01-17 18:46:30	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:46:30] - La validación de los campos concluyó con 4 observaciones tipo1. (~ly2) 	Informativo	Baja
+100243	2021-01-17	2021-01-17 18:47:10	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:47:10] - La validación de los campos concluyó con 23 observaciones tipo2. (~ly2) 	Informativo	Baja
+100243	2021-01-17	2021-01-17 18:47:27	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:47:27] - La validación de los campos concluyó con 4 observación(es) tipo3. (~ly2) 	Informativo	Baja
+100243	2021-01-17	2021-01-17 18:47:27	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:47:27] - La validación de los campos concluyó con un total de 31 observación(es). (~ly2) 	Informativo	Baja
+100244	2021-01-17	2021-01-17 18:47:29	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:47:29] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100244	2021-01-17	2021-01-17 18:47:29	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:47:29] - Agente creado.	Informativo	Baja
+100244	2021-01-17	2021-01-17 18:47:29	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:47:29] - Bucket de errores creado.	Informativo	Baja
+100244	2021-01-17	2021-01-17 18:48:00	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:48:00] - La validación de Columnas vacías concluyó con 1 observación(es). (~ly2)	Informativo	Baja
+100244	2021-01-17	2021-01-17 18:48:16	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:48:16] - La validación de operaciones vacías concluyó con 1 observaciones. (~ly2)	Informativo	Baja
+100244	2021-01-17	2021-01-17 18:48:19	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:48:19] - La validación de operaciones duplicadas concluyó con 11 observación. (~ly2) 	Informativo	Baja
+100244	2021-01-17	2021-01-17 18:48:37	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:48:37] - La validación de los campos concluyó con 4 observaciones tipo1. (~ly2) 	Informativo	Baja
+100245	2021-01-17	2021-01-17 18:48:39	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:48:39] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100245	2021-01-17	2021-01-17 18:48:39	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:48:39] - Agente creado.	Informativo	Baja
+100245	2021-01-17	2021-01-17 18:48:39	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:48:39] - Bucket de errores creado.	Informativo	Baja
+100245	2021-01-17	2021-01-17 18:49:07	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:49:07] - La validación de Columnas vacías concluyó con 1 observación(es). (~ly2)	Informativo	Baja
+100245	2021-01-17	2021-01-17 18:49:21	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:49:21] - La validación de operaciones vacías concluyó con 1 observaciones. (~ly2)	Informativo	Baja
+100245	2021-01-17	2021-01-17 18:49:25	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:49:25] - La validación de operaciones duplicadas concluyó con 11 observación. (~ly2) 	Informativo	Baja
+100245	2021-01-17	2021-01-17 18:49:44	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:49:44] - La validación de los campos concluyó con 4 observaciones tipo1. (~ly2) 	Informativo	Baja
+100245	2021-01-17	2021-01-17 18:50:23	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:50:23] - La validación de los campos concluyó con 23 observaciones tipo2. (~ly2) 	Informativo	Baja
+100245	2021-01-17	2021-01-17 18:50:40	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:50:40] - La validación de los campos concluyó con 4 observación(es) tipo3. (~ly2) 	Informativo	Baja
+100245	2021-01-17	2021-01-17 18:50:40	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:50:40] - La validación de los campos concluyó con un total de 31 observación(es). (~ly2) 	Informativo	Baja
+100245	2021-01-17	2021-01-17 18:51:14	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:51:14] - La validación cruce interno concluyó con 15 observación. (~ly2) 	Informativo	Baja
+100246	2021-01-17	2021-01-17 18:51:14	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:51:14] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100246	2021-01-17	2021-01-17 18:51:15	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:51:14] - Agente creado.	Informativo	Baja
+100246	2021-01-17	2021-01-17 18:51:15	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:51:15] - Bucket de errores creado.	Informativo	Baja
+100246	2021-01-17	2021-01-17 18:51:47	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:51:47] - La validación de Columnas vacías concluyó con 1 observación(es). (~ly2)	Informativo	Baja
+100246	2021-01-17	2021-01-17 18:52:02	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:52:02] - La validación de operaciones vacías concluyó con 1 observaciones. (~ly2)	Informativo	Baja
+100246	2021-01-17	2021-01-17 18:52:06	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:52:06] - La validación de operaciones duplicadas concluyó con 11 observación. (~ly2) 	Informativo	Baja
+100246	2021-01-17	2021-01-17 18:52:25	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:52:25] - La validación de los campos concluyó con 4 observaciones tipo1. (~ly2) 	Informativo	Baja
+100247	2021-01-17	2021-01-17 18:52:36	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:52:36] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100247	2021-01-17	2021-01-17 18:52:36	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:52:36] - Agente creado.	Informativo	Baja
+100247	2021-01-17	2021-01-17 18:52:36	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:52:36] - Bucket de errores creado.	Informativo	Baja
+100247	2021-01-17	2021-01-17 18:53:05	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:53:05] - La validación de Columnas vacías concluyó con 1 observación(es). (~ly2)	Informativo	Baja
+100247	2021-01-17	2021-01-17 18:53:22	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:53:22] - La validación de operaciones vacías concluyó con 1 observaciones. (~ly2)	Informativo	Baja
+100247	2021-01-17	2021-01-17 18:53:25	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:53:25] - La validación de operaciones duplicadas concluyó con 11 observación. (~ly2) 	Informativo	Baja
+100247	2021-01-17	2021-01-17 18:53:44	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:53:44] - La validación de los campos concluyó con 4 observaciones tipo1. (~ly2) 	Informativo	Baja
+100248	2021-01-17	2021-01-17 18:54:04	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:54:04] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100248	2021-01-17	2021-01-17 18:54:04	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:54:04] - Agente creado.	Informativo	Baja
+100248	2021-01-17	2021-01-17 18:54:04	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:54:04] - Bucket de errores creado.	Informativo	Baja
+100248	2021-01-17	2021-01-17 18:54:31	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:54:31] - La validación de Columnas vacías concluyó con 1 observación(es). (~ly2)	Informativo	Baja
+100248	2021-01-17	2021-01-17 18:54:45	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:54:45] - La validación de operaciones vacías concluyó con 1 observaciones. (~ly2)	Informativo	Baja
+100248	2021-01-17	2021-01-17 18:54:49	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:54:49] - La validación de operaciones duplicadas concluyó con 11 observación. (~ly2) 	Informativo	Baja
+100248	2021-01-17	2021-01-17 18:55:07	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:55:07] - La validación de los campos concluyó con 4 observaciones tipo1. (~ly2) 	Informativo	Baja
+100248	2021-01-17	2021-01-17 18:55:46	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:55:46] - La validación de los campos concluyó con 23 observaciones tipo2. (~ly2) 	Informativo	Baja
+100248	2021-01-17	2021-01-17 18:56:04	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:56:04] - La validación de los campos concluyó con 4 observación(es) tipo3. (~ly2) 	Informativo	Baja
+100248	2021-01-17	2021-01-17 18:56:04	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:56:04] - La validación de los campos concluyó con un total de 31 observación(es). (~ly2) 	Informativo	Baja
+100248	2021-01-17	2021-01-17 18:56:33	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:56:33] - La validación cruce interno concluyó con 15 observación. (~ly2) 	Informativo	Baja
+100249	2021-01-17	2021-01-17 18:56:33	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:56:33] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100249	2021-01-17	2021-01-17 18:56:33	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:56:33] - Agente creado.	Informativo	Baja
+100250	2021-01-17	2021-01-17 18:56:42	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:56:42] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100250	2021-01-17	2021-01-17 18:56:42	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:56:42] - Agente creado.	Informativo	Baja
+100251	2021-01-17	2021-01-17 18:56:46	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:56:46] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100251	2021-01-17	2021-01-17 18:56:46	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:56:46] - Agente creado.	Informativo	Baja
+100252	2021-01-17	2021-01-17 18:57:40	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:57:40] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100252	2021-01-17	2021-01-17 18:57:40	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:57:40] - Agente creado.	Informativo	Baja
+100253	2021-01-17	2021-01-17 18:57:44	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:57:44] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100253	2021-01-17	2021-01-17 18:57:44	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 18:57:44] - Agente creado.	Informativo	Baja
+100254	2021-01-17	2021-01-17 19:04:58	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:04:58] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100254	2021-01-17	2021-01-17 19:04:58	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:04:58] - Agente creado.	Informativo	Baja
+100255	2021-01-17	2021-01-17 19:05:27	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:05:27] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100255	2021-01-17	2021-01-17 19:05:27	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:05:27] - Agente creado.	Informativo	Baja
+100255	2021-01-17	2021-01-17 19:05:27	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:05:27] - Bucket de errores creado.	Informativo	Baja
+100255	2021-01-17	2021-01-17 19:05:57	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:05:57] - La validación de Columnas vacías concluyó con 1 observación(es). (~ly2)	Informativo	Baja
+100255	2021-01-17	2021-01-17 19:06:10	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:06:10] - La validación de operaciones vacías concluyó con 1 observaciones. (~ly2)	Informativo	Baja
+100255	2021-01-17	2021-01-17 19:06:13	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:06:13] - La validación de operaciones duplicadas concluyó con 11 observación. (~ly2) 	Informativo	Baja
+100255	2021-01-17	2021-01-17 19:06:31	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:06:31] - La validación de los campos concluyó con 4 observaciones tipo1. (~ly2) 	Informativo	Baja
+100255	2021-01-17	2021-01-17 19:07:10	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:07:10] - La validación de los campos concluyó con 23 observaciones tipo2. (~ly2) 	Informativo	Baja
+100255	2021-01-17	2021-01-17 19:07:28	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:07:28] - La validación de los campos concluyó con 4 observación(es) tipo3. (~ly2) 	Informativo	Baja
+100255	2021-01-17	2021-01-17 19:07:28	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:07:28] - La validación de los campos concluyó con un total de 31 observación(es). (~ly2) 	Informativo	Baja
+100255	2021-01-17	2021-01-17 19:08:00	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:08:00] - La validación cruce interno concluyó con 15 observación. (~ly2) 	Informativo	Baja
+100256	2021-01-17	2021-01-17 19:08:43	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:08:43] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100256	2021-01-17	2021-01-17 19:08:43	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:08:43] - Agente creado.	Informativo	Baja
+100256	2021-01-17	2021-01-17 19:08:43	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:08:43] - Bucket de errores creado.	Informativo	Baja
+100256	2021-01-17	2021-01-17 19:09:12	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:09:12] - La validación de Columnas vacías concluyó con 1 observación(es). (~ly2)	Informativo	Baja
+100256	2021-01-17	2021-01-17 19:09:27	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:09:27] - La validación de operaciones vacías concluyó con 1 observaciones. (~ly2)	Informativo	Baja
+100256	2021-01-17	2021-01-17 19:09:30	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:09:30] - La validación de operaciones duplicadas concluyó con 11 observación. (~ly2) 	Informativo	Baja
+100256	2021-01-17	2021-01-17 19:09:50	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:09:50] - La validación de los campos concluyó con 4 observaciones tipo1. (~ly2) 	Informativo	Baja
+100256	2021-01-17	2021-01-17 19:10:28	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:10:27] - La validación de los campos concluyó con 23 observaciones tipo2. (~ly2) 	Informativo	Baja
+100257	2021-01-17	2021-01-17 19:10:38	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:10:38] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100257	2021-01-17	2021-01-17 19:10:38	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:10:38] - Agente creado.	Informativo	Baja
+100257	2021-01-17	2021-01-17 19:10:38	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:10:38] - Bucket de errores creado.	Informativo	Baja
+100258	2021-01-17	2021-01-17 19:11:07	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:11:07] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100258	2021-01-17	2021-01-17 19:11:07	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:11:07] - Agente creado.	Informativo	Baja
+100259	2021-01-17	2021-01-17 19:11:22	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:11:22] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100259	2021-01-17	2021-01-17 19:11:22	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:11:22] - Agente creado.	Informativo	Baja
+100260	2021-01-17	2021-01-17 19:11:44	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:11:44] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100260	2021-01-17	2021-01-17 19:11:44	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:11:44] - Agente creado.	Informativo	Baja
+100260	2021-01-17	2021-01-17 19:11:45	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:11:44] - Bucket de errores creado.	Informativo	Baja
+100260	2021-01-17	2021-01-17 19:12:12	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:12:12] - La validación de Columnas vacías concluyó con 1 observación(es). (~ly2)	Informativo	Baja
+100260	2021-01-17	2021-01-17 19:12:26	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:12:26] - La validación de operaciones vacías concluyó con 1 observaciones. (~ly2)	Informativo	Baja
+100260	2021-01-17	2021-01-17 19:12:29	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:12:29] - La validación de operaciones duplicadas concluyó con 11 observación. (~ly2) 	Informativo	Baja
+100260	2021-01-17	2021-01-17 19:12:47	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:12:47] - La validación de los campos concluyó con 4 observaciones tipo1. (~ly2) 	Informativo	Baja
+100260	2021-01-17	2021-01-17 19:13:27	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:13:27] - La validación de los campos concluyó con 23 observaciones tipo2. (~ly2) 	Informativo	Baja
+100260	2021-01-17	2021-01-17 19:13:45	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:13:45] - La validación de los campos concluyó con 4 observación(es) tipo3. (~ly2) 	Informativo	Baja
+100260	2021-01-17	2021-01-17 19:13:45	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:13:45] - La validación de los campos concluyó con un total de 31 observación(es). (~ly2) 	Informativo	Baja
+100260	2021-01-17	2021-01-17 19:14:16	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:14:16] - La validación cruce interno concluyó con 15 observación. (~ly2) 	Informativo	Baja
+100261	2021-01-17	2021-01-17 19:15:55	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:15:55] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100261	2021-01-17	2021-01-17 19:15:55	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:15:55] - Agente creado.	Informativo	Baja
+100261	2021-01-17	2021-01-17 19:15:55	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:15:55] - Bucket de errores creado.	Informativo	Baja
+100261	2021-01-17	2021-01-17 19:16:27	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:16:27] - La validación de Columnas vacías concluyó con 1 observación(es). (~ly2)	Informativo	Baja
+100261	2021-01-17	2021-01-17 19:16:43	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:16:43] - La validación de operaciones vacías concluyó con 1 observaciones. (~ly2)	Informativo	Baja
+100261	2021-01-17	2021-01-17 19:16:46	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:16:46] - La validación de operaciones duplicadas concluyó con 11 observación. (~ly2) 	Informativo	Baja
+100261	2021-01-17	2021-01-17 19:17:04	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:17:04] - La validación de los campos concluyó con 4 observaciones tipo1. (~ly2) 	Informativo	Baja
+100262	2021-01-17	2021-01-17 19:17:15	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:17:15] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100262	2021-01-17	2021-01-17 19:17:15	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:17:15] - Agente creado.	Informativo	Baja
+100262	2021-01-17	2021-01-17 19:17:15	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:17:15] - Bucket de errores creado.	Informativo	Baja
+100262	2021-01-17	2021-01-17 19:17:43	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:17:43] - La validación de Columnas vacías concluyó con 1 observación(es). (~ly2)	Informativo	Baja
+100262	2021-01-17	2021-01-17 19:17:59	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:17:59] - La validación de operaciones vacías concluyó con 1 observaciones. (~ly2)	Informativo	Baja
+100262	2021-01-17	2021-01-17 19:18:02	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:18:02] - La validación de operaciones duplicadas concluyó con 11 observación. (~ly2) 	Informativo	Baja
+100262	2021-01-17	2021-01-17 19:18:21	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:18:21] - La validación de los campos concluyó con 4 observaciones tipo1. (~ly2) 	Informativo	Baja
+100262	2021-01-17	2021-01-17 19:19:02	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:19:02] - La validación de los campos concluyó con 23 observaciones tipo2. (~ly2) 	Informativo	Baja
+100262	2021-01-17	2021-01-17 19:19:20	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:19:20] - La validación de los campos concluyó con 4 observación(es) tipo3. (~ly2) 	Informativo	Baja
+100262	2021-01-17	2021-01-17 19:19:20	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:19:20] - La validación de los campos concluyó con un total de 31 observación(es). (~ly2) 	Informativo	Baja
+100262	2021-01-17	2021-01-17 19:19:57	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:19:57] - La validación cruce interno concluyó con 15 observación. (~ly2) 	Informativo	Baja
+100263	2021-01-17	2021-01-17 19:20:14	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:20:14] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100263	2021-01-17	2021-01-17 19:20:14	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:20:14] - Agente creado.	Informativo	Baja
+100264	2021-01-17	2021-01-17 19:21:00	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:21:00] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100264	2021-01-17	2021-01-17 19:21:00	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:21:00] - Agente creado.	Informativo	Baja
+100264	2021-01-17	2021-01-17 19:21:00	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:21:00] - Bucket de errores creado.	Informativo	Baja
+100264	2021-01-17	2021-01-17 19:21:34	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:21:34] - La validación de Columnas vacías concluyó con 1 observación(es). (~ly2)	Informativo	Baja
+100264	2021-01-17	2021-01-17 19:21:49	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:21:49] - La validación de operaciones vacías concluyó con 1 observaciones. (~ly2)	Informativo	Baja
+100264	2021-01-17	2021-01-17 19:21:52	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:21:52] - La validación de operaciones duplicadas concluyó con 11 observación. (~ly2) 	Informativo	Baja
+100264	2021-01-17	2021-01-17 19:22:11	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:22:11] - La validación de los campos concluyó con 4 observaciones tipo1. (~ly2) 	Informativo	Baja
+100264	2021-01-17	2021-01-17 19:22:48	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:22:48] - La validación de los campos concluyó con 23 observaciones tipo2. (~ly2) 	Informativo	Baja
+100264	2021-01-17	2021-01-17 19:23:04	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:23:04] - La validación de los campos concluyó con 4 observación(es) tipo3. (~ly2) 	Informativo	Baja
+100264	2021-01-17	2021-01-17 19:23:04	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:23:04] - La validación de los campos concluyó con un total de 31 observación(es). (~ly2) 	Informativo	Baja
+100265	2021-01-17	2021-01-17 19:23:45	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:23:45] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100265	2021-01-17	2021-01-17 19:23:45	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:23:45] - Agente creado.	Informativo	Baja
+100265	2021-01-17	2021-01-17 19:23:45	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:23:45] - Bucket de errores creado.	Informativo	Baja
+100265	2021-01-17	2021-01-17 19:24:16	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:24:16] - La validación de Columnas vacías concluyó con 1 observación(es). (~ly2)	Informativo	Baja
+100265	2021-01-17	2021-01-17 19:24:31	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:24:31] - La validación de operaciones vacías concluyó con 1 observaciones. (~ly2)	Informativo	Baja
+100265	2021-01-17	2021-01-17 19:24:35	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:24:35] - La validación de operaciones duplicadas concluyó con 11 observación. (~ly2) 	Informativo	Baja
+100265	2021-01-17	2021-01-17 19:24:54	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:24:54] - La validación de los campos concluyó con 4 observaciones tipo1. (~ly2) 	Informativo	Baja
+100265	2021-01-17	2021-01-17 19:25:34	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:25:34] - La validación de los campos concluyó con 23 observaciones tipo2. (~ly2) 	Informativo	Baja
+100265	2021-01-17	2021-01-17 19:25:50	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:25:50] - La validación de los campos concluyó con 4 observación(es) tipo3. (~ly2) 	Informativo	Baja
+100265	2021-01-17	2021-01-17 19:25:51	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:25:50] - La validación de los campos concluyó con un total de 31 observación(es). (~ly2) 	Informativo	Baja
+100265	2021-01-17	2021-01-17 19:26:28	ANONYM	SAN MARTÍN DE PORRES	test/datatest	[2021-01-17 19:26:28] - La validación cruce interno concluyó con 15 observación. (~ly2) 	Informativo	Baja

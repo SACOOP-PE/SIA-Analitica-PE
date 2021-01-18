@@ -39,8 +39,8 @@ addEventLog      <- function(agente,
                   Criticidad = ifelse(criticidad == "B", "Baja", ifelse(criticidad == "M",Media, Alta)))
   
   write_delim(x = event,path = "logging/log.txt", delim = "\t", col_names = F, append = T)
-  
-  print(descripcion)
+  cat(paste0(padright(descripcion)))
+  #print(descripcion)
 }
 
 timehead <- function() {

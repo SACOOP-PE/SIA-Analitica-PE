@@ -1,8 +1,24 @@
-#' función principal 
-#' layer1()
-#' 
+ 
 layer1 <- function(agente, eb){
+  eb <- validarColumnas(agente,eb)
+  return(eb)
+}
+
+#' Funciones secundarias 
+#' getColumnaOM()
+#' getColVacia()
+#' evaluarFile()
+#' 
+#' 
+evaluarFile   <- function(ruta){
+  read_delim(ruta,"\t",escape_double = FALSE, trim_ws = TRUE, col_names = TRUE,
+             col_types = cols(.default = "c"), progress = F) %>%
+    return()
   
+}
+
+validarColumnas <- function(agente, eb) {
+    
   carpeta   <- getCarpetaFromAgent(agente)
   exigibles <- getArchivosExigiblesFromAgent(agente) 
   
@@ -20,7 +36,7 @@ layer1 <- function(agente, eb){
                                  toString(setdiff(Columnas, ColumnasOM)),
                                  ""),
            ColVacias    = toString(getColVacia(ruta)))
-
+  
   view(tbl1_ctrl1)
   
   fal <- tbl1_ctrl1 %>% filter(ColFaltantes != "")
@@ -64,22 +80,9 @@ layer1 <- function(agente, eb){
     eb <- addErrorMasivo(eb, chunk_203)
   }
   
-  return(eb)
+return(eb)
 }
-
-#' Funciones secundarias 
-#' getColumnaOM()
-#' getColVacia()
-#' evaluarFile()
-#' 
-#' 
-evaluarFile   <- function(ruta){
-  read_delim(ruta,"\t",escape_double = FALSE, trim_ws = TRUE, col_names = TRUE,
-             col_types = cols(.default = "c"), progress = F) %>%
-    return()
-  
-}
-
+ 
 getColumnasOM <- function(BD){ 
   cols_base <- switch (BD,
                        BD01  = {initEstructuraBase() %>% filter(BD == "BD01") %>% pull(CAMPO) %>% list()},
@@ -90,6 +93,7 @@ getColumnasOM <- function(BD){
                        BD04  = {initEstructuraBase() %>% filter(BD == "BD04") %>% pull(CAMPO) %>% list()})
   return(cols_base)
 }
+
 getColVacia   <- function(ruta, BD = evaluarFile(ruta)){
   colsVacias <- intersect(BD[sapply(BD, function(x) all(is.na(x)))] %>% colnames(),
                           getColumnasOM(getBDFromRuta(ruta)) %>% unlist())
