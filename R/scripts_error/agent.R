@@ -51,7 +51,7 @@ interrogateAgent <- function(agente){
   addEventLog(agente, paste0("Inicio del interrogatorio. PID-", agente %>% pull(IdProceso) %>% first(),"."), 
               "I", "B")
   
-  #pre-requisitos
+  #pre-requisitos ----
   addEventLog(agente, paste0("Apertura de revisión de pre-requisitos."),  "I", "B")
   
     eb <- layer0(agente, eb)
@@ -70,7 +70,7 @@ interrogateAgent <- function(agente){
     addEventLog(agente, paste0("Revisión de pre-requisitos satisfactoria."), "I", "B")
   }
   
-  #estructura de columnas
+  #estructura de columnas ----
   addEventLog(agente, paste0("Apertura de revisión de estructura de datos."),  "I", "B")
   
     eb <- layer1(agente, eb)
@@ -92,7 +92,7 @@ interrogateAgent <- function(agente){
       addEventLog(agente, paste0("Revisión de estructura de datos satisfatoria."), "I", "B")
     }
   
-  # errores OM 22269-2020
+  #errores OM 22269-2020 ----
   addEventLog(agente, paste0("Apertura de revisión de errores OM 22269-2020."),  "I", "B")
 
     eb <- layer2(agente, eb)
@@ -110,8 +110,9 @@ interrogateAgent <- function(agente){
       addEventLog(agente, paste0("Revisión de errores OM 22269-2020 fue satisfatoria."), "I", "B")
       }
 
-  # eb <- layer3(agent, eb) #alertas ad-hoc 11356
-   
+  #alertas ad-hoc 11356 ----
+    #eb <- layer3(agent, eb) 
+
   return(eb)
 }
 
