@@ -1,11 +1,20 @@
- 
+#' Funciones principales
+#' layer2(agente, eb)
+
 layer2 <- function(agente, eb){
-  
 eb <- validarOperacionesVacias(agente, eb)
 eb <- validarOperacionesDuplicadas(agente, eb)
-
+eb <- validarCruceInterno(agente, eb)
+eb <- validarCampos(agente, eb)
 return(eb)
 }
+
+#' Funciones secundarias: nivel I
+#' validarCuadreContable
+#' validarOperacionesDUVA
+#' validarCruceInterno
+#' validarCampos
+
  
 validarOperacionesVacias     <- function(agente, eb){
   carpeta   <- getCarpetaFromAgent(agente)
@@ -26,16 +35,16 @@ validarOperacionesVacias     <- function(agente, eb){
              num1 = Vacios) %>%  
       select(CodCoopac, IdProceso, Cod, Periodo, BD, num1)
     
-    eb <- addError(eb, chunk_311)
+    eb <- addErrorMasivo(eb, chunk_311)
   }
   
   n <- eb %>% filter(Cod %in% c(311)) %>% nrow()
   
   if (n == 0) {  
-    addEventLog(agente, paste0("La validaciÃ³n de operaciones vacÃ­as concluyÃ³ sin observaciones. (~ly2)"), "I", "B") 
+    addEventLog(agente, paste0("La validación de operaciones vacías concluyó sin observaciones. (~ly2)"), "I", "B") 
   }
   else{
-    addEventLog(agente, paste0("La validaciÃ³n de operaciones vacÃ­as concluyÃ³ con ", n, " observaciones. (~ly2)"), "I", "B")
+    addEventLog(agente, paste0("La validación de operaciones vacías concluyó con ", n, " observaciones. (~ly2)"), "I", "B")
   }
   
   return(eb)
@@ -66,16 +75,188 @@ validarOperacionesDuplicadas <- function(agente, eb){
   n <- eb %>% filter(Cod %in% c(312)) %>% nrow()
   
   if (n == 0) {
-    addEventLog(agente, paste0("La validaciÃ³n de operaciones duplicadas concluyÃ³ sin observaciones. (~ly2) "), "I", "B")
+    addEventLog(agente, paste0("La validación de operaciones duplicadas concluyó sin observaciones. (~ly2) "), "I", "B")
   }
   else{
     
-    addEventLog(agente, paste0("La validaciÃ³n de operaciones duplicadas concluyÃ³ con ", n, " observaciÃ³n. (~ly2) "), "I", "B")
+    addEventLog(agente, paste0("La validación de operaciones duplicadas concluyó con ", n, " observación. (~ly2) "), "I", "B")
+  }
+  
+  return(eb)
+}
+validarCruceInterno          <- function(agente, eb){
+  
+  if (length(getPeriodosNoObservados(agente, eb, "CCR")) >0){
+    
+    cruce1 <- tibble(Periodo   = getPeriodosNoObservados(agente, eb, "CCR")) %>% rowwise() %>%
+      mutate(OpFaltantes_BD01  = realizarCruce(agente, Periodo, "BD02A", "BD01"),
+             OpFaltantes_BD02A = realizarCruce(agente, Periodo, "BD01", "BD02A"))
+    
+    f_bd01  <- cruce1 %>% filter(OpFaltantes_BD01 != "") %>% select(Periodo, OpFaltantes_BD01)
+    f_bd02A <- cruce1 %>% filter(OpFaltantes_BD02A != "") %>% select(Periodo, OpFaltantes_BD02A)
+    
+    if (nrow(f_bd01) >0) {
+      chunk_321 <- f_bd01 %>% rowwise() %>%
+        mutate(CodCoopac = getCoopacFromAgent(agente),
+               IdProceso = getIdProcesoFromAgent(agente),
+               Cod = 312,
+               BD  = "BD01",
+               txt1 = OpFaltantes_BD01,
+               num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
+        select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
+      
+      eb <- addErrorMasivo(eb, chunk_321)
+    }
+    if (nrow(f_bd02A) >0) {
+      chunk_322 <- f_bd02A %>% rowwise() %>%
+        mutate(CodCoopac = getCoopacFromAgent(agente),
+               IdProceso = getIdProcesoFromAgent(agente),
+               Cod = 322,
+               BD  = "BD02A",
+               txt1 = OpFaltantes_BD02A,
+               num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
+        select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
+      
+      eb <- addErrorMasivo(eb, chunk_322)
+    }
+  }
+  
+  if (length(getPeriodosNoObservados(agente, eb, "CODGR")) >0){
+    
+    cruce2 <- tibble(Periodo = getPeriodosNoObservados(agente, eb, "CODGR")) %>% rowwise() %>%
+      mutate(GaranFaltantes_BD03A = realizarCruce(agente, Periodo, "BD03B", "BD03A"))
+    
+    f_bd03A <- cruce2 %>% filter(GaranFaltantes_BD03A != "") %>% select(Periodo, GaranFaltantes_BD03A)
+    
+    if (nrow(f_bd03A) >0) {
+      chunk_323 <- f_bd03A %>% rowwise() %>%
+        mutate(CodCoopac = getCoopacFromAgent(agente),
+               IdProceso = getIdProcesoFromAgent(agente),
+               Cod = 323,
+               BD  = "BD03A",
+               txt1 = GaranFaltantes_BD03A,
+               num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
+        select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
+      
+      eb <- addErrorMasivo(eb, chunk_323)
+    }
+  }
+
+  n <- eb %>% filter(Cod %in% c(321, 322, 323)) %>% nrow()
+  
+  if (n == 0) {
+    addEventLog(agente, paste0("La validación cruce interno concluyó sin observaciones. (~ly2) "), "I", "B")
+  }
+  else{
+    
+    addEventLog(agente, paste0("La validación cruce interno concluyó con ", n, " observación. (~ly2) "), "I", "B")
+  }
+  
+  return(eb)
+}
+validarCampos                <- function(agente, eb){
+  carpeta   <- getCarpetaFromAgent(agente)
+  exigibles <- getArchivosNoObservadosByCols(agente, eb, c("CCR","CCR_C","CODGR"))
+  
+  # i. Errores tipo1 ----
+  for (x in 1:length(exigibles)){
+    eb     <- procesarErroresT1(agente, getRuta(carpeta, exigibles[x]), eb)
+  }
+  
+  n <- eb %>% filter(Cod %in% c(401:457)) %>% nrow()
+  if (n == 0) {
+    addEventLog(agente, paste0("La validación de los campos concluyó sin observaciones tipo1. (~ly2) "), "I", "B")
+  }
+  else{
+    
+    addEventLog(agente, paste0("La validación de los campos concluyó con ",n," observaciones tipo1. (~ly2) "), "I", "B")
+  }
+  
+  
+  # ii. Errores tipo2 ----
+  cod <- 461
+  for (y in 461:467){
+    eb <- procesarErroresT2(agente, eb, exigibles, cod)
+    cod <- cod +1
+  }
+  
+  n <- eb %>% filter(Cod %in% c(461:467)) %>% nrow()
+  if (n == 0) {
+    addEventLog(agente, paste0("La validación de los campos concluyó sin observaciones tipo2. (~ly2) "), "I", "B")
+  }
+  else{
+    
+    addEventLog(agente, paste0("La validación de los campos concluyó con ",n," observaciones tipo2. (~ly2) "), "I", "B")
+  }
+  
+  
+  # iii. Errores tipo3 ----
+  #error 471:478
+  exigibles <- exigibles[str_detect(exigibles, paste(c("BD01","BD02A","BD02B","BD04"), collapse = '|'))]
+
+  for (z in 1:length(exigibles)) {
+    eb     <- procesarErroresT3(agente, getRuta(carpeta, exigibles[z]), eb)
+  }
+  
+  #error 479
+  exigibles <- intersect(exigibles[str_detect(exigibles, "BD01")], getArchivosNoObservadosByCols(agent, eb, "FOT"))
+  error479  <- tibble(Archivo = exigibles) %>% rowwise() %>%
+    mutate(ruta      = getRuta(getCarpetaFromAgent(agente), Archivo),
+           verificar = procesarErrorFechaDesembolso(ruta) %>%
+                          unique() %>% toString(),
+           Cod       = 479) %>%
+    filter(verificar != "")
+  
+  if (nrow(error479) >0) {
+      chunk479 <- error479 %>% rowwise() %>%
+        mutate(CodCoopac = getCoopacFromAgent(agente),
+               IdProceso = getIdProcesoFromAgent(agente),
+               Periodo = getAnoMesFromRuta(toString(ruta)),
+               BD      = getBDFromRuta(toString(ruta)),
+               txt1 = verificar,
+               num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
+        select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
+
+      eb <- addErrorMasivo(eb, chunk479)
+  }
+  
+  
+  n <- eb %>% filter(Cod %in% c(471:479)) %>% nrow()
+  if (n == 0) {
+    addEventLog(agente, paste0("La validación de los campos concluyó sin observaciones tipo3. (~ly2) "), "I", "B")
+  }
+  else{
+    
+    addEventLog(agente, paste0("La validación de los campos concluyó con ",n," observación(es) tipo3. (~ly2) "), "I", "B")
+  }
+  
+  
+  ######
+  
+  n <- eb %>% filter(Cod %in% c(401:479)) %>% nrow()
+  
+  if (n == 0) {
+    addEventLog(agente, paste0("La validación de los campos concluyó sin observaciones. (~ly2) "), "I", "B")
+  }
+  else{
+    
+    addEventLog(agente, paste0("La validación de los campos concluyó con un total de ", n, " observación(es). (~ly2) "), "I", "B")
   }
   
   return(eb)
 }
 
+
+getCodigoBD <- function(bd){
+  campo <- case_when(bd == "BD01"  ~ "CCR",
+                     bd == "BD02A" ~ "CCR",
+                     bd == "BD02B" ~ "CCR_C",
+                     bd == "BD03A" ~ "CODGR",
+                     bd == "BD03B" ~ "CODGR",
+                     bd == "BD04"  ~ "CCR_C")
+  return(campo)
+}
+#validarOperacionesVacias #cambiar nombre
 getoperacionesVacias <- function(ruta){
   BD <- evaluarFile(ruta)
   
@@ -83,6 +264,8 @@ getoperacionesVacias <- function(ruta){
     select(getCodigoBD(getBDFromRuta(ruta))[1]) %>%
     sapply(function(x) sum(is.na(x))) %>% return()
 }
+
+#validarOperacionesDuplicadas  #cambiar nombre
 getoperacionesDuplicadas <- function(ruta){
   if (getBDFromRuta(ruta) == "BD01" | getBDFromRuta(ruta) == "BD03A") {
     operaciones <- evaluarFile(ruta) %>% select(getCodigoBD(getBDFromRuta(ruta))[1]) 
@@ -96,11 +279,7 @@ getoperacionesDuplicadas <- function(ruta){
     return("")
     }  
 }
- 
 
-#<<<<<<< 01122021_dp
- 
-#=======
 #validarCruceInterno
 realizarCruce <- function(agente, periodo, data1, data2){
   
@@ -118,7 +297,7 @@ realizarCruce <- function(agente, periodo, data1, data2){
 #Validar campos
 
 #' Tipo 0: Validaciones a vacios o "NA" a los campos
-#' Tipo 1: validaciones a campos con dÃ­gitos especÃ­ficos
+#' Tipo 1: validaciones a campos con dígitos específicos
 #' Tipo 2: validaciones con condiciones entre campos
 #' Tipo 3: validaciones a campos fecha
 
@@ -587,4 +766,3 @@ getColsNoObservadas             <- function(ruta, eb, tipoError){
   
   return(cols)
 }
-#>>>>>>> main
