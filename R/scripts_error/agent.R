@@ -57,7 +57,7 @@ interrogateAgent <- function(agente){
     eb <- layer0(agente, eb)
   
     if (nrow(eb) > 0) {
-      if ((eb %>% pull(Cod)) %in% c(101,102)) { 
+      if (nrow(eb %>% filter(Cod %in% c(101, 102))) >0) { 
       
         addEventLog(agente, paste0("Fin del proceso de revisión por errores críticos 101-102."), "I", "B")
         return(eb)
@@ -77,7 +77,7 @@ interrogateAgent <- function(agente){
   
     if (nrow(eb) > 0) {
       
-      if ((eb %>% pull(Cod)) %in% c(201,202)) { 
+      if (nrow(eb %>% filter(Cod %in% c(201, 202))) >0) { 
       
       n <- eb %>% filter(Cod %in% c(201,202)) %>% nrow()
       addEventLog(agente, paste0("La revisión de estructura de datos tiene observaciones. Continuar con discreción."), "I", "B")
@@ -98,7 +98,7 @@ interrogateAgent <- function(agente){
     eb <- layer2(agente, eb)
 
     if (nrow(eb) > 0) {
-      if (nrow(eb %>% filter(Cod %in% c(311:478)) >0)) {
+      if (nrow(eb %>% filter(Cod %in% c(311:478))) >0) {
 
         addEventLog(agente, paste0("La revisión errores OM 22269-2020 tiene observaciones."), "I", "B")
         }
