@@ -18,7 +18,7 @@ return(eb)
  
 validarOperacionesVacias     <- function(agente, eb){
   carpeta   <- getCarpetaFromAgent(agente)
-  exigibles <- getArchivosNoObservadosByCols(agente, eb, c("CCR", "CCR_C", "CODGR"))
+  exigibles <- getArchivosNoObservadosByCols(agente, eb, )
   
   vacios <- tibble(NombreArchivo = exigibles) %>% rowwise() %>% 
     mutate(ruta    = getRuta(carpeta, NombreArchivo),
@@ -288,10 +288,12 @@ realizarCruce <- function(agente, periodo, data1, data2){
   archivo2 <- getRuta(getCarpetaFromAgent(agente), 
                       paste0(paste(getCoopacFromAgent(agente), data2, periodo, sep  = "_"), ".txt"))
   
-  setdiff(evaluarFile(getRuta(getCarpetaFromAgent(agente), archivo1)) %>% pull(getCodigoBD(data1)),
-          evaluarFile(getRuta(getCarpetaFromAgent(agente), archivo2)) %>% pull(getCodigoBD(data2))) %>%
+  cruce <- setdiff(evaluarFile(getRuta(getCarpetaFromAgent(agente), archivo1)) %>% pull(getCodigoBD(data1)),
+                   evaluarFile(getRuta(getCarpetaFromAgent(agente), archivo2)) %>% pull(getCodigoBD(data2))) %>%
     unique() %>%
-    toString() %>% return()
+    toString()
+  
+  return(cruce)
 }
 
 #Validar campos
@@ -725,15 +727,16 @@ getArchivosNoObservadosByErrors <- function(agente, eb, cods) {
 }
 getArchivosNoObservadosByCols   <- function(agente, eb, cols) {
   v <- eb %>%
-    filter(Cod %in% c(201, 202, 203)) %>% 
+    filter(Cod %in% c(201, 203)) %>% 
     rowwise() %>% 
-    filter_at(.vars = vars(txt1),
-              .vars_predicate = any_vars(str_detect(., paste0(paste(cols, collapse = "|"))))) %>% 
-    mutate(filename = paste0(CodCoopac,"_",BD, "_",Periodo,".txt")) %>% 
+    mutate(filename     = paste0(CodCoopac,"_",BD, "_",Periodo,".txt"),
+           verificarCol = ifelse(length(which(str_split(txt1, ", ")[[1]] == cols)) >=1, 
+                                 "TRUE", 
+                                 "FALSE")) %>%
+    filter(verificarCol == "TRUE") %>% 
     pull(filename) %>% unique()
   
-  setdiff(getArchivosExigiblesFromAgent(agente),
-          v) %>%  return()
+  return(setdiff(getArchivosExigiblesFromAgent(agente), v))
 }
 getPeriodosNoObservados         <- function(agente, eb, colCruce){
   archivos  <- getArchivosNoObservadosByCols(agente, eb, colCruce)
