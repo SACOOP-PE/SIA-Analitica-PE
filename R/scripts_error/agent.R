@@ -57,18 +57,12 @@ interrogateAgent <- function(agente){
     eb <- layer0(agente, eb)
   
     if (nrow(eb) > 0) {
-      if (nrow(eb %>% filter(Cod %in% c(101, 102))) >0) { 
-      
         addEventLog(agente, paste0("Fin del proceso de revisión por errores críticos 101-102."), "I", "B")
         return(eb)
     }
-      else {
-        addEventLog(agente, paste0("Revisión de pre-requisitos satisfactoria."), "I", "B")
-    }
-  }
     else {
     addEventLog(agente, paste0("Revisión de pre-requisitos satisfactoria."), "I", "B")
-  }
+    }
   
   #estructura de columnas ----
   addEventLog(agente, paste0("Apertura de revisión de estructura de datos."),  "I", "B")
