@@ -8,7 +8,7 @@ formatBucket <- function(eb) {
                                  "201" = paste0("Se identificaron ", pad2(num1), " columna(s) faltantes en la ", BD, " correspondiente al periodo de ", periodoEscrito(Periodo), ".(",txt1,")"),
                                  "202" = paste0("Se identificaron ", pad2(num1), " columna(s) sobrantes en la ", BD, " correspondiente al periodo de ", periodoEscrito(Periodo), ".(", txt1, ")"),
                                  "203" = paste0("Se identificaron ", pad2(num1), " columna(s) vacias en la ", BD, " correspondiente al periodo de ", periodoEscrito(Periodo), ".(", txt1, ")"),
-                                 "311" = paste0("Se identificaron ", pad2(num1), " crédito(s)/garantía(s) vacias en la ", BD, " correspondiente al periodo de ", periodoEscrito(Periodo), ".(", txt1, ")"),
+                                 "311" = paste0("Se identificaron ", pad2(num1), " crédito(s)/garantía(s) vacias en la ", BD, " correspondiente al periodo de ", periodoEscrito(Periodo), "."),
                                  "312" = paste0("Se identificaron ", pad2(num1), " crédito(s)/garantía(s) duplicados en la ", BD, " correspondiente al periodo de ", periodoEscrito(Periodo), ".(", txt1, ")"),
                                  "321" = paste0("Se identificaron ", pad2(num1), " crédito(s) que no figuran en la cartera de créditos ", BD, " correspondiente al periodo de ", periodoEscrito(Periodo), ".(", txt1, ")"),
                                  "322" = paste0("Se identificaron ", pad2(num1), " crédito(s) que no figuran en los cronogramas ", BD, " correspondiente al periodo de ", periodoEscrito(Periodo), ".(", txt1, ")"),
