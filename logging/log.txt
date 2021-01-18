@@ -1,4 +1,4 @@
-IdProceso	Fecha	Hora	Usuario	Coopac	Carpeta	Descripcion	Categoria	Criticidad
+﻿IdProceso	Fecha	Hora	Usuario	Coopac	Carpeta	Descripcion	Categoria	Criticidad
 100001	1/1/2020	20:21	DPACHECO	AELU		Se generó el agente para la validación. 	Informativo	Baja
 100002	2021-01-09	2021-01-09 22:51:00	DPACHECO	SAN MARTÃN DE PORRES	test/datatest2	Se da inicio al proceso 100002. ~ Validador SIA 1.2.2021	Informativo	Baja
 100003	2021-01-09	2021-01-09 22:51:45	DPACHECO	SAN MARTÃN DE PORRES	test/datatest2	Se da inicio al proceso 100003. ~ Validador SIA 1.2.2021	Informativo	Baja
@@ -1533,7 +1533,6 @@ IdProceso	Fecha	Hora	Usuario	Coopac	Carpeta	Descripcion	Categoria	Criticidad
 100265	2021-01-17	2021-01-17 19:25:50	ANONYM	SAN MARTÃN DE PORRES	test/datatest	[2021-01-17 19:25:50] - La validaciÃ³n de los campos concluyÃ³ con 4 observaciÃ³n(es) tipo3. (~ly2) 	Informativo	Baja
 100265	2021-01-17	2021-01-17 19:25:51	ANONYM	SAN MARTÃN DE PORRES	test/datatest	[2021-01-17 19:25:50] - La validaciÃ³n de los campos concluyÃ³ con un total de 31 observaciÃ³n(es). (~ly2) 	Informativo	Baja
 100265	2021-01-17	2021-01-17 19:26:28	ANONYM	SAN MARTÃN DE PORRES	test/datatest	[2021-01-17 19:26:28] - La validaciÃ³n cruce interno concluyÃ³ con 15 observaciÃ³n. (~ly2) 	Informativo	Baja
-# =======
 100153	2021-01-17	2021-01-17 09:55:05	DPACHECO	SAN MARTÃN DE PORRES	test/datatest/smp_15012021	[2021-01-17 09:55:05] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
 100153	2021-01-17	2021-01-17 09:55:05	DPACHECO	SAN MARTÃN DE PORRES	test/datatest/smp_15012021	[2021-01-17 09:55:05] - Agente creado. PID-100153. [01172|201901~202010]	Informativo	Baja
 100153	2021-01-17	2021-01-17 09:55:05	DPACHECO	SAN MARTÃN DE PORRES	test/datatest/smp_15012021	[2021-01-17 09:55:05] - Bucket de errores creado. PID-100153.	Informativo	Baja
@@ -1552,4 +1551,3 @@ IdProceso	Fecha	Hora	Usuario	Coopac	Carpeta	Descripcion	Categoria	Criticidad
 100153	2021-01-17	2021-01-17 10:01:56	DPACHECO	SAN MARTÃN DE PORRES	test/datatest/smp_15012021	[2021-01-17 10:01:56] - La validaciÃ³n de los campos concluyÃ³ con 4 observaciÃ³n(es) tipo3. (~ly2) 	Informativo	Baja
 100153	2021-01-17	2021-01-17 10:01:56	DPACHECO	SAN MARTÃN DE PORRES	test/datatest/smp_15012021	[2021-01-17 10:01:56] - La validaciÃ³n de los campos concluyÃ³ con un total de 43 observaciÃ³n(es). (~ly2) 	Informativo	Baja
 100153	2021-01-17	2021-01-17 10:01:56	DPACHECO	SAN MARTÃN DE PORRES	test/datatest/smp_15012021	[2021-01-17 10:01:56] - La revisiÃ³n errores OM 22269-2020 tiene observaciones.	Informativo	Baja
-#>>>>>>>  main
