@@ -18,12 +18,7 @@ getLogObject     <- function(path){
                                                                 Usuario = col_character()), 
              locale = locale(encoding = "ISO-8859-1"), trim_ws = TRUE) %>% return()
 }
-getNextIdProceso <- function(logObject){
-  if (logObject %>% pull(IdProceso) %>% max(na.rm = T) > 0)
-    (logObject %>% pull(IdProceso) %>% max(na.rm = T) + 1) %>% return()
-  else 
-    return(1) 
-}
+
 
 addEventLog      <- function(agente,
                              descripcion,
@@ -36,7 +31,7 @@ addEventLog      <- function(agente,
   event <- tibble(IdProceso = getIdProcesoFromAgent(agente),
                   Fecha = toString(Sys.Date()),
                   Hora  = toString(Sys.time()),
-                  Usuario = "DPACHECO", 
+                  Usuario = default.usuario, 
                   Coopac  = getNombreCoopacFromAgent(agente) ,
                   Carpeta = getCarpetaFromAgent(agente), 
                   Descripcion = descripcion ,
@@ -44,8 +39,8 @@ addEventLog      <- function(agente,
                   Criticidad = ifelse(criticidad == "B", "Baja", ifelse(criticidad == "M",Media, Alta)))
   
   write_delim(x = event,path = "logging/log.txt", delim = "\t", col_names = F, append = T)
-  
-  print(descripcion)
+  cat(paste0(padright(descripcion)))
+  #print(descripcion)
 }
 
 timehead <- function() {

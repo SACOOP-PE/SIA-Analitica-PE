@@ -19,11 +19,20 @@ archivo.RepositorioAlertas = "config/config4.txt"
 
 global.alcance = c(201901:201912, 202001:202012, 202101:202112)
 
+agente.nombrecoopac <<-  NULL
+agente.carpeta <<- NULL
+agente.idcoopac <<-  NULL
+agente.pid  <<- NULL
+agente.usuario <<-  NULL
+agente.inicioproceso  <<-  NULL
+agente.finproceso  <<-  NULL
+agente.BD <<-  NULL
+
 #### 5. Parametros por defecto ----- 
 
 default.usuario <- "ANONYM"
-default.carpeta <- "test/datatest/smp_15012021" 
 default.bd <- c("BD01","BD02A","BD02B","BD03A","BD03B","BD04")
+default.carpeta <- "test/datatest/"  
 
 ### 6. Inicializar archivos de configuracion ----
 
@@ -51,4 +60,14 @@ initRepositorioErrores <- function(){
                                                            Descripcion = col_character(), 
                                                            Tipo = col_character()),
              locale = locale(encoding = "ISO-8859-1"), trim_ws = TRUE, progress = F) %>% return()
+}
+
+
+# Obtener 
+
+getNextIdProceso <- function(logObject){
+  if (logObject %>% pull(IdProceso) %>% max(na.rm = T) > 0)
+    (logObject %>% pull(IdProceso) %>% max(na.rm = T) + 1) %>% return()
+  else 
+    return(1) 
 }

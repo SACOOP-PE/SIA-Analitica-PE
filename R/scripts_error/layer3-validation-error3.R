@@ -1,107 +1,102 @@
- 
-layer2 <- function(agente, eb){
+layer3 <- function(agente, eb){ 
   
-eb <- validarOperacionesVacias(agente, eb)
-eb <- validarOperacionesDuplicadas(agente, eb)
-
-return(eb)
-}
- 
-validarOperacionesVacias     <- function(agente, eb){
-  carpeta   <- getCarpetaFromAgent(agente)
-  exigibles <- getArchivosNoObservadosByCols(agente, eb, c("CCR", "CCR_C", "CODGR"))
-  
-  vacios <- tibble(NombreArchivo = exigibles) %>% rowwise() %>% 
-    mutate(ruta    = getRuta(carpeta, NombreArchivo),
-           Vacios = getoperacionesVacias(ruta)) %>%
-    filter(Vacios != 0)
-
-  if (nrow(vacios) > 0) {
-    chunk_311 <- vacios %>% rowwise() %>% 
-      mutate(CodCoopac = getCoopacFromAgent(agente),
-             IdProceso = getIdProcesoFromAgent(agente),
-             Cod = 311,
-             Periodo = getAnoMesFromRuta(toString(ruta)),
-             BD      = getBDFromRuta(toString(ruta)),
-             num1 = Vacios) %>%  
-      select(CodCoopac, IdProceso, Cod, Periodo, BD, num1)
-    
-    eb <- addError(eb, chunk_311)
-  }
-  
-  n <- eb %>% filter(Cod %in% c(311)) %>% nrow()
-  
-  if (n == 0) {  
-    addEventLog(agente, paste0("La validaciÃ³n de operaciones vacÃ­as concluyÃ³ sin observaciones. (~ly2)"), "I", "B") 
-  }
-  else{
-    addEventLog(agente, paste0("La validaciÃ³n de operaciones vacÃ­as concluyÃ³ con ", n, " observaciones. (~ly2)"), "I", "B")
-  }
+  eb <- validarCampos(agente, eb)
   
   return(eb)
 }
-validarOperacionesDuplicadas <- function(agente, eb){
+
+validarCampos                <- function(agente, eb){
   carpeta   <- getCarpetaFromAgent(agente)
-  exigibles <- getArchivosNoObservadosByCols(agente, eb, c("CCR", "CCR_C", "CODGR"))
+  exigibles <- getArchivosNoObservadosByCols(agente, eb, c("CCR","CCR_C","CODGR"))
   
-  dups <- tibble(NombreArchivo = exigibles) %>% rowwise() %>% 
-    mutate(ruta       = getRuta(carpeta, NombreArchivo),
-           Duplicados = getoperacionesDuplicadas(ruta)) %>%
-    filter(Duplicados != "")
+  # i. Errores tipo1 ----
+  for (x in 1:length(exigibles)){
+    eb     <- procesarErroresT1(agente, getRuta(carpeta, exigibles[x]), eb)
+  }
   
-  if (nrow(dups) > 0) {
-    chunk_312 <- dups %>% rowwise() %>%
+  n <- eb %>% filter(Cod %in% c(401:457)) %>% nrow()
+  if (n == 0) {
+    addEventLog(agente, paste0("La validación de los campos concluyó sin observaciones tipo1. (~ly2) "), "I", "B")
+  }
+  else{
+    
+    addEventLog(agente, paste0("La validación de los campos concluyó con ",n," observaciones tipo1. (~ly2) "), "I", "B")
+  }
+  
+  
+  # ii. Errores tipo2 ----
+  cod <- 461
+  for (y in 461:467){
+    eb <- procesarErroresT2(agente, eb, exigibles, cod)
+    cod <- cod +1
+  }
+  
+  n <- eb %>% filter(Cod %in% c(461:467)) %>% nrow()
+  if (n == 0) {
+    addEventLog(agente, paste0("La validación de los campos concluyó sin observaciones tipo2. (~ly2) "), "I", "B")
+  }
+  else{
+    
+    addEventLog(agente, paste0("La validación de los campos concluyó con ",n," observaciones tipo2. (~ly2) "), "I", "B")
+  }
+  
+  
+  # iii. Errores tipo3 ----
+  #error 471:478
+  exigibles <- exigibles[str_detect(exigibles, paste(c("BD01","BD02A","BD02B","BD04"), collapse = '|'))]
+  
+  for (z in 1:length(exigibles)) {
+    eb     <- procesarErroresT3(agente, getRuta(carpeta, exigibles[z]), eb)
+  }
+  
+  #error 479
+  exigibles <- intersect(exigibles[str_detect(exigibles, "BD01")], getArchivosNoObservadosByCols(agent, eb, "FOT"))
+  error479  <- tibble(Archivo = exigibles) %>% rowwise() %>%
+    mutate(ruta      = getRuta(getCarpetaFromAgent(agente), Archivo),
+           verificar = procesarErrorFechaDesembolso(ruta) %>%
+             unique() %>% toString(),
+           Cod       = 479) %>%
+    filter(verificar != "")
+  
+  if (nrow(error479) >0) {
+    chunk479 <- error479 %>% rowwise() %>%
       mutate(CodCoopac = getCoopacFromAgent(agente),
              IdProceso = getIdProcesoFromAgent(agente),
-             Cod = 312,
              Periodo = getAnoMesFromRuta(toString(ruta)),
              BD      = getBDFromRuta(toString(ruta)),
-             txt1 = Duplicados,
+             txt1 = verificar,
              num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
       select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
-
-    eb <- addErrorMasivo(eb, chunk_312)
+    
+    eb <- addErrorMasivo(eb, chunk479)
   }
   
-  n <- eb %>% filter(Cod %in% c(312)) %>% nrow()
   
+  n <- eb %>% filter(Cod %in% c(471:479)) %>% nrow()
   if (n == 0) {
-    addEventLog(agente, paste0("La validaciÃ³n de operaciones duplicadas concluyÃ³ sin observaciones. (~ly2) "), "I", "B")
+    addEventLog(agente, paste0("La validación de los campos concluyó sin observaciones tipo3. (~ly2) "), "I", "B")
   }
   else{
     
-    addEventLog(agente, paste0("La validaciÃ³n de operaciones duplicadas concluyÃ³ con ", n, " observaciÃ³n. (~ly2) "), "I", "B")
+    addEventLog(agente, paste0("La validación de los campos concluyó con ",n," observación(es) tipo3. (~ly2) "), "I", "B")
+  }
+  
+  
+  ######
+  
+  n <- eb %>% filter(Cod %in% c(401:479)) %>% nrow()
+  
+  if (n == 0) {
+    addEventLog(agente, paste0("La validación de los campos concluyó sin observaciones. (~ly2) "), "I", "B")
+  }
+  else{
+    
+    addEventLog(agente, paste0("La validación de los campos concluyó con un total de ", n, " observación(es). (~ly2) "), "I", "B")
   }
   
   return(eb)
 }
 
-getoperacionesVacias <- function(ruta){
-  BD <- evaluarFile(ruta)
-  
-  BD %>% 
-    select(getCodigoBD(getBDFromRuta(ruta))[1]) %>%
-    sapply(function(x) sum(is.na(x))) %>% return()
-}
-getoperacionesDuplicadas <- function(ruta){
-  if (getBDFromRuta(ruta) == "BD01" | getBDFromRuta(ruta) == "BD03A") {
-    operaciones <- evaluarFile(ruta) %>% select(getCodigoBD(getBDFromRuta(ruta))[1]) 
-    duplicados  <- operaciones[duplicated(operaciones), ] %>% 
-      unique() %>%
-      pull(getCodigoBD(getBDFromRuta(ruta))[1]) %>%
-      toString()
-    return(duplicados)
-    }
-  else {
-    return("")
-    }  
-}
- 
-
-#<<<<<<< 01122021_dp
- 
-#=======
-#validarCruceInterno
 realizarCruce <- function(agente, periodo, data1, data2){
   
   archivo1 <- getRuta(getCarpetaFromAgent(agente), 
@@ -118,7 +113,7 @@ realizarCruce <- function(agente, periodo, data1, data2){
 #Validar campos
 
 #' Tipo 0: Validaciones a vacios o "NA" a los campos
-#' Tipo 1: validaciones a campos con dÃ­gitos especÃ­ficos
+#' Tipo 1: validaciones a campos con dígitos específicos
 #' Tipo 2: validaciones con condiciones entre campos
 #' Tipo 3: validaciones a campos fecha
 
@@ -228,9 +223,9 @@ procesarErroresT1 <- function(agente, ruta, eb){
     erroresTipo1 <- tibble(Columna = getColsNoObservadas(ruta, eb, "T1")) %>%
       rowwise() %>%
       mutate(verificar = BD %>% 
-                          filter((as.numeric(cgrep(BD, Columna)[[1]]) %in% getDigitosBD(ruta, Columna)) == FALSE) %>%
-                          pull(getCodigoBD(getBDFromRuta(ruta))) %>%
-                          unique() %>% toString(),
+               filter((as.numeric(cgrep(BD, Columna)[[1]]) %in% getDigitosBD(ruta, Columna)) == FALSE) %>%
+               pull(getCodigoBD(getBDFromRuta(ruta))) %>%
+               unique() %>% toString(),
              Cod       = getCodErrorT1(ruta, Columna)) %>% 
       filter(verificar != "")
     
@@ -246,9 +241,9 @@ procesarErroresT1 <- function(agente, ruta, eb){
         select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, txt2, num1)
       
       eb <- addErrorMasivo(eb, chunkT1)
-      }
-    return(eb)
     }
+    return(eb)
+  }
   return(eb)
 }
 
@@ -262,7 +257,7 @@ procesarErroresT2 <- function(agente, eb, exigibles, codigoError){
                       "464"= getArchivosNoObservadosByCols(agente, eb, c("KVE", "DAK", "KJU")) %>% intersect(exigibles[str_detect(exigibles, "BD01")]),
                       "465"= getArchivosNoObservadosByCols(agente, eb, c("TID", "NID", "TID_C", "NID_C")) %>% intersect(exigibles[str_detect(exigibles, paste(c("BD01","BD04"), collapse = '|'))]),
                       "466"= getArchivosNoObservadosByCols(agente, eb, c("NCR", "NRCL")) %>% intersect(exigibles[str_detect(exigibles, "BD03A")]))
-
+  
   # errores t2:
   if (codigoError == 461 & length(archivos) >0) {
     for (i in 1:length(archivos)) {
@@ -298,7 +293,7 @@ procesarErroresT2 <- function(agente, eb, exigibles, codigoError){
                                  "464"= procesarErrorVencRetraso(ruta),
                                  "465"= procesarErrorDocumentoIdent(ruta),
                                  "466"= procesarErrorNumCredCobertura(ruta)) %>%
-                 unique() %>% toString(),
+               unique() %>% toString(),
              Cod       = codigoError) %>% 
       filter(verificar != "")
     
@@ -311,9 +306,9 @@ procesarErroresT2 <- function(agente, eb, exigibles, codigoError){
                txt1 = verificar,
                num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
         select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
-        
-        eb <- addErrorMasivo(eb, chunkT2)
-      }
+      
+      eb <- addErrorMasivo(eb, chunkT2)
+    }
     return(eb)
   }
   
@@ -334,9 +329,9 @@ procesarErroresT2 <- function(agente, eb, exigibles, codigoError){
         select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
       
       eb <- addErrorMasivo(eb, chunkT2)
-      }
-    return(eb)
     }
+    return(eb)
+  }
 }
 
 #BD01
@@ -445,7 +440,7 @@ procesarErrorcodDeudor <- function(agente, periodo){
                       paste0(paste(getCoopacFromAgent(agente), "BD01", periodo, sep  = "_"), ".txt"))
   
   cruce <- setdiff(evaluarFile(getRuta(getCarpetaFromAgent(agente), archivo1)) %>% pull(CIS),
-          evaluarFile(getRuta(getCarpetaFromAgent(agente), archivo2)) %>% pull(CIS)) %>%
+                   evaluarFile(getRuta(getCarpetaFromAgent(agente), archivo2)) %>% pull(CIS)) %>%
     unique() %>%
     toString()
   
@@ -485,9 +480,9 @@ procesarErroresT3 <- function(agente, ruta, eb){
     erroresTipo3 <- tibble(Columna = getColsNoObservadas(ruta, eb, "T3")) %>%
       rowwise() %>%
       mutate(verificar = BD %>% 
-                            filter(dmy(cgrep(BD, Columna)[[1]]) %>% is.na() == TRUE) %>% 
-                            pull(getCodigoBD(getBDFromRuta(ruta))) %>%
-                            unique() %>% toString(),
+               filter(dmy(cgrep(BD, Columna)[[1]]) %>% is.na() == TRUE) %>% 
+               pull(getCodigoBD(getBDFromRuta(ruta))) %>%
+               unique() %>% toString(),
              Cod       = getCodErrorT3(ruta, Columna)) %>% 
       filter(verificar != "")
     
@@ -524,67 +519,3 @@ procesarErrorFechaDesembolso <- function(ruta){
 }
 
 ####
-
-# Filter files, periods, cols from bucket----
-getArchivosObservadosFromBucket <- function(eb) {
-  eb %>% 
-    mutate(filename = paste0(CodCoopac,"_",BD, "_",Periodo,".txt")) %>% 
-    pull(filename) %>% unique() %>% return()
-}
-getArchivosNoObservados         <- function(agente, eb) {
-  setdiff(getArchivosExigiblesFromAgent(agente),
-          getArchivosObservadosFromBucket(eb)) %>%  return()
-}
-getArchivosNoObservadosByErrors <- function(agente, eb, cods) {
-  v <- eb %>% 
-    filter(Cod %in% cods) %>% 
-    mutate(filename = paste0(CodCoopac,"_",BD, "_",Periodo,".txt")) %>% 
-    pull(filename) %>% unique()
-  
-  setdiff(getArchivosExigiblesFromAgent(agente),
-          v) %>%  return()
-}
-getArchivosNoObservadosByCols   <- function(agente, eb, cols) {
-  v <- eb %>%
-    filter(Cod %in% c(201, 202, 203)) %>% 
-    rowwise() %>% 
-    filter_at(.vars = vars(txt1),
-              .vars_predicate = any_vars(str_detect(., paste0(paste(cols, collapse = "|"))))) %>% 
-    mutate(filename = paste0(CodCoopac,"_",BD, "_",Periodo,".txt")) %>% 
-    pull(filename) %>% unique()
-  
-  setdiff(getArchivosExigiblesFromAgent(agente),
-          v) %>%  return()
-}
-getPeriodosNoObservados         <- function(agente, eb, colCruce){
-  archivos  <- getArchivosNoObservadosByCols(agente, eb, colCruce)
-  archCruce <- switch (colCruce,
-                       CCR   = archivos[str_detect(archivos, paste(c("BD01","BD02A"), collapse = '|'))],
-                       CODGR = archivos[str_detect(archivos, paste(c("BD03A","BD03B"), collapse = '|'))],
-                       CIS   = archivos[str_detect(archivos, paste(c("BD03A","BD01"), collapse = '|'))])
-  
-  getPeriodos <- tibble(Periodos =  str_extract(archCruce, paste(as.character(global.alcance),collapse = '|'))) %>%
-    group_by(Periodos) %>%
-    filter(n() ==2) %>%
-    pull(Periodos) %>% 
-    unique() 
-  
-  return(getPeriodos)
-}
-getColsNoObservadas             <- function(ruta, eb, tipoError){
-  colsError <- eb %>%
-    filter(BD == getBDFromRuta(ruta) & Periodo == getAnoMesFromRuta(ruta) & Cod %in%  c(201, 203)) %>% 
-    pull(txt1) %>%
-    str_split(", ") %>% 
-    unlist()
-  
-  
-  cols <- switch (tipoError,
-                  T1 = setdiff(getColsErrorT1(ruta), colsError),
-                  T3 = setdiff(getColsErrorT3(ruta), colsError),
-                  saldos = setdiff(c("SKCR", "PCI", "KVI", "KRF", "KVE", "KJU", "SIN", "SID", "SIS", "DGR", "NCPR", "NCPA", "TPINT", "NRPRG"),
-                                   colsError))
-  
-  return(cols)
-}
-#>>>>>>> main

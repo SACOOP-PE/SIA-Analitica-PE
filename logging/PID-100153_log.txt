@@ -1,4 +1,14 @@
 Time	logEncontrado
+#<<<<<<< 01122021_dp
+[2021-01-16 15:46:21]	Validador SIA 1.3.2021 --------------------------------------
+[2021-01-16 15:46:21]	Agente creado. PID-100153. [01172|201901~202010]
+[2021-01-16 15:46:22]	Bucket de errores creado. PID-100153.
+[2021-01-16 15:46:22]	Inicio del interrogatorio. PID-100153.
+[2021-01-16 15:46:22]	Apertura de revisiÃ³n de pre-requisitos.
+[2021-01-16 15:46:22]	    Error: Se identificaron archivos duplicados.
+[2021-01-16 15:46:22]	    Error: Se identificaron archivos faltantes.
+[2021-01-16 15:46:22]	Fin del proceso de revisiÃ³n por errores crÃ­ticos 101-102.
+#=======
 [2021-01-17 09:55:05]	Validador SIA 1.3.2021 --------------------------------------
 [2021-01-17 09:55:05]	Agente creado. PID-100153. [01172|201901~202010]
 [2021-01-17 09:55:05]	Bucket de errores creado. PID-100153.
@@ -17,3 +27,4 @@ Time	logEncontrado
 [2021-01-17 10:01:56]	La validaciÃ³n de los campos concluyÃ³ con 4 observaciÃ³n(es) tipo3. (~ly2)
 [2021-01-17 10:01:56]	La validaciÃ³n de los campos concluyÃ³ con un total de 43 observaciÃ³n(es). (~ly2)
 [2021-01-17 10:01:56]	La revisiÃ³n errores OM 22269-2020 tiene observaciones.
+#>>>>>>> main
