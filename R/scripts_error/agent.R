@@ -93,22 +93,22 @@ interrogateAgent <- function(agente){
     }
   
   # errores OM 22269-2020
-  # addEventLog(agente, paste0("Apertura de revisión de errores OM 22269-2020."),  "I", "B")
-  # 
-  #   eb <- layer2(agente, eb)
-  # 
-  #   if (nrow(eb) > 0) {
-  #     if (nrow(eb %>% filter(Cod %in% c(311:478)) >0)) {
-  # 
-  #       addEventLog(agente, paste0("La revisión errores OM 22269-2020 tiene observaciones."), "I", "B")
-  #       }
-  #     else {
-  #       addEventLog(agente, paste0("Revisión de errores OM 22269-2020 fue satisfatoria."), "I", "B")
-  #       }
-  #     }
-  #   else {
-  #     addEventLog(agente, paste0("Revisión de errores OM 22269-2020 fue satisfatoria."), "I", "B")
-  #     }
+  addEventLog(agente, paste0("Apertura de revisión de errores OM 22269-2020."),  "I", "B")
+
+    eb <- layer2(agente, eb)
+
+    if (nrow(eb) > 0) {
+      if (nrow(eb %>% filter(Cod %in% c(311:478)) >0)) {
+
+        addEventLog(agente, paste0("La revisión errores OM 22269-2020 tiene observaciones."), "I", "B")
+        }
+      else {
+        addEventLog(agente, paste0("Revisión de errores OM 22269-2020 fue satisfatoria."), "I", "B")
+        }
+      }
+    else {
+      addEventLog(agente, paste0("Revisión de errores OM 22269-2020 fue satisfatoria."), "I", "B")
+      }
 
   # eb <- layer3(agent, eb) #alertas ad-hoc 11356
    

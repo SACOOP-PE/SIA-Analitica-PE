@@ -18,7 +18,7 @@ return(eb)
  
 validarOperacionesVacias     <- function(agente, eb){
   carpeta   <- getCarpetaFromAgent(agente)
-  exigibles <- getArchivosNoObservadosByCols(agente, eb, )
+  exigibles <- getArchivosNoObservadosByCols(agente, eb, c("CCR", "CCR_C", "CODGR"))
   
   vacios <- tibble(NombreArchivo = exigibles) %>% rowwise() %>% 
     mutate(ruta    = getRuta(carpeta, NombreArchivo),
@@ -732,7 +732,8 @@ getArchivosNoObservadosByCols   <- function(agente, eb, cols) {
     mutate(filename     = paste0(CodCoopac,"_",BD, "_",Periodo,".txt"),
            verificarCol = ifelse(length(which(str_split(txt1, ", ")[[1]] == cols)) >=1, 
                                  "TRUE", 
-                                 "FALSE")) %>%
+                                 "FALSE")  
+           ) %>%
     filter(verificarCol == "TRUE") %>% 
     pull(filename) %>% unique()
   
