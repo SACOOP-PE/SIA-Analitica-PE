@@ -36,8 +36,10 @@ validarColumnas <- function(agente, eb) {
                                  toString(setdiff(Columnas, ColumnasOM)),
                                  ""),
            ColVacias    = toString(getColVacia(ruta)))
-  
-  view(tbl1_ctrl1)
+#<<<<<<< 01122021_dp
+
+=======
+#>>>>>>> main
   
   fal <- tbl1_ctrl1 %>% filter(ColFaltantes != "")
   sob <- tbl1_ctrl1 %>% filter(ColSobrantes != "")
@@ -52,7 +54,7 @@ validarColumnas <- function(agente, eb) {
              num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%  
       select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
     
-    addEventLog(agente, paste0("La validación de Columnas faltantes concluyó con ", nrow(fal), " observación(es). (~ly2)"), "I", "B")
+    addEventLog(agente, paste0("La validaciÃ³n de Columnas faltantes concluyÃ³ con ", nrow(fal), " observaciÃ³n(es). (~ly2)"), "I", "B")
     eb <- addErrorMasivo(eb, chunk_201)
   }
   if (nrow(sob)>0) {
@@ -64,7 +66,7 @@ validarColumnas <- function(agente, eb) {
              num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%  
       select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
     
-    addEventLog(agente, paste0("La validación de Columnas sobrantes concluyó con ", nrow(sob), " observación(es). (~ly2)"), "I", "B")
+    addEventLog(agente, paste0("La validaciÃ³n de Columnas sobrantes concluyÃ³ con ", nrow(sob), " observaciÃ³n(es). (~ly2)"), "I", "B")
     eb <- addErrorMasivo(eb, chunk_202)
   }
   if (nrow(vac)>0) {
@@ -76,7 +78,7 @@ validarColumnas <- function(agente, eb) {
              num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%  
       select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
     
-    addEventLog(agente, paste0("La validación de Columnas vacías concluyó con ", nrow(vac), " observación(es). (~ly2)"), "I", "B")
+    addEventLog(agente, paste0("La validaciÃ³n de Columnas vacÃ­as concluyÃ³ con ", nrow(vac), " observaciÃ³n(es). (~ly2)"), "I", "B")
     eb <- addErrorMasivo(eb, chunk_203)
   }
   
