@@ -71,11 +71,11 @@ validarCruceInterno <- function(agente, eb){
   n <- eb %>% filter(Cod %in% c(321, 322, 323)) %>% nrow()
   
   if (n == 0) {
-    addEventLog(agente, paste0("La validación cruce interno concluyó sin observaciones. (~ly2) "), "I", "B")
+    addEventLog(agente, paste0("La validación cruce interno concluyó sin observaciones. (~ly3) "), "I", "B")
   }
   else{
     
-    addEventLog(agente, paste0("La validación cruce interno concluyó con ", n, " observación. (~ly2) "), "I", "B")
+    addEventLog(agente, paste0("La validación cruce interno concluyó con ", n, " observación. (~ly3) "), "I", "B")
   }
   
   return(eb)

@@ -20,11 +20,11 @@ validarCampos <- function(agente, eb){
   
   n <- eb %>% filter(Cod %in% c(401:457)) %>% nrow()
   if (n == 0) {
-    addEventLog(agente, paste0("La validación de los campos concluyó sin observaciones tipo1. (~ly2) "), "I", "B")
+    addEventLog(agente, paste0("La validación de los campos concluyó sin observaciones tipo1. (~ly4) "), "I", "B")
   }
   else{
     
-    addEventLog(agente, paste0("La validación de los campos concluyó con ",n," observaciones tipo1. (~ly2) "), "I", "B")
+    addEventLog(agente, paste0("La validación de los campos concluyó con ",n," observaciones tipo1. (~ly4) "), "I", "B")
   }
   
   
@@ -37,11 +37,11 @@ validarCampos <- function(agente, eb){
   
   n <- eb %>% filter(Cod %in% c(461:466)) %>% nrow()
   if (n == 0) {
-    addEventLog(agente, paste0("La validación de los campos concluyó sin observaciones tipo2. (~ly2) "), "I", "B")
+    addEventLog(agente, paste0("La validación de los campos concluyó sin observaciones tipo2. (~ly4) "), "I", "B")
   }
   else{
     
-    addEventLog(agente, paste0("La validación de los campos concluyó con ",n," observaciones tipo2. (~ly2) "), "I", "B")
+    addEventLog(agente, paste0("La validación de los campos concluyó con ",n," observaciones tipo2. (~ly4) "), "I", "B")
   }
   
   
@@ -78,11 +78,11 @@ validarCampos <- function(agente, eb){
   
   n <- eb %>% filter(Cod %in% c(471:479)) %>% nrow()
   if (n == 0) {
-    addEventLog(agente, paste0("La validación de los campos concluyó sin observaciones tipo3. (~ly2) "), "I", "B")
+    addEventLog(agente, paste0("La validación de los campos concluyó sin observaciones tipo3. (~ly4) "), "I", "B")
   }
   else{
     
-    addEventLog(agente, paste0("La validación de los campos concluyó con ",n," observación(es) tipo3. (~ly2) "), "I", "B")
+    addEventLog(agente, paste0("La validación de los campos concluyó con ",n," observación(es) tipo3. (~ly4) "), "I", "B")
   }
   
   
@@ -91,11 +91,11 @@ validarCampos <- function(agente, eb){
   n <- eb %>% filter(Cod %in% c(401:479)) %>% nrow()
   
   if (n == 0) {
-    addEventLog(agente, paste0("La validación de los campos concluyó sin observaciones. (~ly2) "), "I", "B")
+    addEventLog(agente, paste0("La validación de los campos concluyó sin observaciones. (~ly4) "), "I", "B")
   }
   else{
     
-    addEventLog(agente, paste0("La validación de los campos concluyó con un total de ", n, " observación(es). (~ly2) "), "I", "B")
+    addEventLog(agente, paste0("La validación de los campos concluyó con un total de ", n, " observación(es). (~ly4) "), "I", "B")
   }
   
   return(eb)
