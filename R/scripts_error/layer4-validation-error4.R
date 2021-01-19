@@ -465,7 +465,9 @@ getFechaCorte                <- function(ruta){
   return(fecha_corte)
 }
 procesarErrorFechaDesembolso <- function(ruta){
-  error <- evaluarFile(ruta) %>%
+  BD <- evaluarFile(ruta) 
+  
+  error <- BD %>%
     filter((dmy(BD %>% pull(FOT)) > getFechaCorte(ruta)) == TRUE) %>% 
     pull(getCodigoBD("BD01"))
   

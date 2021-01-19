@@ -3,6 +3,7 @@ library(tidyverse)
 library(stringr)
 library(colr)
 library(lubridate)
+library(reactable)
 
 ##### 2. Opciones ----- 
 
