@@ -4,6 +4,9 @@
   source("R/scripts_error/layer0-validation-error0.R")
   source("R/scripts_error/layer1-validation-error1.R")
   source("R/scripts_error/layer2-validation-error2.R")
+  source("R/scripts_error/layer3-validation-error3.R")
+  source("R/scripts_error/layer4-validation-error4.R")
+  
   source("R/scripts_error/libraries-and-options.R")
   source("R/scripts_error/log-manager.R")
   source("R/scripts_error/reporting-manager.R")

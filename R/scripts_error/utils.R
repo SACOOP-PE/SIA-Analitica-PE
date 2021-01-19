@@ -89,3 +89,13 @@ getAlcanceFromAgent           <- function(agente){
 getNombreCoopacFromIdCoopac   <- function(idCoopac){
   initCuadreContable() %>% filter(CODIGO_ENTIDAD == as.integer(idCoopac)) %>% pull(ENTIDAD) %>% first()
 }
+
+getCodigoBD <- function(bd){
+  campo <- case_when(bd == "BD01"  ~ "CCR",
+                     bd == "BD02A" ~ "CCR",
+                     bd == "BD02B" ~ "CCR_C",
+                     bd == "BD03A" ~ "CODGR",
+                     bd == "BD03B" ~ "CODGR",
+                     bd == "BD04"  ~ "CCR_C")
+  return(campo)
+}

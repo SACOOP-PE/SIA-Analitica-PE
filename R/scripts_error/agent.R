@@ -90,6 +90,8 @@ interrogateAgent <- function(agente){
   addEventLog(agente, paste0("Apertura de revisión de errores OM 22269-2020."),  "I", "B")
 
     eb <- layer2(agente, eb)
+    eb <- layer3(agente, eb)
+    eb <- layer4(agente, eb)
 
     if (nrow(eb) > 0) {
       if (nrow(eb %>% filter(Cod %in% c(311:478))) >0) {
@@ -102,8 +104,8 @@ interrogateAgent <- function(agente){
       }
     else {
       addEventLog(agente, paste0("Revisión de errores OM 22269-2020 fue satisfatoria."), "I", "B")
-      }
-
+    }
+    
   #alertas ad-hoc 11356 ----
     #eb <- layer3(agent, eb) 
 
