@@ -321,25 +321,25 @@ procesarErrorSaldosNegativos <- function(agente, ruta, eb){
   return("")
 }
 procesarErrorModalidadCouta  <- function(ruta){
-  BD <- evaluarFile(ruta)
-  
-  BD %>%
+ error <- evaluarFile(ruta) %>%
     filter(((as.numeric(ESAM) < 5) & (as.numeric(NCPR) == 0 | as.numeric(PCUO)  == 0)) == TRUE) %>%
-    pull(CCR) %>% return()
+    pull(CCR)
+ 
+ return(error)
 }
 procesarErrorMontoOtorgado   <- function(ruta){
-  BD <- evaluarFile(ruta)
+  error <- evaluarFile(ruta) %>%
+    filter(as.numeric(MORG) < as.numeric(SKCR)) %>%
+    pull(CCR)
   
-  BD %>% filter(as.numeric(MORG) < as.numeric(SKCR)) %>%
-    pull(CCR) %>%
-    return()
+  return(error)
 }
 procesarErrorVencRetraso     <- function(ruta){
-  BD <- evaluarFile(ruta)
-  
-  BD %>% 
+  error <- evaluarFile(ruta) %>%
     filter((as.numeric(KVE) > 0 & as.numeric(DAK) == 0)) %>% 
-    pull (CCR) %>% return()
+    pull (CCR)
+  
+  return(error)
 }
 
 #BD01 y BD04
@@ -392,12 +392,12 @@ procesarErrorDocumentoIdent <- function(ruta){
 
 #BD03A
 procesarErrorNumCredCobertura <- function(ruta){
-  BD <- evaluarFile(ruta)
-  
-  BD %>% 
+  error <- evaluarFile(ruta) %>% 
     filter(as.numeric(NCR) > 0, as.numeric(NRCL) == 0) %>%
     pull(getCodigoBD("BD03A")) %>%
-    unique() %>% return()
+    unique()
+  
+  return(error)
 }
 
 
@@ -465,10 +465,11 @@ getFechaCorte                <- function(ruta){
   return(fecha_corte)
 }
 procesarErrorFechaDesembolso <- function(ruta){
-  BD <- evaluarFile(ruta)
+  error <- evaluarFile(ruta) %>%
+    filter((dmy(BD %>% pull(FOT)) > getFechaCorte(ruta)) == TRUE) %>% 
+    pull(getCodigoBD("BD01"))
   
-  BD %>% filter((dmy(BD %>% pull(FOT)) > getFechaCorte(ruta)) == TRUE) %>% 
-    pull(getCodigoBD("BD01")) %>% return()
+  return(error)
 }
 
 ####
