@@ -78,7 +78,7 @@ interrogateAgent <- function(agente){
         
       }
       else {
-      addEventLog(agente, paste0("Revisión de estructura de datos satisfatoria."), "I", "B")
+        addEventLog(agente, paste0("Revisión de estructura de datos satisfatoria."), "I", "B")
       }
       
     }
@@ -94,14 +94,16 @@ interrogateAgent <- function(agente){
     eb <- layer4(agente, eb)
 
     if (nrow(eb) > 0) {
+      
       if (nrow(eb %>% filter(Cod %in% c(311:478))) >0) {
 
         addEventLog(agente, paste0("La revisión errores OM 22269-2020 tiene observaciones."), "I", "B")
-        }
+      }
       else {
         addEventLog(agente, paste0("Revisión de errores OM 22269-2020 fue satisfatoria."), "I", "B")
-        }
       }
+      
+    }
     else {
       addEventLog(agente, paste0("Revisión de errores OM 22269-2020 fue satisfatoria."), "I", "B")
     }
