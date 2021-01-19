@@ -31,7 +31,7 @@ validarCruceInterno <- function(agente, eb){
                num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
         select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
       
-      eb <- addErrorMasivo(eb, chunk_321)
+      eb <- addError(eb, chunk_321)
     }
     if (nrow(f_bd02A) >0) {
       chunk_322 <- f_bd02A %>% rowwise() %>%
@@ -43,7 +43,7 @@ validarCruceInterno <- function(agente, eb){
                num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
         select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
       
-      eb <- addErrorMasivo(eb, chunk_322)
+      eb <- addError(eb, chunk_322)
     }
   }
   
@@ -64,7 +64,7 @@ validarCruceInterno <- function(agente, eb){
                num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
         select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
       
-      eb <- addErrorMasivo(eb, chunk_323)
+      eb <- addError(eb, chunk_323)
     }
   }
 

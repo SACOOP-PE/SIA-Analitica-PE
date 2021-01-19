@@ -72,7 +72,7 @@ validarCampos <- function(agente, eb){
              num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
       select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
     
-    eb <- addErrorMasivo(eb, chunk479)
+    eb <- addError(eb, chunk479)
   }
   
   
@@ -230,7 +230,7 @@ procesarErroresT1 <- function(agente, ruta, eb){
                num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
         select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, txt2, num1)
       
-      eb <- addErrorMasivo(eb, chunkT1)
+      eb <- addError(eb, chunkT1)
     }
     return(eb)
   }
@@ -267,7 +267,7 @@ procesarErroresT2 <- function(agente, eb, exigibles, codigoError){
                  num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
           select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, txt2, num1)
         
-        eb <- addErrorMasivo(eb, chunkSaldos)
+        eb <- addError(eb, chunkSaldos)
       }
     }
     return(eb)
@@ -297,7 +297,7 @@ procesarErroresT2 <- function(agente, eb, exigibles, codigoError){
                num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
         select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
       
-      eb <- addErrorMasivo(eb, chunkT2)
+      eb <- addError(eb, chunkT2)
     }
     return(eb)
   }
@@ -450,7 +450,7 @@ procesarErroresT3 <- function(agente, ruta, eb){
                num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
         select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, txt2, num1)
       
-      eb <- addErrorMasivo(eb, chunkT3)
+      eb <- addError(eb, chunkT3)
     }
     return(eb)
   }

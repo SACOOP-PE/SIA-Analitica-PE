@@ -35,7 +35,7 @@ layer1 <- function(agente, eb){
       select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
     
     addEventLog(agente, paste0("La validación de Columnas faltantes concluyó con ", nrow(fal), " observación(es). (~ly2)"), "I", "B")
-    eb <- addErrorMasivo(eb, chunk_201)
+    eb <- addError(eb, chunk_201)
   }
   if (nrow(sob)>0) {
     chunk_202 <- sob %>% rowwise() %>% 
@@ -47,7 +47,7 @@ layer1 <- function(agente, eb){
       select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
     
     addEventLog(agente, paste0("La validación de Columnas sobrantes concluyó con ", nrow(sob), " observación(es). (~ly2)"), "I", "B")
-    eb <- addErrorMasivo(eb, chunk_202)
+    eb <- addError(eb, chunk_202)
   }
   if (nrow(vac)>0) {
     chunk_203 <- vac %>% rowwise() %>% 
@@ -59,7 +59,7 @@ layer1 <- function(agente, eb){
       select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
     
     addEventLog(agente, paste0("La validación de Columnas vacías concluyó con ", nrow(vac), " observación(es). (~ly2)"), "I", "B")
-    eb <- addErrorMasivo(eb, chunk_203)
+    eb <- addError(eb, chunk_203)
   }
   
   return(eb)

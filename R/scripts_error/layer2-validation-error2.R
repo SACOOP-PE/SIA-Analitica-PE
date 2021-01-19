@@ -30,7 +30,7 @@ validarOperacionesVacias     <- function(agente, eb){
              num1 = Vacios) %>%  
       select(CodCoopac, IdProceso, Cod, Periodo, BD, num1)
     
-    eb <- addErrorMasivo(eb, chunk_311)
+    eb <- addError(eb, chunk_311)
   }
   
   n <- eb %>% filter(Cod %in% c(311)) %>% nrow()
@@ -64,7 +64,7 @@ validarOperacionesDuplicadas <- function(agente, eb){
              num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
       select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
 
-    eb <- addErrorMasivo(eb, chunk_312)
+    eb <- addError(eb, chunk_312)
   }
   
   n <- eb %>% filter(Cod %in% c(312)) %>% nrow()
