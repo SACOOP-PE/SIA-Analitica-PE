@@ -9,12 +9,8 @@ return(eb)
 }
 
 #' Funciones secundarias: nivel I
-#' validarCuadreContable
-#' validarOperacionesDUVA
-#' validarCruceInterno
-#' validarCampos
+#' validarOperaciones Op Vacias-Duplicadas
 
- 
 validarOperacionesVacias     <- function(agente, eb){
   carpeta   <- getCarpetaFromAgent(agente)
   exigibles <- getArchivosNoObservadosByCols(agente, eb, c("CCR", "CCR_C", "CODGR"))
@@ -84,7 +80,7 @@ validarOperacionesDuplicadas <- function(agente, eb){
   return(eb)
 }
 
-#validarOperacionesVacias #cambiar nombre
+#validarOperacionesVacias
 getoperacionesVacias <- function(ruta){
   BD <- evaluarFile(ruta)
   
@@ -93,7 +89,7 @@ getoperacionesVacias <- function(ruta){
     sapply(function(x) sum(is.na(x))) %>% return()
 }
 
-#validarOperacionesDuplicadas  #cambiar nombre
+#validarOperacionesDuplicadas
 getoperacionesDuplicadas <- function(ruta){
   if (getBDFromRuta(ruta) == "BD01" | getBDFromRuta(ruta) == "BD03A") {
     operaciones <- evaluarFile(ruta) %>% select(getCodigoBD(getBDFromRuta(ruta))[1]) 

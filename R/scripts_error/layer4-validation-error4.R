@@ -9,8 +9,98 @@ return(eb)
 
 #' Funciones secundarias: nivel I
 #' validarCampos
+validarCampos <- function(agente, eb){
+  carpeta   <- getCarpetaFromAgent(agente)
+  exigibles <- getArchivosNoObservadosByCols(agente, eb, c("CCR","CCR_C","CODGR"))
+  
+  # i. Errores tipo1 ----
+  for (x in 1:length(exigibles)){
+    eb     <- procesarErroresT1(agente, getRuta(carpeta, exigibles[x]), eb)
+  }
+  
+  n <- eb %>% filter(Cod %in% c(401:457)) %>% nrow()
+  if (n == 0) {
+    addEventLog(agente, paste0("La validación de los campos concluyó sin observaciones tipo1. (~ly2) "), "I", "B")
+  }
+  else{
+    
+    addEventLog(agente, paste0("La validación de los campos concluyó con ",n," observaciones tipo1. (~ly2) "), "I", "B")
+  }
+  
+  
+  # ii. Errores tipo2 ----
+  cod <- 461
+  for (y in 461:466){
+    eb <- procesarErroresT2(agente, eb, exigibles, cod)
+    cod <- cod +1
+  }
+  
+  n <- eb %>% filter(Cod %in% c(461:466)) %>% nrow()
+  if (n == 0) {
+    addEventLog(agente, paste0("La validación de los campos concluyó sin observaciones tipo2. (~ly2) "), "I", "B")
+  }
+  else{
+    
+    addEventLog(agente, paste0("La validación de los campos concluyó con ",n," observaciones tipo2. (~ly2) "), "I", "B")
+  }
+  
+  
+  # iii. Errores tipo3 ----
+  #error 471:478
+  exigibles <- exigibles[str_detect(exigibles, paste(c("BD01","BD02A","BD02B","BD04"), collapse = '|'))]
+  
+  for (z in 1:length(exigibles)) {
+    eb     <- procesarErroresT3(agente, getRuta(carpeta, exigibles[z]), eb)
+  }
+  
+  #error 479
+  exigibles <- intersect(exigibles[str_detect(exigibles, "BD01")], getArchivosNoObservadosByCols(agent, eb, "FOT"))
+  error479  <- tibble(Archivo = exigibles) %>% rowwise() %>%
+    mutate(ruta      = getRuta(getCarpetaFromAgent(agente), Archivo),
+           verificar = procesarErrorFechaDesembolso(ruta) %>%
+             unique() %>% toString(),
+           Cod       = 479) %>%
+    filter(verificar != "")
+  
+  if (nrow(error479) >0) {
+    chunk479 <- error479 %>% rowwise() %>%
+      mutate(CodCoopac = getCoopacFromAgent(agente),
+             IdProceso = getIdProcesoFromAgent(agente),
+             Periodo = getAnoMesFromRuta(toString(ruta)),
+             BD      = getBDFromRuta(toString(ruta)),
+             txt1 = verificar,
+             num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
+      select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
+    
+    eb <- addErrorMasivo(eb, chunk479)
+  }
+  
+  
+  n <- eb %>% filter(Cod %in% c(471:479)) %>% nrow()
+  if (n == 0) {
+    addEventLog(agente, paste0("La validación de los campos concluyó sin observaciones tipo3. (~ly2) "), "I", "B")
+  }
+  else{
+    
+    addEventLog(agente, paste0("La validación de los campos concluyó con ",n," observación(es) tipo3. (~ly2) "), "I", "B")
+  }
+  
+  
+  ######
+  
+  n <- eb %>% filter(Cod %in% c(401:479)) %>% nrow()
+  
+  if (n == 0) {
+    addEventLog(agente, paste0("La validación de los campos concluyó sin observaciones. (~ly2) "), "I", "B")
+  }
+  else{
+    
+    addEventLog(agente, paste0("La validación de los campos concluyó con un total de ", n, " observación(es). (~ly2) "), "I", "B")
+  }
+  
+  return(eb)
+}
 
-#Validar campos
 
 #' Tipo 0: Validaciones a vacios o "NA" a los campos
 #' Tipo 1: validaciones a campos con dígitos específicos
