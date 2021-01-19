@@ -175,12 +175,12 @@ validarCampos                <- function(agente, eb){
   
   # ii. Errores tipo2 ----
   cod <- 461
-  for (y in 461:467){
+  for (y in 461:466){
     eb <- procesarErroresT2(agente, eb, exigibles, cod)
     cod <- cod +1
   }
   
-  n <- eb %>% filter(Cod %in% c(461:467)) %>% nrow()
+  n <- eb %>% filter(Cod %in% c(461:466)) %>% nrow()
   if (n == 0) {
     addEventLog(agente, paste0("La validación de los campos concluyó sin observaciones tipo2. (~ly2) "), "I", "B")
   }
@@ -497,27 +497,6 @@ procesarErroresT2 <- function(agente, eb, exigibles, codigoError){
       }
     return(eb)
   }
-  
-  if (codigoError == 467 & length(getPeriodosNoObservados(agente, eb, "CIS")) > 0) {
-    
-    erroresTipo2 <- tibble(Periodo = getPeriodosNoObservados(agente, eb, "CIS")) %>% rowwise() %>%
-      mutate(error467 = procesarErrorcodDeudor(agente, Periodo),
-             Cod = codigoError)%>% 
-      filter(error467 != "")
-    
-    if (nrow(erroresTipo2) >0) {
-      chunkT2 <- erroresTipo2 %>% rowwise() %>%
-        mutate(CodCoopac = getCoopacFromAgent(agente),
-               IdProceso = getIdProcesoFromAgent(agente),
-               BD   = "BD03A",
-               txt1 = error467,
-               num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
-        select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
-      
-      eb <- addErrorMasivo(eb, chunkT2)
-      }
-    return(eb)
-    }
 }
 
 #BD01
@@ -615,22 +594,6 @@ procesarErrorNumCredCobertura <- function(ruta){
     filter(as.numeric(NCR) > 0, as.numeric(NRCL) == 0) %>%
     pull(getCodigoBD("BD03A")) %>%
     unique() %>% return()
-}
-
-#BD3A y BD01
-procesarErrorcodDeudor <- function(agente, periodo){
-  
-  archivo1 <- getRuta(getCarpetaFromAgent(agente), 
-                      paste0(paste(getCoopacFromAgent(agente), "BD03A", periodo, sep  = "_"), ".txt"))
-  archivo2 <- getRuta(getCarpetaFromAgent(agente), 
-                      paste0(paste(getCoopacFromAgent(agente), "BD01", periodo, sep  = "_"), ".txt"))
-  
-  cruce <- setdiff(evaluarFile(getRuta(getCarpetaFromAgent(agente), archivo1)) %>% pull(CIS),
-          evaluarFile(getRuta(getCarpetaFromAgent(agente), archivo2)) %>% pull(CIS)) %>%
-    unique() %>%
-    toString()
-  
-  return(cruce)
 }
 
 
