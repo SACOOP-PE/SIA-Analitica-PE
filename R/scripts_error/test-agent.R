@@ -13,7 +13,7 @@
   source("R/scripts_error/utils.R")
   
   # Inicializar agente.
-  # Interrogar agente - Layer del 0 al 3. 
+  # Interrogar agente - Layer del 0 al 4. 
   # Cerrar agente.
   # Formatear bucket generado para comunicarlo por correo o por Oficio SBS.
   # Obtener el Log (Time - Descripción)
