@@ -99,3 +99,25 @@ saveOutputs <- function(agente, ebFormatt, pidlog) {
     write_delim(path = paste0(getwd(), "/logging/", "PID-", getIdProcesoFromAgent(agente), "_log.txt"), delim = "\t",
                 col_names = T, append = T)
 }
+
+# bucket personalizado:
+# library(reactable)
+# library(crosstalk)
+
+# reactable(
+#   bucket %>% select(Periodo, Cod, BD, txt1, txt2, txt3, num1),
+#   groupBy = "Periodo",
+#   details = function(index) paste("Details for row:", index),
+#   onClick = "expand",
+# 
+#   rowStyle = list(cursor = "pointer")
+# )
+# 
+# 
+# 
+# bucket$names <- rownames(bucket)
+# bucket  %>% 
+#   scatterD3(x = Periodo, y = Cod, lab = BD,
+#             col_var = BD,
+#             xlab = "Año-Mes", ylab = "CodError")
+  
