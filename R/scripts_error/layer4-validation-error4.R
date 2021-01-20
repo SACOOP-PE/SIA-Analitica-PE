@@ -496,18 +496,22 @@ getArchivosNoObservadosByErrors <- function(agente, eb, cods) {
           v) %>%  return()
 }
 getArchivosNoObservadosByCols   <- function(agente, eb, cols) {
-  v <- eb %>%
-    filter(Cod %in% c(201, 203)) %>% 
-    rowwise() %>% 
-    mutate(filename     = paste0(CodCoopac,"_",BD, "_",Periodo,".txt"),
-           verificarCol = ifelse(length(which(str_split(txt1, ", ")[[1]] == cols)) >=1, 
-                                 "TRUE", 
-                                 "FALSE")  
-    ) %>%
-    filter(verificarCol == "TRUE") %>% 
-    pull(filename) %>% unique()
-  
-  return(setdiff(getArchivosExigiblesFromAgent(agente), v))
+  if (nrow(eb %>% filter(Cod %in% c(201,203))) >0) {
+    v <- eb %>%
+      filter(Cod %in% c(201, 203)) %>% 
+      rowwise() %>% 
+      mutate(filename     = paste0(CodCoopac,"_",BD, "_",Periodo,".txt"),
+             verificarCol = ifelse(length(which(str_split(txt1, ", ")[[1]] == cols)) >=1, 
+                                   "TRUE", 
+                                   "FALSE")) %>%
+      filter(verificarCol == "TRUE") %>% 
+      pull(filename) %>% unique()
+    
+    return(setdiff(getArchivosExigiblesFromAgent(agente), v))
+  }
+  else{
+    return(getArchivosExigiblesFromAgent(agente))
+    }
 }
 getPeriodosNoObservados         <- function(agente, eb, colCruce){
   archivos  <- getArchivosNoObservadosByCols(agente, eb, colCruce)
@@ -525,18 +529,23 @@ getPeriodosNoObservados         <- function(agente, eb, colCruce){
   return(getPeriodos)
 }
 getColsNoObservadas             <- function(ruta, eb, tipoError){
-  colsError <- eb %>%
-    filter(BD == getBDFromRuta(ruta) & Periodo == getAnoMesFromRuta(ruta) & Cod %in%  c(201, 203)) %>% 
-    pull(txt1) %>%
-    str_split(", ") %>% 
-    unlist()
-  
-  
-  cols <- switch (tipoError,
-                  T1 = setdiff(getColsErrorT1(ruta), colsError),
-                  T3 = setdiff(getColsErrorT3(ruta), colsError),
-                  saldos = setdiff(c("SKCR", "PCI", "KVI", "KRF", "KVE", "KJU", "SIN", "SID", "SIS", "DGR", "NCPR", "NCPA", "TPINT", "NRPRG"),
-                                   colsError))
-  
-  return(cols)
+  if (nrow(eb %>% filter(Cod %in% c(201,203))) >0) {
+    colsError <- eb %>%
+      filter(BD == getBDFromRuta(ruta) & Periodo == getAnoMesFromRuta(ruta) & Cod %in%  c(201, 203)) %>% 
+      pull(txt1) %>%
+      str_split(", ") %>% 
+      unlist()
+    
+    
+    cols <- switch (tipoError,
+                    T1 = setdiff(getColsErrorT1(ruta), colsError),
+                    T3 = setdiff(getColsErrorT3(ruta), colsError),
+                    saldos = setdiff(c("SKCR", "PCI", "KVI", "KRF", "KVE", "KJU", "SIN", "SID", "SIS", "DGR", "NCPR", "NCPA", "TPINT", "NRPRG"),
+                                     colsError))
+    
+    return(cols)
+  }
+  else{
+    return(getArchivosExigiblesFromAgent(agente))
+    }
 }
