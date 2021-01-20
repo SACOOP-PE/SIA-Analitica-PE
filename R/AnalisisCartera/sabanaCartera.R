@@ -36,15 +36,12 @@ getSabanaCartera <- function(agente){
   filesCartera <- getArchivosCartera(agente)
   
   cartera <-  evaluarFile(getRuta(carpeta, filesCartera[1])) %>%
-    rowwise() %>% 
     mutate(Periodo = getAnoMesFromRuta(getRuta(carpeta, filesCartera[1])))
   
   for (i in 1:length(filesCartera)-1) {
-    cartera <- cartera %>% 
-      bind_rows(evaluarFile(getRuta(carpeta, filesCartera[i+1])) %>%
-                  rowwise() %>% 
-                  mutate(Periodo = getAnoMesFromRuta(getRuta(carpeta,filesCartera[i+1])))
-                )
+    cartera <- cartera %>% bind_rows(evaluarFile(getRuta(carpeta, filesCartera[i+1])) %>% 
+                                       mutate(Periodo = getAnoMesFromRuta(getRuta(carpeta,filesCartera[i+1])))
+                                     )
   }
   
   cartera <- cartera[c(51, 1:50)]
