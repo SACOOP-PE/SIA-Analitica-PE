@@ -352,39 +352,40 @@ detectarVacios              <- function(ruta,campo){
   
   return(vacios)
 }
-getnumCaracteresDoc         <- function(documento){
-  n_caracteres <- switch (documento,
-                          "1" = "8",
-                          "2" = "9",
-                          "3" = "13",
-                          "4" = "13",
-                          "5" = "12",
-                          "6" = "11")
-  return(n_caracteres)
+validarDocumentoIdent       <- function(tipodocumento, ndocumento){
+  if (is.na(ndocumento) | is.na(tipodocumento)) {
+    return("FALSE")
+  }
+  else{
+    nCaracteres <- switch (tipodocumento,
+                           "1" = "8",
+                           "2" = "9",
+                           "3" = "13",
+                           "4" = "13",
+                           "5" = "12",
+                           "6" = "11")
+    return((nCaracteres == nchar(ndocumento)) %>% toString())
+  }
 }
 procesarErrorDocumentoIdent <- function(ruta){
   BD <- evaluarFile(ruta)
   
   if (getBDFromRuta(ruta) =="BD01"){
-    verificar_documento <- BD %>%
-      filter((CCR %in% detectarVacios(ruta, "TID")) == FALSE) %>% 
+    verificar_documento <- BD %>% 
       rowwise() %>%
-      mutate(detectarError = if_else(getnumCaracteresDoc(TID) == (nchar(NID) %>% toString()), "TRUE", "FALSE")) %>%
+      mutate(detectarError = validarDocumentoIdent(TID, NID)) %>%
       filter(detectarError == "FALSE") %>%
-      pull(getCodigoBD(getBDFromRuta(ruta))) %>%
-      union(detectarVacios(ruta, "TID")) %>% toString()
+      pull(getCodigoBD(getBDFromRuta(ruta)))
     
     return(verificar_documento)
   }
   
   if (getBDFromRuta(ruta) =="BD04"){
-    verificar_documento <- BD %>%
-      filter((CCR_C %in% detectarVacios(ruta, "TID_C")) == FALSE) %>% 
+    verificar_documento <- BD %>% 
       rowwise() %>%
-      mutate(detectarError = if_else(getnumCaracteresDoc(TID_C) == (nchar(NID_C) %>% toString()), "TRUE", "FALSE")) %>%
+      mutate(detectarError = validarDocumentoIdent(TID_C, NID_C)) %>%
       filter(detectarError == "FALSE") %>%
-      pull(getCodigoBD(getBDFromRuta(ruta))) %>%
-      union(detectarVacios(ruta, "TID_C")) %>% toString()
+      pull(getCodigoBD(getBDFromRuta(ruta)))
     
     return(verificar_documento)
   }
