@@ -9,8 +9,8 @@ layer0 <- function(agente, eb){
   
   if (length(getDuplicados(carpeta, exigibles)) != 0) {
     
-    eb <- eb %>% addError(obj = tibble(Codcoopac = getCoopacFromAgent(agente),
-                                       Idproceso = getIdProcesoFromAgent(agente),
+    eb <- eb %>% addError(obj = tibble(CodCoopac = getCoopacFromAgent(agente),
+                                       IdProceso = getIdProcesoFromAgent(agente),
                                        Cod = 101,
                                        txt1 = toString(getDuplicados(carpeta, exigibles)),
                                        num1 = length(str_split(txt1, ",")[[1]]))
@@ -21,8 +21,8 @@ layer0 <- function(agente, eb){
  
   if (length(getFaltantes(carpeta, exigibles)) != 0) { 
     
-    eb <- eb %>% addError(obj = tibble(Codcoopac = getCoopacFromAgent(agente),
-                                       Idproceso = getIdProcesoFromAgent(agente),
+    eb <- eb %>% addError(obj = tibble(CodCoopac = getCoopacFromAgent(agente),
+                                       IdProceso = getIdProcesoFromAgent(agente),
                                        Cod = 102,
                                        txt1 = toString(getFaltantes(carpeta, exigibles)),
                                        num1 = length(str_split(txt1, ",")[[1]]))
