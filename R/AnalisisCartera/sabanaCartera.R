@@ -51,3 +51,9 @@ getSabanaCartera <- function(agente){
 #Generar sábana de Créditos 201701- 202009
 agentAelu     <- createAgent2()
 sabanaCartera <- getSabanaCartera(agentAelu)
+sabanaCartera %>% 
+  write_delim(path = paste0(paste0(getwd(), "/test/"),
+                            paste(paste0("(",agentAelu %>% pull(PeriodoInicial),"-", agentAelu %>% pull(PeriodoFinal),")"),sep = "_"),
+                            "_sabanaCarteraAelu.txt"),
+              delim = "\t",
+              col_names = T, append = T)
