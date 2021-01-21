@@ -2,10 +2,9 @@
 #' layer2(agente, eb)
 
 layer2 <- function(agente, eb){
-  
-eb <- validarOperacionesVacias(agente, eb)
-eb <- validarOperacionesDuplicadas(agente, eb)
-return(eb)
+  eb <- validarOperacionesVacias(agente, eb)
+  eb <- validarOperacionesDuplicadas(agente, eb)
+  return(eb)
 }
 
 #' Funciones secundarias: nivel I

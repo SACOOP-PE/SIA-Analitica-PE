@@ -2,7 +2,17 @@
 #' layer1()
 #' 
 layer1 <- function(agente, eb){
-  
+  eb <- validarColumnas(agente, eb)
+  return(eb)
+}
+
+#' Funciones secundarias 
+#' validarColumnas()
+#' getColumnaOM()
+#' getColVacia()
+#' 
+
+validarColumnas <- function(agente, eb){
   carpeta   <- getCarpetaFromAgent(agente)
   exigibles <- getArchivosExigiblesFromAgent(agente) 
   
@@ -64,20 +74,7 @@ layer1 <- function(agente, eb){
   
   return(eb)
 }
-
-#' Funciones secundarias 
-#' getColumnaOM()
-#' getColVacia()
-#' evaluarFile()
-#' 
-#' 
-evaluarFile   <- function(ruta){
-  read_delim(ruta,"\t",escape_double = FALSE, trim_ws = TRUE, col_names = TRUE,
-             col_types = cols(.default = "c"), progress = F) %>%
-    return()
   
-}
-
 getColumnasOM <- function(BD){ 
   cols_base <- switch (BD,
                        BD01  = {initEstructuraBase() %>% filter(BD == "BD01") %>% pull(CAMPO) %>% list()},

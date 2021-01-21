@@ -10,23 +10,19 @@ options(warn = -1)
 options(scipen = 999)
 
 ##### 3. Archivos de configuración ----- 
-archivo.CuadreContable     = "config/config1.txt"
-archivo.EstructuraBase     = "config/config2.txt"
+archivo.CuadreContable = "config/config1.txt"
+archivo.EstructuraBase = "config/config2.txt"
 
 #### 4. Parametros globales ----- 
-
 global.alcance = c(201901:201912, 202001:202012, 202101:202112)
 
 #### 5. Parametros por defecto ----- 
-
 default.usuario <- "ANONYM"
 default.carpeta <- "test/datatest"
-default.bd <- c("BD01","BD02A","BD02B","BD03A","BD03B","BD04")
+default.bd      <- c("BD01","BD02A","BD02B","BD03A","BD03B","BD04")
 
 ### 6. Inicializar archivos de configuracion ----
-
-## Archivos precargados ----
-initCuadreContable     <- function(){
+initCuadreContable  <- function(){
   read_delim(archivo.CuadreContable, 
              "\t", escape_double = FALSE, col_types = cols(ANO = col_double(), 
                                                            CODIGO_ENTIDAD = col_double(), ENTIDAD = col_character(), 
@@ -35,7 +31,7 @@ initCuadreContable     <- function(){
                                                            PERIODO = col_double(), TIPOENTIDAD = col_character()), 
              trim_ws = TRUE, progress = F) %>% return()
 }
-initEstructuraBase     <- function(){ 
+initEstructuraBase  <- function(){ 
   read_delim(archivo.EstructuraBase, 
              "\t", escape_double = FALSE, col_types = cols(BD = col_character(), 
                                                            CAMPO = col_character(), 

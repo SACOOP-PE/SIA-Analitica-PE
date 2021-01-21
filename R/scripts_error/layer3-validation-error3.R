@@ -1,10 +1,9 @@
 #' Funciones principales
-#' layer2(agente, eb)
+#' layer3(agente, eb)
 
 layer3 <- function(agente, eb){
-  
-eb <- validarCruceInterno(agente, eb)
-return(eb)
+  eb <- validarCruceInterno(agente, eb)
+  return(eb)
 }
 
 #' Funciones secundarias: nivel I

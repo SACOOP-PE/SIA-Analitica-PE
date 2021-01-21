@@ -28,8 +28,6 @@
   bucket      <- interrogateAgent(agent)
   agent       <- closeAgent(agent, bucket)
   ebFormatted <- formatBucket(bucket)
-  
   PIDlog      <- getlog(getIdProcesoFromAgent(agent))
   
   saveOutputs(agent, ebFormatted, PIDlog)
-  

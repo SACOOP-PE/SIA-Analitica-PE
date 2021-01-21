@@ -1,7 +1,6 @@
 # Version utils v2. 
 
-getRuta           <- function(carpeta, 
-                              filename){
+getRuta           <- function(carpeta, filename){
   
   lista_rutas <- list.files(path=carpeta, 
                             full.names = TRUE, 
@@ -48,6 +47,12 @@ getNombreArchivoFromRuta  <- function(ruta){
   (basename(ruta) %>% strsplit("/"))[[1]] %>% return()
 } 
 
+evaluarFile   <- function(ruta){
+  read_delim(ruta,"\t",escape_double = FALSE, trim_ws = TRUE, col_names = TRUE,
+             col_types = cols(.default = "c"), progress = F) %>%
+    return()
+  
+}
 
 # Funciones auxiliares - Agent
 getCarpetaFromAgent           <- function(agente){ 
@@ -64,8 +69,7 @@ getArchivosExigiblesFromAgent <- function(agente){
   periodo_final  <- agente %>% pull(PeriodoFinal)
   
   apply(expand.grid(cod_coopac, id_bds,
-                    paste0(periodos[(periodos >= periodo_inicio) &
-                                      (periodos <= periodo_final)], ".txt")),
+                    paste0(periodos[(periodos >= periodo_inicio) & (periodos <= periodo_final)], ".txt")),
         1, paste, collapse = "_") %>% return()
 }
 getNombreCoopacFromAgent      <- function(agente){  
@@ -90,12 +94,14 @@ getNombreCoopacFromIdCoopac   <- function(idCoopac){
   initCuadreContable() %>% filter(CODIGO_ENTIDAD == as.integer(idCoopac)) %>% pull(ENTIDAD) %>% first()
 }
 
-getCodigoBD <- function(bd){
-  campo <- case_when(bd == "BD01"  ~ "CCR",
-                     bd == "BD02A" ~ "CCR",
-                     bd == "BD02B" ~ "CCR_C",
-                     bd == "BD03A" ~ "CODGR",
-                     bd == "BD03B" ~ "CODGR",
-                     bd == "BD04"  ~ "CCR_C")
-  return(campo)
+getCodigoBD <- function(BD){
+  campoIdentif  <- switch (BD,
+                           BD01  = "CCR",
+                           BD02A = "CCR",
+                           BD02B = "CCR_C",
+                           BD03A = "CODGR",
+                           BD03B = "CODGR",
+                           BD04  = "CCR_C")
+  
+  return(campoIdentif)
 }
