@@ -1610,3 +1610,23 @@
 100269	2021-01-20	2021-01-20 18:09:40	DPACHECO	SAN ISIDRO	test/datatest/sanisidro_200121	[2021-01-20 18:09:40] - La validación de los campos concluyó con 47 observación(es) tipo3. (~ly4) 	Informativo	Baja
 100269	2021-01-20	2021-01-20 18:09:40	DPACHECO	SAN ISIDRO	test/datatest/sanisidro_200121	[2021-01-20 18:09:40] - La validación de los campos concluyó con un total de 332 observación(es). (~ly4) 	Informativo	Baja
 100269	2021-01-20	2021-01-20 18:09:40	DPACHECO	SAN ISIDRO	test/datatest/sanisidro_200121	[2021-01-20 18:09:40] - La revisión errores OM 22269-2020 tiene observaciones.	Informativo	Baja
+100270	2021-01-21	2021-01-21 09:36:17	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-01-21 09:36:17] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100270	2021-01-21	2021-01-21 09:36:18	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-01-21 09:36:17] - Agente creado. PID-100270. [01342|201901~202010]	Informativo	Baja
+100270	2021-01-21	2021-01-21 09:36:18	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-01-21 09:36:18] - Bucket de errores creado. PID-100270.	Informativo	Baja
+100270	2021-01-21	2021-01-21 09:36:18	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-01-21 09:36:18] - Inicio del interrogatorio. PID-100270.	Informativo	Baja
+100270	2021-01-21	2021-01-21 09:36:18	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-01-21 09:36:18] - Apertura de revisión de pre-requisitos.	Informativo	Baja
+100270	2021-01-21	2021-01-21 09:36:19	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-01-21 09:36:19] - Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100270	2021-01-21	2021-01-21 09:36:19	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-01-21 09:36:19] - Apertura de revisión de estructura de datos.	Informativo	Baja
+100270	2021-01-21	2021-01-21 09:37:50	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-01-21 09:37:50] - La validación de Columnas faltantes concluyó con 1 observación(es). (~ly1)	Informativo	Baja
+100270	2021-01-21	2021-01-21 09:37:50	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-01-21 09:37:50] - La validación de Columnas sobrantes concluyó con 1 observación(es). (~ly1)	Informativo	Baja
+100270	2021-01-21	2021-01-21 09:37:51	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-01-21 09:37:51] - La validación de Columnas vacías concluyó con 49 observación(es). (~ly1)	Informativo	Baja
+100270	2021-01-21	2021-01-21 09:37:51	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-01-21 09:37:51] - La revisión de estructura de datos tiene observaciones. Continuar con discreción.	Informativo	Baja
+100270	2021-01-21	2021-01-21 09:37:51	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-01-21 09:37:51] - Apertura de revisión de errores OM 22269-2020.	Informativo	Baja
+100270	2021-01-21	2021-01-21 09:38:40	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-01-21 09:38:40] - La validación de operaciones vacías concluyó sin observaciones. (~ly2)	Informativo	Baja
+100270	2021-01-21	2021-01-21 09:39:08	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-01-21 09:39:08] - La validación de operaciones duplicadas concluyó con 22 observación. (~ly2) 	Informativo	Baja
+100270	2021-01-21	2021-01-21 09:40:51	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-01-21 09:40:51] - La validación cruce interno concluyó con 22 observación. (~ly3) 	Informativo	Baja
+100270	2021-01-21	2021-01-21 09:41:54	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-01-21 09:41:54] - La validación de los campos concluyó con 22 observaciones tipo1. (~ly4) 	Informativo	Baja
+100270	2021-01-21	2021-01-21 09:44:27	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-01-21 09:44:27] - La validación de los campos concluyó con 54 observaciones tipo2. (~ly4) 	Informativo	Baja
+100270	2021-01-21	2021-01-21 09:45:19	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-01-21 09:45:19] - La validación de los campos concluyó con 4 observación(es) tipo3. (~ly4) 	Informativo	Baja
+100270	2021-01-21	2021-01-21 09:45:20	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-01-21 09:45:19] - La validación de los campos concluyó con un total de 80 observación(es). (~ly4) 	Informativo	Baja
+100270	2021-01-21	2021-01-21 09:45:20	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-01-21 09:45:20] - La revisión errores OM 22269-2020 tiene observaciones.	Informativo	Baja
