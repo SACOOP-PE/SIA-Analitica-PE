@@ -100,26 +100,9 @@ validarCampos <- function(agente, eb){
   return(eb)
 }
 
-
-#' Tipo 0: Validaciones a vacios o "NA" a los campos
 #' Tipo 1: validaciones a campos con dígitos específicos
 #' Tipo 2: validaciones con condiciones entre campos
 #' Tipo 3: validaciones a campos fecha
-
-# Tipo0 ----
-getVacios <- function(ruta){
-  BD    <- evaluarFile(ruta)
-  
-  vacios <- tibble(Columna  = setdiff(getColumnasOM(getBDFromRuta(ruta))[[1]],
-                                      getColVacia(ruta))) %>%
-    rowwise() %>% 
-    mutate(verificar = BD %>% 
-             filter(is.na(cgrep(BD, Columna))) %>% 
-             pull(getCodigoBD(getBDFromRuta(ruta))) %>% unique() %>% toString()) %>% 
-    filter(verificar != "")
-  
-  return(vacios)
-}
 
 # Tipo1 ----
 getDigitosBD01  <- function(campo){
