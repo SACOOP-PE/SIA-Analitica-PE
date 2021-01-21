@@ -24,7 +24,7 @@ validarCruceInterno <- function(agente, eb){
       chunk_321 <- f_bd01 %>% rowwise() %>%
         mutate(CodCoopac = getCoopacFromAgent(agente),
                IdProceso = getIdProcesoFromAgent(agente),
-               Cod = 312,
+               Cod = 321,
                BD  = "BD01",
                txt1 = OpFaltantes_BD01,
                num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
