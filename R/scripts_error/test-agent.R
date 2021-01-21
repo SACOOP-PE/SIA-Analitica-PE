@@ -21,9 +21,9 @@
   
 
   ##### Testing -----
-  agent <- createAgent(idCoopac = "01138", 
+  agent <- createAgent(idCoopac = "01342", 
                        periodoInicial = "201901",
-                       periodoFinal   = "202009")
+                       periodoFinal   = "202010")
   
   bucket      <- interrogateAgent(agent)
   agent       <- closeAgent(agent, bucket)
@@ -32,3 +32,4 @@
   PIDlog      <- getlog(getIdProcesoFromAgent(agent))
   
   saveOutputs(agent, ebFormatted, PIDlog)
+  

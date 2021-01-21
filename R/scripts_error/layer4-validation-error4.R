@@ -478,25 +478,7 @@ procesarErrorFechaDesembolso <- function(ruta){
 ####
 
 # Filter files, periods, cols from bucket----
-getArchivosObservadosFromBucket <- function(eb) {
-  eb %>% 
-    mutate(filename = paste0(CodCoopac,"_",BD, "_",Periodo,".txt")) %>% 
-    pull(filename) %>% unique() %>% return()
-}
-getArchivosNoObservados         <- function(agente, eb) {
-  setdiff(getArchivosExigiblesFromAgent(agente),
-          getArchivosObservadosFromBucket(eb)) %>%  return()
-}
-getArchivosNoObservadosByErrors <- function(agente, eb, cods) {
-  v <- eb %>% 
-    filter(Cod %in% cods) %>% 
-    mutate(filename = paste0(CodCoopac,"_",BD, "_",Periodo,".txt")) %>% 
-    pull(filename) %>% unique()
-  
-  setdiff(getArchivosExigiblesFromAgent(agente),
-          v) %>%  return()
-}
-getArchivosNoObservadosByCols   <- function(agente, eb, cols) {
+getArchivosNoObservadosByCols <- function(agente, eb, cols) {
   if (nrow(eb %>% filter(Cod %in% c(201,203))) >0) {
     v <- eb %>%
       filter(Cod %in% c(201, 203)) %>% 
@@ -512,9 +494,9 @@ getArchivosNoObservadosByCols   <- function(agente, eb, cols) {
   }
   else{
     return(getArchivosExigiblesFromAgent(agente))
-    }
+  }
 }
-getPeriodosNoObservados         <- function(agente, eb, colCruce){
+getPeriodosNoObservados       <- function(agente, eb, colCruce){
   archivos  <- getArchivosNoObservadosByCols(agente, eb, colCruce)
   archCruce <- switch (colCruce,
                        CCR   = archivos[str_detect(archivos, paste(c("BD01","BD02A"), collapse = '|'))],
@@ -529,24 +511,30 @@ getPeriodosNoObservados         <- function(agente, eb, colCruce){
   
   return(getPeriodos)
 }
-getColsNoObservadas             <- function(ruta, eb, tipoError){
+getColsNoObservadas           <- function(ruta, eb, tipoError){
   if (nrow(eb %>% filter(Cod %in% c(201,203))) >0) {
+    
     colsError <- eb %>%
       filter(BD == getBDFromRuta(ruta) & Periodo == getAnoMesFromRuta(ruta) & Cod %in%  c(201, 203)) %>% 
       pull(txt1) %>%
       str_split(", ") %>% 
       unlist()
     
+    filtrarCols <- switch (tipoError,
+                           T1 = setdiff(getColsErrorT1(ruta), colsError),
+                           T3 = setdiff(getColsErrorT3(ruta), colsError),
+                           saldos = setdiff(c("SKCR", "PCI", "KVI", "KRF", "KVE", "KJU", "SIN", "SID", "SIS", "DGR", "NCPR", "NCPA", "TPINT", "NRPRG"),
+                                            colsError))
     
-    cols <- switch (tipoError,
-                    T1 = setdiff(getColsErrorT1(ruta), colsError),
-                    T3 = setdiff(getColsErrorT3(ruta), colsError),
-                    saldos = setdiff(c("SKCR", "PCI", "KVI", "KRF", "KVE", "KJU", "SIN", "SID", "SIS", "DGR", "NCPR", "NCPA", "TPINT", "NRPRG"),
-                                     colsError))
-    
-    return(cols)
+    return(filtrarCols)
   }
   else{
-    return(getArchivosExigiblesFromAgent(agente))
-    }
+    
+   cols <- switch (tipoError,
+                   T1 = getColsErrorT1(ruta),
+                   T3 = getColsErrorT3(ruta),
+                   saldos = c("SKCR", "PCI", "KVI", "KRF", "KVE", "KJU", "SIN", "SID", "SIS", "DGR", "NCPR", "NCPA", "TPINT", "NRPRG"))
+            
+    return(cols)
+  }
 }
