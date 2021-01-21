@@ -48,7 +48,7 @@ formatBucket <- function(eb) {
                                  "476" = paste0("Se identificaron ", pad2(num1), " crédito(s) con fechas vacías o erróneas en la Fecha de Desembolso (FOT_C) en la BD04", " correspondiente al periodo de ", periodoEscrito(Periodo), ".(", txt1, ")"),
                                  "477" = paste0("Se identificaron ", pad2(num1), " crédito(s) con fechas vacías o erróneas en la Fecha de cancelación de la operación (FCAN_C) en la BD04", " correspondiente al periodo de ", periodoEscrito(Periodo), ".(", cutStringError(num1, txt1), ")"),
                                  "478" = paste0("Se identificaron ", pad2(num1), " crédito(s) con fecha de desembolso posterior a la fecha de corte en la cartera de créditos (BD01)", " correspondiente al periodo de ", periodoEscrito(Periodo), ".(", cutStringError(num1, txt1), ")")
-                                 )) %>% 
+                                 ) %>% toString()) %>% 
     select(Cod, Descripcion)
   
   return(output)
