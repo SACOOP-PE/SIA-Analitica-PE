@@ -5,7 +5,7 @@ layer0 <- function(agente, eb){
   carpeta <- getCarpetaFromAgent(agente)
   exigibles <- getArchivosExigiblesFromAgent(agente)
   
-  eb <- eb %>% filter(Cod != 000) 
+  eb <- eb %>% filter(Cod != 999) 
   
   if (length(getDuplicados(carpeta, exigibles)) != 0) {
     
