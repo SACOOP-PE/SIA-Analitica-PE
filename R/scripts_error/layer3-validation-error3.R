@@ -21,28 +21,28 @@ validarCruceInterno <- function(agente, eb){
     f_bd02A <- cruce1 %>% filter(OpFaltantes_BD02A != "") %>% select(Periodo, OpFaltantes_BD02A)
     
     if (nrow(f_bd01) >0) {
-      chunk_321 <- f_bd01 %>% rowwise() %>%
+      chunk_301 <- f_bd01 %>% rowwise() %>%
         mutate(CodCoopac = getCoopacFromAgent(agente),
                IdProceso = getIdProcesoFromAgent(agente),
-               Cod = 321,
+               Cod = 301,
                BD  = "BD01",
                txt1 = OpFaltantes_BD01,
                num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
         select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
       
-      eb <- addError(eb, chunk_321)
+      eb <- addError(eb, chunk_301)
     }
     if (nrow(f_bd02A) >0) {
-      chunk_322 <- f_bd02A %>% rowwise() %>%
+      chunk_302 <- f_bd02A %>% rowwise() %>%
         mutate(CodCoopac = getCoopacFromAgent(agente),
                IdProceso = getIdProcesoFromAgent(agente),
-               Cod = 322,
+               Cod = 302,
                BD  = "BD02A",
                txt1 = OpFaltantes_BD02A,
                num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
         select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
       
-      eb <- addError(eb, chunk_322)
+      eb <- addError(eb, chunk_302)
     }
   }
   
@@ -54,20 +54,20 @@ validarCruceInterno <- function(agente, eb){
     f_bd03A <- cruce2 %>% filter(GaranFaltantes_BD03A != "") %>% select(Periodo, GaranFaltantes_BD03A)
     
     if (nrow(f_bd03A) >0) {
-      chunk_323 <- f_bd03A %>% rowwise() %>%
+      chunk_303 <- f_bd03A %>% rowwise() %>%
         mutate(CodCoopac = getCoopacFromAgent(agente),
                IdProceso = getIdProcesoFromAgent(agente),
-               Cod = 323,
+               Cod = 303,
                BD  = "BD03A",
                txt1 = GaranFaltantes_BD03A,
                num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
         select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
       
-      eb <- addError(eb, chunk_323)
+      eb <- addError(eb, chunk_303)
     }
   }
 
-  n <- eb %>% filter(Cod %in% c(321, 322, 323)) %>% nrow()
+  n <- eb %>% filter(Cod %in% c(301, 302, 303)) %>% nrow()
   
   if (n == 0) {
     addEventLog(agente, paste0("La validación cruce interno concluyó sin observaciones. (~ly3) "), "I", "B")

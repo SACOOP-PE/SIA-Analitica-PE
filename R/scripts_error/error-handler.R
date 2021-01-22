@@ -49,7 +49,7 @@ getColsNoObservadas           <- function(ruta, eb, tipoError){
     
     filtrarCols <- switch (tipoError,
                            T1 = setdiff(getColsErrorT1(ruta), colsError),
-                           T3 = setdiff(getColsErrorT3(ruta), colsError),
+                           T2 = setdiff(getColsErrorT2(ruta), colsError),
                            saldos = setdiff(c("SKCR", "PCI", "KVI", "KRF", "KVE", "KJU", "SIN", "SID", "SIS", "DGR", "NCPR", "NCPA", "TPINT", "NRPRG"),
                                             colsError))
     
@@ -59,7 +59,7 @@ getColsNoObservadas           <- function(ruta, eb, tipoError){
     
     cols <- switch (tipoError,
                     T1 = getColsErrorT1(ruta),
-                    T3 = getColsErrorT3(ruta),
+                    T2 = getColsErrorT2(ruta),
                     saldos = c("SKCR", "PCI", "KVI", "KRF", "KVE", "KJU", "SIN", "SID", "SIS", "DGR", "NCPR", "NCPA", "TPINT", "NRPRG"))
     
     return(cols)

@@ -57,7 +57,7 @@ validarCampos <- function(agente, eb){
     exigibles <- exigibles[str_detect(exigibles, paste(c("BD01","BD02A","BD02B","BD04"), collapse = '|'))]
   
     for (ii in 1:length(exigibles)) {
-      eb     <- procesarErroresT3(agente, getRuta(carpeta, exigibles[ii]), eb)
+      eb     <- procesarErroresT2(agente, getRuta(carpeta, exigibles[ii]), eb)
     }
   
    # error 430
@@ -262,7 +262,7 @@ procesarErrorDocumentoIdent <- function(ruta){
 
 # Tipo2----
 #BD01, BD02A, BD02B, BD04 
-getColsErrorT3 <- function(ruta){
+getColsErrorT2 <- function(ruta){
   cols <- switch (getBDFromRuta(ruta),
                   BD01  = {c("FOT", "FVEG", "FVEP")},
                   BD02A = {c("FVEP")},
@@ -270,14 +270,14 @@ getColsErrorT3 <- function(ruta){
                   BD04  = {c("FOT_C", "FCAN_C")}) 
   return(cols)
 }
-getCodErrorT3  <- function(ruta, campo){
+getCodErrorT2  <- function(ruta, campo){
   codError <- switch (getBDFromRuta(ruta),
                       BD01  = {c(423,424,425)},
                       BD02A = {c(426)},
                       BD02B = {c(427)},
                       BD04  = {c(428, 429)})
   
-  cod <- tibble(col       = getColsErrorT3(ruta),
+  cod <- tibble(col       = getColsErrorT2(ruta),
                 cod_error = codError) %>% 
     filter(col == campo) %>% 
     pull(cod_error)
@@ -285,17 +285,17 @@ getCodErrorT3  <- function(ruta, campo){
   return(cod)
 }
 
-procesarErroresT3 <- function(agente, ruta, eb){
+procesarErroresT2 <- function(agente, ruta, eb){
   BD <- evaluarFile(ruta)
   
-  if (length(getColsNoObservadas(ruta, eb, "T3")) >0) {
-    erroresTipo3 <- tibble(Columna = getColsNoObservadas(ruta, eb, "T3")) %>%
+  if (length(getColsNoObservadas(ruta, eb, "T2")) >0) {
+    erroresTipo3 <- tibble(Columna = getColsNoObservadas(ruta, eb, "T2")) %>%
       rowwise() %>%
       mutate(verificar = BD %>% 
                filter(dmy(cgrep(BD, Columna)[[1]]) %>% is.na() == TRUE) %>% 
                pull(getCodigoBD(getBDFromRuta(ruta))) %>%
                unique() %>% toString(),
-             Cod       = getCodErrorT3(ruta, Columna)) %>% 
+             Cod       = getCodErrorT2(ruta, Columna)) %>% 
       filter(verificar != "")
     
     if (nrow(erroresTipo3) >0) {
