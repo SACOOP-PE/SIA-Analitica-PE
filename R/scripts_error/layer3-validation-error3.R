@@ -25,7 +25,7 @@ validarCruceInterno <- function(agente, eb){
         mutate(CodCoopac = getCoopacFromAgent(agente),
                IdProceso = getIdProcesoFromAgent(agente),
                Cod = 301,
-               BD  = "BD01",
+               BD  = "BD02A",
                txt1 = OpFaltantes_BD01,
                num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
         select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
@@ -37,7 +37,7 @@ validarCruceInterno <- function(agente, eb){
         mutate(CodCoopac = getCoopacFromAgent(agente),
                IdProceso = getIdProcesoFromAgent(agente),
                Cod = 302,
-               BD  = "BD02A",
+               BD  = "BD01",
                txt1 = OpFaltantes_BD02A,
                num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
         select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
@@ -58,7 +58,7 @@ validarCruceInterno <- function(agente, eb){
         mutate(CodCoopac = getCoopacFromAgent(agente),
                IdProceso = getIdProcesoFromAgent(agente),
                Cod = 303,
-               BD  = "BD03A",
+               BD  = "BD03B",
                txt1 = GaranFaltantes_BD03A,
                num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
         select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
@@ -74,7 +74,7 @@ validarCruceInterno <- function(agente, eb){
   }
   else{
     
-    addEventLog(agente, paste0("La validación cruce interno concluyó con ", n, " observación. (~ly3) "), "I", "B")
+    addEventLog(agente, paste0("La validación cruce interno concluyó con ", n, " observación(es). (~ly3) "), "I", "B")
   }
   
   return(eb)
