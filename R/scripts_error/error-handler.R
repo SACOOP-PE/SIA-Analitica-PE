@@ -6,9 +6,9 @@ addError <- function(eb, obj) {
 
 # Filter files, periods, cols from bucket----
 getArchivosNoObservadosByCols <- function(agente, eb, cols) {
-  if (nrow(eb %>% filter(Cod %in% c(201,203))) >0) {
+  if (nrow(eb %>% filter(Cod %in% c(101,103))) >0) {
     v <- eb %>%
-      filter(Cod %in% c(201, 203)) %>% 
+      filter(Cod %in% c(101, 103)) %>% 
       rowwise() %>% 
       mutate(filename     = paste0(CodCoopac,"_",BD, "_",Periodo,".txt"),
              verificarCol = ifelse(length(which(str_split(txt1, ", ")[[1]] == cols)) >=1, 
@@ -39,10 +39,10 @@ getPeriodosNoObservados       <- function(agente, eb, colCruce){
   return(getPeriodos)
 }
 getColsNoObservadas           <- function(ruta, eb, tipoError){
-  if (nrow(eb %>% filter(Cod %in% c(201,203))) >0) {
+  if (nrow(eb %>% filter(Cod %in% c(101,103))) >0) {
     
     colsError <- eb %>%
-      filter(BD == getBDFromRuta(ruta) & Periodo == getAnoMesFromRuta(ruta) & Cod %in%  c(201, 203)) %>% 
+      filter(BD == getBDFromRuta(ruta) & Periodo == getAnoMesFromRuta(ruta) & Cod %in%  c(101, 103)) %>% 
       pull(txt1) %>%
       str_split(", ") %>% 
       unlist()

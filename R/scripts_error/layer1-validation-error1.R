@@ -36,8 +36,8 @@ validarColumnas <- function(agente, eb){
   vac <- tbl1_ctrl1 %>% filter(ColVacias != "")
   
   if (nrow(fal)>0) {
-    chunk_201 <- fal %>% rowwise() %>% 
-      mutate(Cod = 201,
+    chunk_101 <- fal %>% rowwise() %>% 
+      mutate(Cod = 101,
              Periodo = getAnoMesFromRuta(toString(ruta)),
              BD      = getBDFromRuta(toString(ruta)),
              txt1 = ColFaltantes, 
@@ -45,11 +45,11 @@ validarColumnas <- function(agente, eb){
       select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
     
     addEventLog(agente, paste0("La validación de Columnas faltantes concluyó con ", nrow(fal), " observación(es). (~ly1)"), "I", "B")
-    eb <- addError(eb, chunk_201)
+    eb <- addError(eb, chunk_101)
   }
   if (nrow(sob)>0) {
-    chunk_202 <- sob %>% rowwise() %>% 
-      mutate(Cod = 202,
+    chunk_102 <- sob %>% rowwise() %>% 
+      mutate(Cod = 102,
              Periodo = getAnoMesFromRuta(toString(ruta)),
              BD      = getBDFromRuta(toString(ruta)),
              txt1 = ColSobrantes, 
@@ -57,11 +57,11 @@ validarColumnas <- function(agente, eb){
       select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
     
     addEventLog(agente, paste0("La validación de Columnas sobrantes concluyó con ", nrow(sob), " observación(es). (~ly1)"), "I", "B")
-    eb <- addError(eb, chunk_202)
+    eb <- addError(eb, chunk_102)
   }
   if (nrow(vac)>0) {
-    chunk_203 <- vac %>% rowwise() %>% 
-      mutate(Cod = 203,
+    chunk_103 <- vac %>% rowwise() %>% 
+      mutate(Cod = 103,
              Periodo = getAnoMesFromRuta(toString(ruta)),
              BD      = getBDFromRuta(toString(ruta)),
              txt1 = ColVacias, 
@@ -69,7 +69,7 @@ validarColumnas <- function(agente, eb){
       select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
     
     addEventLog(agente, paste0("La validación de Columnas vacías concluyó con ", nrow(vac), " observación(es). (~ly1)"), "I", "B")
-    eb <- addError(eb, chunk_203)
+    eb <- addError(eb, chunk_103)
   }
   
   return(eb)

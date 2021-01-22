@@ -22,7 +22,7 @@ createAgent  <- function(idCoopac, periodoInicial, periodoFinal){
 createBucket <- function(agente){
   eb <- tibble(CodCoopac     = agente %>% pull(Coopac) %>% first(),
                IdProceso  = agente %>% pull(IdProceso) %>% first(), 
-               Cod         = 100,
+               Cod         = 000,
                Periodo = "",
                BD = "",
                txt1 = "",
