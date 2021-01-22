@@ -8,7 +8,7 @@ createAgent  <- function(idCoopac, periodoInicial, periodoFinal){
                    InicioProceso  = format(Sys.time(), "%a %b %d %X %Y"), 
                    PeriodoInicial = periodoInicial,
                    PeriodoFinal   = periodoFinal,
-                   Alcance        = bds) 
+                   Alcance        = list(default.bd)) 
   
   addEventLog(agente, paste0("Validador SIA 1.3.2021 --------------------------------------"), 
               "I", "B")
