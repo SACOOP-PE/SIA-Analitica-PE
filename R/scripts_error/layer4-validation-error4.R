@@ -289,7 +289,7 @@ procesarErroresT2 <- function(agente, ruta, eb){
   BD <- evaluarFile(ruta)
   
   if (length(getColsNoObservadas(ruta, eb, "T2")) >0) {
-    erroresTipo3 <- tibble(Columna = getColsNoObservadas(ruta, eb, "T2")) %>%
+    erroresTipo2 <- tibble(Columna = getColsNoObservadas(ruta, eb, "T2")) %>%
       rowwise() %>%
       mutate(verificar = BD %>% 
                filter(dmy(cgrep(BD, Columna)[[1]]) %>% is.na() == TRUE) %>% 
@@ -298,8 +298,8 @@ procesarErroresT2 <- function(agente, ruta, eb){
              Cod       = getCodErrorT2(ruta, Columna)) %>% 
       filter(verificar != "")
     
-    if (nrow(erroresTipo3) >0) {
-      chunkT3 <- erroresTipo3 %>% rowwise() %>%
+    if (nrow(erroresTipo2) >0) {
+      chunkT2 <- erroresTipo2 %>% rowwise() %>%
         mutate(CodCoopac = getCoopacFromAgent(agente),
                IdProceso = getIdProcesoFromAgent(agente),
                Periodo = getAnoMesFromRuta(toString(ruta)),
@@ -309,7 +309,7 @@ procesarErroresT2 <- function(agente, ruta, eb){
                num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
         select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, txt2, num1)
       
-      eb <- addError(eb, chunkT3)
+      eb <- addError(eb, chunkT2)
     }
     return(eb)
   }
