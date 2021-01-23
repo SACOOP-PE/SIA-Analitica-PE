@@ -33,19 +33,16 @@ getCoopacFromRuta <- function(ruta){
   
   (basename(ruta) %>% strsplit("_"))[[1]][1] %>% return()
 }
-getNombreCoopacFromRuta   <- function(ruta){
+getNombreCoopacFromRuta <- function(ruta){
   i <- (basename(ruta) %>% strsplit("_"))[[1]][1]
   initCuadreContable() %>% filter(CODIGO_ENTIDAD == as.numeric(i)) %>% pull(ENTIDAD) %>% first() %>% return()
 }
-getBDFromRuta             <- function(ruta){ 
+getBDFromRuta           <- function(ruta){ 
   if (is.na(ruta) | ruta == ""  ) {
     return("")
   }
   (basename(ruta) %>% strsplit("_"))[[1]][2] %>% return() 
 }
-getNombreArchivoFromRuta  <- function(ruta){
-  (basename(ruta) %>% strsplit("/"))[[1]] %>% return()
-} 
 
 evaluarFile   <- function(ruta){
   read_delim(ruta,"\t",escape_double = FALSE, trim_ws = TRUE, col_names = TRUE,
