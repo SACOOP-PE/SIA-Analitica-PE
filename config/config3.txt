@@ -18,9 +18,9 @@ Cod	Descripcion	Criticidad
 402	Se detectaron {0} crédito(s) con cronogramas duplicado(s) en el periodo {1} con un saldo de colocaciones por S/ {2} durante el periodo {2}.	ALTA
 403	Se detectaron {0} operacione(s) de crédito con cronogramas cancelados duplicados en el periodo {1} con un saldo de colocaciones por S/ {2} durante el periodo {2}.	ALTA
 404	Se detectaron {0} código(s) de garantía duplicados en el periodo {1} con un saldo de colocaciones por S/ {2} durante el periodo {2}	ALTA
-501	"Se detectaron {0} créditos faltantes de acuerdo con los cronogramas reportados en el periodo {1}, los créditos observados tienen un saldo de colocaciones por S/ {2} durante el periodo {2}."	ALTA
-502	"Se detectaron {0} cronogramas faltantes de acuerdo con la cartera reportada en el periodo {1}, los créditos observados tienen un saldo de colocaciones por S/ {2} durante el periodo {2}."	ALTA
-503	"Se detectaron {0} garantía(s) de {1} crédito(s) faltantes en el registro correspondiente, por un monto de cobertura de S/ {2} durante el periodo {2}."	ALTA
+501	Se detectaron {0} créditos faltantes de acuerdo con los cronogramas reportados en el periodo {1}, los créditos observados tienen un saldo de colocaciones por S/ {2} durante el periodo {2}.	ALTA
+502	Se detectaron {0} cronogramas faltantes de acuerdo con la cartera reportada en el periodo {1}, los créditos observados tienen un saldo de colocaciones por S/ {2} durante el periodo {2}.	ALTA
+503	Se detectaron {0} garantía(s) de {1} crédito(s) faltantes en el registro correspondiente, por un monto de cobertura de S/ {2} durante el periodo {2}.	ALTA
 601	Se detectaron {0} créditos con dígitos diferentes o vacíos en el Tipo de documento (TID) en la cartera de créditos durante el periodo {2}.	MEDIA
 602	Se detectaron {0} créditos con dígitos diferentes o vacíos en el Tipo de crédito (TCR) en la cartera de créditos del periodo {2} durante el periodo {2}.	MEDIA
 603	Se detectaron {0} créditos con dígitos diferentes o vacíos en la Clasificación del deudor (CAL) en la cartera de créditos durante el periodo {2}.	MEDIA
