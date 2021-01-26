@@ -26,16 +26,20 @@ formatBucket <- function(eb) {
                                                                          str_replace_all(getDescError(Cod), c("\\Q{0}"  = toString(num1),
                                                                                                               "\\Q{1}"  = periodoEscrito(Periodo),
                                                                                                               "\\Q{2}"  = txt3)),
-                                                                         if_else(Cod >=622,
+                                                                         if_else(Cod ==622,
                                                                                  str_replace_all(getDescError(Cod), c("\\Q{0}"  = toString(num1),
                                                                                                                       "\\Q{1}"  = periodoEscrito(Periodo))),
-                                                                                 "")
+                                                                                 if_else(Cod <=701,
+                                                                                         str_replace_all(getDescError(Cod), c("\\Q{0}"  = toString(num1),
+                                                                                                                              "\\Q{1}"  = periodoEscrito(Periodo))),
+                                                                                         "")
+                                                                                 )
                                                                          )
                                                                  )
                                                          )
                                                  )
-                                         ),
-                                 "")
+                                         )
+                                 )
            ) %>% 
     select(Periodo, BD, Cod, Descripcion)
   
