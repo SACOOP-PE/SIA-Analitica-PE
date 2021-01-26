@@ -82,10 +82,10 @@ validarOperacionesDuplicadas <- function(agente, eb){
   
   n <- eb %>% filter(Cod %in% c(401:404)) %>% nrow()
   if (n == 0) {
-    addEventLog(agente, paste0("La validación operaciones duplicadas concluyó sin observaciones tipo2. (~ly2) "), "I", "B")
+    addEventLog(agente, paste0("La validación operaciones duplicadas concluyó sin observaciones. (~ly2) "), "I", "B")
   }
   else{
-    addEventLog(agente, paste0("La validación operaciones duplicadas concluyó con ",n," observación(es) tipo2. (~ly2) "), "I", "B")
+    addEventLog(agente, paste0("La validación operaciones duplicadas concluyó con ",n," observación(es). (~ly2) "), "I", "B")
   }
   
   return(eb)
