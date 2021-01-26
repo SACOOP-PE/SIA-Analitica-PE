@@ -212,15 +212,6 @@ procesarErroresT1 <- function(agente, ruta, eb){
 }
 
 #BD01 y BD04
-detectarVacios              <- function(ruta,campo){
-  BD    <- evaluarFile(ruta)
-  
-  vacios <- BD %>% 
-    filter(is.na(cgrep(BD, campo))) %>% 
-    pull(getCodigoBD(getBDFromRuta(ruta)))
-  
-  return(vacios)
-}
 validarDocumentoIdent       <- function(tipodocumento, ndocumento){
   if (is.na(ndocumento) | is.na(tipodocumento)) {
     return("FALSE")
