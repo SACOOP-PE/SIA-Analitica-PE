@@ -31,7 +31,7 @@ formatBucket <- function(eb) {
                                          ),
                                  "")
            ) %>% 
-    select(Cod, Descripcion)
+    select(Periodo, Cod, Descripcion)
   
   return(output)
 }
