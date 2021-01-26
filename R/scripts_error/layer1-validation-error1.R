@@ -21,6 +21,7 @@ validarColumnas <- function(agente, eb){
            CodCoopac = getCoopacFromAgent(agente),
            IdProceso = getIdProcesoFromAgent(agente),
            BD        = getBDFromRuta(ruta),
+           Periodo   = getAnoMesFromRuta(toString(ruta)),
            Columnas     = list(colnames(evaluarFile(ruta))),
            ColumnasOM   = getColumnasOM(BD),
            ColFaltantes = ifelse(length(setdiff(ColumnasOM, Columnas))>0,
@@ -36,40 +37,34 @@ validarColumnas <- function(agente, eb){
   vac <- tbl1_ctrl1 %>% filter(ColVacias != "")
   
   if (nrow(fal)>0) {
-    chunk_101 <- fal %>% rowwise() %>% 
-      mutate(Cod = 101,
-             Periodo = getAnoMesFromRuta(toString(ruta)),
-             BD      = getBDFromRuta(toString(ruta)),
+    chunk_201 <- fal %>% rowwise() %>% 
+      mutate(Cod = 201,
              txt1 = ColFaltantes, 
              num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%  
       select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
     
     addEventLog(agente, paste0("La validación de Columnas faltantes concluyó con ", nrow(fal), " observación(es). (~ly1)"), "I", "B")
-    eb <- addError(eb, chunk_101)
+    eb <- addError(eb, chunk_201)
   }
   if (nrow(sob)>0) {
-    chunk_102 <- sob %>% rowwise() %>% 
-      mutate(Cod = 102,
-             Periodo = getAnoMesFromRuta(toString(ruta)),
-             BD      = getBDFromRuta(toString(ruta)),
+    chunk_202 <- sob %>% rowwise() %>% 
+      mutate(Cod = 202,
              txt1 = ColSobrantes, 
              num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%  
       select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
     
     addEventLog(agente, paste0("La validación de Columnas sobrantes concluyó con ", nrow(sob), " observación(es). (~ly1)"), "I", "B")
-    eb <- addError(eb, chunk_102)
+    eb <- addError(eb, chunk_202)
   }
   if (nrow(vac)>0) {
-    chunk_103 <- vac %>% rowwise() %>% 
-      mutate(Cod = 103,
-             Periodo = getAnoMesFromRuta(toString(ruta)),
-             BD      = getBDFromRuta(toString(ruta)),
+    chunk_203 <- vac %>% rowwise() %>% 
+      mutate(Cod = 203,
              txt1 = ColVacias, 
              num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%  
       select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
     
     addEventLog(agente, paste0("La validación de Columnas vacías concluyó con ", nrow(vac), " observación(es). (~ly1)"), "I", "B")
-    eb <- addError(eb, chunk_103)
+    eb <- addError(eb, chunk_203)
   }
   
   return(eb)

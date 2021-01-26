@@ -10,6 +10,7 @@ layer3 <- function(agente, eb){
 #' validarCruceInterno
 
 validarCruceInterno <- function(agente, eb){
+  carpeta <- getCarpetaFromAgent(agente)
   
   if (length(getPeriodosNoObservados(agente, eb, "CCR")) >0){
     
@@ -21,28 +22,32 @@ validarCruceInterno <- function(agente, eb){
     f_bd02A <- cruce1 %>% filter(OpFaltantes_BD02A != "") %>% select(Periodo, OpFaltantes_BD02A)
     
     if (nrow(f_bd01) >0) {
-      chunk_301 <- f_bd01 %>% rowwise() %>%
+      chunk_501 <- f_bd01 %>% rowwise() %>%
         mutate(CodCoopac = getCoopacFromAgent(agente),
                IdProceso = getIdProcesoFromAgent(agente),
-               Cod = 301,
+               Cod = 501,
                BD  = "BD02A",
                txt1 = OpFaltantes_BD01,
-               num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
-        select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
+               num1 = length(str_split(string=txt1 ,pattern = ",")[[1]]),
+               num2 = 0
+               ) %>%
+        select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1, num2)
       
-      eb <- addError(eb, chunk_301)
+      eb <- addError(eb, chunk_501)
     }
     if (nrow(f_bd02A) >0) {
-      chunk_302 <- f_bd02A %>% rowwise() %>%
+      chunk_502 <- f_bd02A %>% rowwise() %>%
         mutate(CodCoopac = getCoopacFromAgent(agente),
                IdProceso = getIdProcesoFromAgent(agente),
-               Cod = 302,
+               Cod = 502,
                BD  = "BD01",
                txt1 = OpFaltantes_BD02A,
-               num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
-        select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
+               num1 = length(str_split(string=txt1 ,pattern = ",")[[1]]),
+               num2 = getSaldoTotal(getRuta(carpeta, paste(CodCoopac, "BD01", Periodo, sep = "_")), OpFaltantes_BD02A)
+               ) %>%
+        select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1, num2)
       
-      eb <- addError(eb, chunk_302)
+      eb <- addError(eb, chunk_502)
     }
   }
   
@@ -54,29 +59,21 @@ validarCruceInterno <- function(agente, eb){
     f_bd03A <- cruce2 %>% filter(GaranFaltantes_BD03A != "") %>% select(Periodo, GaranFaltantes_BD03A)
     
     if (nrow(f_bd03A) >0) {
-      chunk_303 <- f_bd03A %>% rowwise() %>%
+      chunk_503 <- f_bd03A %>% rowwise() %>%
         mutate(CodCoopac = getCoopacFromAgent(agente),
                IdProceso = getIdProcesoFromAgent(agente),
-               Cod = 303,
+               Cod = 503,
                BD  = "BD03B",
                txt1 = GaranFaltantes_BD03A,
-               num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
-        select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
+               num1 = length(str_split(string=txt1 ,pattern = ",")[[1]]),
+               num2 = getSaldoTotal(getRuta(carpeta, paste(CodCoopac, "BD03A", Periodo, sep = "_")), GaranFaltantes_BD03A)
+               ) %>%
+        select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1, num2)
       
-      eb <- addError(eb, chunk_303)
+      eb <- addError(eb, chunk_503)
     }
   }
 
-  n <- eb %>% filter(Cod %in% c(301, 302, 303)) %>% nrow()
-  
-  if (n == 0) {
-    addEventLog(agente, paste0("La validación cruce interno concluyó sin observaciones. (~ly3) "), "I", "B")
-  }
-  else{
-    
-    addEventLog(agente, paste0("La validación cruce interno concluyó con ", n, " observación(es). (~ly3) "), "I", "B")
-  }
-  
   return(eb)
 }
 

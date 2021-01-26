@@ -5,13 +5,13 @@ layer0 <- function(agente, eb){
   carpeta <- getCarpetaFromAgent(agente)
   exigibles <- getArchivosExigiblesFromAgent(agente)
   
-  eb <- eb %>% filter(Cod != 999) 
+  eb <- eb %>% filter(Cod != 100) 
   
   if (length(getDuplicados(carpeta, exigibles)) != 0) {
     
     eb <- eb %>% addError(obj = tibble(CodCoopac = getCoopacFromAgent(agente),
                                        IdProceso = getIdProcesoFromAgent(agente),
-                                       Cod = 001,
+                                       Cod = 101,
                                        txt1 = toString(getDuplicados(carpeta, exigibles)),
                                        num1 = length(str_split(txt1, ",")[[1]])
                                        )) 
@@ -23,7 +23,7 @@ layer0 <- function(agente, eb){
     
     eb <- eb %>% addError(obj = tibble(CodCoopac = getCoopacFromAgent(agente),
                                        IdProceso = getIdProcesoFromAgent(agente),
-                                       Cod = 002,
+                                       Cod = 102,
                                        txt1 = toString(getFaltantes(carpeta, exigibles)),
                                        num1 = length(str_split(txt1, ",")[[1]])
                                        )

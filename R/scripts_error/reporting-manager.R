@@ -1,71 +1,52 @@
 formatBucket <- function(eb) {
-    
+  
   output <- eb %>% 
     rowwise() %>% 
-    mutate(Descripcion = switch (toString(Cod),
-                                 "001" = paste0(descPartInicial(num1), " archivo(s) duplicados dentro de la ruta especificada. (",txt1,")"),
-                                 "002" = paste0(descPartInicial(num1), " archivo(s) faltantes dentro de la ruta especificada. (",txt1,")"),
-                                 "101" = paste0(descPartInicial(num1), " columna(s) faltantes en la ", BD, " correspondiente al periodo de ", periodoEscrito(Periodo), ". (",txt1,")"),
-                                 "102" = paste0(descPartInicial(num1), " columna(s) sobrantes en la ", BD, " correspondiente al periodo de ", periodoEscrito(Periodo), ". (", txt1, ")"),
-                                 "103" = paste0(descPartInicial(num1), " columna(s) vacias en la ", BD, " correspondiente al periodo de ", periodoEscrito(Periodo), ". (", txt1, ")"),
-                                 "201" = paste0(descPartInicial(num1), " crédito(s)/garantía(s) vacias en la ", BD, " correspondiente al periodo de ", periodoEscrito(Periodo), "."),
-                                 "202" = paste0(descPartInicial(num1), " crédito(s)/garantía(s) duplicados en la ", BD, " correspondiente al periodo de ", periodoEscrito(Periodo), ". (", cutStringError(num1, txt1), ")"),
-                                 "301" = paste0(descPartInicial(num1), " cronograma(s) (BD02A) que no figuran en la cartera de créditos (BD01) ", " correspondiente al periodo de ", periodoEscrito(Periodo), ". (", cutStringError(num1, txt1), ")"),
-                                 "302" = paste0(descPartInicial(num1), " operación(es) de crédito (BD01) que no figuran en los cronogramas (BD02A) ", " correspondiente al periodo de ", periodoEscrito(Periodo), ". (", cutStringError(num1, txt1), ")"),
-                                 "303" = paste0(descPartInicial(num1), " garantía(s) que no figuran en la base de datos de garantía entrega ", BD, " correspondiente al periodo de ", periodoEscrito(Periodo), ". (", cutStringError(num1, txt1), ")"),
-                                 "401" = paste0(descPartInicial(num1), " crédito(s) con algunos dígitos diferentes o vacíos en la columna ", txt2, " en la BD01", " correspondiente al periodo de ", periodoEscrito(Periodo), ". (", cutStringError(num1, txt1), ")"),
-                                 "402" = paste0(descPartInicial(num1), " crédito(s) con algunos dígitos diferentes o vacíos en la columna ", txt2, " en la BD01", " correspondiente al periodo de ", periodoEscrito(Periodo), ". (", cutStringError(num1, txt1), ")"),
-                                 "403" = paste0(descPartInicial(num1), " crédito(s) con algunos dígitos diferentes o vacíos en la columna ", txt2, " en la BD01", " correspondiente al periodo de ", periodoEscrito(Periodo), ". (", cutStringError(num1, txt1), ")"),
-                                 "404" = paste0(descPartInicial(num1), " crédito(s) con algunos dígitos diferentes o vacíos en la columna ", txt2, " en la BD01", " correspondiente al periodo de ", periodoEscrito(Periodo), ". (", cutStringError(num1, txt1), ")"),
-                                 "405" = paste0(descPartInicial(num1), " crédito(s) con algunos dígitos diferentes o vacíos en la columna ", txt2, " en la BD01", " correspondiente al periodo de ", periodoEscrito(Periodo), ". (", cutStringError(num1, txt1), ")"),
-                                 "406" = paste0(descPartInicial(num1), " crédito(s) con algunos dígitos diferentes o vacíos en la columna ", txt2, " en la BD01", " correspondiente al periodo de ", periodoEscrito(Periodo), ". (", cutStringError(num1, txt1), ")"),
-                                 "407" = paste0(descPartInicial(num1), " crédito(s) con algunos dígitos diferentes o vacíos en la columna ", txt2, " en la BD01", " correspondiente al periodo de ", periodoEscrito(Periodo), ". (", cutStringError(num1, txt1), ")"),
-                                 "408" = paste0(descPartInicial(num1), " crédito(s) con algunos dígitos diferentes o vacíos en la columna ", txt2, " en la BD02A", " correspondiente al periodo de ", periodoEscrito(Periodo), ". (", cutStringError(num1, txt1), ")"),
-                                 "409" = paste0(descPartInicial(num1), " crédito(s) con algunos dígitos diferentes o vacíos en la columna ", txt2, " en la BD02A", " correspondiente al periodo de ", periodoEscrito(Periodo), ". (", cutStringError(num1, txt1), ")"),
-                                 "410" = paste0(descPartInicial(num1), " crédito(s) con algunos dígitos diferentes o vacíos en la columna ", txt2, " en la BD02B", " correspondiente al periodo de ", periodoEscrito(Periodo), ". (", cutStringError(num1, txt1), ")"),
-                                 "411" = paste0(descPartInicial(num1), " crédito(s) con algunos dígitos diferentes o vacíos en la columna ", txt2, " en la BD02B", " correspondiente al periodo de ", periodoEscrito(Periodo), ". (", cutStringError(num1, txt1), ")"),
-                                 "412" = paste0(descPartInicial(num1), " garantia(s) con algunos dígitos diferentes o vacíos en la columna ", txt2, " en la BD03A", " correspondiente al periodo de ", periodoEscrito(Periodo), ". (", cutStringError(num1, txt1), ")"),
-                                 "413" = paste0(descPartInicial(num1), " garantia(s) con algunos dígitos diferentes o vacíos en la columna ", txt2, " en la BD03A", " correspondiente al periodo de ", periodoEscrito(Periodo), ". (", cutStringError(num1, txt1), ")"),
-                                 "414" = paste0(descPartInicial(num1), " garantia(s) con algunos dígitos diferentes o vacíos en la columna ", txt2, " en la BD03B", " correspondiente al periodo de ", periodoEscrito(Periodo), ". (", cutStringError(num1, txt1), ")"),
-                                 "415" = paste0(descPartInicial(num1), " crédito(s) con algunos dígitos diferentes o vacíos en la columna ", txt2, " en la BD04", " correspondiente al periodo de ", periodoEscrito(Periodo), ". (", cutStringError(num1, txt1), ")"),
-                                 "416" = paste0(descPartInicial(num1), " crédito(s) con algunos dígitos diferentes o vacíos en la columna ", txt2, " en la BD04", " correspondiente al periodo de ", periodoEscrito(Periodo), ". (", cutStringError(num1, txt1), ")"),
-                                 "417" = paste0(descPartInicial(num1), " crédito(s) con algunos dígitos diferentes o vacíos en la columna ", txt2, " en la BD04", " correspondiente al periodo de ", periodoEscrito(Periodo), ". (", cutStringError(num1, txt1), ")"),
-                                 "418" = paste0(descPartInicial(num1), " crédito(s) con algunos dígitos diferentes o vacíos en la columna ", txt2, " en la BD04", " correspondiente al periodo de ", periodoEscrito(Periodo), ". (", cutStringError(num1, txt1), ")"),
-                                 "419" = paste0(descPartInicial(num1), " crédito(s) con algunos dígitos diferentes o vacíos en la columna ", txt2, " en la BD04", " correspondiente al periodo de ", periodoEscrito(Periodo), ". (", cutStringError(num1, txt1), ")"),
-                                 "420" = paste0(descPartInicial(num1), " crédito(s) con algunos dígitos diferentes o vacíos en la columna ", txt2, " en la BD04", " correspondiente al periodo de ", periodoEscrito(Periodo), ". (", cutStringError(num1, txt1), ")"),
-                                 "421" = paste0(descPartInicial(num1), " crédito(s) con algunos dígitos diferentes o vacíos en la columna ", txt2, " en la BD04", " correspondiente al periodo de ", periodoEscrito(Periodo), ". (", cutStringError(num1, txt1), ")"),
-                                 "422" = paste0(descPartInicial(num1), " crédito(s) con errores en la longitud del documento de identidad según el tipo de documento en la ", BD ," correspondiente al periodo de ", periodoEscrito(Periodo), ". (", cutStringError(num1, txt1), ")"),
-                                 "423" = paste0(descPartInicial(num1), " crédito(s) con fechas vacías o erróneas en la Fecha de desembolso (FOT) en la BD01"," correspondiente al periodo de ", periodoEscrito(Periodo), ". (", cutStringError(num1, txt1), ")"),
-                                 "424" = paste0(descPartInicial(num1), " crédito(s) con fechas vacías o erróneas en la Fecha de vencimiento general de la operación según cronograma (FVEG) en la BD01", " correspondiente al periodo de ", periodoEscrito(Periodo), ". (", cutStringError(num1, txt1), ")"),
-                                 "425" = paste0(descPartInicial(num1), " crédito(s) con fechas vacías o erróneas en la Fecha de vencimiento puntual de la operación (FVEP) en la BD01", " correspondiente al periodo de ", periodoEscrito(Periodo), ". (", cutStringError(num1, txt1), ")"),
-                                 "426" = paste0(descPartInicial(num1), " crédito(s) con fechas vacías o erróneas en la Fecha de vencimiento de la cuota (FVEP) en la BD02A", " correspondiente al periodo de ", periodoEscrito(Periodo), ". (", cutStringError(num1, txt1), ")"),
-                                 "427" = paste0(descPartInicial(num1), " crédito(s) con fechas vacías o erróneas en la Fecha de Vencimiento de la Cuota (FVEP_C) en la BD02B", " correspondiente al periodo de ", periodoEscrito(Periodo), ". (", cutStringError(num1, txt1), ")"),
-                                 "428" = paste0(descPartInicial(num1), " crédito(s) con fechas vacías o erróneas en la Fecha de Desembolso (FOT_C) en la BD04", " correspondiente al periodo de ", periodoEscrito(Periodo), ". (", txt1, ")"),
-                                 "429" = paste0(descPartInicial(num1), " crédito(s) con fechas vacías o erróneas en la Fecha de cancelación de la operación (FCAN_C) en la BD04", " correspondiente al periodo de ", periodoEscrito(Periodo), ". (", cutStringError(num1, txt1), ")"),
-                                 "430" = paste0(descPartInicial(num1), " crédito(s) con fecha de desembolso posterior a la fecha de corte en la cartera de créditos (BD01)", " correspondiente al periodo de ", periodoEscrito(Periodo), ". (", cutStringError(num1, txt1), ")")
-                                 ) %>% toString()) %>% 
+    mutate(Descripcion = if_else(Cod <= 102,
+                                 str_replace_all(getDescError(Cod), c("\\Q{0}"  = toString(num1))),
+                                 if_else(Cod >=201 & Cod <=203,
+                                         str_replace_all(getDescError(Cod), c("\\Q{0}"  = toString(num1),
+                                                                              "\\Q{1}"  = BD,
+                                                                              "\\Q{2}"  = periodoEscrito(Periodo))),
+                                         if_else(Cod >=301 & Cod <=310, 
+                                                 str_replace_all(getDescError(Cod), c("\\Q{0}"  = months(as.Date(paste(substr(Periodo,1,4), substr(Periodo,5,6), "01", sep = "-"))),
+                                                                                      "\\Q{1}"  = "")),
+                                                 if_else(Cod ==401 & Cod ==402,
+                                                         str_replace_all(getDescError(Cod), c("\\Q{0}"  = toString(num1),
+                                                                                              "\\Q{1}"  = months(as.Date(paste(substr(Periodo,1,4), substr(Periodo,5,6), "01", sep = "-"))),
+                                                                                              "\\Q{2}"  = toString(num2),
+                                                                                              "\\Q{3}"  = periodoEscrito(Periodo))),
+                                                         if_else(Cod >=403 & Cod <=503,
+                                                                 str_replace_all(getDescError(Cod), c("\\Q{0}"  = toString(num1),
+                                                                                                      "\\Q{1}"  = Periodo,
+                                                                                                      "\\Q{2}"  = toString(num2),
+                                                                                                      "\\Q{3}"  = periodoEscrito(Periodo))),
+                                                                 if_else(Cod >=601 & Cod <=708,
+                                                                         str_replace_all(getDescError(Cod), c("\\Q{0}"  = toString(num1),
+                                                                                                              "\\Q{1}"  = periodoEscrito(Periodo))),
+                                                                         "")
+                                                                 )
+                                                         )
+                                                 )
+                                         ),
+                                 "")
+           ) %>% 
     select(Cod, Descripcion)
   
   return(output)
 }
 
-descPartInicial <- function(num1){
+getDescError    <- function(CodError) {
+  descr <- initRepositorioErrores() %>% filter(Cod == CodError) %>% pull(Descripcion)
+  return(descr)
+}
+descPartInicial <- function(num1) {
 
 partInicial <- ifelse(num1 == 1, 
                       paste0("Se identificó ", pad2(num1)),
                       paste0("Se identificaron ", pad2(num1)))
 
 return(partInicial)
-}
-pad2            <- function(n) {
-  return(str_pad(n, width = 2, side = "left", pad = "0"))
-}
-periodoEscrito  <- function(periodo) { 
-  base <- tibble(MES = c(1:12),
-                 ESCRITO = c("enero","febrero","marzo","abril","mayo","junio","julio","agosto","setiembre","octubre","noviembre", "diciembre"))
-  m <- base %>% filter(pad2(MES) %in% substr(periodo,5,6)) %>% pull(ESCRITO)
-  
-  return(paste(m, "del", substr(periodo, 1, 4)))
 }
 cutStringError  <- function(num1, txt1) {
   if (num1 > 100) {
@@ -76,6 +57,18 @@ cutStringError  <- function(num1, txt1) {
   }
   else{return(txt1)}
 }
+
+pad2            <- function(n) {
+  return(str_pad(n, width = 2, side = "left", pad = "0"))
+}
+periodoEscrito  <- function(periodo) { 
+  base <- tibble(MES = c(1:12),
+                 ESCRITO = c("enero","febrero","marzo","abril","mayo","junio","julio","agosto","setiembre","octubre","noviembre", "diciembre"))
+  m <- base %>% filter(pad2(MES) %in% substr(periodo,5,6)) %>% pull(ESCRITO)
+  
+  return(paste(m, "del", substr(periodo, 1, 4)))
+}
+
 
 saveOutputs <- function(agente, ebFormatt, pidlog) {
   #agent----

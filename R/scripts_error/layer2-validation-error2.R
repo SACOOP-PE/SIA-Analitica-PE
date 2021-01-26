@@ -2,103 +2,130 @@
 #' layer2(agente, eb)
 
 layer2 <- function(agente, eb){
-  eb <- validarOperacionesVacias(agente, eb)
   eb <- validarOperacionesDuplicadas(agente, eb)
   return(eb)
 }
 
 #' Funciones secundarias: nivel I
-#' validarOperaciones Op Vacias-Duplicadas
+#' validarOperacionesDuplicadas
 
-validarOperacionesVacias     <- function(agente, eb){
-  carpeta   <- getCarpetaFromAgent(agente)
-  exigibles <- getArchivosNoObservadosByCols(agente, eb, c("CCR", "CCR_C", "CODGR"))
-  
-  vacios <- tibble(NombreArchivo = exigibles) %>% rowwise() %>% 
-    mutate(ruta    = getRuta(carpeta, NombreArchivo),
-           Vacios = getoperacionesVacias(ruta)) %>%
-    filter(Vacios != 0)
-
-  if (nrow(vacios) > 0) {
-    chunk_201 <- vacios %>% rowwise() %>% 
-      mutate(CodCoopac = getCoopacFromAgent(agente),
-             IdProceso = getIdProcesoFromAgent(agente),
-             Cod = 201,
-             Periodo = getAnoMesFromRuta(toString(ruta)),
-             BD      = getBDFromRuta(toString(ruta)),
-             num1 = Vacios) %>%  
-      select(CodCoopac, IdProceso, Cod, Periodo, BD, num1)
-    
-    eb <- addError(eb, chunk_201)
-  }
-  
-  n <- eb %>% filter(Cod %in% c(201)) %>% nrow()
-  
-  if (n == 0) {  
-    addEventLog(agente, paste0("La validación de operaciones vacías concluyó sin observaciones. (~ly2)"), "I", "B") 
-  }
-  else{
-    addEventLog(agente, paste0("La validación de operaciones vacías concluyó con ", n, " observaciones. (~ly2)"), "I", "B")
-  }
-  
-  return(eb)
-}
 validarOperacionesDuplicadas <- function(agente, eb){
   carpeta   <- getCarpetaFromAgent(agente)
   exigibles <- getArchivosNoObservadosByCols(agente, eb, c("CCR", "CCR_C", "CODGR"))
   
-  dups <- tibble(NombreArchivo = exigibles) %>% rowwise() %>% 
+  DupsSaldo <- tibble(NombreArchivo = exigibles) %>% rowwise() %>% 
     mutate(ruta       = getRuta(carpeta, NombreArchivo),
+           BD         = getBDFromRuta(ruta),
+           Periodo    = getAnoMesFromRuta(toString(ruta)),
            Duplicados = getoperacionesDuplicadas(ruta)) %>%
-    filter(Duplicados != "")
+    filter(Duplicados != "" & BD != "BD03B" & BD != "BD04") %>%
+    rowwise() %>%
+    mutate(Saldo = getSaldoTotal(ruta, Duplicados))
   
-  if (nrow(dups) > 0) {
-    chunk_202 <- dups %>% rowwise() %>%
+  dups_BD01  <- DupsSaldo %>% filter(BD == "BD01")
+  dups_BD02A <- DupsSaldo %>% filter(BD == "BD02A")
+  dups_BD02B <- DupsSaldo %>% filter(BD == "BD02B")
+  dups_BD03A <- DupsSaldo %>% filter(BD == "BD03A")
+  
+  if (nrow(dups_BD01) > 0) {
+    chunk_401 <- dups_BD01 %>% rowwise() %>%
       mutate(CodCoopac = getCoopacFromAgent(agente),
              IdProceso = getIdProcesoFromAgent(agente),
-             Cod = 202,
-             Periodo = getAnoMesFromRuta(toString(ruta)),
-             BD   = getBDFromRuta(toString(ruta)),
+             Cod = 401,
              txt1 = Duplicados,
-             num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
-      select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
+             num1 = length(str_split(string=txt1 ,pattern = ",")[[1]]),
+             num2 = Saldo
+             ) %>%
+      select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1, num2)
 
-    eb <- addError(eb, chunk_202)
+    eb <- addError(eb, chunk_401)
   }
-  
-  n <- eb %>% filter(Cod %in% c(202)) %>% nrow()
-  
-  if (n == 0) {
-    addEventLog(agente, paste0("La validación de operaciones duplicadas concluyó sin observaciones. (~ly2) "), "I", "B")
-  }
-  else {
+  if (nrow(dups_BD02A) > 0) {
+    chunk_402 <- dups_BD02A %>% rowwise() %>%
+      mutate(CodCoopac = getCoopacFromAgent(agente),
+             IdProceso = getIdProcesoFromAgent(agente),
+             Cod = 402,
+             txt1 = Duplicados,
+             num1 = length(str_split(string=txt1 ,pattern = ",")[[1]]),
+             num2 = Saldo
+      ) %>%
+      select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1, num2)
     
-    addEventLog(agente, paste0("La validación de operaciones duplicadas concluyó con ", n, " observación. (~ly2) "), "I", "B")
+    eb <- addError(eb, chunk_402)
+  }
+  if (nrow(dups_BD02B) > 0) {
+    chunk_403 <- dups_BD02B %>% rowwise() %>%
+      mutate(CodCoopac = getCoopacFromAgent(agente),
+             IdProceso = getIdProcesoFromAgent(agente),
+             Cod = 403,
+             txt1 = Duplicados,
+             num1 = length(str_split(string=txt1 ,pattern = ",")[[1]]),
+             num2 = Saldo
+      ) %>%
+      select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1, num2)
+    
+    eb <- addError(eb, chunk_403)
+  }
+  if (nrow(dups_BD03A) > 0) {
+    chunk_404 <- dups_BD03A %>% rowwise() %>%
+      mutate(CodCoopac = getCoopacFromAgent(agente),
+             IdProceso = getIdProcesoFromAgent(agente),
+             Cod = 404,
+             txt1 = Duplicados,
+             num1 = length(str_split(string=txt1 ,pattern = ",")[[1]]),
+             num2 = Saldo
+      ) %>%
+      select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1, num2)
+    
+    eb <- addError(eb, chunk_404)
   }
   
   return(eb)
 }
 
-#validarOperacionesVacias
-getoperacionesVacias <- function(ruta){
-  BD <- evaluarFile(ruta)
-  
-  BD %>% 
-    select(getCodigoBD(getBDFromRuta(ruta))[1]) %>%
-    sapply(function(x) sum(is.na(x))) %>% return()
-}
-
 #validarOperacionesDuplicadas
 getoperacionesDuplicadas <- function(ruta){
+  BD <- evaluarFile(ruta)
+  
   if (getBDFromRuta(ruta) == "BD01" | getBDFromRuta(ruta) == "BD03A") {
-    operaciones <- evaluarFile(ruta) %>% select(getCodigoBD(getBDFromRuta(ruta))[1]) 
-    duplicados  <- operaciones[duplicated(operaciones), ] %>% 
-      unique() %>%
-      pull(getCodigoBD(getBDFromRuta(ruta))[1]) %>%
-      toString()
+    operaciones <- BD %>% select(getCodigoBD(getBDFromRuta(ruta))[1]) 
+    duplicados  <- operaciones[duplicated(operaciones), ] %>% unique() %>% pull(getCodigoBD(getBDFromRuta(ruta))[1]) %>% toString()
+    
     return(duplicados)
+  }
+  if (getBDFromRuta(ruta) == "BD02A") {
+    duplicados <- BD %>%
+      group_by(CCR, NCUO) %>%
+      filter(n() >1) %>%
+      pull(CCR) %>% 
+      unique() %>% toString()
+    
+    return(duplicados)
+  }
+  if (getBDFromRuta(ruta) == "BD02B") {
+    duplicados <- BD %>%
+      group_by(CCR_C, NCUO_C) %>%
+      filter(n() >1) %>%
+      pull(CCR_C) %>% 
+      unique() %>% toString()
+    
+    return(duplicados)
+  }
+  else{return("")}
+}
+getSaldoTotal            <- function(ruta, opers){
+  
+    if (getBDFromRuta(ruta) == "BD01" | getBDFromRuta(ruta) == "BD02A" | getBDFromRuta(ruta) == "BD02B") {
+      saldo <- evaluarFile(str_replace(ruta, getBDFromRuta(ruta), "BD01")) %>% 
+        filter(CCR %in% unlist(str_split(opers, pattern = ", " ))) %>%
+        pull(SKCR) %>% as.numeric() %>% sum()
     }
-  else {
-    return("")
-    }  
+    else {
+      saldo <- evaluarFile(ruta) %>% 
+        filter(CODGR %in% unlist(str_split(opers, pattern = ", " ))) %>%
+        pull(VCONS) %>%
+        unique() %>% as.numeric() %>% sum()
+    }
+    
+    return(saldo)
 }

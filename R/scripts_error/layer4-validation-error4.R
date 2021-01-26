@@ -14,23 +14,23 @@ validarCampos <- function(agente, eb){
   
   ## i. Errores tipo1 ----
   
-   # erorres 401:421
+   # erorres 601:621
     for (i in 1:length(exigibles)){
       eb     <- procesarErroresT1(agente, getRuta(carpeta, exigibles[i]), eb)
     }
   
-   # errores 422
-    exigiblesError422 <- intersect(getArchivosNoObservadosByCols(agente, eb, c("TID", "NID", "TID_C", "NID_C")),
+   # errores 622
+    exigiblesError622 <- intersect(getArchivosNoObservadosByCols(agente, eb, c("TID", "NID", "TID_C", "NID_C")),
                                    exigibles[str_detect(exigibles, paste(c("BD01","BD04"), collapse = '|'))])
   
-    error422  <- tibble(Archivo = exigiblesError422) %>% rowwise() %>%
+    error622  <- tibble(Archivo = exigiblesError622) %>% rowwise() %>%
       mutate(ruta      = getRuta(getCarpetaFromAgent(agente), Archivo),
              verificar = procesarErrorDocumentoIdent(ruta) %>% unique() %>% toString(),
-             Cod       = 422) %>%
+             Cod       = 622) %>%
       filter(verificar != "")
   
-    if (nrow(error422) >0) {
-      chunk422 <- error422 %>% rowwise() %>%
+    if (nrow(error622) >0) {
+      chunk622 <- error622 %>% rowwise() %>%
         mutate(CodCoopac = getCoopacFromAgent(agente),
                IdProceso = getIdProcesoFromAgent(agente),
                Periodo = getAnoMesFromRuta(toString(ruta)),
@@ -39,11 +39,11 @@ validarCampos <- function(agente, eb){
                num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
         select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
       
-      eb <- addError(eb, chunk422)
+      eb <- addError(eb, chunk622)
     }
   
    #addEvent Tipo1:
-    n <- eb %>% filter(Cod %in% c(401:422)) %>% nrow()
+    n <- eb %>% filter(Cod %in% c(601:622)) %>% nrow()
     if (n == 0) {
       addEventLog(agente, paste0("La validación de los campos concluyó sin observaciones tipo1. (~ly4) "), "I", "B")
     }
@@ -53,23 +53,23 @@ validarCampos <- function(agente, eb){
 
   ## ii. Errores tipo2 ----
   
-   # error 423:429
+   # error 701:707
     exigibles <- exigibles[str_detect(exigibles, paste(c("BD01","BD02A","BD02B","BD04"), collapse = '|'))]
   
     for (ii in 1:length(exigibles)) {
       eb     <- procesarErroresT2(agente, getRuta(carpeta, exigibles[ii]), eb)
     }
   
-   # error 430
-    exigibles430 <- intersect(exigibles[str_detect(exigibles, "BD01")], getArchivosNoObservadosByCols(agent, eb, "FOT"))
-    error430     <- tibble(Archivo = exigibles430) %>% rowwise() %>%
+   # error 708
+    exigibles708 <- intersect(exigibles[str_detect(exigibles, "BD01")], getArchivosNoObservadosByCols(agent, eb, "FOT"))
+    error708     <- tibble(Archivo = exigibles708) %>% rowwise() %>%
       mutate(ruta      = getRuta(getCarpetaFromAgent(agente), Archivo),
              verificar = procesarErrorFechaDesembolso(ruta) %>% unique() %>% toString(),
-             Cod       = 430) %>%
+             Cod       = 708) %>%
       filter(verificar != "")
   
-    if (nrow(error430) >0) {
-      chunk430 <- error430 %>% rowwise() %>%
+    if (nrow(error708) >0) {
+      chunk708 <- error708 %>% rowwise() %>%
         mutate(CodCoopac = getCoopacFromAgent(agente),
                IdProceso = getIdProcesoFromAgent(agente),
                Periodo = getAnoMesFromRuta(toString(ruta)),
@@ -78,11 +78,11 @@ validarCampos <- function(agente, eb){
                num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
         select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
       
-      eb <- addError(eb, chunk430)
+      eb <- addError(eb, chunk708)
     }
     
    #addEvent Tipo2:
-    n <- eb %>% filter(Cod %in% c(423:430)) %>% nrow()
+    n <- eb %>% filter(Cod %in% c(701:708)) %>% nrow()
     if (n == 0) {
       addEventLog(agente, paste0("La validación de los campos concluyó sin observaciones tipo2. (~ly4) "), "I", "B")
     }
@@ -166,12 +166,12 @@ getColsErrorT1 <- function(ruta){
 }
 getCodErrorT1  <- function(ruta, campo){
   codError <- switch (getBDFromRuta(ruta),
-                      BD01  = {c(401,402,403,404,405,406,407)},
-                      BD02A = {c(408,409)},
-                      BD02B = {c(410,411)},
-                      BD03A = {c(412,413)},
-                      BD03B = {c(414)},
-                      BD04  = {c(415,416,417,418,419,420,421)})
+                      BD01  = {c(601,602,603,604,605,606,607)},
+                      BD02A = {c(608,609)},
+                      BD02B = {c(610,611)},
+                      BD03A = {c(612,613)},
+                      BD03B = {c(614)},
+                      BD04  = {c(615,616,617,618,619,620,621)})
   
   cod <- tibble(col       = getColsErrorT1(ruta),
                 cod_error = codError) %>% 
@@ -272,10 +272,10 @@ getColsErrorT2 <- function(ruta){
 }
 getCodErrorT2  <- function(ruta, campo){
   codError <- switch (getBDFromRuta(ruta),
-                      BD01  = {c(423,424,425)},
-                      BD02A = {c(426)},
-                      BD02B = {c(427)},
-                      BD04  = {c(428, 429)})
+                      BD01  = {c(701,702,703)},
+                      BD02A = {c(704)},
+                      BD02B = {c(705)},
+                      BD04  = {c(706, 707)})
   
   cod <- tibble(col       = getColsErrorT2(ruta),
                 cod_error = codError) %>% 

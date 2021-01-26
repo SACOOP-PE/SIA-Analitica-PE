@@ -22,7 +22,7 @@ createAgent  <- function(idCoopac, periodoInicial, periodoFinal){
 createBucket <- function(agente){
   eb <- tibble(CodCoopac     = agente %>% pull(Coopac) %>% first(),
                IdProceso  = agente %>% pull(IdProceso) %>% first(), 
-               Cod         = 999,
+               Cod         = 100,
                Periodo = "",
                BD = "",
                txt1 = "",
@@ -64,7 +64,7 @@ interrogateAgent <- function(agente){
   
     if (nrow(eb) > 0) {
       
-      if (nrow(eb %>% filter(Cod %in% c(101, 102))) >0) { 
+      if (nrow(eb %>% filter(Cod %in% c(201, 202))) >0) { 
       
       n <- eb %>% filter(Cod %in% c(201,202)) %>% nrow()
       addEventLog(agente, paste0("La revisión de estructura de datos tiene observaciones. Continuar con discreción."), "I", "B")
@@ -88,7 +88,7 @@ interrogateAgent <- function(agente){
 
     if (nrow(eb) > 0) {
       
-      if (nrow(eb %>% filter(Cod %in% c(201:430))) >0) {
+      if (nrow(eb %>% filter(Cod %in% c(301:708))) >0) {
 
         addEventLog(agente, paste0("La revisión errores OM 22269-2020 tiene observaciones."), "I", "B")
       }
