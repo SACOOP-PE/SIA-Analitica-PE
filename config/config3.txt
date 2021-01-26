@@ -16,7 +16,7 @@ Cod	Descripcion	Criticidad
 310	Las provisiones específicas de la cartera correspondiente al mes de {0} no cuadra con el balance de comprobación. Diferencia: {1} 	ALTA
 401	Se detectaron {0} crédito(s) duplicado(s) en la cartera en el mes de {1} con un saldo de colocaciones por S/ {2} durante el periodo {3}.	ALTA
 402	Se detectaron {0} crédito(s) con cronogramas duplicado(s) en el mes de {1} con un saldo de colocaciones por S/ {2} durante el periodo {3}.	ALTA
-403	Se detectaron {0} operacione(s) de crédito con cronogramas cancelados duplicados en el periodo {1} con un saldo de colocaciones por S/ {2} durante el periodo {3}.	ALTA
+403	Se detectaron {0} operación(es) de crédito con cronogramas cancelados duplicados en el periodo {1} con un saldo de colocaciones por S/ {2} durante el periodo {3}.	ALTA
 404	Se detectaron {0} código(s) de garantía duplicados en el periodo {1} con un saldo de colocaciones por S/ {1} durante el periodo {2}	ALTA
 501	Se detectaron {0} crédito(s) faltantes de acuerdo con los cronogramas reportados en el periodo {1}, los créditos observados tienen un saldo de colocaciones por S/ {2} durante el periodo {3}.	ALTA
 502	Se detectaron {0} cronograma(s) faltantes de acuerdo con la cartera reportada en el periodo {1}, los créditos observados tienen un saldo de colocaciones por S/ {2} durante el periodo {3}.	ALTA

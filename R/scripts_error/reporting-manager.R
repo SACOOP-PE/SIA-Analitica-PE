@@ -11,7 +11,7 @@ formatBucket <- function(eb) {
                                          if_else(Cod >=301 & Cod <=310, 
                                                  str_replace_all(getDescError(Cod), c("\\Q{0}"  = months(as.Date(paste(substr(Periodo,1,4), substr(Periodo,5,6), "01", sep = "-"))),
                                                                                       "\\Q{1}"  = "")),
-                                                 if_else(Cod ==401 & Cod ==402,
+                                                 if_else(Cod ==401 | Cod ==402,
                                                          str_replace_all(getDescError(Cod), c("\\Q{0}"  = toString(num1),
                                                                                               "\\Q{1}"  = months(as.Date(paste(substr(Periodo,1,4), substr(Periodo,5,6), "01", sep = "-"))),
                                                                                               "\\Q{2}"  = toString(num2),
