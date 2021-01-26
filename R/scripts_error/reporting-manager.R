@@ -42,7 +42,7 @@ getDescError   <- function(CodError) {
 }
 cutStringError <- function(num1, txt1) {
   if (num1 > 100) {
-    txt1 <- str_split(txt1, ", ")[[1]]
+    txt1 <- str_split(txt1, ",") %>% unlist()
     
     txt1 <- paste0(toString(txt1[1:5]), " ...")
     return(txt1)
@@ -62,8 +62,8 @@ periodoEscrito  <- function(periodo) {
 }
 
 
-saveOutputs <- function(agente, ebFormatt, pidlog) {
-  #agent----
+saveOutputs <- function(agente, eb, ebFormat, pidlog) {
+  #agent ----
   agente %>% 
     writexl::write_xlsx(paste0(paste0(getwd(), "/test/"),
                                paste(agente %>% pull(Coopac),
@@ -72,16 +72,25 @@ saveOutputs <- function(agente, ebFormatt, pidlog) {
                                      sep = "_"),
                                "_agente.xlsx"))
   
-  #ebFormatted ----
-  ebFormatt %>%
+  #bucket ----
+  eb %>% rowwise() %>%
+    mutate(txt1 = cutStringError(num1, txt1)) %>% 
     writexl::write_xlsx(paste0(paste0(getwd(), "/test/"),
                                paste(agente %>% pull(Coopac),
                                      getIdProcesoFromAgent(agente),
                                      paste0("(",agente %>% pull(PeriodoInicial),"-", agente %>% pull(PeriodoFinal),")"),
                                      sep = "_"),
-                               "_reportErrores.xlsx"))
+                               "_ListaErrores.xlsx"))
+  #ebFormatted ----
+  ebFormat %>%
+    writexl::write_xlsx(paste0(paste0(getwd(), "/test/"),
+                               paste(agente %>% pull(Coopac),
+                                     getIdProcesoFromAgent(agente),
+                                     paste0("(",agente %>% pull(PeriodoInicial),"-", agente %>% pull(PeriodoFinal),")"),
+                                     sep = "_"),
+                               "_ResumenErrores.xlsx"))
   
-  #pidlog----
+  #pidlog ----
   pidlog %>%
     write_delim(path = paste0(getwd(), "/logging/", "PID-", getIdProcesoFromAgent(agente), "_log.txt"), delim = "\t",
                 col_names = T, append = T)
