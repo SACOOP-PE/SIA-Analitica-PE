@@ -34,7 +34,7 @@ validarOperacionesDuplicadas <- function(agente, eb){
              Cod = 401,
              txt1 = Duplicados,
              num1 = length(str_split(string=txt1 ,pattern = ",")[[1]]),
-             num2 = Saldo
+             num2 = if_else(is.na(Saldo), 0, Saldo)
              ) %>%
       select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1, num2)
 
@@ -47,7 +47,7 @@ validarOperacionesDuplicadas <- function(agente, eb){
              Cod = 402,
              txt1 = Duplicados,
              num1 = length(str_split(string=txt1 ,pattern = ",")[[1]]),
-             num2 = Saldo
+             num2 = if_else(is.na(Saldo), 0, Saldo)
       ) %>%
       select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1, num2)
     
@@ -60,7 +60,7 @@ validarOperacionesDuplicadas <- function(agente, eb){
              Cod = 403,
              txt1 = Duplicados,
              num1 = length(str_split(string=txt1 ,pattern = ",")[[1]]),
-             num2 = Saldo
+             num2 = if_else(is.na(Saldo), 0, Saldo)
       ) %>%
       select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1, num2)
     
@@ -73,7 +73,7 @@ validarOperacionesDuplicadas <- function(agente, eb){
              Cod = 404,
              txt1 = Duplicados,
              num1 = length(str_split(string=txt1 ,pattern = ",")[[1]]),
-             num2 = Saldo
+             num2 = if_else(is.na(Saldo), 0, Saldo)
       ) %>%
       select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1, num2)
     

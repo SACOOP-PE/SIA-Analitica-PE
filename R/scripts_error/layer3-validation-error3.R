@@ -66,7 +66,7 @@ validarCruceInterno <- function(agente, eb){
                BD  = "BD03B",
                txt1 = GaranFaltantes_BD03A,
                num1 = length(str_split(string=txt1 ,pattern = ",")[[1]]),
-               num2 = getSaldoTotal(getRuta(carpeta, paste(CodCoopac, "BD03A", Periodo, sep = "_")), GaranFaltantes_BD03A)
+               num2 = 0
                ) %>%
         select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1, num2)
       

@@ -36,19 +36,11 @@ formatBucket <- function(eb) {
   return(output)
 }
 
-getDescError    <- function(CodError) {
+getDescError   <- function(CodError) {
   descr <- initRepositorioErrores() %>% filter(Cod == CodError) %>% pull(Descripcion)
   return(descr)
 }
-descPartInicial <- function(num1) {
-
-partInicial <- ifelse(num1 == 1, 
-                      paste0("Se identificó ", pad2(num1)),
-                      paste0("Se identificaron ", pad2(num1)))
-
-return(partInicial)
-}
-cutStringError  <- function(num1, txt1) {
+cutStringError <- function(num1, txt1) {
   if (num1 > 100) {
     txt1 <- str_split(txt1, ", ")[[1]]
     
