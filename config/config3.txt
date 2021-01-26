@@ -42,7 +42,7 @@ Cod	Descripcion	Criticidad
 619	Se detectaron {0} crédito(s) con diferentes o vacíos en la Esquema de amortización (ESAM_C) de la BD04 durante el periodo {1}. Valores correctos: {2}	MEDIA
 620	Se detectaron {0} crédito(s) con diferentes o vacíos en la Forma de Cancelación del crédito (FOCAN_C) de la BD04 durante el periodo {1}. Valores correctos: {2}	MEDIA
 621	Se detectaron {0} crédito(s) con diferentes o vacíos en la Modalidad específica bajo la cual fue otorgado el Crédito(MDCR_C) de la BD04 durante el periodo {1}. Valores correctos: {2}	MEDIA
-622	Se detectaron {0} crédito(s) con errores en la longitud NID o NID_C en la BD01 y BD04 durante el periodo {1}.	BAJA
+622	Se detectaron {0} crédito(s) con errores en el Número y Tipo de Documento ({1}) respectivamente, correspondiente a la base de datos crediticia {2} durante el periodo {3}.	BAJA
 701	Se detectaron {0} crédito(s) con fechas vacías o erróneas en la Fecha de desembolso (FOT) en la BD01 durante el periodo {1}.	MEDIA
 702	Se detectaron {0} crédito(s) con fechas vacías o erróneas en la Fecha de vencimiento general de la operación según cronograma (FVEG) en la BD01 durante el periodo {1}.	MEDIA
 703	Se detectaron {0} crédito(s) con fechas vacías o erróneas en la Fecha de vencimiento puntual de la operación (FVEP) en la BD01 durante el periodo {1}.	MEDIA
