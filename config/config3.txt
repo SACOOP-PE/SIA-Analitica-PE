@@ -25,23 +25,23 @@ Cod	Descripcion	Criticidad
 602	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en el Tipo de crédito (TCR) en la cartera de créditos durante el periodo {1}. Valores correctos: {2}	MEDIA
 603	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Clasificación del deudor (CAL) en la cartera de créditos durante el periodo {1}. Valores correctos: {2}	MEDIA
 604	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en el Esquema de amortización (ESAM) en la BD01 durante el periodo {1}. Valores correctos: {2}	MEDIA
-605	Se detectaron {0} crédito(s) con diferentes o vacíos en el Sector del Crédito a financiar (SEC) en la BD01 durante el periodo {1}. Valores correctos: {2}	MEDIA
-606	Se detectaron {0} crédito(s) con diferentes o vacíos en la Modalidad del Crédito (MDCR) en la BD01 durante el periodo {1}. Valores correctos: {2}	MEDIA
-607	Se detectaron {0} crédito(s) con diferentes o vacíos en el Ocupación del socio deudor declarado (OSD) en la BD01 durante el periodo {1}. Valores correctos: {2}	MEDIA
-608	Se detectaron {0} crédito(s) con diferentes o vacíos en la Moneda (MON) de la BD02A durante el periodo {1}. Valores correctos: {2}	MEDIA
-609	Se detectaron {0} crédito(s) con diferentes o vacíos en la Forma de cancelación de la cuota (FOCAN) de la BD02A durante el periodo {1}. Valores correctos: {2}	MEDIA
-610	Se detectaron {0} crédito(s) con diferentes o vacíos en la Moneda (MON_C) de la BD02B durante el periodo {1}. Valores correctos: {2}	MEDIA
-611	Se detectaron {0} crédito(s) con diferentes o vacíos en la Forma de cancelación de la cuota (FOCAN_C) de la BD02B durante el periodo {1}. Valores correctos: {2}	MEDIA
-612	Se detectaron {0} crédito(s) con diferentes o vacíos en la Clase de garantía (CGR) de la BD03A durante el periodo {1}. Valores correctos: {2}	MEDIA
-613	Se detectaron {0} crédito(s) con diferentes o vacíos en la Cobertura de garantía (COBGR) de la BD03A durante el periodo {1}. Valores correctos: {2}	MEDIA
-614	Se detectaron {0} crédito(s) con diferentes o vacíos en la Clase de garantía (CGR) de la BD03B durante el periodo {1}. Valores correctos: {2}	MEDIA
-615	Se detectaron {0} crédito(s) con diferentes o vacíos en la Tipo de documento (TID_C) de la BD04 durante el periodo {1}. Valores correctos: {2}	MEDIA
-616	Se detectaron {0} crédito(s) con diferentes o vacíos en la Tipo de crédito (TCR_C) de la BD04 durante el periodo {1}. Valores correctos: {2}	MEDIA
-617	Se detectaron {0} crédito(s) con diferentes o vacíos en la Moneda (MON_C) de la BD04 durante el periodo {1}. Valores correctos: {2}	MEDIA
-618	Se detectaron {0} crédito(s) con diferentes o vacíos en la Clasificación del Deudor a la fecha de cancelación del crédito (CAL_C) de la BD04 durante el periodo {1}. Valores correctos: {2}	MEDIA
-619	Se detectaron {0} crédito(s) con diferentes o vacíos en la Esquema de amortización (ESAM_C) de la BD04 durante el periodo {1}. Valores correctos: {2}	MEDIA
-620	Se detectaron {0} crédito(s) con diferentes o vacíos en la Forma de Cancelación del crédito (FOCAN_C) de la BD04 durante el periodo {1}. Valores correctos: {2}	MEDIA
-621	Se detectaron {0} crédito(s) con diferentes o vacíos en la Modalidad específica bajo la cual fue otorgado el Crédito(MDCR_C) de la BD04 durante el periodo {1}. Valores correctos: {2}	MEDIA
+605	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en el Sector del Crédito a financiar (SEC) en la BD01 durante el periodo {1}. Valores correctos: {2}	MEDIA
+606	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Modalidad del Crédito (MDCR) en la BD01 durante el periodo {1}. Valores correctos: {2}	MEDIA
+607	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en el Ocupación del socio deudor declarado (OSD) en la BD01 durante el periodo {1}. Valores correctos: {2}	MEDIA
+608	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Moneda (MON) de la BD02A durante el periodo {1}. Valores correctos: {2}	MEDIA
+609	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Forma de cancelación de la cuota (FOCAN) de la BD02A durante el periodo {1}. Valores correctos: {2}	MEDIA
+610	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Moneda (MON_C) de la BD02B durante el periodo {1}. Valores correctos: {2}	MEDIA
+611	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Forma de cancelación de la cuota (FOCAN_C) de la BD02B durante el periodo {1}. Valores correctos: {2}	MEDIA
+612	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Clase de garantía (CGR) de la BD03A durante el periodo {1}. Valores correctos: {2}	MEDIA
+613	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Cobertura de garantía (COBGR) de la BD03A durante el periodo {1}. Valores correctos: {2}	MEDIA
+614	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Clase de garantía (CGR) de la BD03B durante el periodo {1}. Valores correctos: {2}	MEDIA
+615	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Tipo de documento (TID_C) de la BD04 durante el periodo {1}. Valores correctos: {2}	MEDIA
+616	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Tipo de crédito (TCR_C) de la BD04 durante el periodo {1}. Valores correctos: {2}	MEDIA
+617	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Moneda (MON_C) de la BD04 durante el periodo {1}. Valores correctos: {2}	MEDIA
+618	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Clasificación del Deudor a la fecha de cancelación del crédito (CAL_C) de la BD04 durante el periodo {1}. Valores correctos: {2}	MEDIA
+619	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Esquema de amortización (ESAM_C) de la BD04 durante el periodo {1}. Valores correctos: {2}	MEDIA
+620	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Forma de Cancelación del crédito (FOCAN_C) de la BD04 durante el periodo {1}. Valores correctos: {2}	MEDIA
+621	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Modalidad específica bajo la cual fue otorgado el Crédito(MDCR_C) de la BD04 durante el periodo {1}. Valores correctos: {2}	MEDIA
 622	Se detectaron {0} crédito(s) con errores en el Número y Tipo de Documento ({1}) respectivamente, correspondiente a la base de datos crediticia {2} durante el periodo {3}.	BAJA
 701	Se detectaron {0} crédito(s) con fechas vacías o erróneas en la Fecha de desembolso (FOT) en la BD01 durante el periodo {1}.	MEDIA
 702	Se detectaron {0} crédito(s) con fechas vacías o erróneas en la Fecha de vencimiento general de la operación según cronograma (FVEG) en la BD01 durante el periodo {1}.	MEDIA
