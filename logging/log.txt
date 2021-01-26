@@ -1680,3 +1680,18 @@
 100273	2021-01-26	2021-01-26 16:06:05	DPACHECO	SAN ISIDRO	test/datatest	[2021-01-26 16:06:05] - La validación de los campos concluyó con 283 observaciones tipo1. (~ly4) 	Informativo	Baja
 100273	2021-01-26	2021-01-26 16:06:36	DPACHECO	SAN ISIDRO	test/datatest	[2021-01-26 16:06:36] - La validación de los campos concluyó con 47 observación(es) tipo2. (~ly4) 	Informativo	Baja
 100273	2021-01-26	2021-01-26 16:06:36	DPACHECO	SAN ISIDRO	test/datatest	[2021-01-26 16:06:36] - La revisión errores OM 22269-2020 tiene observaciones.	Informativo	Baja
+100274	2021-01-26	2021-01-26 18:20:46	DPACHECO	SAN ISIDRO	test/datatest	[2021-01-26 18:20:46] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100274	2021-01-26	2021-01-26 18:20:46	DPACHECO	SAN ISIDRO	test/datatest	[2021-01-26 18:20:46] - Agente creado. PID-100274. [01183|201901~202011]	Informativo	Baja
+100274	2021-01-26	2021-01-26 18:20:46	DPACHECO	SAN ISIDRO	test/datatest	[2021-01-26 18:20:46] - Bucket de errores creado. PID-100274.	Informativo	Baja
+100274	2021-01-26	2021-01-26 18:20:47	DPACHECO	SAN ISIDRO	test/datatest	[2021-01-26 18:20:46] - Inicio del interrogatorio. PID-100274.	Informativo	Baja
+100274	2021-01-26	2021-01-26 18:20:47	DPACHECO	SAN ISIDRO	test/datatest	[2021-01-26 18:20:47] - Apertura de revisión de pre-requisitos.	Informativo	Baja
+100274	2021-01-26	2021-01-26 18:20:48	DPACHECO	SAN ISIDRO	test/datatest	[2021-01-26 18:20:48] - Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100274	2021-01-26	2021-01-26 18:20:48	DPACHECO	SAN ISIDRO	test/datatest	[2021-01-26 18:20:48] - Apertura de revisión de estructura de datos.	Informativo	Baja
+100274	2021-01-26	2021-01-26 18:21:32	DPACHECO	SAN ISIDRO	test/datatest	[2021-01-26 18:21:32] - La validación de Columnas vacías concluyó con 23 observación(es). (~ly1)	Informativo	Baja
+100274	2021-01-26	2021-01-26 18:21:32	DPACHECO	SAN ISIDRO	test/datatest	[2021-01-26 18:21:32] - Revisión de estructura de datos satisfatoria.	Informativo	Baja
+100274	2021-01-26	2021-01-26 18:21:32	DPACHECO	SAN ISIDRO	test/datatest	[2021-01-26 18:21:32] - Apertura de revisión de errores OM 22269-2020.	Informativo	Baja
+100274	2021-01-26	2021-01-26 18:23:29	DPACHECO	SAN ISIDRO	test/datatest	[2021-01-26 18:23:29] - La validación operaciones duplicadas concluyó con 12 observación(es). (~ly2) 	Informativo	Baja
+100274	2021-01-26	2021-01-26 18:24:27	DPACHECO	SAN ISIDRO	test/datatest	[2021-01-26 18:24:27] - La validación de cruce interno concluyó con 2 observación(es). (~ly3) 	Informativo	Baja
+100274	2021-01-26	2021-01-26 18:25:34	DPACHECO	SAN ISIDRO	test/datatest	[2021-01-26 18:25:34] - La validación de los campos concluyó con 283 observaciones tipo1. (~ly4) 	Informativo	Baja
+100274	2021-01-26	2021-01-26 18:26:06	DPACHECO	SAN ISIDRO	test/datatest	[2021-01-26 18:26:06] - La validación de los campos concluyó con 47 observación(es) tipo2. (~ly4) 	Informativo	Baja
+100274	2021-01-26	2021-01-26 18:26:06	DPACHECO	SAN ISIDRO	test/datatest	[2021-01-26 18:26:06] - La revisión errores OM 22269-2020 tiene observaciones.	Informativo	Baja
