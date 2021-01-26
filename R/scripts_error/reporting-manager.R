@@ -28,7 +28,7 @@ formatBucket <- function(eb) {
                                                                                                               "\\Q{2}"  = txt3)),
                                                                          if_else(Cod == 622,
                                                                                  str_replace_all(getDescError(Cod), c("\\Q{0}"  = toString(num1),
-                                                                                                                      "\\Q{1}"  = txt3,
+                                                                                                                      "\\Q{1}"  = txt2,
                                                                                                                       "\\Q{2}"  = BD,
                                                                                                                       "\\Q{3}"  = periodoEscrito(Periodo))),
                                                                                  if_else(Cod >=701,
