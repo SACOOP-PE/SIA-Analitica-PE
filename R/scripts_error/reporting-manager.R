@@ -6,8 +6,9 @@ formatBucket <- function(eb) {
                                  str_replace_all(getDescError(Cod), c("\\Q{0}"  = toString(num1))),
                                  if_else(Cod >=201 & Cod <=203,
                                          str_replace_all(getDescError(Cod), c("\\Q{0}"  = toString(num1),
-                                                                              "\\Q{1}"  = BD,
-                                                                              "\\Q{2}"  = periodoEscrito(Periodo))),
+                                                                              "\\Q{1}"  = txt1,
+                                                                              "\\Q{2}"  = BD,
+                                                                              "\\Q{3}"  = periodoEscrito(Periodo))),
                                          if_else(Cod >=301 & Cod <=310, 
                                                  str_replace_all(getDescError(Cod), c("\\Q{0}"  = months(as.Date(paste(substr(Periodo,1,4), substr(Periodo,5,6), "01", sep = "-"))),
                                                                                       "\\Q{1}"  = "")),
@@ -21,17 +22,22 @@ formatBucket <- function(eb) {
                                                                                                       "\\Q{1}"  = Periodo,
                                                                                                       "\\Q{2}"  = toString(num2),
                                                                                                       "\\Q{3}"  = periodoEscrito(Periodo))),
-                                                                 if_else(Cod >=601 & Cod <=708,
+                                                                 if_else(Cod >=601 & Cod <=621,
                                                                          str_replace_all(getDescError(Cod), c("\\Q{0}"  = toString(num1),
-                                                                                                              "\\Q{1}"  = periodoEscrito(Periodo))),
-                                                                         "")
+                                                                                                              "\\Q{1}"  = periodoEscrito(Periodo),
+                                                                                                              "\\Q{2}"  = txt3)),
+                                                                         if_else(Cod >=622,
+                                                                                 str_replace_all(getDescError(Cod), c("\\Q{0}"  = toString(num1),
+                                                                                                                      "\\Q{1}"  = periodoEscrito(Periodo))),
+                                                                                 "")
+                                                                         )
                                                                  )
                                                          )
                                                  )
                                          ),
                                  "")
            ) %>% 
-    select(Periodo, Cod, Descripcion)
+    select(Periodo, BD, Cod, Descripcion)
   
   return(output)
 }

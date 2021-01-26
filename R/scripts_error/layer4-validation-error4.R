@@ -25,7 +25,7 @@ validarCampos <- function(agente, eb){
   
     error622  <- tibble(Archivo = exigiblesError622) %>% rowwise() %>%
       mutate(ruta      = getRuta(getCarpetaFromAgent(agente), Archivo),
-             verificar = procesarErrorDocumentoIdent(ruta) %>% unique() %>% toString(),
+             verificar = procesarErrorDocumentoIdent(ruta),
              Cod       = 622) %>%
       filter(verificar != "")
   
@@ -36,8 +36,9 @@ validarCampos <- function(agente, eb){
                Periodo = getAnoMesFromRuta(toString(ruta)),
                BD      = getBDFromRuta(toString(ruta)),
                txt1 = verificar,
+               txt2 = if_else(BD == "BD01", "NID, TID", "NID_C, TID_C"),
                num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
-        select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
+        select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, txt2, num1)
       
       eb <- addError(eb, chunk622)
     }
@@ -201,8 +202,9 @@ procesarErroresT1 <- function(agente, ruta, eb){
                BD      = getBDFromRuta(toString(ruta)),
                txt1 = verificar,
                txt2 = Columna,
+               txt3 = toString(getDigitosBD(ruta, Columna)),
                num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
-        select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, txt2, num1)
+        select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, txt2, txt3, num1)
       
       eb <- addError(eb, chunkT1)
     }
@@ -235,7 +237,7 @@ procesarErrorDocumentoIdent <- function(ruta){
       rowwise() %>%
       mutate(detectarError = validarDocumentoIdent(TID, NID)) %>%
       filter(detectarError == "FALSE") %>%
-      pull(getCodigoBD(getBDFromRuta(ruta)))
+      pull(getCodigoBD(getBDFromRuta(ruta))) %>% unique() %>% toString()
     
     return(verificar_documento)
   }
@@ -245,7 +247,7 @@ procesarErrorDocumentoIdent <- function(ruta){
       rowwise() %>%
       mutate(detectarError = validarDocumentoIdent(TID_C, NID_C)) %>%
       filter(detectarError == "FALSE") %>%
-      pull(getCodigoBD(getBDFromRuta(ruta)))
+      pull(getCodigoBD(getBDFromRuta(ruta))) %>% unique() %>% toString()
     
     return(verificar_documento)
   }
