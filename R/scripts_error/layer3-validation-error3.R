@@ -73,6 +73,14 @@ validarCruceInterno <- function(agente, eb){
       eb <- addError(eb, chunk_503)
     }
   }
+  
+  n <- eb %>% filter(Cod %in% c(501:503)) %>% nrow()
+  if (n == 0) {
+    addEventLog(agente, paste0("La validación operaciones duplicadas concluyó sin observaciones tipo2. (~ly3) "), "I", "B")
+  }
+  else{
+    addEventLog(agente, paste0("La validación operaciones duplicadas concluyó con ",n," observación(es) tipo2. (~ly3) "), "I", "B")
+  }
 
   return(eb)
 }
