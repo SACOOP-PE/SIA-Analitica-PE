@@ -93,7 +93,7 @@ validarOperacionesDuplicadas <- function(agente, eb){
 
 #validarOperacionesDuplicadas
 getoperacionesDuplicadas <- function(ruta){
-  BD <- evaluarFile(ruta)
+  BD <- quitarVaciosBD(ruta)
   
   if (getBDFromRuta(ruta) == "BD01" | getBDFromRuta(ruta) == "BD03A") {
     operaciones <- BD %>% select(getCodigoBD(getBDFromRuta(ruta))[1]) 
@@ -124,12 +124,12 @@ getoperacionesDuplicadas <- function(ruta){
 getSaldoTotal            <- function(ruta, opers){
   
     if (getBDFromRuta(ruta) == "BD01" | getBDFromRuta(ruta) == "BD02A" | getBDFromRuta(ruta) == "BD02B") {
-      saldo <- evaluarFile(str_replace(ruta, getBDFromRuta(ruta), "BD01")) %>% 
+      saldo <- quitarVaciosBD(str_replace(ruta, getBDFromRuta(ruta), "BD01")) %>% 
         filter(CCR %in% unlist(str_split(opers, pattern = ", " ))) %>%
         pull(SKCR) %>% as.numeric() %>% sum()
     }
     else {
-      saldo <- evaluarFile(ruta) %>% 
+      saldo <- quitarVaciosBD(ruta) %>% 
         filter(CODGR %in% unlist(str_split(opers, pattern = ", " ))) %>%
         pull(VCONS) %>%
         unique() %>% as.numeric() %>% sum()

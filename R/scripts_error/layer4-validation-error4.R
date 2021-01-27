@@ -97,6 +97,15 @@ validarCampos <- function(agente, eb){
 #' Tipo 1: validaciones a campos con dígitos específicos
 #' Tipo 2: validaciones a campos fecha
 
+quitarVaciosBD <- function(ruta){
+  BD <- evaluarFile(ruta)
+  
+  BDSinVacios <- BD %>%
+    filter(is.na(cgrep(BD, getCodigoBD(getBDFromRuta(ruta)))) == FALSE)
+  
+  return(BDSinVacios)
+}
+
 # Tipo1 ----
 getDigitosBD01  <- function(campo){
   digitos <- switch (campo,
@@ -182,7 +191,7 @@ getCodErrorT1  <- function(ruta, campo){
 }
 
 procesarErroresT1 <- function(agente, ruta, eb){
-  BDCC <- evaluarFile(ruta)
+  BDCC <- quitarVaciosBD(ruta)
   
   if (length(getColsNoObservadas(ruta, eb, "T1")) >0) {
     erroresTipo1 <- tibble(Columna = getColsNoObservadas(ruta, eb, "T1")) %>% rowwise() %>%
@@ -228,7 +237,7 @@ validarDocumentoIdent       <- function(tipodocumento, ndocumento){
   }
 }
 procesarErrorDocumentoIdent <- function(ruta){
-  BD <- evaluarFile(ruta)
+  BD <- quitarVaciosBD(ruta)
   
   if (getBDFromRuta(ruta) =="BD01"){
     verificar_documento <- BD %>% rowwise() %>%
@@ -277,7 +286,7 @@ getCodErrorT2  <- function(ruta, campo){
 }
 
 procesarErroresT2 <- function(agente, ruta, eb){
-  BDCC <- evaluarFile(ruta)
+  BDCC <- quitarVaciosBD(ruta)
   
   if (length(getColsNoObservadas(ruta, eb, "T2")) >0) {
     erroresTipo2 <- tibble(Columna = getColsNoObservadas(ruta, eb, "T2")) %>%
@@ -285,7 +294,7 @@ procesarErroresT2 <- function(agente, ruta, eb){
       mutate(BD        = getBDFromRuta(ruta),
              verificar = BDCC %>% 
                             filter(dmy(cgrep(BDCC, Columna)[[1]]) %>% is.na() == TRUE) %>% 
-                            pull(getCodigoBD(BD)) %>% unique() %>% replace_na("") %>% toString(),
+                            pull(getCodigoBD(BD)) %>% unique() %>% toString(),
              Cod       = getCodErrorT2(ruta, Columna)) %>% 
       filter(verificar != "")
     
@@ -314,7 +323,7 @@ getFechaCorte                <- function(ruta){
   return(fecha_corte)
 }
 procesarErrorFechaDesembolso <- function(ruta){
-  BD <- evaluarFile(ruta) 
+  BD <- quitarVaciosBD(ruta) 
   
   error <- BD %>%
     filter((dmy(BD %>% pull(FOT)) > getFechaCorte(ruta)) == TRUE) %>% 

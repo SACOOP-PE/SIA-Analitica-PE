@@ -92,10 +92,10 @@ realizarCruce       <- function(agente, periodo, data1, data2){
   archivo2 <- getRuta(getCarpetaFromAgent(agente), 
                       paste0(paste(getCoopacFromAgent(agente), data2, periodo, sep  = "_"), ".txt"))
   
-  cruce <- setdiff(evaluarFile(getRuta(getCarpetaFromAgent(agente), archivo1)) %>% pull(getCodigoBD(data1)),
-                   evaluarFile(getRuta(getCarpetaFromAgent(agente), archivo2)) %>% pull(getCodigoBD(data2))) %>%
+  cruce <- setdiff(quitarVaciosBD(getRuta(getCarpetaFromAgent(agente), archivo1)) %>% pull(getCodigoBD(data1)),
+                   quitarVaciosBD(getRuta(getCarpetaFromAgent(agente), archivo2)) %>% pull(getCodigoBD(data2))) %>%
     unique() %>%
-    toString() %>% replace_na("")
+    toString()
   
   return(cruce)
 }

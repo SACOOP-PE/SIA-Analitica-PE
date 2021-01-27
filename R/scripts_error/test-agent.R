@@ -21,9 +21,9 @@
   
 
   ##### Testing -----
-  agent <- createAgent(idCoopac = "01183",
+  agent <- createAgent(idCoopac = "01112",
                        periodoInicial = "201901",
-                       periodoFinal   = "202011")
+                       periodoFinal   = "202012")
   
   bucket      <- interrogateAgent(agent)
   agent       <- closeAgent(agent, bucket)
