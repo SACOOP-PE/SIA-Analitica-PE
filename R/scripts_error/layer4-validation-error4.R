@@ -182,15 +182,14 @@ getCodErrorT1  <- function(ruta, campo){
 }
 
 procesarErroresT1 <- function(agente, ruta, eb){
-  BD <- evaluarFile(ruta)
+  BDCC <- evaluarFile(ruta)
   
   if (length(getColsNoObservadas(ruta, eb, "T1")) >0) {
-    erroresTipo1 <- tibble(Columna = getColsNoObservadas(ruta, eb, "T1")) %>%
-      rowwise() %>%
-      mutate(verificar = BD %>% 
-               filter((as.numeric(cgrep(BD, Columna)[[1]]) %in% getDigitosBD(ruta, Columna)) == FALSE) %>%
-               pull(getCodigoBD(getBDFromRuta(ruta))) %>%
-               unique() %>% toString() %>% replace_na(""),
+    erroresTipo1 <- tibble(Columna = getColsNoObservadas(ruta, eb, "T1")) %>% rowwise() %>%
+      mutate(BD        = getBDFromRuta(ruta),
+             verificar = BDCC %>% 
+                            filter((as.numeric(cgrep(BDCC, Columna)[[1]]) %in% getDigitosBD(ruta, Columna)) == FALSE) %>%
+                            pull(getCodigoBD(BD)) %>% unique() %>% toString(),
              Cod       = getCodErrorT1(ruta, Columna)) %>% 
       filter(verificar != "")
     
@@ -198,8 +197,7 @@ procesarErroresT1 <- function(agente, ruta, eb){
       chunkT1 <- erroresTipo1 %>% rowwise() %>%
         mutate(CodCoopac = getCoopacFromAgent(agente),
                IdProceso = getIdProcesoFromAgent(agente),
-               Periodo = getAnoMesFromRuta(toString(ruta)),
-               BD      = getBDFromRuta(toString(ruta)),
+               Periodo = getAnoMesFromRuta(ruta),
                txt1 = verificar,
                txt2 = Columna,
                txt3 = toString(getDigitosBD(ruta, Columna)),
@@ -233,23 +231,21 @@ procesarErrorDocumentoIdent <- function(ruta){
   BD <- evaluarFile(ruta)
   
   if (getBDFromRuta(ruta) =="BD01"){
-    verificar_documento <- BD %>% 
-      rowwise() %>%
+    verificar_documento <- BD %>% rowwise() %>%
       mutate(detectarError = validarDocumentoIdent(TID, NID)) %>%
       filter(detectarError == "FALSE") %>%
       pull(getCodigoBD(getBDFromRuta(ruta))) %>% 
-      unique() %>% toString() %>% replace_na("")
+      unique() %>% replace_na("")  %>% toString()
     
     return(verificar_documento)
   }
   
   if (getBDFromRuta(ruta) =="BD04"){
-    verificar_documento <- BD %>% 
-      rowwise() %>%
+    verificar_documento <- BD %>% rowwise() %>%
       mutate(detectarError = validarDocumentoIdent(TID_C, NID_C)) %>%
       filter(detectarError == "FALSE") %>%
       pull(getCodigoBD(getBDFromRuta(ruta))) %>%
-      unique() %>% toString() %>% replace_na("")
+      unique() %>% replace_na("") %>% toString()
     
     return(verificar_documento)
   }
@@ -281,15 +277,15 @@ getCodErrorT2  <- function(ruta, campo){
 }
 
 procesarErroresT2 <- function(agente, ruta, eb){
-  BD <- evaluarFile(ruta)
+  BDCC <- evaluarFile(ruta)
   
   if (length(getColsNoObservadas(ruta, eb, "T2")) >0) {
     erroresTipo2 <- tibble(Columna = getColsNoObservadas(ruta, eb, "T2")) %>%
       rowwise() %>%
-      mutate(verificar = BD %>% 
-               filter(dmy(cgrep(BD, Columna)[[1]]) %>% is.na() == TRUE) %>% 
-               pull(getCodigoBD(getBDFromRuta(ruta))) %>%
-               unique() %>% toString() %>% replace_na(""),
+      mutate(BD        = getBDFromRuta(ruta),
+             verificar = BDCC %>% 
+                            filter(dmy(cgrep(BDCC, Columna)[[1]]) %>% is.na() == TRUE) %>% 
+                            pull(getCodigoBD(BD)) %>% unique() %>% replace_na("") %>% toString(),
              Cod       = getCodErrorT2(ruta, Columna)) %>% 
       filter(verificar != "")
     
@@ -297,8 +293,7 @@ procesarErroresT2 <- function(agente, ruta, eb){
       chunkT2 <- erroresTipo2 %>% rowwise() %>%
         mutate(CodCoopac = getCoopacFromAgent(agente),
                IdProceso = getIdProcesoFromAgent(agente),
-               Periodo = getAnoMesFromRuta(toString(ruta)),
-               BD      = getBDFromRuta(toString(ruta)),
+               Periodo = getAnoMesFromRuta(ruta),
                txt1 = verificar,
                txt2 = Columna,
                num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
