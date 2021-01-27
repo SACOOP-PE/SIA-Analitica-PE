@@ -190,7 +190,7 @@ procesarErroresT1 <- function(agente, ruta, eb){
       mutate(verificar = BD %>% 
                filter((as.numeric(cgrep(BD, Columna)[[1]]) %in% getDigitosBD(ruta, Columna)) == FALSE) %>%
                pull(getCodigoBD(getBDFromRuta(ruta))) %>%
-               unique() %>% toString(),
+               unique() %>% toString() %>% replace_na(""),
              Cod       = getCodErrorT1(ruta, Columna)) %>% 
       filter(verificar != "")
     
@@ -287,7 +287,7 @@ procesarErroresT2 <- function(agente, ruta, eb){
       mutate(verificar = BD %>% 
                filter(dmy(cgrep(BD, Columna)[[1]]) %>% is.na() == TRUE) %>% 
                pull(getCodigoBD(getBDFromRuta(ruta))) %>%
-               unique() %>% toString(),
+               unique() %>% toString() %>% replace_na(""),
              Cod       = getCodErrorT2(ruta, Columna)) %>% 
       filter(verificar != "")
     
