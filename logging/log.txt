@@ -1695,3 +1695,18 @@
 100274	2021-01-26	2021-01-26 18:25:34	DPACHECO	SAN ISIDRO	test/datatest	[2021-01-26 18:25:34] - La validación de los campos concluyó con 283 observaciones tipo1. (~ly4) 	Informativo	Baja
 100274	2021-01-26	2021-01-26 18:26:06	DPACHECO	SAN ISIDRO	test/datatest	[2021-01-26 18:26:06] - La validación de los campos concluyó con 47 observación(es) tipo2. (~ly4) 	Informativo	Baja
 100274	2021-01-26	2021-01-26 18:26:06	DPACHECO	SAN ISIDRO	test/datatest	[2021-01-26 18:26:06] - La revisión errores OM 22269-2020 tiene observaciones.	Informativo	Baja
+100275	2021-01-27	2021-01-27 16:46:49	DPACHECO	CRISTOBAL DE HUAMANG	test/datatest	[2021-01-27 16:46:49] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100275	2021-01-27	2021-01-27 16:46:49	DPACHECO	CRISTOBAL DE HUAMANG	test/datatest	[2021-01-27 16:46:49] - Agente creado. PID-100275. [01112|201901~202012]	Informativo	Baja
+100275	2021-01-27	2021-01-27 16:46:49	DPACHECO	CRISTOBAL DE HUAMANG	test/datatest	[2021-01-27 16:46:49] - Bucket de errores creado. PID-100275.	Informativo	Baja
+100275	2021-01-27	2021-01-27 16:46:49	DPACHECO	CRISTOBAL DE HUAMANG	test/datatest	[2021-01-27 16:46:49] - Inicio del interrogatorio. PID-100275.	Informativo	Baja
+100275	2021-01-27	2021-01-27 16:46:49	DPACHECO	CRISTOBAL DE HUAMANG	test/datatest	[2021-01-27 16:46:49] - Apertura de revisión de pre-requisitos.	Informativo	Baja
+100275	2021-01-27	2021-01-27 16:46:50	DPACHECO	CRISTOBAL DE HUAMANG	test/datatest	[2021-01-27 16:46:50] - Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100275	2021-01-27	2021-01-27 16:46:51	DPACHECO	CRISTOBAL DE HUAMANG	test/datatest	[2021-01-27 16:46:50] - Apertura de revisión de estructura de datos.	Informativo	Baja
+100275	2021-01-27	2021-01-27 16:49:29	DPACHECO	CRISTOBAL DE HUAMANG	test/datatest	[2021-01-27 16:49:29] - La validación de Columnas vacías concluyó con 24 observación(es). (~ly1)	Informativo	Baja
+100275	2021-01-27	2021-01-27 16:49:30	DPACHECO	CRISTOBAL DE HUAMANG	test/datatest	[2021-01-27 16:49:29] - Revisión de estructura de datos satisfatoria.	Informativo	Baja
+100275	2021-01-27	2021-01-27 16:49:30	DPACHECO	CRISTOBAL DE HUAMANG	test/datatest	[2021-01-27 16:49:30] - Apertura de revisión de errores OM 22269-2020.	Informativo	Baja
+100275	2021-01-27	2021-01-27 16:57:36	DPACHECO	CRISTOBAL DE HUAMANG	test/datatest	[2021-01-27 16:57:36] - La validación operaciones duplicadas concluyó con 48 observación(es). (~ly2) 	Informativo	Baja
+100275	2021-01-27	2021-01-27 17:00:01	DPACHECO	CRISTOBAL DE HUAMANG	test/datatest	[2021-01-27 17:00:01] - La validación de cruce interno concluyó con 5 observación(es). (~ly3) 	Informativo	Baja
+100275	2021-01-27	2021-01-27 17:03:10	DPACHECO	CRISTOBAL DE HUAMANG	test/datatest	[2021-01-27 17:03:10] - La validación de los campos concluyó con 42 observaciones tipo1. (~ly4) 	Informativo	Baja
+100275	2021-01-27	2021-01-27 17:04:31	DPACHECO	CRISTOBAL DE HUAMANG	test/datatest	[2021-01-27 17:04:31] - La validación de los campos concluyó con 23 observación(es) tipo2. (~ly4) 	Informativo	Baja
+100275	2021-01-27	2021-01-27 17:04:31	DPACHECO	CRISTOBAL DE HUAMANG	test/datatest	[2021-01-27 17:04:31] - La revisión errores OM 22269-2020 tiene observaciones.	Informativo	Baja
