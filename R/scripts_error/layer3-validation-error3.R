@@ -95,7 +95,7 @@ realizarCruce       <- function(agente, periodo, data1, data2){
   cruce <- setdiff(evaluarFile(getRuta(getCarpetaFromAgent(agente), archivo1)) %>% pull(getCodigoBD(data1)),
                    evaluarFile(getRuta(getCarpetaFromAgent(agente), archivo2)) %>% pull(getCodigoBD(data2))) %>%
     unique() %>%
-    toString()
+    toString() %>% replace_na("")
   
   return(cruce)
 }

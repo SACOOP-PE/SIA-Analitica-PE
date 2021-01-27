@@ -237,7 +237,8 @@ procesarErrorDocumentoIdent <- function(ruta){
       rowwise() %>%
       mutate(detectarError = validarDocumentoIdent(TID, NID)) %>%
       filter(detectarError == "FALSE") %>%
-      pull(getCodigoBD(getBDFromRuta(ruta))) %>% unique() %>% toString()
+      pull(getCodigoBD(getBDFromRuta(ruta))) %>% 
+      unique() %>% toString() %>% replace_na("")
     
     return(verificar_documento)
   }
@@ -247,7 +248,8 @@ procesarErrorDocumentoIdent <- function(ruta){
       rowwise() %>%
       mutate(detectarError = validarDocumentoIdent(TID_C, NID_C)) %>%
       filter(detectarError == "FALSE") %>%
-      pull(getCodigoBD(getBDFromRuta(ruta))) %>% unique() %>% toString()
+      pull(getCodigoBD(getBDFromRuta(ruta))) %>%
+      unique() %>% toString() %>% replace_na("")
     
     return(verificar_documento)
   }
@@ -321,7 +323,7 @@ procesarErrorFechaDesembolso <- function(ruta){
   
   error <- BD %>%
     filter((dmy(BD %>% pull(FOT)) > getFechaCorte(ruta)) == TRUE) %>% 
-    pull(getCodigoBD("BD01"))
+    pull(getCodigoBD("BD01")) %>% replace_na("")
   
   return(error)
 }
