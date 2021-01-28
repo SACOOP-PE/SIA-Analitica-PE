@@ -13,8 +13,8 @@ layer0 <- function(agente, eb){
                                        IdProceso = getIdProcesoFromAgent(agente),
                                        Cod = 101,
                                        txt1 = toString(getDuplicados(carpeta, exigibles)),
-                                       num1 = length(str_split(txt1, ",")[[1]])
-                                       )) 
+                                       num1 = length(str_split(txt1, ",")[[1]]))
+                          ) 
     
     addEventLog(agent, paste0("    Error: Se identificaron archivos duplicados."), "I", "B")
   }
@@ -25,8 +25,7 @@ layer0 <- function(agente, eb){
                                        IdProceso = getIdProcesoFromAgent(agente),
                                        Cod = 102,
                                        txt1 = toString(getFaltantes(carpeta, exigibles)),
-                                       num1 = length(str_split(txt1, ",")[[1]])
-                                       )
+                                       num1 = length(str_split(txt1, ",")[[1]]))
                           )
 
     addEventLog(agent, paste0("    Error: Se identificaron archivos faltantes."), "I", "B")
