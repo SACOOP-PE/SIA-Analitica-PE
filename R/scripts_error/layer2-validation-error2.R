@@ -19,11 +19,9 @@ validarOperacionesDuplicadas <- function(agente, eb){
            BD         = getBDFromRuta(ruta),
            Periodo    = getAnoMesFromRuta(toString(ruta)),
            Duplicados = getoperacionesDuplicadas(ruta),
-           Saldo      = if_else(Duplicados != "", 
-                                getSaldoTotal(ruta, Duplicados),
-                                0)) %>%
+           Saldo      = getSaldoTotal(ruta, Duplicados)) %>%
     filter(Duplicados != "")
-  
+
   dups_BD01  <- DupsSaldo %>% filter(BD == "BD01")
   dups_BD02A <- DupsSaldo %>% filter(BD == "BD02A")
   dups_BD02B <- DupsSaldo %>% filter(BD == "BD02B")
@@ -124,7 +122,8 @@ getoperacionesDuplicadas <- function(ruta){
   else{return("")}
 }
 getSaldoTotal            <- function(ruta, opers){
-  
+  if (opers != "") {
+    
     if (getBDFromRuta(ruta) == "BD01" | getBDFromRuta(ruta) == "BD02A" | getBDFromRuta(ruta) == "BD02B") {
       saldo <- quitarVaciosBD(str_replace(ruta, getBDFromRuta(ruta), "BD01")) %>% 
         filter(CCR %in% unlist(str_split(opers, pattern = ", " ))) %>%
@@ -138,4 +137,6 @@ getSaldoTotal            <- function(ruta, opers){
     }
     
     return(saldo)
+  }
+  return(0)
 }

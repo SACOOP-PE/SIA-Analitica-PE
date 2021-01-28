@@ -104,7 +104,7 @@ interrogateAgent <- function(agente){
   #alertas ad-hoc 11356 ----
     #eb <- layer5(agent, eb) 
   
-  eb <- eb %>% arrange(Periodo, Cod)  
+  eb <- eb %>% arrange(Periodo, Cod)
   return(eb)
 }
 closeAgent       <- function(agente, eb){
