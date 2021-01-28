@@ -1710,3 +1710,18 @@
 100275	2021-01-27	2021-01-27 17:03:10	DPACHECO	CRISTOBAL DE HUAMANG	test/datatest	[2021-01-27 17:03:10] - La validación de los campos concluyó con 42 observaciones tipo1. (~ly4) 	Informativo	Baja
 100275	2021-01-27	2021-01-27 17:04:31	DPACHECO	CRISTOBAL DE HUAMANG	test/datatest	[2021-01-27 17:04:31] - La validación de los campos concluyó con 23 observación(es) tipo2. (~ly4) 	Informativo	Baja
 100275	2021-01-27	2021-01-27 17:04:31	DPACHECO	CRISTOBAL DE HUAMANG	test/datatest	[2021-01-27 17:04:31] - La revisión errores OM 22269-2020 tiene observaciones.	Informativo	Baja
+100276	2021-01-28	2021-01-28 18:14:40	DPACHECO	AELU	test/datatest	[2021-01-28 18:14:40] - Validador SIA 1.3.2021 --------------------------------------	Informativo	Baja
+100276	2021-01-28	2021-01-28 18:14:40	DPACHECO	AELU	test/datatest	[2021-01-28 18:14:40] - Agente creado. PID-100276. [01138|201901~202012]	Informativo	Baja
+100276	2021-01-28	2021-01-28 18:14:41	DPACHECO	AELU	test/datatest	[2021-01-28 18:14:40] - Bucket de errores creado. PID-100276.	Informativo	Baja
+100276	2021-01-28	2021-01-28 18:14:41	DPACHECO	AELU	test/datatest	[2021-01-28 18:14:41] - Inicio del interrogatorio. PID-100276.	Informativo	Baja
+100276	2021-01-28	2021-01-28 18:14:41	DPACHECO	AELU	test/datatest	[2021-01-28 18:14:41] - Apertura de revisión de pre-requisitos.	Informativo	Baja
+100276	2021-01-28	2021-01-28 18:14:42	DPACHECO	AELU	test/datatest	[2021-01-28 18:14:42] - Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100276	2021-01-28	2021-01-28 18:14:42	DPACHECO	AELU	test/datatest	[2021-01-28 18:14:42] - Apertura de revisión de estructura de datos.	Informativo	Baja
+100276	2021-01-28	2021-01-28 18:15:46	DPACHECO	AELU	test/datatest	[2021-01-28 18:15:46] - La validación de Columnas vacías concluyó con 24 observación(es). (~ly1)	Informativo	Baja
+100276	2021-01-28	2021-01-28 18:15:46	DPACHECO	AELU	test/datatest	[2021-01-28 18:15:46] - Revisión de estructura de datos satisfatoria.	Informativo	Baja
+100276	2021-01-28	2021-01-28 18:15:46	DPACHECO	AELU	test/datatest	[2021-01-28 18:15:46] - Apertura de revisión de errores OM 22269-2020.	Informativo	Baja
+100276	2021-01-28	2021-01-28 18:19:58	DPACHECO	AELU	test/datatest	[2021-01-28 18:19:58] - La validación operaciones duplicadas concluyó sin observaciones. (~ly2) 	Informativo	Baja
+100276	2021-01-28	2021-01-28 18:21:23	DPACHECO	AELU	test/datatest	[2021-01-28 18:21:23] - La validación de cruce interno concluyó con 22 observación(es). (~ly3) 	Informativo	Baja
+100276	2021-01-28	2021-01-28 18:23:06	DPACHECO	AELU	test/datatest	[2021-01-28 18:23:06] - La validación de los campos concluyó con 24 observaciones tipo1. (~ly4) 	Informativo	Baja
+100276	2021-01-28	2021-01-28 18:23:53	DPACHECO	AELU	test/datatest	[2021-01-28 18:23:53] - La validación de los campos concluyó sin observaciones tipo2. (~ly4) 	Informativo	Baja
+100276	2021-01-28	2021-01-28 18:23:54	DPACHECO	AELU	test/datatest	[2021-01-28 18:23:53] - La revisión errores OM 22269-2020 tiene observaciones.	Informativo	Baja
