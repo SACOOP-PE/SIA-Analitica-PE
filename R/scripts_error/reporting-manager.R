@@ -34,7 +34,8 @@ formatBucket <- function(eb) {
                                                                                  if_else(Cod >=701,
                                                                                          str_replace_all(getDescError(Cod), c("\\Q{0}"  = toString(num1),
                                                                                                                               "\\Q{1}"  = periodoEscrito(Periodo))),
-                                                                                         "")
+                                                                                         ""
+                                                                                         )
                                                                                  )
                                                                          )
                                                                  )
