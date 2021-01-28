@@ -24,12 +24,8 @@ validarColumnas <- function(agente, eb){
            Periodo   = getAnoMesFromRuta(toString(ruta)),
            Columnas     = list(colnames(evaluarFile(ruta))),
            ColumnasOM   = getColumnasOM(BD),
-           ColFaltantes = ifelse(length(setdiff(ColumnasOM, Columnas))>0,
-                                 toString(setdiff(ColumnasOM, Columnas)),
-                                 ""),
-           ColSobrantes = ifelse(length(setdiff(Columnas, ColumnasOM))>0,
-                                 toString(setdiff(Columnas, ColumnasOM)),
-                                 ""),
+           ColFaltantes = toString(setdiff(ColumnasOM, Columnas)),
+           ColSobrantes = toString(setdiff(Columnas, ColumnasOM)),
            ColVacias    = toString(getColVacia(ruta)))
   
   fal <- tbl1_ctrl1 %>% filter(ColFaltantes != "")
