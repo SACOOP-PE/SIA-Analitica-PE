@@ -13,14 +13,16 @@ validarOperacionesDuplicadas <- function(agente, eb){
   carpeta   <- getCarpetaFromAgent(agente)
   exigibles <- getArchivosNoObservadosByCols(agente, eb, c("CCR", "CCR_C", "CODGR"))
   
-  DupsSaldo <- tibble(NombreArchivo = exigibles) %>% rowwise() %>% 
+  DupsSaldo <- tibble(NombreArchivo = exigibles[str_detect(exigibles, paste(c("BD01","BD02A", "BD02B", "BD03A"), collapse = '|'))]) %>% 
+    rowwise() %>% 
     mutate(ruta       = getRuta(carpeta, NombreArchivo),
            BD         = getBDFromRuta(ruta),
            Periodo    = getAnoMesFromRuta(toString(ruta)),
-           Duplicados = getoperacionesDuplicadas(ruta)) %>%
-    filter(Duplicados != "" & BD != "BD03B" & BD != "BD04") %>%
-    rowwise() %>%
-    mutate(Saldo = getSaldoTotal(ruta, Duplicados))
+           Duplicados = getoperacionesDuplicadas(ruta),
+           Saldo      = if_else(Duplicados != "", 
+                                getSaldoTotal(ruta, Duplicados),
+                                0)) %>%
+    filter(Duplicados != "")
   
   dups_BD01  <- DupsSaldo %>% filter(BD == "BD01")
   dups_BD02A <- DupsSaldo %>% filter(BD == "BD02A")
