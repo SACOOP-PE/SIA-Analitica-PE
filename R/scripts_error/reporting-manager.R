@@ -88,7 +88,10 @@ saveOutputs <- function(agente, eb, ebFormat, pidlog) {
   
   #bucket ----
   eb %>% rowwise() %>%
-    mutate(txt1 = cutStringError(num1, txt1)) %>% 
+    mutate(txt1 = if_else(Cod >102, 
+                          cutStringError(num1, txt1),
+                          txt1)
+           ) %>% 
     writexl::write_xlsx(paste0(paste0(getwd(), "/test/"),
                                paste(agente %>% pull(Coopac),
                                      getIdProcesoFromAgent(agente),
