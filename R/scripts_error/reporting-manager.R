@@ -3,7 +3,8 @@ formatBucket <- function(eb) {
   output <- eb %>% 
     rowwise() %>% 
     mutate(Descripcion = if_else(Cod <= 102,
-                                 str_replace_all(getDescError(Cod), c("\\Q{0}"  = toString(num1))),
+                                 str_replace_all(getDescError(Cod), c("\\Q{0}"  = toString(num1),
+                                                                      "\\Q{1}"  = toString(txt1))),
                                  if_else(Cod >=201 & Cod <=203,
                                          str_replace_all(getDescError(Cod), c("\\Q{0}"  = toString(num1),
                                                                               "\\Q{1}"  = txt1,
