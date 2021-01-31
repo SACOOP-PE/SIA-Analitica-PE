@@ -76,8 +76,10 @@ periodoEscrito  <- function(periodo) {
 }
 
 
-saveOutputs <- function(agente, eb, ebFormat, pidlog) {
+saveOutputs <- function(agente, eb, ebFormat) {
   #agent ----
+  pidlog <- getlog(getIdProcesoFromAgent(agent))
+  
   agente %>% 
     writexl::write_xlsx(paste0(paste0(getwd(), "/test/output/"),
                                paste(agente %>% pull(Coopac),

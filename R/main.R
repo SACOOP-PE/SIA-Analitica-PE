@@ -18,22 +18,23 @@
   # # 2. Módulo de alertas regulatorias
   # source("R/scripts-alertas/layer0-alertas.R")
   # source("R/scripts-alertas/layer1-alertas.R") 
-  # 
+  
   # # 3. Módulo de analisis crediticio
   # source("R/scripts-alertas/layer0-analisis.R")
   # source("R/scripts-alertas/layer1-analisis.R") 
   
 
-  ##### Main -----
-  agent <- createAgent(idCoopac = "01342",
-                       carpeta = "test/datatest/01342/",
+  ##### Create agent -----
+  agent <- createAgent(idCoopac = "01172",
+                       carpeta = "test/datatest/01172/",
                        periodoInicial = "201901",
-                       periodoFinal   = "202010")
+                       periodoFinal   = "201902")
   
   bucket      <- interrogateAgent(agent)
+   
+  ##### Close agent -----
   agent       <- closeAgent(agent, bucket)
-  ebFormatted <- formatBucket(bucket)
-  PIDlog      <- getlog(getIdProcesoFromAgent(agent))
   
-  saveOutputs(agent, bucket, ebFormatted, PIDlog)
+  ##### Reporting -----
+  saveOutputs(agent, bucket, formatBucket(bucket))
   

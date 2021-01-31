@@ -12,12 +12,15 @@ createAgent  <- function(idCoopac, periodoInicial, periodoFinal,
                    PeriodoFinal   = periodoFinal,
                    Alcance        = list(default.bd)) 
   
-  addEventLog(agente, paste0("Validador SIA 1.3.2021 --------------------------------------"), 
+  addEventLog(agente, paste0("------------------ Validador SIA 1.4.2021 --------------------"), 
+              "I", "B")
+  addEventLog(agente, paste0("Coopac evaluada: ",idCoopac,"-", agente %>% pull(NombreCoopac) %>% first()), 
+              "I", "B")
+  addEventLog(agente, paste0("PID: ", agente %>% pull(IdProceso) %>% first(),
+                            "[", periodoInicial, "~", periodoFinal, "]"), 
               "I", "B")
   
-  addEventLog(agente, paste0("Agente creado. PID-", agente %>% pull(IdProceso) %>% first(),
-                            ". [",idCoopac,"|", periodoInicial, "~", periodoFinal, "]"), 
-              "I", "B")
+
   
   return(agente)
 }
