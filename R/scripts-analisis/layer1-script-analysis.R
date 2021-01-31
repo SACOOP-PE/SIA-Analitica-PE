@@ -1,7 +1,6 @@
 ####' Script de análisis layer1
 ####' 1. Obtener sabana de cartera 
-####' 2. Obtener sabana de cartera cancelada 
-####' 
+####' 2. Obtener sabana de cartera cancelada  
 
 
 getSabanaCartera   <- function(agente){

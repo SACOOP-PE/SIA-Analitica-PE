@@ -79,7 +79,7 @@ periodoEscrito  <- function(periodo) {
 saveOutputs <- function(agente, eb, ebFormat, pidlog) {
   #agent ----
   agente %>% 
-    writexl::write_xlsx(paste0(paste0(getwd(), "/test/"),
+    writexl::write_xlsx(paste0(paste0(getwd(), "/test/output/"),
                                paste(agente %>% pull(Coopac),
                                      getIdProcesoFromAgent(agente),
                                      paste0("(",agente %>% pull(PeriodoInicial),"-", agente %>% pull(PeriodoFinal),")"),
@@ -92,7 +92,7 @@ saveOutputs <- function(agente, eb, ebFormat, pidlog) {
                           cutStringError(num1, txt1),
                           txt1)
            ) %>% 
-    writexl::write_xlsx(paste0(paste0(getwd(), "/test/"),
+    writexl::write_xlsx(paste0(paste0(getwd(), "/test/output/"),
                                paste(agente %>% pull(Coopac),
                                      getIdProcesoFromAgent(agente),
                                      paste0("(",agente %>% pull(PeriodoInicial),"-", agente %>% pull(PeriodoFinal),")"),
@@ -100,7 +100,7 @@ saveOutputs <- function(agente, eb, ebFormat, pidlog) {
                                "_ListaErrores.xlsx"))
   #ebFormatted ----
   ebFormat %>%
-    writexl::write_xlsx(paste0(paste0(getwd(), "/test/"),
+    writexl::write_xlsx(paste0(paste0(getwd(), "/test/output/"),
                                paste(agente %>% pull(Coopac),
                                      getIdProcesoFromAgent(agente),
                                      paste0("(",agente %>% pull(PeriodoInicial),"-", agente %>% pull(PeriodoFinal),")"),
