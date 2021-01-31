@@ -18,7 +18,7 @@ validarOperacionesDuplicadas <- function(agente, eb){
     mutate(ruta       = getRuta(carpeta, NombreArchivo),
            BD         = getBDFromRuta(ruta),
            Periodo    = getAnoMesFromRuta(toString(ruta)),
-           Duplicados = getoperacionesDuplicadas(ruta),
+           Duplicados = getOperacionesDuplicadas(ruta),
            Saldo      = getSaldoTotal(ruta, Duplicados)) %>%
     filter(Duplicados != "")
 
@@ -92,7 +92,7 @@ validarOperacionesDuplicadas <- function(agente, eb){
 }
 
 #validarOperacionesDuplicadas
-getoperacionesDuplicadas <- function(ruta){
+getOperacionesDuplicadas <- function(ruta){
   BD <- quitarVaciosBD(ruta)
   
   if (getBDFromRuta(ruta) == "BD01" | getBDFromRuta(ruta) == "BD03A") {

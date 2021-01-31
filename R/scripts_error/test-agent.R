@@ -21,9 +21,10 @@
   
 
   ##### Testing -----
-  agent <- createAgent(idCoopac = "01138",
-                       periodoInicial = "201901",
-                       periodoFinal   = "202012")
+  agent <- createAgent(idCoopac = "01172",
+                       carpeta = "test/datatest/01172/",
+                       periodoInicial = "201909",
+                       periodoFinal   = "201910")
   
   bucket      <- interrogateAgent(agent)
   agent       <- closeAgent(agent, bucket)

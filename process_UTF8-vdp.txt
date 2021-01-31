@@ -1,0 +1,7 @@
+Get-ChildItem "C:\dsingh\InstanciaValidadorBDCC\test\datatest" -Filter *.txt -recurse | 
+    Foreach-Object {
+    Write-Host (Get-Date).ToString() $_.FullName
+    Get-Content $_.FullName | Set-Content -Encoding UTF8 ($_.FullName  + 'TMP')
+    Copy-Item ($_.FullName  + 'TMP') -Destination $_.FullName  
+    Remove-Item -Path ($_.FullName  + 'TMP')  -Force
+   

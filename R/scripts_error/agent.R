@@ -1,10 +1,12 @@
-createAgent  <- function(idCoopac, periodoInicial, periodoFinal){
+createAgent  <- function(idCoopac, periodoInicial, periodoFinal, 
+                         carpeta = default.carpeta, 
+                         usuario = default.usuario){
   
   agente <- tibble(Coopac      = idCoopac,
                    NombreCoopac = getNombreCoopacFromIdCoopac(Coopac),
-                   Carpeta      = default.carpeta,
+                   Carpeta      = carpeta,
                    IdProceso    = getNextIdProceso(getLogObject("logging/log.txt")),
-                   Usuario      = default.usuario,
+                   Usuario      = usuario,
                    InicioProceso  = format(Sys.time(), "%a %b %d %X %Y"), 
                    PeriodoInicial = periodoInicial,
                    PeriodoFinal   = periodoFinal,
