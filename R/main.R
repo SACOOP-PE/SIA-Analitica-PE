@@ -8,22 +8,23 @@
   source("R/scripts-entorno/reporting-manager.R")
   source("R/scripts-entorno/utils.R")
   
-  # Validación de información
+  # 1. Módulo de validaciones 
   source("R/scripts-errores/layer0-validation.R")
   source("R/scripts-errores/layer1-validation.R")
   source("R/scripts-errores/layer2-validation.R")
   source("R/scripts-errores/layer3-validation.R")
   source("R/scripts-errores/layer4-validation.R")
   
-  # Inicializar agente.
-  # Interrogar agente - Layer del 0 al 4. 
-  # Cerrar agente.
-  # Formatear bucket generado para comunicarlo por correo o por Oficio SBS.
-  # Obtener el Log (Time - Descripción)
-  # Exportar agent, ebFormatted y PIDlog
+  # # 2. Módulo de alertas regulatorias
+  # source("R/scripts-alertas/layer0-alertas.R")
+  # source("R/scripts-alertas/layer1-alertas.R") 
+  # 
+  # # 3. Módulo de analisis crediticio
+  # source("R/scripts-alertas/layer0-analisis.R")
+  # source("R/scripts-alertas/layer1-analisis.R") 
   
 
-  ##### Testing -----
+  ##### Main -----
   agent <- createAgent(idCoopac = "01342",
                        carpeta = "test/datatest/01342/",
                        periodoInicial = "201901",
