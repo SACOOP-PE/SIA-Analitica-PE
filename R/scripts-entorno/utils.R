@@ -46,7 +46,6 @@ evaluarFile   <- function(ruta){
   read_delim(ruta,"\t",escape_double = FALSE, trim_ws = TRUE, col_names = TRUE,
              col_types = cols(.default = "c"), progress = F) %>%
     return()
-  
 }
 
 # Funciones auxiliares - Agent -----

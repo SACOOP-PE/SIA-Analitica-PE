@@ -20,7 +20,6 @@ addEventLog(agente, paste0("PID: ", agente %>% pull(IdProceso) %>% first(),
                           "[", periodoInicial, "~", periodoFinal, "]"))
   
 
-  
   return(agente)
 }
 

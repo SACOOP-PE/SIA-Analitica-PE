@@ -39,7 +39,7 @@ validarColumnas <- function(agente, eb){
              num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%  
       select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
     
-    addEventLog(agente, paste0("La validación de Columnas faltantes concluyó con ", nrow(fal), " observación(es). (~ly1)"), "I", "B")
+    addEventLog(agente, paste0("La validación de Columnas faltantes concluyó con ", nrow(fal), " observación(es)."), "I", "B")
     eb <- addError(eb, chunk_201)
   }
   if (nrow(sob)>0) {
@@ -49,7 +49,7 @@ validarColumnas <- function(agente, eb){
              num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%  
       select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
     
-    addEventLog(agente, paste0("La validación de Columnas sobrantes concluyó con ", nrow(sob), " observación(es). (~ly1)"), "I", "B")
+    addEventLog(agente, paste0("La validación de Columnas sobrantes concluyó con ", nrow(sob), " observación(es)."), "I", "B")
     eb <- addError(eb, chunk_202)
   }
   if (nrow(vac)>0) {
@@ -59,7 +59,7 @@ validarColumnas <- function(agente, eb){
              num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%  
       select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
     
-    addEventLog(agente, paste0("La validación de Columnas vacías concluyó con ", nrow(vac), " observación(es). (~ly1)"), "I", "B")
+    addEventLog(agente, paste0("La validación de Columnas vacías concluyó con ", nrow(vac), " observación(es)."), "I", "B")
     eb <- addError(eb, chunk_203)
   }
   

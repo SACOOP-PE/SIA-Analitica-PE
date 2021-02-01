@@ -25,10 +25,9 @@ source("R/modulo1/layer4-validation.R")
 
 
 ##### Create agent -----
-agent <- createAgent(idCoopac = "01172",
-                     carpeta = "test/datatest/01172/",
+agent <- createAgent(idCoopac = "01342",
                      periodoInicial = "201901",
-                     periodoFinal   = "201902")
+                     periodoFinal   = "202012")
 
 ##### Interrogar Modulo 1
 bucket      <- interrogateAgent_mod1(agent)
