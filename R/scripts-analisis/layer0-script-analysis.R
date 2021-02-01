@@ -19,42 +19,42 @@ agent <- createAgent(idCoopac = "01172",
 
 
 getSaldoVigenteSiscor <- function(agent, periodo) {
-  initCuadreContable2() %>% 
+  initCuadreContable() %>% 
     filter(str_sub(as.character(PeriodoId),1,6) == periodo, 
            CodigoEntidad == getCoopacFromAgent(agent)) %>% 
     pull(C1401) %>% 
     return()
 }
 getSaldoRefinanciadoSiscor <- function(agent, periodo) {
-  initCuadreContable2() %>% 
+  initCuadreContable() %>% 
     filter(str_sub(as.character(PeriodoId),1,6) == periodo, 
            CodigoEntidad == getCoopacFromAgent(agent)) %>% 
     pull(C1404) %>% 
     return()
 }
 getSaldoVencidoSiscor <- function(agent, periodo) {
-  initCuadreContable2() %>% 
+  initCuadreContable() %>% 
     filter(str_sub(as.character(PeriodoId),1,6) == periodo, 
            CodigoEntidad == getCoopacFromAgent(agent)) %>% 
     pull(C1405) %>% 
     return()
 }
 getSaldoCobranzaJudicialSiscor <- function(agent, periodo) {
-  initCuadreContable2() %>% 
+  initCuadreContable() %>% 
     filter(str_sub(as.character(PeriodoId),1,6) == periodo, 
            CodigoEntidad == getCoopacFromAgent(agent)) %>% 
     pull(C1406) %>% 
     return()
 }
 getSaldoRendimientoDevengadoSiscor <- function(agent, periodo) {
-  initCuadreContable2() %>% 
+  initCuadreContable() %>% 
     filter(str_sub(as.character(PeriodoId),1,6) == periodo, 
            CodigoEntidad == getCoopacFromAgent(agent)) %>% 
     pull(C1408) %>% 
     return()
 }
 getSaldoInteresesDiferidosSiscor <- function(Agent, periodo) {
-  initCuadreContable2() %>% rowwise() %>% 
+  initCuadreContable() %>% rowwise() %>% 
     mutate(diferidos = sum(C290101, C290102, C29010207, C29010702, C29010801, na.rm = T)) %>% 
     filter(str_sub(as.character(PeriodoId),1,6) == periodo, 
            CodigoEntidad == getCoopacFromAgent(agent)) %>% 
@@ -62,7 +62,7 @@ getSaldoInteresesDiferidosSiscor <- function(Agent, periodo) {
     return()
 }
 getSaldoProvisionesGenericasSiscor <- function(Agent, periodo) {
-  initCuadreContable2() %>% rowwise() %>% 
+  initCuadreContable() %>% rowwise() %>% 
     mutate(diferidos = sum(C14090202, 
                            C14090302, 
                            C14090402, 
@@ -79,7 +79,7 @@ getSaldoProvisionesGenericasSiscor <- function(Agent, periodo) {
     return()
 }
 getSaldoProvisionesEspecificasSiscor <- function(Agent, periodo) {
-  initCuadreContable2() %>% rowwise() %>% 
+  initCuadreContable() %>% rowwise() %>% 
     mutate(diferidos = sum(C14090201, 
                            C14090301, 
                            C14090401, 

@@ -16,7 +16,7 @@ layer0 <- function(agente, eb){
                                        num1 = length(unlist(str_split(txt1, ","))))
                           ) 
     
-    addEventLog(agent, paste0("    Error: Se identificaron archivos duplicados."), "I", "B")
+    addEventLog(agent, paste0("      Resultado: Se identificaron archivos duplicados."), "I", "B")
   }
  
   if (length(getFaltantes(carpeta, exigibles)) != 0) { 
@@ -28,7 +28,7 @@ layer0 <- function(agente, eb){
                                        num1 = length(unlist(str_split(txt1, ","))))
                           )
 
-    addEventLog(agent, paste0("    Error: Se identificaron archivos faltantes."), "I", "B")
+    addEventLog(agent, paste0("      Resultado: Se identificaron archivos faltantes."), "I", "B")
   }
  
   return(eb)

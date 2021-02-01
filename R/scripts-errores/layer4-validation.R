@@ -46,10 +46,10 @@ validarCampos <- function(agente, eb){
    #addEvent Tipo1:
     n <- eb %>% filter(Cod %in% c(601:622)) %>% nrow()
     if (n == 0) {
-      addEventLog(agente, paste0("La validación de los campos concluyó sin observaciones tipo1. (~ly4) "), "I", "B")
+      addEventLog(agente, paste0("      Resultado: La validación de los campos concluyó sin observaciones tipo1."))
     }
     else{
-      addEventLog(agente, paste0("La validación de los campos concluyó con ",n," observaciones tipo1. (~ly4) "), "I", "B")
+      addEventLog(agente, paste0("      Resultado: La validación de los campos concluyó con ",n," observaciones tipo1."))
     }
 
   ## ii. Errores tipo2 ----
@@ -85,10 +85,10 @@ validarCampos <- function(agente, eb){
    #addEvent Tipo2:
     n <- eb %>% filter(Cod %in% c(701:708)) %>% nrow()
     if (n == 0) {
-      addEventLog(agente, paste0("La validación de los campos concluyó sin observaciones tipo2. (~ly4) "), "I", "B")
+      addEventLog(agente, paste0("      Resultado: La validación de los campos concluyó sin observaciones tipo2."))
     }
     else{
-      addEventLog(agente, paste0("La validación de los campos concluyó con ",n," observación(es) tipo2. (~ly4) "), "I", "B")
+      addEventLog(agente, paste0("      Resultado: La validación de los campos concluyó con ",n," observación(es) tipo2."))
     }
   
   return(eb)

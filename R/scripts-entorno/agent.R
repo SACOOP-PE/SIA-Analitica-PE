@@ -2,23 +2,20 @@ createAgent  <- function(idCoopac, periodoInicial, periodoFinal,
                          carpeta = default.carpeta, 
                          usuario = default.usuario){
   
-  agente <- tibble(Coopac      = idCoopac,
-                   NombreCoopac = getNombreCoopacFromIdCoopac(Coopac),
-                   Carpeta      = carpeta,
-                   IdProceso    = getNextIdProceso(getLogObject("logging/log.txt")),
-                   Usuario      = usuario,
-                   InicioProceso  = format(Sys.time(), "%a %b %d %X %Y"), 
-                   PeriodoInicial = periodoInicial,
-                   PeriodoFinal   = periodoFinal,
-                   Alcance        = list(default.bd)) 
-  
-  addEventLog(agente, paste0("------------------ Validador SIA 1.4.2021 --------------------"), 
-              "I", "B")
-  addEventLog(agente, paste0("Coopac evaluada: ",idCoopac,"-", agente %>% pull(NombreCoopac) %>% first()), 
-              "I", "B")
-  addEventLog(agente, paste0("PID: ", agente %>% pull(IdProceso) %>% first(),
-                            "[", periodoInicial, "~", periodoFinal, "]"), 
-              "I", "B")
+agente <- tibble(Coopac      = idCoopac,
+                 NombreCoopac = getNombreCoopacFromIdCoopac(Coopac),
+                 Carpeta      = carpeta,
+                 IdProceso    = getNextIdProceso(getLogObject("logging/log.txt")),
+                 Usuario      = usuario,
+                 InicioProceso  = format(Sys.time(), "%a %b %d %X %Y"), 
+                 PeriodoInicial = periodoInicial,
+                 PeriodoFinal   = periodoFinal,
+                 Alcance        = list(default.bd)) 
+
+addEventLog(agente, paste0("------------------ Validador SIA 1.4.2021 --------------------"))
+addEventLog(agente, paste0("Coopac evaluada: ",idCoopac,"-", agente %>% pull(NombreCoopac) %>% first()))
+addEventLog(agente, paste0("PID: ", agente %>% pull(IdProceso) %>% first(),
+                          "[", periodoInicial, "~", periodoFinal, "]"))
   
 
   
@@ -37,34 +34,35 @@ createBucket <- function(agente){
                num2 = 0,
                num3 = 0) 
   
-  addEventLog(agente, paste0("Bucket de errores creado. PID-", agente %>% pull(IdProceso) %>% first(),"."), 
-              "I", "B")
+ 
   
   return(eb)
 }
 
 interrogateAgent <- function(agente){
   eb <- createBucket(agente)
+   
+  addEventLog(agente, paste0("1. Módulo de validación de base de datos crediticias----------"))
   
-  addEventLog(agente, paste0("Inicio del interrogatorio. PID-", agente %>% pull(IdProceso) %>% first(),"."), 
-              "I", "B")
+  
+  addEventLog(agente, paste0("Inicio del interrogatorio. PID-", agente %>% pull(IdProceso) %>% first(),"."))
   
   #pre-requisitos ----
-  addEventLog(agente, paste0("Apertura de revisión de pre-requisitos."),  "I", "B")
+  addEventLog(agente, paste0("Layer 0. Revisión de pre-requisitos."))
   
     eb <- layer0(agente, eb)
   
     if (nrow(eb) > 0) {
-        addEventLog(agente, paste0("Fin del proceso de revisión por errores críticos 101-102."), "I", "B")
+        addEventLog(agente, paste0("      Resultado: Fin del proceso de revisión por errores críticos 101-102."))
         return(eb)
     }
-    else {
-    addEventLog(agente, paste0("Revisión de pre-requisitos satisfactoria."), "I", "B")
+    else { 
+        addEventLog(agente, paste0("      Resultado: Revisión de pre-requisitos satisfactoria."))
     }
   
   #estructura de columnas ----
-  addEventLog(agente, paste0("Apertura de revisión de estructura de datos."),  "I", "B")
-  
+  addEventLog(agente, paste0("Layer 1. Revisión de estructura de tablas"))
+    
     eb <- layer1(agente, eb)
   
     if (nrow(eb) > 0) {
@@ -72,38 +70,41 @@ interrogateAgent <- function(agente){
       if (nrow(eb %>% filter(Cod %in% c(201, 202))) >0) { 
       
       n <- eb %>% filter(Cod %in% c(201,202)) %>% nrow()
-      addEventLog(agente, paste0("La revisión de estructura de datos tiene observaciones. Continuar con discreción."), "I", "B")
+      addEventLog(agente, paste0("      Resultado: La revisión de estructura de datos tiene observaciones. Continuar con discreción."))
         
       }
       else {
-        addEventLog(agente, paste0("Revisión de estructura de datos satisfatoria."), "I", "B")
+        addEventLog(agente, paste0("      Resultado: Revisión de estructura de datos satisfatoria."))
       }
       
     }
     else {
-      addEventLog(agente, paste0("Revisión de estructura de datos satisfatoria."), "I", "B")
+      addEventLog(agente, paste0("      Resultado: Revisión de estructura de datos satisfatoria."))
     }
   
   #errores OM 22269-2020 ----
-  addEventLog(agente, paste0("Apertura de revisión de errores OM 22269-2020."),  "I", "B")
-
+    addEventLog(agente, paste0("Layer 2. Validación de operaciones duplicadas."))
     eb <- layer2(agente, eb)
+    
+    addEventLog(agente, paste0("Layer 3. Validación de entre BD01/BD02A, BD03A/BD03B."))
     eb <- layer3(agente, eb)
+    
+    addEventLog(agente, paste0("Layer 4. Validación de campos indviduales."))
     eb <- layer4(agente, eb)
 
     if (nrow(eb) > 0) {
       
       if (nrow(eb %>% filter(Cod %in% c(301:708))) >0) {
 
-        addEventLog(agente, paste0("La revisión errores OM 22269-2020 tiene observaciones."), "I", "B")
+        addEventLog(agente, paste0("      Resultado: La revisión errores OM 22269-2020 tiene observaciones."))
       }
       else {
-        addEventLog(agente, paste0("Revisión de errores OM 22269-2020 fue satisfatoria."), "I", "B")
+        addEventLog(agente, paste0("      Resultado: Revisión de errores OM 22269-2020 fue satisfatoria."))
       }
       
     }
     else {
-      addEventLog(agente, paste0("Revisión de errores OM 22269-2020 fue satisfatoria."), "I", "B")
+      addEventLog(agente, paste0("      Resultado: Revisión de errores OM 22269-2020 fue satisfatoria."))
     }
     
   #alertas ad-hoc 11356 ----
@@ -112,6 +113,7 @@ interrogateAgent <- function(agente){
   eb <- eb %>% arrange(Periodo, Cod)
   return(eb)
 }
+
 closeAgent       <- function(agente, eb){
   agente <- agente %>% 
     mutate(

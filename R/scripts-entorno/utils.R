@@ -35,8 +35,9 @@ getCoopacFromRuta <- function(ruta){
 }
 getNombreCoopacFromRuta <- function(ruta){
   i <- (basename(ruta) %>% strsplit("_"))[[1]][1]
-  initCuadreContable() %>% filter(CODIGO_ENTIDAD == as.numeric(i)) %>% pull(ENTIDAD) %>% first() %>% return()
+  initCuadreContable() %>% filter(CodigoEntidad == i) %>% pull(Entidad) %>% first() %>% return()
 }
+ 
 getBDFromRuta           <- function(ruta){ 
   if (is.na(ruta) | ruta == ""  ) {
     return("")
@@ -88,9 +89,8 @@ getAlcanceFromAgent           <- function(agente){
   agente %>% pull(Alcance) %>% first() %>% return()
 }
 getNombreCoopacFromIdCoopac   <- function(idCoopac){
-  initCuadreContable() %>% filter(CODIGO_ENTIDAD == as.integer(idCoopac)) %>% pull(ENTIDAD) %>% first()
+  initCuadreContable() %>% filter(CodigoEntidad == idCoopac) %>% pull(Entidad) %>% first()
 }
-
 getCodigoBD <- function(BD){
   campoIdentif  <- switch (BD,
                            BD01  = "CCR",
