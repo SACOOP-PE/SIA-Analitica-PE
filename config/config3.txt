@@ -16,11 +16,11 @@ Cod	Descripcion	Criticidad
 310	Las provisiones específicas de la cartera correspondiente al mes de {0} no cuadra con el balance de comprobación. Diferencia: {1} 	ALTA
 401	Se detectaron {0} crédito(s) duplicado(s) en la cartera en el mes de {1} con un saldo de colocaciones por S/ {2} durante el periodo {3}.	ALTA
 402	Se detectaron {0} crédito(s) con cronogramas duplicado(s) en el mes de {1} con un saldo de colocaciones por S/ {2} durante el periodo {3}.	ALTA
-403	Se detectaron {0} operación(es) de crédito con cronogramas cancelados duplicados en el periodo {1} con un saldo de colocaciones por S/ {2} durante el periodo {3}.	ALTA
-404	Se detectaron {0} código(s) de garantía duplicados en el periodo {1} con un saldo de colocaciones por S/ {2} durante el periodo {3}	ALTA
-501	Se detectaron {0} crédito(s) faltantes de acuerdo con los cronogramas reportados en el periodo {1}, los créditos observados tienen un saldo de colocaciones por S/ {2} durante el periodo {3}.	ALTA
-502	Se detectaron {0} cronograma(s) faltantes de acuerdo con la cartera reportada en el periodo {1}, los créditos observados tienen un saldo de colocaciones por S/ {2} durante el periodo {3}.	ALTA
-503	Se detectaron {0} garantía(s) faltantes en el registro correspondiente en el periodo {1}, por un monto de cobertura de S/ {2} durante el periodo {3}.	ALTA
+403	Se detectaron {0} operación(es) de crédito con cronograma(s) cancelado(s) duplicados durante el periodo {1}.	ALTA
+404	Se detectaron {0} código(s) de garantía duplicado(s) con un monto de cobertura total por S/ {1} durante el periodo {2}	ALTA
+501	Se detectaron {0} crédito(s) faltante(s) de acuerdo con los cronogramas reportados durante el periodo {1}.	ALTA
+502	Se detectaron {0} cronograma(s) faltante(s) de acuerdo con la cartera reportada con un saldo de colocaciones por S/ {1} durante el periodo {2}.	ALTA
+503	Se detectaron {0} garantía(s) faltante(s) en el registro correspondiente durante el periodo {1}.	ALTA
 601	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en el Tipo de documento (TID) en la cartera de créditos durante el periodo {1}. Valores correctos: {2}	MEDIA
 602	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en el Tipo de crédito (TCR) en la cartera de créditos durante el periodo {1}. Valores correctos: {2}	MEDIA
 603	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Clasificación del deudor (CAL) en la cartera de créditos durante el periodo {1}. Valores correctos: {2}	MEDIA
@@ -43,11 +43,12 @@ Cod	Descripcion	Criticidad
 620	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Forma de Cancelación del crédito (FOCAN_C) de la BD04 durante el periodo {1}. Valores correctos: {2}	MEDIA
 621	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Modalidad específica bajo la cual fue otorgado el Crédito(MDCR_C) de la BD04 durante el periodo {1}. Valores correctos: {2}	MEDIA
 622	Se detectaron {0} crédito(s) con errores en el Número y Tipo de Documento ({1}) respectivamente, correspondiente a la base de datos crediticia {2} durante el periodo {3}.	BAJA
-701	Se detectaron {0} crédito(s) con fechas vacías o erróneas en la Fecha de desembolso (FOT) en la BD01 durante el periodo {1}.	MEDIA
-702	Se detectaron {0} crédito(s) con fechas vacías o erróneas en la Fecha de vencimiento general de la operación según cronograma (FVEG) en la BD01 durante el periodo {1}.	MEDIA
-703	Se detectaron {0} crédito(s) con fechas vacías o erróneas en la Fecha de vencimiento puntual de la operación (FVEP) en la BD01 durante el periodo {1}.	MEDIA
-704	Se detectaron {0} crédito(s) con fechas vacías o erróneas en la Fecha de vencimiento de la cuota (FVEP) en la BD02A durante el periodo {1}.	MEDIA
-705	Se detectaron {0} crédito(s) con fechas vacías o erróneas en la Fecha de Vencimiento de la Cuota (FVEP_C) en la BD02B durante el periodo {1}.	MEDIA
-706	Se detectaron {0} crédito(s) con fechas vacías o erróneas en la Fecha de Desembolso (FOT_C) en la BD04 durante el periodo {1}.	MEDIA
-707	Se detectaron {0} crédito(s) con fechas vacías o erróneas en la Fecha de cancelación de la operación (FCAN_C) en la BD04 durante el periodo {1}.	MEDIA
-708	Se detectaron {0} crédito(s) con fecha de desembolso posterior a la fecha de corte en la cartera de créditos (BD01) durante el periodo {1}.	MEDIA
+701	Se detectaron {0} crédito(s) con fechas vacías o erróneas en la Fecha de primer pago de capital según cronograma original (FPPK) en la BD01 durante el periodo {1}.	MEDIA
+702	Se detectaron {0} crédito(s) con fechas vacías o erróneas en la Fecha de desembolso (FOT) en la BD01 durante el periodo {1}.	MEDIA
+703	Se detectaron {0} crédito(s) con fechas vacías o erróneas en la Fecha de vencimiento general de la operación según cronograma (FVEG) en la BD01 durante el periodo {1}.	MEDIA
+704	Se detectaron {0} crédito(s) con fechas vacías o erróneas en la Fecha de vencimiento puntual de la operación (FVEP) en la BD01 durante el periodo {1}.	MEDIA
+705	Se detectaron {0} crédito(s) con fechas vacías o erróneas en la Fecha de vencimiento de la cuota (FVEP) en la BD02A durante el periodo {1}.	MEDIA
+706	Se detectaron {0} crédito(s) con fechas vacías o erróneas en la Fecha de Vencimiento de la Cuota (FVEP_C) en la BD02B durante el periodo {1}.	MEDIA
+707	Se detectaron {0} crédito(s) con fechas vacías o erróneas en la Fecha de Desembolso (FOT_C) en la BD04 durante el periodo {1}.	MEDIA
+708	Se detectaron {0} crédito(s) con fechas vacías o erróneas en la Fecha de cancelación de la operación (FCAN_C) en la BD04 durante el periodo {1}.	MEDIA
+709	Se detectaron {0} crédito(s) con fecha de desembolso posterior a la fecha de corte en la cartera de créditos (BD01) durante el periodo {1}.	MEDIA

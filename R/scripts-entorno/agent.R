@@ -6,9 +6,9 @@ createAgent  <- function(idCoopac,
   
 agente <- tibble(Coopac      = idCoopac,
                  NombreCoopac = getNombreCoopacFromIdCoopac(Coopac),
-                 Carpeta      = carpeta,
-                 IdProceso    = getNextIdProceso(getLogObject("logging/log.txt")),
-                 Usuario      = usuario,
+                 Carpeta     = carpeta,
+                 IdProceso   = getNextIdProceso(getLogObject("logging/log.txt")),
+                 Usuario     = usuario,
                  InicioProceso  = format(Sys.time(), "%a %b %d %X %Y"), 
                  PeriodoInicial = periodoInicial,
                  PeriodoFinal   = periodoFinal,
@@ -80,21 +80,21 @@ interrogateAgent_mod1 <- function(agente){
       addEventLog(agente, paste0("      Resultado: Revisión de estructura de datos satisfatoria."))
     }
   
-    #layer2 ----
-    addEventLog(agente, paste0("Layer 2. Validación de operaciones duplicadas."))
+  #layer2 ----
+  addEventLog(agente, paste0("Layer 2. Validación de operaciones duplicadas."))
     eb <- layer2(agente, eb)
     
-    #layer3 ----
-    addEventLog(agente, paste0("Layer 3. Validación de entre BD01/BD02A, BD03A/BD03B."))
+  #layer3 ----
+  addEventLog(agente, paste0("Layer 3. Validación de entre BD01/BD02A, BD03A/BD03B."))
     eb <- layer3(agente, eb)
     
-    #layer4 ----
-    addEventLog(agente, paste0("Layer 4. Validación de campos indviduales."))
+  #layer4 ----
+  addEventLog(agente, paste0("Layer 4. Validación de campos indviduales."))
     eb <- layer4(agente, eb)
 
     if (nrow(eb) > 0) {
       
-      if (nrow(eb %>% filter(Cod %in% c(301:708))) >0) {
+      if (nrow(eb %>% filter(Cod %in% c(301:709))) >0) {
 
         addEventLog(agente, paste0("      Resultado: La revisión errores OM 22269-2020 tiene observaciones."))
       }
@@ -107,6 +107,8 @@ interrogateAgent_mod1 <- function(agente){
       addEventLog(agente, paste0("      Resultado: Revisión de errores OM 22269-2020 fue satisfatoria."))
     }
   
+  
+  #Error Final ----
   eb <- eb %>% arrange(Periodo, Cod)
   return(eb)
 }

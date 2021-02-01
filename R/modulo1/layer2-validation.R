@@ -34,7 +34,7 @@ validarOperacionesDuplicadas <- function(agente, eb){
              Cod = 401,
              txt1 = Duplicados,
              num1 = length(str_split(string=txt1 ,pattern = ",")[[1]]),
-             num2 = if_else(is.na(Saldo), 0, Saldo)
+             num2 = Saldo
              ) %>%
       select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1, num2)
 
@@ -47,8 +47,8 @@ validarOperacionesDuplicadas <- function(agente, eb){
              Cod = 402,
              txt1 = Duplicados,
              num1 = length(str_split(string=txt1 ,pattern = ",")[[1]]),
-             num2 = if_else(is.na(Saldo), 0, Saldo)
-      ) %>%
+             num2 = Saldo
+             ) %>%
       select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1, num2)
     
     eb <- addError(eb, chunk_402)
@@ -59,10 +59,9 @@ validarOperacionesDuplicadas <- function(agente, eb){
              IdProceso = getIdProcesoFromAgent(agente),
              Cod = 403,
              txt1 = Duplicados,
-             num1 = length(str_split(string=txt1 ,pattern = ",")[[1]]),
-             num2 = if_else(is.na(Saldo), 0, Saldo)
-      ) %>%
-      select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1, num2)
+             num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])
+             ) %>%
+      select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
     
     eb <- addError(eb, chunk_403)
   }
@@ -73,7 +72,7 @@ validarOperacionesDuplicadas <- function(agente, eb){
              Cod = 404,
              txt1 = Duplicados,
              num1 = length(str_split(string=txt1 ,pattern = ",")[[1]]),
-             num2 = if_else(is.na(Saldo), 0, Saldo)
+             num2 = Saldo
       ) %>%
       select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1, num2)
     
@@ -122,9 +121,9 @@ getOperacionesDuplicadas <- function(ruta){
   else{return("")}
 }
 getSaldoTotal            <- function(ruta, opers){
-  if (opers != "") {
+  if (opers != "" & getBDFromRuta(ruta) != "BD02B") {
     
-    if (getBDFromRuta(ruta) == "BD01" | getBDFromRuta(ruta) == "BD02A" | getBDFromRuta(ruta) == "BD02B") {
+    if (getBDFromRuta(ruta) == "BD01" | getBDFromRuta(ruta) == "BD02A") {
       saldo <- quitarVaciosBD(str_replace(ruta, getBDFromRuta(ruta), "BD01")) %>% 
         filter(CCR %in% unlist(str_split(opers, pattern = ", " ))) %>%
         pull(SKCR) %>% as.numeric() %>% sum()

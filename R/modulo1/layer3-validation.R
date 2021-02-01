@@ -28,10 +28,9 @@ validarCruceInterno <- function(agente, eb){
                Cod = 501,
                BD  = "BD02A",
                txt1 = OpFaltantes_BD01,
-               num1 = length(str_split(string=txt1 ,pattern = ",")[[1]]),
-               num2 = 0
+               num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])
                ) %>%
-        select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1, num2)
+        select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
       
       eb <- addError(eb, chunk_501)
     }
@@ -65,10 +64,9 @@ validarCruceInterno <- function(agente, eb){
                Cod = 503,
                BD  = "BD03B",
                txt1 = GaranFaltantes_BD03A,
-               num1 = length(str_split(string=txt1 ,pattern = ",")[[1]]),
-               num2 = 0
+               num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])
                ) %>%
-        select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1, num2)
+        select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
       
       eb <- addError(eb, chunk_503)
     }
