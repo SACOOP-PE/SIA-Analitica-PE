@@ -1947,3 +1947,75 @@
 100300	2021-01-31	2021-01-31 02:32:14	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 02:32:14] - La validación de los campos concluyó sin observaciones tipo1. (~ly4) 	Informativo	Baja
 100300	2021-01-31	2021-01-31 02:32:17	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 02:32:17] - La validación de los campos concluyó sin observaciones tipo2. (~ly4) 	Informativo	Baja
 100300	2021-01-31	2021-01-31 02:32:17	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 02:32:17] - La revisión errores OM 22269-2020 tiene observaciones.	Informativo	Baja
+100301	2021-01-31	2021-01-31 12:30:13	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 12:30:13] - ------------------ Validador SIA 1.4.2021 --------------------	Informativo	Baja
+100301	2021-01-31	2021-01-31 12:30:13	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 12:30:13] - Coopac evaluada: 01172-SAN MARTÍN DE PORRES	Informativo	Baja
+100301	2021-01-31	2021-01-31 12:30:13	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 12:30:13] - PID: 100301[201901~201902]	Informativo	Baja
+100301	2021-01-31	2021-01-31 12:30:14	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 12:30:14] - Bucket de errores creado. PID-100301.	Informativo	Baja
+100301	2021-01-31	2021-01-31 12:30:14	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 12:30:14] - Inicio del interrogatorio. PID-100301.	Informativo	Baja
+100301	2021-01-31	2021-01-31 12:30:14	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 12:30:14] - Apertura de revisión de pre-requisitos.	Informativo	Baja
+100301	2021-01-31	2021-01-31 12:30:14	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 12:30:14] - Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100301	2021-01-31	2021-01-31 12:30:15	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 12:30:14] - Apertura de revisión de estructura de datos.	Informativo	Baja
+100301	2021-01-31	2021-01-31 12:30:19	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 12:30:19] - Revisión de estructura de datos satisfatoria.	Informativo	Baja
+100301	2021-01-31	2021-01-31 12:30:19	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 12:30:19] - Apertura de revisión de errores OM 22269-2020.	Informativo	Baja
+100301	2021-01-31	2021-01-31 12:30:47	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 12:30:47] - La validación operaciones duplicadas concluyó con 5 observación(es). (~ly2) 	Informativo	Baja
+100301	2021-01-31	2021-01-31 12:30:52	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 12:30:52] - La validación de cruce interno concluyó con 2 observación(es). (~ly3) 	Informativo	Baja
+100301	2021-01-31	2021-01-31 12:30:59	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 12:30:59] - La validación de los campos concluyó sin observaciones tipo1. (~ly4) 	Informativo	Baja
+100301	2021-01-31	2021-01-31 12:31:02	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 12:31:02] - La validación de los campos concluyó sin observaciones tipo2. (~ly4) 	Informativo	Baja
+100301	2021-01-31	2021-01-31 12:31:03	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 12:31:02] - La revisión errores OM 22269-2020 tiene observaciones.	Informativo	Baja
+100302	2021-01-31	2021-01-31 13:39:45	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 13:39:44] - ------------------ Validador SIA 1.4.2021 --------------------	Informativo	Baja
+100302	2021-01-31	2021-01-31 13:39:45	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 13:39:45] - Coopac evaluada: 01172-SAN MARTÍN DE PORRES	Informativo	Baja
+100302	2021-01-31	2021-01-31 13:39:45	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 13:39:45] - PID: 100302[201901~201902]	Informativo	Baja
+100303	2021-01-31	2021-01-31 13:40:11	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 13:40:11] - ------------------ Validador SIA 1.4.2021 --------------------	Informativo	Baja
+100303	2021-01-31	2021-01-31 13:40:11	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 13:40:11] - Coopac evaluada: 01172-SAN MARTÍN DE PORRES	Informativo	Baja
+100303	2021-01-31	2021-01-31 13:40:11	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 13:40:11] - PID: 100303[201901~201902]	Informativo	Baja
+100304	2021-01-31	2021-01-31 13:53:48	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 13:53:48] - ------------------ Validador SIA 1.4.2021 --------------------	Informativo	Baja
+100304	2021-01-31	2021-01-31 13:53:48	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 13:53:48] - Coopac evaluada: 01172-SAN MARTÍN DE PORRES	Informativo	Baja
+100304	2021-01-31	2021-01-31 13:53:48	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 13:53:48] - PID: 100304[201901~201902]	Informativo	Baja
+100305	2021-01-31	2021-01-31 13:54:32	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 13:54:32] - ------------------ Validador SIA 1.4.2021 --------------------	Informativo	Baja
+100305	2021-01-31	2021-01-31 13:54:32	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 13:54:32] - Coopac evaluada: 01172-SAN MARTÍN DE PORRES	Informativo	Baja
+100305	2021-01-31	2021-01-31 13:54:32	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 13:54:32] - PID: 100305[201901~201902]	Informativo	Baja
+100306	2021-01-31	2021-01-31 13:55:24	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 13:55:24] - ------------------ Validador SIA 1.4.2021 --------------------	Informativo	Baja
+100306	2021-01-31	2021-01-31 13:55:24	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 13:55:24] - Coopac evaluada: 01172-SAN MARTÍN DE PORRES	Informativo	Baja
+100306	2021-01-31	2021-01-31 13:55:24	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 13:55:24] - PID: 100306[201901~201902]	Informativo	Baja
+100307	2021-01-31	2021-01-31 13:56:04	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 13:56:04] - ------------------ Validador SIA 1.4.2021 --------------------	Informativo	Baja
+100307	2021-01-31	2021-01-31 13:56:05	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 13:56:05] - Coopac evaluada: 01172-SAN MARTÍN DE PORRES	Informativo	Baja
+100307	2021-01-31	2021-01-31 13:56:05	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 13:56:05] - PID: 100307[201901~201902]	Informativo	Baja
+100308	2021-01-31	2021-01-31 13:56:32	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 13:56:32] - ------------------ Validador SIA 1.4.2021 --------------------	Informativo	Baja
+100308	2021-01-31	2021-01-31 13:56:32	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 13:56:32] - Coopac evaluada: 01172-SAN MARTÍN DE PORRES	Informativo	Baja
+100308	2021-01-31	2021-01-31 13:56:32	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 13:56:32] - PID: 100308[201901~201902]	Informativo	Baja
+100309	2021-01-31	2021-01-31 13:57:02	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 13:57:01] - ------------------ Validador SIA 1.4.2021 --------------------	Informativo	Baja
+100309	2021-01-31	2021-01-31 13:57:02	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 13:57:02] - Coopac evaluada: 01172-SAN MARTÍN DE PORRES	Informativo	Baja
+100309	2021-01-31	2021-01-31 13:57:02	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 13:57:02] - PID: 100309[201901~201902]	Informativo	Baja
+100310	2021-01-31	2021-01-31 13:57:21	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 13:57:21] - ------------------ Validador SIA 1.4.2021 --------------------	Informativo	Baja
+100310	2021-01-31	2021-01-31 13:57:22	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 13:57:21] - Coopac evaluada: 01172-SAN MARTÍN DE PORRES	Informativo	Baja
+100310	2021-01-31	2021-01-31 13:57:22	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 13:57:22] - PID: 100310[201901~201902]	Informativo	Baja
+100311	2021-01-31	2021-01-31 13:59:32	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 13:59:31] - ------------------ Validador SIA 1.4.2021 --------------------	Informativo	Baja
+100311	2021-01-31	2021-01-31 13:59:32	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 13:59:32] - Coopac evaluada: 01172-SAN MARTÍN DE PORRES	Informativo	Baja
+100311	2021-01-31	2021-01-31 13:59:32	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 13:59:32] - PID: 100311[201901~201902]	Informativo	Baja
+100312	2021-01-31	2021-01-31 14:00:27	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 14:00:27] - ------------------ Validador SIA 1.4.2021 --------------------	Informativo	Baja
+100312	2021-01-31	2021-01-31 14:00:27	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 14:00:27] - Coopac evaluada: 01172-SAN MARTÍN DE PORRES	Informativo	Baja
+100312	2021-01-31	2021-01-31 14:00:27	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 14:00:27] - PID: 100312[201901~201902]	Informativo	Baja
+100313	2021-01-31	2021-01-31 14:02:40	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 14:02:40] - ------------------ Validador SIA 1.4.2021 --------------------	Informativo	Baja
+100313	2021-01-31	2021-01-31 14:02:40	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 14:02:40] - Coopac evaluada: 01172-SAN MARTÍN DE PORRES	Informativo	Baja
+100313	2021-01-31	2021-01-31 14:02:40	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 14:02:40] - PID: 100313[201901~201902]	Informativo	Baja
+100314	2021-01-31	2021-01-31 14:02:57	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 14:02:57] - ------------------ Validador SIA 1.4.2021 --------------------	Informativo	Baja
+100314	2021-01-31	2021-01-31 14:02:57	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 14:02:57] - Coopac evaluada: 01172-SAN MARTÍN DE PORRES	Informativo	Baja
+100314	2021-01-31	2021-01-31 14:02:57	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 14:02:57] - PID: 100314[201901~201902]	Informativo	Baja
+100315	2021-01-31	2021-01-31 14:03:18	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 14:03:18] - ------------------ Validador SIA 1.4.2021 --------------------	Informativo	Baja
+100315	2021-01-31	2021-01-31 14:03:19	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 14:03:18] - Coopac evaluada: 01172-SAN MARTÍN DE PORRES	Informativo	Baja
+100315	2021-01-31	2021-01-31 14:03:19	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 14:03:19] - PID: 100315[201901~201902]	Informativo	Baja
+100316	2021-01-31	2021-01-31 14:03:37	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 14:03:37] - ------------------ Validador SIA 1.4.2021 --------------------	Informativo	Baja
+100316	2021-01-31	2021-01-31 14:03:37	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 14:03:37] - Coopac evaluada: 01172-SAN MARTÍN DE PORRES	Informativo	Baja
+100316	2021-01-31	2021-01-31 14:03:37	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 14:03:37] - PID: 100316[201901~201902]	Informativo	Baja
+100317	2021-01-31	2021-01-31 14:03:52	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 14:03:52] - ------------------ Validador SIA 1.4.2021 --------------------	Informativo	Baja
+100317	2021-01-31	2021-01-31 14:03:52	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 14:03:52] - Coopac evaluada: 01172-SAN MARTÍN DE PORRES	Informativo	Baja
+100317	2021-01-31	2021-01-31 14:03:52	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 14:03:52] - PID: 100317[201901~201902]	Informativo	Baja
+100318	2021-01-31	2021-01-31 14:05:13	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 14:05:12] - ------------------ Validador SIA 1.4.2021 --------------------	Informativo	Baja
+100318	2021-01-31	2021-01-31 14:05:13	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 14:05:13] - Coopac evaluada: 01172-SAN MARTÍN DE PORRES	Informativo	Baja
+100318	2021-01-31	2021-01-31 14:05:13	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 14:05:13] - PID: 100318[201901~201902]	Informativo	Baja
+100319	2021-01-31	2021-01-31 16:02:04	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 16:02:04] - ------------------ Validador SIA 1.4.2021 --------------------	Informativo	Baja
+100319	2021-01-31	2021-01-31 16:02:04	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 16:02:04] - Coopac evaluada: 01172-SAN MARTÍN DE PORRES	Informativo	Baja
+100319	2021-01-31	2021-01-31 16:02:04	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 16:02:04] - PID: 100319[201901~201902]	Informativo	Baja
+100320	2021-01-31	2021-01-31 16:06:24	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 16:06:24] - ------------------ Validador SIA 1.4.2021 --------------------	Informativo	Baja
+100320	2021-01-31	2021-01-31 16:06:24	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 16:06:24] - Coopac evaluada: 01172-SAN MARTÍN DE PORRES	Informativo	Baja
+100320	2021-01-31	2021-01-31 16:06:24	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 16:06:24] - PID: 100320[201901~202012]	Informativo	Baja

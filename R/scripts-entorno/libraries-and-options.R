@@ -23,6 +23,18 @@ default.carpeta <- "test/datatest"
 default.bd      <- c("BD01","BD02A","BD02B","BD03A","BD03B","BD04")
 
 ### 6. Inicializar archivos de configuracion ----
+
+initCuadreContable2 <- function(){
+  read_delim("C:/Users/DPacheco/Downloads/PlantillaCruceBDCC.txt",
+             "\t", escape_double = FALSE, 
+             col_types = cols(C1403 = col_double(),
+                              C14090702 = col_double(), 
+                              C14090701 = col_double(),
+                              C14090901 = col_double(), 
+                              PeriodoId_1 = col_skip()),
+             trim_ws = TRUE) %>% return()
+}
+
 initCuadreContable     <- function(){
   read_delim(archivo.CuadreContable, 
              "\t", escape_double = FALSE, col_types = cols(ANO = col_double(), 
@@ -32,6 +44,7 @@ initCuadreContable     <- function(){
                                                            PERIODO = col_double(), TIPOENTIDAD = col_character()), 
              trim_ws = TRUE, progress = F) %>% return()
 }
+
 initEstructuraBase     <- function(){ 
   read_delim(archivo.EstructuraBase, 
              "\t", escape_double = FALSE, col_types = cols(BD = col_character(), 

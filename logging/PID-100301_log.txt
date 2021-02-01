@@ -1,0 +1,16 @@
+Time	logEncontrado
+[2021-01-31 12:30:13]	------------------ Validador SIA 1.4.2021 --------------------
+[2021-01-31 12:30:13]	Coopac evaluada: 01172-SAN MARTÃN DE PORRES
+[2021-01-31 12:30:13]	PID: 100301[201901~201902]
+[2021-01-31 12:30:14]	Bucket de errores creado. PID-100301.
+[2021-01-31 12:30:14]	Inicio del interrogatorio. PID-100301.
+[2021-01-31 12:30:14]	Apertura de revisiÃ³n de pre-requisitos.
+[2021-01-31 12:30:14]	RevisiÃ³n de pre-requisitos satisfactoria.
+[2021-01-31 12:30:14]	Apertura de revisiÃ³n de estructura de datos.
+[2021-01-31 12:30:19]	RevisiÃ³n de estructura de datos satisfatoria.
+[2021-01-31 12:30:19]	Apertura de revisiÃ³n de errores OM 22269-2020.
+[2021-01-31 12:30:47]	La validaciÃ³n operaciones duplicadas concluyÃ³ con 5 observaciÃ³n(es). (~ly2)
+[2021-01-31 12:30:52]	La validaciÃ³n de cruce interno concluyÃ³ con 2 observaciÃ³n(es). (~ly3)
+[2021-01-31 12:30:59]	La validaciÃ³n de los campos concluyÃ³ sin observaciones tipo1. (~ly4)
+[2021-01-31 12:31:02]	La validaciÃ³n de los campos concluyÃ³ sin observaciones tipo2. (~ly4)
+[2021-01-31 12:31:02]	La revisiÃ³n errores OM 22269-2020 tiene observaciones.
