@@ -13,7 +13,7 @@ validarOperacionesDuplicadas <- function(agente, eb){
   carpeta   <- getCarpetaFromAgent(agente)
   exigibles <- getArchivosNoObservadosByCols(agente, eb, c("CCR", "CCR_C", "CODGR"))
   
-  DupsSaldo <- tibble(NombreArchivo = exigibles[str_detect(exigibles, paste(c("BD01","BD02A", "BD02B", "BD03A","BD04"), collapse = '|'))]) %>% 
+  DupsSaldo <- tibble(NombreArchivo = exigibles[str_detect(exigibles, paste(c("BD01","BD02A", "BD02B", "BD03A"), collapse = '|'))]) %>% 
     rowwise() %>% 
     mutate(ruta       = getRuta(carpeta, NombreArchivo),
            BD         = getBDFromRuta(ruta),
@@ -26,7 +26,6 @@ validarOperacionesDuplicadas <- function(agente, eb){
   dups_BD02A <- DupsSaldo %>% filter(BD == "BD02A")
   dups_BD02B <- DupsSaldo %>% filter(BD == "BD02B")
   dups_BD03A <- DupsSaldo %>% filter(BD == "BD03A")
-  dups_BD04  <- DupsSaldo %>% filter(BD == "BD04")
   
   if (nrow(dups_BD01) > 0) {
     chunk_401 <- dups_BD01 %>% rowwise() %>%
@@ -108,7 +107,7 @@ validarOperacionesDuplicadas <- function(agente, eb){
 getOperacionesDuplicadas <- function(ruta){
   BD <- quitarVaciosBD(ruta)
   
-  if (getBDFromRuta(ruta) == "BD01" | getBDFromRuta(ruta) == "BD03A" | getBDFromRuta(ruta) == "BD04") {
+  if (getBDFromRuta(ruta) == "BD01" | getBDFromRuta(ruta) == "BD03A") {
     operaciones <- BD %>% select(getCodigoBD(getBDFromRuta(ruta))[1]) 
     duplicados  <- operaciones[duplicated(operaciones), ] %>% unique() %>% pull(getCodigoBD(getBDFromRuta(ruta))[1]) %>% toString()
     
@@ -132,7 +131,11 @@ getOperacionesDuplicadas <- function(ruta){
     
     return(duplicados)
   }
+  if (getBDFromRuta(ruta) == "BD04") {
+    
+  }
   else{return("")}
+  
 }
 getSaldoTotal            <- function(ruta, opers){
   if (opers != "" & getBDFromRuta(ruta) != "BD02B") {
