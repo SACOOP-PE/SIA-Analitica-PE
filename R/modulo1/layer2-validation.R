@@ -13,7 +13,7 @@ validarOperacionesDuplicadas <- function(agente, eb){
   carpeta   <- getCarpetaFromAgent(agente)
   exigibles <- getArchivosNoObservadosByCols(agente, eb, c("CCR", "CCR_C", "CODGR"))
   
-  DupsSaldo <- tibble(NombreArchivo = exigibles[str_detect(exigibles, paste(c("BD01","BD02A", "BD02B", "BD03A"), collapse = '|'))]) %>% 
+  DupsSaldo <- tibble(NombreArchivo = exigibles[str_detect(exigibles, paste(c("BD01","BD02A", "BD02B", "BD03A","BD04"), collapse = '|'))]) %>% 
     rowwise() %>% 
     mutate(ruta       = getRuta(carpeta, NombreArchivo),
            BD         = getBDFromRuta(ruta),
@@ -26,6 +26,7 @@ validarOperacionesDuplicadas <- function(agente, eb){
   dups_BD02A <- DupsSaldo %>% filter(BD == "BD02A")
   dups_BD02B <- DupsSaldo %>% filter(BD == "BD02B")
   dups_BD03A <- DupsSaldo %>% filter(BD == "BD03A")
+  dups_BD04  <- DupsSaldo %>% filter(BD == "BD04")
   
   if (nrow(dups_BD01) > 0) {
     chunk_401 <- dups_BD01 %>% rowwise() %>%
@@ -78,8 +79,21 @@ validarOperacionesDuplicadas <- function(agente, eb){
     
     eb <- addError(eb, chunk_404)
   }
+  if (nrow(dups_BD04) > 0) {
+    chunk_405 <- dups_BD04 %>% rowwise() %>%
+      mutate(CodCoopac = getCoopacFromAgent(agente),
+             IdProceso = getIdProcesoFromAgent(agente),
+             Cod = 405,
+             txt1 = Duplicados,
+             num1 = length(str_split(string=txt1 ,pattern = ",")[[1]]),
+             num2 = Saldo
+      ) %>%
+      select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1, num2)
+    
+    eb <- addError(eb, chunk_405)
+  }
   
-  n <- eb %>% filter(Cod %in% c(401:404)) %>% nrow()
+  n <- eb %>% filter(Cod %in% c(401:405)) %>% nrow()
   if (n == 0) {
     addEventLog(agente, paste0("      Resultado: La validación operaciones duplicadas concluyó sin observaciones."))
   }
@@ -94,7 +108,7 @@ validarOperacionesDuplicadas <- function(agente, eb){
 getOperacionesDuplicadas <- function(ruta){
   BD <- quitarVaciosBD(ruta)
   
-  if (getBDFromRuta(ruta) == "BD01" | getBDFromRuta(ruta) == "BD03A") {
+  if (getBDFromRuta(ruta) == "BD01" | getBDFromRuta(ruta) == "BD03A" | getBDFromRuta(ruta) == "BD04") {
     operaciones <- BD %>% select(getCodigoBD(getBDFromRuta(ruta))[1]) 
     duplicados  <- operaciones[duplicated(operaciones), ] %>% unique() %>% pull(getCodigoBD(getBDFromRuta(ruta))[1]) %>% toString()
     

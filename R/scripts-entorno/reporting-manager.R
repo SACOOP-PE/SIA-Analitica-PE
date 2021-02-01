@@ -56,6 +56,7 @@ formatBucket <- function(eb) {
   return(output)
 }
 
+#Desc códigos
 getDescError   <- function(CodError) {
   descr <- initRepositorioErrores() %>% filter(Cod == CodError) %>% pull(Descripcion)
   return(descr)
@@ -70,6 +71,7 @@ cutStringError <- function(num1, txt1) {
   else{return(txt1)}
 }
 
+#Descr periodos
 pad2            <- function(n) {
   return(str_pad(n, width = 2, side = "left", pad = "0"))
 }
@@ -109,25 +111,3 @@ saveOutputs <- function(agente, eb, ebFormat) {
                                      paste0("(",agente %>% pull(PeriodoInicial),"-", agente %>% pull(PeriodoFinal),")"),
                                      sep = "_") ))
 }
-
-# bucket personalizado:
-# library(reactable)
-# library(crosstalk)
-
-# reactable(
-#   bucket %>% select(Periodo, Cod, BD, txt1, txt2, txt3, num1),
-#   groupBy = "Periodo",
-#   details = function(index) paste("Details for row:", index),
-#   onClick = "expand",
-# 
-#   rowStyle = list(cursor = "pointer")
-# )
-# 
-# 
-# 
-# bucket$names <- rownames(bucket)
-# bucket  %>% 
-#   scatterD3(x = Periodo, y = Cod, lab = BD,
-#             col_var = BD,
-#             xlab = "Año-Mes", ylab = "CodError")
-  
