@@ -1,4 +1,6 @@
-createAgent  <- function(idCoopac, periodoInicial, periodoFinal, 
+createAgent  <- function(idCoopac, 
+                         periodoInicial, 
+                         periodoFinal, 
                          carpeta = default.carpeta, 
                          usuario = default.usuario){
   
@@ -21,10 +23,11 @@ addEventLog(agente, paste0("PID: ", agente %>% pull(IdProceso) %>% first(),
   
   return(agente)
 }
+
 createBucket <- function(agente){
-  eb <- tibble(CodCoopac     = agente %>% pull(Coopac) %>% first(),
+  eb <- tibble(CodCoopac = agente %>% pull(Coopac) %>% first(),
                IdProceso  = agente %>% pull(IdProceso) %>% first(), 
-               Cod         = 100,
+               Cod = 100,
                Periodo = "",
                BD = "",
                txt1 = "",
@@ -33,13 +36,10 @@ createBucket <- function(agente){
                num1 = 0,
                num2 = 0,
                num3 = 0) 
-  
- 
-  
   return(eb)
 }
 
-interrogateAgent <- function(agente){
+interrogateAgent_mod1 <- function(agente){
   eb <- createBucket(agente)
    
   addEventLog(agente, paste0("1. Módulo de validación de base de datos crediticias----------"))
@@ -47,7 +47,7 @@ interrogateAgent <- function(agente){
   
   addEventLog(agente, paste0("Inicio del interrogatorio. PID-", agente %>% pull(IdProceso) %>% first(),"."))
   
-  #pre-requisitos ----
+  #layer0 ----
   addEventLog(agente, paste0("Layer 0. Revisión de pre-requisitos."))
   
     eb <- layer0(agente, eb)
@@ -60,7 +60,7 @@ interrogateAgent <- function(agente){
         addEventLog(agente, paste0("      Resultado: Revisión de pre-requisitos satisfactoria."))
     }
   
-  #estructura de columnas ----
+  #layer1 ----
   addEventLog(agente, paste0("Layer 1. Revisión de estructura de tablas"))
     
     eb <- layer1(agente, eb)
@@ -82,13 +82,15 @@ interrogateAgent <- function(agente){
       addEventLog(agente, paste0("      Resultado: Revisión de estructura de datos satisfatoria."))
     }
   
-  #errores OM 22269-2020 ----
+    #layer2 ----
     addEventLog(agente, paste0("Layer 2. Validación de operaciones duplicadas."))
     eb <- layer2(agente, eb)
     
+    #layer3 ----
     addEventLog(agente, paste0("Layer 3. Validación de entre BD01/BD02A, BD03A/BD03B."))
     eb <- layer3(agente, eb)
     
+    #layer4 ----
     addEventLog(agente, paste0("Layer 4. Validación de campos indviduales."))
     eb <- layer4(agente, eb)
 
@@ -106,15 +108,13 @@ interrogateAgent <- function(agente){
     else {
       addEventLog(agente, paste0("      Resultado: Revisión de errores OM 22269-2020 fue satisfatoria."))
     }
-    
-  #alertas ad-hoc 11356 ----
-    #eb <- layer5(agent, eb) 
   
   eb <- eb %>% arrange(Periodo, Cod)
   return(eb)
 }
 
-closeAgent       <- function(agente, eb){
+closeAgent <- function(agente,
+                       eb){
   agente <- agente %>% 
     mutate(
       FinProceso = format(Sys.time(), "%a %b %d %X %Y"),

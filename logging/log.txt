@@ -2112,3 +2112,6 @@
 100326	2021-01-31	2021-01-31 21:49:46	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 21:49:46] - Layer 3. Validación de entre BD01/BD02A, BD03A/BD03B.	Informativo	Baja
 100326	2021-01-31	2021-01-31 21:49:50	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 21:49:50] -       Resultado: La validación de cruce interno concluyó con 2 observación(es).	Informativo	Baja
 100326	2021-01-31	2021-01-31 21:49:50	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 21:49:50] - Layer 4. Validación de campos indviduales.	Informativo	Baja
+100326	2021-01-31	2021-01-31 21:49:57	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 21:49:57] -       Resultado: La validación de los campos concluyó sin observaciones tipo1.	Informativo	Baja
+100326	2021-01-31	2021-01-31 21:50:00	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 21:50:00] -       Resultado: La validación de los campos concluyó sin observaciones tipo2.	Informativo	Baja
+100326	2021-01-31	2021-01-31 21:50:00	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-01-31 21:50:00] -       Resultado: La revisión errores OM 22269-2020 tiene observaciones.	Informativo	Baja

@@ -1,5 +1,5 @@
-# Version utils v2. 
 
+# Funciones auxiliares - Ruta -----
 getRuta           <- function(carpeta, filename){
   
   lista_rutas <- list.files(path=carpeta, 
@@ -9,7 +9,6 @@ getRuta           <- function(carpeta, filename){
   return((lista_rutas[str_detect(lista_rutas, filename)])[1])
   
 }
-# Funciones auxiliares - Ruta
 getAnoFromRuta    <- function(ruta){
   if (is.na(ruta) | ruta == "" ) {
     return("")
@@ -37,14 +36,12 @@ getNombreCoopacFromRuta <- function(ruta){
   i <- (basename(ruta) %>% strsplit("_"))[[1]][1]
   initCuadreContable() %>% filter(CodigoEntidad == i) %>% pull(Entidad) %>% first() %>% return()
 }
- 
 getBDFromRuta           <- function(ruta){ 
   if (is.na(ruta) | ruta == ""  ) {
     return("")
   }
   (basename(ruta) %>% strsplit("_"))[[1]][2] %>% return() 
 }
-
 evaluarFile   <- function(ruta){
   read_delim(ruta,"\t",escape_double = FALSE, trim_ws = TRUE, col_names = TRUE,
              col_types = cols(.default = "c"), progress = F) %>%
@@ -52,7 +49,7 @@ evaluarFile   <- function(ruta){
   
 }
 
-# Funciones auxiliares - Agent
+# Funciones auxiliares - Agent -----
 getCarpetaFromAgent           <- function(agente){ 
   agente %>% pull(Carpeta) %>% first() %>% return()
 }
@@ -101,4 +98,55 @@ getCodigoBD <- function(BD){
                            BD04  = "CCR_C")
   
   return(campoIdentif)
+}
+
+# Funciones auxiliares - Logging -----
+
+getLogObject     <- function(path){
+  read_delim(path, "\t", escape_double = FALSE,col_types = cols(Categoria = col_character(), 
+                                                                Coopac = col_character(), Criticidad = col_character(), 
+                                                                Descripcion = col_character(),  Carpeta = col_character(), Fecha = col_character(), 
+                                                                Hora = col_character(), 
+                                                                IdProceso = col_integer(),
+                                                                Usuario = col_character()), 
+             locale = locale(encoding = "ISO-8859-1"), trim_ws = TRUE) %>% return()
+}
+getNextIdProceso <- function(logObject){
+  if (logObject %>% pull(IdProceso) %>% max(na.rm = T) > 0)
+    (logObject %>% pull(IdProceso) %>% max(na.rm = T) + 1) %>% return()
+  else 
+    return(1) 
+}
+addEventLog      <- function(agente,
+                             descripcion,
+                             categoria = "I", 
+                             criticidad = "B"){
+  
+  descripcion <- paste0(paste0("[",Sys.time()[1],"] - "),descripcion)
+  
+  myLog <- getLogObject("logging/log.txt")
+  event <- tibble(IdProceso = getIdProcesoFromAgent(agente),
+                  Fecha = toString(Sys.Date()),
+                  Hora  = toString(Sys.time()),
+                  Usuario = "DPACHECO", 
+                  Coopac  = getNombreCoopacFromAgent(agente) ,
+                  Carpeta = getCarpetaFromAgent(agente), 
+                  Descripcion = descripcion ,
+                  Categoria  = ifelse(categoria == "I", "Informativo", "Advertencia"),
+                  Criticidad = ifelse(criticidad == "B", "Baja", ifelse(criticidad == "M",Media, Alta)))
+  
+  write_delim(x = event,path = "logging/log.txt", delim = "\t", col_names = F, append = T)
+  
+  print(descripcion)
+}
+ 
+getLog <- function(pid) {
+  contents <- getLogObject(path = "logging/log.txt") %>% filter(IdProceso == pid) %>% pull(Descripcion)
+  
+  pidlog <- tibble(logEncontrado = contents) %>% rowwise() %>% 
+    mutate(Time = str_split(logEncontrado, pattern = " - ")[[1]][1],
+           logEncontrado = str_split(logEncontrado, pattern = " - ")[[1]][2]) %>% 
+    select(Time, logEncontrado)
+  
+  return(pidlog)
 }

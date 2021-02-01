@@ -4,7 +4,7 @@ addError <- function(eb, obj) {
   return(eb)
 }
 
-# Filter files, periods, cols from bucket----
+# Otras funciones ----
 getArchivosNoObservadosByCols <- function(agente, eb, cols) {
   if (nrow(eb %>% filter(Cod %in% c(201,203))) >0) {
     v <- eb %>%
