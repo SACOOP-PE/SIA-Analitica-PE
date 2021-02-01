@@ -77,16 +77,13 @@ periodoEscrito  <- function(periodo) {
 
 
 saveOutputs <- function(agente, eb, ebFormat) {
-  #agent ----
-  pidlog <- getLog(getIdProcesoFromAgent(agent))
-  
+ 
   agente %>% 
     writexl::write_xlsx(paste0(paste0(getwd(), "/test/output/"),
                                paste(agente %>% pull(Coopac),
                                      getIdProcesoFromAgent(agente),
                                      paste0("(",agente %>% pull(PeriodoInicial),"-", agente %>% pull(PeriodoFinal),")"),
-                                     sep = "_"),
-                               "_agente.xlsx"))
+                                     sep = "_")))
   
   #bucket ----
   eb %>% rowwise() %>%
@@ -98,17 +95,15 @@ saveOutputs <- function(agente, eb, ebFormat) {
                                paste(agente %>% pull(Coopac),
                                      getIdProcesoFromAgent(agente),
                                      paste0("(",agente %>% pull(PeriodoInicial),"-", agente %>% pull(PeriodoFinal),")"),
-                                     sep = "_"),
-                               "_ListaErrores.xlsx"))
+                                     sep = "_")))
   #ebFormatted ----
   ebFormat %>%
     writexl::write_xlsx(paste0(paste0(getwd(), "/test/output/"),
                                paste(agente %>% pull(Coopac),
                                      getIdProcesoFromAgent(agente),
                                      paste0("(",agente %>% pull(PeriodoInicial),"-", agente %>% pull(PeriodoFinal),")"),
-                                     sep = "_"),
-                               "_ResumenErrores.xlsx"))
-  
+                                     sep = "_") ))
+ 
   #pidlog ----
   pidlog %>%
     write_delim(path = paste0(getwd(), "/logging/", "PID-", getIdProcesoFromAgent(agente), "_log.txt"), delim = "\t",

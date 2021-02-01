@@ -1,0 +1,18 @@
+Time	logEncontrado
+[2021-01-31 22:21:43]	---------------------------- Validador SIA 1.4.2021 --------------------------
+[2021-01-31 22:21:43]	Coopac evaluada: 01172-SAN MARTÃN DE PORRES
+[2021-01-31 22:21:43]	PID: 100328[201901~201902]
+[2021-01-31 22:21:44]	1. MÃ³dulo de validaciÃ³n de base de datos crediticias--------------------------
+[2021-01-31 22:21:44]	Inicio del interrogatorio. PID-100328.
+[2021-01-31 22:21:44]	Layer 0. RevisiÃ³n de pre-requisitos.
+[2021-01-31 22:21:44]	      Resultado: RevisiÃ³n de pre-requisitos satisfactoria.
+[2021-01-31 22:21:44]	Layer 1. RevisiÃ³n de estructura de tablas
+[2021-01-31 22:21:49]	      Resultado: RevisiÃ³n de estructura de datos satisfatoria.
+[2021-01-31 22:21:49]	Layer 2. ValidaciÃ³n de operaciones duplicadas.
+[2021-01-31 22:22:14]	      Resultado: La validaciÃ³n operaciones duplicadas concluyÃ³ con 5 observaciÃ³n(es).
+[2021-01-31 22:22:14]	Layer 3. ValidaciÃ³n de entre BD01/BD02A, BD03A/BD03B.
+[2021-01-31 22:22:18]	      Resultado: La validaciÃ³n de cruce interno concluyÃ³ con 2 observaciÃ³n(es).
+[2021-01-31 22:22:18]	Layer 4. ValidaciÃ³n de campos indviduales.
+[2021-01-31 22:22:25]	      Resultado: La validaciÃ³n de los campos concluyÃ³ sin observaciones tipo1.
+[2021-01-31 22:22:28]	      Resultado: La validaciÃ³n de los campos concluyÃ³ sin observaciones tipo2.
+[2021-01-31 22:22:28]	      Resultado: La revisiÃ³n errores OM 22269-2020 tiene observaciones.

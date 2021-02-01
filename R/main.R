@@ -9,11 +9,11 @@ source("R/scripts-entorno/reporting-manager.R")
 source("R/scripts-entorno/utils.R")
  
 # 1. Módulo de validaciones 
-source("R/scripts-errores/layer0-validation.R")
-source("R/scripts-errores/layer1-validation.R")
-source("R/scripts-errores/layer2-validation.R")
-source("R/scripts-errores/layer3-validation.R")
-source("R/scripts-errores/layer4-validation.R")
+source("R/modulo1/layer0-validation.R")
+source("R/modulo1/layer1-validation.R")
+source("R/modulo1/layer2-validation.R")
+source("R/modulo1/layer3-validation.R")
+source("R/modulo1/layer4-validation.R")
 
 # # 2. Módulo de alertas regulatorias
 # source("R/scripts-alertas/layer0-alertas.R")

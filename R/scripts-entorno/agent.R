@@ -14,7 +14,7 @@ agente <- tibble(Coopac      = idCoopac,
                  PeriodoFinal   = periodoFinal,
                  Alcance        = list(default.bd)) 
 
-addEventLog(agente, paste0("------------------ Validador SIA 1.4.2021 --------------------"))
+addEventLog(agente, paste0("---------------------------- VALIDADOR SIA 1.4.2021 --------------------------"))
 addEventLog(agente, paste0("Coopac evaluada: ",idCoopac,"-", agente %>% pull(NombreCoopac) %>% first()))
 addEventLog(agente, paste0("PID: ", agente %>% pull(IdProceso) %>% first(),
                           "[", periodoInicial, "~", periodoFinal, "]"))
@@ -42,8 +42,7 @@ createBucket <- function(agente){
 interrogateAgent_mod1 <- function(agente){
   eb <- createBucket(agente)
    
-  addEventLog(agente, paste0("1. Módulo de validación de base de datos crediticias----------"))
-  
+  addEventLog(agente, paste0("1. MÓDULO DE VALIDACIÓN DE BASE DE DATOS CREDITICIAS --------------------------")) 
   
   addEventLog(agente, paste0("Inicio del interrogatorio. PID-", agente %>% pull(IdProceso) %>% first(),"."))
   

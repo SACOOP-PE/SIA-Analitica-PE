@@ -1,9 +1,12 @@
 ##### 1. Librerias opciones ----- 
+
+install.packages(setdiff(c("tidyverse", "stringr", "colr", "lubridate"), 
+                         rownames(installed.packages()))) 
 library(tidyverse)
 library(stringr)
 library(colr)
-library(lubridate)
-
+library(lubridate) 
+library(writexl) 
 ##### 2. Opciones ----- 
 
 options(warn = -1)
