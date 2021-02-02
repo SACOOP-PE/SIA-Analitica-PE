@@ -84,7 +84,7 @@ validarOperacionesDuplicadas <- function(agente, eb){
     chunk_405 <- tibble(CodCoopac = getCoopacFromAgent(agente),
                         IdProceso = getIdProcesoFromAgent(agente),
                         Cod     = 405,
-                        Periodo = "201901",
+                        Periodo = dups_BD04 %>% pull(Periodo) %>% first(),
                         BD      = "BD04",
                         txt1 = toString(unique(dups_BD04 %>% pull(CCR_C))),
                         txt2 = toString(unique(dups_BD04 %>% pull(Periodo))),
@@ -107,7 +107,7 @@ validarOperacionesDuplicadas <- function(agente, eb){
 }
 
 #validarOperacionesDuplicadas
-getOperacionesDuplicadas <- function(ruta){
+getOperacionesDuplicadas    <- function(ruta){
    BD <- quitarVaciosBD(ruta)
    
    if (getBDFromRuta(ruta) == "BD01" | getBDFromRuta(ruta) == "BD03A") {
@@ -159,7 +159,7 @@ getDuplicadosCredCancelados <- function(agente, exigibles){
   
   return(dupsCancelados)
 }
-getSaldoTotal            <- function(ruta, opers){
+getSaldoTotal               <- function(ruta, opers){
   if (opers != "" & getBDFromRuta(ruta) != "BD02B") {
     
     if (getBDFromRuta(ruta) == "BD01" | getBDFromRuta(ruta) == "BD02A") {
