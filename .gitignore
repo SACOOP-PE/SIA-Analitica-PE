@@ -3,3 +3,5 @@ test/datatest
 .Rhistory
 .RData
 .Ruserdata
+logging
+test/output
