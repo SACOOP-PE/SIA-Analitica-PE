@@ -13,7 +13,7 @@ validarOperacionesDuplicadas <- function(agente, eb){
   carpeta   <- getCarpetaFromAgent(agente)
   exigibles <- getArchivosNoObservadosByCols(agente, eb, c("CCR", "CCR_C", "CODGR"))
   
-  DupsSaldo <- tibble(NombreArchivo = exigibles[str_detect(exigibles, paste(c("BD01","BD02A", "BD02B", "BD03A"), collapse = '|'))]) %>% 
+  Dups <- tibble(NombreArchivo = exigibles[str_detect(exigibles, paste(c("BD01","BD02A", "BD02B", "BD03A"), collapse = '|'))]) %>% 
     rowwise() %>% 
     mutate(ruta       = getRuta(carpeta, NombreArchivo),
            BD         = getBDFromRuta(ruta),
@@ -22,10 +22,10 @@ validarOperacionesDuplicadas <- function(agente, eb){
            Saldo      = getSaldoTotal(ruta, Duplicados)) %>%
     filter(Duplicados != "")
 
-  dups_BD01  <- DupsSaldo %>% filter(BD == "BD01")
-  dups_BD02A <- DupsSaldo %>% filter(BD == "BD02A")
-  dups_BD02B <- DupsSaldo %>% filter(BD == "BD02B")
-  dups_BD03A <- DupsSaldo %>% filter(BD == "BD03A")
+  dups_BD01  <- Dups %>% filter(BD == "BD01")
+  dups_BD02A <- Dups %>% filter(BD == "BD02A")
+  dups_BD02B <- Dups %>% filter(BD == "BD02B")
+  dups_BD03A <- Dups %>% filter(BD == "BD03A")
   
   if (nrow(dups_BD01) > 0) {
     chunk_401 <- dups_BD01 %>% rowwise() %>%
@@ -105,36 +105,54 @@ validarOperacionesDuplicadas <- function(agente, eb){
 
 #validarOperacionesDuplicadas
 getOperacionesDuplicadas <- function(ruta){
-  BD <- quitarVaciosBD(ruta)
+   BD <- quitarVaciosBD(ruta)
+   
+   if (getBDFromRuta(ruta) == "BD01" | getBDFromRuta(ruta) == "BD03A") {
+     operaciones <- BD %>% select(getCodigoBD(getBDFromRuta(ruta))[1]) 
+     duplicados  <- operaciones[duplicated(operaciones), ] %>% unique() %>% pull(getCodigoBD(getBDFromRuta(ruta))[1]) %>% toString()
+     
+     return(duplicados)
+   }
+   if (getBDFromRuta(ruta) == "BD02A") {
+     duplicados <- BD %>%
+       group_by(CCR, NCUO) %>%
+       filter(n() >1) %>%
+       pull(CCR) %>% 
+       unique() %>% toString()
+     
+     return(duplicados)
+   }
+   if (getBDFromRuta(ruta) == "BD02B") {
+     duplicados <- BD %>%
+       group_by(CCR_C, NCUO_C) %>%
+       filter(n() >1) %>%
+       pull(CCR_C) %>% 
+       unique() %>% toString()
+     
+     return(duplicados)
+   }
+   else{""}
+
+}
+getDuplicadosCredCancelados <- function(agente, exigibles){
   
-  if (getBDFromRuta(ruta) == "BD01" | getBDFromRuta(ruta) == "BD03A") {
-    operaciones <- BD %>% select(getCodigoBD(getBDFromRuta(ruta))[1]) 
-    duplicados  <- operaciones[duplicated(operaciones), ] %>% unique() %>% pull(getCodigoBD(getBDFromRuta(ruta))[1]) %>% toString()
-    
-    return(duplicados)
+  carpeta    <- getCarpetaFromAgent(agente)
+  cancelados <- exigibles[str_detect(exigibles, "BD04")]
+  
+  CredCandelados <-  evaluarFile(getRuta(carpeta, cancelados[1])) %>%
+    select(CCR_C) %>% 
+    mutate(Periodo = getAnoMesFromRuta(getRuta(carpeta, cancelados[1])))
+  
+  for (i in 1:length(cancelados)-1) {
+    CredCandelados <- CredCandelados %>% 
+      bind_rows(evaluarFile(getRuta(carpeta, cancelados[i+1])) %>%
+                  select(CCR_C) %>% 
+                  mutate(Periodo = getAnoMesFromRuta(getRuta(carpeta, cancelados[i+1]))))
   }
-  if (getBDFromRuta(ruta) == "BD02A") {
-    duplicados <- BD %>%
-      group_by(CCR, NCUO) %>%
-      filter(n() >1) %>%
-      pull(CCR) %>% 
-      unique() %>% toString()
-    
-    return(duplicados)
-  }
-  if (getBDFromRuta(ruta) == "BD02B") {
-    duplicados <- BD %>%
-      group_by(CCR_C, NCUO_C) %>%
-      filter(n() >1) %>%
-      pull(CCR_C) %>% 
-      unique() %>% toString()
-    
-    return(duplicados)
-  }
-  if (getBDFromRuta(ruta) == "BD04") {
-    
-  }
-  else{return("")}
+  
+  CredCandelados <- CredCandelados[c(2, 1)]
+  
+  
   
 }
 getSaldoTotal            <- function(ruta, opers){
