@@ -2193,3 +2193,19 @@
 100331	2021-02-01	2021-02-01 17:54:50	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-02-01 17:54:50] -       Resultado: La validación de los campos concluyó sin observaciones tipo1.	Informativo	Baja
 100331	2021-02-01	2021-02-01 17:54:54	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-02-01 17:54:54] -       Resultado: La validación de los campos concluyó sin observaciones tipo2.	Informativo	Baja
 100331	2021-02-01	2021-02-01 17:54:54	DPACHECO	SAN MARTÍN DE PORRES	test/datatest/01172/	[2021-02-01 17:54:54] -       Resultado: La revisión errores OM 22269-2020 tiene observaciones.	Informativo	Baja
+100332	2021-02-02	2021-02-02 09:42:38	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-02 09:42:38] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100332	2021-02-02	2021-02-02 09:42:38	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-02 09:42:38] - Coopac evaluada: 01342-LOS ANDES COTARUSI	Informativo	Baja
+100332	2021-02-02	2021-02-02 09:42:38	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-02 09:42:38] - PID: 100332[201901~202012]	Informativo	Baja
+100332	2021-02-02	2021-02-02 09:42:38	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-02 09:42:38] - 1. MÓDULO DE VALIDACIÓN DE BASE DE DATOS CREDITICIAS --------------------------	Informativo	Baja
+100332	2021-02-02	2021-02-02 09:42:39	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-02 09:42:38] - Inicio del interrogatorio. PID-100332.	Informativo	Baja
+100332	2021-02-02	2021-02-02 09:42:39	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-02 09:42:39] - Layer 0. Revisión de pre-requisitos.	Informativo	Baja
+100332	2021-02-02	2021-02-02 09:42:40	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-02 09:42:39] -       Resultado: Se identificaron archivos faltantes.	Informativo	Baja
+100332	2021-02-02	2021-02-02 09:42:40	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-02 09:42:40] -       Resultado: Fin del proceso de revisión por errores críticos 101-102.	Informativo	Baja
+100333	2021-02-02	2021-02-02 09:46:02	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-02 09:46:02] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100333	2021-02-02	2021-02-02 09:46:02	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-02 09:46:02] - Coopac evaluada: 01342-LOS ANDES COTARUSI	Informativo	Baja
+100333	2021-02-02	2021-02-02 09:46:02	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-02 09:46:02] - PID: 100333[201901~202012]	Informativo	Baja
+100333	2021-02-02	2021-02-02 09:46:03	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-02 09:46:02] - 1. MÓDULO DE VALIDACIÓN DE BASE DE DATOS CREDITICIAS --------------------------	Informativo	Baja
+100333	2021-02-02	2021-02-02 09:46:03	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-02 09:46:03] - Inicio del interrogatorio. PID-100333.	Informativo	Baja
+100333	2021-02-02	2021-02-02 09:46:03	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-02 09:46:03] - Layer 0. Revisión de pre-requisitos.	Informativo	Baja
+100333	2021-02-02	2021-02-02 09:46:03	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-02 09:46:03] -       Resultado: Se identificaron archivos faltantes.	Informativo	Baja
+100333	2021-02-02	2021-02-02 09:46:03	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-02 09:46:03] -       Resultado: Fin del proceso de revisión por errores críticos 101-102.	Informativo	Baja
