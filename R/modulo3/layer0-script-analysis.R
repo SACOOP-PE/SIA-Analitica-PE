@@ -122,17 +122,16 @@ getSaldoProvisionesEspecificasBDCC <- function(bd01) {
     sum(na.rm = T)
 }
 
-getCodErrorContable <- function() {
-  codError <- switch (dif_Capital,
+getCodErrorContable <- function(nameCapital) {
+  codError <- switch (nameCapital,
                       KVI = 301,
                       KVE = 302,
                       KRF = 303,
                       KJU = 304,
                       SIN = 305,
                       SID = 306,
-                      SIN = 307,
-                      PCIGEN = 308,
-                      PCIESP = 309)
+                      PCIGEN = 307,
+                      PCIESP = 308)
   
   return(codError)
 }
