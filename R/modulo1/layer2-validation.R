@@ -27,6 +27,8 @@ validarOperacionesDuplicadas <- function(agente, eb){
   dups_BD02B <- Dups %>% filter(BD == "BD02B")
   dups_BD03A <- Dups %>% filter(BD == "BD03A")
   
+  dups_BD04  <- getDuplicadosCredCancelados(agente, exigibles) 
+  
   if (nrow(dups_BD01) > 0) {
     chunk_401 <- dups_BD01 %>% rowwise() %>%
       mutate(CodCoopac = getCoopacFromAgent(agente),
@@ -79,15 +81,16 @@ validarOperacionesDuplicadas <- function(agente, eb){
     eb <- addError(eb, chunk_404)
   }
   if (nrow(dups_BD04) > 0) {
-    chunk_405 <- dups_BD04 %>% rowwise() %>%
-      mutate(CodCoopac = getCoopacFromAgent(agente),
-             IdProceso = getIdProcesoFromAgent(agente),
-             Cod = 405,
-             txt1 = Duplicados,
-             num1 = length(str_split(string=txt1 ,pattern = ",")[[1]]),
-             num2 = Saldo
-      ) %>%
-      select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1, num2)
+    chunk_405 <- tibble(CodCoopac = getCoopacFromAgent(agente),
+                        IdProceso = getIdProcesoFromAgent(agente),
+                        Cod     = 405,
+                        Periodo = "201901",
+                        BD      = "BD04",
+                        txt1 = toString(unique(dups_BD04 %>% pull(CCR_C))),
+                        txt2 = toString(unique(dups_BD04 %>% pull(Periodo))),
+                        num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])
+                        ) %>%
+      select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, txt2, num1)
     
     eb <- addError(eb, chunk_405)
   }
@@ -141,19 +144,20 @@ getDuplicadosCredCancelados <- function(agente, exigibles){
   
   CredCandelados <-  evaluarFile(getRuta(carpeta, cancelados[1])) %>%
     select(CCR_C) %>% 
-    mutate(Periodo = getAnoMesFromRuta(getRuta(carpeta, cancelados[1])))
+    mutate(Periodos = getAnoMesFromRuta(getRuta(carpeta, cancelados[1])))
   
   for (i in 1:length(cancelados)-1) {
     CredCandelados <- CredCandelados %>% 
       bind_rows(evaluarFile(getRuta(carpeta, cancelados[i+1])) %>%
                   select(CCR_C) %>% 
-                  mutate(Periodo = getAnoMesFromRuta(getRuta(carpeta, cancelados[i+1]))))
+                  mutate(Periodos = getAnoMesFromRuta(getRuta(carpeta, cancelados[i+1]))))
   }
   
-  CredCandelados <- CredCandelados[c(2, 1)]
+  dupsCancelados <- CredCandelados %>% 
+    group_by(CCR_C) %>%
+    filter(n() >1)
   
-  
-  
+  return(dupsCancelados)
 }
 getSaldoTotal            <- function(ruta, opers){
   if (opers != "" & getBDFromRuta(ruta) != "BD02B") {
