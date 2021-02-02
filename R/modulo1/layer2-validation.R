@@ -87,7 +87,7 @@ validarOperacionesDuplicadas <- function(agente, eb){
                         Periodo = dups_BD04 %>% pull(Periodo) %>% first(),
                         BD      = "BD04",
                         txt1 = toString(unique(dups_BD04 %>% pull(CCR_C))),
-                        txt2 = toString(unique(dups_BD04 %>% pull(Periodo))),
+                        txt2 = toString(unique(dups_BD04 %>% pull(Periodos))),
                         num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])
                         ) %>%
       select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, txt2, num1)
@@ -147,10 +147,10 @@ getDuplicadosCredCancelados <- function(agente, exigibles){
     mutate(Periodos = getAnoMesFromRuta(getRuta(carpeta, cancelados[1])))
   
   for (i in 1:length(cancelados)-1) {
-    CredCandelados <- CredCandelados %>% 
-      bind_rows(evaluarFile(getRuta(carpeta, cancelados[i+1])) %>%
-                  select(CCR_C) %>% 
-                  mutate(Periodos = getAnoMesFromRuta(getRuta(carpeta, cancelados[i+1]))))
+    CredCandelados <- CredCandelados %>% bind_rows(evaluarFile(getRuta(carpeta, cancelados[i+1])) %>%
+                                                     select(CCR_C) %>% 
+                                                     mutate(Periodos = getAnoMesFromRuta(getRuta(carpeta, cancelados[i+1])))
+                                                   )
   }
   
   dupsCancelados <- CredCandelados %>% 
