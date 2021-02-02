@@ -1,6 +1,5 @@
 ####' Script de análisis layer0 
 ####' 0. Revisión previa del bucket de errores, y soltar advertencias.
-source("R/scripts-entorno/libraries-and-options.R")
 
 # 
 # getCruceAnexo06 <- function(Agente) {}
@@ -179,16 +178,13 @@ analizarCruceContable <- function(agente, eb){
            ) %>% 
     filter(Resultado == "ERRROR")
   
-  # if (nrow(tbl_cruce_BC)> 0) {
-  #   chunkContable <- tbl_cruce_BC %>% rowwise() %>%
-  #     mutate(num2 = Saldo) %>%
-  #     select(CodCoopac, IdProceso, Cod, Periodo, BD, num2)
-  #   
-  #   eb %>% addError(chunkContable)
-  # }
+  if (nrow(tbl_cruce_BC)> 0) {
+    chunkContable <- tbl_cruce_BC %>% rowwise() %>%
+      mutate(num2 = Saldo) %>%
+      select(CodCoopac, IdProceso, Cod, Periodo, BD, num2)
+
+    eb %>% addError(chunkContable)
+  }
     
-  return(tbl_cruce_BC)
+  return(eb)
 }
-
-
- 

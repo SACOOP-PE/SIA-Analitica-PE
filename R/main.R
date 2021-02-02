@@ -20,7 +20,7 @@ source("R/modulo1/layer4-validation.R")
 # source("R/scripts-alertas/layer1-alertas.R") 
 
 # # 3. Módulo de analisis crediticio
-# source("R/scripts-alertas/layer0-analisis.R")
+source("R/scripts-alertas/layer0-analisis.R")
 # source("R/scripts-alertas/layer1-analisis.R") 
 
 
