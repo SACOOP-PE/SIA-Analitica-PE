@@ -26,24 +26,28 @@ formatBucket <- function(eb) {
                                                                          str_replace_all(getDescError(Cod), c("\\Q{0}"  = toString(num1),
                                                                                                               "\\Q{1}"  = toString(num2),
                                                                                                               "\\Q{2}"  = periodoEscrito(Periodo))),
-                                       
-                                                                         if_else(Cod >= 601 & Cod <= 621,
+                                                                         if_else(Cod == 405,
                                                                                  str_replace_all(getDescError(Cod), c("\\Q{0}"  = toString(num1),
-                                                                                                                      "\\Q{1}"  = periodoEscrito(Periodo),
-                                                                                                                      "\\Q{2}"  = txt3)),
-                                                                                 if_else(Cod == 622,
+                                                                                                                      "\\Q{1}"  = txt3)),
+                                                                                 if_else(Cod >= 601 & Cod <= 621,
                                                                                          str_replace_all(getDescError(Cod), c("\\Q{0}"  = toString(num1),
-                                                                                                                              "\\Q{1}"  = txt2,
-                                                                                                                              "\\Q{2}"  = BD,
-                                                                                                                              "\\Q{3}"  = periodoEscrito(Periodo))),
-
-                                                                                         if_else(Cod >= 701,
+                                                                                                                              "\\Q{1}"  = periodoEscrito(Periodo),
+                                                                                                                              "\\Q{2}"  = txt3)),
+                                                                                         if_else(Cod == 622,
                                                                                                  str_replace_all(getDescError(Cod), c("\\Q{0}"  = toString(num1),
-                                                                                                                                      "\\Q{1}"  = periodoEscrito(Periodo))),
-                                                                                                 ""
+                                                                                                                                      "\\Q{1}"  = txt2,
+                                                                                                                                      "\\Q{2}"  = BD,
+                                                                                                                                      "\\Q{3}"  = periodoEscrito(Periodo))),
+                                                                                                 
+                                                                                                 if_else(Cod >= 701,
+                                                                                                         str_replace_all(getDescError(Cod), c("\\Q{0}"  = toString(num1),
+                                                                                                                                              "\\Q{1}"  = periodoEscrito(Periodo))),
+                                                                                                         ""
+                                                                                                         )
                                                                                                  )
                                                                                          )
                                                                                  )
+
                                                                          )
                                                                  )
                                                          )
