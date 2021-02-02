@@ -2209,3 +2209,18 @@
 100333	2021-02-02	2021-02-02 09:46:03	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-02 09:46:03] - Layer 0. Revisión de pre-requisitos.	Informativo	Baja
 100333	2021-02-02	2021-02-02 09:46:03	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-02 09:46:03] -       Resultado: Se identificaron archivos faltantes.	Informativo	Baja
 100333	2021-02-02	2021-02-02 09:46:03	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-02 09:46:03] -       Resultado: Fin del proceso de revisión por errores críticos 101-102.	Informativo	Baja
+100334	2021-02-02	2021-02-02 14:57:55	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-02 14:57:55] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100334	2021-02-02	2021-02-02 14:57:56	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-02 14:57:55] - Coopac evaluada: 01342-LOS ANDES COTARUSI	Informativo	Baja
+100334	2021-02-02	2021-02-02 14:57:56	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-02 14:57:56] - PID: 100334[201901~202012]	Informativo	Baja
+100335	2021-02-02	2021-02-02 17:18:45	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-02 17:18:45] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100335	2021-02-02	2021-02-02 17:18:45	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-02 17:18:45] - Coopac evaluada: 01342-LOS ANDES COTARUSI	Informativo	Baja
+100335	2021-02-02	2021-02-02 17:18:46	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-02 17:18:45] - PID: 100335[201901~202012]	Informativo	Baja
+100335	2021-02-02	2021-02-02 17:18:46	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-02 17:18:46] - 1. MÓDULO DE VALIDACIÓN DE BASE DE DATOS CREDITICIAS --------------------------	Informativo	Baja
+100335	2021-02-02	2021-02-02 17:18:46	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-02 17:18:46] - Inicio del interrogatorio. PID-100335.	Informativo	Baja
+100335	2021-02-02	2021-02-02 17:18:46	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-02 17:18:46] - Layer 0. Revisión de pre-requisitos.	Informativo	Baja
+100335	2021-02-02	2021-02-02 17:18:48	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-02 17:18:48] -       Resultado: Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100335	2021-02-02	2021-02-02 17:18:48	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-02 17:18:48] - Layer 1. Revisión de estructura de tablas	Informativo	Baja
+100335	2021-02-02	2021-02-02 17:20:31	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-02 17:20:31] - La validación de Columnas faltantes concluyó con 1 observación(es).	Informativo	Baja
+100335	2021-02-02	2021-02-02 17:20:31	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-02 17:20:31] - La validación de Columnas sobrantes concluyó con 1 observación(es).	Informativo	Baja
+100335	2021-02-02	2021-02-02 17:20:32	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-02 17:20:31] - La validación de Columnas vacías concluyó con 53 observación(es).	Informativo	Baja
+100335	2021-02-02	2021-02-02 17:20:32	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-02 17:20:32] -       Resultado: La revisión de estructura de datos tiene observaciones. Continuar con discreción.	Informativo	Baja

@@ -108,7 +108,7 @@ interrogateAgent_mod1 <- function(agente){
     }
   
   
-  #Error Final ----
+  #Lista Final Errores ----
   eb <- eb %>% arrange(Periodo, Cod)
   return(eb)
 }

@@ -30,10 +30,10 @@ agent <- createAgent(idCoopac = "01342",
                      periodoFinal   = "202012")
 
 ##### Interrogar Modulo 1
-bucket      <- interrogateAgent_mod1(agent)
+bucket  <- interrogateAgent_mod1(agent)
  
 ##### Close agent -----
-agent       <- closeAgent(agent, bucket)
+agent   <- closeAgent(agent, bucket)
 
 ##### Reporting -----
 saveOutputs(agent, bucket, formatBucket(bucket))
