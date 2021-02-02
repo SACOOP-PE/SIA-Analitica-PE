@@ -77,7 +77,7 @@ periodoEscrito  <- function(periodo) {
 
 
 saveOutputs <- function(agente, eb, ebFormat) {
- 
+  
   agente %>% 
     writexl::write_xlsx(paste0(paste0(getwd(), "/test/output/"),
                                paste(agente %>% pull(Coopac),
