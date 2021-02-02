@@ -1,6 +1,12 @@
 ####' Script de análisis layer0 
 ####' 0. Revisión previa del bucket de errores, y soltar advertencias.
 
+layer0_Analisis <- function(agente, eb){
+  eb <- analizarCruceContable(agente, eb)
+  
+  return(eb)
+}
+
 # 
 # getCruceAnexo06 <- function(Agente) {}
 # getCruceAnexo05 <- function(Agente) {}
@@ -186,5 +192,13 @@ analizarCruceContable <- function(agente, eb){
     eb %>% addError(chunkContable)
   }
     
+  n <- eb %>% filter(Cod %in% c(301:308)) %>% nrow()
+  if (n == 0) {
+    addEventLog(agente, paste0("      Resultado: El análisis contable concluyó sin observaciones."))
+  }
+  else{
+    addEventLog(agente, paste0("      Resultado: El análisis contable concluyó con ",n," observación(es)."))
+  }
+  
   return(eb)
 }

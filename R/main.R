@@ -20,8 +20,8 @@ source("R/modulo1/layer4-validation.R")
 # source("R/scripts-alertas/layer1-alertas.R") 
 
 # # 3. Módulo de analisis crediticio
-source("R/scripts-alertas/layer0-analisis.R")
-# source("R/scripts-alertas/layer1-analisis.R") 
+source("R/modulo3/layer0-analysis.R")
+source("R/modulo3/layer1-analysis.R")
 
 
 ##### Create agent -----
@@ -30,10 +30,11 @@ agent <- createAgent(idCoopac = "01342",
                      periodoFinal   = "202012")
 
 ##### Interrogar Modulo 1
-bucket  <- interrogateAgent_mod1(agent)
+bucket <- interrogateAgent_mod1(agent)
+bucket <- interrogateAgent_mod3(agent, bucket)
  
 ##### Close agent -----
-agent   <- closeAgent(agent, bucket)
+agent  <- closeAgent(agent, bucket)
 
 ##### Reporting -----
 saveOutputs(agent, bucket, formatBucket(bucket))

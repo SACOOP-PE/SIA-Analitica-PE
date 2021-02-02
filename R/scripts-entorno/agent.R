@@ -43,7 +43,7 @@ interrogateAgent_mod1 <- function(agente){
    
   addEventLog(agente, paste0("1. MÓDULO DE VALIDACIÓN DE BASE DE DATOS CREDITICIAS --------------------------")) 
   
-  addEventLog(agente, paste0("Inicio del interrogatorio. PID-", agente %>% pull(IdProceso) %>% first(),"."))
+  addEventLog(agente, paste0("Inicio del interrogatorio modulo 1. PID-", agente %>% pull(IdProceso) %>% first(),"."))
   
   #layer0 ----
   addEventLog(agente, paste0("Layer 0. Revisión de pre-requisitos."))
@@ -91,11 +91,11 @@ interrogateAgent_mod1 <- function(agente){
   #layer4 ----
   addEventLog(agente, paste0("Layer 4. Validación de campos indviduales."))
     eb <- layer4(agente, eb)
-
+    
     if (nrow(eb) > 0) {
       
       if (nrow(eb %>% filter(Cod %in% c(301:709))) >0) {
-
+        
         addEventLog(agente, paste0("      Resultado: La revisión errores OM 22269-2020 tiene observaciones."))
       }
       else {
@@ -106,9 +106,42 @@ interrogateAgent_mod1 <- function(agente){
     else {
       addEventLog(agente, paste0("      Resultado: Revisión de errores OM 22269-2020 fue satisfatoria."))
     }
+    
+  #Fin de la validación  ----
+  eb <- eb %>% arrange(Periodo, Cod)
+  return(eb)
+}
+# interrogateAgent_mod2 <- function(agente, eb){
+#   
+#   addEventLog(agente, paste0("2. MÓDULO DE DECTECCIÓN DE ALERTAS A BASE DE DATOS CREDITICIAS --------------------------")) 
+#   
+#   addEventLog(agente, paste0("Inicio del interrogatorio modulo 2. PID-", agente %>% pull(IdProceso) %>% first(),"."))
+#   
+# }
+interrogateAgent_mod3 <- function(agente, eb){
   
+  addEventLog(agente, paste0("3. MÓDULO DE ANÁLISIS A LA CARTERA DE CRÉDITOS (BD01) --------------------------")) 
   
-  #Lista Final Errores ----
+  addEventLog(agente, paste0("Inicio del interrogatorio modulo 3. PID-", agente %>% pull(IdProceso) %>% first(),"."))
+  
+  #layer0 ----
+  addEventLog(agente, paste0("Layer 0. Análisis Contable a la cartera."))
+    
+    eb <- layer0_Analisis(agente, eb)
+    
+    if (nrow(eb %>% filter(Cod %in% c(301:308))) > 0) {
+      addEventLog(agente, paste0("      Resultado: Análisis contable a la cartera de créditos no cuadra con el balance de comprobacioens. "))
+      return(eb)
+    }
+    else { 
+      addEventLog(agente, paste0("      Resultado: Análisis contable a la cartera de créditos fue satisfactoria."))
+    }
+    
+  #layer1 ----
+    addEventLog(agente, paste0("Layer 1. Análisis Cartera y Cartera Cancelada."))
+    resultado <- layer1_Analisis(agente)
+    
+  #Fin de Análisis ----  
   eb <- eb %>% arrange(Periodo, Cod)
   return(eb)
 }
