@@ -1,8 +1,8 @@
 ####' Script de análisis layer0 
 ####' 0. Revisión previa del bucket de errores, y soltar advertencias.
 
-layer0_Analisis <- function(agente, eb){
-  eb <- analizarCruceContable(agente, eb)
+layer0_Alertas <- function(agente, eb){
+  eb <- ejecutarAlertasCruceContable(agente, eb)
   
   return(eb)
 }
@@ -141,7 +141,7 @@ getCodErrorContable <- function(nameCapital) {
   return(codError)
 }
 
-analizarCruceContable <- function(agente, eb){
+ejecutarAlertasCruceContable <- function(agente, eb){
   carpeta   <- getCarpetaFromAgent(agente)
   exigibles <- getArchivosNoObservadosByCols(agente, eb, c("CCR",
                                                            "KVI", "KVE", "KRF", "KJU",
