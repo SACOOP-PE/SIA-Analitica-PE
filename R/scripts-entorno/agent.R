@@ -114,7 +114,7 @@ interrogateAgent_mod1 <- function(agente){
 interrogateAgent_mod2 <- function(agente, eb){
 
   addEventLog(agente, paste0("2. MÓDULO DE DECTECCIÓN DE ALERTAS A BASE DE DATOS CREDITICIAS --------------------------"))
-
+  
   addEventLog(agente, paste0("Inicio del interrogatorio modulo 2. PID-", agente %>% pull(IdProceso) %>% first(),"."))
 
   #layer0 ----

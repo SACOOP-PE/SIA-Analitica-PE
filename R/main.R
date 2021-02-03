@@ -29,7 +29,7 @@ agent <- createAgent(idCoopac = "01342",
 
 ##### Interrogar Modulo 1
 bucket <- interrogateAgent_mod1(agent)
-bucket <- interrogateAgent_mod3(agent, bucket)
+bucket <- interrogateAgent_mod2(agent, bucket)
  
 ##### Close agent -----
 agent  <- closeAgent(agent, bucket)
