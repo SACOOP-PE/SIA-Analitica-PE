@@ -145,13 +145,13 @@ getDuplicadosCredCancelados <- function(agente, exigibles){
   carpeta    <- getCarpetaFromAgent(agente)
   cancelados <- exigibles[str_detect(exigibles, "BD04")]
   
-  CredCandelados <- evaluarFile(getRuta(carpeta, cancelados[1])) %>% 
+  CredCandelados <- quitarVaciosBD(getRuta(carpeta, cancelados[1])) %>% 
     mutate(Periodos = getAnoMesFromRuta(getRuta(carpeta, cancelados[1]))) 
   
   for (i in 2:length(cancelados)-1) {
 
     CredCandelados <- CredCandelados %>%
-      bind_rows(evaluarFile(getRuta(carpeta, cancelados[i+1])) %>% 
+      bind_rows(quitarVaciosBD(getRuta(carpeta, cancelados[i+1])) %>% 
                   mutate(Periodos = getAnoMesFromRuta(getRuta(carpeta, cancelados[i+1]))))
     
   }
