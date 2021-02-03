@@ -35,6 +35,8 @@ layer0 <- function(agente, eb){
 }
 
 #' Funciones secundarias
+#' getDuplicados()
+#' getFaltantes()
 
 getDuplicados <- function(carpeta, exigibles){ 
  dups <- tibble(files = basename(list.files(path = carpeta, full.names = F, recursive =  TRUE))) %>%

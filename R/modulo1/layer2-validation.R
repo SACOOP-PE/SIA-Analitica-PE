@@ -8,6 +8,10 @@ layer2 <- function(agente, eb){
 
 #' Funciones secundarias: nivel I
 #' validarOperacionesDuplicadas
+#' 
+#' getOperacionesDuplicadas()
+#' getDuplicadosCredCancelados()
+#' getSaldoTotal()
 
 validarOperacionesDuplicadas <- function(agente, eb){
   carpeta   <- getCarpetaFromAgent(agente)
@@ -106,7 +110,6 @@ validarOperacionesDuplicadas <- function(agente, eb){
   return(eb)
 }
 
-#validarOperacionesDuplicadas
 getOperacionesDuplicadas    <- function(ruta){
    BD <- quitarVaciosBD(ruta)
    

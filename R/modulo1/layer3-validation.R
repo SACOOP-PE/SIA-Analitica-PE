@@ -8,6 +8,7 @@ layer3 <- function(agente, eb){
 
 #' Funciones secundarias: nivel I
 #' validarCruceInterno
+#' realizarCruce()
 
 validarCruceInterno <- function(agente, eb){
   carpeta <- getCarpetaFromAgent(agente)

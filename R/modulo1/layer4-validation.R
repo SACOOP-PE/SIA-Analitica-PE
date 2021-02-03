@@ -8,6 +8,27 @@ layer4 <- function(agente, eb){
 
 #' Funciones secundarias: nivel I
 #' validarCampos
+#' 
+#' quitarVaciosBD()
+#' getDigitosBD01()
+#' getDigitosBD02A()
+#' getDigitosBD02B()
+#' getDigitosBD03A()
+#' getDigitosBD03B()
+#' getDigitosBD04()
+#' getDigitosBD()
+#' getColsErrorT1()
+#' getCodErrorT1()
+#' procesarErroresT1()
+#' validarDocumentoIdent()
+#' procesarErrorDocumentoIdent()
+#' getColsErrorT2()
+#' getCodErrorT2()
+#' procesarErroresT2()
+#' getFechaCorte()
+#' procesarErrorFechaDesembolso()
+
+
 validarCampos <- function(agente, eb){
   carpeta   <- getCarpetaFromAgent(agente)
   exigibles <- getArchivosNoObservadosByCols(agente, eb, c("CCR","CCR_C","CODGR"))

@@ -8,9 +8,9 @@ layer1 <- function(agente, eb){
 
 #' Funciones secundarias 
 #' validarColumnas()
+#' 
 #' getColumnaOM()
 #' getColVacia()
-#' 
 
 validarColumnas <- function(agente, eb){
   carpeta   <- getCarpetaFromAgent(agente)
