@@ -43,12 +43,10 @@ getBDFromRuta           <- function(ruta){
   (basename(ruta) %>% strsplit("_"))[[1]][2] %>% return() 
 }
 evaluarFile             <- function(ruta){
-  BD <- read_delim(ruta,"\t",escape_double = FALSE, trim_ws = TRUE, col_names = TRUE,
-                   col_types = cols(.default = "c"), progress = F)
-  
-  colnames(BD) <- toupper(colnames(BD))
-  
-  return(BD)
+  read_delim(ruta,"\t",escape_double = FALSE, trim_ws = TRUE, col_names = TRUE,
+             col_types = cols(.default = "c"), progress = F) %>% 
+    rename_all(toupper) %>% 
+    return()
 }
 
 # Funciones auxiliares - Agent -----
