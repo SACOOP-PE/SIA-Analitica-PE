@@ -42,10 +42,13 @@ getBDFromRuta           <- function(ruta){
   }
   (basename(ruta) %>% strsplit("_"))[[1]][2] %>% return() 
 }
-evaluarFile   <- function(ruta){
-  read_delim(ruta,"\t",escape_double = FALSE, trim_ws = TRUE, col_names = TRUE,
-             col_types = cols(.default = "c"), progress = F) %>%
-    return()
+evaluarFile             <- function(ruta){
+  BD <- read_delim(ruta,"\t",escape_double = FALSE, trim_ws = TRUE, col_names = TRUE,
+                   col_types = cols(.default = "c"), progress = F)
+  
+  colnames(BD) <- toupper(colnames(BD))
+  
+  return(BD)
 }
 
 # Funciones auxiliares - Agent -----
@@ -87,7 +90,7 @@ getAlcanceFromAgent           <- function(agente){
 getNombreCoopacFromIdCoopac   <- function(idCoopac){
   initCuadreContable() %>% filter(CodigoEntidad == idCoopac) %>% pull(Entidad) %>% first()
 }
-getCodigoBD <- function(BD){
+getCodigoBD                   <- function(BD){
   campoIdentif  <- switch (BD,
                            BD01  = "CCR",
                            BD02A = "CCR",

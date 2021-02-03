@@ -23,9 +23,9 @@ source("R/modulo2/layer1-alertas.R")
 source("R/modulo3/layer0-analysis.R")
 
 ##### Create agent -----
-agent <- createAgent(idCoopac = "01342",
+agent <- createAgent(idCoopac = "01106",
                      periodoInicial = "201901",
-                     periodoFinal   = "202012")
+                     periodoFinal   = "202011")
 
 ##### Interrogar Modulo 1
 bucket <- interrogateAgent_mod1(agent)
