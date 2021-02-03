@@ -84,11 +84,11 @@ validarOperacionesDuplicadas <- function(agente, eb){
     
     eb <- addError(eb, chunk_404)
   }
-  if (nrow(dups_BD04) > 0) {+
+  if (nrow(dups_BD04) > 0) {
     chunk_405 <- tibble(CodCoopac = getCoopacFromAgent(agente),
                         IdProceso = getIdProcesoFromAgent(agente),
                         Cod     = 405,
-                        Periodo = dups_BD04 %>% pull(Periodo) %>% first(),
+                        Periodo = dups_BD04 %>% pull(Periodos) %>% first(),
                         BD      = "BD04",
                         txt1 = toString(unique(dups_BD04 %>% pull(CCR_C))),
                         txt2 = toString(unique(dups_BD04 %>% pull(Periodos))),
