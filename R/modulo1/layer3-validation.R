@@ -83,7 +83,6 @@ validarCruceInterno <- function(agente, eb){
 
   return(eb)
 }
-
 realizarCruce       <- function(agente, periodo, data1, data2){
   
   archivo1 <- getRuta(getCarpetaFromAgent(agente), 
