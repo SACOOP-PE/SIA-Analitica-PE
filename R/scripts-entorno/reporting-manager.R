@@ -2,7 +2,10 @@ formatBucket <- function(eb) {
   
   output <- eb %>% 
     rowwise() %>% 
-    mutate(num1 = pad2(num1),
+    mutate(num1 = if_else(num1< 1000, 
+                          pad2(num1), 
+                          format(num1, big.mark = ",", small.interval = 3)),
+           num2 = format(num2, big.mark = ",", small.interval = 3),
            Descripcion = if_else(Cod <= 102,
                                  str_replace_all(getDescError(Cod), c("\\Q{0}"  = toString(num1),
                                                                       "\\Q{1}"  = txt1)),
@@ -11,10 +14,10 @@ formatBucket <- function(eb) {
                                                                               "\\Q{1}"  = txt1,
                                                                               "\\Q{2}"  = BD,
                                                                               "\\Q{3}"  = periodoEscrito(Periodo))),
-                                         if_else(Cod >= 301 & Cod <= 310, 
+                                         if_else(Cod >= 301 & Cod <= 308, 
                                                  str_replace_all(getDescError(Cod), c("\\Q{0}"  = months(as.Date(paste(substr(Periodo,1,4), substr(Periodo,5,6), "01", sep = "-"))),
                                                                                       "\\Q{1}"  = periodoEscrito(Periodo),
-                                                                                      "\\Q{2}"  = num2)),
+                                                                                      "\\Q{2}"  = toString(num2))),
                                                  if_else(Cod == 401 | Cod == 402,
                                                          str_replace_all(getDescError(Cod), c("\\Q{0}"  = toString(num1),
                                                                                               "\\Q{1}"  = tolower(toString(months(as.Date(paste(substr(Periodo,1,4), substr(Periodo,5,6), "01", sep = "-"))))),
@@ -94,7 +97,8 @@ saveOutputs <- function(agente, eb, ebFormat) {
                                paste(agente %>% pull(Coopac),
                                      getIdProcesoFromAgent(agente),
                                      paste0("(",agente %>% pull(PeriodoInicial),"-", agente %>% pull(PeriodoFinal),")"),
-                                     sep = "_")))
+                                     sep = "_"),
+                               "_agent.xlsx"))
   
   #bucket ----
   eb %>% rowwise() %>%
@@ -106,12 +110,14 @@ saveOutputs <- function(agente, eb, ebFormat) {
                                paste(agente %>% pull(Coopac),
                                      getIdProcesoFromAgent(agente),
                                      paste0("(",agente %>% pull(PeriodoInicial),"-", agente %>% pull(PeriodoFinal),")"),
-                                     sep = "_")))
+                                     sep = "_"),
+                               "_bucket.xlsx"))
   #ebFormatted ----
   ebFormat %>%
     writexl::write_xlsx(paste0(paste0(getwd(), "/test/output/"),
                                paste(agente %>% pull(Coopac),
                                      getIdProcesoFromAgent(agente),
                                      paste0("(",agente %>% pull(PeriodoInicial),"-", agente %>% pull(PeriodoFinal),")"),
-                                     sep = "_") ))
+                                     sep = "_"),
+                               "_bucketOficio.xlsx"))
 }
