@@ -6,7 +6,7 @@ library(tidyverse)
 library(stringr)
 library(colr)
 library(lubridate) 
-library(writexl) 
+library(openxlsx)
 ##### 2. Opciones ----- 
 
 options(warn = -1)
