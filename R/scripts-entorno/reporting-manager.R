@@ -91,34 +91,14 @@ periodoEscrito  <- function(periodo) {
   return(paste(m, "del", substr(periodo, 1, 4)))
 }
 
-saveOutputs <- function(agente, eb, ebFormat) {
+saveOutputs <- function(agente, ebFormat) {
+  list_of_datasets <- list("agente" = agente, "bucketOficio" = ebFormat)
   
-  agente %>% 
-    writexl::write_xlsx(paste0(paste0(getwd(), "/test/output/"),
-                               paste(agente %>% pull(Coopac),
-                                     getIdProcesoFromAgent(agente),
-                                     paste0("(",agente %>% pull(PeriodoInicial),"-", agente %>% pull(PeriodoFinal),")"),
-                                     sep = "_"),
-                               "_agent.xlsx"))
-  
-  #bucket ----
-  eb %>% rowwise() %>%
-    mutate(txt1 = if_else(Cod >102, 
-                          cutStringError(num1, txt1),
-                          txt1)
-           ) %>% 
-    writexl::write_xlsx(paste0(paste0(getwd(), "/test/output/"),
-                               paste(agente %>% pull(Coopac),
-                                     getIdProcesoFromAgent(agente),
-                                     paste0("(",agente %>% pull(PeriodoInicial),"-", agente %>% pull(PeriodoFinal),")"),
-                                     sep = "_"),
-                               "_bucket.xlsx"))
-  #ebFormatted ----
-  ebFormat %>%
-    writexl::write_xlsx(paste0(paste0(getwd(), "/test/output/"),
-                               paste(agente %>% pull(Coopac),
-                                     getIdProcesoFromAgent(agente),
-                                     paste0("(",agente %>% pull(PeriodoInicial),"-", agente %>% pull(PeriodoFinal),")"),
-                                     sep = "_"),
-                               "_bucketOficio.xlsx"))
+  write.xlsx(list_of_datasets, 
+             file = paste0(paste0(getwd(), "/test/output/"),
+                           paste(agente %>% pull(Coopac),
+                                 getIdProcesoFromAgent(agente),
+                                 paste0("(",agente %>% pull(PeriodoInicial),"-", agente %>% pull(PeriodoFinal),")"),
+                                 sep = "_"),
+                           ".xlsx"))
 }

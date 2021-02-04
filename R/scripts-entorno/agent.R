@@ -107,8 +107,6 @@ interrogateAgent_mod1 <- function(agente){
       addEventLog(agente, paste0("      Resultado: Revisión de errores OM 22269-2020 fue satisfatoria."))
     }
     
-  #Fin ----
-  eb <- eb %>% arrange(Periodo, Cod)
   return(eb)
 }
 interrogateAgent_mod2 <- function(agente, eb){
@@ -142,8 +140,8 @@ interrogateAgent_mod3 <- function(agente, eb){
     
   #layer0 ----
     addEventLog(agente, paste0("Layer 1. Análisis Cartera y Cartera Cancelada."))
-    resultado <- layer0_Analisis(agente)
-
+    resultado <- layer0_Analisis(agente) %>% 
+      return()
 }
 
 closeAgent <- function(agente,

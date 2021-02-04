@@ -2288,3 +2288,27 @@
 100338	2021-02-04	2021-02-04 12:55:19	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-02-04 12:55:18] - Inicio del interrogatorio modulo 2. PID-100338.	Informativo	Baja
 100338	2021-02-04	2021-02-04 12:55:19	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-02-04 12:55:19] - Layer 0. Detección de Alertas al Cruce Contable de la cartera.	Informativo	Baja
 100338	2021-02-04	2021-02-04 12:57:21	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-02-04 12:57:21] -       Resultado: Se detectaron alertas contables a la cartera de créditos pues no cuadra con el balance de comprobación. 	Informativo	Baja
+100339	2021-02-04	2021-02-04 14:58:45	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-02-04 14:58:45] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100339	2021-02-04	2021-02-04 14:58:45	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-02-04 14:58:45] - Coopac evaluada: 01106-SAN FRANCISCO 289	Informativo	Baja
+100339	2021-02-04	2021-02-04 14:58:45	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-02-04 14:58:45] - PID: 100339[201901~202011]	Informativo	Baja
+100339	2021-02-04	2021-02-04 14:58:46	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-02-04 14:58:46] - 1. MÓDULO DE VALIDACIÓN DE BASE DE DATOS CREDITICIAS --------------------------	Informativo	Baja
+100339	2021-02-04	2021-02-04 14:58:46	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-02-04 14:58:46] - Inicio del interrogatorio modulo 1. PID-100339.	Informativo	Baja
+100339	2021-02-04	2021-02-04 14:58:46	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-02-04 14:58:46] - Layer 0. Revisión de pre-requisitos.	Informativo	Baja
+100339	2021-02-04	2021-02-04 14:58:47	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-02-04 14:58:47] -       Resultado: Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100339	2021-02-04	2021-02-04 14:58:47	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-02-04 14:58:47] - Layer 1. Revisión de estructura de tablas	Informativo	Baja
+100339	2021-02-04	2021-02-04 14:59:29	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-02-04 14:59:29] - La validación de Columnas faltantes concluyó con 46 observación(es).	Informativo	Baja
+100339	2021-02-04	2021-02-04 14:59:29	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-02-04 14:59:29] - La validación de Columnas sobrantes concluyó con 46 observación(es).	Informativo	Baja
+100339	2021-02-04	2021-02-04 14:59:29	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-02-04 14:59:29] - La validación de Columnas vacías concluyó con 69 observación(es).	Informativo	Baja
+100339	2021-02-04	2021-02-04 14:59:29	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-02-04 14:59:29] -       Resultado: La revisión de estructura de datos tiene observaciones. Continuar con discreción.	Informativo	Baja
+100339	2021-02-04	2021-02-04 14:59:30	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-02-04 14:59:30] - Layer 2. Validación de operaciones duplicadas.	Informativo	Baja
+100339	2021-02-04	2021-02-04 15:00:51	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-02-04 15:00:51] -       Resultado: La validación operaciones duplicadas concluyó con 23 observación(es).	Informativo	Baja
+100339	2021-02-04	2021-02-04 15:00:51	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-02-04 15:00:51] - Layer 3. Validación de entre BD01/BD02A, BD03A/BD03B.	Informativo	Baja
+100339	2021-02-04	2021-02-04 15:01:32	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-02-04 15:01:32] -       Resultado: La validación de cruce interno concluyó con 23 observación(es).	Informativo	Baja
+100339	2021-02-04	2021-02-04 15:01:33	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-02-04 15:01:32] - Layer 4. Validación de campos indviduales.	Informativo	Baja
+100339	2021-02-04	2021-02-04 15:02:51	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-02-04 15:02:51] -       Resultado: La validación de los campos concluyó con 209 observaciones tipo1.	Informativo	Baja
+100339	2021-02-04	2021-02-04 15:03:27	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-02-04 15:03:27] -       Resultado: La validación de los campos concluyó con 183 observación(es) tipo2.	Informativo	Baja
+100339	2021-02-04	2021-02-04 15:03:28	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-02-04 15:03:27] -       Resultado: La revisión errores OM 22269-2020 tiene observaciones.	Informativo	Baja
+100339	2021-02-04	2021-02-04 15:03:28	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-02-04 15:03:28] - 2. MÓDULO DE DECTECCIÓN DE ALERTAS A BASE DE DATOS CREDITICIAS --------------------------	Informativo	Baja
+100339	2021-02-04	2021-02-04 15:03:28	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-02-04 15:03:28] - Inicio del interrogatorio modulo 2. PID-100339.	Informativo	Baja
+100339	2021-02-04	2021-02-04 15:03:28	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-02-04 15:03:28] - Layer 0. Detección de Alertas al Cruce Contable de la cartera.	Informativo	Baja
+100339	2021-02-04	2021-02-04 15:05:22	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-02-04 15:05:22] -       Resultado: Se detectaron alertas contables a la cartera de créditos pues no cuadra con el balance de comprobación. 	Informativo	Baja
