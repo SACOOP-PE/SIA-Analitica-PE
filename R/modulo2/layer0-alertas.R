@@ -140,6 +140,12 @@ getCodErrorContable <- function(nameCapital) {
   
   return(codError)
 }
+getAnoMesCoopacContableFromAgente <- function(agente) {
+  initCuadreContable() %>% 
+    mutate(PeriodoId = str_sub(as.character(PeriodoId),1,6)) %>% 
+    filter(CodigoEntidad == getCoopacFromAgent(agente)) %>% 
+    pull(PeriodoId) %>% unique() %>% return()
+}
 
 ejecutarAlertasCruceContable <- function(agente, eb){
   carpeta   <- getCarpetaFromAgent(agente)
@@ -147,7 +153,11 @@ ejecutarAlertasCruceContable <- function(agente, eb){
                                                            "KVI", "KVE", "KRF", "KJU",
                                                            "SIN", "SID", "CAL", "PCI"))
   
-  tbl_cruce_BC <- tibble(NombreArchivo = exigibles[str_detect(exigibles, "BD01")]) %>% rowwise() %>%
+  exigiblesBD01 <- exigibles[str_detect(exigibles, "BD01")]
+  
+  tbl_cruce_BC <- tibble(NombreArchivo = exigiblesBD01[str_detect(exigiblesBD01, 
+                                                                  paste(getAnoMesCoopacContableFromAgente(agente), collapse = '|'))]) %>%
+    rowwise() %>%
     mutate(Ruta      = getRuta(carpeta, NombreArchivo),
            CodCoopac = getCoopacFromAgent(agente),
            IdProceso = getIdProcesoFromAgent(agente),
