@@ -1,32 +1,36 @@
-CodAlerta	Responsable	Descripcion
-2001	mb	Se detectaron créditos con un MORG superior a USD 50,000 o equivalente en soles en ubigeos de agencias de alto riesgo LAFT en la BD01.
-2002	mb	Se detectaron créditos con un UAGE superior a USD 50,000 o equivalente en soles en ubigeos de agencias de alto riesgo LAFT en la BD01.
-2003	mb	Se detectaron créditos con un MORG superior a USD 100,000 o equivalente en soles en los sectores de alto riesgo SEC(3, 6, 8, 9, 10) de LAFT en la BD01.
-2004	mb	Se detectaron créditos con un MORG superior a USD 500,000 o equivalente en soles a deudores con ocupaciones de alto riesgo LAFT OSD(1, 2, 5, 9) en la BD01.
-2005	jz	Se detectaron créditos con TEA menor del 1% en la BD01.
-2006	jz	Se detectaron créditos con Días de Gracias (DGR) mayores a 90 días en la BD01.
-2007	jz	Se detectaron créditos donde el monto original del credito (MORG) es mayor o igual al saldo de de capital vigente (SKCR) en la BD01.
-2008	jz	Se detectaron créditos en situación contable refinanciada, judicial, con clasificación dudoso o perdida CAL(3,4) con rendimientos devengados (SIN) en la BD01.
-2009	jz	Se detectaron códigos de socios (CIS) de deudores con más de una clasificación (CAL) en la BD01.
-2010	ja	Se detectaron créditos con días de atraso(DAKR) negativos en la BD01.
-2011	av	Se detectaron créditos cuyo esquema de amortización (ESAM_C) correspondiente a cuotas reporta número de cuotas pactadas igual a 1 (NCPR) en la BD01.
-2012	av	Se detectaron códigos de socios (CIS) de deudores con calificación Dudoso o Pérdida CAL(3,4) que generen intereses devengados (SIN) en la BD01
-2013	av	Se detectaron créditos diferentes a vigente (refinanciados, estructurados, judicial, vencidos) que generen intereses devengados (SIN) en la BD01.
-2014	av	Se detectaron códigos de socios (CIS) de deudores con calificación normal y CPP CAL(0,1) que registran situacion contable vencido (KVE) en la BD01.
-2015	dp	Se detectaron créditos con calificación dudosa o pérdida CAL(3,4) que se encuentren vigentes (KVI) en la BD01.
-2016	dp	Se detectaron créditos con días de atraso (DAK) mayor a 120 que no hayan pasado a Judicial (KJU) en la BD01.
-2017	dp	Se detectaron créditos en cobranza judicial (KJU) que esten en clasificaciones Normal, CPP o Deficiente (CAL = 0, 1, 2) en la BD01.
-2018	dp	Se detectaron créditos unicuota en el campo ESAM con fecha de cancelación pactada a más de un año (FOT, FVEG) en la BD01.
-2019	dp	Se detectaron créditos con antigüedad mayor a 10 años que no correspondan al tipo de créditos hipotecarios TCR(menos el 13) en la BD01.
-2020	dp	Se detectaron créditos sin garantia que tengan tasa de provisión distinta a los porcentajes establecidos en la Tabla 1 de la Rs. 11356 en la BD01
-2022	hl	Se detectaron créditos con días de atraso (DAKR) calculados desde la última cuota pagada en la BD01.
-2025	mb	Se detectaron créditos con un importe en la cancelación de cuota superior a USD 100,000 o equivalente en soles realizados por deudores con ocupaciones de alto riesgo LAFT (OSD=1, 2, 5, 9) en la BD2A.
-2026	mb	Se detectaron créditos con un importe en la cancelación de cuota superior a USD 100,000 o equivalente en soles realizados por deudores con ocupaciones de alto riesgo LAFT (OSD=1, 2, 5, 9) en la BD2B.
-2027	jz	Se detectaron créditos donde el monto otorgado (MORG) en la BD01 es mayor que elcapital por cobrar (MCUO) en el cronograma (BD02).
-2028	ja	Se detectaron garantías que presentan diferencias entre las provisiones requeridas en la BDC 01 y en el Anexo 5 en la BD3A.
-2029	hl	Se detectaron garantías que coberturan más de 3 créditos a la vez en el campo NCR y que registran el mismo importe de cobertura en la BD3A.
-2030	mb	Se detectaron créditos cancelados con fondos en efectivo FOCAN_C = 1 por un monto superior (MCT_C) a los USD 100,000 o equivalente en soles en la BD04. 
-2031	mb	Se detectaron créditos cancelados con montos superiores a USD 1 MM que se hayan producido antes de los 30 días de haber sido desembolsado en la BD04.
-2032	mb	Se detectaron créditos cancelados con montos superiores a USD 1 MM de deudores con ocupaciones de alto riesgo LAFT (OSD= 1, 2, 5, 9) en la BD04.
-2033	ja	Se detectaron créditos con la misma fecha de desembolso(FOT_C) y cancelación(FCAN_C) en la BD04.
-2034	ja	Se detectaron créditos con el mismo número original de cuotas de la operación cancelada (NCPA_C) y el número de cuotas pagadas a la fecha de cancelación de la operación (NCPA_C) en la BD04.
+CodAlerta	Descripcion
+1000	Se identificaron {0} crédito(s) con un monto original (MORG) mayor a USD 50,000 o equivalente en soles, correspondiente al periodo {1}.
+1001	Se identificaron {0} crédito(s) con un monto original mayor (MORG) a USD 100,000 o equivalente en soles, para los sectores de alto riesgo (SEC: 3,6,8,9,10), correspondiente al periodo {1}.
+1002	Se identificaron {0} crédito(s) con un monto original mayor (MORG) a USD 500,000 o equivalente en soles, realizados por deudores con ocupaciones de alto riesgo (OSD: 1,2,5,9), correspondiente al periodo {1}.
+1003	Se identificaron {0} cronograma(s) de la cartera de créditos con un importe mayor a USD 100,000 o equivalente en soles realizados por deudores con ocupaciones de alto riesgo (OSD: 1,2,5,9), correspondiente al periodo {1}.
+1004	Se identificaron {0} cronograma(s) de crédito(s) cancelado(s) con un importe mayor a USD 100,000 o equivalente en soles realizados por deudores con ocupaciones de alto riesgo (OSD: 1,2,5,9), correspondiente al periodo {1}.
+1005	Se identificaron {0} crédito(s) cancelado(s) con fondos en efectivo superiores a los USD 100,000 o equivalente en soles, correspondiente al periodo {1}.
+1006	Se identificaron {0} crédito(s) cancelado(s) con fondos en efectivo superiores a los USD 1 MM o equivalente en soles, que se hayan producido antes de los 30 días de haber sido desembolsados, correspondiente al periodo {1}.
+1007	Se identificaron {0} crédito(s) cancelado(s)  con un importe mayor a USD 1 MM o equivalente en soles realizados por deudores con ocupaciones de alto riesgo (OSD: 1,2,5,9), correspondiente al periodo {1}.
+2000	Se identificaron {0} crédito(s) con TEA menor al 1.00 % por un saldo de colocaciones de {1}, en el periodo de {2}.
+2001	Se identificaron {0} crédito(s) con días de gracia mayor a 90 días en la cartera de créditos con un saldo de colocaciones de S/. {1}, correspondiente al periodo {2}.
+2002	Se identificaron {0} crédito(s) con el monto original de crédito menor al saldo pendiente de pago en la cartera de créditos correspondiente al periodo {1}. 
+2003	Se identificaron {0} crédito(s) en situación contable refinanciada, judicial y con clasificación dudoso o pérdida, que están reportando rendimientos devengados por un saldo de {1}, correspondiente al periodo {2}.
+2004	Se identificaron {0} deudor(es) con más de una calificación correspondiente al periodo {1}.
+2005	Se identificaron {0} crédito(s) con días de atraso reales al cierre de la última cuota pagada negativos, con un saldo de colocaciones de S/. {1}, correspondiente al periodo {2}.
+2006	Se identificaron {0} crédito(s) con un esquema de amortización en cuotas que reporta un número cuotas pactadas igual a 1, con un saldo de colocaciones de S/. {1}, correspondiente al periodo {2}.
+2007	Se identificaron {0} deudor(es) con calificación dudosa o pérdida que generan intereses devengados por un saldo de {1}, con un saldo de colocaciones de S/. {1}, correspondiente al periodo {2}.
+2008	Se identificaron {0} crédito(s) en situación contable refinanciado, judicial y vencidos, que reportan intereses devengados, con un saldo de colocaciones de S/. {1}, correspondiente al periodo {2}.
+2009	Se identificaron {0} deudor(es) no minoristas con calificación normal en situación contable vencido, con un saldo de colocaciones de S/. {1}, correspondiente al periodo {2}.
+2010	Se identificaron {0} crédito(s) con calificación dudoso o pérdida en situación contable vigente con un saldo de colocaciones S/ {1}, correspondiente al periodo {2}.
+2011	Se identificaron {0} crédito(s) con días de atraso al cierre mayor a 120 días que no están en situación contable judicial con un saldo de colocaciones de S/ {1}, correspondiente al periodo {2}.
+2012	Se identificaron {0} crédito(s) en situación contable judicial que tienen una calificación normal, CPP o deficiente con un saldo de colocaciones S/ {1}, correspondiente al periodo {2}.
+2013	Se identificaron {0} crédito(s) con un esquema de amortización unicuota, que presentan fecha de cancelación pactada más de un año con un saldo de colocaciones S/ {1}, correspondiente al periodo {2}.
+2014	Se identificaron {0} crédito(s) que no son hipotecarios con una atigüedad mayor a 10 años, con un saldo de colocaciones de S/. {1}, correspondiente al periodo {2}.
+2015	Se identificaron {0} crédito(s) sin garantía, que presentan tasas de provisiones distintas a los establecidos en la Rs. 11356, correspondiente al periodo {1}.
+2016	Se identificaron {0} crédito(s) minoristas con días de atraso al cierre de mes que no concuerdan con su calificación, con un saldo de colocaciones de S/. {1}, correspondiente al periodo {2}.
+2017	Se identificaron {0} crédito(s) con días de atraso reales al cierre de la última cuota pagada que no fueron calculados desde la última cuota pagada, con un saldo de colocaciones de S/. {1}, correspondiente al periodo {2}.
+2018	Se identificaron {0} crédito(s) en la cartera con un monto original mayor al capital por cobrar en los cronogramas con una diferencia de S/. {1}, correspondiente al periodo {2}.
+2019	Se identificaron {0} crédito(s) con una diferencia de provisiones de {1} %, requeridas en el Anexo 5, correspondientes al periodo {2}.
+2020	Se identificaron {0} garantía(s) que coberturan más de 3 créditos a la vez y reportan el mismo importe de cobertura, correspondiente al periodo {1}.
+2021	Se identificaron {0} crédito(s) cancelados que presenta la misma fecha del desembolso y cancelación del crédito, correspondiente al periodo {1}.
+2022	Se identificaron {0} crédito(s) cancelados con adelanto de cuotas pagadas iguales al número original de cuotas de la operación, correspondiente al periodo {1}.
+2023	Se identificaron {0} crédito(s) con saldos negativos en la cartera, correspondiente al periodo {1}.
+2024	Se identificaron {0} cronograma(s) con modalidad de coutas sin periocidad o número de cuotas (NCUO)  pactadas igual a 0, con un saldo de colocaciones S/ {1}, correspondiente al periodo {2}.
+2025	Se detectaron {0} crédito(s) en situación contable vencidos con 0 días de atraso con un saldo de colocaciones de S/. {1} , correspondiente al periodo {2}.
+2026	Se identificaron {0} garantía(s) donde el número de créditos que cobertura la garantía (NCR) no está vinculado al menos a un deudor, con un monto de constitución de la garantía de S/. {1}, correspondiente al periodo {2}.

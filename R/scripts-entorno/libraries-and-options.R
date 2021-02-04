@@ -16,6 +16,7 @@ options(scipen = 999)
 archivo.CuadreContable = "config/config1.txt"
 archivo.EstructuraBase = "config/config2.txt"
 archivo.RepositorioErrores = "config/config3.txt"
+archivo.RepositorioAlertas = "config/config4.txt"
 
 #### 4. Parametros globales ----- 
 global.alcance = c(201901:201912, 202001:202012, 202101:202112)
@@ -51,6 +52,13 @@ initRepositorioErrores <- function(){
              "\t", escape_double = FALSE, col_types = cols(Cod = col_number(), 
                                                            Descripcion = col_character(), 
                                                            Criticidad = col_character()),
+             locale = locale(encoding = "ISO-8859-1"), progress = F)  %>%
+    return()
+}
+initRepositorioAlertas <- function(){
+  read_delim(archivo.RepositorioAlertas, 
+             "\t", escape_double = FALSE, col_types = cols(CodAlerta   = col_number(), 
+                                                           Descripcion = col_character()),
              locale = locale(encoding = "ISO-8859-1"), progress = F)  %>%
     return()
 }

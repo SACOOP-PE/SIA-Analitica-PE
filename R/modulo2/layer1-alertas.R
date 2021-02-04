@@ -171,28 +171,28 @@ alertMontosuperiorOcupaciones    <- function(ruta, BD = evalFile(ruta)){
     return()
 }
 
-# Codigo 2005
+# Codigo 2000
 alertTea                         <- function(ruta, BD = evalFile(ruta)){
   BD %>% 
     filter(as.numeric(TEA) < 1) %>% pull(getCodigoBD("BD01")) %>% 
     return()
 }
 
-# Codigo 2006
+# Codigo 2001
 alertDiasGracia                  <- function(ruta, BD = evalFile(ruta)){
   BD %>% 
     filter(as.numeric(DGR) > 90) %>% pull(getCodigoBD("BD01")) %>% 
     return() 
 }
 
-# Codigo 2007
+# Codigo 2002
 alertMontOtorsuperiorCapitalVig  <- function(ruta, BD = evalFile(ruta)){
   BD %>% 
     filter(as.numeric(MORG) >= as.numeric(SKCR)) %>% pull(getCodigoBD("BD01")) %>%
     return()
 }
 
-# Codigo 2008
+# Codigo 2003
 alertRendimientoDevengado        <- function(ruta, BD = evalFile(ruta)){
   BD %>%
     filter(CAL %in% c(3,4) & (as.numeric(KRF) >0 | as.numeric(KJU) >0) & as.numeric(SIN) >0) %>%
