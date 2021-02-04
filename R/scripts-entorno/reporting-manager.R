@@ -15,7 +15,7 @@ formatBucket <- function(eb) {
                                                                               "\\Q{2}"  = BD,
                                                                               "\\Q{3}"  = periodoEscrito(Periodo))),
                                          if_else(Cod >= 301 & Cod <= 308, 
-                                                 str_replace_all(getDescError(Cod), c("\\Q{0}"  = months(as.Date(paste(substr(Periodo,1,4), substr(Periodo,5,6), "01", sep = "-"))),
+                                                 str_replace_all(getDescError(Cod), c("\\Q{0}"  = tolower(toString(months(as.Date(paste(substr(Periodo,1,4), substr(Periodo,5,6), "01", sep = "-"))))),
                                                                                       "\\Q{1}"  = periodoEscrito(Periodo),
                                                                                       "\\Q{2}"  = toString(num2))),
                                                  if_else(Cod == 401 | Cod == 402,
@@ -58,7 +58,8 @@ formatBucket <- function(eb) {
                                          )
                                  )
            ) %>% 
-    select(Periodo, BD, Cod, Descripcion)
+    select(Periodo, BD, Cod, Descripcion) %>% 
+    arrange(Periodo, Cod)
   
   return(output)
 }

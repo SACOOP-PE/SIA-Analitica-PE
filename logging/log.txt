@@ -2284,3 +2284,7 @@
 100338	2021-02-04	2021-02-04 10:22:14	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-02-04 10:22:13] - Layer 0. Detección de Alertas al Cruce Contable de la cartera.	Informativo	Baja
 100338	2021-02-04	2021-02-04 10:24:18	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-02-04 10:24:18] -       Resultado: El análisis contable concluyó sin observaciones.	Informativo	Baja
 100338	2021-02-04	2021-02-04 10:24:19	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-02-04 10:24:18] -       Resultado: No se detectaron alertas al cruce contable de la cartera.	Informativo	Baja
+100338	2021-02-04	2021-02-04 12:55:18	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-02-04 12:55:18] - 2. MÓDULO DE DECTECCIÓN DE ALERTAS A BASE DE DATOS CREDITICIAS --------------------------	Informativo	Baja
+100338	2021-02-04	2021-02-04 12:55:19	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-02-04 12:55:18] - Inicio del interrogatorio modulo 2. PID-100338.	Informativo	Baja
+100338	2021-02-04	2021-02-04 12:55:19	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-02-04 12:55:19] - Layer 0. Detección de Alertas al Cruce Contable de la cartera.	Informativo	Baja
+100338	2021-02-04	2021-02-04 12:57:21	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-02-04 12:57:21] -       Resultado: Se detectaron alertas contables a la cartera de créditos pues no cuadra con el balance de comprobación. 	Informativo	Baja
