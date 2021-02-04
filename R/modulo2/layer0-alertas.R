@@ -7,7 +7,6 @@ layer0_Alertas <- function(agente, eb){
   return(eb)
 }
 
-# 
 # getCruceAnexo06 <- function(Agente) {}
 # getCruceAnexo05 <- function(Agente) {}
 # getCruceEEFF <- function(Agente) {}
@@ -127,7 +126,7 @@ getSaldoProvisionesEspecificasBDCC <- function(bd01) {
     sum(na.rm = T)
 }
 
-getCodErrorContable <- function(nameCapital) {
+getCodErrorContable               <- function(nameCapital) {
   codError <- switch (nameCapital,
                       KVI = 301,
                       KVE = 302,
@@ -156,7 +155,8 @@ ejecutarAlertasCruceContable <- function(agente, eb){
   exigiblesBD01 <- exigibles[str_detect(exigibles, "BD01")]
   
   tbl_cruce_BC <- tibble(NombreArchivo = exigiblesBD01[str_detect(exigiblesBD01, 
-                                                                  paste(getAnoMesCoopacContableFromAgente(agente), collapse = '|'))]) %>%
+                                                                  paste(getAnoMesCoopacContableFromAgente(agente), collapse = '|'))]
+                         ) %>%
     rowwise() %>%
     mutate(Ruta      = getRuta(carpeta, NombreArchivo),
            CodCoopac = getCoopacFromAgent(agente),
