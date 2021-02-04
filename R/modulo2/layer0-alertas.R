@@ -2,8 +2,8 @@
 ####' 0. Revisión previa del bucket de errores, y soltar advertencias.
 
 layer0_Alertas <- function(agente, eb){
-  eb <- ejecutarAlertasCruceContable(agente, eb)
   
+  eb <- ejecutarAlertasCruceContable(agente, eb)
   return(eb)
 }
 
@@ -158,11 +158,8 @@ ejecutarAlertasCruceContable <- function(agente, eb){
                                                                   paste(getAnoMesCoopacContableFromAgente(agente), collapse = '|'))]
                          ) %>%
     rowwise() %>%
-    mutate(Ruta      = getRuta(carpeta, NombreArchivo),
-           CodCoopac = getCoopacFromAgent(agente),
-           IdProceso = getIdProcesoFromAgent(agente),
-           BD        = "BD01",
-           Periodo   = getAnoMesFromRuta(toString(Ruta)),
+    mutate(Ruta    = getRuta(carpeta, NombreArchivo),
+           Periodo = getAnoMesFromRuta(toString(Ruta)),
            KVI_SISCOR   = getSaldoVigenteSiscor(agente, Periodo),
            KVE_SISCOR   = getSaldoVencidoSiscor(agente, Periodo),
            KRF_SISCOR   = getSaldoRefinanciadoSiscor(agente, Periodo),
@@ -187,28 +184,20 @@ ejecutarAlertasCruceContable <- function(agente, eb){
            diff_SID      = (SID_SISCOR - SID_BDCC) %>% round(.,2),
            diff_PCIGEN   = (PCI_GEN_SISCOR - PCI_GEN_BDCC) %>% round(.,2),
            diff_PCIESP   = (PCI_ESP_SISCOR - PCI_ESP_BDCC) %>% round(.,2)) %>% 
-    pivot_longer(starts_with("diff"), names_to = "Capital", values_to = "Saldo") %>% rowwise() %>% 
-    mutate(Resultado = ifelse(abs(Saldo)>100, "ERROR", ""),
-           Cod       = ifelse(Resultado == "ERROR",
-                              getCodErrorContable(str_split(Capital, "_")[[1]][2]), 0),
-           ) %>% 
-    filter(Resultado == "ERRROR")
+    pivot_longer(starts_with("diff"), names_to = "Capital", values_to = "Saldo") %>%
+    rowwise() %>% 
+    mutate(CodCoopac = getCoopacFromAgent(agente),
+           IdProceso = getIdProcesoFromAgent(agente),
+           Cod       = if_else(abs(Saldo)> 100,
+                               getCodErrorContable(str_split(Capital, "_")[[1]][2]), 0),
+           Periodo   = Periodo,
+           BD        = "BD01",
+           num2      = Saldo)
   
-  if (nrow(tbl_cruce_BC)> 0) {
-    chunkContable <- tbl_cruce_BC %>% rowwise() %>%
-      mutate(num2 = Saldo) %>%
-      select(CodCoopac, IdProceso, Cod, Periodo, BD, num2)
-
-    eb %>% addError(chunkContable)
-  }
-    
-  n <- eb %>% filter(Cod %in% c(301:308)) %>% nrow()
-  if (n == 0) {
-    addEventLog(agente, paste0("      Resultado: El análisis contable concluyó sin observaciones."))
-  }
-  else{
-    addEventLog(agente, paste0("      Resultado: El análisis contable concluyó con ",n," observación(es)."))
-  }
+  
+  eb <- eb %>% addError(tbl_cruce_BC %>% 
+                          filter(Cod %in% c(301:308)) %>% 
+                          select(CodCoopac, IdProceso, Cod, Periodo, BD, num2))
   
   return(eb)
 }
