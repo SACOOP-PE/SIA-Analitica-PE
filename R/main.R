@@ -35,4 +35,4 @@ bucket <- interrogateAgent_mod2(agent, bucket)
 agent  <- closeAgent(agent, bucket)
 
 ##### Reporting -----
-saveOutputs(agent, bucket)
+saveOutputs(agent, formatBucket(bucket))
