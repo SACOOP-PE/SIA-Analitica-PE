@@ -6,6 +6,26 @@ layer1_Alertas <- function(agente, eb){
   return(eb)
 }
 
+procesarAlertas  <- function(exigibles, BD, cod){
+  tb <- tibble(CodigoAlerta = getcodigoAlerta(BD)) %>% rowwise() %>%
+    mutate(Archivos = list(getArchivosExigiblesAlertas(exigibles, CodigoAlerta)))
+  
+  alertas <- tibble(NombreArchivo = unlist(tb %>% filter(CodigoAlerta == cod) %>% pull(Archivos))) %>% rowwise() %>%
+    mutate(BDCC = BD,
+           Ruta = getRuta(getCarpeta(header), NombreArchivo), 
+           Alerta = ifelse(cod == 2032,
+                           elegiralertasBD(BDCC, cod, Ruta),
+                           generarDetalleError2(Ruta, elegiralertasBD(BDCC, cod, Ruta)))) %>% 
+    pull(Alerta)
+  return(alertas)
+}
+procesarAlertas2 <- function(cod){
+  tb <- tibble(Periodos = getPeriodosAlertas(2025)) %>% rowwise() %>%
+    mutate(Alerta = generarDetalleError4(Periodos, elegiralertasBD("BD02", cod, Periodos))) %>% 
+    pull(Alerta)
+  return(tb)
+}
+
 getArchivosExigiblesAlertas <- function(exigibles, codigoAlerta){
   if(codigoAlerta >= 2003 & codigoAlerta <= 2022){
     archivos <- switch (toString(codigoAlerta),
@@ -106,25 +126,7 @@ elegiralertasBD <- function(BD, cod, ruta){
   }
 }
 
-procesarAlertas  <- function(exigibles, BD, cod){
-  tb <- tibble(CodigoAlerta = getcodigoAlerta(BD)) %>% rowwise() %>%
-    mutate(Archivos = list(getArchivosExigiblesAlertas(exigibles, CodigoAlerta)))
-  
-  alertas <- tibble(NombreArchivo = unlist(tb %>% filter(CodigoAlerta == cod) %>% pull(Archivos))) %>% rowwise() %>%
-    mutate(BDCC = BD,
-           Ruta = getRuta(getCarpeta(header), NombreArchivo), 
-           Alerta = ifelse(cod == 2032,
-                           elegiralertasBD(BDCC, cod, Ruta),
-                           generarDetalleError2(Ruta, elegiralertasBD(BDCC, cod, Ruta)))) %>% 
-    pull(Alerta)
-  return(alertas)
-}
-procesarAlertas2 <- function(cod){
-  tb <- tibble(Periodos = getPeriodosAlertas(2025)) %>% rowwise() %>%
-    mutate(Alerta = generarDetalleError4(Periodos, elegiralertasBD("BD02", cod, Periodos))) %>% 
-    pull(Alerta)
-  return(tb)
-}
+
 
 #Alertas PLAFT ----
 
@@ -175,24 +177,97 @@ alert1003 <- function(ruta) {
     return()
 }
 alert1004 <- function(ruta) {
-  
-  alert <-  quitarVaciosBD(ruta) %>% 
+  quitarVaciosBD(ruta) %>% 
     filter(CCR_C %in% getOcupacionesAltoRiesgo(ruta) & as.numeric(TCUO_C) > 27778) %>%
-    pull(getCodigoBD("BD02B")) %>%
-    unique() %>% 
+    pull(getCodigoBD("BD02B")) %>% unique() %>% 
     return()
 }
 alert1005 <- function(ruta) {
-
+  quitarVaciosBD(ruta) %>%
+    filter(as.numeric(FOCAN_C) == 1 & as.numeric(MCT_C) > 27778) %>%
+    pull(getCodigoBD("BD04")) %>% unique()
+    return()
 }
 alert1006 <- function(ruta) {
-  
+  quitarVaciosBD(ruta) %>% 
+    filter(as.numeric(MCT_C) > 277778 & (dmy(BD %>% pull(FCAN_C)) - dmy(BD %>% pull(FOT_C))) > 30) %>%
+    pull(getCodigoBD("BD04")) %>% unique() %>% 
+    return()
 }
 alert1007 <- function(ruta) {
-  
+  quitarVaciosBD(ruta) %>% 
+    filter(as.numeric(MCT_C) > 277778) %>% 
+    pull(CCR_C) %>% 
+    return()
 }
 
+
 #Alertas Prudenciales ----
+
+getCreditosSinGarantia <- function(agente, periodo) {
+  
+  credSinGarantias <- setdiff(evaluarFile(getRuta(getCarpetaFromAgent(agente),paste(getCoopacFromAgent(agente), "BD01", periodo, sep = "_"))) %>% pull(CCR),
+                              evaluarFile(getRuta(getCarpetaFromAgent(agente),paste(getCoopacFromAgent(agente), "BD03B", periodo, sep = "_"))) %>% pull(CCR))
+  
+  return(credSinGarantias)
+}
+getCreditosConGarantia <- function(agente, periodo) {
+  
+  credConGarantias <- intersect(evaluarFile(getRuta(getCarpetaFromAgent(agente),paste(getCoopacFromAgent(agente), "BD01", periodo, sep = "_"))) %>%  
+                                filter(as.numeric(CAL)>0) %>%
+                                  pull(CCR),
+                                evaluarFile(getRuta(getCarpetaFromAgent(agente),paste(getCoopacFromAgent(agente), "BD03B", periodo, sep = "_"))) %>%
+                                  filter(CGR !=1 & CGR !=5) %>%
+                                  pull(CCR))
+  
+  return(credConGarantias)
+}
+
+asignarProvisionSG <- function(cal, tipoCredito) {
+  if (toString(cal) == "0"){
+    provision <- switch (toString(tipoCredito),
+                         "6"  = 0.7,
+                         "7"  = 0.7,
+                         "8"  = 1,
+                         "9"  = 1,
+                         "10" = 1,
+                         "11" = 1,
+                         "12" = 1,
+                         "13" = 0.7) 
+    return(provision)
+  }
+  if (toString(cal) > "0"){
+    provision <- if_else(cal == 1, 5,
+                         if_else(cal == 2, 25,
+                                 if_else(cal == 3, 60, 
+                                         if_else(cal == 4, 100, 0))))
+    return(provision)
+  }
+}
+asignarProvisionCG <- function(cal, claseGarantia) {
+  
+  if (claseGarantia == 2) {
+    provision <- 2
+    return(provision)
+  }
+  if (claseGarantia == 3) {
+    provision <- switch (toString(cal),
+                         "1" = 1.25,
+                         "2" = 6.25,
+                         "3" = 15,
+                         "4" = 30)
+    return(provision)
+  }
+  if (claseGarantia == 4) {
+    provision <- switch (toString(cal),
+                         "1" = 2.5,
+                         "2" = 12.50,
+                         "3" = 30,
+                         "4" = 60)
+    return(provision)
+  }
+}
+
 alert2000 <- function(ruta) {
   quitarVaciosBD(ruta) %>% 
     filter(as.numeric(TEA) < 1) %>% pull(getCodigoBD("BD01")) %>% 
@@ -288,196 +363,121 @@ alert2014 <- function(ruta) {
     pull(getCodigoBD("BD01")) %>%
     return()
 }
-
-# Codigo 2020
-getCreditosSinGarantia   <- function(periodo){
-  credSinGarantias <- setdiff(getInfoTotal(getCarpeta(header), periodo, "BD01") %>% pull(CIS),
-                              getInfoTotal(getCarpeta(header), periodo, "BD03A") %>% pull(CIS))
+alert2015 <- function(ruta, agente) {
   
-  getInfoTotal(getCarpeta(header), periodo, "BD01") %>% filter(CIS %in% credSinGarantias) %>% 
-    pull(CCR) %>% 
-    return()
-}
-asignarProvision         <- function(calificacion, tipoCredito){
-  if (toString(calificacion) == "0"){
-    provision <- switch (toString(tipoCredito),
-                         "6"  = 0.7,
-                         "7"  = 0.7,
-                         "8"  = 1,
-                         "9"  = 1,
-                         "10" = 1,
-                         "11" = 1,
-                         "12" = 1,
-                         "13" = 0.7) 
-    return(provision)
-  }
-  if (toString(calificacion) > "0"){
-    provision <- if_else(calificacion == 1, 5,
-                         if_else(calificacion == 2, 25,
-                                 if_else(calificacion == 3, 60, 
-                                         if_else(calificacion == 4, 100, 0))))
-    return(provision)
-  }
-}
-alertCreditosProvisiones <- function(ruta, BD = evalFile(ruta)){
-  tbAlerta <- BD %>% 
-    filter(CCR %in% getCreditosSinGarantia(getAnoMes(ruta))) %>%  rowwise() %>%
-    mutate(porcentajeProvision = asignarProvision(as.numeric(CAL),as.numeric(TCR)) %>% toString(),
-           calcularProvision = (as.numeric(PCI)/as.numeric(SKCR) *100) %>% round(0)) %>%
+  quitarVaciosBD(ruta) %>% 
+    filter(CCR %in% getCreditosSinGarantia(agente, getAnoMesFromRuta(ruta))) %>% 
+    rowwise() %>%
+    mutate(porcentajeProvision = asignarProvisionSG(as.numeric(CAL),as.numeric(TCR)),
+           calcularProvision   = (as.numeric(PCI)/as.numeric(SKCR) *100) %>% round(0)) %>%
     filter(porcentajeProvision != calcularProvision) %>% 
     pull(CCR) %>%
     return() 
 }
-
-# Codigo 2022
-alertDiasAtrasoUltimaCouta       <- function(ruta, BD = evalFile(ruta)){
+alert2016 <- function(ruta) {
+  BD <- quitarVaciosBD(ruta)
+  
   BD %>% 
-    filter(dmy(BD %>% pull(FVEG)) < dmy(BD %>% pull(FOT))) %>%
-    pull(getCodigoBD("BD01")) %>%
+    filter(as.numeric(TCR) >=9 & dmy(BD %>% pull(FVEG)) < dmy(BD %>% pull(FOT))) %>%
+    pull(CCR) %>%
     return() 
 }
-
-
-#alertas BD01 y BD02A ----
-# Codigo 2027
-creditosComunes <- function(periodo, BD1, BD2){
-  comunes <- intersect(getInfoCruce(getCarpeta(header), periodo, BD1), 
-                       getInfoCruce(getCarpeta(header), periodo, BD2)) %>%
-    unique() %>%
+alert2017 <- function(ruta) {
+  # Fecha de pago última cuota cancelada - 
+  # fecha de vencimiento última cuota cancelada
+  # 
+  # FCAN - FVEP == DAKR ???
+}
+alert2018 <- function(periodo, agente){
+  
+  creditosComun <- intersect(quitarVaciosBD(getRuta(getCarpetaFromAgent(agente),paste(getCoopacFromAgent(agente), "BD01", periodo, sep = "_"))) %>%
+                               pull(CCR),
+                             quitarVaciosBD(getRuta(getCarpetaFromAgent(agente),paste(getCoopacFromAgent(agente), "BD02A", periodo, sep = "_"))) %>%
+                               pull(CCR)) %>% unique()
+  
+  BD01  <- quitarVaciosBD(getRuta(getCarpetaFromAgent(agente),paste(getCoopacFromAgent(agente), "BD01", periodo, sep = "_"))) %>%
+    filter(CCR %in% creditosComun) %>% 
+    select(CCR, MORG)
+  
+  BD02A <- quitarVaciosBD(getRuta(getCarpetaFromAgent(agente),paste(getCoopacFromAgent(agente), "BD02A", periodo, sep = "_"))) %>% 
+    filter(CCR %in% creditosComun) %>% 
+    select(CCR, MCUO)
+  
+  merge(BD01, BD02A, by.x = "CCR", by.y = "CCR") %>% 
+    filter(MORG > MCUO) %>% 
+    mutate(diff = as.numeric(MORG) - as.numeric(MCUO)) %>%
+    filter(abs(diff) >100) %>% 
+    pull(CCR) %>% unique() %>% 
     return()
 }
-alertMontOrtorgadoCronograma <- function(periodo){
-  creditosComun <- creditosComunes(periodo, "BD01", "BD02A")
+alert2019 <- function(ruta, agente){
   
-  montoOtorgado    <- getInfoTotal(getCarpeta(header), periodo, "BD01") %>% filter(CCR %in% creditosComun) %>%
-    pull(MORG)
-  capitalPorCobrar <- getInfoTotal(getCarpeta(header), periodo, "BD02A") %>% filter(CCR %in% creditosComun) %>%
-    pull(MCUO)
+  BD01 <- quitarVaciosBD(ruta) %>% 
+    filter(CCR %in% getCreditosConGarantia(agente, getAnoMesFromRuta(ruta))) %>% 
+    select(CCR, CAL, PCI, SKCR)
   
-  creditosComun <- creditosComun[montoOtorgado > capitalPorCobrar] %>%
-    unique() %>%
-    return()
-}
-#alertas BD03A ----
-# Codigo 2028 (aún por terminar)
-getCreditosConGarantia   <- function(periodo){
-  credConGarantias <- intersect(getInfoTotal(getCarpeta(header), periodo, "BD01") %>% pull(CIS),
-                                getInfoTotal(getCarpeta(header), periodo, "BD03A") %>% pull(CIS)) %>% 
-    return()
-}
-asignarProvisionGarantia <- function(claseGarantia, calificacion){
-  if (claseGarantia == 2) {
-    provision <- 2 %>% return()
-  }
-  if (claseGarantia == 3) {
-    provision <- switch (calificacion %>% toString(),
-                         "1" = 1.25,
-                         "2" = 6.25,
-                         "3" = 15,
-                         "4" = 30
-    )
-    return(provision)
-  }
-  if (claseGarantia == 4) {
-    provision <- switch (calificacion %>% toString(),
-                         "1" = 2.5,
-                         "2" = 12.50,
-                         "3" = 30,
-                         "4" = 60
-    )
-    return(provision)
-  }
-}
-getDuplicadosCIS  <- function(periodo, BD){
-  cis_deudor <- getInfoTotal(getCarpeta(header), periodo, BD) %>%
-    filter(CIS %in% getCreditosConGarantia(periodo)) %>%
-    select(CIS)
-  duplicados <- cis_deudor[duplicated(cis_deudor), ] %>%
-    unique() %>% 
-    return()
-}
-alertGarantiaProvisiones <- function(periodo){
-  
-  deudorBD03 <- getInfoTotal(getCarpeta(header), 201902, "BD03A") %>%
-    filter(CIS %in% getCreditosConGarantia(201902)) %>%
-    select(CIS, CGR) %>% 
-    group_by(CIS) %>%
-    summarize(n=n())
-  
-  deudorBD01 <- getInfoTotal(getCarpeta(header), 201902, "BD01") %>%
-    filter(CIS %in% getCreditosConGarantia(201902)) %>%
-    select(CCR, CIS)  %>% 
-    group_by(CIS) %>%
-    summarize(n=n()) %>% 
-    select(CIS)
-  
-  tibble(deudorCartera = getInfoTotal(getCarpeta(header), 201902, "BD01") %>%
-           filter(CIS %in% getCreditosConGarantia(201902))) %>%
+  BD03B <- quitarVaciosBD(ruta) %>% 
+    filter(CCR %in% getCreditosConGarantia(agente, getAnoMesFromRuta(ruta))) %>% 
+    select(CCR, CGR)
+    
+  merge(BD01, BD03B, by.x = "CCR", by.y = "CCR") %>% 
     rowwise() %>%
-    mutate(claseDeGarantia = getInfoTotal(getCarpeta(header), 201902, "BD03A") %>%
-             filter(CIS %in% getCreditosConGarantia(201902)) %>%
-             select(CIS, CGR) %>%
-             filter(CIS %in% deudorCartera$CIS) %>%
-             pull(CGR) %>% unique() %>% toString()) %>% 
-    select(deudorCartera$claseDeGarantia, )
-  #        ,
-  #        porcentajeProvision = asignarProvision(as.numeric(claseDeGarantia), as.numeric(CAL)) %>%
-  #                             toString(),
-  #        calcularProvision   = (as.numeric(PCI)/as.numeric(SKCR) *100) %>% round(0)) %>%
-  # select(CCR, CIS, claseDeGarantia, porcentajeProvision, calcularProvision) %>%
-  # return()
+    mutate(porcentajeProvision = asignarProvisionCG(as.numeric(CAL),as.numeric(CGR)),
+           calcularProvision   = (as.numeric(PCI)/as.numeric(SKCR) *100) %>% round(0)) %>%
+    filter(porcentajeProvision != calcularProvision) %>% 
+    pull(CCR) %>% unique() %>% 
+    return() 
 }
-
-# Codigo 2029
-alertGarantiasNumerocobertura    <- function(ruta, BD = evalFile(ruta)){
-  BD %>%
+alert2020 <- function(ruta) {
+  quitarVaciosBD(ruta) %>%
     filter(as.numeric(NCR) > 3) %>%
-    pull(getCodigoBD("BD03A")) %>% 
+    pull(CODGR) %>% 
     return()
 }
-#alertas BD04 ----
-# Codigo 2030
-alertCreditosEfectivo            <- function(ruta, BD = evalFile(ruta)){
-  BD %>%
-    filter(as.numeric(FOCAN_C) == 1 & as.numeric(MCT_C) > 27778) %>%
-    pull(getCodigoBD("BD04")) %>%
-    return()
-}
-
-# Codigo 2031
-alertCreditosAntesDesembolso     <- function(ruta, BD = evalFile(ruta)){
-  BD %>% 
-    filter(as.numeric(MCT_C) > 277778 & (dmy(BD %>% pull(FCAN_C)) - dmy(BD %>% pull(FOT_C))) > 30) %>%
-    pull(getCodigoBD("BD04")) %>%
-    return()
-}
-
-# Codigo 2032
-alertMontosuperiorOcupaciones3   <- function(periodo){
-  bd4 <- getInfoTotal(getCarpeta(header), periodo, "BD04")
-  if (length(intersect(creditosComunes(periodo, "BD01", "BD04"), ocupacionesAltoRiesgo(periodo))) >0) {
-    creditos <- bd4 %>% filter(cgrep(bd4, getCodigoBD("BD04"))[[1]] %in% ocupacionesAltoRiesgo(periodo) &
-                                 as.numeric(MCT_C) > 277778) %>%
-      pull(getCodigoBD("BD04"))
-    alerta <- generarDetalleError4(periodo, creditos)
-    return(alerta)
-  }
-  return(list("character(0)"))
-}
-
-# Codigo 2033
-alertFechaDesembolsoCancelacion  <- function(ruta, BD = evalFile(ruta)){
-  BD %>%
+alert2021 <- function(ruta) {
+  quitarVaciosBD(ruta) %>%
     filter(dmy(BD %>% pull(FOT_C)) == (dmy(BD %>% pull(FCAN_C)))) %>% 
-    pull(getCodigoBD("BD04")) %>%
+    pull(CCR_C) %>%
     return()
 }
-
-# Codigo 2034
-alertNumeroCanceladosyOriginales <- function(ruta, BD = evalFile(ruta)){
-  BD %>%
+alert2022 <- function(ruta) {
+  quitarVaciosBD(ruta) %>%
     filter(as.numeric(NCPR_C) == as.numeric(NCPA_C)) %>%
     pull(getCodigoBD("BD04")) %>%
     return()
 }
-# alertMontosuperiorAgencias("C:/Users/eroque/Desktop/Proyecto_BDCC/SIA-Analitica-PE/test/datatest/202001/01172_BD01_202001.txt") %>% view()
+alert2023 <- function(ruta, eb) {
+  BD         <- quitarVaciosBD(ruta)
+  saldosCols <- getColsNoObservadas(ruta, eb, "saldos")
+  
+  if (length(saldosCols) >0) {
+    alertSaldos <- tibble(Columna = saldosCols) %>% rowwise() %>%
+      mutate(verificarSaldos = BD %>% 
+                                filter(as.numeric(cgrep(BD, Columna)[[1]]) <0) %>% 
+                                pull(CCR) %>% toString(),
+             Cod             = 461) %>%
+      filter(verificarSaldos != "")
+    
+    return(alertSaldos)
+  }
+  return("")
+}
+alert2024 <- function(ruta) {
+  quitarVaciosBD(ruta) %>%
+    filter(((as.numeric(ESAM) < 5) & (as.numeric(NCPR) == 0 | as.numeric(PCUO)  == 0)) == TRUE) %>%
+    pull(CCR) %>% 
+    return()
+}
+alert2025 <- function(ruta) {
+  quitarVaciosBD(ruta) %>%
+    filter((as.numeric(KVE) > 0 & as.numeric(DAK) == 0)) %>% 
+    pull (CCR) %>% 
+    return()
+}
+alert2026 <- function(ruta) {
+  quitarVaciosBD(ruta) %>% 
+    filter(as.numeric(NCR) > 0, as.numeric(NRCL) == 0) %>%
+    pull(getCodigoBD("BD03A")) %>%
+    unique() %>% 
+    return()
+}
