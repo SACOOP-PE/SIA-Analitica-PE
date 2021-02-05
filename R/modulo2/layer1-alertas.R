@@ -6,7 +6,7 @@ layer1_Alertas <- function(agente, eb){
   return(eb)
 }
 
-procesarAlertas  <- function(exigibles, BD, cod){
+procesarAlertas  <- function(exigibles, BD, codAlerta){
   tb <- tibble(CodigoAlerta = getcodigoAlerta(BD)) %>% rowwise() %>%
     mutate(Archivos = list(getArchivosExigiblesAlertas(exigibles, CodigoAlerta)))
   
@@ -26,107 +26,151 @@ procesarAlertas2 <- function(cod){
   return(tb)
 }
 
-getArchivosExigiblesAlertas <- function(exigibles, codigoAlerta){
-  if(codigoAlerta >= 2003 & codigoAlerta <= 2022){
-    archivos <- switch (toString(codigoAlerta),
-                        "2003"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("SEC", "MORG")),
-                        "2004"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("OSD", "MORG")),
-                        "2005"= getArchivosSinErrores(header, listaErrores, c(201, 203), "TEA"),
-                        "2006"= getArchivosSinErrores(header, listaErrores, c(201, 203), "DGR"),
-                        "2007"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("MORG", "SKCR")),
-                        "2008"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("CAL", "KRF", "KJU", "SIN")),
-                        "2009"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("CIS", "CAL")),
-                        "2010"= getArchivosSinErrores(header, listaErrores, c(201, 203), "DARK"),
-                        "2011"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("ESAM", "NCPR")),
-                        "2012"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("CAL", "SIN")),
-                        "2013"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("KRF", "KVE", "KJU", "SIN")),
-                        "2014"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("CAL", "KVE", "CIS")),
-                        "2015"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("CAL", "KVI", "CIS")),
-                        "2016"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("DAK", "KJU")),
-                        "2017"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("CAL", "KJU")),
-                        "2018"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("ESAM", "FVEG", "FOT")),
-                        "2019"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("TCR", "FVEG", "FOT")),
-                        "2020"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("CIS", "CAL", "TCR", "PCI", "SKCR")),
-                        "2022"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("FVEG", "FOT"))
-    ) %>% 
+getArchivosExigiblesAlertas <- function(exigibles, codAlerta){
+  
+  if (codAlerta %in% c(1000:1002, 2000:2017, 2024,2025)){
+    
+    archivos <- switch (toString(codAlerta),
+                        "1000"= getArchivosNoObservadosByCols(agente, eb, c("UAGE", "MORG")),
+                        "1001"= getArchivosNoObservadosByCols(agente, eb, c("SEC", "MORG")),
+                        "1002"= getArchivosNoObservadosByCols(agente, eb, c("OSD", "MORG")),
+                        "2000"= getArchivosNoObservadosByCols(agente, eb, "TEA"),
+                        "2001"= getArchivosNoObservadosByCols(agente, eb, "DGR"),
+                        "2002"= getArchivosNoObservadosByCols(agente, eb, c("MORG", "SKCR")),
+                        "2003"= getArchivosNoObservadosByCols(agente, eb, c("CAL", "KRF", "KJU", "SIN")),
+                        "2004"= getArchivosNoObservadosByCols(agente, eb, c("CIS", "CAL")),
+                        "2005"= getArchivosNoObservadosByCols(agente, eb, "DARK"),
+                        "2006"= getArchivosNoObservadosByCols(agente, eb, c("ESAM", "NCPR")),
+                        "2007"= getArchivosNoObservadosByCols(agente, eb, c("CAL", "SIN")),
+                        "2008"= getArchivosNoObservadosByCols(agente, eb, c("KRF", "KVE", "KJU", "SIN")),
+                        "2009"= getArchivosNoObservadosByCols(agente, eb, c("CAL", "KVE", "CIS")),
+                        "2010"= getArchivosNoObservadosByCols(agente, eb, c("CAL", "KVI", "CIS")),
+                        "2011"= getArchivosNoObservadosByCols(agente, eb, c("DAK", "KJU")),
+                        "2012"= getArchivosNoObservadosByCols(agente, eb, c("CAL", "KJU", "CIS")),
+                        "2013"= getArchivosNoObservadosByCols(agente, eb, c("ESAM", "FVEG", "FOT")),
+                        "2014"= getArchivosNoObservadosByCols(agente, eb, c("TCR", "FVEG", "FOT")),
+                        "2015"= getArchivosNoObservadosByCols(agente, eb, c("CAL", "TCR", "PCI", "SKCR")),
+                        "2016"= getArchivosNoObservadosByCols(agente, eb, c("TCR","FVEG", "FOT")),
+                        "2017"= getArchivosNoObservadosByCols(agente, eb, c("FCAN", "FVEP", "DAKR")),
+                        "2025"= getArchivosNoObservadosByCols(agente, eb, c("KVE", "DAK")),
+                        ) %>% 
       intersect(exigibles[str_detect(exigibles, "BD01")])
     return(archivos)
+    
   }
-  if(codigoAlerta > 2029){
-    archivos <- switch (toString(codigoAlerta),
-                        "2030"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("FOCAN_C", "MCT_C")),
-                        "2031"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("FOCAN_C", "MCT_C", "FOT_C")),
-                        "2032"= getArchivosSinErrores(header, listaErrores, c(201, 203), "MCT_C"),
-                        "2033"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("FOT_C", "FCAN_C")),
-                        "2034"= getArchivosSinErrores(header, listaErrores, c(201, 203), c("NCPR_C", "NCPA_C"))
-    ) %>% 
+  if (codAlerta %in% c(1003, 2024)) {
+    
+    archivos <- switch (toString(codAlerta),
+                        "1003"= getArchivosNoObservadosByCols(agente, eb, c("OSD", "TCUO")),
+                        "2024"= getArchivosNoObservadosByCols(agente, eb, c("ESAM", "NCPR", "PCUO"))
+                        ) %>% 
+      intersect(exigibles[str_detect(exigibles, "BD02A")])
+    return(archivos)
+    
+  }
+  if (codAlerta == 1004) {
+    
+    archivos <- getArchivosNoObservadosByCols(agente, eb, c("OSD", "TCUO_C")) %>% 
+      intersect(exigibles[str_detect(exigibles, "BD02B")])
+    return(archivos)
+    
+  }
+  if (codAlerta %in% c(2019,2020, 2026)) {
+    
+    archivos <- switch (toString(codAlerta),
+                        "2019"= getArchivosNoObservadosByCols(agente, eb, c("CAL", "PCI", "SKCR", "CGR")),
+                        "2020"= getArchivosNoObservadosByCols(agente, eb, "NCR"),
+                        "2026"= getArchivosNoObservadosByCols(agente, eb, c("NCR", "NRCL"))
+                        ) %>% 
+      intersect(exigibles[str_detect(exigibles, "BD03A")])
+    return(archivos)
+    
+  }
+  if (codAlerta %in% c(1005:1007, 2021,2022)) {
+    
+    archivos <- switch (toString(codAlerta),
+                        "1005"= getArchivosNoObservadosByCols(agente, eb, c("FOCAN_C", "MCT_C")),
+                        "1006"= getArchivosNoObservadosByCols(agente, eb, c("MCT_C", "FCAN_C", "FOT_C")),
+                        "1007"= getArchivosNoObservadosByCols(agente, eb, "MCT_C"),
+                        "2021"= getArchivosNoObservadosByCols(agente, eb, c("FOT_C", "FOCAN_C")),
+                        "2022"= getArchivosNoObservadosByCols(agente, eb, c("NCPR_C", "NCPA_C"))
+                        )%>% 
       intersect(exigibles[str_detect(exigibles, "BD04")])
     return(archivos)
+    
   }
-}
-getPeriodosAlertas <- function(codigoAlerta){
-  periodos <- switch (toString(codigoAlerta),
-                      "2025" = restriccionPeriodos(listaErrores, "BD01", "BD02A", c("CCR", "CCR_C", "OSD", "TCUO")),
-                      "2026" = restriccionPeriodos(listaErrores, "BD01", "BD02A", c("CCR", "CCR_C", "OSD", "TCUO_C")),
-                      "2027" = restriccionPeriodos(listaErrores, "BD01", "BD02B", c("CCR", "CCR_C", "MORG", "MCUO"))
-  )
-  return(periodos)
-}
-getcodigoAlerta    <- function(BD){
-  cod <- switch (BD,
-                 BD01 = c(2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2022),
-                 BD04 = c(2030, 2031, 2032, 2033, 2034)
-  )
-  return(cod)
-}
 
-elegiralertasBD <- function(BD, cod, ruta){
-  #La "ruta" puede ser también periodos
-  if (BD == "BD01"){
-    alerta <- switch (toString(cod),
-                      "2003"= alertMontosuperiorSector(ruta),
-                      "2004"= alertMontosuperiorOcupaciones(ruta),
-                      "2005"= alertTea(ruta),
-                      "2006"= alertDiasGracia(ruta),
-                      "2007"= alertMontOtorsuperiorCapitalVig(ruta),
-                      "2008"= alertRendimientoDevengado(ruta),
-                      "2009"= alertDeudorCal(ruta),
-                      "2010"= alertDiasAtrasonegativo(ruta),
-                      "2011"= alertEsquemaAmortizaCuotaPagadas(ruta),
-                      "2012"= alertDeudorInteresDevengado(ruta),
-                      "2013"= alertCreditoInteresDevengado(ruta),
-                      "2014"= alertDeudorContableVencido(ruta),
-                      "2015"= alertCreditoContableVigente(ruta),
-                      "2016"= alertDiasAtrasoJudicial(ruta),
-                      "2017"= alertCreditoCobranzaJudicial(ruta),
-                      "2018"= alertCreditosUnicouta(ruta),
-                      "2019"= alertCreditosHipotecario(ruta),
-                      "2020"= alertCreditosProvisiones(ruta),
-                      "2022"= alertDiasAtrasoUltimaCouta(ruta)
-    )
-    return(alerta) 
+}
+elegiralertasBD             <- function(ruta, codAlerta, agente, eb){
+  if (codAlerta != 2018) {
+    if (getBDFromRuta(ruta) == "BD01") {
+      
+      alerta <- switch (toString(codAlerta),
+                        "1000"= alert1000(ruta),
+                        "1001"= alert1001(ruta),
+                        "1002"= alert1002(ruta),
+                        "2000"= alert2000(ruta),
+                        "2001"= alert2001(ruta),
+                        "2002"= alert2002(ruta),
+                        "2003"= alert2003(ruta),
+                        "2004"= alert2004(ruta),
+                        "2005"= alert2005(ruta),
+                        "2006"= alert2006(ruta),
+                        "2007"= alert2007(ruta),
+                        "2008"= alert2008(ruta),
+                        "2009"= alert2009(ruta),
+                        "2010"= alert2010(ruta),
+                        "2011"= alert2011(ruta),
+                        "2012"= alert2012(ruta),
+                        "2013"= alert2013(ruta),
+                        "2014"= alert2014(ruta),
+                        "2015"= alert2015(ruta, agente),
+                        "2016"= alert2016(ruta),
+                        "2017"= alert2017(ruta),
+                        "2023"= alert2023(ruta, eb),
+                        "2025"= alert2025(ruta))
+      return(alerta)
+      
+    }
+    if (getBDFromRuta(ruta) == "BD02A") {
+      
+      alerta <- switch (toString(codAlerta),
+                        "1002"= alert1002(ruta),
+                        "2024"= alert2024(ruta))
+      return(alerta)
+      
+    }
+    if (getBDFromRuta(ruta) == "BD02B") {
+      alerta <- alert1004(ruta)
+      return(alerta)
+    }
+    if (getBDFromRuta(ruta) == "BD03A"){
+      alerta <- switch (toString(codAlerta),
+                        "2019"= alert2019(ruta, agente),
+                        "2020"= alert2020(ruta),
+                        "2026"= alert2026(ruta))
+      return(alerta)
+    }
+    if (getBDFromRuta(ruta) == "BD04") {
+      
+      alerta <- switch (toString(cod),
+                        "1005"= alert1005(ruta),
+                        "1007"= alert1007(ruta),
+                        "2021"= alert2021(ruta),
+                        "2022"= alert2022(ruta))
+      return(alerta)
+      
+    } 
   }
-  if (BD == "BD02"){
-    alerta <- switch (toString(cod),
-                      "2025"= alertMontosuperiorOcupaciones2("BD02A", ruta),
-                      "2026"= alertMontosuperiorOcupaciones2("BD02B", ruta),
-                      "2027"= alertMontOrtorgadoCronograma(ruta)
-    )
+  else{
+    alerta <- alert2018(getAnoMesFromRuta(ruta), agente)
     return(alerta)
   }
-  if (BD == "BD04"){
-    alerta <- switch (toString(cod),
-                      "2030"= alertCreditosEfectivo(ruta),
-                      "2031"= alertCreditosAntesDesembolso(ruta),
-                      "2032"= alertMontosuperiorOcupaciones3(getAnoMes(ruta)),
-                      "2033"= alertFechaDesembolsoCancelacion(ruta),
-                      "2034"= alertNumeroCanceladosyOriginales(ruta)
-    )
-    return(alerta)
-  }
 }
-
-
+getDescAlerta()  <- function(codAlerta){
+  descr <- initRepositorioAlertas() %>% filter(CodAlerta == codAlerta) %>% pull(Descripcion)
+  return(descr)
+}
 
 #Alertas PLAFT ----
 
@@ -154,26 +198,21 @@ alert1000 <- function(ruta) {
   return(alerta)
 }
 alert1001 <- function(ruta) {
-  
-  alerta <- quitarVaciosBD(ruta) %>% 
+  quitarVaciosBD(ruta) %>% 
     filter(as.numeric(SEC) %in% c(3,6,8,9,10) & as.numeric(MORG) > 27778) %>%
-    pull(getCodigoBD("BD01"))
-  
-  return(alerta)
+    pull(getCodigoBD("BD01")) %>% 
+    return()
 }
 alert1002 <- function(ruta) {
-  
-  alert <-  quitarVaciosBD(ruta) %>% 
+  quitarVaciosBD(ruta) %>% 
     filter(CCR %in% getOcupacionesAltoRiesgo(ruta) & as.numeric(MORG) > 138889) %>%
     pull(getCodigoBD("BD01")) %>%
     return()
 }
 alert1003 <- function(ruta) {
-  
-  alert <-  quitarVaciosBD(ruta) %>% 
+  quitarVaciosBD(ruta) %>% 
     filter(CCR %in% getOcupacionesAltoRiesgo(ruta) & as.numeric(TCUO) > 27778) %>%
-    pull(getCodigoBD("BD02A")) %>%
-    unique() %>% 
+    pull(getCodigoBD("BD02A")) %>% unique() %>% 
     return()
 }
 alert1004 <- function(ruta) {
@@ -270,34 +309,34 @@ asignarProvisionCG <- function(cal, claseGarantia) {
 
 alert2000 <- function(ruta) {
   quitarVaciosBD(ruta) %>% 
-    filter(as.numeric(TEA) < 1) %>% pull(getCodigoBD("BD01")) %>% 
+    filter(as.numeric(TEA) < 1) %>% pull(CCR) %>% 
     return()
 }
 alert2001 <- function(ruta) {
   quitarVaciosBD(ruta) %>% 
-    filter(as.numeric(DGR) > 90) %>% pull(getCodigoBD("BD01")) %>% 
+    filter(as.numeric(DGR) > 90) %>% pull(CCR) %>% 
     return() 
 }
 alert2002 <- function(ruta) {
   quitarVaciosBD(ruta) %>% 
-    filter(as.numeric(MORG) >= as.numeric(SKCR)) %>% pull(getCodigoBD("BD01")) %>%
+    filter(as.numeric(MORG) >= as.numeric(SKCR)) %>% pull(CCR) %>%
     return()
 }
 alert2003 <- function(ruta) {
   quitarVaciosBD(ruta) %>%
     filter(CAL %in% c(3,4) & (as.numeric(KRF)> 0 | as.numeric(KJU)> 0) & as.numeric(SIN)> 0) %>%
-    pull(getCodigoBD("BD01")) %>%
+    pull(CCR) %>%
     return() 
 }
 alert2004 <- function(ruta) {
   
-  deudores   <- quitarVaciosBD(ruta) %>% select(CIS) 
+  deudores <- quitarVaciosBD(ruta) %>% select(CIS) 
   
   alerta <- tibble(Deudor = unique(deudores[duplicated(deudores), ])) %>% 
     rowwise() %>% 
     mutate(NumeroCalificaciones = quitarVaciosBD(ruta) %>%
-             filter(CIS %in% Deudor) %>% 
-             pull(CAL) %>% unique() %>% length()) %>% 
+                                    filter(CIS %in% Deudor) %>% 
+                                    pull(CAL) %>% unique() %>% length()) %>% 
     filter(NumeroCalificaciones > 1) %>%
     pull(Deudor)
   
@@ -305,8 +344,7 @@ alert2004 <- function(ruta) {
 }
 alert2005 <- function(ruta) {
   quitarVaciosBD(ruta) %>%
-    filter(as.numeric(DAKR) < 0) %>%
-    pull(getCodigoBD("BD01")) %>%
+    filter(as.numeric(DAKR) < 0) %>% pull(CCR) %>%
     return() 
 }
 alert2006 <- function(ruta) {
@@ -342,7 +380,7 @@ alert2010 <- function(ruta) {
 alert2011 <- function(ruta) {
   quitarVaciosBD(ruta) %>%
     filter(as.numeric(DAK) > 120 & as.numeric(KJU) == 0) %>%
-    pull(getCodigoBD("BD01")) %>%
+    pull(CCR) %>%
     return()
 }
 alert2012 <- function(ruta) {
@@ -354,7 +392,7 @@ alert2012 <- function(ruta) {
 alert2013 <- function(ruta) {
   quitarVaciosBD(ruta) %>%
     filter(as.numeric(ESAM) %in% c(1,2) & (dmy(BD %>% pull(FVEG)) - dmy(BD %>% pull(FOT))) > 365) %>%
-    pull(getCodigoBD("BD01")) %>%
+    pull(CCR) %>%
     return()
 }
 alert2014 <- function(ruta) {
@@ -388,7 +426,7 @@ alert2017 <- function(ruta) {
   # 
   # FCAN - FVEP == DAKR ???
 }
-alert2018 <- function(periodo, agente){
+alert2018 <- function(periodo, agente) {
   
   creditosComun <- intersect(quitarVaciosBD(getRuta(getCarpetaFromAgent(agente),paste(getCoopacFromAgent(agente), "BD01", periodo, sep = "_"))) %>%
                                pull(CCR),
@@ -410,7 +448,7 @@ alert2018 <- function(periodo, agente){
     pull(CCR) %>% unique() %>% 
     return()
 }
-alert2019 <- function(ruta, agente){
+alert2019 <- function(ruta, agente) {
   
   BD01 <- quitarVaciosBD(ruta) %>% 
     filter(CCR %in% getCreditosConGarantia(agente, getAnoMesFromRuta(ruta))) %>% 
@@ -443,7 +481,7 @@ alert2021 <- function(ruta) {
 alert2022 <- function(ruta) {
   quitarVaciosBD(ruta) %>%
     filter(as.numeric(NCPR_C) == as.numeric(NCPA_C)) %>%
-    pull(getCodigoBD("BD04")) %>%
+    pull(CCR_C) %>%
     return()
 }
 alert2023 <- function(ruta, eb) {
@@ -454,8 +492,7 @@ alert2023 <- function(ruta, eb) {
     alertSaldos <- tibble(Columna = saldosCols) %>% rowwise() %>%
       mutate(verificarSaldos = BD %>% 
                                 filter(as.numeric(cgrep(BD, Columna)[[1]]) <0) %>% 
-                                pull(CCR) %>% toString(),
-             Cod             = 461) %>%
+                                pull(CCR) %>% toString()) %>%
       filter(verificarSaldos != "")
     
     return(alertSaldos)
@@ -477,7 +514,7 @@ alert2025 <- function(ruta) {
 alert2026 <- function(ruta) {
   quitarVaciosBD(ruta) %>% 
     filter(as.numeric(NCR) > 0, as.numeric(NRCL) == 0) %>%
-    pull(getCodigoBD("BD03A")) %>%
+    pull(CODGR) %>%
     unique() %>% 
     return()
 }
