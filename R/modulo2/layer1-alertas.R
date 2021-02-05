@@ -6,25 +6,25 @@ layer1_Alertas <- function(agente, eb){
   return(eb)
 }
 
-procesarAlertas  <- function(exigibles, BD, codAlerta){
-  tb <- tibble(CodigoAlerta = getcodigoAlerta(BD)) %>% rowwise() %>%
-    mutate(Archivos = list(getArchivosExigiblesAlertas(exigibles, CodigoAlerta)))
-  
-  alertas <- tibble(NombreArchivo = unlist(tb %>% filter(CodigoAlerta == cod) %>% pull(Archivos))) %>% rowwise() %>%
-    mutate(BDCC = BD,
-           Ruta = getRuta(getCarpeta(header), NombreArchivo), 
-           Alerta = ifelse(cod == 2032,
-                           elegiralertasBD(BDCC, cod, Ruta),
-                           generarDetalleError2(Ruta, elegiralertasBD(BDCC, cod, Ruta)))) %>% 
-    pull(Alerta)
-  return(alertas)
-}
-procesarAlertas2 <- function(cod){
-  tb <- tibble(Periodos = getPeriodosAlertas(2025)) %>% rowwise() %>%
-    mutate(Alerta = generarDetalleError4(Periodos, elegiralertasBD("BD02", cod, Periodos))) %>% 
-    pull(Alerta)
-  return(tb)
-}
+# procesarAlertas  <- function(exigibles, BD, codAlerta){
+#   tb <- tibble(CodigoAlerta = getcodigoAlerta(BD)) %>% rowwise() %>%
+#     mutate(Archivos = list(getArchivosExigiblesAlertas(exigibles, CodigoAlerta)))
+#   
+#   alertas <- tibble(NombreArchivo = unlist(tb %>% filter(CodigoAlerta == cod) %>% pull(Archivos))) %>% rowwise() %>%
+#     mutate(BDCC = BD,
+#            Ruta = getRuta(getCarpeta(header), NombreArchivo), 
+#            Alerta = ifelse(cod == 2032,
+#                            elegiralertasBD(BDCC, cod, Ruta),
+#                            generarDetalleError2(Ruta, elegiralertasBD(BDCC, cod, Ruta)))) %>% 
+#     pull(Alerta)
+#   return(alertas)
+# }
+# procesarAlertas2 <- function(cod){
+#   tb <- tibble(Periodos = getPeriodosAlertas(2025)) %>% rowwise() %>%
+#     mutate(Alerta = generarDetalleError4(Periodos, elegiralertasBD("BD02", cod, Periodos))) %>% 
+#     pull(Alerta)
+#   return(tb)
+# }
 
 getArchivosExigiblesAlertas <- function(exigibles, codAlerta){
   
