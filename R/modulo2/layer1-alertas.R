@@ -143,7 +143,6 @@ getOcupacionesAltoRiesgo <- function(ruta){
   }
 }
 
-
 alert1000 <- function(ruta) {
   
   alerta <- quitarVaciosBD(ruta) %>% 
@@ -241,64 +240,50 @@ alert2006 <- function(ruta) {
     pull(getCodigoBD("BD01")) %>%
     return()
 }
-alertDeudorInteresDevengado      <- function(ruta, BD = evalFile(ruta)){
-  BD %>%
+alert2007 <- function(ruta) {
+  quitarVaciosBD(ruta) %>%
     filter((CAL %in% c(3,4)) & as.numeric(SIN) > 0) %>%
     pull(CIS) %>%
     return()
 }
-
-# Codigo 2013
-alertCreditoInteresDevengado     <- function(ruta, BD = evalFile(ruta)){
-  BD %>%
-    filter((as.numeric(KRF) >0 | as.numeric(KVE) >0 | as.numeric(KJU) >0) & as.numeric(SIN) > 0) %>%
+alert2008 <- function(ruta) {
+  quitarVaciosBD(ruta) %>%
+    filter((as.numeric(KRF)> 0 | as.numeric(KVE)> 0 | as.numeric(KJU)> 0) & as.numeric(SIN)> 0) %>%
     pull(getCodigoBD("BD01")) %>%
     return()
 }
-
-# Codigo 2014
-alertDeudorContableVencido       <- function(ruta, BD = evalFile(ruta)){
-  BD %>%
+alert2009 <- function(ruta) {
+  quitarVaciosBD(ruta) %>%
     filter((CAL %in%  c(0,1)) & as.numeric(KVE) > 0) %>%
     pull(CIS) %>%
     return()
 }
-
-# Codigo 2015
-alertCreditoContableVigente      <- function(ruta, BD = evalFile(ruta)){
-  BD %>%
+alert2010 <- function(ruta) {
+  quitarVaciosBD(ruta) %>%
     filter((CAL %in%  c(3,4)) & as.numeric(KVI) > 0) %>%
     pull(CIS) %>%
     return()
 }
-
-# Codigo 2016
-alertDiasAtrasoJudicial          <- function(ruta, BD = evalFile(ruta)){
-  BD %>%
+alert2011 <- function(ruta) {
+  quitarVaciosBD(ruta) %>%
     filter(as.numeric(DAK) > 120 & as.numeric(KJU) == 0) %>%
     pull(getCodigoBD("BD01")) %>%
     return()
 }
-
-# Codigo 2017
-alertCreditoCobranzaJudicial     <- function(ruta, BD = evalFile(ruta)){
-  BD %>%
-    filter(as.numeric(KJU) > 0 & (CAL %in%  c(0,1,2))) %>%
+alert2012 <- function(ruta) {
+  quitarVaciosBD(ruta) %>%
+    filter(as.numeric(KJU) > 0 & (CAL %in% c(0,1,2))) %>%
     pull(CIS) %>%
     return()
 }
-
-# Codigo 20218
-alertCreditosUnicouta            <- function(ruta, BD = evalFile(ruta)){
-  BD %>%
+alert2013 <- function(ruta) {
+  quitarVaciosBD(ruta) %>%
     filter(as.numeric(ESAM) %in% c(1,2) & (dmy(BD %>% pull(FVEG)) - dmy(BD %>% pull(FOT))) > 365) %>%
     pull(getCodigoBD("BD01")) %>%
     return()
 }
-
-# Codigo 2019
-alertCreditosHipotecario         <- function(ruta, BD = evalFile(ruta)){
-  BD %>%
+alert2014 <- function(ruta) {
+  quitarVaciosBD(ruta) %>%
     filter(as.numeric(TCR) != 13 & (dmy(BD %>% pull(FVEG)) - dmy(BD %>% pull(FOT))) > 3650) %>%
     pull(getCodigoBD("BD01")) %>%
     return()
