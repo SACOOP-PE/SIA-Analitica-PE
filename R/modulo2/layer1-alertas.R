@@ -6,27 +6,66 @@ layer1_Alertas <- function(agente, eb){
   return(eb)
 }
 
-# procesarAlertas  <- function(exigibles, BD, codAlerta){
-#   tb <- tibble(CodigoAlerta = getcodigoAlerta(BD)) %>% rowwise() %>%
-#     mutate(Archivos = list(getArchivosExigiblesAlertas(exigibles, CodigoAlerta)))
-#   
-#   alertas <- tibble(NombreArchivo = unlist(tb %>% filter(CodigoAlerta == cod) %>% pull(Archivos))) %>% rowwise() %>%
-#     mutate(BDCC = BD,
-#            Ruta = getRuta(getCarpeta(header), NombreArchivo), 
-#            Alerta = ifelse(cod == 2032,
-#                            elegiralertasBD(BDCC, cod, Ruta),
-#                            generarDetalleError2(Ruta, elegiralertasBD(BDCC, cod, Ruta)))) %>% 
-#     pull(Alerta)
-#   return(alertas)
-# }
-# procesarAlertas2 <- function(cod){
-#   tb <- tibble(Periodos = getPeriodosAlertas(2025)) %>% rowwise() %>%
-#     mutate(Alerta = generarDetalleError4(Periodos, elegiralertasBD("BD02", cod, Periodos))) %>% 
-#     pull(Alerta)
-#   return(tb)
-# }
+detectarAlertasPLAFT         <- function(agente, eb){
+  carpeta   <- getCarpetaFromAgent(agente)
+  exigibles <- getArchivosNoObservadosByCols(agente, eb, c("CCR","CCR_C","CODGR"))
+  
+  codAlerta <- c(1000:1007)
+  
+  for (i in 1:length(codAlerta)) {
+    eb <- procesarAlertas(getArchivosExigiblesAlertas(exigibles, codAlerta[i], agente, eb),
+                          codAlerta[i], 
+                          agente, eb)
+  }
+  return(eb)
+}
+detectarAlertasPrudenciales  <- function(agente, eb){
+  carpeta   <- getCarpetaFromAgent(agente)
+  exigibles <- getArchivosNoObservadosByCols(agente, eb, c("CCR","CCR_C","CODGR"))
+  
+  codAlerta <- c(2000:2026)
+  
+  for (i in 1:length(codAlerta)) {
+   eb <- procesarAlertas(getArchivosExigiblesAlertas(exigibles, codAlerta[i], agente, eb),
+                         codAlerta[i], 
+                         agente, eb)
+  }
+  return(eb)
+}
 
-getArchivosExigiblesAlertas <- function(exigibles, codAlerta){
+procesarAlertas <- function(exigiblesAlerta, codAlerta,agente, eb){
+  
+  if (length(exigiblesAlerta) >0 & codAlerta != 2018) {
+    
+    alertas <- tibble(Nombre = exigiblesAlerta) %>% rowwise() %>% 
+      mutate(ruta      = getRuta(carpeta, Nombre),
+             CodCoopac = getCoopacFromRuta(ruta),
+             IdProceo  = getIdProcesoFromAgent(agente),
+             BD        = getBDFromRuta(ruta),
+             Periodo   = getAnoMesFromRuta(ruta),
+             Alert     = seleccionarAlertasBD(ruta, codAlerta, agente, eb) %>% toString()
+             ) %>% 
+      filter(Alert != "") %>% 
+      pull(Alert)
+    
+    if (nrow(alertas) >0) {
+      chunkAlert <- alertas %>% rowwise() %>% 
+        mutate(Cod = codAlerta,
+               txt1 = Alert,
+               num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%  
+        select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
+      
+      eb <- eb %>% addError(chunkAlert)
+    }
+    return(eb)
+  }
+  else{
+    
+  }
+  return(eb)
+}
+
+getArchivosExigiblesAlertas <- function(exigibles, codAlerta, agente, eb){
   
   if (codAlerta %in% c(1000:1002, 2000:2017, 2024,2025)){
     
@@ -75,6 +114,10 @@ getArchivosExigiblesAlertas <- function(exigibles, codAlerta){
     return(archivos)
     
   }
+  if (codAlerta == 2018) {
+    periodos <- getPeriodosNoObservados(agente, eb, "CCR")
+    return(periodos)
+  }
   if (codAlerta %in% c(2019,2020, 2026)) {
     
     archivos <- switch (toString(codAlerta),
@@ -101,7 +144,7 @@ getArchivosExigiblesAlertas <- function(exigibles, codAlerta){
   }
 
 }
-elegiralertasBD             <- function(ruta, codAlerta, agente, eb){
+seleccionarAlertasBD        <- function(ruta, codAlerta, agente, eb){
   if (codAlerta != 2018) {
     if (getBDFromRuta(ruta) == "BD01") {
       
@@ -167,9 +210,23 @@ elegiralertasBD             <- function(ruta, codAlerta, agente, eb){
     return(alerta)
   }
 }
-getDescAlerta()  <- function(codAlerta){
+getDescAlerta               <- function(codAlerta){
   descr <- initRepositorioAlertas() %>% filter(CodAlerta == codAlerta) %>% pull(Descripcion)
   return(descr)
+}
+createBucketAlert           <- function(agente) {
+  eb <- tibble(CodCoopac = agente %>% pull(Coopac) %>% first(),
+               IdProceso  = agent %>% pull(IdProceso) %>% first(), 
+               Cod = 100,
+               Periodo = "",
+               BD = "",
+               txt1 = "",
+               txt2 = "",
+               txt3 = "",
+               num1 = 0,
+               num2 = 0,
+               num3 = 0) 
+  return(eb)
 }
 
 #Alertas PLAFT ----
