@@ -24,18 +24,23 @@ detectarAlertasPrudenciales  <- function(agente, eb){
   exigibles <- getArchivosNoObservadosByCols(agente, eb, c("CCR","CCR_C","CODGR"))
   
   codAlerta <- c(2000:2026)
+  exigiblesAlertas <- exigibles[str_detect(exigibles, 
+                                           paste(as.character(global.alcance[global.alcance >=202001 &
+                                                                             global.alcance <= agent %>% pull(PeriodoFinal)]), collapse = '|'))]
   
   for (i in 1:length(codAlerta)) {
-   eb <- procesarAlertas(getArchivosExigiblesAlertas(exigibles, codAlerta[i], agente, eb),
+   eb <- procesarAlertas(getArchivosExigiblesAlertas(exigiblesAlertas, codAlerta[i], agente, eb),
                          codAlerta[i], 
                          agente, eb)
   }
   return(eb)
 }
 
+
+#Funciones secundarias
 procesarAlertas <- function(exigiblesAlerta, cod, agente, eb){
   
-  if (length(exigiblesAlerta) >0 & cod != 2018) {
+  if (cod != 2018 & length(exigiblesAlerta) >0) {
     
     alertas <- tibble(Nombre = exigiblesAlerta) %>% rowwise() %>% 
       mutate(ruta      = getRuta(carpeta, Nombre),
@@ -59,7 +64,7 @@ procesarAlertas <- function(exigiblesAlerta, cod, agente, eb){
     }
     return(eb)
   }
-  if (length(exigiblesAlerta) >0 & cod == 2018) {
+  if (cod == 2018 & length(exigiblesAlerta) >0) {
     
     alertas <- tibble(Periodo = exigiblesAlerta) %>% rowwise() %>% 
       mutate(CodCoopac = getCoopacFromAgent(agente),
@@ -81,7 +86,7 @@ procesarAlertas <- function(exigiblesAlerta, cod, agente, eb){
     }
     return(eb)
   }
-
+  return(eb)
 }
 
 getArchivosExigiblesAlertas <- function(exigibles, cod, agente, eb){
@@ -137,7 +142,7 @@ getArchivosExigiblesAlertas <- function(exigibles, cod, agente, eb){
     periodos <- getPeriodosNoObservados(agente, eb, "CCR")
     return(periodos)
   }
-  if (cod %in% c(2019,2020, 2026)) {
+  if (cod %in% c(2019, 2020, 2026)) {
     
     archivos <- switch (toString(cod),
                         "2019"= getArchivosNoObservadosByCols(agente, eb, c("CAL", "PCI", "SKCR", "CGR")),

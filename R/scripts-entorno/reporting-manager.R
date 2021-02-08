@@ -56,11 +56,11 @@ formatBucket <- function(eb) {
                                                  )
                                          )
                                  ),
-           Categoria  = initRepositorioErrores() %>% filter(Cod == Cod) %>% pull(Categoria),
-           Criticidad = initRepositorioErrores() %>% filter(Cod == Cod) %>% pull(Criticidad),
-           Tipo       = initRepositorioErrores() %>% filter(Cod == Cod) %>% pull(Tipo)
+           Categoria  = getCateError(Cod),
+           Criticidad = getCritError(Cod),
+           Tipo       = "Error"
            ) %>% 
-    select(Periodo, BD, Cod, Tipo, Descripcion, Catergoria, Criticidad) %>% 
+    select(Periodo, BD, Cod, Tipo, Descripcion, Categoria, Criticidad) %>% 
     arrange(Periodo, Cod)
   
   return(output)
@@ -71,6 +71,15 @@ getDescError   <- function(CodError) {
   descr <- initRepositorioErrores() %>% filter(Cod == CodError) %>% pull(Descripcion)
   return(descr)
 }
+getCateError   <- function(CodError) {
+  categoria <- initRepositorioErrores() %>% filter(Cod == CodError) %>% pull(Categoria)
+  return(categoria)
+}
+getCritError   <- function(CodError) {
+  criticidad <- initRepositorioErrores() %>% filter(Cod == CodError) %>% pull(Criticidad)
+  return(criticidad)
+}
+
 cutStringError <- function(num1, txt1) {
   if (num1 > 100) {
     txt1 <- str_split(txt1, ",") %>% unlist()
@@ -80,6 +89,7 @@ cutStringError <- function(num1, txt1) {
   }
   else{return(txt1)}
 }
+
 
 #Descr periodos
 pad2            <- function(n) {
@@ -93,6 +103,8 @@ periodoEscrito  <- function(periodo) {
   return(paste(m, "del", substr(periodo, 1, 4)))
 }
 
+
+#Exportar reportes
 saveOutputs <- function(agente, ebFormat) {
   list_of_datasets <- list("agente" = agente, "bucketOficio" = ebFormat)
   
