@@ -1,7 +1,6 @@
 formatBucket <- function(eb) {
   
-  output <- eb %>% 
-    rowwise() %>% 
+  output <- eb %>% rowwise() %>% 
     mutate(num1 = if_else(num1< 1000, 
                           pad2(num1), 
                           format(num1, big.mark = ",", small.interval = 3)),
@@ -56,15 +55,18 @@ formatBucket <- function(eb) {
                                                          )
                                                  )
                                          )
-                                 )
+                                 ),
+           Categoria  = initRepositorioErrores() %>% filter(Cod = Cod) %>% pull(Categoria),
+           Criticidad = initRepositorioErrores() %>% filter(Cod = Cod) %>% pull(Criticidad),
+           Tipo       = initRepositorioErrores() %>% filter(Cod = Cod) %>% pull(Tipo)
            ) %>% 
-    select(Periodo, BD, Cod, Descripcion) %>% 
+    select(Periodo, BD, Cod, Tipo, Descripcion, Catergoria, Criticidad) %>% 
     arrange(Periodo, Cod)
   
   return(output)
 }
 
-#Desc códigos
+#Descr larga
 getDescError   <- function(CodError) {
   descr <- initRepositorioErrores() %>% filter(Cod == CodError) %>% pull(Descripcion)
   return(descr)

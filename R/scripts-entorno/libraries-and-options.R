@@ -28,7 +28,7 @@ default.bd      <- c("BD01","BD02A","BD02B","BD03A","BD03B","BD04")
 
 ### 6. Inicializar archivos de configuracion ----
 
-initCuadreContable <- function(){
+initCuadreContable     <- function(){
   read_delim(archivo.CuadreContable,
              "\t", escape_double = FALSE, 
              col_types = cols(C1403 = col_double(),
@@ -38,7 +38,6 @@ initCuadreContable <- function(){
                               PeriodoId_1 = col_skip()),
              trim_ws = TRUE) %>% return()
 }
-
 initEstructuraBase     <- function(){ 
   read_delim(archivo.EstructuraBase, 
              "\t", escape_double = FALSE, col_types = cols(BD = col_character(), 
@@ -49,16 +48,20 @@ initEstructuraBase     <- function(){
 }
 initRepositorioErrores <- function(){ 
   read_delim(archivo.RepositorioErrores, 
-             "\t", escape_double = FALSE, col_types = cols(Cod = col_number(), 
-                                                           Descripcion = col_character(), 
+             "\t", escape_double = FALSE, col_types = cols(Cod = col_number(),
+                                                           Tipo = col_character(),
+                                                           Descripcion = col_character(),
+                                                           Categoria = col_character(), 
                                                            Criticidad = col_character()),
              locale = locale(encoding = "ISO-8859-1"), progress = F)  %>%
     return()
 }
 initRepositorioAlertas <- function(){
   read_delim(archivo.RepositorioAlertas, 
-             "\t", escape_double = FALSE, col_types = cols(CodAlerta   = col_number(), 
-                                                           Descripcion = col_character()),
+             "\t", escape_double = FALSE, col_types = cols(Cod         = col_number(),
+                                                           Tipo        = col_character(),
+                                                           Descripcion = col_character(),
+                                                           Criticidad  = col_character()),
              locale = locale(encoding = "ISO-8859-1"), progress = F)  %>%
     return()
 }

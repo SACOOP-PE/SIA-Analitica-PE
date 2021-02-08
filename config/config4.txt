@@ -1,36 +1,36 @@
-CodAlerta	Descripcion
-1000	Se identificaron {0} crédito(s) con un monto original (MORG) mayor a USD 50,000 o equivalente en soles, correspondiente al periodo {1}.
-1001	Se identificaron {0} crédito(s) con un monto original mayor (MORG) a USD 100,000 o equivalente en soles, para los sectores de alto riesgo (SEC: 3,6,8,9,10), correspondiente al periodo {1}.
-1002	Se identificaron {0} crédito(s) con un monto original mayor (MORG) a USD 500,000 o equivalente en soles, realizados por deudores con ocupaciones de alto riesgo (OSD: 1,2,5,9), correspondiente al periodo {1}.
-1003	Se identificaron {0} cronograma(s) de la cartera de créditos con un importe mayor a USD 100,000 o equivalente en soles realizados por deudores con ocupaciones de alto riesgo (OSD: 1,2,5,9), correspondiente al periodo {1}.
-1004	Se identificaron {0} cronograma(s) de crédito(s) cancelado(s) con un importe mayor a USD 100,000 o equivalente en soles realizados por deudores con ocupaciones de alto riesgo (OSD: 1,2,5,9), correspondiente al periodo {1}.
-1005	Se identificaron {0} crédito(s) cancelado(s) con fondos en efectivo superiores a los USD 100,000 o equivalente en soles, correspondiente al periodo {1}.
-1006	Se identificaron {0} crédito(s) cancelado(s) con fondos en efectivo superiores a los USD 1 MM o equivalente en soles, que se hayan producido antes de los 30 días de haber sido desembolsados, correspondiente al periodo {1}.
-1007	Se identificaron {0} crédito(s) cancelado(s)  con un importe mayor a USD 1 MM o equivalente en soles realizados por deudores con ocupaciones de alto riesgo (OSD: 1,2,5,9), correspondiente al periodo {1}.
-2000	Se identificaron {0} crédito(s) con TEA menor al 1.00 % por un saldo de colocaciones de {1}, en el periodo de {2}.
-2001	Se identificaron {0} crédito(s) con días de gracia mayor a 90 días en la cartera de créditos con un saldo de colocaciones de S/. {1}, correspondiente al periodo {2}.
-2002	Se identificaron {0} crédito(s) con el monto original de crédito menor al saldo pendiente de pago en la cartera de créditos correspondiente al periodo {1}. 
-2003	Se identificaron {0} crédito(s) en situación contable refinanciada, judicial y con clasificación dudoso o pérdida, que están reportando rendimientos devengados por un saldo de {1}, correspondiente al periodo {2}.
-2004	Se identificaron {0} deudor(es) con más de una calificación correspondiente al periodo {1}.
-2005	Se identificaron {0} crédito(s) con días de atraso reales al cierre de la última cuota pagada negativos, con un saldo de colocaciones de S/. {1}, correspondiente al periodo {2}.
-2006	Se identificaron {0} crédito(s) con un esquema de amortización en cuotas que reporta un número cuotas pactadas igual a 1, con un saldo de colocaciones de S/. {1}, correspondiente al periodo {2}.
-2007	Se identificaron {0} deudor(es) con calificación dudosa o pérdida que generan intereses devengados por un saldo de {1}, con un saldo de colocaciones de S/. {1}, correspondiente al periodo {2}.
-2008	Se identificaron {0} crédito(s) en situación contable refinanciado, judicial y vencidos, que reportan intereses devengados, con un saldo de colocaciones de S/. {1}, correspondiente al periodo {2}.
-2009	Se identificaron {0} deudor(es) no minoristas con calificación normal en situación contable vencido, con un saldo de colocaciones de S/. {1}, correspondiente al periodo {2}.
-2010	Se identificaron {0} crédito(s) con calificación dudoso o pérdida en situación contable vigente con un saldo de colocaciones S/ {1}, correspondiente al periodo {2}.
-2011	Se identificaron {0} crédito(s) con días de atraso al cierre mayor a 120 días que no están en situación contable judicial con un saldo de colocaciones de S/ {1}, correspondiente al periodo {2}.
-2012	Se identificaron {0} crédito(s) en situación contable judicial que tienen una calificación normal, CPP o deficiente con un saldo de colocaciones S/ {1}, correspondiente al periodo {2}.
-2013	Se identificaron {0} crédito(s) con un esquema de amortización unicuota, que presentan fecha de cancelación pactada más de un año con un saldo de colocaciones S/ {1}, correspondiente al periodo {2}.
-2014	Se identificaron {0} crédito(s) que no son hipotecarios con una atigüedad mayor a 10 años, con un saldo de colocaciones de S/. {1}, correspondiente al periodo {2}.
-2015	Se identificaron {0} crédito(s) sin garantía, que presentan tasas de provisiones distintas a los establecidos en la Rs. 11356, correspondiente al periodo {1}.
-2016	Se identificaron {0} crédito(s) minoristas con días de atraso al cierre de mes que no concuerdan con su calificación, con un saldo de colocaciones de S/. {1}, correspondiente al periodo {2}.
-2017	Se identificaron {0} crédito(s) con días de atraso reales al cierre de la última cuota pagada que no fueron calculados desde la última cuota pagada, con un saldo de colocaciones de S/. {1}, correspondiente al periodo {2}.
-2018	Se identificaron {0} crédito(s) en la cartera con un monto original mayor al capital por cobrar en los cronogramas con una diferencia de S/. {1}, correspondiente al periodo {2}.
-2019	Se identificaron {0} crédito(s) con una diferencia de provisiones de {1} %, requeridas en el Anexo 5, correspondientes al periodo {2}.
-2020	Se identificaron {0} garantía(s) que coberturan más de 3 créditos a la vez y reportan el mismo importe de cobertura, correspondiente al periodo {1}.
-2021	Se identificaron {0} crédito(s) cancelados que presenta la misma fecha del desembolso y cancelación del crédito, correspondiente al periodo {1}.
-2022	Se identificaron {0} crédito(s) cancelados con adelanto de cuotas pagadas iguales al número original de cuotas de la operación, correspondiente al periodo {1}.
-2023	Se identificaron {0} crédito(s) con saldos negativos en la cartera, correspondiente al periodo {1}.
-2024	Se identificaron {0} cronograma(s) con modalidad de coutas sin periocidad o número de cuotas (NCUO)  pactadas igual a 0, con un saldo de colocaciones S/ {1}, correspondiente al periodo {2}.
-2025	Se detectaron {0} crédito(s) en situación contable vencidos con 0 días de atraso con un saldo de colocaciones de S/. {1} , correspondiente al periodo {2}.
-2026	Se identificaron {0} garantía(s) donde el número de créditos que cobertura la garantía (NCR) no está vinculado al menos a un deudor, con un monto de constitución de la garantía de S/. {1}, correspondiente al periodo {2}.
+Cod	Tipo	Descripcion	Criticidad
+1000	Alerta	"Se identificaron {0} crédito(s) con un monto original (MORG) mayor a USD 50,000 o equivalente en soles, correspondiente al periodo {1}."	Baja
+1001	Alerta	"Se identificaron {0} crédito(s) con un monto original mayor (MORG) a USD 100,000 o equivalente en soles, para los sectores de alto riesgo (SEC: 3,6,8,9,10), correspondiente al periodo {1}."	Baja
+1002	Alerta	"Se identificaron {0} crédito(s) con un monto original mayor (MORG) a USD 500,000 o equivalente en soles, realizados por deudores con ocupaciones de alto riesgo (OSD: 1,2,5,9), correspondiente al periodo {1}."	Baja
+1003	Alerta	"Se identificaron {0} cronograma(s) de la cartera de créditos con un importe mayor a USD 100,000 o equivalente en soles realizados por deudores con ocupaciones de alto riesgo (OSD: 1,2,5,9), correspondiente al periodo {1}."	Baja
+1004	Alerta	"Se identificaron {0} cronograma(s) de crédito(s) cancelado(s) con un importe mayor a USD 100,000 o equivalente en soles realizados por deudores con ocupaciones de alto riesgo (OSD: 1,2,5,9), correspondiente al periodo {1}."	Baja
+1005	Alerta	"Se identificaron {0} crédito(s) cancelado(s) con fondos en efectivo superiores a los USD 100,000 o equivalente en soles, correspondiente al periodo {1}."	Baja
+1006	Alerta	"Se identificaron {0} crédito(s) cancelado(s) con fondos en efectivo superiores a los USD 1 MM o equivalente en soles, que se hayan producido antes de los 30 días de haber sido desembolsados, correspondiente al periodo {1}."	Baja
+1007	Alerta	"Se identificaron {0} crédito(s) cancelado(s)  con un importe mayor a USD 1 MM o equivalente en soles realizados por deudores con ocupaciones de alto riesgo (OSD: 1,2,5,9), correspondiente al periodo {1}."	Baja
+2000	Alerta	"Se identificaron {0} crédito(s) con TEA menor al 1.00 % por un saldo de colocaciones de {1}, en el periodo de {2}."	Alta
+2001	Alerta	"Se identificaron {0} crédito(s) con días de gracia mayor a 90 días en la cartera de créditos con un saldo de colocaciones de S/. {1}, correspondiente al periodo {2}."	Alta
+2002	Alerta	Se identificaron {0} crédito(s) con el monto original de crédito menor al saldo pendiente de pago en la cartera de créditos correspondiente al periodo {1}. 	Alta
+2003	Alerta	"Se identificaron {0} crédito(s) en situación contable refinanciada, judicial y con clasificación dudoso o pérdida, que están reportando rendimientos devengados por un saldo de {1}, correspondiente al periodo {2}."	Alta
+2004	Alerta	Se identificaron {0} deudor(es) con más de una calificación correspondiente al periodo {1}.	Alta
+2005	Alerta	"Se identificaron {0} crédito(s) con días de atraso reales al cierre de la última cuota pagada negativos, con un saldo de colocaciones de S/. {1}, correspondiente al periodo {2}."	Alta
+2006	Alerta	"Se identificaron {0} crédito(s) con un esquema de amortización en cuotas que reporta un número cuotas pactadas igual a 1, con un saldo de colocaciones de S/. {1}, correspondiente al periodo {2}."	Alta
+2007	Alerta	"Se identificaron {0} deudor(es) con calificación dudosa o pérdida que generan intereses devengados por un saldo de {1}, con un saldo de colocaciones de S/. {1}, correspondiente al periodo {2}."	Alta
+2008	Alerta	"Se identificaron {0} crédito(s) en situación contable refinanciado, judicial y vencidos, que reportan intereses devengados, con un saldo de colocaciones de S/. {1}, correspondiente al periodo {2}."	Alta
+2009	Alerta	"Se identificaron {0} deudor(es) no minoristas con calificación normal en situación contable vencido, con un saldo de colocaciones de S/. {1}, correspondiente al periodo {2}."	Alta
+2010	Alerta	"Se identificaron {0} crédito(s) con calificación dudoso o pérdida en situación contable vigente con un saldo de colocaciones S/ {1}, correspondiente al periodo {2}."	Alta
+2011	Alerta	"Se identificaron {0} crédito(s) con días de atraso al cierre mayor a 120 días que no están en situación contable judicial con un saldo de colocaciones de S/ {1}, correspondiente al periodo {2}."	Alta
+2012	Alerta	"Se identificaron {0} crédito(s) en situación contable judicial que tienen una calificación normal, CPP o deficiente con un saldo de colocaciones S/ {1}, correspondiente al periodo {2}."	Alta
+2013	Alerta	"Se identificaron {0} crédito(s) con un esquema de amortización unicuota, que presentan fecha de cancelación pactada más de un año con un saldo de colocaciones S/ {1}, correspondiente al periodo {2}."	Alta
+2014	Alerta	"Se identificaron {0} crédito(s) que no son hipotecarios con una atigüedad mayor a 10 años, con un saldo de colocaciones de S/. {1}, correspondiente al periodo {2}."	Alta
+2015	Alerta	"Se identificaron {0} crédito(s) sin garantía, que presentan tasas de provisiones distintas a los establecidos en la Rs. 11356, correspondiente al periodo {1}."	Alta
+2016	Alerta	"Se identificaron {0} crédito(s) minoristas con días de atraso al cierre de mes que no concuerdan con su calificación, con un saldo de colocaciones de S/. {1}, correspondiente al periodo {2}."	Alta
+2017	Alerta	"Se identificaron {0} crédito(s) con días de atraso reales al cierre de la última cuota pagada que no fueron calculados desde la última cuota pagada, con un saldo de colocaciones de S/. {1}, correspondiente al periodo {2}."	Alta
+2018	Alerta	"Se identificaron {0} crédito(s) en la cartera con un monto original mayor al capital por cobrar en los cronogramas con una diferencia de S/. {1}, correspondiente al periodo {2}."	Alta
+2019	Alerta	"Se identificaron {0} crédito(s) con una diferencia de provisiones de {1} %, requeridas en el Anexo 5, correspondientes al periodo {2}."	Alta
+2020	Alerta	"Se identificaron {0} garantía(s) que coberturan más de 3 créditos a la vez y reportan el mismo importe de cobertura, correspondiente al periodo {1}."	Alta
+2021	Alerta	"Se identificaron {0} crédito(s) cancelados que presenta la misma fecha del desembolso y cancelación del crédito, correspondiente al periodo {1}."	Alta
+2022	Alerta	"Se identificaron {0} crédito(s) cancelados con adelanto de cuotas pagadas iguales al número original de cuotas de la operación, correspondiente al periodo {1}."	Alta
+2023	Alerta	"Se identificaron {0} crédito(s) con saldos negativos en la cartera, correspondiente al periodo {1}."	Alta
+2024	Alerta	"Se identificaron {0} cronograma(s) con modalidad de coutas sin periocidad o número de cuotas (NCUO)  pactadas igual a 0, con un saldo de colocaciones S/ {1}, correspondiente al periodo {2}."	Alta
+2025	Alerta	"Se detectaron {0} crédito(s) en situación contable vencidos con 0 días de atraso con un saldo de colocaciones de S/. {1} , correspondiente al periodo {2}."	Alta
+2026	Alerta	"Se identificaron {0} garantía(s) donde el número de créditos que cobertura la garantía (NCR) no está vinculado al menos a un deudor, con un monto de constitución de la garantía de S/. {1}, correspondiente al periodo {2}."	Alta
