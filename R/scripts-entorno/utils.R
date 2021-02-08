@@ -87,6 +87,7 @@ getFinProcesoFromAgent        <- function(agente){
 getAlcanceFromAgent           <- function(agente){ 
   agente %>% pull(Alcance) %>% first() %>% return()
 }
+
 getNombreCoopacFromIdCoopac   <- function(idCoopac){
   initCuadreContable() %>% filter(CodigoEntidad == idCoopac) %>% pull(Entidad) %>% first()
 }

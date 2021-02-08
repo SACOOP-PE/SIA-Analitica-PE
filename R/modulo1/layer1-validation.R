@@ -36,7 +36,7 @@ validarColumnas <- function(agente, eb){
     chunk_201 <- fal %>% rowwise() %>% 
       mutate(Cod = 201,
              txt1 = ColFaltantes, 
-             num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%  
+             num1 = length(str_split(txt1 ,pattern = ",")[[1]])) %>%  
       select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
     
     addEventLog(agente, paste0("La validación de Columnas faltantes concluyó con ", nrow(fal), " observación(es)."), "I", "B")

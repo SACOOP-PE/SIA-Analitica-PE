@@ -2,6 +2,8 @@
 ####' 0. Revisión previa del bucket de errores, y soltar advertencias.
 
 layer1_Alertas <- function(agente, eb){
+  eb <- detectarAlertasPLAFT(agente, eb)
+  eb <- detectarAlertasPrudenciales(agente, eb)
   
   return(eb)
 }
