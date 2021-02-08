@@ -7,29 +7,22 @@ layer1_Alertas <- function(agente, eb){
 }
 
 detectarAlertasPLAFT         <- function(agente, eb){
-  carpeta   <- getCarpetaFromAgent(agente)
-  exigibles <- getArchivosNoObservadosByCols(agente, eb, c("CCR","CCR_C","CODGR"))
-  
+
   codAlerta <- c(1000:1007)
   
   for (i in 1:length(codAlerta)) {
-    eb <- procesarAlertas(getArchivosExigiblesAlertas(exigibles, codAlerta[i], agente, eb),
+    eb <- procesarAlertas(getArchivosNoObservadosByCols(agente, eb, c("CCR","CCR_C","CODGR")),
                           codAlerta[i], 
                           agente, eb)
   }
   return(eb)
 }
 detectarAlertasPrudenciales  <- function(agente, eb){
-  carpeta   <- getCarpetaFromAgent(agente)
-  exigibles <- getArchivosNoObservadosByCols(agente, eb, c("CCR","CCR_C","CODGR"))
-  
+
   codAlerta <- c(2000:2026)
-  exigiblesAlertas <- exigibles[str_detect(exigibles, 
-                                           paste(as.character(global.alcance[global.alcance >=202001 &
-                                                                             global.alcance <= agent %>% pull(PeriodoFinal)]), collapse = '|'))]
-  
+    
   for (i in 1:length(codAlerta)) {
-   eb <- procesarAlertas(getArchivosExigiblesAlertas(exigiblesAlertas, codAlerta[i], agente, eb),
+   eb <- procesarAlertas(getArchivosNoObservadosByCols(agente, eb, c("CCR","CCR_C","CODGR")),
                          codAlerta[i], 
                          agente, eb)
   }
@@ -38,48 +31,32 @@ detectarAlertasPrudenciales  <- function(agente, eb){
 
 
 #Funciones secundarias
-procesarAlertas <- function(exigiblesAlerta, cod, agente, eb){
+procesarAlertas <- function(exigibles, cod, agente, eb){
+
+  carpeta   <- getCarpetaFromAgent(agente)
+  exigibles <- exigibles[str_detect(exigibles, 
+                                    paste(as.character(global.alcance[global.alcance >= 202001 &
+                                                                      global.alcance <= agent %>% pull(PeriodoFinal)]), collapse = '|'))]
+  
+  exigiblesAlerta <- getArchivosExigiblesAlertas(exigibles, cod, agente, eb)
   
   if (cod != 2018 & length(exigiblesAlerta) >0) {
     
     alertas <- tibble(Nombre = exigiblesAlerta) %>% rowwise() %>% 
-      mutate(ruta      = getRuta(carpeta, Nombre),
-             CodCoopac = getCoopacFromRuta(ruta),
-             IdProceo  = getIdProcesoFromAgent(agente),
-             BD        = getBDFromRuta(ruta),
-             Periodo   = getAnoMesFromRuta(ruta),
+      mutate(ruta      = if_else(cod != 2018, getRuta(carpeta, Nombre), ""),
+             CodCoopac = getCoopacFromAgent(agente),
+             IdProceso = getIdProcesoFromAgent(agente),
+             BD        = if_else(cod != 2018, getBDFromRuta(ruta), "BD01"),
+             Periodo   = if_else(cod != 2018, getAnoMesFromRuta(ruta), Nombre),
              Alert     = seleccionarAlertasBD(ruta, cod, agente, eb) %>% toString()
              ) %>% 
-      filter(Alert != "") %>% 
-      pull(Alert)
+      filter(Alert != "")
     
     if (nrow(alertas) >0) {
       chunkAlert <- alertas %>% rowwise() %>% 
         mutate(Cod = cod,
                txt1 = Alert,
-               num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%  
-        select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
-      
-      eb <- eb %>% addError(chunkAlert)
-    }
-    return(eb)
-  }
-  if (cod == 2018 & length(exigiblesAlerta) >0) {
-    
-    alertas <- tibble(Periodo = exigiblesAlerta) %>% rowwise() %>% 
-      mutate(CodCoopac = getCoopacFromAgent(agente),
-             IdProceo  = getIdProcesoFromAgent(agente),
-             BD        = "BD01",
-             Alert     = seleccionarAlertasBD(" ", cod, agente, eb) %>% toString()
-             ) %>% 
-      filter(Alert != "") %>% 
-      pull(Alert)
-    
-    if (nrow(alertas) >0) {
-      chunkAlert <- alertas %>% rowwise() %>% 
-        mutate(Cod = cod,
-               txt1 = Alert,
-               num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%  
+               num1 = length(str_split(string=txt1, pattern = ",")[[1]])) %>%  
         select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
       
       eb <- eb %>% addError(chunkAlert)
