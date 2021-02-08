@@ -56,9 +56,9 @@ formatBucket <- function(eb) {
                                                  )
                                          )
                                  ),
-           Categoria  = initRepositorioErrores() %>% filter(Cod = Cod) %>% pull(Categoria),
-           Criticidad = initRepositorioErrores() %>% filter(Cod = Cod) %>% pull(Criticidad),
-           Tipo       = initRepositorioErrores() %>% filter(Cod = Cod) %>% pull(Tipo)
+           Categoria  = initRepositorioErrores() %>% filter(Cod == Cod) %>% pull(Categoria),
+           Criticidad = initRepositorioErrores() %>% filter(Cod == Cod) %>% pull(Criticidad),
+           Tipo       = initRepositorioErrores() %>% filter(Cod == Cod) %>% pull(Tipo)
            ) %>% 
     select(Periodo, BD, Cod, Tipo, Descripcion, Catergoria, Criticidad) %>% 
     arrange(Periodo, Cod)

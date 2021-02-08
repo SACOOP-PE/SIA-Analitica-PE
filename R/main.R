@@ -15,11 +15,11 @@ source("R/modulo1/layer2-validation.R")
 source("R/modulo1/layer3-validation.R")
 source("R/modulo1/layer4-validation.R")
 
-# # 2. Módulo de alertas regulatorias
+# 2. Módulo de alertas regulatorias
 source("R/modulo2/layer0-alertas.R")
 # source("R/modulo2/layer1-alertas.R") #aún en desarrollo
 
-# # 3. Módulo de analisis crediticio
+# 3. Módulo de analisis crediticio
 source("R/modulo3/layer0-analysis.R")
 
 ##### Create agent -----
