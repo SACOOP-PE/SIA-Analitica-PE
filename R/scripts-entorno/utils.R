@@ -90,6 +90,10 @@ getAlcanceFromAgent           <- function(agente){
 getNombreCoopacFromIdCoopac   <- function(idCoopac){
   initCuadreContable() %>% filter(CodigoEntidad == idCoopac) %>% pull(Entidad) %>% first()
 }
+getNivelCoopacFrpomIdCoopac   <- function(idCoopac){
+  (initCuadreContable() %>% filter(CodigoEntidad == idCoopac) %>% pull(TipoEntidad) %>% unique() %>%
+     str_split(pattern = " - Nivel "))[[1]][2]
+}
 getCodigoBD                   <- function(BD){
   campoIdentif  <- switch (BD,
                            BD01  = "CCR",
