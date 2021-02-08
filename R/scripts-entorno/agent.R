@@ -6,7 +6,7 @@ createAgent  <- function(idCoopac,
   
 agente <- tibble(Coopac       = idCoopac,
                  NombreCoopac = getNombreCoopacFromIdCoopac(Coopac),
-                 NivelCoopac  = getNombreCoopacFromIdCoopac(Coopac),
+                 NivelCoopac  = getNivelCoopacFrpomIdCoopac(Coopac),
                  Carpeta      = carpeta,
                  IdProceso    = getNextIdProceso(getLogObject("logging/log.txt")),
                  Usuario      = usuario,
