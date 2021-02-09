@@ -1,9 +1,9 @@
-####' Script de análisis layer0 
-####' 0. Revisión previa del bucket de errores, y soltar advertencias.
-
-layer0_Alertas <- function(agente, eb){
+#' Funciones principales
+#' layer5(agente, eb)
+#' 
+layer5 <- function(agente, eb){
   
-  eb <- ejecutarAlertasCruceContable(agente, eb)
+  eb <- validarCruceContable(agente, eb)
   return(eb)
 }
 
@@ -146,7 +146,7 @@ getAnoMesCoopacContableFromAgente <- function(agente) {
     pull(PeriodoId) %>% unique() %>% return()
 }
 
-ejecutarAlertasCruceContable <- function(agente, eb){
+validarCruceContable              <- function(agente, eb){
   carpeta   <- getCarpetaFromAgent(agente)
   exigibles <- getArchivosNoObservadosByCols(agente, eb, c("CCR",
                                                            "KVI", "KVE", "KRF", "KJU",

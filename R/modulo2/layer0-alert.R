@@ -1,7 +1,7 @@
 ####' Script de análisis layer0 
 ####' 0. Revisión previa del bucket de errores, y soltar advertencias.
 
-layer1_Alertas <- function(agente, eb){
+layer0_Alertas <- function(agente, eb){
   eb <- detectarAlertasPLAFT(agente, eb)
   eb <- detectarAlertasPrudenciales(agente, eb)
   
@@ -45,12 +45,33 @@ procesarAlertas <- function(exigibles, cod, agente, eb){
   if (cod != 2018 & length(exigiblesAlerta) >0) {
     
     alertas <- tibble(Nombre = exigiblesAlerta) %>% rowwise() %>% 
-      mutate(ruta      = if_else(cod != 2018, getRuta(carpeta, Nombre), ""),
+      mutate(ruta      = getRuta(carpeta, Nombre),
              CodCoopac = getCoopacFromAgent(agente),
              IdProceso = getIdProcesoFromAgent(agente),
-             BD        = if_else(cod != 2018, getBDFromRuta(ruta), "BD01"),
-             Periodo   = if_else(cod != 2018, getAnoMesFromRuta(ruta), Nombre),
+             BD        = getBDFromRuta(ruta),
+             Periodo   = getAnoMesFromRuta(ruta),
              Alert     = seleccionarAlertasBD(ruta, cod, agente, eb) %>% toString()
+             ) %>% 
+      filter(Alert != "")
+    
+    if (nrow(alertas) >0) {
+      chunkAlert <- alertas %>% rowwise() %>% 
+        mutate(Cod = cod,
+               txt1 = Alert,
+               num1 = length(str_split(string=txt1, pattern = ",")[[1]])) %>%  
+        select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
+      
+      eb <- eb %>% addError(chunkAlert)
+    }
+    return(eb)
+  }
+  if (cod == 2018 & length(exigiblesAlerta) >0) {
+    
+    alertas <- tibble(Periodo = exigiblesAlerta) %>% rowwise() %>% 
+      mutate(CodCoopac = getCoopacFromAgent(agente),
+             IdProceso = getIdProcesoFromAgent(agente),
+             BD        = "BD01",
+             Alert     = alert2018(Periodo, agente) %>% toString()
              ) %>% 
       filter(Alert != "")
     
@@ -68,7 +89,7 @@ procesarAlertas <- function(exigibles, cod, agente, eb){
   return(eb)
 }
 
-getArchivosExigiblesAlertas <- function(exigibles, cod, agente, eb){
+getArchivosExigiblesAlertas <- function(exigibles, cod, agente, eb) {
   
   if (cod %in% c(1000:1002, 2000:2017, 2024,2025)){
     
@@ -147,7 +168,7 @@ getArchivosExigiblesAlertas <- function(exigibles, cod, agente, eb){
   }
 
 }
-seleccionarAlertasBD        <- function(ruta, cod, agente, eb){
+seleccionarAlertasBD        <- function(ruta, cod, agente, eb) {
   if (cod != 2018) {
     if (getBDFromRuta(ruta) == "BD01") {
       
@@ -208,12 +229,11 @@ seleccionarAlertasBD        <- function(ruta, cod, agente, eb){
       
     } 
   }
-  else{
-    alerta <- alert2018(getAnoMesFromRuta(ruta), agente)
-    return(alerta)
+  else {
+    return("")
   }
 }
-getDescAlerta               <- function(cod){
+getDescAlerta               <- function(cod) {
   descr <- initRepositorioAlertas() %>% filter(Cod == cod) %>% pull(Descripcion)
   return(descr)
 }

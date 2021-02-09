@@ -31,7 +31,7 @@
     bucket.lbl6 <- "Criticidad"
     bucket.lbl7 <- "Detalle" 
     
-    #dinÃ¡mico 
+    #dinamico 
     myhead.txt1 <- paste0(agente %>% pull(NombreCoopac) %>% first()," (",agente %>% pull(Coopac) %>% first(),")")
     myhead.txt2 <- "Nivel 2 (B)"
     myhead.txt3 <- nrow(eb)
@@ -144,6 +144,50 @@
   
  generar_reporte_T1(eb, agente)
   
+ ########################################################
+ library(tidyquant)
+ library(ggplot2)
+ library(plyr)
+ library(plotly)
+ 
+ 
+ aleat <- read_excel("C:/Users/DPacheco/Desktop/aleat.xlsx", col_types = c("text", "text", "text", "text", "numeric","text"))
+ 
+ aleat$Inconsistencias <- factor(aleat$Inconsistencias, 
+                                 levels=c("BAJA","MEDIA", "ALTA"),
+                                 labels=c("Archivo sin errores", "Archivo con errores", "Archivo con errores graves"),
+                                 ordered = T)
+ 
+ aleat$BDCC <- factor(aleat$BDCC,
+                      levels=c("BD01","BD02A","BD02B","BD03A","BD03B","BD04"),
+                      labels=c("BD01","BD02A","BD02B","BD03A","BD03B","BD04"),
+                      ordered=TRUE)
+ fct_rev(aleat$Inconsistencias)
+ aleat$dateMonth <- factor(aleat$dateMonth,
+                           levels=as.character(1:12),
+                           labels=c("Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Set","Oct","Nov","Dic"),
+                           ordered=TRUE)
+ 
+ colors <- c("dodgerblue4", "dodgerblue1", "firebrick1")
+ 
+ # ggplot(aleat, aes(dateMonth, BDCC, fill = factor(Inconsistencias))) + 
+ #   geom_tile() + 
+ #    facet_grid(dateYear~dateMonth, scales="free") +
+ #   scale_fill_manual(values=colors)
+ #   #scale_fill_gradient() +
+ #   xlab("Periodo") + labs(fill = "Criticidad") 
+ 
+ 
+ ggplot(aleat, aes(dateMonth, BDCC, fill = factor(Inconsistencias))) + 
+   geom_tile(aes(fill = factor(Inconsistencias),width=0.95, height=0.95)) + 
+   facet_wrap(vars(dateYear)) +
+   scale_fill_manual(values=colors, guide = guide_legend(reverse = TRUE))+
+   #scale_fill_gradient() +
+   xlab("") + ylab("") + labs(fill = " ") +
+   theme(legend.position=("right"), legend.title = element_text(size=10)) + 
+   theme(axis.text.y = element_text(hjust=0))
+ 
+ 
  
   
   

@@ -14,10 +14,10 @@ source("R/modulo1/layer1-validation.R")
 source("R/modulo1/layer2-validation.R")
 source("R/modulo1/layer3-validation.R")
 source("R/modulo1/layer4-validation.R")
+source("R/modulo1/layer5-validation.R")
 
 # 2. Módulo de alertas regulatorias
-source("R/modulo2/layer0-alertas.R")
-# source("R/modulo2/layer1-alertas.R") #aún en desarrollo
+source("R/modulo2/layer0-alert.R")
 
 # 3. Módulo de analisis crediticio
 source("R/modulo3/layer0-analysis.R")
@@ -29,7 +29,7 @@ agent <- createAgent(idCoopac = "01106",
 
 ##### Interrogar Modulo 1
 bucket <- interrogateAgent_mod1(agent)
-bucket <- interrogateAgent_mod2(agent, bucket)
+bucket <- interrogateAgent_mod2(agent, bucket) #alertas, aún no está listo
  
 ##### Close agent -----
 agent  <- closeAgent(agent, bucket)

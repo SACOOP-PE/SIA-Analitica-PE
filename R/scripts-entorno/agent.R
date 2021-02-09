@@ -95,7 +95,7 @@ interrogateAgent_mod1 <- function(agente){
     
     if (nrow(eb) > 0) {
       
-      if (nrow(eb %>% filter(Cod %in% c(301:709))) >0) {
+      if (nrow(eb %>% filter(Cod %in% c(601:708))) >0) {
         
         addEventLog(agente, paste0("      Resultado: La revisión errores OM 22269-2020 tiene observaciones."))
       }
@@ -108,30 +108,36 @@ interrogateAgent_mod1 <- function(agente){
       addEventLog(agente, paste0("      Resultado: Revisión de errores OM 22269-2020 fue satisfatoria."))
     }
     
-  return(eb)
+  #layer5 ----
+    addEventLog(agente, paste0("Layer 5. Validación de Cruce Contable a la cartera."))
+    
+    eb <- layer5(agente, eb)
+    
+    if (nrow(eb) > 0) {
+      
+      if (nrow(eb %>% filter(Cod %in% c(301:308))) > 0) {
+        addEventLog(agente, paste0("      Resultado: Se detectaron errores contables a la cartera de créditos pues no cuadra con el balance de comprobación."))
+      }
+      else { 
+        addEventLog(agente, paste0("      Resultado: No se detectaron errores contables a la cartera de créditos."))
+      }
+      
+    }
+    else { 
+      addEventLog(agente, paste0("      Resultado: No se detectaron errores contables a la cartera de créditos."))
+    }
+    
+  #Fin validación ----
+    eb <- eb %>% arrange(Periodo, Cod)
+    return(eb)
 }
 interrogateAgent_mod2 <- function(agente, eb){
 
-  addEventLog(agente, paste0("2. MÓDULO DE DECTECCIÓN DE ALERTAS A BASE DE DATOS CREDITICIAS --------------------------"))
+  addEventLog(agente, paste0("2. MÓDULO DE DECTECCIÓN DE ALERTAS DE BASE DE DATOS CREDITICIAS --------------------------"))
   
   addEventLog(agente, paste0("Inicio del interrogatorio modulo 2. PID-", agente %>% pull(IdProceso) %>% first(),"."))
 
   #layer0 ----
-  addEventLog(agente, paste0("Layer 0. Detección de Alertas al Cruce Contable de la cartera."))
-  
-  eb <- layer0_Alertas(agente, eb)
-  
-  if (nrow(eb %>% filter(Cod %in% c(301:308))) > 0) {
-    addEventLog(agente, paste0("      Resultado: Se detectaron alertas contables a la cartera de créditos pues no cuadra con el balance de comprobación. "))
-    return(eb)
-  }
-  else { 
-    addEventLog(agente, paste0("      Resultado: No se detectaron alertas al cruce contable de la cartera."))
-  }
-  
-  #Fin ----
-  eb <- eb %>% arrange(Periodo, Cod)
-  return(eb)
 }
 interrogateAgent_mod3 <- function(agente, eb){
   
