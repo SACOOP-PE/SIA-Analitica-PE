@@ -129,6 +129,20 @@ generar_reporte_T1 <- function(eb, agente) {
   file.show("test/output/SIA_Report_T1.xlsx")
   
 }
+getObservaciones   <- function(agente, eb){
+  
+  eb <- eb %>% filter((Cod %in% c(201:203, 301:308)) == FALSE) %>% rowwise() %>%
+    mutate(filename = paste0(CodCoopac, "_",BD ,"_" ,Periodo, ".txt")) %>%
+    select(Cod, filename, txt1)
+  
+  operaciones <- unlist(eb[1,] %>% pull(txt1) %>% str_split(", "))
+  ruta        <- getRuta(getCarpetaFromAgent(agente), eb[1,] %>% pull(filename))
+  
+  obs <- quitarVaciosBD(ruta) %>%
+    filter(cgrep(quitarVaciosBD(ruta), getCodigoBD(getBDFromRuta(ruta)))[[1]] %in% operaciones)
+  
+  return(obs)
+}
 
 generar_reporte_T1(read_excel("test/output/resultados.xlsx", sheet = "bucketOficio", 
                               col_types = c("text", "text", "text", 
