@@ -76,11 +76,10 @@ generar_reporte_T1 <- function(eb, agente) {
   mergeCells(wb, 1, cols = 15:16, rows = 9:10)
   
   mergeCells(wb, 1, cols = 7:14, rows = 13)
-  mergeCells(wb, 1, cols = 16:17, rows = 13)
   
-  map(14:(nrow(eb)+14),~ mergeCells(wb, 1, 6:13, .))
-  map(14:(nrow(eb)+14),~ mergeCells(wb, 1, 16:17, .))
-  # 
+  map(14:(nrow(eb)+14),~ mergeCells(wb, 1, 7:14, .))
+
+  #WriteData ----
   writeData(wb, 1, myhead.left, 2, 2) 
   addStyle(wb, 1, myhead.left.style, cols = 2, rows = 2)
   writeData(wb, 1, myhead.center1, 7, 6)
@@ -120,7 +119,7 @@ generar_reporte_T1 <- function(eb, agente) {
   
   setRowHeights(wb, 1, 14:(nrow(eb)+14), heights = 33.7)
   writeData(wb, 1, eb %>% select(Periodo, BD, Cod, Tipo, Descripcion), 3, 14, colNames = F, rowNames = F)
-  writeData(wb, 1, eb %>% select(Categoria, Criticidad), 15, 16, colNames = F, rowNames = F)
+  writeData(wb, 1, eb %>% select(Categoria, Criticidad), 15, 14, colNames = F, rowNames = F)
   addStyle(wb, 1,  bucket.body.style  , cols =3:17, rows = 14:(14+(nrow(eb)-1)), gridExpand = T)
   
   img <- "R/scripts-reportes/logo-sbs.png"
