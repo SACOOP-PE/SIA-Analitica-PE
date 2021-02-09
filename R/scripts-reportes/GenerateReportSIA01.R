@@ -125,18 +125,26 @@ generar_reporte_T1 <- function(eb, agente) {
   img <- "R/scripts-reportes/logo-sbs.png"
   insertImage(wb, 1, img, startRow = 2, startCol = 16, width = 1.95, height = 0.95)
   setColWidths(wb, 1, 1:2, widths = 5.2)
+  
+  numObs <- which((bucket$Cod %in% c(201:203, 301:308)) == FALSE)
+  
+  for (i in 1:nrow(filter(bucket,(Cod %in% c(201:203, 301:308)) == FALSE))){
+    addWorksheet(wb, paste0("Observación ", numObs[i]))
+    writeData(wb, i+1, getObservaciones(agente, bucket, i), colNames = T, rowNames = F)
+  }
+  
   saveWorkbook(wb, "test/output/SIA_Report_T1.xlsx", overwrite = TRUE)
   file.show("test/output/SIA_Report_T1.xlsx")
   
 }
-getObservaciones   <- function(agente, eb){
+getObservaciones   <- function(agente, eb, roweb){
   
   eb <- eb %>% filter((Cod %in% c(201:203, 301:308)) == FALSE) %>% rowwise() %>%
     mutate(filename = paste0(CodCoopac, "_",BD ,"_" ,Periodo, ".txt")) %>%
     select(Cod, filename, txt1)
   
-  operaciones <- unlist(eb[1,] %>% pull(txt1) %>% str_split(", "))
-  ruta        <- getRuta(getCarpetaFromAgent(agente), eb[1,] %>% pull(filename))
+  operaciones <- unlist(eb[roweb,] %>% pull(txt1) %>% str_split(", "))
+  ruta        <- getRuta(getCarpetaFromAgent(agente), eb[roweb,] %>% pull(filename))
   
   obs <- quitarVaciosBD(ruta) %>%
     filter(cgrep(quitarVaciosBD(ruta), getCodigoBD(getBDFromRuta(ruta)))[[1]] %in% operaciones)
