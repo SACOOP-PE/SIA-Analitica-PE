@@ -119,18 +119,17 @@ generar_reporte_T1 <- function(eb, agente) {
   addStyle(wb, 1, myhead.resultados.style, cols = 15, rows = 9 )
   
   setRowHeights(wb, 1, 14:(nrow(eb)+14), heights = 33.7)
-  writeData(wb, 1, eb %>% select(Periodo, BD, Cod, Descripcion), 3, 14, colNames = F, rowNames = F)
-  writeData(wb, 1, eb %>% select(Categoria, Criticidad), 14, 14, colNames = F, rowNames = F)
+  writeData(wb, 1, eb %>% select(Periodo, BD, Cod, Tipo, Descripcion), 3, 14, colNames = F, rowNames = F)
+  writeData(wb, 1, eb %>% select(Categoria, Criticidad), 15, 16, colNames = F, rowNames = F)
   addStyle(wb, 1,  bucket.body.style  , cols =3:17, rows = 14:(14+(nrow(eb)-1)), gridExpand = T)
   
   img <- "R/scripts-reportes/logo-sbs.png"
   insertImage(wb, 1, img, startRow = 2, startCol = 16, width = 1.95, height = 0.95)
   setColWidths(wb, 1, 1:2, widths = 5.2)
-  saveWorkbook(wb, "SIA_Report_T1.xlsx", overwrite = TRUE)
-  file.show("SIA_Report_T1.xlsx")
+  saveWorkbook(wb, "test/output/SIA_Report_T1.xlsx", overwrite = TRUE)
+  file.show("test/output/SIA_Report_T1.xlsx")
   
 }
-
 
 generar_reporte_T1(read_excel("test/output/resultados.xlsx", sheet = "bucketOficio", 
                               col_types = c("text", "text", "text", 
