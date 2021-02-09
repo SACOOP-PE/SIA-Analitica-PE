@@ -7,6 +7,7 @@ library(stringr)
 library(colr)
 library(lubridate) 
 library(openxlsx)
+library(readxl)
 ##### 2. Opciones ----- 
 
 options(warn = -1)
