@@ -14,7 +14,7 @@
   generar_reporte_T1 <- function(eb, agente) {
     
     myhead.left <- "SUPERINTENDENCIA ADJUNTA DE COOPERATIVAS"
-    myhead.center1 <- "REPORTE DE VALIDACI�N DE BASE DE DATOS CREDITICIAS - COOPAC N2B/N3"
+    myhead.center1 <- "REPORTE DE VALIDACIÓN DE BASE DE DATOS CREDITICIAS - COOPAC N2B/N3"
     myhead.center2 <- "(Según Oficio Múltiple SBS N° 22269-2020)"
     myhead.lbl1 <- "Nombre de la Coopac:"
     myhead.lbl2 <- "Nivel modular:"
@@ -26,12 +26,12 @@
     bucket.lbl1 <- "Periodo"
     bucket.lbl2 <- "BD"
     bucket.lbl3 <- "Código"
-    bucket.lbl4 <- "Descripci�n del error"
-    bucket.lbl5 <- "Categor�a"
+    bucket.lbl4 <- "Descripción del error"
+    bucket.lbl5 <- "Categoría"
     bucket.lbl6 <- "Criticidad"
     bucket.lbl7 <- "Detalle" 
     
-    #dinámico 
+    #dinÃ¡mico 
     myhead.txt1 <- paste0(agente %>% pull(NombreCoopac) %>% first()," (",agente %>% pull(Coopac) %>% first(),")")
     myhead.txt2 <- "Nivel 2 (B)"
     myhead.txt3 <- nrow(eb)
@@ -78,7 +78,7 @@
     
     wb <- createWorkbook()
     addCreator(wb, "PROYECTO SIA SACOOP")
-    addWorksheet(wb, "Reporte de Validación BD", gridLines = F)
+    addWorksheet(wb, "Reporte de ValidaciÃ³n BD", gridLines = F)
     
     modifyBaseFont(wb, fontSize = 11, fontColour = "black", 
                    fontName = "Arial Narrow")
