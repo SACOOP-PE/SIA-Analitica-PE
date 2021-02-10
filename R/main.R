@@ -39,4 +39,4 @@ saveOutputs(closeAgent(agent, bucket), formatBucket(bucket))
 generar_reporte_T1(read_excel("test/output/resultados.xlsx", sheet = "bucketOficio", 
                               col_types = c("text", "text", "text", "text", "text", "text", "text")),
                    read_excel("test/output/resultados.xlsx", sheet = "agente", 
-                              col_types = c("text", "text", "text", "text", "text", "text", "text", "text", "text")))
+                              col_types = c("text", "text", "text", "text", "text", "text", "text", "text", "text","text")))
