@@ -117,8 +117,8 @@ generar_reporte_T1 <- function(idProceso) {
   # WriteData ----
   writeData(wb, 1, myhead.left, 2, 2) 
   addStyle(wb, 1, myhead.left.style, cols = 2, rows = 2)
-  writeData(wb, 1, myhead.center1, 7, 6)
-  addStyle(wb, 1, myhead.center1.style, cols = 7, rows = 6)
+  writeData(wb, 1, myhead.center1, 3, 5)
+  addStyle(wb, 1, myhead.center1.style, cols = 3:17, rows = 5)
   writeData(wb, 1, myhead.center2, 9 ,7)
   addStyle(wb, 1, myhead.center2.style, cols = 9, rows = 7)
   writeData(wb, 1, myhead.lbl1, 3, 9)
@@ -139,7 +139,7 @@ generar_reporte_T1 <- function(idProceso) {
   addStyle(wb, 1, myhead.lbl2.style, cols = 3, rows = 24)
   
   addStyle(wb, 1, myhead.lblresultados.style, cols = 14, rows = 10)
-  addStyle(wb, 1, myhead.lbl3.style, cols =6:17, rows = 12.13, gridExpand = T)
+  addStyle(wb, 1, myhead.lbl3.style, cols =6:17, rows = 12:13, gridExpand = T)
   addStyle(wb, 1, myhead.resultados.style, cols = 15, rows = 9)
   
   writeData(wb, 1, myhead.txt1, 5, 9)
@@ -162,11 +162,12 @@ generar_reporte_T1 <- function(idProceso) {
   
   setRowHeights(wb, 1, 27:(nrow(eb)+27), heights = 33.7)
   writeData(wb, 1, eb %>% select(Periodo, BD, Cod, Descripcion), 3, 27, colNames = F, rowNames = F)
-  writeData(wb, 1, eb %>% select(Categoria, Criticidad), 14, 27, colNames = F, rowNames = F)
+  writeData(wb, 1, eb %>% select(Categoria), 14, 27, colNames = F, rowNames = F)
+  writeData(wb, 1, eb %>% select(Criticidad), 16, 27, colNames = F, rowNames = F)
   addStyle(wb, 1, bucket.body.style  , cols =3:17, rows = 27:(27+(nrow(eb)-1)), gridExpand = T)
   
   img <- "R/scripts-reportes/logo-sbs.png"
-  insertImage(wb, 1, img, startRow = 2, startCol = 16, width = 1.90, height = 0.90)
+  insertImage(wb, 1, img, startRow = 1, startCol = 16, width = 1.90, height = 0.90)
   setColWidths(wb, 1, 1:2, widths = 5.2)
   
   # Add Multiple sheet by error ----
