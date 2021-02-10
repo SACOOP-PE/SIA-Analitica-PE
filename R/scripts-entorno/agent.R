@@ -158,7 +158,7 @@ closeAgent <- function(agente,
       FinProceso = format(Sys.time(), "%a %b %d %X %Y"),
       NroErrores = nrow(eb),
       Tramo      = paste0(PeriodoInicial, ":", PeriodoFinal)) %>% 
-    select(Coopac, NombreCoopac, IdProceso, InicioProceso, FinProceso, Tramo, NroErrores, PeriodoInicial, PeriodoFinal)
+    select(Coopac, NivelCoopac,NombreCoopac, IdProceso, InicioProceso, FinProceso, Tramo, NroErrores, PeriodoInicial, PeriodoFinal)
   
   return(agente)
 }
