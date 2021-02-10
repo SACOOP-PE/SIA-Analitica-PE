@@ -7,6 +7,9 @@ source("R/scripts-entorno/agent.R")
 source("R/scripts-entorno/error-handler.R") 
 source("R/scripts-entorno/reporting-manager.R")
 source("R/scripts-entorno/utils.R")
+
+# Script reportes
+source("R/scripts-reportes/GenerateReportSIA01.R")
  
 # 1. Módulo de validaciones 
 source("R/modulo1/layer0-validation.R")
@@ -23,9 +26,9 @@ source("R/modulo2/layer0-alert.R")
 source("R/modulo3/layer0-analysis.R")
 
 ##### Create agent -----
-agent <- createAgent(idCoopac = "01106",
+agent <- createAgent(idCoopac = "01172",
                      periodoInicial = "201901",
-                     periodoFinal   = "202011")
+                     periodoFinal   = "202010")
 
 ##### Interrogar Modulo 1
 bucket <- interrogateAgent_mod1(agent)
@@ -33,3 +36,7 @@ bucket <- interrogateAgent_mod1(agent)
 
 ##### Reporting -----
 saveOutputs(closeAgent(agent, bucket), formatBucket(bucket))
+generar_reporte_T1(read_excel("test/output/resultados.xlsx", sheet = "bucketOficio", 
+                              col_types = c("text", "text", "text", "text", "text", "text", "text")),
+                   read_excel("test/output/resultados.xlsx", sheet = "agente", 
+                              col_types = c("text", "text", "text", "text", "text", "text", "text", "text", "text", "text")))
