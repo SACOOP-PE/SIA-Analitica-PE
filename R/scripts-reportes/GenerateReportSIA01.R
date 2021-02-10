@@ -42,9 +42,7 @@ generar_reporte_T1 <- function(eb, agente) {
   
   myhead.left.style <- createStyle(fontSize = 12, 
                                    fontColour = "#252850",
-                                   textDecoration = c("BOLD","ITALIC"),
-                                   wrapText = T, borderStyle = "thin", halign= "left",
-                                   border ="TopBottomLeftRight")
+                                   textDecoration = c("BOLD","ITALIC"))
   
   myhead.center1.style <- createStyle(fontSize = 14, 
                                       fontColour = "#252850",
