@@ -126,9 +126,7 @@ generar_reporte_T1 <- function(eb, agente) {
   insertImage(wb, 1, img, startRow = 2, startCol = 16, width = 1.95, height = 0.95)
   setColWidths(wb, 1, 1:2, widths = 5.2)
   
-  # Add Multiple sheet (por cada eror) ----
-  numObs <- which((bucket$Cod %in% c(201:203, 301:308)) == FALSE)
-  
+  # Add Multiple sheet by error ----
   for (i in 1:nrow(filter(bucket,(Cod %in% c(201:203, 301:308)) == FALSE))){
     addWorksheet(wb, 
                  filter(bucket,(Cod %in% c(201:203, 301:308)) == FALSE)[i,] %>% 

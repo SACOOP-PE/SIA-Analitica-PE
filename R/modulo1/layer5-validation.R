@@ -140,10 +140,12 @@ getCodErrorContable               <- function(nameCapital) {
   return(codError)
 }
 getAnoMesCoopacContableFromAgente <- function(agente) {
-  initCuadreContable() %>% 
-    mutate(PeriodoId = str_sub(as.character(PeriodoId),1,6)) %>% 
-    filter(CodigoEntidad == getCoopacFromAgent(agente)) %>% 
-    pull(PeriodoId) %>% unique() %>% return()
+ periodoContables <- initCuadreContable() %>% 
+   mutate(PeriodoId = str_sub(as.character(PeriodoId),1,6)) %>% 
+   filter(CodigoEntidad == getCoopacFromAgent(agente)) %>% 
+   pull(PeriodoId) %>% unique()
+ 
+ periodoContables[which(as.numeric(periodoContables)<= as.numeric(agent %>% pull(PeriodoFinal)))] %>% return()
 }
 
 validarCruceContable              <- function(agente, eb){
