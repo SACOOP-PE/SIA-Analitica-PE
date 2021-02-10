@@ -1,8 +1,14 @@
-generar_reporte_T1 <- function(eb, agente) {
+generar_reporte_T1 <- function(idProceso) {
+  
+  agente <- read_excel(paste0("test/output/resultados_", idProceso, ".xlsx"), sheet = "bucketOficio", 
+                       col_types = c("text", "text", "text", "text", "text", "text", "text"))
+  eb <- read_excel(paste0("test/output/resultados_", idProceso, ".xlsx"), sheet = "agente", 
+                   col_types = c("text", "text", "text", "text", "text", "text", "text", "text", "text","text"))
   
   resumenValidacion <- "El proceso de validación concluyó satisfactoriamente. Las observaciones deben ser sometidas a revisión por el analista SACOOP. Se identificaron {0} observaciones, de las cuales {1} tienen criticidad ALTA, ello da como resultado {2} archivos inconsistentes."
   
   # Head & cols ----
+  
   myhead.left <- "SUPERINTENDENCIA ADJUNTA DE COOPERATIVAS"
   myhead.center1 <- "REPORTE DE VALIDACIÓN DE BASE DE DATOS CREDITICIAS - COOPAC N2B/N3"
   myhead.center2 <- "(Según Oficio Múltiple SBS N° 22269-2020)"
@@ -25,6 +31,7 @@ generar_reporte_T1 <- function(eb, agente) {
   bucket.lbl8 <- "Detalle" 
   
   # Dinamico ----
+  
   myhead.txt1 <- paste0(agente %>% pull(NombreCoopac) %>% first()," (",agente %>% pull(Coopac) %>% first(),")")
   myhead.txt2 <- paste0("Nivel ", agente %>% pull(NivelCoopac) %>% first())
   myhead.txt3 <- str_replace_all(resumenValidacion, c("\\Q{0}"  = toString(nrow(eb)),
