@@ -136,7 +136,10 @@ generar_reporte_T1 <- function(eb, agente) {
     
     addWorksheet(wb, nombreSheet)
     
-    writeData(wb, i+1, getObservaciones(agent, bucket, i), colNames = T, rowNames = F)
+    writeData(wb, i+1, getObservaciones(agent, bucket, i), startRow = 4, colNames = T, rowNames = F)
+    writeFormula(wb, i+1, startRow = 2, x= makeHyperlinkString(sheet = 1, 
+                                                               row = 1,
+                                                               text = "Volver"))
     writeFormula(wb, 1, startRow = 13+numObs[i], startCol = 17, x= makeHyperlinkString(sheet = nombreSheet, 
                                                                                        row = 1,
                                                                                        text = "Ver más detalle"))
