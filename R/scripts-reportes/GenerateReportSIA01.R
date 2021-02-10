@@ -141,8 +141,7 @@ generar_reporte_T1 <- function(eb, agente) {
                                                                                        row = 1,
                                                                                        text = "Ver más detalle"))
   }
-    
- 
+  
   # Save file xlsx ----
   saveWorkbook(wb, "test/output/SIA_Report_T1.xlsx", overwrite = TRUE)
   file.show("test/output/SIA_Report_T1.xlsx")
