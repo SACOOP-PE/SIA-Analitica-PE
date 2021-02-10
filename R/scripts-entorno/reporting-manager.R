@@ -110,9 +110,7 @@ saveOutputs <- function(agente, ebFormat) {
   
   write.xlsx(list_of_datasets, 
              file = paste0(paste0(getwd(), "/test/output/"),
-                           paste(agente %>% pull(Coopac),
-                                 getIdProcesoFromAgent(agente),
-                                 paste0("(",agente %>% pull(PeriodoInicial),"-", agente %>% pull(PeriodoFinal),")"),
-                                 sep = "_"),
-                           ".xlsx"))
+                           paste0("resultados_",
+                                  getIdProcesoFromAgent(agente),
+                           ".xlsx")))
 }
