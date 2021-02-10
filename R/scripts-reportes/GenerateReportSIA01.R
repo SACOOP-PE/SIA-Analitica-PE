@@ -24,7 +24,6 @@ generar_reporte_T1 <- function(idProceso) {
   bucket.lbl1 <- "Periodo"
   bucket.lbl2 <- "BD"
   bucket.lbl3 <- "Código"
-  bucket.lbl4 <- "Tipo"
   bucket.lbl5 <- "Descripción del error"
   bucket.lbl6 <- "Categoría"
   bucket.lbl7 <- "Criticidad"
@@ -51,9 +50,11 @@ generar_reporte_T1 <- function(idProceso) {
                                    fontColour = "#252850",
                                    textDecoration = c("BOLD","ITALIC"))
   
-  myhead.center1.style <- createStyle(fontSize = 14, 
+  myhead.center1.style <- createStyle(fontSize = 18, 
                                       fontColour = "#252850",
-                                      textDecoration = c("BOLD"))
+                                      textDecoration = c("BOLD"),
+                                      valign = "center",
+                                      wrapText = T)
   myhead.center2.style <- createStyle(fontSize = 12, 
                                       #fontColour = "#0000FF",
                                       textDecoration = c("ITALIC"))
@@ -97,6 +98,8 @@ generar_reporte_T1 <- function(idProceso) {
   modifyBaseFont(wb, fontSize = 11, fontColour = "black", 
                  fontName = "Arial Narrow")
   
+  mergeCells(wb, 1, cols = 3:17, rows = 5:6)
+  
   mergeCells(wb, 1, cols = 9:10, rows = 9)
   mergeCells(wb, 1, cols = 9:10, rows = 10)
   mergeCells(wb, 1, cols = 14:15, rows = 9)
@@ -104,7 +107,8 @@ generar_reporte_T1 <- function(idProceso) {
   mergeCells(wb, 1, cols = 6:17, rows = 12:13)
   mergeCells(wb, 1, cols = 3:5, rows = 12)
   
-  mergeCells(wb, 1, cols = 7:14, rows = 26)
+  mergeCells(wb, 1, cols = 6:13, rows = 26)
+  mergeCells(wb, 1, cols = 14:15, rows = 26)
   
   map(27:(nrow(eb)+27),~ mergeCells(wb, 1, 7:14, .))
   
@@ -133,7 +137,8 @@ generar_reporte_T1 <- function(idProceso) {
   addStyle(wb, 1, myhead.lbl2.style, cols = 3, rows = 24)
   
   addStyle(wb, 1, myhead.lblresultados.style, cols = 14, rows = 10)
-  addStyle(wb, 1,  myhead.lbl3.style, cols =6:17, rows = 12.13, gridExpand = T)
+  addStyle(wb, 1, myhead.lbl3.style, cols =6:17, rows = 12.13, gridExpand = T)
+  addStyle(wb, 1, myhead.resultados.style, cols = 15, rows = 9)
   
   writeData(wb, 1, myhead.txt1, 5, 9)
   writeData(wb, 1, myhead.txt2, 5, 10)
@@ -146,21 +151,20 @@ generar_reporte_T1 <- function(idProceso) {
   writeData(wb, 1, bucket.lbl1, 3, 26)
   writeData(wb, 1, bucket.lbl2, 4, 26) 
   writeData(wb, 1, bucket.lbl3, 5, 26)
-  writeData(wb, 1, bucket.lbl4, 6, 26)
-  writeData(wb, 1, bucket.lbl5, 7, 26)
-  writeData(wb, 1, bucket.lbl6, 15, 26)
+  writeData(wb, 1, bucket.lbl5, 6, 26)
+  writeData(wb, 1, bucket.lbl6, 14, 26)
   writeData(wb, 1, bucket.lbl7, 16, 26)
   writeData(wb, 1, bucket.lbl8, 17, 26)
-  addStyle(wb, 1,  bucket.head.style  , cols =3:17, rows = 26)
-  addStyle(wb, 1, myhead.resultados.style, cols = 15, rows = 9)
+  
+  addStyle(wb, 1, bucket.head.style, cols =3:17, rows = 26)
   
   setRowHeights(wb, 1, 27:(nrow(eb)+27), heights = 33.7)
-  writeData(wb, 1, eb %>% select(Periodo, BD, Cod, Tipo, Descripcion), 3, 27, colNames = F, rowNames = F)
-  writeData(wb, 1, eb %>% select(Categoria, Criticidad), 15, 27, colNames = F, rowNames = F)
-  addStyle(wb, 1,  bucket.body.style  , cols =3:17, rows = 27:(27+(nrow(eb)-1)), gridExpand = T)
+  writeData(wb, 1, eb %>% select(Periodo, BD, Cod, Descripcion), 3, 27, colNames = F, rowNames = F)
+  writeData(wb, 1, eb %>% select(Categoria, Criticidad), 14, 27, colNames = F, rowNames = F)
+  addStyle(wb, 1, bucket.body.style  , cols =3:17, rows = 27:(27+(nrow(eb)-1)), gridExpand = T)
   
   img <- "R/scripts-reportes/logo-sbs.png"
-  insertImage(wb, 1, img, startRow = 2, startCol = 16, width = 1.95, height = 0.95)
+  insertImage(wb, 1, img, startRow = 2, startCol = 16, width = 1.90, height = 0.90)
   setColWidths(wb, 1, 1:2, widths = 5.2)
   
   # Add Multiple sheet by error ----
