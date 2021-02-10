@@ -127,15 +127,22 @@ generar_reporte_T1 <- function(eb, agente) {
   setColWidths(wb, 1, 1:2, widths = 5.2)
   
   # Add Multiple sheet by error ----
+  numObs <- which((bucket$Cod %in% c(201:203, 301:308)) == FALSE)
+  
   for (i in 1:nrow(filter(bucket,(Cod %in% c(201:203, 301:308)) == FALSE))){
-    addWorksheet(wb, 
-                 filter(bucket,(Cod %in% c(201:203, 301:308)) == FALSE)[i,] %>% 
-                   select(BD, Cod, Periodo) %>%
-                   apply(1, paste, collapse = "-" ))
+    
+    nombreSheet <- filter(bucket,(Cod %in% c(201:203, 301:308)) == FALSE)[i,] %>% select(BD, Cod, Periodo) %>%
+      apply(1, paste, collapse = "-" )
+    
+    addWorksheet(wb, nombreSheet)
     
     writeData(wb, i+1, getObservaciones(agent, bucket, i), colNames = T, rowNames = F)
+    writeFormula(wb, 1, startRow = 13+numObs[i], startCol = 17, x= makeHyperlinkString(sheet = nombreSheet, 
+                                                                                       row = 1,
+                                                                                       text = "Ver más detalle"))
   }
-  
+    
+ 
   # Save file xlsx ----
   saveWorkbook(wb, "test/output/SIA_Report_T1.xlsx", overwrite = TRUE)
   file.show("test/output/SIA_Report_T1.xlsx")
