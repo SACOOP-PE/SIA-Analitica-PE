@@ -104,13 +104,15 @@ generar_reporte_T1 <- function(idProceso) {
   mergeCells(wb, 1, cols = 9:10, rows = 10)
   mergeCells(wb, 1, cols = 14:15, rows = 9)
   mergeCells(wb, 1, cols = 14:15, rows = 10)
+  
   mergeCells(wb, 1, cols = 6:17, rows = 12:13)
   mergeCells(wb, 1, cols = 3:5, rows = 12)
   
   mergeCells(wb, 1, cols = 6:13, rows = 26)
   mergeCells(wb, 1, cols = 14:15, rows = 26)
   
-  map(27:(nrow(eb)+27),~ mergeCells(wb, 1, 7:14, .))
+  map(27:(nrow(eb)+27),~ mergeCells(wb, 1, 6:13, .))
+  map(27:(nrow(eb)+27),~ mergeCells(wb, 1, 14:15, .))
   
   # WriteData ----
   writeData(wb, 1, myhead.left, 2, 2) 
