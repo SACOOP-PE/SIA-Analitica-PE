@@ -1,9 +1,9 @@
 generar_reporte_T1 <- function(idProceso) {
   
-  agente <- read_excel(paste0("test/output/resultados_", idProceso, ".xlsx"), sheet = "bucketOficio", 
-                       col_types = c("text", "text", "text", "text", "text", "text", "text"))
-  eb <- read_excel(paste0("test/output/resultados_", idProceso, ".xlsx"), sheet = "agente", 
-                   col_types = c("text", "text", "text", "text", "text", "text", "text", "text", "text","text"))
+  eb <- read_excel(paste0("test/output/resultados_", idProceso, ".xlsx"), sheet = "bucketOficio", 
+                   col_types = c("text", "text", "text", "text", "text", "text", "text"))
+  agente <- read_excel(paste0("test/output/resultados_", idProceso, ".xlsx"), sheet = "agente",
+                       col_types = c("text", "text", "text", "text", "text", "text", "text", "text", "text","text"))
   
   resumenValidacion <- "El proceso de validación concluyó satisfactoriamente. Las observaciones deben ser sometidas a revisión por el analista SACOOP. Se identificaron {0} observaciones, de las cuales {1} tienen criticidad ALTA, ello da como resultado {2} archivos inconsistentes."
   
