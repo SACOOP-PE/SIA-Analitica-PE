@@ -53,7 +53,7 @@ generar_reporte_T1 <- function(idProceso) {
   myhead.center1.style <- createStyle(fontSize = 18, 
                                       fontColour = "#252850",
                                       textDecoration = c("BOLD"),
-                                      valign = "center")
+                                      halign = "center")
   myhead.center2.style <- createStyle(fontSize = 12, 
                                       #fontColour = "#0000FF",
                                       textDecoration = c("ITALIC"))
@@ -164,6 +164,12 @@ generar_reporte_T1 <- function(idProceso) {
   writeData(wb, 1, eb %>% select(Categoria), 14, 27, colNames = F, rowNames = F)
   writeData(wb, 1, eb %>% select(Criticidad), 16, 27, colNames = F, rowNames = F)
   addStyle(wb, 1, bucket.body.style  , cols =3:17, rows = 27:(27+(nrow(eb)-1)), gridExpand = T)
+  conditionalFormatting(wb, 1,
+                        cols = 16,
+                        rows = 27:(27+(nrow(eb)-1)),
+                        type = "contains",
+                        rule = "ALTA", 
+                        style = createStyle(fontColour = "#9C0006"))
   
   img <- "R/scripts-reportes/logo-sbs.png"
   insertImage(wb, 1, img, startRow = 1, startCol = 16, width = 1.90, height = 0.90)
