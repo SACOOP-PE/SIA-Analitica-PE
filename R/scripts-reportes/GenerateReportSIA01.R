@@ -53,8 +53,7 @@ generar_reporte_T1 <- function(idProceso) {
   myhead.center1.style <- createStyle(fontSize = 18, 
                                       fontColour = "#252850",
                                       textDecoration = c("BOLD"),
-                                      valign = "center",
-                                      wrapText = T)
+                                      valign = "center")
   myhead.center2.style <- createStyle(fontSize = 12, 
                                       #fontColour = "#0000FF",
                                       textDecoration = c("ITALIC"))
