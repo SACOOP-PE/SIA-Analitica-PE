@@ -204,14 +204,12 @@ generar_grafico_T1 <- function(idProceso) {
   eb <- read_excel(paste0("test/output/resultados_", 100341, ".xlsx"), sheet = "bucketOficio", 
                       col_types = c("text", "text", "text", "text", "text", "text", "text")) %>% rowwise() %>%
     mutate(dateYear  = substr(Periodo, 1, 4),
-           dateMonth = as.numeric(substr(Periodo, 5, 6))) %>% 
-    select(dateYear, dateMonth, BD, Criticidad) %>% 
-    arrange(dateYear, dateMonth, BD)
+           dateMonth = as.integer(substr(Periodo, 5, 6)))
     
   
   eb$Criticidad <- factor(eb$Criticidad, 
                           levels=c("BAJA","MEDIA", "ALTA"),
-                          labels=c("Archivo sin errores", "Archivo con errores", "Archivo con errores graves"),
+                          labels=c("Archivo sin errores", "Archivo con errores", "Archivo con errores críticos"),
                           ordered = T)
   
   eb$BD <- factor(eb$BD,
@@ -220,6 +218,7 @@ generar_grafico_T1 <- function(idProceso) {
                   ordered=TRUE)
   
   fct_rev(eb$Criticidad)
+  
   eb$dateMonth <- factor(eb$dateMonth,
                          levels=as.character(1:12),
                          labels=c("Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Set","Oct","Nov","Dic"),
