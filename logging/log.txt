@@ -2334,3 +2334,23 @@
 100340	2021-02-09	2021-02-09 12:35:16	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-02-09 12:35:16] -       Resultado: La revisión errores OM 22269-2020 tiene observaciones.	Informativo	Baja
 100340	2021-02-09	2021-02-09 12:35:17	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-02-09 12:35:16] - Layer 5. Validación de Cruce Contable a la cartera.	Informativo	Baja
 100340	2021-02-09	2021-02-09 12:37:25	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-02-09 12:37:25] -       Resultado: Se detectaron errores contables a la cartera de créditos pues no cuadra con el balance de comprobación.	Informativo	Baja
+100341	2021-02-09	2021-02-09 20:16:25	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-09 20:16:25] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100341	2021-02-09	2021-02-09 20:16:26	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-09 20:16:25] - Coopac evaluada: 01172-SAN MARTÍN DE PORRES	Informativo	Baja
+100341	2021-02-09	2021-02-09 20:16:26	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-09 20:16:26] - PID: 100341[201901~202010]	Informativo	Baja
+100341	2021-02-09	2021-02-09 20:16:26	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-09 20:16:26] - 1. MÓDULO DE VALIDACIÓN DE BASE DE DATOS CREDITICIAS --------------------------	Informativo	Baja
+100341	2021-02-09	2021-02-09 20:16:27	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-09 20:16:26] - Inicio del interrogatorio modulo 1. PID-100341.	Informativo	Baja
+100341	2021-02-09	2021-02-09 20:16:27	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-09 20:16:27] - Layer 0. Revisión de pre-requisitos.	Informativo	Baja
+100341	2021-02-09	2021-02-09 20:16:28	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-09 20:16:28] -       Resultado: Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100341	2021-02-09	2021-02-09 20:16:28	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-09 20:16:28] - Layer 1. Revisión de estructura de tablas	Informativo	Baja
+100341	2021-02-09	2021-02-09 20:17:59	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-09 20:17:59] - La validación de Columnas vacías concluyó con 1 observación(es).	Informativo	Baja
+100341	2021-02-09	2021-02-09 20:17:59	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-09 20:17:59] -       Resultado: Revisión de estructura de datos satisfatoria.	Informativo	Baja
+100341	2021-02-09	2021-02-09 20:17:59	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-09 20:17:59] - Layer 2. Validación de operaciones duplicadas.	Informativo	Baja
+100341	2021-02-09	2021-02-09 20:25:25	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-09 20:25:25] -       Resultado: La validación operaciones duplicadas concluyó con 50 observación(es).	Informativo	Baja
+100341	2021-02-09	2021-02-09 20:25:25	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-09 20:25:25] - Layer 3. Validación de entre BD01/BD02A, BD03A/BD03B.	Informativo	Baja
+100341	2021-02-09	2021-02-09 20:27:09	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-09 20:27:09] -       Resultado: La validación de cruce interno concluyó con 24 observación(es).	Informativo	Baja
+100341	2021-02-09	2021-02-09 20:27:09	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-09 20:27:09] - Layer 4. Validación de campos indviduales.	Informativo	Baja
+100341	2021-02-09	2021-02-09 20:29:24	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-09 20:29:24] -       Resultado: La validación de los campos concluyó con 4 observaciones tipo1.	Informativo	Baja
+100341	2021-02-09	2021-02-09 20:30:35	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-09 20:30:34] -       Resultado: La validación de los campos concluyó con 4 observación(es) tipo2.	Informativo	Baja
+100341	2021-02-09	2021-02-09 20:30:35	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-09 20:30:35] -       Resultado: La revisión errores OM 22269-2020 tiene observaciones.	Informativo	Baja
+100341	2021-02-09	2021-02-09 20:30:35	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-09 20:30:35] - Layer 5. Validación de Cruce Contable a la cartera.	Informativo	Baja
+100341	2021-02-09	2021-02-09 20:32:48	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-09 20:32:48] -       Resultado: Se detectaron errores contables a la cartera de créditos pues no cuadra con el balance de comprobación.	Informativo	Baja
