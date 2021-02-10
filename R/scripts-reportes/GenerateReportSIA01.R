@@ -1,15 +1,19 @@
 generar_reporte_T1 <- function(eb, agente) {
   
+  resumenValidacion <- "El proceso de validación concluyó satisfactoriamente. Las observaciones deben ser sometidas a revisión por el analista SACOOP. Se identificaron {0} observaciones, de las cuales {1} tienen criticidad ALTA, ello da como resultado {2} archivos inconsistentes."
+  
   # Head & cols ----
   myhead.left <- "SUPERINTENDENCIA ADJUNTA DE COOPERATIVAS"
   myhead.center1 <- "REPORTE DE VALIDACIÓN DE BASE DE DATOS CREDITICIAS - COOPAC N2B/N3"
   myhead.center2 <- "(Según Oficio Múltiple SBS N° 22269-2020)"
   myhead.lbl1 <- "Nombre de la Coopac:"
   myhead.lbl2 <- "Nivel modular:"
-  myhead.lbl3 <- "Observaciones:"
-  myhead.lbl4 <- "Inicio:"
-  myhead.lbl5 <- "Fin:"
-  myhead.lbl6 <- "Resultado:" 
+  myhead.lbl3 <- "I. Resultados de la validación:"
+  myhead.lbl4 <- "Periodo Inicio:"
+  myhead.lbl5 <- "Periodo Fin:"
+  myhead.lbl6 <- "N° proceso:"
+  myhead.lbl7 <- "Periodicidad"
+  myhead.lbl8 <- "II. Detalle de las observaciones:"
   
   bucket.lbl1 <- "Periodo"
   bucket.lbl2 <- "BD"
@@ -22,28 +26,44 @@ generar_reporte_T1 <- function(eb, agente) {
   
   # Dinamico ----
   myhead.txt1 <- paste0(agente %>% pull(NombreCoopac) %>% first()," (",agente %>% pull(Coopac) %>% first(),")")
-  myhead.txt2 <- agente %>% pull(NivelCoopac) %>% first()
-  myhead.txt3 <- nrow(eb)
+  myhead.txt2 <- paste0("Nivel ", agente %>% pull(NivelCoopac) %>% first())
+  myhead.txt3 <- str_replace_all(resumenValidacion, c("\\Q{0}"  = toString(nrow(eb)),
+                                                      "\\Q{1}"  = toString(nrow(eb %>% filter(Criticidad == "ALTA"))),
+                                                      "\\Q{2}"  = eb %>% 
+                                                                   mutate(filename = paste0(agente %>% pull(Coopac), "_",BD ,"_" ,Periodo, ".txt")) %>% 
+                                                                   pull(filename) %>% unique() %>% length() %>% toString()
+                                                      ))
   myhead.txt4 <- agente %>% pull(PeriodoInicial) %>% first()
   myhead.txt5 <- agente %>% pull(PeriodoFinal) %>% first()
-  myhead.txt6 <- "CON OBSERVACIONES DE CRITICIDAD ALTA."
+  myhead.txt6 <- agente %>% pull(IdProceso) %>% first()
+  myhead.txt7 <- "Mensual"
   
   # Estilos ----
   
   myhead.left.style <- createStyle(fontSize = 12, 
                                    fontColour = "#252850",
-                                   textDecoration = c("BOLD","ITALIC"))
+                                   textDecoration = c("BOLD","ITALIC"),
+                                   wrapText = T, borderStyle = "thin", halign= "left",
+                                   border ="TopBottomLeftRight")
   
   myhead.center1.style <- createStyle(fontSize = 14, 
                                       fontColour = "#252850",
                                       textDecoration = c("BOLD"))
-  
   myhead.center2.style <- createStyle(fontSize = 12, 
                                       #fontColour = "#0000FF",
                                       textDecoration = c("ITALIC"))
+  
   myhead.lbl.style <- createStyle(fontSize = 12, 
                                   #fontColour = "#0000FF",
                                   textDecoration = c("BOLD"))
+  myhead.lbl2.style <- createStyle(fontSize = 14, 
+                                  #fontColour = "#0000FF",
+                                  textDecoration = c("BOLD"))
+  myhead.lbl3.style <- createStyle(fontSize = 11, 
+                                   wrapText = T, 
+                                   borderStyle = "thin",
+                                   halign= "left", 
+                                   valign = "center")
   
   myhead.lblresultados.style <- createStyle(fontSize = 12, 
                                             #fontColour = "#0000FF",
@@ -72,12 +92,16 @@ generar_reporte_T1 <- function(eb, agente) {
   modifyBaseFont(wb, fontSize = 11, fontColour = "black", 
                  fontName = "Arial Narrow")
   
-  mergeCells(wb, 1, cols = 14, rows = 9:10)
-  mergeCells(wb, 1, cols = 15:16, rows = 9:10)
+  mergeCells(wb, 1, cols = 9:10, rows = 9)
+  mergeCells(wb, 1, cols = 9:10, rows = 10)
+  mergeCells(wb, 1, cols = 14:15, rows = 9)
+  mergeCells(wb, 1, cols = 14:15, rows = 10)
+  mergeCells(wb, 1, cols = 6:17, rows = 12:13)
+  mergeCells(wb, 1, cols = 3:5, rows = 12)
   
-  mergeCells(wb, 1, cols = 7:14, rows = 13)
+  mergeCells(wb, 1, cols = 7:14, rows = 26)
   
-  map(14:(nrow(eb)+14),~ mergeCells(wb, 1, 7:14, .))
+  map(27:(nrow(eb)+27),~ mergeCells(wb, 1, 7:14, .))
   
   # WriteData ----
   writeData(wb, 1, myhead.left, 2, 2) 
@@ -90,37 +114,45 @@ generar_reporte_T1 <- function(eb, agente) {
   addStyle(wb, 1, myhead.lbl.style, cols = 3, rows = 9)
   writeData(wb, 1, myhead.lbl2, 3, 10)
   addStyle(wb, 1, myhead.lbl.style, cols = 3, rows = 10)
-  writeData(wb, 1, myhead.lbl3, 3, 11)
-  addStyle(wb, 1, myhead.lbl.style, cols = 3, rows = 11)
-  writeData(wb, 1, myhead.lbl4, 11, 9)
-  addStyle(wb, 1, myhead.lbl.style, cols = 11, rows = 9)
-  writeData(wb, 1, myhead.lbl5, 11, 10)
-  addStyle(wb, 1, myhead.lbl.style, cols = 11, rows = 10)
+  writeData(wb, 1, myhead.lbl3, 3, 12)
+  addStyle(wb, 1, myhead.lbl2.style, cols = 3, rows = 12)
+  writeData(wb, 1, myhead.lbl4, 9, 9)
+  addStyle(wb, 1, myhead.lbl.style, cols = 9, rows = 9)
+  writeData(wb, 1, myhead.lbl5, 9, 10)
+  addStyle(wb, 1, myhead.lbl.style, cols = 9, rows = 10)
   writeData(wb, 1, myhead.lbl6, 14, 9)
-  addStyle(wb, 1,  myhead.lblresultados.style , cols =14, rows = 9)
+  addStyle(wb, 1, myhead.lbl.style, cols = 14, rows = 9)
+  writeData(wb, 1, myhead.lbl7, 14, 10)
+  addStyle(wb, 1, myhead.lbl.style, cols = 14, rows = 10)
+  writeData(wb, 1, myhead.lbl8, 3, 24)
+  addStyle(wb, 1, myhead.lbl2.style, cols = 3, rows = 24)
+  
+  addStyle(wb, 1, myhead.lblresultados.style, cols = 14, rows = 10)
+  addStyle(wb, 1,  myhead.lbl3.style, cols =6:17, rows = 12.13, gridExpand = T)
+  
   writeData(wb, 1, myhead.txt1, 5, 9)
   writeData(wb, 1, myhead.txt2, 5, 10)
-  writeData(wb, 1, myhead.txt3, 5, 11)
-  writeData(wb, 1, myhead.txt4, 12, 9)
-  writeData(wb, 1, myhead.txt5, 12, 10)
+  writeData(wb, 1, myhead.txt3, 6, 12)
+  writeData(wb, 1, myhead.txt4, 11, 9)
+  writeData(wb, 1, myhead.txt5, 11, 10)
+  writeData(wb, 1, myhead.txt6, 16, 9)
+  writeData(wb, 1, myhead.txt7, 16, 10)
   
-  writeData(wb, 1, bucket.lbl1, 3, 13)
-  addStyle(wb, 1,  bucket.head.style  , cols =3:17, rows = 13)
+  writeData(wb, 1, bucket.lbl1, 3, 26)
+  writeData(wb, 1, bucket.lbl2, 4, 26) 
+  writeData(wb, 1, bucket.lbl3, 5, 26)
+  writeData(wb, 1, bucket.lbl4, 6, 26)
+  writeData(wb, 1, bucket.lbl5, 7, 26)
+  writeData(wb, 1, bucket.lbl6, 15, 26)
+  writeData(wb, 1, bucket.lbl7, 16, 26)
+  writeData(wb, 1, bucket.lbl8, 17, 26)
+  addStyle(wb, 1,  bucket.head.style  , cols =3:17, rows = 26)
+  addStyle(wb, 1, myhead.resultados.style, cols = 15, rows = 9)
   
-  writeData(wb, 1, bucket.lbl2, 4, 13) 
-  writeData(wb, 1, bucket.lbl3, 5, 13)
-  writeData(wb, 1, bucket.lbl4, 6, 13)
-  writeData(wb, 1, bucket.lbl5, 7, 13)
-  writeData(wb, 1, bucket.lbl6, 15, 13)
-  writeData(wb, 1, bucket.lbl7, 16, 13)
-  writeData(wb, 1, bucket.lbl8, 17, 13)
-  writeData(wb, 1, myhead.txt6, 15, 9)
-  addStyle(wb, 1, myhead.resultados.style, cols = 15, rows = 9 )
-  
-  setRowHeights(wb, 1, 14:(nrow(eb)+14), heights = 33.7)
-  writeData(wb, 1, eb %>% select(Periodo, BD, Cod, Tipo, Descripcion), 3, 14, colNames = F, rowNames = F)
-  writeData(wb, 1, eb %>% select(Categoria, Criticidad), 15, 14, colNames = F, rowNames = F)
-  addStyle(wb, 1,  bucket.body.style  , cols =3:17, rows = 14:(14+(nrow(eb)-1)), gridExpand = T)
+  setRowHeights(wb, 1, 27:(nrow(eb)+27), heights = 33.7)
+  writeData(wb, 1, eb %>% select(Periodo, BD, Cod, Tipo, Descripcion), 3, 27, colNames = F, rowNames = F)
+  writeData(wb, 1, eb %>% select(Categoria, Criticidad), 15, 27, colNames = F, rowNames = F)
+  addStyle(wb, 1,  bucket.body.style  , cols =3:17, rows = 27:(27+(nrow(eb)-1)), gridExpand = T)
   
   img <- "R/scripts-reportes/logo-sbs.png"
   insertImage(wb, 1, img, startRow = 2, startCol = 16, width = 1.95, height = 0.95)
@@ -137,10 +169,10 @@ generar_reporte_T1 <- function(eb, agente) {
     addWorksheet(wb, nombreSheet)
     
     writeData(wb, i+1, getObservaciones(agent, bucket, i), startRow = 4, colNames = T, rowNames = F)
-    writeFormula(wb, i+1, startRow = 2, x= makeHyperlinkString(sheet = 1, 
+    writeFormula(wb, i+1, startRow = 2, x= makeHyperlinkString(sheet = "Reporte de Validación BD", 
                                                                row = 1,
                                                                text = "Volver"))
-    writeFormula(wb, 1, startRow = 13+numObs[i], startCol = 17, x= makeHyperlinkString(sheet = nombreSheet, 
+    writeFormula(wb, 1, startRow = 26+numObs[i], startCol = 17, x= makeHyperlinkString(sheet = nombreSheet, 
                                                                                        row = 1,
                                                                                        text = "Ver más detalle"))
   }
