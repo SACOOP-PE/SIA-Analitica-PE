@@ -37,4 +37,3 @@ bucket <- interrogateAgent_mod1(agent)
 ##### Reporting -----
 saveOutputs(closeAgent(agent, bucket), formatBucket(bucket))
 generar_reporte_T1(getIdProcesoFromAgent(agent))
-
