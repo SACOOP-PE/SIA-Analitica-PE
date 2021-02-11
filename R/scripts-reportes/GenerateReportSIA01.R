@@ -213,7 +213,6 @@ generar_reporte_T1 <- function(idProceso) {
   saveWorkbook(wb, "test/output/SIA_Report_T1.xlsx", overwrite = TRUE)
   file.show("test/output/SIA_Report_T1.xlsx")
 }
-
 getObservaciones   <- function(agente, eb, roweb){
   
   eb <- eb %>% filter((Cod %in% c(201:203, 301:308)) == FALSE) %>% rowwise() %>%
@@ -224,8 +223,7 @@ getObservaciones   <- function(agente, eb, roweb){
   ruta        <- getRuta(getCarpetaFromAgent(agente), eb[roweb,] %>% pull(filename))
   
   obs <- quitarVaciosBD(ruta) %>%
-    filter(cgrep(quitarVaciosBD(ruta), getCodigoBD(getBDFromRuta(ruta)))[[1]] %in% operaciones) %>% 
-    mutate_all(funs(str_replace(., "???", "#N#")))
+    filter(cgrep(quitarVaciosBD(ruta), getCodigoBD(getBDFromRuta(ruta)))[[1]] %in% operaciones)
   
   return(obs)
 }

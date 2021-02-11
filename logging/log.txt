@@ -2423,3 +2423,25 @@
 100345	2021-02-11	2021-02-11 18:16:16	DPACHECO	STA MA MAGDALENA	test/datatest	[2021-02-11 18:16:16] -       Resultado: La revisión errores OM 22269-2020 tiene observaciones.	Informativo	Baja
 100345	2021-02-11	2021-02-11 18:16:16	DPACHECO	STA MA MAGDALENA	test/datatest	[2021-02-11 18:16:16] - Layer 5. Validación de Cruce Contable a la cartera.	Informativo	Baja
 100345	2021-02-11	2021-02-11 18:16:25	DPACHECO	STA MA MAGDALENA	test/datatest	[2021-02-11 18:16:25] -       Resultado: No se detectaron errores contables a la cartera de créditos.	Informativo	Baja
+100346	2021-02-11	2021-02-11 18:50:04	DPACHECO	STA MA MAGDALENA	test/datatest	[2021-02-11 18:50:04] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100346	2021-02-11	2021-02-11 18:50:04	DPACHECO	STA MA MAGDALENA	test/datatest	[2021-02-11 18:50:04] - Coopac evaluada: 01113-STA MA MAGDALENA	Informativo	Baja
+100346	2021-02-11	2021-02-11 18:50:05	DPACHECO	STA MA MAGDALENA	test/datatest	[2021-02-11 18:50:04] - PID: 100346[202011~202011]	Informativo	Baja
+100346	2021-02-11	2021-02-11 18:50:05	DPACHECO	STA MA MAGDALENA	test/datatest	[2021-02-11 18:50:05] - 1. MÓDULO DE VALIDACIÓN DE BASE DE DATOS CREDITICIAS --------------------------	Informativo	Baja
+100346	2021-02-11	2021-02-11 18:50:06	DPACHECO	STA MA MAGDALENA	test/datatest	[2021-02-11 18:50:05] - Inicio del interrogatorio modulo 1. PID-100346.	Informativo	Baja
+100346	2021-02-11	2021-02-11 18:50:06	DPACHECO	STA MA MAGDALENA	test/datatest	[2021-02-11 18:50:06] - Layer 0. Revisión de pre-requisitos.	Informativo	Baja
+100346	2021-02-11	2021-02-11 18:50:07	DPACHECO	STA MA MAGDALENA	test/datatest	[2021-02-11 18:50:07] -       Resultado: Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100346	2021-02-11	2021-02-11 18:50:07	DPACHECO	STA MA MAGDALENA	test/datatest	[2021-02-11 18:50:07] - Layer 1. Revisión de estructura de tablas	Informativo	Baja
+100346	2021-02-11	2021-02-11 18:50:19	DPACHECO	STA MA MAGDALENA	test/datatest	[2021-02-11 18:50:19] - La validación de Columnas faltantes concluyó con 2 observación(es).	Informativo	Baja
+100346	2021-02-11	2021-02-11 18:50:19	DPACHECO	STA MA MAGDALENA	test/datatest	[2021-02-11 18:50:19] - La validación de Columnas sobrantes concluyó con 3 observación(es).	Informativo	Baja
+100346	2021-02-11	2021-02-11 18:50:19	DPACHECO	STA MA MAGDALENA	test/datatest	[2021-02-11 18:50:19] - La validación de Columnas vacías concluyó con 1 observación(es).	Informativo	Baja
+100346	2021-02-11	2021-02-11 18:50:19	DPACHECO	STA MA MAGDALENA	test/datatest	[2021-02-11 18:50:19] -       Resultado: La revisión de estructura de datos tiene observaciones. Continuar con discreción.	Informativo	Baja
+100346	2021-02-11	2021-02-11 18:50:19	DPACHECO	STA MA MAGDALENA	test/datatest	[2021-02-11 18:50:19] - Layer 2. Validación de operaciones duplicadas.	Informativo	Baja
+100346	2021-02-11	2021-02-11 18:50:34	DPACHECO	STA MA MAGDALENA	test/datatest	[2021-02-11 18:50:34] -       Resultado: La validación operaciones duplicadas concluyó con 2 observación(es).	Informativo	Baja
+100346	2021-02-11	2021-02-11 18:50:34	DPACHECO	STA MA MAGDALENA	test/datatest	[2021-02-11 18:50:34] - Layer 3. Validación de entre BD01/BD02A, BD03A/BD03B.	Informativo	Baja
+100346	2021-02-11	2021-02-11 18:50:43	DPACHECO	STA MA MAGDALENA	test/datatest	[2021-02-11 18:50:43] -       Resultado: La validación de cruce interno concluyó con 2 observación(es).	Informativo	Baja
+100346	2021-02-11	2021-02-11 18:50:43	DPACHECO	STA MA MAGDALENA	test/datatest	[2021-02-11 18:50:43] - Layer 4. Validación de campos indviduales.	Informativo	Baja
+100346	2021-02-11	2021-02-11 18:50:54	DPACHECO	STA MA MAGDALENA	test/datatest	[2021-02-11 18:50:53] -       Resultado: La validación de los campos concluyó con 6 observaciones tipo1.	Informativo	Baja
+100346	2021-02-11	2021-02-11 18:50:59	DPACHECO	STA MA MAGDALENA	test/datatest	[2021-02-11 18:50:58] -       Resultado: La validación de los campos concluyó con 1 observación(es) tipo2.	Informativo	Baja
+100346	2021-02-11	2021-02-11 18:50:59	DPACHECO	STA MA MAGDALENA	test/datatest	[2021-02-11 18:50:59] -       Resultado: La revisión errores OM 22269-2020 tiene observaciones.	Informativo	Baja
+100346	2021-02-11	2021-02-11 18:50:59	DPACHECO	STA MA MAGDALENA	test/datatest	[2021-02-11 18:50:59] - Layer 5. Validación de Cruce Contable a la cartera.	Informativo	Baja
+100346	2021-02-11	2021-02-11 18:51:10	DPACHECO	STA MA MAGDALENA	test/datatest	[2021-02-11 18:51:10] -       Resultado: No se detectaron errores contables a la cartera de créditos.	Informativo	Baja

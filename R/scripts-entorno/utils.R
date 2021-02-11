@@ -44,7 +44,7 @@ getBDFromRuta           <- function(ruta){
 }
 evaluarFile             <- function(ruta){
   BD <- read_delim(ruta,"\t",escape_double = FALSE, trim_ws = TRUE, col_names = TRUE,
-                   col_types = cols(.default = "c"), progress = F)
+                   col_types = cols(.default = "c"), locale = locale(encoding = "ISO-8859-1"), progress = F)
   
   colnames(BD) <- toupper(str_replace(colnames(BD), " ", "_"))
   
