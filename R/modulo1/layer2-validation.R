@@ -17,7 +17,7 @@ validarOperacionesDuplicadas <- function(agente, eb){
   carpeta   <- getCarpetaFromAgent(agente)
   exigibles <- getArchivosNoObservadosByCols(agente, eb, c("CCR", "CCR_C", "CODGR"))
   
-  Dups <- tibble(NombreArchivo = exigibles[str_detect(exigibles, paste(c("BD01","BD02A", "BD02B", "BD03A"), collapse = '|'))]) %>% 
+  Dups <- tibble(NombreArchivo = exigibles[str_detect(exigibles, paste(c("BD01","BD02A", "BD02B"), collapse = '|'))]) %>% 
     rowwise() %>% 
     mutate(ruta       = getRuta(carpeta, NombreArchivo),
            BD         = getBDFromRuta(ruta),
@@ -29,7 +29,6 @@ validarOperacionesDuplicadas <- function(agente, eb){
   dups_BD01  <- Dups %>% filter(BD == "BD01")
   dups_BD02A <- Dups %>% filter(BD == "BD02A")
   dups_BD02B <- Dups %>% filter(BD == "BD02B")
-  dups_BD03A <- Dups %>% filter(BD == "BD03A")
   
   dups_BD04  <- getDuplicadosCredCancelados(agente, exigibles) 
   
@@ -70,19 +69,6 @@ validarOperacionesDuplicadas <- function(agente, eb){
       select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
     
     eb <- addError(eb, chunk_403)
-  }
-  if (nrow(dups_BD03A) > 0) {
-    chunk_404 <- dups_BD03A %>% rowwise() %>%
-      mutate(CodCoopac = getCoopacFromAgent(agente),
-             IdProceso = getIdProcesoFromAgent(agente),
-             Cod = 404,
-             txt1 = Duplicados,
-             num1 = length(str_split(string=txt1 ,pattern = ",")[[1]]),
-             num2 = Saldo
-      ) %>%
-      select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1, num2)
-    
-    eb <- addError(eb, chunk_404)
   }
   if (nrow(dups_BD04) > 0) {
     chunk_405 <- tibble(CodCoopac = getCoopacFromAgent(agente),
