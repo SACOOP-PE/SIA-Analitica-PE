@@ -70,7 +70,7 @@ validarOperacionesDuplicadas <- function(agente, eb){
     
     eb <- addError(eb, chunk_403)
   }
-  if (nrow(dups_BD04) > 0) {
+  if (length(exigibles[str_detect(exigibles, "BD04")]) >0 & nrow(dups_BD04) > 0) {
     chunk_405 <- tibble(CodCoopac = getCoopacFromAgent(agente),
                         IdProceso = getIdProcesoFromAgent(agente),
                         Cod     = 405,
@@ -131,7 +131,7 @@ getDuplicadosCredCancelados <- function(agente, exigibles){
   carpeta    <- getCarpetaFromAgent(agente)
   cancelados <- exigibles[str_detect(exigibles, "BD04")]
   
-  if (cancelados >= 1) {
+  if (length(cancelados) > 0) {
     CredCandelados <- quitarVaciosBD(getRuta(carpeta, cancelados[1])) %>% 
       mutate(Periodos = getAnoMesFromRuta(getRuta(carpeta, cancelados[1]))) 
     
@@ -145,20 +145,23 @@ getDuplicadosCredCancelados <- function(agente, exigibles){
       return(dupsCancelados)
     }
     
-    for (i in 2:length(cancelados)-1) {
+    else{
+      for (i in 2:length(cancelados)-1) {
+        
+        CredCandelados <- CredCandelados %>%
+          bind_rows(quitarVaciosBD(getRuta(carpeta, cancelados[i+1])) %>% 
+                      mutate(Periodos = getAnoMesFromRuta(getRuta(carpeta, cancelados[i+1]))))
+        
+      }
       
-      CredCandelados <- CredCandelados %>%
-        bind_rows(quitarVaciosBD(getRuta(carpeta, cancelados[i+1])) %>% 
-                    mutate(Periodos = getAnoMesFromRuta(getRuta(carpeta, cancelados[i+1]))))
+      dupsCancelados <- CredCandelados %>% 
+        select(Periodos, CCR_C) %>% 
+        group_by(CCR_C) %>%
+        filter(n() >1)
       
+      return(dupsCancelados)
     }
-    
-    dupsCancelados <- CredCandelados %>% 
-      select(Periodos, CCR_C) %>% 
-      group_by(CCR_C) %>%
-      filter(n() >1)
-    
-    return(dupsCancelados)
+
   }
   return("")
 }
