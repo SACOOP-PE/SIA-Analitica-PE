@@ -20,10 +20,10 @@ source("R/modulo1/layer4-validation.R")
 source("R/modulo1/layer5-validation.R")
 
 # 2. Módulo de alertas regulatorias
-source("R/modulo2/layer0-alert.R")
+# source("R/modulo2/layer0-alert.R")
 
 # 3. Módulo de analisis crediticio
-source("R/modulo3/layer0-analysis.R")
+# source("R/modulo3/layer0-analysis.R")
 
 ##### Create agent -----
 agent <- createAgent(idCoopac = "01172",
