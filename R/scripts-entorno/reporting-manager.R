@@ -90,9 +90,16 @@ cutStringError <- function(num1, txt1) {
   else{return(txt1)}
 }
 replaceString  <- function(desc, num1, cod) {
-  desc <- if_else(num1 == "01" & (cod %in% c(301:308) == FALSE), 
-                  str_replace(desc, "Se detectaron", "Se detectó"),
-                  desc)
+  if (num1 == "01" & (cod %in% c(301:308) == FALSE)) {
+    desc <- if_else(cod %in% c(401:709), 
+                    str_replace(desc, "Se detectaron", "Se detectó"),
+                    if_else(cod %in% c(201:203),
+                            str_replace(desc, "Se identificaron", "Se identificó"),
+                            desc
+                            )
+                    )
+    return(desc)
+  }
   return(desc)
 }
 

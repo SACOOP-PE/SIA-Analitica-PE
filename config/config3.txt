@@ -41,7 +41,7 @@ Cod	Tipo	Descripcion	Categoria	Criticidad
 619	Error	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Esquema de amortización (ESAM_C) de la BD04 durante el periodo {1}. Valores correctos: {2}	Verificación de campos numéricos	MEDIA
 620	Error	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Forma de Cancelación del crédito (FOCAN_C) de la BD04 durante el periodo {1}. Valores correctos: {2}	Verificación de campos numéricos	MEDIA
 621	Error	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Modalidad específica bajo la cual fue otorgado el Crédito(MDCR_C) de la BD04 durante el periodo {1}. Valores correctos: {2}	Verificación de campos numéricos	MEDIA
-622	Error	"Se detectaron {0} crédito(s) con errores en el Número y Tipo de Documento ({1}) respectivamente, correspondiente a la base de datos crediticia {2} durante el periodo {3}."	Verificación de campos no numéricos	BAJA
+622	Error	Se detectaron {0} crédito(s) con errores en el Número y Tipo de Documento ({1}) respectivamente, correspondiente a la base de datos crediticia {2} durante el periodo {3}.	Verificación de campos no numéricos	BAJA
 701	Error	Se detectaron {0} crédito(s) con fechas vacías o erróneas en la Fecha de primer pago de capital según cronograma original (FPPK) en la BD01 durante el periodo {1}.	Verificación de campos no numéricos	MEDIA
 702	Error	Se detectaron {0} crédito(s) con fechas vacías o erróneas en la Fecha de desembolso (FOT) en la BD01 durante el periodo {1}.	Verificación de campos no numéricos	MEDIA
 703	Error	Se detectaron {0} crédito(s) con fechas vacías o erróneas en la Fecha de vencimiento general de la operación según cronograma (FVEG) en la BD01 durante el periodo {1}.	Verificación de campos no numéricos	MEDIA
