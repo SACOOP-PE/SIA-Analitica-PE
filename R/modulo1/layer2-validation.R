@@ -131,23 +131,36 @@ getDuplicadosCredCancelados <- function(agente, exigibles){
   carpeta    <- getCarpetaFromAgent(agente)
   cancelados <- exigibles[str_detect(exigibles, "BD04")]
   
-  CredCandelados <- quitarVaciosBD(getRuta(carpeta, cancelados[1])) %>% 
-    mutate(Periodos = getAnoMesFromRuta(getRuta(carpeta, cancelados[1]))) 
-  
-  for (i in 2:length(cancelados)-1) {
-
-    CredCandelados <- CredCandelados %>%
-      bind_rows(quitarVaciosBD(getRuta(carpeta, cancelados[i+1])) %>% 
-                  mutate(Periodos = getAnoMesFromRuta(getRuta(carpeta, cancelados[i+1]))))
+  if (cancelados >= 1) {
+    CredCandelados <- quitarVaciosBD(getRuta(carpeta, cancelados[1])) %>% 
+      mutate(Periodos = getAnoMesFromRuta(getRuta(carpeta, cancelados[1]))) 
     
+    if (length(cancelados) ==1) {
+      
+      dupsCancelados <- CredCandelados %>% 
+        select(Periodos, CCR_C) %>% 
+        group_by(CCR_C) %>%
+        filter(n() >1)
+      
+      return(dupsCancelados)
+    }
+    
+    for (i in 2:length(cancelados)-1) {
+      
+      CredCandelados <- CredCandelados %>%
+        bind_rows(quitarVaciosBD(getRuta(carpeta, cancelados[i+1])) %>% 
+                    mutate(Periodos = getAnoMesFromRuta(getRuta(carpeta, cancelados[i+1]))))
+      
+    }
+    
+    dupsCancelados <- CredCandelados %>% 
+      select(Periodos, CCR_C) %>% 
+      group_by(CCR_C) %>%
+      filter(n() >1)
+    
+    return(dupsCancelados)
   }
-  
-  dupsCancelados <- CredCandelados %>% 
-    select(Periodos, CCR_C) %>% 
-    group_by(CCR_C) %>%
-    filter(n() >1)
-  
-  return(dupsCancelados)
+  return("")
 }
 getSaldoTotal               <- function(ruta, opers){
   if (opers != "" & getBDFromRuta(ruta) != "BD02B") {

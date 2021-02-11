@@ -1,6 +1,6 @@
 Cod	Tipo	Descripcion	Categoria	Criticidad
-101	Error	Se interrumpió el proceso de análisis debido a que existen {0} archivos duplicados en la ruta indicada. Archivos duplicados: {1}.	Completitud de archivos	MUY ALTA
-102	Error	Se interrumpió el proceso de análisis debido a que faltan {0} archivos según lo indicado en la Coopac. Archivos faltantes: {1}	Completitud de archivos	MUY ALTA
+101	Error	Se interrumpió el proceso de análisis debido a que existen {0} archivo(s) duplicado(s) en la ruta indicada. Archivo(s) duplicado(s): {1}.	Completitud de archivos	MUY ALTA
+102	Error	Se interrumpió el proceso de análisis debido a que faltan {0} archivo(s) según lo indicado en la Coopac. Archivo(s) faltante(s): {1}	Completitud de archivos	MUY ALTA
 201	Error	Se identificaron {0} columna(s) faltante(s) ({1}) correspondiente(s) a la base de datos crediticia {2} durante el periodo {3}.	Completitud de columnas	ALTA
 202	Error	Se identificaron {0} columna(s) sobrante(s) ({1}) correspondiente(s) a la base de datos crediticia {2} durante el periodo {3}. 	Completitud de columnas	ALTA
 203	Error	Se identificaron {0} columna(s) totalmente vacía(s) ({1}) correspondiente a la base de datos crediticia {2} en el periodo {3}.	Completitud de columnas	ALTA
