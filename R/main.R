@@ -26,13 +26,12 @@ source("R/modulo1/layer5-validation.R")
 # source("R/modulo3/layer0-analysis.R")
 
 ##### Create agent -----
-agent <- createAgent(idCoopac = "01172",
-                     periodoInicial = "201901",
-                     periodoFinal   = "202010")
+agent <- createAgent(idCoopac = "01106",
+                     periodoInicial = "202001",
+                     periodoFinal   = "202012")
 
 ##### Interrogar Modulo 1
 bucket <- interrogateAgent_mod1(agent)
-# bucket <- interrogateAgent_mod2(agent, bucket) #alertas, aún no está listo
 
 ##### Reporting -----
 saveOutputs(closeAgent(agent, bucket), formatBucket(bucket))
