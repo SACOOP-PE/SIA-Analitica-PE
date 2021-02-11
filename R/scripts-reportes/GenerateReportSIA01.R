@@ -23,7 +23,7 @@ generar_reporte_T1 <- function(idProceso) {
   myhead.lbl3 <- "I. Resultados de la validación:"
   myhead.lbl4 <- "Periodo Inicio:"
   myhead.lbl5 <- "Periodo Fin:"
-  myhead.lbl6 <- "N° proceso:"
+  myhead.lbl6 <- "Fecha de Validación:"
   myhead.lbl7 <- "Periodicidad"
   myhead.lbl8 <- "II. Detalle de las observaciones:"
   
@@ -49,7 +49,7 @@ generar_reporte_T1 <- function(idProceso) {
                                                                 pull(filename) %>% unique() %>% length() %>% toString())))
   myhead.txt4 <- agente %>% pull(PeriodoInicial) %>% first()
   myhead.txt5 <- agente %>% pull(PeriodoFinal) %>% first()
-  myhead.txt6 <- agente %>% pull(IdProceso) %>% first()
+  myhead.txt6 <- format(Sys.time(), "%d/%m/%Y")
   myhead.txt7 <- "Mensual"
   
   # Estilos ----
