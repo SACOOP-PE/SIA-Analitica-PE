@@ -5,7 +5,7 @@ formatBucket <- function(eb) {
                           pad2(num1), 
                           format(num1, big.mark = ",", small.interval = 3)),
            num2 = format(num2, big.mark = ",", small.interval = 3),
-           Descripcion = replaceString(if_else(Cod <= 102,
+           Descripcion = replaceString(if_else(Cod %in% c(101:102),
                                                str_replace_all(getDescError(Cod), c("\\Q{0}"  = toString(num1),
                                                                                     "\\Q{1}"  = txt1)),
                                                if_else(Cod %in% c(201:203),
@@ -32,7 +32,7 @@ formatBucket <- function(eb) {
                                                                                        if_else(Cod == 405,
                                                                                                str_replace_all(getDescError(Cod), c("\\Q{0}"  = toString(num1),
                                                                                                                                     "\\Q{1}"  = txt2)),
-                                                                                               if_else(Cod >= 601 & Cod <= 621,
+                                                                                               if_else(Cod %in% c(601:621),
                                                                                                        str_replace_all(getDescError(Cod), c("\\Q{0}"  = toString(num1),
                                                                                                                                             "\\Q{1}"  = periodoEscrito(Periodo),
                                                                                                                                             "\\Q{2}"  = txt3)),
@@ -42,7 +42,7 @@ formatBucket <- function(eb) {
                                                                                                                                                     "\\Q{2}"  = BD,
                                                                                                                                                     "\\Q{3}"  = periodoEscrito(Periodo))),
                                                                                                  
-                                                                                                               if_else(Cod >= 701,
+                                                                                                               if_else(Cod %in% c(701:709),
                                                                                                                        str_replace_all(getDescError(Cod), c("\\Q{0}"  = toString(num1),
                                                                                                                                                             "\\Q{1}"  = periodoEscrito(Periodo))),
                                                                                                                        ""
