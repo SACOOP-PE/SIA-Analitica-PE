@@ -115,11 +115,11 @@ generar_reporte_T1 <- function(idProceso) {
   mergeCells(wb, 1, cols = 6:17, rows = 12:13)
   mergeCells(wb, 1, cols = 3:5, rows = 12)
   
-  mergeCells(wb, 1, cols = 6:13, rows = 26)
-  mergeCells(wb, 1, cols = 14:15, rows = 26)
+  mergeCells(wb, 1, cols = 6:13, rows = 17)
+  mergeCells(wb, 1, cols = 14:15, rows = 17)
   
-  map(27:(nrow(eb)+27),~ mergeCells(wb, 1, 6:13, .))
-  map(27:(nrow(eb)+27),~ mergeCells(wb, 1, 14:15, .))
+  map(18:(nrow(eb)+18),~ mergeCells(wb, 1, 6:13, .))
+  map(18:(nrow(eb)+18),~ mergeCells(wb, 1, 14:15, .))
   
   # WriteData ----
   writeData(wb, 1, myhead.left, 2, 2) 
@@ -142,8 +142,8 @@ generar_reporte_T1 <- function(idProceso) {
   addStyle(wb, 1, myhead.lbl.style, cols = 14, rows = 9)
   writeData(wb, 1, myhead.lbl7, 14, 10)
   addStyle(wb, 1, myhead.lbl.style, cols = 14, rows = 10)
-  writeData(wb, 1, myhead.lbl8, 3, 24)
-  addStyle(wb, 1, myhead.lbl2.style, cols = 3, rows = 24)
+  writeData(wb, 1, myhead.lbl8, 3, 15)
+  addStyle(wb, 1, myhead.lbl2.style, cols = 3, rows = 15)
   
   addStyle(wb, 1, myhead.lblresultados.style, cols = 14, rows = 10)
   addStyle(wb, 1, myhead.lbl3.style, cols =6:17, rows = 12:13, gridExpand = T)
@@ -157,24 +157,24 @@ generar_reporte_T1 <- function(idProceso) {
   writeData(wb, 1, myhead.txt6, 16, 9)
   writeData(wb, 1, myhead.txt7, 16, 10)
   
-  writeData(wb, 1, bucket.lbl1, 3, 26)
-  writeData(wb, 1, bucket.lbl2, 4, 26) 
-  writeData(wb, 1, bucket.lbl3, 5, 26)
-  writeData(wb, 1, bucket.lbl5, 6, 26)
-  writeData(wb, 1, bucket.lbl6, 14, 26)
-  writeData(wb, 1, bucket.lbl7, 16, 26)
-  writeData(wb, 1, bucket.lbl8, 17, 26)
+  writeData(wb, 1, bucket.lbl1, 3, 17)
+  writeData(wb, 1, bucket.lbl2, 4, 17) 
+  writeData(wb, 1, bucket.lbl3, 5, 17)
+  writeData(wb, 1, bucket.lbl5, 6, 17)
+  writeData(wb, 1, bucket.lbl6, 14, 17)
+  writeData(wb, 1, bucket.lbl7, 16, 17)
+  writeData(wb, 1, bucket.lbl8, 17, 17)
   
-  addStyle(wb, 1, bucket.head.style, cols =3:17, rows = 26)
+  addStyle(wb, 1, bucket.head.style, cols =3:17, rows = 17)
   
-  setRowHeights(wb, 1, 27:(nrow(eb)+27), heights = 33.7)
-  writeData(wb, 1, eb %>% select(Periodo, BD, Cod, Descripcion), 3, 27, colNames = F, rowNames = F)
-  writeData(wb, 1, eb %>% select(Categoria), 14, 27, colNames = F, rowNames = F)
-  writeData(wb, 1, eb %>% select(Criticidad), 16, 27, colNames = F, rowNames = F)
-  addStyle(wb, 1, bucket.body.style  , cols =3:17, rows = 27:(27+(nrow(eb)-1)), gridExpand = T)
+  setRowHeights(wb, 1, 18:(nrow(eb)+18), heights = 33.7)
+  writeData(wb, 1, eb %>% select(Periodo, BD, Cod, Descripcion), 3, 18, colNames = F, rowNames = F)
+  writeData(wb, 1, eb %>% select(Categoria), 14, 18, colNames = F, rowNames = F)
+  writeData(wb, 1, eb %>% select(Criticidad), 16, 18, colNames = F, rowNames = F)
+  addStyle(wb, 1, bucket.body.style  , cols =3:17, rows = 18:(18+(nrow(eb)-1)), gridExpand = T)
   conditionalFormatting(wb, 1,
                         cols = 16,
-                        rows = 27:(27+(nrow(eb)-1)),
+                        rows = 18:(18+(nrow(eb)-1)),
                         type = "contains",
                         rule = "ALTA", 
                         style = createStyle(fontColour = "#9C0006"))
@@ -191,34 +191,52 @@ generar_reporte_T1 <- function(idProceso) {
   }
   
   numObs <- which((bucket$Cod %in% c(201:203, 301:308)) == FALSE)
-  
+
   for (i in 1:nrow(filter(bucket,(Cod %in% c(201:203, 301:308)) == FALSE))){
-    
+
     nombreSheet <- filter(bucket,(Cod %in% c(201:203, 301:308)) == FALSE)[i,] %>% select(BD, Cod, Periodo) %>%
       apply(1, paste, collapse = "-" )
-    
+
     addWorksheet(wb, nombreSheet)
-    
-    writeData(wb, i+1, getObservaciones(agent, bucket, i), startRow = 4, colNames = T, rowNames = F)
     writeFormula(wb, i+1, startRow = 2, x= makeHyperlinkString(sheet = "Reporte de Validación BD", 
                                                                row = 1,
                                                                text = "Volver"))
-    writeFormula(wb, 1, startRow = 26+numObs[i], startCol = 17, x= makeHyperlinkString(sheet = nombreSheet, 
+    writeFormula(wb, 1, startRow = 17+numObs[i], startCol = 17, x= makeHyperlinkString(sheet = nombreSheet,
                                                                                        row = 1,
                                                                                        text = "Ver más detalle"))
+    
+    writeData(wb, i+1, getObservaciones(agent, bucket, i), startRow = 4, colNames = T, rowNames = F)
+    
   }
+  
+    
   
   # Save file xlsx ----
   saveWorkbook(wb, "test/output/SIA_Report_T1.xlsx", overwrite = TRUE)
   file.show("test/output/SIA_Report_T1.xlsx")
 }
-generar_grafico_T1 <- function(idProceso) {
 
+getObservaciones   <- function(agente, eb, roweb){
+  
+  eb <- eb %>% filter((Cod %in% c(201:203, 301:308)) == FALSE) %>% rowwise() %>%
+    mutate(filename = paste0(CodCoopac, "_",BD ,"_" ,Periodo, ".txt")) %>%
+    select(Cod, filename, txt1)
+  
+  operaciones <- unlist(eb[roweb,] %>% pull(txt1) %>% str_split(", "))
+  ruta        <- getRuta(getCarpetaFromAgent(agente), eb[roweb,] %>% pull(filename))
+  
+  obs <- quitarVaciosBD(ruta) %>%
+    filter(cgrep(quitarVaciosBD(ruta), getCodigoBD(getBDFromRuta(ruta)))[[1]] %in% operaciones)
+  
+  return(obs)
+}
+generar_grafico_T1 <- function(idProceso) {
+  
   eb <- read_excel(paste0("test/output/resultados_", 100341, ".xlsx"), sheet = "bucketOficio", 
-                      col_types = c("text", "text", "text", "text", "text", "text", "text")) %>% rowwise() %>%
+                   col_types = c("text", "text", "text", "text", "text", "text", "text")) %>% rowwise() %>%
     mutate(dateYear  = substr(Periodo, 1, 4),
            dateMonth = as.integer(substr(Periodo, 5, 6)))
-    
+  
   
   eb$Criticidad <- factor(eb$Criticidad, 
                           levels=c("BAJA","MEDIA", "ALTA"),
@@ -247,20 +265,6 @@ generar_grafico_T1 <- function(idProceso) {
     theme(legend.position=("right"), legend.title = element_text(size=10)) + 
     theme(axis.text.y = element_text(hjust=0))
   
-}
-getObservaciones   <- function(agente, eb, roweb){
-  
-  eb <- eb %>% filter((Cod %in% c(201:203, 301:308)) == FALSE) %>% rowwise() %>%
-    mutate(filename = paste0(CodCoopac, "_",BD ,"_" ,Periodo, ".txt")) %>%
-    select(Cod, filename, txt1)
-  
-  operaciones <- unlist(eb[roweb,] %>% pull(txt1) %>% str_split(", "))
-  ruta        <- getRuta(getCarpetaFromAgent(agente), eb[roweb,] %>% pull(filename))
-  
-  obs <- quitarVaciosBD(ruta) %>%
-    filter(cgrep(quitarVaciosBD(ruta), getCodigoBD(getBDFromRuta(ruta)))[[1]] %in% operaciones)
-  
-  return(obs)
 }
 
 library(tidyquant)
