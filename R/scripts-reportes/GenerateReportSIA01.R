@@ -190,11 +190,11 @@ generar_reporte_T1 <- function(idProceso) {
     return(wb)
   }
   
-  numObs <- which((bucket$Cod %in% c(201:203, 301:308)) == FALSE)
+  numObs <- which((bucket$Cod %in% c(201:203, 301:308, 404)) == FALSE)
   
-  for (i in 1:nrow(filter(bucket,(Cod %in% c(201:203, 301:308)) == FALSE))){
+  for (i in 1:nrow(filter(bucket,(Cod %in% c(201:203, 301:308, 404)) == FALSE))){
     
-    nombreSheet <- filter(bucket,(Cod %in% c(201:203, 301:308)) == FALSE)[i,] %>% select(BD, Cod, Periodo) %>%
+    nombreSheet <- filter(bucket,(Cod %in% c(201:203, 301:308, 404)) == FALSE)[i,] %>% select(BD, Cod, Periodo) %>%
       apply(1, paste, collapse = "-" )
     
     addWorksheet(wb, nombreSheet)
@@ -250,7 +250,7 @@ generar_grafico_T1 <- function(idProceso) {
 }
 getObservaciones   <- function(agente, eb, roweb){
   
-  eb <- eb %>% filter((Cod %in% c(201:203, 301:308)) == FALSE) %>% rowwise() %>%
+  eb <- eb %>% filter((Cod %in% c(201:203, 301:308, 404)) == FALSE) %>% rowwise() %>%
     mutate(filename = paste0(CodCoopac, "_",BD ,"_" ,Periodo, ".txt")) %>%
     select(Cod, filename, txt1)
   
