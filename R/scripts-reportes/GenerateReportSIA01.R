@@ -40,14 +40,13 @@ generar_reporte_T1 <- function(idProceso) {
   myhead.txt1 <- paste0(agente %>% pull(NombreCoopac) %>% first()," (",agente %>% pull(Coopac) %>% first(),")")
   myhead.txt2 <- paste0("Nivel ", agente %>% pull(NivelCoopac) %>% first())
   myhead.txt3 <- if_else(nrow(eb %>% filter(Cod %in% c(101,102))) >0,
-                         str_replace(resumenValidacion, c("\\Q{0}" = eb %>% pull(Descripcion) %>% toString(),
-                                                          "\\Q{1}" = bucket %>% pull(num1) %>% sum() %>% toString())),
+                         str_replace_all(resumenValidacion, c("\\Q{0}" = eb %>% pull(Descripcion) %>% toString(),
+                                                              "\\Q{1}" = bucket %>% pull(num1) %>% sum() %>% toString())),
                          str_replace_all(resumenValidacion, c("\\Q{0}"  = toString(nrow(eb)),
                                                               "\\Q{1}"  = toString(nrow(eb %>% filter(Criticidad == "ALTA"))),
                                                               "\\Q{2}"  = eb %>% 
                                                                 mutate(filename = paste0(agente %>% pull(Coopac), "_",BD ,"_" ,Periodo, ".txt")) %>% 
-                                                                pull(filename) %>% unique() %>% length() %>% toString()))
-                         )
+                                                                pull(filename) %>% unique() %>% length() %>% toString())))
   myhead.txt4 <- agente %>% pull(PeriodoInicial) %>% first()
   myhead.txt5 <- agente %>% pull(PeriodoFinal) %>% first()
   myhead.txt6 <- agente %>% pull(IdProceso) %>% first()
