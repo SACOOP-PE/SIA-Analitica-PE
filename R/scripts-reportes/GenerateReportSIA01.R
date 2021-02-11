@@ -5,7 +5,13 @@ generar_reporte_T1 <- function(idProceso) {
   agente <- read_excel(paste0("test/output/resultados_", idProceso, ".xlsx"), sheet = "agente",
                        col_types = c("text", "text", "text", "text", "text", "text", "text", "text", "text","text"))
   
-  resumenValidacion <- "El proceso de validación concluyó satisfactoriamente. Las observaciones deben ser sometidas a revisión por el analista SACOOP. Se identificaron {0} observaciones, de las cuales {1} tienen criticidad ALTA, ello da como resultado {2} archivos inconsistentes."
+  if (nrow(eb %>% filter(Cod %in% c(101,102))) >0) {
+    resumenValidacion <- "El proceso de validación no concluyó satisfactoriamente. {0}, de las cuales tienen criticidad ALTA, ello da como resultado {1} archivos inconsistentes."
+  }
+  else{
+    resumenValidacion <- "El proceso de validación concluyó satisfactoriamente. Las observaciones deben ser sometidas a revisión por el analista SACOOP. Se identificaron {0} observaciones, de las cuales {1} tienen criticidad ALTA, ello da como resultado {2} archivos inconsistentes."
+  }
+  
   
   # Head & cols ----
   
@@ -27,18 +33,21 @@ generar_reporte_T1 <- function(idProceso) {
   bucket.lbl5 <- "Descripción del error"
   bucket.lbl6 <- "Categoría"
   bucket.lbl7 <- "Criticidad"
-  bucket.lbl8 <- "Detalle" 
+  bucket.lbl8 <- "Detalle"
   
   # Dinamico ----
   
   myhead.txt1 <- paste0(agente %>% pull(NombreCoopac) %>% first()," (",agente %>% pull(Coopac) %>% first(),")")
   myhead.txt2 <- paste0("Nivel ", agente %>% pull(NivelCoopac) %>% first())
-  myhead.txt3 <- str_replace_all(resumenValidacion, c("\\Q{0}"  = toString(nrow(eb)),
-                                                      "\\Q{1}"  = toString(nrow(eb %>% filter(Criticidad == "ALTA"))),
-                                                      "\\Q{2}"  = eb %>% 
-                                                                   mutate(filename = paste0(agente %>% pull(Coopac), "_",BD ,"_" ,Periodo, ".txt")) %>% 
-                                                                   pull(filename) %>% unique() %>% length() %>% toString()
-                                                      ))
+  myhead.txt3 <- if_else(nrow(eb %>% filter(Cod %in% c(101,102))) >0,
+                         str_replace(resumenValidacion, c("\\Q{0}" = eb %>% pull(Descripcion) %>% toString(),
+                                                          "\\Q{1}" = bucket %>% pull(num1) %>% sum() %>% toString())),
+                         str_replace_all(resumenValidacion, c("\\Q{0}"  = toString(nrow(eb)),
+                                                              "\\Q{1}"  = toString(nrow(eb %>% filter(Criticidad == "ALTA"))),
+                                                              "\\Q{2}"  = eb %>% 
+                                                                mutate(filename = paste0(agente %>% pull(Coopac), "_",BD ,"_" ,Periodo, ".txt")) %>% 
+                                                                pull(filename) %>% unique() %>% length() %>% toString()))
+                         )
   myhead.txt4 <- agente %>% pull(PeriodoInicial) %>% first()
   myhead.txt5 <- agente %>% pull(PeriodoFinal) %>% first()
   myhead.txt6 <- agente %>% pull(IdProceso) %>% first()
@@ -176,6 +185,12 @@ generar_reporte_T1 <- function(idProceso) {
   setColWidths(wb, 1, 1:2, widths = 5.2)
   
   # Add Multiple sheet by error ----
+  if (nrow(eb %>% filter(Cod %in% c(101,102))) >0) {
+    saveWorkbook(wb, "test/output/SIA_Report_T1.xlsx", overwrite = TRUE)
+    file.show("test/output/SIA_Report_T1.xlsx")
+    return(wb)
+  }
+  
   numObs <- which((bucket$Cod %in% c(201:203, 301:308)) == FALSE)
   
   for (i in 1:nrow(filter(bucket,(Cod %in% c(201:203, 301:308)) == FALSE))){
@@ -197,7 +212,6 @@ generar_reporte_T1 <- function(idProceso) {
   # Save file xlsx ----
   saveWorkbook(wb, "test/output/SIA_Report_T1.xlsx", overwrite = TRUE)
   file.show("test/output/SIA_Report_T1.xlsx")
-  
 }
 generar_grafico_T1 <- function(idProceso) {
 
@@ -209,7 +223,7 @@ generar_grafico_T1 <- function(idProceso) {
   
   eb$Criticidad <- factor(eb$Criticidad, 
                           levels=c("BAJA","MEDIA", "ALTA"),
-                          labels=c("Archivo sin errores", "Archivo con errores", "Archivo con errores críticos"),
+                          labels=c("Errores no crítico", "Errores no crítico", "Errores críticos"),
                           ordered = T)
   
   eb$BD <- factor(eb$BD,
