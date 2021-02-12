@@ -232,7 +232,7 @@ getObservaciones   <- function(agente, eb, roweb){
   
   return(obs)
 }
-generar_grafico_T1 <- function(idProceso) {
+generar_grafico_T1 <- function(idProceso, numGraf) {
   
   eb <- read_excel(paste0("test/output/resultados_", idProceso, ".xlsx"), sheet = "bucketOficio", 
                    col_types = c("text", "text", "text", "text", "text", "text", "text")) %>% rowwise() %>%
@@ -248,7 +248,7 @@ generar_grafico_T1 <- function(idProceso) {
   
   eb$Criticidad <- factor(eb$Criticidad, 
                           levels=c("BAJA","MEDIA", "ALTA"),
-                          labels=c("Errores no críticos", "Errores leves", "Errores críticos"),
+                          labels=c("Errores no críticos", "Errores no críticos", "Errores críticos"),
                           ordered = T)
   
   eb$dateMonth <- factor(eb$dateMonth,
@@ -258,22 +258,35 @@ generar_grafico_T1 <- function(idProceso) {
   
   fct_rev(eb$Criticidad)
   
-  colors <- c("dodgerblue1", "dodgerblue4", "firebrick1")
+  colors <- c("dodgerblue1", "firebrick1")
   
-  # ggplot(eb, aes(dateMonth, BD, fill = factor(Criticidad))) +
-  #   geom_tile(aes(fill = factor(Criticidad), width=0.95, height=0.95)) +
-  #   facet_wrap(vars(dateYear)) +
-  #   scale_fill_manual(values=colors, guide = guide_legend(reverse = TRUE))+
-  #   xlab("") + ylab("") + labs(fill = " ") +
-  #   theme(legend.position=("right"), legend.title = element_text(size=10)) +
-  #   theme(axis.text.y = element_text(hjust=0))
-  
- eb %>% 
-   count(dateMonth) %>% 
-   ggplot(aes(dateMonth, Criticidad)) +
-   scale_fill_manual(values=colors, guide = guide_legend(reverse = FALSE)) +
-   geom_tile(aes(fill = factor(Criticidad), width=0.95, height=0.95)) + 
-   facet_wrap(~ BD)
+  if (numGraf == 1) {
+    plot <- eb %>%
+      ggplot(aes(dateMonth, BD, group = Criticidad)) +
+      scale_fill_manual(values=colors, guide = guide_legend(reverse = FALSE)) +
+      geom_tile(aes(fill = Criticidad, width=0.95, height=0.95)) +
+      facet_wrap(~ Criticidad) +
+      labs(x = "MESES",
+           y = 'BASES DE DATOS CREDITICIAS') +
+      theme_bw()
+    
+    return(plot)
+  }
+  if (numGraf == 2) {
+    plot <-  eb %>%
+      group_by(BD, Criticidad) %>% tally() %>%
+      ggplot(aes(BD, n, fill = Criticidad)) +
+      geom_bar(stat='identity') +
+      labs(x = "BASES DE DATOS CREDITICIAS",
+           y = 'N errores') +
+      scale_fill_manual(values=colors, guide = guide_legend(reverse = FALSE)) +
+      geom_text(aes(label=n), vjust=1.6,
+                color="white", size=3.5) +
+      theme_minimal()
+    
+    return(plot)
+  }
+
 }
 
 library(tidyquant)
