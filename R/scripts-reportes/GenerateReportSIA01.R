@@ -63,7 +63,6 @@ generar_reporte_T1 <- function(idProceso) {
                                       textDecoration = c("BOLD"),
                                       halign = "center")
   myhead.center2.style <- createStyle(fontSize = 12, 
-                                      #fontColour = "#0000FF",
                                       textDecoration = c("ITALIC"))
   
   myhead.centerGrafico.style <- createStyle(fontSize = 18, 
@@ -72,10 +71,8 @@ generar_reporte_T1 <- function(idProceso) {
                                             halign = "left")
   
   myhead.lbl.style <- createStyle(fontSize = 12, 
-                                  #fontColour = "#0000FF",
                                   textDecoration = c("BOLD"))
   myhead.lbl2.style <- createStyle(fontSize = 14, 
-                                  #fontColour = "#0000FF",
                                   textDecoration = c("BOLD"))
   myhead.lbl3.style <- createStyle(fontSize = 11, 
                                    wrapText = T, 
@@ -84,7 +81,6 @@ generar_reporte_T1 <- function(idProceso) {
                                    valign = "center")
   
   myhead.lblresultados.style <- createStyle(fontSize = 12, 
-                                            #fontColour = "#0000FF",
                                             textDecoration = c("BOLD"),
                                             halign = "left",
                                             valign = "top")
@@ -96,9 +92,7 @@ generar_reporte_T1 <- function(idProceso) {
                                          valign = "top",
                                          wrapText = T)
   
-  bucket.head.style <- createStyle(fontSize = 12, border = "TopBottomLeftRight ", fgFill = "#bfd1e7"
-                                   #bgFill = "#AAAAAA"
-                                   )
+  bucket.head.style <- createStyle(fontSize = 12, border = "TopBottomLeftRight ", fgFill = "#bfd1e7")
   
   bucket.body.style <- createStyle(fontSize = 11, wrapText = T, borderStyle = "thin", halign= "left", valign = "center", border ="TopBottomLeftRight")
   
@@ -204,23 +198,20 @@ generar_reporte_T1 <- function(idProceso) {
   plot <- generar_grafico_T1(idProceso)
   insertPlot(wb, "Estado de archivos", startCol = 2, startRow = 6, fileType = "png",  width = 76.20, height = 12.21 ,units = "cm")
   
-  numObs <- which((bucket$Cod %in% c(201:203, 301:308, 601:709)) == FALSE)
+  numObs <- which((bucket$Cod %in% c(201:203, 301:308)) == FALSE)
 
-  for (i in 1:nrow(filter(bucket,(Cod %in% c(201:203, 301:308, 601:709)) == FALSE))){
+  for (i in 1:nrow(filter(bucket,(Cod %in% c(201:203, 301:308)) == FALSE))){
 
-    nombreSheet <- filter(bucket,(Cod %in% c(201:203, 301:308, 601:709)) == FALSE)[i,] %>% select(BD, Cod, Periodo) %>%
+    nombreSheet <- filter(bucket,(Cod %in% c(201:203, 301:308)) == FALSE)[i,] %>% select(BD, Cod, Periodo) %>%
       apply(1, paste, collapse = "-" )
 
     addWorksheet(wb, nombreSheet)
-    writeFormula(wb, i+2, startRow = 2, x= makeHyperlinkString(sheet = "Reporte de Validación BD", 
-                                                               row = 1,
-                                                               text = "Volver"))
+    writeFormula(wb, i+2, startRow = 2, x= makeHyperlinkString(sheet = "Reporte de Validación BD", row = 1, text = "Volver"))
     writeFormula(wb, 1, startRow = 17+numObs[i], startCol = 17, x= makeHyperlinkString(sheet = nombreSheet,
                                                                                        row = 1,
                                                                                        text = "Ver más detalle"))
     
     writeData(wb, i+2, getObservaciones(agent, bucket, i), startRow = 4, colNames = T, rowNames = F)
-    
   }
   
   # Save file xlsx ----
@@ -229,7 +220,7 @@ generar_reporte_T1 <- function(idProceso) {
 }
 getObservaciones   <- function(agente, eb, roweb){
   
-  eb <- eb %>% filter((Cod %in% c(201:203, 301:308, 601:709)) == FALSE) %>% rowwise() %>%
+  eb <- eb %>% filter((Cod %in% c(201:203, 301:308)) == FALSE) %>% rowwise() %>%
     mutate(filename = paste0(CodCoopac, "_",BD ,"_" ,Periodo, ".txt")) %>%
     select(Cod, filename, txt1)
   
@@ -243,7 +234,7 @@ getObservaciones   <- function(agente, eb, roweb){
 }
 generar_grafico_T1 <- function(idProceso) {
   
-  eb <- read_excel(paste0("test/output/resultados_", "100348", ".xlsx"), sheet = "bucketOficio", 
+  eb <- read_excel(paste0("test/output/resultados_", idProceso, ".xlsx"), sheet = "bucketOficio", 
                    col_types = c("text", "text", "text", "text", "text", "text", "text")) %>% rowwise() %>%
     mutate(dateYear  = substr(Periodo, 1, 4),
            dateMonth = as.integer(substr(Periodo, 5, 6))) %>% 
@@ -277,7 +268,9 @@ generar_grafico_T1 <- function(idProceso) {
   #   theme(legend.position=("right"), legend.title = element_text(size=10)) +
   #   theme(axis.text.y = element_text(hjust=0))
   
- ggplot(data=eb, aes(dateMonth, Criticidad)) +
+ eb %>% 
+   count(dateMonth) %>% 
+   ggplot(aes(dateMonth, Criticidad)) +
    scale_fill_manual(values=colors, guide = guide_legend(reverse = FALSE)) +
    geom_tile(aes(fill = factor(Criticidad), width=0.95, height=0.95)) + 
    facet_wrap(~ BD)
