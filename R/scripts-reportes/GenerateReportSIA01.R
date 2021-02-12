@@ -32,7 +32,7 @@ generar_reporte_T1 <- function(idProceso) {
   bucket.lbl3 <- "Código"
   bucket.lbl5 <- "Descripción del error"
   bucket.lbl6 <- "Categoría"
-  bucket.lbl7 <- "Criticidad"
+  bucket.lbl7 <- "Tipo"
   bucket.lbl8 <- "Detalle"
   
   # Dinamico ----
@@ -175,8 +175,8 @@ generar_reporte_T1 <- function(idProceso) {
                         cols = 16,
                         rows = 18:(18+(nrow(eb)-1)),
                         type = "contains",
-                        rule = "ALTA", 
-                        style = createStyle(fontColour = "#9C0006"))
+                        rule = "Crítico", 
+                        style = createStyle(fontColour = "#9C0006", textDecoration = "bold"))
   
   img <- "R/scripts-reportes/logo-sbs.png"
   insertImage(wb, 1, img, startRow = 1, startCol = 16, width = 1.90, height = 0.90)
@@ -191,12 +191,22 @@ generar_reporte_T1 <- function(idProceso) {
   # Add plot - detalles de errores ----
   
   addWorksheet(wb, "Estado de archivos")
+  
+  ##plot1----
   mergeCells(wb, 2, cols = 2:8, rows = 4)
   writeData(wb, 2, "RESUMEN DE ARCHIVOS SEGÚN CRITICIDAD", 2, 4)
   addStyle(wb, 2, myhead.centerGrafico.style, cols = 2:8, rows = 4)
   
-  plot <- generar_grafico_T1(idProceso)
-  insertPlot(wb, "Estado de archivos", startCol = 2, startRow = 6, fileType = "png",  width = 76.20, height = 12.21 ,units = "cm")
+  plot <- generar_grafico_T1(idProceso, 1)
+  insertPlot(wb, "Estado de archivos", startCol = 2, startRow = 6, fileType = "png",  width = 36.20, height = 12.21 ,units = "cm")
+  
+  ##plot2----
+  mergeCells(wb, 2, cols = 2:8, rows = 33)
+  writeData(wb, 2, "RESUMEN DE ARCHIVOS SEGÚN BD-CRITICIDAD", 2, 4)
+  addStyle(wb, 2, myhead.centerGrafico.style, cols = 2:8, rows = 33)
+  
+  plot <- generar_grafico_T1(idProceso, 2)
+  insertPlot(wb, "Estado de archivos", startCol = 2, startRow = 35, fileType = "png",  width = 56.20, height = 12.21 ,units = "cm")
   
   numObs <- which((bucket$Cod %in% c(201:203, 301:308)) == FALSE)
 
@@ -218,7 +228,7 @@ generar_reporte_T1 <- function(idProceso) {
   saveWorkbook(wb, "test/output/SIA_Report_T1.xlsx", overwrite = TRUE)
   file.show("test/output/SIA_Report_T1.xlsx")
 }
-getObservaciones   <- function(agente, eb, roweb){
+getObservaciones   <- function(agente, eb, roweb) {
   
   eb <- eb %>% filter((Cod %in% c(201:203, 301:308)) == FALSE) %>% rowwise() %>%
     mutate(filename = paste0(CodCoopac, "_",BD ,"_" ,Periodo, ".txt")) %>%
@@ -247,8 +257,8 @@ generar_grafico_T1 <- function(idProceso, numGraf) {
                   ordered=TRUE)
   
   eb$Criticidad <- factor(eb$Criticidad, 
-                          levels=c("BAJA","MEDIA", "ALTA"),
-                          labels=c("Errores no críticos", "Errores no críticos", "Errores críticos"),
+                          levels=c("Crítico","No crítico"),
+                          labels=c("Errores críticos", "Errores no críticos"),
                           ordered = T)
   
   eb$dateMonth <- factor(eb$dateMonth,
@@ -258,7 +268,7 @@ generar_grafico_T1 <- function(idProceso, numGraf) {
   
   fct_rev(eb$Criticidad)
   
-  colors <- c("dodgerblue1", "firebrick1")
+  colors <- c("firebrick1","dodgerblue1")
   
   if (numGraf == 1) {
     plot <- eb %>%
@@ -278,10 +288,10 @@ generar_grafico_T1 <- function(idProceso, numGraf) {
       ggplot(aes(BD, n, fill = Criticidad)) +
       geom_bar(stat='identity') +
       labs(x = "BASES DE DATOS CREDITICIAS",
-           y = 'N errores') +
+           y = 'n errores') +
       scale_fill_manual(values=colors, guide = guide_legend(reverse = FALSE)) +
       geom_text(aes(label=n), vjust=1.6,
-                color="white", size=3.5) +
+                color="white", size=4) +
       theme_minimal()
     
     return(plot)

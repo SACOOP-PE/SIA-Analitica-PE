@@ -1,53 +1,53 @@
 Cod	Tipo	Descripcion	Categoria	Criticidad
-101	Error	Se interrumpió el proceso de análisis debido a que existen {0} archivo(s) duplicado(s) en la ruta indicada. Archivo(s) duplicado(s): {1}.	Completitud de archivos	MUY ALTA
-102	Error	Se interrumpió el proceso de análisis debido a que faltan {0} archivo(s) según lo indicado en la Coopac. Archivo(s) faltante(s): {1}	Completitud de archivos	MUY ALTA
-201	Error	Se identificaron {0} columna(s) faltante(s) ({1}) correspondiente(s) a la base de datos crediticia {2} durante el periodo {3}.	Completitud de columnas	ALTA
-202	Error	Se identificaron {0} columna(s) sobrante(s) ({1}) correspondiente(s) a la base de datos crediticia {2} durante el periodo {3}. 	Completitud de columnas	ALTA
-203	Error	Se identificaron {0} columna(s) totalmente vacía(s) ({1}) correspondiente a la base de datos crediticia {2} en el periodo {3}.	Completitud de columnas	ALTA
-301	Error	El capital vigente de la cartera correspondiente al mes de {0} no cuadra con el balance de comprobación durante el periodo de {1}. Diferencia: S/{2}	Verificación contable	ALTA
-302	Error	El capital vencido de la cartera correspondiente al mes de {0} no cuadra con el balance de comprobación durante el periodo de {1}. Diferencia: S/{2}	Verificación contable	ALTA
-303	Error	El capital refinanciado de la cartera correspondiente al mes de {0} no cuadra con el balance de comprobación durante el periodo de {1}. Diferencia: S/{2}	Verificación contable	ALTA
-304	Error	El capital cobranza judicial de la cartera correspondiente al mes de {0} no cuadra con el balance de comprobación durante el periodo de {1}. Diferencia: S/{2}	Verificación contable	ALTA
-305	Error	Los intereses devengados de la cartera correspondiente al mes de {0} no cuadra con el balance de comprobación durante el periodo de {1}. Diferencia: S/{2}	Verificación contable	ALTA
-306	Error	Los intereses diferidos de la cartera correspondiente al mes de {0} no cuadra con el balance de comprobación durante el periodo de {1}. Diferencia: S/{2}	Verificación contable	ALTA
-307	Error	Las provisiones genéricas de la cartera correspondiente al mes de {0} no cuadra con el balance de comprobación durante el periodo de {1}. Diferencia: S/{2}	Verificación contable	ALTA
-308	Error	Las provisiones específicas de la cartera correspondiente al mes de {0} no cuadra con el balance de comprobación durante el periodo de {1}. Diferencia: S/{2}	Verificación contable	ALTA
-401	Error	Se detectaron {0} crédito(s) duplicado(s) en la cartera (BD01) en el mes de {1} con un saldo de colocaciones por S/ {2} durante el periodo {3}.	Consistencia de operaciones	ALTA
-402	Error	Se detectaron {0} crédito(s) con cronogramas duplicado(s) (BD02A) en el mes de {1} con un saldo de colocaciones por S/ {2} durante el periodo {3}.	Consistencia de operaciones	ALTA
-403	Error	Se detectaron {0} operación(es) de crédito con cronograma(s) cancelado(s) (BD02B) duplicados durante el periodo {1}.	Consistencia de operaciones	ALTA
-404	Error	Se detectaron {0} código(s) de garantía duplicado(s) (BD03A) con un monto de cobertura total por S/ {1} durante el periodo {2}.	Consistencia de operaciones	ALTA
-405	Error	Se detectaron {0} crédito(s) duplicado(s) cancelado(s) (BD04) durante el/los periodo(s) {1}.	Consistencia de operaciones	ALTA
-501	Error	Se detectaron {0} crédito(s) faltante(s) de acuerdo con los cronogramas reportados durante el periodo {1}.	Consistencia de operaciones	ALTA
-502	Error	Se detectaron {0} cronograma(s) faltante(s) de acuerdo con la cartera reportada con un saldo de colocaciones por S/ {1} durante el periodo {2}.	Consistencia de operaciones	ALTA
-503	Error	Se detectaron {0} garantía(s) faltante(s) en el registro correspondiente durante el periodo {1}.	Consistencia de operaciones	ALTA
-601	Error	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en el Tipo de documento (TID) en la cartera de créditos durante el periodo {1}. Valores correctos: {2}	Verificación de campos numéricos	MEDIA
-602	Error	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en el Tipo de crédito (TCR) en la cartera de créditos durante el periodo {1}. Valores correctos: {2}	Verificación de campos numéricos	MEDIA
-603	Error	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Clasificación del deudor (CAL) en la cartera de créditos durante el periodo {1}. Valores correctos: {2}	Verificación de campos numéricos	MEDIA
-604	Error	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en el Esquema de amortización (ESAM) en la BD01 durante el periodo {1}. Valores correctos: {2}	Verificación de campos numéricos	MEDIA
-605	Error	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en el Sector del Crédito a financiar (SEC) en la BD01 durante el periodo {1}. Valores correctos: {2}	Verificación de campos numéricos	MEDIA
-606	Error	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Modalidad del Crédito (MDCR) en la BD01 durante el periodo {1}. Valores correctos: {2}	Verificación de campos numéricos	MEDIA
-607	Error	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en el Ocupación del socio deudor declarado (OSD) en la BD01 durante el periodo {1}. Valores correctos: {2}	Verificación de campos numéricos	MEDIA
-608	Error	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Moneda (MON) de la BD02A durante el periodo {1}. Valores correctos: {2}	Verificación de campos numéricos	MEDIA
-609	Error	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Forma de cancelación de la cuota (FOCAN) de la BD02A durante el periodo {1}. Valores correctos: {2}	Verificación de campos numéricos	MEDIA
-610	Error	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Moneda (MON_C) de la BD02B durante el periodo {1}. Valores correctos: {2}	Verificación de campos numéricos	MEDIA
-611	Error	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Forma de cancelación de la cuota (FOCAN_C) de la BD02B durante el periodo {1}. Valores correctos: {2}	Verificación de campos numéricos	MEDIA
-612	Error	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Clase de garantía (CGR) de la BD03A durante el periodo {1}. Valores correctos: {2}	Verificación de campos numéricos	MEDIA
-613	Error	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Cobertura de garantía (COBGR) de la BD03A durante el periodo {1}. Valores correctos: {2}	Verificación de campos numéricos	MEDIA
-614	Error	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Clase de garantía (CGR) de la BD03B durante el periodo {1}. Valores correctos: {2}	Verificación de campos numéricos	MEDIA
-615	Error	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Tipo de documento (TID_C) de la BD04 durante el periodo {1}. Valores correctos: {2}	Verificación de campos numéricos	MEDIA
-616	Error	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Tipo de crédito (TCR_C) de la BD04 durante el periodo {1}. Valores correctos: {2}	Verificación de campos numéricos	MEDIA
-617	Error	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Moneda (MON_C) de la BD04 durante el periodo {1}. Valores correctos: {2}	Verificación de campos numéricos	MEDIA
-618	Error	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Clasificación del Deudor a la fecha de cancelación del crédito (CAL_C) de la BD04 durante el periodo {1}. Valores correctos: {2}	Verificación de campos numéricos	MEDIA
-619	Error	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Esquema de amortización (ESAM_C) de la BD04 durante el periodo {1}. Valores correctos: {2}	Verificación de campos numéricos	MEDIA
-620	Error	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Forma de Cancelación del crédito (FOCAN_C) de la BD04 durante el periodo {1}. Valores correctos: {2}	Verificación de campos numéricos	MEDIA
-621	Error	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Modalidad específica bajo la cual fue otorgado el Crédito(MDCR_C) de la BD04 durante el periodo {1}. Valores correctos: {2}	Verificación de campos numéricos	MEDIA
-622	Error	Se detectaron {0} crédito(s) con errores en el Número y Tipo de Documento ({1}) respectivamente, correspondiente a la base de datos crediticia {2} durante el periodo {3}.	Verificación de campos no numéricos	BAJA
-701	Error	Se detectaron {0} crédito(s) con fechas vacías o erróneas en la Fecha de primer pago de capital según cronograma original (FPPK) en la BD01 durante el periodo {1}.	Verificación de campos no numéricos	MEDIA
-702	Error	Se detectaron {0} crédito(s) con fechas vacías o erróneas en la Fecha de desembolso (FOT) en la BD01 durante el periodo {1}.	Verificación de campos no numéricos	MEDIA
-703	Error	Se detectaron {0} crédito(s) con fechas vacías o erróneas en la Fecha de vencimiento general de la operación según cronograma (FVEG) en la BD01 durante el periodo {1}.	Verificación de campos no numéricos	MEDIA
-704	Error	Se detectaron {0} crédito(s) con fechas vacías o erróneas en la Fecha de vencimiento puntual de la operación (FVEP) en la BD01 durante el periodo {1}.	Verificación de campos no numéricos	MEDIA
-705	Error	Se detectaron {0} crédito(s) con fechas vacías o erróneas en la Fecha de vencimiento de la cuota (FVEP) en la BD02A durante el periodo {1}.	Verificación de campos no numéricos	MEDIA
-706	Error	Se detectaron {0} crédito(s) con fechas vacías o erróneas en la Fecha de Vencimiento de la Cuota (FVEP_C) en la BD02B durante el periodo {1}.	Verificación de campos no numéricos	MEDIA
-707	Error	Se detectaron {0} crédito(s) con fechas vacías o erróneas en la Fecha de Desembolso (FOT_C) en la BD04 durante el periodo {1}.	Verificación de campos no numéricos	MEDIA
-708	Error	Se detectaron {0} crédito(s) con fechas vacías o erróneas en la Fecha de cancelación de la operación (FCAN_C) en la BD04 durante el periodo {1}.	Verificación de campos no numéricos	MEDIA
-709	Error	Se detectaron {0} crédito(s) con fecha de desembolso posterior a la fecha de corte en la cartera de créditos (BD01) durante el periodo {1}.	Verificación de campos no numéricos	MEDIA
+101	Error	Se interrumpió el proceso de análisis debido a que existen {0} archivo(s) duplicado(s) en la ruta indicada. Archivo(s) duplicado(s): {1}.	Completitud de archivos	Crítico
+102	Error	Se interrumpió el proceso de análisis debido a que faltan {0} archivo(s) según lo indicado en la Coopac. Archivo(s) faltante(s): {1}	Completitud de archivos	Crítico
+201	Error	Se identificaron {0} columna(s) faltante(s) ({1}) correspondiente(s) a la base de datos crediticia {2} durante el periodo {3}.	Completitud de columnas	Crítico
+202	Error	Se identificaron {0} columna(s) sobrante(s) ({1}) correspondiente(s) a la base de datos crediticia {2} durante el periodo {3}. 	Completitud de columnas	Crítico
+203	Error	Se identificaron {0} columna(s) totalmente vacía(s) ({1}) correspondiente a la base de datos crediticia {2} en el periodo {3}.	Completitud de columnas	Crítico
+301	Error	El capital vigente de la cartera correspondiente al mes de {0} no cuadra con el balance de comprobación durante el periodo de {1}. Diferencia: S/{2}	Verificación contable	Crítico
+302	Error	El capital vencido de la cartera correspondiente al mes de {0} no cuadra con el balance de comprobación durante el periodo de {1}. Diferencia: S/{2}	Verificación contable	Crítico
+303	Error	El capital refinanciado de la cartera correspondiente al mes de {0} no cuadra con el balance de comprobación durante el periodo de {1}. Diferencia: S/{2}	Verificación contable	Crítico
+304	Error	El capital cobranza judicial de la cartera correspondiente al mes de {0} no cuadra con el balance de comprobación durante el periodo de {1}. Diferencia: S/{2}	Verificación contable	Crítico
+305	Error	Los intereses devengados de la cartera correspondiente al mes de {0} no cuadra con el balance de comprobación durante el periodo de {1}. Diferencia: S/{2}	Verificación contable	Crítico
+306	Error	Los intereses diferidos de la cartera correspondiente al mes de {0} no cuadra con el balance de comprobación durante el periodo de {1}. Diferencia: S/{2}	Verificación contable	Crítico
+307	Error	Las provisiones genéricas de la cartera correspondiente al mes de {0} no cuadra con el balance de comprobación durante el periodo de {1}. Diferencia: S/{2}	Verificación contable	Crítico
+308	Error	Las provisiones específicas de la cartera correspondiente al mes de {0} no cuadra con el balance de comprobación durante el periodo de {1}. Diferencia: S/{2}	Verificación contable	Crítico
+401	Error	Se detectaron {0} crédito(s) duplicado(s) en la cartera (BD01) en el mes de {1} con un saldo de colocaciones por S/ {2} durante el periodo {3}.	Consistencia de operaciones	Crítico
+402	Error	Se detectaron {0} crédito(s) con cronogramas duplicado(s) (BD02A) en el mes de {1} con un saldo de colocaciones por S/ {2} durante el periodo {3}.	Consistencia de operaciones	Crítico
+403	Error	Se detectaron {0} operación(es) de crédito con cronograma(s) cancelado(s) (BD02B) duplicados durante el periodo {1}.	Consistencia de operaciones	Crítico
+404	Error	Se detectaron {0} código(s) de garantía duplicado(s) (BD03A) con un monto de cobertura total por S/ {1} durante el periodo {2}.	Consistencia de operaciones	Crítico
+405	Error	Se detectaron {0} crédito(s) duplicado(s) cancelado(s) (BD04) durante el/los periodo(s) {1}.	Consistencia de operaciones	Crítico
+501	Error	Se detectaron {0} crédito(s) faltante(s) de acuerdo con los cronogramas reportados durante el periodo {1}.	Consistencia de operaciones	Crítico
+502	Error	Se detectaron {0} cronograma(s) faltante(s) de acuerdo con la cartera reportada con un saldo de colocaciones por S/ {1} durante el periodo {2}.	Consistencia de operaciones	Crítico
+503	Error	Se detectaron {0} garantía(s) faltante(s) en el registro correspondiente durante el periodo {1}.	Consistencia de operaciones	Crítico
+601	Error	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en el Tipo de documento (TID) en la cartera de créditos durante el periodo {1}. Valores correctos: {2}	Verificación de campos numéricos	No crítico
+602	Error	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en el Tipo de crédito (TCR) en la cartera de créditos durante el periodo {1}. Valores correctos: {2}	Verificación de campos numéricos	No crítico
+603	Error	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Clasificación del deudor (CAL) en la cartera de créditos durante el periodo {1}. Valores correctos: {2}	Verificación de campos numéricos	No crítico
+604	Error	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en el Esquema de amortización (ESAM) en la BD01 durante el periodo {1}. Valores correctos: {2}	Verificación de campos numéricos	No crítico
+605	Error	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en el Sector del Crédito a financiar (SEC) en la BD01 durante el periodo {1}. Valores correctos: {2}	Verificación de campos numéricos	No crítico
+606	Error	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Modalidad del Crédito (MDCR) en la BD01 durante el periodo {1}. Valores correctos: {2}	Verificación de campos numéricos	No crítico
+607	Error	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en el Ocupación del socio deudor declarado (OSD) en la BD01 durante el periodo {1}. Valores correctos: {2}	Verificación de campos numéricos	No crítico
+608	Error	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Moneda (MON) de la BD02A durante el periodo {1}. Valores correctos: {2}	Verificación de campos numéricos	No crítico
+609	Error	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Forma de cancelación de la cuota (FOCAN) de la BD02A durante el periodo {1}. Valores correctos: {2}	Verificación de campos numéricos	No crítico
+610	Error	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Moneda (MON_C) de la BD02B durante el periodo {1}. Valores correctos: {2}	Verificación de campos numéricos	No crítico
+611	Error	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Forma de cancelación de la cuota (FOCAN_C) de la BD02B durante el periodo {1}. Valores correctos: {2}	Verificación de campos numéricos	No crítico
+612	Error	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Clase de garantía (CGR) de la BD03A durante el periodo {1}. Valores correctos: {2}	Verificación de campos numéricos	No crítico
+613	Error	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Cobertura de garantía (COBGR) de la BD03A durante el periodo {1}. Valores correctos: {2}	Verificación de campos numéricos	No crítico
+614	Error	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Clase de garantía (CGR) de la BD03B durante el periodo {1}. Valores correctos: {2}	Verificación de campos numéricos	No crítico
+615	Error	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Tipo de documento (TID_C) de la BD04 durante el periodo {1}. Valores correctos: {2}	Verificación de campos numéricos	No crítico
+616	Error	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Tipo de crédito (TCR_C) de la BD04 durante el periodo {1}. Valores correctos: {2}	Verificación de campos numéricos	No crítico
+617	Error	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Moneda (MON_C) de la BD04 durante el periodo {1}. Valores correctos: {2}	Verificación de campos numéricos	No crítico
+618	Error	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Clasificación del Deudor a la fecha de cancelación del crédito (CAL_C) de la BD04 durante el periodo {1}. Valores correctos: {2}	Verificación de campos numéricos	No crítico
+619	Error	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Esquema de amortización (ESAM_C) de la BD04 durante el periodo {1}. Valores correctos: {2}	Verificación de campos numéricos	No crítico
+620	Error	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Forma de Cancelación del crédito (FOCAN_C) de la BD04 durante el periodo {1}. Valores correctos: {2}	Verificación de campos numéricos	No crítico
+621	Error	Se detectaron {0} crédito(s) con dígitos diferentes o vacíos en la Modalidad específica bajo la cual fue otorgado el Crédito(MDCR_C) de la BD04 durante el periodo {1}. Valores correctos: {2}	Verificación de campos numéricos	No crítico
+622	Error	"Se detectaron {0} crédito(s) con errores en el Número y Tipo de Documento ({1}) respectivamente, correspondiente a la base de datos crediticia {2} durante el periodo {3}."	Verificación de campos no numéricos	No crítico
+701	Error	Se detectaron {0} crédito(s) con fechas vacías o erróneas en la Fecha de primer pago de capital según cronograma original (FPPK) en la BD01 durante el periodo {1}.	Verificación de campos no numéricos	No crítico
+702	Error	Se detectaron {0} crédito(s) con fechas vacías o erróneas en la Fecha de desembolso (FOT) en la BD01 durante el periodo {1}.	Verificación de campos no numéricos	No crítico
+703	Error	Se detectaron {0} crédito(s) con fechas vacías o erróneas en la Fecha de vencimiento general de la operación según cronograma (FVEG) en la BD01 durante el periodo {1}.	Verificación de campos no numéricos	No crítico
+704	Error	Se detectaron {0} crédito(s) con fechas vacías o erróneas en la Fecha de vencimiento puntual de la operación (FVEP) en la BD01 durante el periodo {1}.	Verificación de campos no numéricos	No crítico
+705	Error	Se detectaron {0} crédito(s) con fechas vacías o erróneas en la Fecha de vencimiento de la cuota (FVEP) en la BD02A durante el periodo {1}.	Verificación de campos no numéricos	No crítico
+706	Error	Se detectaron {0} crédito(s) con fechas vacías o erróneas en la Fecha de Vencimiento de la Cuota (FVEP_C) en la BD02B durante el periodo {1}.	Verificación de campos no numéricos	No crítico
+707	Error	Se detectaron {0} crédito(s) con fechas vacías o erróneas en la Fecha de Desembolso (FOT_C) en la BD04 durante el periodo {1}.	Verificación de campos no numéricos	No crítico
+708	Error	Se detectaron {0} crédito(s) con fechas vacías o erróneas en la Fecha de cancelación de la operación (FCAN_C) en la BD04 durante el periodo {1}.	Verificación de campos no numéricos	No crítico
+709	Error	Se detectaron {0} crédito(s) con fecha de desembolso posterior a la fecha de corte en la cartera de créditos (BD01) durante el periodo {1}.	Verificación de campos no numéricos	No crítico
