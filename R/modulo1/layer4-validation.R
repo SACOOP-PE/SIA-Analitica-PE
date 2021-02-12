@@ -113,7 +113,7 @@ validarCampos <- function(agente, eb){
     }
   
   # ----
-    n <- eb %>% filter(Cod %in% c(601:708)) %>% nrow()
+    n <- eb %>% filter(Cod %in% c(601:709)) %>% nrow()
     if (nrow(eb) > 0) {
       
       if (n >0) {
