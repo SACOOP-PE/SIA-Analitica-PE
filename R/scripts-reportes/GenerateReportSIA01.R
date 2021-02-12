@@ -66,6 +66,11 @@ generar_reporte_T1 <- function(idProceso) {
                                       #fontColour = "#0000FF",
                                       textDecoration = c("ITALIC"))
   
+  myhead.centerGrafico.style <- createStyle(fontSize = 18, 
+                                            fontColour = "#252850",
+                                            textDecoration = c("BOLD", "underline"),
+                                            halign = "left")
+  
   myhead.lbl.style <- createStyle(fontSize = 12, 
                                   #fontColour = "#0000FF",
                                   textDecoration = c("BOLD"))
@@ -182,30 +187,39 @@ generar_reporte_T1 <- function(idProceso) {
   img <- "R/scripts-reportes/logo-sbs.png"
   insertImage(wb, 1, img, startRow = 1, startCol = 16, width = 1.90, height = 0.90)
   setColWidths(wb, 1, 1:2, widths = 5.2)
-  
-  # Add Multiple sheet by error ----
+
   if (nrow(eb %>% filter(Cod %in% c(101,102))) >0) {
     saveWorkbook(wb, "test/output/SIA_Report_T1.xlsx", overwrite = TRUE)
     file.show("test/output/SIA_Report_T1.xlsx")
     return(wb)
-  }
+  }  
   
-  numObs <- which((bucket$Cod %in% c(201:203, 301:308)) == FALSE)
+  # Add plot - detalles de errores ----
+  
+  addWorksheet(wb, "Estado de archivos")
+  mergeCells(wb, 2, cols = 2:8, rows = 4)
+  writeData(wb, 2, "RESUMEN DE ARCHIVOS SEGÚN CRITICIDAD", 2, 4)
+  addStyle(wb, 2, myhead.centerGrafico.style, cols = 2:8, rows = 4)
+  
+  plot <- generar_grafico_T1(idProceso)
+  insertPlot(wb, "Estado de archivos", startCol = 2, startRow = 6, fileType = "png",  width = 76.20, height = 12.21 ,units = "cm")
+  
+  numObs <- which((bucket$Cod %in% c(201:203, 301:308, 601:709)) == FALSE)
 
-  for (i in 1:nrow(filter(bucket,(Cod %in% c(201:203, 301:308)) == FALSE))){
+  for (i in 1:nrow(filter(bucket,(Cod %in% c(201:203, 301:308, 601:709)) == FALSE))){
 
-    nombreSheet <- filter(bucket,(Cod %in% c(201:203, 301:308)) == FALSE)[i,] %>% select(BD, Cod, Periodo) %>%
+    nombreSheet <- filter(bucket,(Cod %in% c(201:203, 301:308, 601:709)) == FALSE)[i,] %>% select(BD, Cod, Periodo) %>%
       apply(1, paste, collapse = "-" )
 
     addWorksheet(wb, nombreSheet)
-    writeFormula(wb, i+1, startRow = 2, x= makeHyperlinkString(sheet = "Reporte de Validación BD", 
+    writeFormula(wb, i+2, startRow = 2, x= makeHyperlinkString(sheet = "Reporte de Validación BD", 
                                                                row = 1,
                                                                text = "Volver"))
     writeFormula(wb, 1, startRow = 17+numObs[i], startCol = 17, x= makeHyperlinkString(sheet = nombreSheet,
                                                                                        row = 1,
                                                                                        text = "Ver más detalle"))
     
-    writeData(wb, i+1, getObservaciones(agent, bucket, i), startRow = 4, colNames = T, rowNames = F)
+    writeData(wb, i+2, getObservaciones(agent, bucket, i), startRow = 4, colNames = T, rowNames = F)
     
   }
   
@@ -215,7 +229,7 @@ generar_reporte_T1 <- function(idProceso) {
 }
 getObservaciones   <- function(agente, eb, roweb){
   
-  eb <- eb %>% filter((Cod %in% c(201:203, 301:308)) == FALSE) %>% rowwise() %>%
+  eb <- eb %>% filter((Cod %in% c(201:203, 301:308, 601:709)) == FALSE) %>% rowwise() %>%
     mutate(filename = paste0(CodCoopac, "_",BD ,"_" ,Periodo, ".txt")) %>%
     select(Cod, filename, txt1)
   
@@ -263,10 +277,10 @@ generar_grafico_T1 <- function(idProceso) {
   #   theme(legend.position=("right"), legend.title = element_text(size=10)) +
   #   theme(axis.text.y = element_text(hjust=0))
   
-  ggplot(data=eb, aes(dateMonth, Criticidad)) +
-    scale_fill_manual(values=colors, guide = guide_legend(reverse = FALSE)) +
-    geom_tile(aes(fill = factor(Criticidad), width=0.95, height=0.95)) + 
-    facet_wrap(~ BD)
+ ggplot(data=eb, aes(dateMonth, Criticidad)) +
+   scale_fill_manual(values=colors, guide = guide_legend(reverse = FALSE)) +
+   geom_tile(aes(fill = factor(Criticidad), width=0.95, height=0.95)) + 
+   facet_wrap(~ BD)
 }
 
 library(tidyquant)
