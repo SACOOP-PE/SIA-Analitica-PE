@@ -229,39 +229,44 @@ getObservaciones   <- function(agente, eb, roweb){
 }
 generar_grafico_T1 <- function(idProceso) {
   
-  eb <- read_excel(paste0("test/output/resultados_", idProceso, ".xlsx"), sheet = "bucketOficio", 
+  eb <- read_excel(paste0("test/output/resultados_", "100348", ".xlsx"), sheet = "bucketOficio", 
                    col_types = c("text", "text", "text", "text", "text", "text", "text")) %>% rowwise() %>%
     mutate(dateYear  = substr(Periodo, 1, 4),
-           dateMonth = as.integer(substr(Periodo, 5, 6)))
-  
-  
-  eb$Criticidad <- factor(eb$Criticidad, 
-                          levels=c("BAJA","MEDIA", "ALTA"),
-                          labels=c("Errores no crítico", "Errores no crítico", "Errores críticos"),
-                          ordered = T)
+           dateMonth = as.integer(substr(Periodo, 5, 6))) %>% 
+    select(BD, dateYear, dateMonth, Criticidad) %>% 
+    arrange(dateYear, dateMonth, BD)
   
   eb$BD <- factor(eb$BD,
                   levels=c("BD01","BD02A","BD02B","BD03A","BD03B","BD04"),
                   labels=c("BD01","BD02A","BD02B","BD03A","BD03B","BD04"),
                   ordered=TRUE)
   
-  fct_rev(eb$Criticidad)
+  eb$Criticidad <- factor(eb$Criticidad, 
+                          levels=c("BAJA","MEDIA", "ALTA"),
+                          labels=c("Errores no críticos", "Errores leves", "Errores críticos"),
+                          ordered = T)
   
   eb$dateMonth <- factor(eb$dateMonth,
                          levels=as.character(1:12),
                          labels=c("Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Set","Oct","Nov","Dic"),
                          ordered=TRUE)
   
-  colors <- c("dodgerblue4", "dodgerblue1", "firebrick1")
+  fct_rev(eb$Criticidad)
   
-  ggplot(eb, aes(dateMonth, BD, fill = factor(Criticidad))) + 
+  colors <- c("dodgerblue1", "dodgerblue4", "firebrick1")
+  
+  # ggplot(eb, aes(dateMonth, BD, fill = factor(Criticidad))) +
+  #   geom_tile(aes(fill = factor(Criticidad), width=0.95, height=0.95)) +
+  #   facet_wrap(vars(dateYear)) +
+  #   scale_fill_manual(values=colors, guide = guide_legend(reverse = TRUE))+
+  #   xlab("") + ylab("") + labs(fill = " ") +
+  #   theme(legend.position=("right"), legend.title = element_text(size=10)) +
+  #   theme(axis.text.y = element_text(hjust=0))
+  
+  ggplot(data=eb, aes(dateMonth, Criticidad)) +
+    scale_fill_manual(values=colors, guide = guide_legend(reverse = FALSE)) +
     geom_tile(aes(fill = factor(Criticidad), width=0.95, height=0.95)) + 
-    facet_wrap(vars(dateYear)) +
-    scale_fill_manual(values=colors, guide = guide_legend(reverse = TRUE))+
-    xlab("") + ylab("") + labs(fill = " ") +
-    theme(legend.position=("right"), legend.title = element_text(size=10)) + 
-    theme(axis.text.y = element_text(hjust=0))
-  
+    facet_wrap(~ BD)
 }
 
 library(tidyquant)
