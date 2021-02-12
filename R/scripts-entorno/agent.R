@@ -93,39 +93,9 @@ interrogateAgent_mod1 <- function(agente){
   addEventLog(agente, paste0("Layer 4. Validación de campos indviduales."))
     eb <- layer4(agente, eb)
     
-    if (nrow(eb) > 0) {
-      
-      if (nrow(eb %>% filter(Cod %in% c(601:708))) >0) {
-        
-        addEventLog(agente, paste0("      Resultado: La revisión errores OM 22269-2020 tiene observaciones."))
-      }
-      else {
-        addEventLog(agente, paste0("      Resultado: Revisión de errores OM 22269-2020 fue satisfatoria."))
-      }
-      
-    }
-    else {
-      addEventLog(agente, paste0("      Resultado: Revisión de errores OM 22269-2020 fue satisfatoria."))
-    }
-    
   #layer5 ----
   addEventLog(agente, paste0("Layer 5. Validación de Cruce Contable a la cartera."))
-    
     eb <- layer5(agente, eb)
-    
-    if (nrow(eb) > 0) {
-      
-      if (nrow(eb %>% filter(Cod %in% c(301:308))) > 0) {
-        addEventLog(agente, paste0("      Resultado: Se detectaron errores contables a la cartera de créditos pues no cuadra con el balance de comprobación."))
-      }
-      else { 
-        addEventLog(agente, paste0("      Resultado: No se detectaron errores contables a la cartera de créditos."))
-      }
-      
-    }
-    else { 
-      addEventLog(agente, paste0("      Resultado: No se detectaron errores contables a la cartera de créditos."))
-    }
     
   #Fin validación ----
     eb <- eb %>% arrange(Periodo, Cod)

@@ -201,5 +201,21 @@ validarCruceContable              <- function(agente, eb){
                           filter(Cod %in% c(301:308)) %>% 
                           select(CodCoopac, IdProceso, Cod, Periodo, BD, num2))
   
+  n <- nrow(eb %>% filter(Cod %in% c(301:308)))
+    
+  if (nrow(eb) > 0) {
+    
+    if (n > 0) {
+      addEventLog(agente, paste0("      Resultado: Se detectaron ", n," errores contables a la cartera de créditos pues no cuadra con el balance de comprobación."))
+    }
+    else { 
+      addEventLog(agente, paste0("      Resultado: No se detectaron errores contables a la cartera de créditos."))
+    }
+    
+  }
+  else { 
+    addEventLog(agente, paste0("      Resultado: No se detectaron errores contables a la cartera de créditos."))
+  }
+  
   return(eb)
 }
