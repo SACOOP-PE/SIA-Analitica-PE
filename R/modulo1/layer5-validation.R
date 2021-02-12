@@ -7,14 +7,6 @@ layer5 <- function(agente, eb){
   return(eb)
 }
 
-# getCruceAnexo06 <- function(Agente) {}
-# getCruceAnexo05 <- function(Agente) {}
-# getCruceEEFF <- function(Agente) {}
-# 
-# getOperacionesIntermitentes <- function(agente) {}
-# getOperacionesCanceladasDuplicadas <- function(Agente) {} 
-
-
 getSaldoVigenteSiscor                <- function(agente, periodo) {
   initCuadreContable() %>% 
     filter(str_sub(as.character(PeriodoId),1,6) == periodo, 
@@ -126,7 +118,7 @@ getSaldoProvisionesEspecificasBDCC <- function(bd01) {
     sum(na.rm = T)
 }
 
-getCodErrorContable               <- function(nameCapital) {
+getCodErrorContable         <- function(nameCapital) {
   codError <- switch (nameCapital,
                       KVI = 301,
                       KVE = 302,
@@ -139,16 +131,18 @@ getCodErrorContable               <- function(nameCapital) {
   
   return(codError)
 }
-getAnoMesCoopacContableFromAgente <- function(agente) {
- periodoContables <- initCuadreContable() %>% 
+getAnoMesContableFromAgente <- function(agente) {
+ 
+  periodoContables <- initCuadreContable() %>% 
    mutate(PeriodoId = str_sub(as.character(PeriodoId),1,6)) %>% 
    filter(CodigoEntidad == getCoopacFromAgent(agente)) %>% 
    pull(PeriodoId) %>% unique()
  
- periodoContables[which(as.numeric(periodoContables)<= as.numeric(agent %>% pull(PeriodoFinal)))] %>% return()
+ periodoContables[which(as.numeric(periodoContables)<= as.numeric(agent %>% pull(PeriodoFinal)))] %>%
+   return()
 }
 
-validarCruceContable              <- function(agente, eb){
+validarCruceContable <- function(agente, eb){
   carpeta   <- getCarpetaFromAgent(agente)
   exigibles <- getArchivosNoObservadosByCols(agente, eb, c("CCR",
                                                            "KVI", "KVE", "KRF", "KJU",
@@ -157,8 +151,7 @@ validarCruceContable              <- function(agente, eb){
   exigiblesBD01 <- exigibles[str_detect(exigibles, "BD01")]
   
   tbl_cruce_BC <- tibble(NombreArchivo = exigiblesBD01[str_detect(exigiblesBD01, 
-                                                                  paste(getAnoMesCoopacContableFromAgente(agente), collapse = '|'))]
-                         ) %>%
+                                                                  paste(getAnoMesContableFromAgente(agente), collapse = '|'))]) %>%
     rowwise() %>%
     mutate(Ruta    = getRuta(carpeta, NombreArchivo),
            Periodo = getAnoMesFromRuta(toString(Ruta)),
@@ -201,15 +194,16 @@ validarCruceContable              <- function(agente, eb){
                           filter(Cod %in% c(301:308)) %>% 
                           select(CodCoopac, IdProceso, Cod, Periodo, BD, num2))
   
+  
   n <- nrow(eb %>% filter(Cod %in% c(301:308)))
     
   if (nrow(eb) > 0) {
     
     if (n > 0) {
-      addEventLog(agente, paste0("      Resultado: Se detectaron ", n," errores contables a la cartera de créditos pues no cuadra con el balance de comprobación."))
+      addEventLog(agente, paste0("      Resultado: Se detectaron ", n," error(es) contable(s) en la cartera de créditos pues no cuadra con el balance de comprobación."))
     }
     else { 
-      addEventLog(agente, paste0("      Resultado: No se detectaron errores contables a la cartera de créditos."))
+      addEventLog(agente, paste0("      Resultado: La validación del cruce contable fue satifactoria."))
     }
     
   }

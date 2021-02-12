@@ -64,23 +64,6 @@ interrogateAgent_mod1 <- function(agente){
     
     eb <- layer1(agente, eb)
   
-    if (nrow(eb) > 0) {
-      
-      if (nrow(eb %>% filter(Cod %in% c(201, 202))) >0) { 
-      
-      n <- eb %>% filter(Cod %in% c(201,202)) %>% nrow()
-      addEventLog(agente, paste0("      Resultado: La revisión de estructura de datos tiene observaciones. Continuar con discreción."))
-        
-      }
-      else {
-        addEventLog(agente, paste0("      Resultado: Revisión de estructura de datos satisfatoria."))
-      }
-      
-    }
-    else {
-      addEventLog(agente, paste0("      Resultado: Revisión de estructura de datos satisfatoria."))
-    }
-  
   #layer2 ----
   addEventLog(agente, paste0("Layer 2. Validación de operaciones duplicadas."))
     eb <- layer2(agente, eb)

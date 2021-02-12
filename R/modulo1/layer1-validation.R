@@ -63,6 +63,22 @@ validarColumnas <- function(agente, eb){
     eb <- addError(eb, chunk_203)
   }
   
+  
+  n <- nrow(eb %>% filter(Cod %in% c(201, 202)))
+    
+  if (nrow(eb) > 0) {
+    if (n >0) {
+        addEventLog(agente, paste0("      Resultado: La revisión de estructura de datos tiene ",n," observaciones. Continuar con discreción."))
+    }
+    else {
+        addEventLog(agente, paste0("      Resultado: Revisión de estructura de datos satisfatoria."))
+    }
+      
+  }
+  else {
+    addEventLog(agente, paste0("      Resultado: Revisión de estructura de datos satisfatoria."))
+  }
+  
   return(eb)
 }
   

@@ -12,11 +12,11 @@ Cod	Tipo	Descripcion	Categoria	Criticidad
 306	Error	Los intereses diferidos de la cartera correspondiente al mes de {0} no cuadra con el balance de comprobación durante el periodo de {1}. Diferencia: S/{2}	Verificación contable	ALTA
 307	Error	Las provisiones genéricas de la cartera correspondiente al mes de {0} no cuadra con el balance de comprobación durante el periodo de {1}. Diferencia: S/{2}	Verificación contable	ALTA
 308	Error	Las provisiones específicas de la cartera correspondiente al mes de {0} no cuadra con el balance de comprobación durante el periodo de {1}. Diferencia: S/{2}	Verificación contable	ALTA
-401	Error	Se detectaron {0} crédito(s) duplicado(s) en la cartera en el mes de {1} con un saldo de colocaciones por S/ {2} durante el periodo {3}.	Consistencia de operaciones	ALTA
-402	Error	Se detectaron {0} crédito(s) con cronogramas duplicado(s) en el mes de {1} con un saldo de colocaciones por S/ {2} durante el periodo {3}.	Consistencia de operaciones	ALTA
-403	Error	Se detectaron {0} operación(es) de crédito con cronograma(s) cancelado(s) duplicados durante el periodo {1}.	Consistencia de operaciones	ALTA
-404	Error	Se detectaron {0} código(s) de garantía duplicado(s) con un monto de cobertura total por S/ {1} durante el periodo {2}.	Consistencia de operaciones	ALTA
-405	Error	Se detectaron {0} crédito(s) duplicado(s) cancelado(s) durante el/los periodo(s) {1}.	Consistencia de operaciones	ALTA
+401	Error	Se detectaron {0} crédito(s) duplicado(s) en la cartera (BD01) en el mes de {1} con un saldo de colocaciones por S/ {2} durante el periodo {3}.	Consistencia de operaciones	ALTA
+402	Error	Se detectaron {0} crédito(s) con cronogramas duplicado(s) (BD02A) en el mes de {1} con un saldo de colocaciones por S/ {2} durante el periodo {3}.	Consistencia de operaciones	ALTA
+403	Error	Se detectaron {0} operación(es) de crédito con cronograma(s) cancelado(s) (BD02B) duplicados durante el periodo {1}.	Consistencia de operaciones	ALTA
+404	Error	Se detectaron {0} código(s) de garantía duplicado(s) (BD03A) con un monto de cobertura total por S/ {1} durante el periodo {2}.	Consistencia de operaciones	ALTA
+405	Error	Se detectaron {0} crédito(s) duplicado(s) cancelado(s) (BD04) durante el/los periodo(s) {1}.	Consistencia de operaciones	ALTA
 501	Error	Se detectaron {0} crédito(s) faltante(s) de acuerdo con los cronogramas reportados durante el periodo {1}.	Consistencia de operaciones	ALTA
 502	Error	Se detectaron {0} cronograma(s) faltante(s) de acuerdo con la cartera reportada con un saldo de colocaciones por S/ {1} durante el periodo {2}.	Consistencia de operaciones	ALTA
 503	Error	Se detectaron {0} garantía(s) faltante(s) en el registro correspondiente durante el periodo {1}.	Consistencia de operaciones	ALTA

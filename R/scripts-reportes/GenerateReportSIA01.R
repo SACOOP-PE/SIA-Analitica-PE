@@ -229,7 +229,7 @@ getObservaciones   <- function(agente, eb, roweb){
 }
 generar_grafico_T1 <- function(idProceso) {
   
-  eb <- read_excel(paste0("test/output/resultados_", 100341, ".xlsx"), sheet = "bucketOficio", 
+  eb <- read_excel(paste0("test/output/resultados_", idProceso, ".xlsx"), sheet = "bucketOficio", 
                    col_types = c("text", "text", "text", "text", "text", "text", "text")) %>% rowwise() %>%
     mutate(dateYear  = substr(Periodo, 1, 4),
            dateMonth = as.integer(substr(Periodo, 5, 6)))

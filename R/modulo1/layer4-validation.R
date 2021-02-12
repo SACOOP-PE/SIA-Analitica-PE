@@ -132,7 +132,7 @@ validarCampos <- function(agente, eb){
   return(eb)
 }
 
-#' Tipo 1: validaciones a campos con dígitos específicos
+#' Tipo 1: validaciones a campos numericos
 #' Tipo 2: validaciones a campos fecha
 
 quitarVaciosBD <- function(ruta){
