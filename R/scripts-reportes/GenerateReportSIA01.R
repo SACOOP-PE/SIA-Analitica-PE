@@ -9,7 +9,7 @@ generar_reporte_T1 <- function(idProceso) {
     resumenValidacion <- "El proceso de validación no concluyó satisfactoriamente. {0}, de las cuales tienen criticidad ALTA, ello da como resultado {1} archivos inconsistentes."
   }
   else{
-    resumenValidacion <- "El proceso de validación concluyó satisfactoriamente. Las observaciones deben ser sometidas a revisión por el analista SACOOP. Se identificaron {0} observaciones, de las cuales {1} tienen criticidad ALTA, ello da como resultado {2} archivos inconsistentes."
+    resumenValidacion <- "El proceso de validación concluyó satisfactoriamente. Las observaciones deben ser sometidas a revisión por el analista SACOOP. Se identificaron {0} observaciones, de las cuales {1} con Críticos, ello da como resultado {2} archivos inconsistentes."
   }
   
   
@@ -42,9 +42,9 @@ generar_reporte_T1 <- function(idProceso) {
   myhead.txt3 <- if_else(nrow(eb %>% filter(Cod %in% c(101,102))) >0,
                          str_replace_all(resumenValidacion, c("\\Q{0}" = eb %>% pull(Descripcion) %>% toString(),
                                                               "\\Q{1}" = bucket %>% pull(num1) %>% sum() %>% toString())),
-                         str_replace_all(resumenValidacion, c("\\Q{0}"  = toString(nrow(eb)),
-                                                              "\\Q{1}"  = toString(nrow(eb %>% filter(Criticidad == "ALTA"))),
-                                                              "\\Q{2}"  = eb %>% 
+                         str_replace_all(resumenValidacion, c("\\Q{0}" = toString(nrow(eb)),
+                                                              "\\Q{1}" = toString(nrow(eb %>% filter(Criticidad == "Crítico"))),
+                                                              "\\Q{2}" = eb %>% 
                                                                 mutate(filename = paste0(agente %>% pull(Coopac), "_",BD ,"_" ,Periodo, ".txt")) %>% 
                                                                 pull(filename) %>% unique() %>% length() %>% toString())))
   myhead.txt4 <- agente %>% pull(PeriodoInicial) %>% first()
@@ -276,7 +276,7 @@ generar_grafico_T1 <- function(idProceso, numGraf) {
       ggplot(aes(dateMonth, BD, group = Criticidad)) +
       scale_fill_manual(values=colors, guide = guide_legend(reverse = FALSE)) +
       geom_tile(aes(fill = Criticidad, width=0.95, height=0.95)) +
-      facet_wrap(~ Criticidad) +
+      facet_wrap(~ dateYear) +
       labs(x = "MESES",
            y = 'BASES DE DATOS CREDITICIAS') +
       theme_bw()
@@ -285,19 +285,20 @@ generar_grafico_T1 <- function(idProceso, numGraf) {
   }
   if (numGraf == 2) {
     plot <-  eb %>%
-      group_by(BD, Criticidad) %>% tally() %>%
+      group_by(BD, Criticidad, dateYear) %>% tally() %>%
       ggplot(aes(BD, n, fill = Criticidad)) +
-      geom_bar(stat='identity') +
+      facet_wrap(~ dateYear) +
+      geom_bar(position= position_stack(reverse = FALSE), stat='identity', width = 0.5) +
       labs(x = "BASES DE DATOS CREDITICIAS",
            y = 'n errores') +
       scale_fill_manual(values=colors, guide = guide_legend(reverse = FALSE)) +
-      geom_text(aes(label=n), vjust=1.6,
-                color="white", size=4) +
-      theme_minimal()
+      geom_text(aes(label=n), vjust= 0,
+                color="black", size=4, position = position_nudge(x= 0, y =0.5)) +
+      coord_flip() +
+      theme_bw()
     
     return(plot)
   }
-
 }
 
 library(tidyquant)
