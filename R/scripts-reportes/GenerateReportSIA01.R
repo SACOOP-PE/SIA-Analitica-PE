@@ -43,7 +43,7 @@ generar_reporte_T1 <- function(idProceso) {
                          str_replace_all(resumenValidacion, c("\\Q{0}" = eb %>% pull(Descripcion) %>% toString(),
                                                               "\\Q{1}" = bucket %>% pull(num1) %>% sum() %>% toString())),
                          str_replace_all(resumenValidacion, c("\\Q{0}" = toString(nrow(eb)),
-                                                              "\\Q{1}" = toString(nrow(eb %>% filter(Criticidad == "Crítico"))),
+                                                              "\\Q{1}" = toString(nrow(eb %>% filter(Criticidad == "CRITICO"))),
                                                               "\\Q{2}" = eb %>% 
                                                                 mutate(filename = paste0(agente %>% pull(Coopac), "_",BD ,"_" ,Periodo, ".txt")) %>% 
                                                                 pull(filename) %>% unique() %>% length() %>% toString())))
@@ -174,8 +174,8 @@ generar_reporte_T1 <- function(idProceso) {
   conditionalFormatting(wb, 1,
                         cols = 16,
                         rows = 18:(18+(nrow(eb)-1)),
-                        type = "contains",
-                        rule = "Crítico", 
+                        type = "notContains",
+                        rule = "NO", 
                         style = createStyle(fontColour = "#9C0006", textDecoration = "bold"))
   
   img <- "R/scripts-reportes/logo-sbs.png"
@@ -192,20 +192,19 @@ generar_reporte_T1 <- function(idProceso) {
   
   addWorksheet(wb, "Estado de archivos")
   
-  ##plot1----
   mergeCells(wb, 2, cols = 2:8, rows = 4)
-  writeData(wb, 2, "RESUMEN DE ARCHIVOS SEGÚN CRITICIDAD", 2, 4)
+  writeData(wb, 2, "RESUMEN DE ARCHIVOS POR CRITICIDAD", 2, 4)
   addStyle(wb, 2, myhead.centerGrafico.style, cols = 2:8, rows = 4)
   
-  plot <- generar_grafico_T1(idProceso, 1)
-  insertPlot(wb, "Estado de archivos", startCol = 2, startRow = 6, fileType = "png",  width = 36.20, height = 12.21 ,units = "cm")
-  
-  ##plot2----
   mergeCells(wb, 2, cols = 2:8, rows = 33)
-  writeData(wb, 2, "RESUMEN DE ARCHIVOS SEGÚN BD-CRITICIDAD", 2, 4)
+  writeData(wb, 2, "RESUMEN DE ARCHIVOS SEGÚN BD-CRITICIDAD", 2, 33)
   addStyle(wb, 2, myhead.centerGrafico.style, cols = 2:8, rows = 33)
   
-  plot <- generar_grafico_T1(idProceso, 2)
+  ##plots----
+  print(generar_grafico_T1(idProceso, 1))
+  insertPlot(wb, "Estado de archivos", startCol = 2, startRow = 6, fileType = "png",  width = 36.20, height = 12.21 ,units = "cm")
+  
+  print(generar_grafico_T1(idProceso, 2))
   insertPlot(wb, "Estado de archivos", startCol = 2, startRow = 35, fileType = "png",  width = 56.20, height = 12.21 ,units = "cm")
   
   ##detalle por cada error ----
@@ -221,7 +220,7 @@ generar_reporte_T1 <- function(idProceso) {
     writeFormula(wb, 1, startRow = 17+numObs[i], startCol = 17, x= makeHyperlinkString(sheet = nombreSheet,
                                                                                        row = 1,
                                                                                        text = "Ver más detalle"))
-    
+
     writeData(wb, i+2, getObservaciones(agent, bucket, i), startRow = 4, colNames = T, rowNames = F)
   }
   
@@ -258,7 +257,7 @@ generar_grafico_T1 <- function(idProceso, numGraf) {
                   ordered=TRUE)
   
   eb$Criticidad <- factor(eb$Criticidad, 
-                          levels=c("Crítico","No crítico"),
+                          levels=c("CRITICO","NO CRITICO"),
                           labels=c("Errores críticos", "Errores no críticos"),
                           ordered = T)
   
