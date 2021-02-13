@@ -299,8 +299,3 @@ generar_grafico_T1 <- function(idProceso, numGraf) {
     return(plot)
   }
 }
-
-library(tidyquant)
-library(ggplot2)
-library(plyr)
-library(plotly)

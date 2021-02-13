@@ -8,6 +8,10 @@ library(colr)
 library(lubridate) 
 library(openxlsx)
 library(readxl)
+library(tidyquant)
+library(ggplot2)
+library(plyr)
+library(plotly)
 ##### 2. Opciones ----- 
 
 options(warn = -1)
