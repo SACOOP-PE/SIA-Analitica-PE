@@ -24,7 +24,7 @@ generar_reporte_T1 <- function(idProceso) {
   myhead.lbl4 <- "Periodo Inicio:"
   myhead.lbl5 <- "Periodo Fin:"
   myhead.lbl6 <- "Fecha de Validación:"
-  myhead.lbl7 <- "Periodicidad"
+  myhead.lbl7 <- "Periodicidad:"
   myhead.lbl8 <- "II. Detalle de las observaciones:"
   
   bucket.lbl1 <- "Periodo"
@@ -208,6 +208,7 @@ generar_reporte_T1 <- function(idProceso) {
   plot <- generar_grafico_T1(idProceso, 2)
   insertPlot(wb, "Estado de archivos", startCol = 2, startRow = 35, fileType = "png",  width = 56.20, height = 12.21 ,units = "cm")
   
+  ##detalle por cada error ----
   numObs <- which((bucket$Cod %in% c(201:203, 301:308)) == FALSE)
 
   for (i in 1:nrow(filter(bucket,(Cod %in% c(201:203, 301:308)) == FALSE))){
