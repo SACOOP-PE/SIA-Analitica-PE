@@ -9,7 +9,7 @@ generar_reporte_T1 <- function(idProceso) {
     resumenValidacion <- "El proceso de validación no concluyó satisfactoriamente. {0}, de las cuales tienen criticidad ALTA, ello da como resultado {1} archivos inconsistentes."
   }
   else{
-    resumenValidacion <- "El proceso de validación concluyó satisfactoriamente. Las observaciones deben ser sometidas a revisión por el analista SACOOP. Se identificaron {0} observaciones, de las cuales {1} con Críticos, ello da como resultado {2} archivos inconsistentes."
+    resumenValidacion <- "El proceso de validación concluyó satisfactoriamente. Las observaciones deben ser sometidas a revisión por el analista SACOOP. Se identificaron {0} errores, de las cuales {1} con errores críticos, ello da como resultado {2} archivos inconsistentes."
   }
   
   
@@ -257,7 +257,7 @@ generar_grafico_T1 <- function(idProceso, numGraf) {
                   ordered=TRUE)
   
   eb$Criticidad <- factor(eb$Criticidad, 
-                          levels=c("CRITICO","NO CRITICO"),
+                          levels=c("CRÍTICO","NO CRÍTICO"),
                           labels=c("Errores críticos", "Errores no críticos"),
                           ordered = T)
   
