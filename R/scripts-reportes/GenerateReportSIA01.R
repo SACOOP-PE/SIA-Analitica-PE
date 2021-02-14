@@ -43,7 +43,7 @@ generar_reporte_T1 <- function(idProceso) {
                          str_replace_all(resumenValidacion, c("\\Q{0}" = eb %>% pull(Descripcion) %>% toString(),
                                                               "\\Q{1}" = bucket %>% pull(num1) %>% sum() %>% toString())),
                          str_replace_all(resumenValidacion, c("\\Q{0}" = toString(nrow(eb)),
-                                                              "\\Q{1}" = toString(nrow(eb %>% filter(Criticidad == "CRITICO"))),
+                                                              "\\Q{1}" = toString(nrow(eb %>% filter(Criticidad == "CRÍTICO"))),
                                                               "\\Q{2}" = eb %>% 
                                                                 mutate(filename = paste0(agente %>% pull(Coopac), "_",BD ,"_" ,Periodo, ".txt")) %>% 
                                                                 pull(filename) %>% unique() %>% length() %>% toString())))
@@ -111,8 +111,9 @@ generar_reporte_T1 <- function(idProceso) {
   mergeCells(wb, 1, cols = 14:15, rows = 9)
   mergeCells(wb, 1, cols = 14:15, rows = 10)
   
-  mergeCells(wb, 1, cols = 6:17, rows = 12:13)
-  mergeCells(wb, 1, cols = 3:5, rows = 12)
+  mergeCells(wb, 1, cols = 7:17, rows = 12:13)
+  mergeCells(wb, 1, cols = 3:6, rows = 12)
+  mergeCells(wb, 1, cols = 3:6, rows = 15)
   
   mergeCells(wb, 1, cols = 6:13, rows = 17)
   mergeCells(wb, 1, cols = 14:15, rows = 17)
@@ -150,7 +151,7 @@ generar_reporte_T1 <- function(idProceso) {
   
   writeData(wb, 1, myhead.txt1, 5, 9)
   writeData(wb, 1, myhead.txt2, 5, 10)
-  writeData(wb, 1, myhead.txt3, 6, 12)
+  writeData(wb, 1, myhead.txt3, 7, 12)
   writeData(wb, 1, myhead.txt4, 11, 9)
   writeData(wb, 1, myhead.txt5, 11, 10)
   writeData(wb, 1, myhead.txt6, 16, 9)
