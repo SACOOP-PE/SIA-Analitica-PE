@@ -43,7 +43,7 @@ generar_reporte_T1 <- function(idProceso) {
                          str_replace_all(resumenValidacion, c("\\Q{0}" = eb %>% pull(Descripcion) %>% toString(),
                                                               "\\Q{1}" = bucket %>% pull(num1) %>% sum() %>% toString())),
                          str_replace_all(resumenValidacion, c("\\Q{0}" = toString(nrow(eb)),
-                                                              "\\Q{1}" = toString(nrow(eb %>% filter(Criticidad == "CRÍTICO"))),
+                                                              "\\Q{1}" = toString(nrow(eb %>% filter(Criticidad == "Crítico"))),
                                                               "\\Q{2}" = eb %>% 
                                                                 mutate(filename = paste0(agente %>% pull(Coopac), "_",BD ,"_" ,Periodo, ".txt")) %>% 
                                                                 pull(filename) %>% unique() %>% length() %>% toString())))
@@ -176,7 +176,7 @@ generar_reporte_T1 <- function(idProceso) {
                         cols = 16,
                         rows = 18:(18+(nrow(eb)-1)),
                         type = "notContains",
-                        rule = "NO", 
+                        rule = "No", 
                         style = createStyle(fontColour = "#9C0006", textDecoration = "bold"))
   
   img <- "R/scripts-reportes/logo-sbs.png"
@@ -258,7 +258,7 @@ generar_grafico_T1 <- function(idProceso, numGraf) {
                   ordered=TRUE)
   
   eb$Criticidad <- factor(eb$Criticidad, 
-                          levels=c("CRÍTICO","NO CRÍTICO"),
+                          levels=c("Crítico","No Crítico"),
                           labels=c("Errores críticos", "Errores no críticos"),
                           ordered = T)
   

@@ -2509,3 +2509,22 @@
 100349	2021-02-12	2021-02-12 19:12:57	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-12 19:12:57] -       Resultado: La revisión errores OM 22269-2020 tiene 8 observaciones.	Informativo	Baja
 100349	2021-02-12	2021-02-12 19:12:58	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-12 19:12:57] - Layer 5. Validación de Cruce Contable a la cartera.	Informativo	Baja
 100349	2021-02-12	2021-02-12 19:16:19	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-12 19:16:19] -       Resultado: Se detectaron 1 error(es) contable(s) en la cartera de créditos pues no cuadra con el balance de comprobación.	Informativo	Baja
+100350	2021-02-15	2021-02-15 10:13:13	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-15 10:13:12] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100350	2021-02-15	2021-02-15 10:13:13	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-15 10:13:13] - Coopac evaluada: 01172-SAN MARTÍN DE PORRES	Informativo	Baja
+100350	2021-02-15	2021-02-15 10:13:13	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-15 10:13:13] - PID: 100350[201901~201903]	Informativo	Baja
+100350	2021-02-15	2021-02-15 10:13:14	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-15 10:13:13] - 1. MÓDULO DE VALIDACIÓN DE BASE DE DATOS CREDITICIAS --------------------------	Informativo	Baja
+100350	2021-02-15	2021-02-15 10:13:14	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-15 10:13:14] - Inicio del interrogatorio modulo 1. PID-100350.	Informativo	Baja
+100350	2021-02-15	2021-02-15 10:13:14	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-15 10:13:14] - Layer 0. Revisión de pre-requisitos.	Informativo	Baja
+100350	2021-02-15	2021-02-15 10:13:15	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-15 10:13:15] -       Resultado: Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100350	2021-02-15	2021-02-15 10:13:16	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-15 10:13:16] - Layer 1. Revisión de estructura de tablas	Informativo	Baja
+100350	2021-02-15	2021-02-15 10:13:57	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-15 10:13:57] -       Resultado: Revisión de estructura de datos satisfatoria.	Informativo	Baja
+100350	2021-02-15	2021-02-15 10:13:57	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-15 10:13:57] - Layer 2. Validación de operaciones duplicadas.	Informativo	Baja
+100350	2021-02-15	2021-02-15 10:15:14	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-15 10:15:13] -       Resultado: La validación operaciones duplicadas concluyó con 7 observación(es).	Informativo	Baja
+100350	2021-02-15	2021-02-15 10:15:14	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-15 10:15:14] - Layer 3. Validación de entre BD01/BD02A, BD03A/BD03B.	Informativo	Baja
+100350	2021-02-15	2021-02-15 10:15:53	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-15 10:15:53] -       Resultado: La validación de cruce interno concluyó con 3 observación(es).	Informativo	Baja
+100350	2021-02-15	2021-02-15 10:15:53	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-15 10:15:53] - Layer 4. Validación de campos indviduales.	Informativo	Baja
+100350	2021-02-15	2021-02-15 10:16:31	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-15 10:16:31] -       Resultado: La validación de los campos concluyó sin observaciones tipo1.	Informativo	Baja
+100350	2021-02-15	2021-02-15 10:16:54	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-15 10:16:54] -       Resultado: La validación de los campos concluyó sin observaciones tipo2.	Informativo	Baja
+100350	2021-02-15	2021-02-15 10:16:54	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-15 10:16:54] -       Resultado: Revisión de errores OM 22269-2020 fue satisfatoria.	Informativo	Baja
+100350	2021-02-15	2021-02-15 10:16:55	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-15 10:16:54] - Layer 5. Validación de Cruce Contable a la cartera.	Informativo	Baja
+100350	2021-02-15	2021-02-15 10:17:23	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-15 10:17:23] -       Resultado: La validación del cruce contable fue satifactoria.	Informativo	Baja
