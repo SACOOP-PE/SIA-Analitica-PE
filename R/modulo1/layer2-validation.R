@@ -13,7 +13,7 @@ layer2 <- function(agente, eb){
 #' getDuplicadosCredCancelados()
 #' getSaldoTotal()
 
-validarOperacionesDuplicadas <- function(agente, eb){
+validarOperacionesDuplicadas <- function(agente, eb) {
   carpeta   <- getCarpetaFromAgent(agente)
   exigibles <- getArchivosNoObservadosByCols(agente, eb, c("CCR", "CCR_C", "CODGR"))
   
@@ -95,8 +95,31 @@ validarOperacionesDuplicadas <- function(agente, eb){
   
   return(eb)
 }
+validarCreditosFaltantes     <- function(agente, eb) {
+  
+  archivos <- getArchivosNoObservadosByCols(agente, eb, c("CCR","CCR_C"))
+  periodos <- getPeriodosFromAgent(agente)
+  
+  if (periodos[2:length(periodos)] >1) {
+    
+    sabanaCartera      <- getSabana(agente, archivos, "BD01")
+    sabanaCronoCance   <- getSabana(agente, archivos, "BD02B")
+    sabanaCarteraCance <- getSabana(agente, archivos, "BD04")
+    
+    validacion <- sabanaCartera %>% group_by(CCR) %>% filter(n()==1) %>% rowwise() %>% 
+      mutate(EncontrarCreBD04 = if_else(nrow(sabanaCarteraCance %>% filter(CCR_C == CCR)) >0,
+                                        "TRUE", "FALSE"),
+             EncontrarCreBD02B = if_else(nrow(sabanaCronoCance %>% filter(CCR_C == CCR)) >0,
+                                         "TRUE", "FALSE")) %>% 
+      select(Periodo, CCR, EncontrarCreBD04, EncontrarCreBD02B)
+    
+    return(validacion)
+  }
+  
+  return(eb)
+}
 
-getOperacionesDuplicadas    <- function(ruta){
+getOperacionesDuplicadas    <- function(ruta) {
    BD <- quitarVaciosBD(ruta)
    
    if (getBDFromRuta(ruta) == "BD01" | getBDFromRuta(ruta) == "BD03A") {
@@ -126,7 +149,7 @@ getOperacionesDuplicadas    <- function(ruta){
    else{""}
 
 }
-getDuplicadosCredCancelados <- function(agente, exigibles){
+getDuplicadosCredCancelados <- function(agente, exigibles) {
   
   carpeta    <- getCarpetaFromAgent(agente)
   cancelados <- exigibles[str_detect(exigibles, "BD04")]
@@ -165,7 +188,7 @@ getDuplicadosCredCancelados <- function(agente, exigibles){
   }
   return("")
 }
-getSaldoTotal               <- function(ruta, opers){
+getSaldoTotal               <- function(ruta, opers) {
   if (opers != "" & getBDFromRuta(ruta) != "BD02B") {
     
     if (getBDFromRuta(ruta) == "BD01" | getBDFromRuta(ruta) == "BD02A") {

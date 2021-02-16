@@ -16,48 +16,90 @@ layer0_Analisis <- function(idCoopac){
                                 paste0(periodos[(periodos >= periodo_inicio) & (periodos <= periodo_final)], ".txt")),
                     1, paste, collapse = "_")
   
-  # getSabanaCartera(agente2, archivos)
-  getSabanaCarteraCancelada(agente2, archivos)
+  sabanaBD01 <- getSabanaCartera(agente2, archivos, "BD01")
+  
+    sabanaBD01 %>% 
+      write.xlsx(file = paste0(getwd(), "/test/output/","sabanaBD01.xlsx"))
+  
+  sabanadaBD04 <- getSabanaCarteraCancelada(agente2, archivos, "BD04")
+  
+    sabanaBD04 %>% 
+      write.xlsx(file = paste0(getwd(), "/test/output/","sabanaBD04.xlsx"))
 }
 
-####' 1. Obtener sabana de cartera 
-####' 2. Obtener sabana de cartera cancelada  
-getSabanaCartera          <- function(agente2, archivos) {
-  carpeta         <- getCarpetaFromAgent(agente2)
-  archivoscartera <- archivos[str_detect(archivos, "BD01")]
+####' 1. Obtener sabana de cartera
+####' 2. Obtener reprogramados
+getSabana  <- function(agente, archivos, bd) {
   
-  cartera <-  evaluarFile(getRuta(carpeta, archivoscartera[1])) %>%
-    mutate(Periodo = getAnoMesFromRuta(getRuta(carpeta, archivoscartera[1])))
+  carpeta         <- getCarpetaFromAgent(agente)
+  archivosCreditos <- archivos[str_detect(archivos, bd)]
   
-  for (i in 2:length(archivoscartera)-1) {
-    cartera <- cartera %>% bind_rows(evaluarFile(getRuta(carpeta, archivoscartera[i+1])) %>% 
-                                       mutate(Periodo = getAnoMesFromRuta(getRuta(carpeta, archivoscartera[i+1]))))
+  sabana <- evaluarFile(getRuta(carpeta, archivosCreditos[1])) %>%
+    mutate(Periodo = getAnoMesFromRuta(getRuta(carpeta, archivosCreditos[1])))
+  
+  if (getPeriodosFromAgent(agente) == 1) {
+    
+    if (bd == "BD01") {
+      cartera <- sabana[c(51, 1:50)]
+      return(cartera)
+    }
+    if (bd == "BD02B") {
+      cronoCanc <- sabana[c(18, 1:17)]
+      return(cronoCanc)
+    }
+    if (bd == "BD04") {
+      carteraCanc <- sabana[c(36, 1:35)]
+      return(carteraCanc)
+    }
+    
   }
   
-  cartera <- cartera[c(51, 1:50)]
+  for (i in 2:length(archivosCreditos)-1) {
+    sabana <- sabana %>% bind_rows(evaluarFile(getRuta(carpeta, archivosCreditos[i+1])) %>% 
+                                       mutate(Periodo = getAnoMesFromRuta(getRuta(carpeta, archivosCreditos[i+1]))))
+  }
   
-  cartera %>% 
-    write.xlsx(file = paste0(getwd(), "/test/output/","sabanaBD01.xlsx"))
-  
-  return(cartera)
+    if (bd == "BD01") {
+      cartera <- sabana[c(51, 1:50)]
+      return(cartera)
+    }
+    if (bd == "BD02B") {
+      cronoCanc <- sabana[c(18, 1:17)]
+      return(cronoCanc)
+    }
+    if (bd == "BD04") {
+      carteraCanc <- sabana[c(36, 1:35)]
+      return(carteraCanc)
+    }
+
 }
-getSabanaCarteraCancelada <- function(agente2, archivos) {
+
+analizarReprogramados <- function(idCoopac){
   
-  carpeta             <- getCarpetaFromAgent(agente2)
-  archivoscarteraCanc <- archivos[str_detect(archivos, "BD04")]
+  agente <- createAgent(idCoopac,
+                        periodoInicial = "201901",
+                        periodoFinal   = "202009")
+    
+  sabanaBD01 <- getSabanaCartera(agente, getArchivosExigiblesFromAgent(agente), "BD01") %>% 
+    select(Periodo, CCR, FVEG, NCPR, TEA)
   
-  carteraCanc <- evaluarFile(getRuta(carpeta, archivoscarteraCanc[1])) %>%
-    mutate(Periodo = getAnoMesFromRuta(getRuta(carpeta, archivoscarteraCanc[1])))
+  creditos <- sabanaBD01 %>% pull(CCR) %>% unique()
   
-  for (i in 2:length(archivoscarteraCanc)-1) {
-    carteraCanc <- carteraCanc %>% bind_rows(evaluarFile(getRuta(carpeta, archivoscarteraCanc[i+1])) %>% 
-                                               mutate(Periodo = getAnoMesFromRuta(getRuta(carpeta, archivoscarteraCanc[i+1]))))
-  }
+  sabanaBD01 <- sabanaBD01 %>% filter(CCR %in% creditos[2]) %>% 
+    mutate(Periodo_post = lead(Periodo),
+           FVEG_post = lead(FVEG),
+           NCPR_post = lead(NCPR),
+           TEA_post  = lead(TEA)) %>% rowwise() %>% 
+    mutate(diff_NCPR = if_else(NCPR == NCPR_post, 
+                               0, as.numeric(NCPR)- as.numeric(NCPR_post)),
+           diff_TEA = if_else(TEA == TEA_post, 
+                               0, as.numeric(TEA)- as.numeric(TEA_post)),
+           diff_FVEG = if_else(FVEG == FVEG_post,
+                               0, 
+                               difftime(dmy(FVEG_post), dmy(FVEG), units = "days") %>% as.numeric())
+           )
   
-  carteraCanc <- carteraCanc[c(36, 1:35)]
   
-  carteraCanc %>% 
-    write.xlsx(file = paste0(getwd(), "/test/output/","sabanaBD04.xlsx"))
-  
-  return(carteraCanc)
+   
+  return(sabanaBD01[1:nrow(sabanaBD01)-1,])
 }

@@ -31,7 +31,7 @@ getPeriodosNoObservados       <- function(agente, eb, colCruce){
                        CODGR = archivos[str_detect(archivos, paste(c("BD03A","BD03B"), collapse = '|'))],
                        CIS   = archivos[str_detect(archivos, paste(c("BD03A","BD01"), collapse = '|'))])
   
-  getPeriodos <- tibble(Periodos =  str_extract(archCruce, paste(as.character(global.alcance),collapse = '|'))) %>%
+  getPeriodos <- tibble(Periodos = str_extract(archCruce, paste(as.character(global.alcance), collapse = '|'))) %>%
     group_by(Periodos) %>%
     filter(n() ==2) %>%
     pull(Periodos) %>% 

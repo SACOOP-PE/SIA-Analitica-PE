@@ -87,6 +87,13 @@ getFinProcesoFromAgent        <- function(agente){
 getAlcanceFromAgent           <- function(agente){ 
   agente %>% pull(Alcance) %>% first() %>% return()
 }
+getPeriodosFromAgent          <- function(agente){
+  
+  periodo_inicio <- agente %>% pull(PeriodoInicial) %>% first()
+  periodo_final  <- agente %>% pull(PeriodoFinal)
+  
+  global.alcance[(global.alcance >= periodo_inicio) & (global.alcance <= periodo_final)] %>% return()
+}
 
 getNombreCoopacFromIdCoopac   <- function(idCoopac){
   initCuadreContable() %>% filter(CodigoEntidad == idCoopac) %>% pull(Entidad) %>% first()
