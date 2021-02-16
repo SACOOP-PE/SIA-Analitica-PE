@@ -15,7 +15,7 @@ layer2 <- function(agente, eb){
 
 validarOperacionesDuplicadas <- function(agente, eb) {
   carpeta   <- getCarpetaFromAgent(agente)
-  exigibles <- getArchivosNoObservadosByCols(agente, eb, c("CCR", "CCR_C", "CODGR"))
+  exigibles <- getArchivosNoObservadosByCols(agente, eb, c("CCR", "CCR_C"))
   
   Dups <- tibble(NombreArchivo = exigibles[str_detect(exigibles, paste(c("BD01","BD02A", "BD02B"), collapse = '|'))]) %>% 
     rowwise() %>% 
@@ -106,12 +106,16 @@ validarCreditosFaltantes     <- function(agente, eb) {
     sabanaCronoCance   <- getSabana(agente, archivos, "BD02B")
     sabanaCarteraCance <- getSabana(agente, archivos, "BD04")
     
-    validacion <- sabanaCartera %>% group_by(CCR) %>% filter(n()==1) %>% rowwise() %>% 
-      mutate(EncontrarCreBD04 = if_else(nrow(sabanaCarteraCance %>% filter(CCR_C == CCR)) >0,
-                                        "TRUE", "FALSE"),
-             EncontrarCreBD02B = if_else(nrow(sabanaCronoCance %>% filter(CCR_C == CCR)) >0,
-                                         "TRUE", "FALSE")) %>% 
-      select(Periodo, CCR, EncontrarCreBD04, EncontrarCreBD02B)
+    validacion <- sabanaCartera %>% 
+      group_by(CCR) %>% 
+      filter(row_number() == max(row_number())) %>% rowwise() %>% 
+      mutate(PeriodoEncontradoBD02B = sabanaCronoCance %>% filter(CCR_C == CCR) %>% pull(Periodo) %>% unique() %>% toString(),
+             PeriodoEncontradoBD04  = sabanaCarteraCance %>% filter(CCR_C == CCR) %>% pull(Periodo) %>% unique() %>% toString(),
+             EncontrarCreBD02B = if_else(PeriodoEncontradoBD02B == "",
+                                         "FALSE", "TRUE"),
+             EncontrarCreBD04  = if_else(PeriodoEncontradoBD04 == "",
+                                         "FALSE", "TRUE")) %>% 
+      select(Periodo, CCR, PeriodoEncontradoBD02B, EncontrarCreBD02B, PeriodoEncontradoBD04, EncontrarCreBD04)
     
     return(validacion)
   }
