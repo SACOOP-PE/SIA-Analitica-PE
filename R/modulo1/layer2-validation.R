@@ -3,6 +3,7 @@
 
 layer2 <- function(agente, eb){
   eb <- validarOperacionesDuplicadas(agente, eb)
+  eb <- validarCreditosFaltantes(agente, eb)
   return(eb)
 }
 
@@ -108,6 +109,7 @@ validarCreditosFaltantes     <- function(agente, eb) {
     
     validacion <- sabanaCartera %>% 
       group_by(CCR) %>% 
+      arrange(Periodo) %>% 
       filter(row_number() == max(row_number())) %>% rowwise() %>% 
       mutate(PeriodoEncontradoBD02B = sabanaCronoCance %>% filter(CCR_C == CCR) %>% pull(Periodo) %>% unique() %>% toString(),
              PeriodoEncontradoBD04  = sabanaCarteraCance %>% filter(CCR_C == CCR) %>% pull(Periodo) %>% unique() %>% toString(),
@@ -117,9 +119,38 @@ validarCreditosFaltantes     <- function(agente, eb) {
                                          "FALSE", "TRUE")) %>% 
       select(Periodo, CCR, PeriodoEncontradoBD02B, EncontrarCreBD02B, PeriodoEncontradoBD04, EncontrarCreBD04)
     
-    return(validacion)
+    f_BD02B <- validacion %>% filter(EncontrarCreBD02B == "FALSE" & Periodo %in% periodos[1:length(periodos)-1]) %>% select(Periodo, CCR)
+    f_BD04  <- validacion %>% filter(EncontrarCreBD04 == "FALSE" & Periodo %in% periodos[1:length(periodos)-1]) %>% select(Periodo, CCR)
+    
+    if (nrow(f_BD02B)>0) {
+      chunk_504 <- f_BD02B %>% group_by(Periodo) %>% summarise(CCR = toString(CCR)) %>% rowwise() %>% 
+        mutate(CodCoopac = getCoopacFromAgent(agente),
+               IdProceso = getIdProcesoFromAgent(agente),
+               BD = "BD01",
+               Cod = 504,
+               txt1 = CCR,
+               txt2 = toString(as.numeric(Periodo) +1),
+               num1 = length(str_split(string=txt1, pattern = ",")[[1]])) %>% 
+        select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, txt2, num1)
+      
+      eb <- addError(eb, chunk_504)
+    }
+    if (nrow(f_BD04)>0) {
+      chunk_505 <- f_BD04 %>% group_by(Periodo) %>% summarise(CCR = toString(CCR)) %>% rowwise() %>% 
+        mutate(CodCoopac = getCoopacFromAgent(agente),
+               IdProceso = getIdProcesoFromAgent(agente),
+               BD = "BD01",
+               Cod = 505,
+               txt1 = CCR,
+               txt2 = toString(as.numeric(Periodo) +1),
+               num1 = length(str_split(string=txt1, pattern = ",")[[1]])) %>% 
+        select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, txt2, num1)
+      
+      eb <- addError(eb, chunk_505)
+    }
+    
+    return(eb)
   }
-  
   return(eb)
 }
 
