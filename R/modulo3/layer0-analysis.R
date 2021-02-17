@@ -76,30 +76,34 @@ getSabana  <- function(agente, archivos, bd) {
 
 analizarReprogramados <- function(idCoopac){
   
-  agente <- createAgent(idCoopac,
-                        periodoInicial = "201901",
-                        periodoFinal   = "202009")
-    
-  sabanaBD01 <- getSabanaCartera(agente, getArchivosExigiblesFromAgent(agente), "BD01") %>% 
-    select(Periodo, CCR, FVEG, NCPR, TEA)
+  agente2 <- createAgent(idCoopac,
+                        periodoInicial = "202001",
+                        periodoFinal   = "202002")
   
-  creditos <- sabanaBD01 %>% pull(CCR) %>% unique()
+  #a.
+  #b. reprogram. vencidos :
+  sabanaBD01 <- getSabana(agente2, getArchivosExigiblesFromAgent(agente2), "BD01") %>%
+    filter(KVI !=0) %>% 
+    select(Periodo, CCR, FVEG)
   
-  sabanaBD01 <- sabanaBD01 %>% filter(CCR %in% creditos[2]) %>% 
+  creditos <- sabanaBD01 %>% group_by(CCR) %>% filter(n()>1) %>% pull(CCR) %>% unique()
+  
+  reprogramados <- sabanaBD01 %>% filter(CCR %in% creditos[1]) %>% 
     mutate(Periodo_post = lead(Periodo),
-           FVEG_post = lead(FVEG),
-           NCPR_post = lead(NCPR),
-           TEA_post  = lead(TEA)) %>% rowwise() %>% 
-    mutate(diff_NCPR = if_else(NCPR == NCPR_post, 
-                               0, as.numeric(NCPR)- as.numeric(NCPR_post)),
-           diff_TEA = if_else(TEA == TEA_post, 
-                               0, as.numeric(TEA)- as.numeric(TEA_post)),
-           diff_FVEG = if_else(FVEG == FVEG_post,
-                               0, 
-                               difftime(dmy(FVEG_post), dmy(FVEG), units = "days") %>% as.numeric())
-           )
+           FVEG_post    = lead(FVEG))
   
+  for (i in 1:length(creditos)-1) {
+
+    reprogramadosi <- sabanaBD01 %>% filter(CCR %in% creditos[i+1]) %>% 
+      mutate(Periodo_post = lead(Periodo),
+             FVEG_post    = lead(FVEG))
+
+    reprogramados <- reprogramados %>% bind_rows(reprogramadosi)
+  }
   
-   
-  return(sabanaBD01[1:nrow(sabanaBD01)-1,])
+  reprogramados <- reprogramados %>% rowwise() %>% 
+    mutate(Reprogramados = if_else(dmy(FVEG_post) > dmy(FVEG),
+                                   "X", ""))
+
+  return(reprogramados)
 }

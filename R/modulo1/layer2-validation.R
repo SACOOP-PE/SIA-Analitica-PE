@@ -190,12 +190,11 @@ getDuplicadosCredCancelados <- function(agente, exigibles) {
   cancelados <- exigibles[str_detect(exigibles, "BD04")]
   
   if (length(cancelados) > 0) {
-    CredCandelados <- quitarVaciosBD(getRuta(carpeta, cancelados[1])) %>% 
-      mutate(Periodos = getAnoMesFromRuta(getRuta(carpeta, cancelados[1]))) 
     
     if (length(cancelados) ==1) {
       
-      dupsCancelados <- CredCandelados %>% 
+      dupsCancelados <- quitarVaciosBD(getRuta(carpeta, cancelados[1])) %>% 
+        mutate(Periodos = getAnoMesFromRuta(getRuta(carpeta, cancelados[1]))) %>% 
         select(Periodos, CCR_C) %>% 
         group_by(CCR_C) %>%
         filter(n() >1)
@@ -204,15 +203,8 @@ getDuplicadosCredCancelados <- function(agente, exigibles) {
     }
     
     else{
-      for (i in 2:length(cancelados)-1) {
-        
-        CredCandelados <- CredCandelados %>%
-          bind_rows(quitarVaciosBD(getRuta(carpeta, cancelados[i+1])) %>% 
-                      mutate(Periodos = getAnoMesFromRuta(getRuta(carpeta, cancelados[i+1]))))
-        
-      }
       
-      dupsCancelados <- CredCandelados %>% 
+      dupsCancelados <- getSabana(agente, cancelados, "BD04") %>% 
         select(Periodos, CCR_C) %>% 
         group_by(CCR_C) %>%
         filter(n() >1)
