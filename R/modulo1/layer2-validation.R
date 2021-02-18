@@ -234,3 +234,48 @@ getSaldoTotal               <- function(ruta, opers) {
   }
   return(0)
 }
+
+getSabana  <- function(agente, archivos, bd) {
+  
+  carpeta          <- getCarpetaFromAgent(agente)
+  archivosCreditos <- archivos[str_detect(archivos, bd)]
+  
+  sabana <- evaluarFile(getRuta(carpeta, archivosCreditos[1])) %>%
+    mutate(Periodo = getAnoMesFromRuta(getRuta(carpeta, archivosCreditos[1])))
+  
+  if (getPeriodosFromAgent(agente) == 1) {
+    
+    if (bd == "BD01") {
+      cartera <- sabana[c(51, 1:50)]
+      return(cartera)
+    }
+    if (bd == "BD02B") {
+      cronoCanc <- sabana[c(18, 1:17)]
+      return(cronoCanc)
+    }
+    if (bd == "BD04") {
+      carteraCanc <- sabana[c(36, 1:35)]
+      return(carteraCanc)
+    }
+    
+  }
+  
+  for (i in 2:length(archivosCreditos)-1) {
+    sabana <- sabana %>% bind_rows(evaluarFile(getRuta(carpeta, archivosCreditos[i+1])) %>% 
+                                     mutate(Periodo = getAnoMesFromRuta(getRuta(carpeta, archivosCreditos[i+1]))))
+  }
+  
+  if (bd == "BD01") {
+    cartera <- sabana[c(51, 1:50)]
+    return(cartera)
+  }
+  if (bd == "BD02B") {
+    cronoCanc <- sabana[c(18, 1:17)]
+    return(cronoCanc)
+  }
+  if (bd == "BD04") {
+    carteraCanc <- sabana[c(36, 1:35)]
+    return(carteraCanc)
+  }
+  
+}
