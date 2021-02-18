@@ -28,11 +28,11 @@ layer0_Analisis <- function(idCoopac){
 }
 
 ####' 1. Obtener reprogramados
-analizarReprogramados <- function(idCoopac){
+analizarReprogramados <- function(idCoopac, fechaInicial, fechaFinal){
   
   agente2 <- createAgent(idCoopac,
-                         periodoInicial = "202001",
-                         periodoFinal   = "202011")
+                         periodoInicial = fechaInicial,
+                         periodoFinal   = fechaFinal)
   
   sabanaBD01 <- getSabana(agente2, getArchivosExigiblesFromAgent(agente2), "BD01")
   
