@@ -75,12 +75,11 @@ validarOperacionesDuplicadas <- function(agente, eb) {
     chunk_405 <- tibble(CodCoopac = getCoopacFromAgent(agente),
                         IdProceso = getIdProcesoFromAgent(agente),
                         Cod     = 405,
-                        Periodo = dups_BD04 %>% pull(Periodos) %>% first(),
+                        Periodo = dups_BD04 %>% pull(PeriodoI) %>% first(),
                         BD      = "BD04",
                         txt1 = toString(unique(dups_BD04 %>% pull(CCR_C))),
-                        txt2 = toString(unique(dups_BD04 %>% pull(Periodos))),
-                        num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])
-                        ) %>%
+                        txt2 = toString(unique(dups_BD04 %>% pull(PeriodoI))),
+                        num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
       select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, txt2, num1)
     
     eb <- addError(eb, chunk_405)
@@ -109,22 +108,23 @@ validarCreditosFaltantes     <- function(agente, eb) {
     
     validacion <- sabanaCartera %>% 
       group_by(CCR) %>% 
-      arrange(Periodo) %>% 
+      arrange(PeriodoI) %>% 
       filter(row_number() == max(row_number())) %>% rowwise() %>% 
-      mutate(PeriodoEncontradoBD02B = sabanaCronoCance %>% filter(CCR_C == CCR) %>% pull(Periodo) %>% unique() %>% toString(),
-             PeriodoEncontradoBD04  = sabanaCarteraCance %>% filter(CCR_C == CCR) %>% pull(Periodo) %>% unique() %>% toString(),
+      mutate(PeriodoEncontradoBD02B = sabanaCronoCance %>% filter(CCR_C == CCR) %>% pull(PeriodoI) %>% unique() %>% toString(),
+             PeriodoEncontradoBD04  = sabanaCarteraCance %>% filter(CCR_C == CCR) %>% pull(PeriodoI) %>% unique() %>% toString(),
              EncontrarCreBD02B = if_else(PeriodoEncontradoBD02B == "",
                                          "FALSE", "TRUE"),
              EncontrarCreBD04  = if_else(PeriodoEncontradoBD04 == "",
                                          "FALSE", "TRUE")) %>% 
-      select(Periodo, CCR, PeriodoEncontradoBD02B, EncontrarCreBD02B, PeriodoEncontradoBD04, EncontrarCreBD04)
+      select(PeriodoI, CCR, PeriodoEncontradoBD02B, EncontrarCreBD02B, PeriodoEncontradoBD04, EncontrarCreBD04)
     
-    f_BD02B <- validacion %>% filter(EncontrarCreBD02B == "FALSE" & Periodo %in% periodos[1:length(periodos)-1]) %>% select(Periodo, CCR)
-    f_BD04  <- validacion %>% filter(EncontrarCreBD04 == "FALSE" & Periodo %in% periodos[1:length(periodos)-1]) %>% select(Periodo, CCR)
+    f_BD02B <- validacion %>% filter(EncontrarCreBD02B == "FALSE" & PeriodoI %in% periodos[1:length(periodos)-1]) %>% select(PeriodoI, CCR)
+    f_BD04  <- validacion %>% filter(EncontrarCreBD04 == "FALSE" & PeriodoI %in% periodos[1:length(periodos)-1]) %>% select(PeriodoI, CCR)
     
     if (nrow(f_BD02B)>0) {
-      chunk_504 <- f_BD02B %>% group_by(Periodo) %>% summarise(CCR = toString(CCR)) %>% rowwise() %>% 
-        mutate(CodCoopac = getCoopacFromAgent(agente),
+      chunk_504 <- f_BD02B %>% group_by(PeriodoI) %>% summarise(CCR = toString(CCR)) %>% rowwise() %>% 
+        mutate(Periodo   = PeriodoI,
+               CodCoopac = getCoopacFromAgent(agente),
                IdProceso = getIdProcesoFromAgent(agente),
                BD = "BD01",
                Cod = 504,
@@ -136,8 +136,9 @@ validarCreditosFaltantes     <- function(agente, eb) {
       eb <- addError(eb, chunk_504)
     }
     if (nrow(f_BD04)>0) {
-      chunk_505 <- f_BD04 %>% group_by(Periodo) %>% summarise(CCR = toString(CCR)) %>% rowwise() %>% 
-        mutate(CodCoopac = getCoopacFromAgent(agente),
+      chunk_505 <- f_BD04 %>% group_by(PeriodoI) %>% summarise(CCR = toString(CCR)) %>% rowwise() %>% 
+        mutate(Periodo   = PeriodoI,
+               CodCoopac = getCoopacFromAgent(agente),
                IdProceso = getIdProcesoFromAgent(agente),
                BD = "BD01",
                Cod = 505,
@@ -147,6 +148,15 @@ validarCreditosFaltantes     <- function(agente, eb) {
         select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, txt2, num1)
       
       eb <- addError(eb, chunk_505)
+    }
+    
+    
+    n <- eb %>% filter(Cod %in% c(504:505)) %>% nrow()
+    if (n == 0) {
+      addEventLog(agente, paste0("      Resultado: La validación de créditos faltantes en la 2B o 4 concluyó sin observaciones."))
+    }
+    else{
+      addEventLog(agente, paste0("      Resultado: La validación de créditos faltantes en la 2B o 4 concluyó con ",n," observación(es)."))
     }
     
     return(eb)
@@ -194,8 +204,8 @@ getDuplicadosCredCancelados <- function(agente, exigibles) {
     if (length(cancelados) ==1) {
       
       dupsCancelados <- quitarVaciosBD(getRuta(carpeta, cancelados[1])) %>% 
-        mutate(Periodos = getAnoMesFromRuta(getRuta(carpeta, cancelados[1]))) %>% 
-        select(Periodos, CCR_C) %>% 
+        mutate(PeriodoI = getAnoMesFromRuta(getRuta(carpeta, cancelados[1]))) %>% 
+        select(PeriodoI, CCR_C) %>% 
         group_by(CCR_C) %>%
         filter(n() >1)
       
@@ -205,7 +215,7 @@ getDuplicadosCredCancelados <- function(agente, exigibles) {
     else{
       
       dupsCancelados <- getSabana(agente, cancelados, "BD04") %>% 
-        select(Periodos, CCR_C) %>% 
+        select(PeriodoI, CCR_C) %>% 
         group_by(CCR_C) %>%
         filter(n() >1)
       
@@ -241,7 +251,7 @@ getSabana  <- function(agente, archivos, bd) {
   archivosCreditos <- archivos[str_detect(archivos, bd)]
   
   sabana <- evaluarFile(getRuta(carpeta, archivosCreditos[1])) %>%
-    mutate(Periodo = getAnoMesFromRuta(getRuta(carpeta, archivosCreditos[1])))
+    mutate(PeriodoI = getAnoMesFromRuta(getRuta(carpeta, archivosCreditos[1])))
   
   if (getPeriodosFromAgent(agente) == 1) {
     
@@ -262,7 +272,7 @@ getSabana  <- function(agente, archivos, bd) {
   
   for (i in 2:length(archivosCreditos)-1) {
     sabana <- sabana %>% bind_rows(evaluarFile(getRuta(carpeta, archivosCreditos[i+1])) %>% 
-                                     mutate(Periodo = getAnoMesFromRuta(getRuta(carpeta, archivosCreditos[i+1]))))
+                                     mutate(PeriodoI = getAnoMesFromRuta(getRuta(carpeta, archivosCreditos[i+1]))))
   }
   
   if (bd == "BD01") {

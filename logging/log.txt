@@ -2816,3 +2816,106 @@
 100434	2021-02-18	2021-02-18 15:52:43	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 15:52:43] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
 100434	2021-02-18	2021-02-18 15:52:43	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 15:52:43] - Coopac evaluada: 01183-SAN ISIDRO	Informativo	Baja
 100434	2021-02-18	2021-02-18 15:52:44	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 15:52:43] - PID: 100434[202001~202011]	Informativo	Baja
+100435	2021-02-18	2021-02-18 16:13:42	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 16:13:42] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100435	2021-02-18	2021-02-18 16:13:42	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 16:13:42] - Coopac evaluada: 01120-STO DOMINGO GUZMAN	Informativo	Baja
+100435	2021-02-18	2021-02-18 16:13:43	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 16:13:42] - PID: 100435[202001~202012]	Informativo	Baja
+100436	2021-02-18	2021-02-18 16:13:58	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 16:13:58] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100436	2021-02-18	2021-02-18 16:13:58	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 16:13:58] - Coopac evaluada: 01120-STO DOMINGO GUZMAN	Informativo	Baja
+100436	2021-02-18	2021-02-18 16:13:59	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 16:13:59] - PID: 100436[202001~202012]	Informativo	Baja
+100437	2021-02-18	2021-02-18 16:14:42	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 16:14:42] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100437	2021-02-18	2021-02-18 16:14:42	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 16:14:42] - Coopac evaluada: 01120-STO DOMINGO GUZMAN	Informativo	Baja
+100437	2021-02-18	2021-02-18 16:14:42	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 16:14:42] - PID: 100437[202001~202012]	Informativo	Baja
+100438	2021-02-18	2021-02-18 16:15:19	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 16:15:19] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100438	2021-02-18	2021-02-18 16:15:20	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 16:15:19] - Coopac evaluada: 01120-STO DOMINGO GUZMAN	Informativo	Baja
+100438	2021-02-18	2021-02-18 16:15:20	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 16:15:20] - PID: 100438[202001~202012]	Informativo	Baja
+100439	2021-02-18	2021-02-18 16:38:03	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:38:03] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100439	2021-02-18	2021-02-18 16:38:03	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:38:03] - Coopac evaluada: 01183-SAN ISIDRO	Informativo	Baja
+100439	2021-02-18	2021-02-18 16:38:04	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:38:03] - PID: 100439[202001~202011]	Informativo	Baja
+100440	2021-02-18	2021-02-18 16:38:18	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:38:18] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100440	2021-02-18	2021-02-18 16:38:18	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:38:18] - Coopac evaluada: 01183-SAN ISIDRO	Informativo	Baja
+100440	2021-02-18	2021-02-18 16:38:19	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:38:18] - PID: 100440[202001~202011]	Informativo	Baja
+100441	2021-02-18	2021-02-18 16:39:09	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:39:09] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100441	2021-02-18	2021-02-18 16:39:10	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:39:09] - Coopac evaluada: 01183-SAN ISIDRO	Informativo	Baja
+100441	2021-02-18	2021-02-18 16:39:10	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:39:10] - PID: 100441[201901~202011]	Informativo	Baja
+100441	2021-02-18	2021-02-18 16:39:10	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:39:10] - 1. MÓDULO DE VALIDACIÓN DE BASE DE DATOS CREDITICIAS --------------------------	Informativo	Baja
+100441	2021-02-18	2021-02-18 16:39:10	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:39:10] - Inicio del interrogatorio modulo 1. PID-100441.	Informativo	Baja
+100441	2021-02-18	2021-02-18 16:39:11	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:39:10] - Layer 0. Revisión de pre-requisitos.	Informativo	Baja
+100441	2021-02-18	2021-02-18 16:39:12	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:39:11] -       Resultado: Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100441	2021-02-18	2021-02-18 16:39:12	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:39:12] - Layer 1. Revisión de estructura de tablas	Informativo	Baja
+100442	2021-02-18	2021-02-18 16:40:11	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:40:11] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100442	2021-02-18	2021-02-18 16:40:11	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:40:11] - Coopac evaluada: 01183-SAN ISIDRO	Informativo	Baja
+100442	2021-02-18	2021-02-18 16:40:12	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:40:11] - PID: 100442[202001~202004]	Informativo	Baja
+100442	2021-02-18	2021-02-18 16:40:12	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:40:12] - 1. MÓDULO DE VALIDACIÓN DE BASE DE DATOS CREDITICIAS --------------------------	Informativo	Baja
+100442	2021-02-18	2021-02-18 16:40:12	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:40:12] - Inicio del interrogatorio modulo 1. PID-100442.	Informativo	Baja
+100442	2021-02-18	2021-02-18 16:40:12	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:40:12] - Layer 0. Revisión de pre-requisitos.	Informativo	Baja
+100442	2021-02-18	2021-02-18 16:40:13	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:40:13] -       Resultado: Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100442	2021-02-18	2021-02-18 16:40:13	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:40:13] - Layer 1. Revisión de estructura de tablas	Informativo	Baja
+100443	2021-02-18	2021-02-18 16:40:28	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:40:28] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100443	2021-02-18	2021-02-18 16:40:28	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:40:28] - Coopac evaluada: 01183-SAN ISIDRO	Informativo	Baja
+100443	2021-02-18	2021-02-18 16:40:29	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:40:28] - PID: 100443[202001~202004]	Informativo	Baja
+100443	2021-02-18	2021-02-18 16:40:30	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:40:30] - 1. MÓDULO DE VALIDACIÓN DE BASE DE DATOS CREDITICIAS --------------------------	Informativo	Baja
+100443	2021-02-18	2021-02-18 16:40:30	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:40:30] - Inicio del interrogatorio modulo 1. PID-100443.	Informativo	Baja
+100443	2021-02-18	2021-02-18 16:40:31	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:40:30] - Layer 0. Revisión de pre-requisitos.	Informativo	Baja
+100443	2021-02-18	2021-02-18 16:40:32	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:40:31] -       Resultado: Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100443	2021-02-18	2021-02-18 16:40:32	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:40:32] - Layer 1. Revisión de estructura de tablas	Informativo	Baja
+100443	2021-02-18	2021-02-18 16:40:55	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:40:55] - La validación de Columnas vacías concluyó con 4 observación(es).	Informativo	Baja
+100443	2021-02-18	2021-02-18 16:40:55	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:40:55] -       Resultado: Revisión de estructura de datos satisfatoria.	Informativo	Baja
+100443	2021-02-18	2021-02-18 16:40:56	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:40:56] - Layer 2. Validación de operaciones duplicadas.	Informativo	Baja
+100444	2021-02-18	2021-02-18 16:52:14	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:52:13] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100444	2021-02-18	2021-02-18 16:52:14	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:52:14] - Coopac evaluada: 01183-SAN ISIDRO	Informativo	Baja
+100444	2021-02-18	2021-02-18 16:52:14	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:52:14] - PID: 100444[202001~202004]	Informativo	Baja
+100444	2021-02-18	2021-02-18 16:52:15	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:52:15] - 1. MÓDULO DE VALIDACIÓN DE BASE DE DATOS CREDITICIAS --------------------------	Informativo	Baja
+100444	2021-02-18	2021-02-18 16:52:16	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:52:15] - Inicio del interrogatorio modulo 1. PID-100444.	Informativo	Baja
+100444	2021-02-18	2021-02-18 16:52:16	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:52:16] - Layer 0. Revisión de pre-requisitos.	Informativo	Baja
+100444	2021-02-18	2021-02-18 16:52:17	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:52:17] -       Resultado: Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100444	2021-02-18	2021-02-18 16:52:17	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:52:17] - Layer 1. Revisión de estructura de tablas	Informativo	Baja
+100444	2021-02-18	2021-02-18 16:52:38	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:52:38] - La validación de Columnas vacías concluyó con 4 observación(es).	Informativo	Baja
+100444	2021-02-18	2021-02-18 16:52:39	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:52:39] -       Resultado: Revisión de estructura de datos satisfatoria.	Informativo	Baja
+100444	2021-02-18	2021-02-18 16:52:39	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:52:39] - Layer 2. Validación de operaciones duplicadas.	Informativo	Baja
+100444	2021-02-18	2021-02-18 16:53:06	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:53:06] -       Resultado: La validación operaciones duplicadas concluyó con 1 observación(es).	Informativo	Baja
+100444	2021-02-18	2021-02-18 16:53:51	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:53:51] -       Resultado: La validación de créditos faltantes en la 2B o 4 concluyó con 5 observación(es).	Informativo	Baja
+100444	2021-02-18	2021-02-18 16:53:51	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:53:51] - Layer 3. Validación de entre BD01/BD02A, BD03A/BD03B.	Informativo	Baja
+100444	2021-02-18	2021-02-18 16:54:11	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:54:11] -       Resultado: La validación de cruce interno concluyó con 1 observación(es).	Informativo	Baja
+100444	2021-02-18	2021-02-18 16:54:12	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:54:11] - Layer 4. Validación de campos indviduales.	Informativo	Baja
+100445	2021-02-18	2021-02-18 16:54:46	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:54:46] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100445	2021-02-18	2021-02-18 16:54:47	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:54:46] - Coopac evaluada: 01183-SAN ISIDRO	Informativo	Baja
+100445	2021-02-18	2021-02-18 16:54:47	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:54:47] - PID: 100445[202001~202004]	Informativo	Baja
+100445	2021-02-18	2021-02-18 16:54:48	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:54:48] - 1. MÓDULO DE VALIDACIÓN DE BASE DE DATOS CREDITICIAS --------------------------	Informativo	Baja
+100445	2021-02-18	2021-02-18 16:54:48	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:54:48] - Inicio del interrogatorio modulo 1. PID-100445.	Informativo	Baja
+100445	2021-02-18	2021-02-18 16:54:49	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:54:48] - Layer 0. Revisión de pre-requisitos.	Informativo	Baja
+100445	2021-02-18	2021-02-18 16:54:49	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:54:49] -       Resultado: Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100445	2021-02-18	2021-02-18 16:54:50	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:54:49] - Layer 1. Revisión de estructura de tablas	Informativo	Baja
+100445	2021-02-18	2021-02-18 16:55:10	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:55:10] - La validación de Columnas vacías concluyó con 4 observación(es).	Informativo	Baja
+100445	2021-02-18	2021-02-18 16:55:11	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:55:10] -       Resultado: Revisión de estructura de datos satisfatoria.	Informativo	Baja
+100445	2021-02-18	2021-02-18 16:55:11	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:55:11] - Layer 2. Validación de operaciones duplicadas.	Informativo	Baja
+100445	2021-02-18	2021-02-18 16:55:40	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:55:40] -       Resultado: La validación operaciones duplicadas concluyó con 1 observación(es).	Informativo	Baja
+100445	2021-02-18	2021-02-18 16:56:27	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:56:27] -       Resultado: La validación de créditos faltantes en la 2B o 4 concluyó con 5 observación(es).	Informativo	Baja
+100445	2021-02-18	2021-02-18 16:56:27	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:56:27] - Layer 3. Validación de entre BD01/BD02A, BD03A/BD03B.	Informativo	Baja
+100445	2021-02-18	2021-02-18 16:56:47	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:56:46] -       Resultado: La validación de cruce interno concluyó con 1 observación(es).	Informativo	Baja
+100445	2021-02-18	2021-02-18 16:56:47	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:56:47] - Layer 4. Validación de campos indviduales.	Informativo	Baja
+100445	2021-02-18	2021-02-18 16:57:09	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:57:09] -       Resultado: La validación de los campos concluyó con 44 observaciones tipo1.	Informativo	Baja
+100445	2021-02-18	2021-02-18 16:57:24	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:57:23] -       Resultado: La validación de los campos concluyó con 10 observación(es) tipo2.	Informativo	Baja
+100445	2021-02-18	2021-02-18 16:57:24	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:57:24] -       Resultado: La revisión errores OM 22269-2020 tiene 54 observaciones.	Informativo	Baja
+100445	2021-02-18	2021-02-18 16:57:24	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:57:24] - Layer 5. Validación de Cruce Contable a la cartera.	Informativo	Baja
+100445	2021-02-18	2021-02-18 16:57:53	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 16:57:53] -       Resultado: Se detectaron 32 error(es) contable(s) en la cartera de créditos pues no cuadra con el balance de comprobación.	Informativo	Baja
+100446	2021-02-18	2021-02-18 17:17:46	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 17:17:46] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100446	2021-02-18	2021-02-18 17:17:46	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 17:17:46] - Coopac evaluada: 01183-SAN ISIDRO	Informativo	Baja
+100446	2021-02-18	2021-02-18 17:17:46	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 17:17:46] - PID: 100446[202001~202004]	Informativo	Baja
+100446	2021-02-18	2021-02-18 17:17:47	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 17:17:46] - 1. MÓDULO DE VALIDACIÓN DE BASE DE DATOS CREDITICIAS --------------------------	Informativo	Baja
+100446	2021-02-18	2021-02-18 17:17:47	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 17:17:47] - Inicio del interrogatorio modulo 1. PID-100446.	Informativo	Baja
+100446	2021-02-18	2021-02-18 17:17:47	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 17:17:47] - Layer 0. Revisión de pre-requisitos.	Informativo	Baja
+100446	2021-02-18	2021-02-18 17:17:48	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 17:17:48] -       Resultado: Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100446	2021-02-18	2021-02-18 17:17:48	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 17:17:48] - Layer 1. Revisión de estructura de tablas	Informativo	Baja
+100446	2021-02-18	2021-02-18 17:18:08	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 17:18:08] - La validación de Columnas vacías concluyó con 4 observación(es).	Informativo	Baja
+100446	2021-02-18	2021-02-18 17:18:08	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 17:18:08] -       Resultado: Revisión de estructura de datos satisfatoria.	Informativo	Baja
+100446	2021-02-18	2021-02-18 17:18:09	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 17:18:08] - Layer 2. Validación de operaciones duplicadas.	Informativo	Baja
+100446	2021-02-18	2021-02-18 17:18:36	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 17:18:36] -       Resultado: La validación operaciones duplicadas concluyó con 1 observación(es).	Informativo	Baja
+100446	2021-02-18	2021-02-18 17:19:21	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 17:19:21] -       Resultado: La validación de créditos faltantes en la 2B o 4 concluyó con 5 observación(es).	Informativo	Baja
+100446	2021-02-18	2021-02-18 17:19:21	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 17:19:21] - Layer 3. Validación de entre BD01/BD02A, BD03A/BD03B.	Informativo	Baja
+100446	2021-02-18	2021-02-18 17:19:40	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 17:19:39] -       Resultado: La validación de cruce interno concluyó con 1 observación(es).	Informativo	Baja
+100446	2021-02-18	2021-02-18 17:19:40	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 17:19:40] - Layer 4. Validación de campos indviduales.	Informativo	Baja
+100446	2021-02-18	2021-02-18 17:20:02	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 17:20:02] -       Resultado: La validación de los campos concluyó con 44 observaciones tipo1.	Informativo	Baja
+100446	2021-02-18	2021-02-18 17:20:16	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 17:20:16] -       Resultado: La validación de los campos concluyó con 10 observación(es) tipo2.	Informativo	Baja
+100446	2021-02-18	2021-02-18 17:20:16	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 17:20:16] -       Resultado: La revisión errores OM 22269-2020 tiene 54 observaciones.	Informativo	Baja
+100446	2021-02-18	2021-02-18 17:20:16	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 17:20:16] - Layer 5. Validación de Cruce Contable a la cartera.	Informativo	Baja
+100446	2021-02-18	2021-02-18 17:20:44	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 17:20:44] -       Resultado: Se detectaron 32 error(es) contable(s) en la cartera de créditos pues no cuadra con el balance de comprobación.	Informativo	Baja
