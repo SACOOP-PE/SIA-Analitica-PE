@@ -2709,3 +2709,110 @@
 100405	2021-02-17	2021-02-17 22:14:47	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-17 22:14:47] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
 100405	2021-02-17	2021-02-17 22:14:48	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-17 22:14:47] - Coopac evaluada: 01172-SAN MARTÍN DE PORRES	Informativo	Baja
 100405	2021-02-17	2021-02-17 22:14:48	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-17 22:14:48] - PID: 100405[202001~202012]	Informativo	Baja
+100406	2021-02-17	2021-02-17 22:19:19	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-17 22:19:19] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100406	2021-02-17	2021-02-17 22:19:19	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-17 22:19:19] - Coopac evaluada: 01172-SAN MARTÍN DE PORRES	Informativo	Baja
+100406	2021-02-17	2021-02-17 22:19:20	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-17 22:19:19] - PID: 100406[202001~202012]	Informativo	Baja
+100407	2021-02-17	2021-02-17 22:19:20	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-17 22:19:20] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100407	2021-02-17	2021-02-17 22:19:21	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-17 22:19:20] - Coopac evaluada: 01172-SAN MARTÍN DE PORRES	Informativo	Baja
+100407	2021-02-17	2021-02-17 22:19:21	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-17 22:19:21] - PID: 100407[202001~202012]	Informativo	Baja
+100408	2021-02-17	2021-02-17 22:19:36	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-17 22:19:36] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100408	2021-02-17	2021-02-17 22:19:37	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-17 22:19:36] - Coopac evaluada: 01172-SAN MARTÍN DE PORRES	Informativo	Baja
+100408	2021-02-17	2021-02-17 22:19:37	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-17 22:19:37] - PID: 100408[202001~202012]	Informativo	Baja
+100409	2021-02-17	2021-02-17 22:19:38	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-17 22:19:37] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100409	2021-02-17	2021-02-17 22:19:38	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-17 22:19:38] - Coopac evaluada: 01172-SAN MARTÍN DE PORRES	Informativo	Baja
+100409	2021-02-17	2021-02-17 22:19:38	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-17 22:19:38] - PID: 100409[202001~202012]	Informativo	Baja
+100410	2021-02-17	2021-02-17 22:20:27	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-17 22:20:27] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100410	2021-02-17	2021-02-17 22:20:27	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-17 22:20:27] - Coopac evaluada: 01172-SAN MARTÍN DE PORRES	Informativo	Baja
+100410	2021-02-17	2021-02-17 22:20:27	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-17 22:20:27] - PID: 100410[202001~202003]	Informativo	Baja
+100411	2021-02-17	2021-02-17 22:20:28	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-17 22:20:28] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100411	2021-02-17	2021-02-17 22:20:28	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-17 22:20:28] - Coopac evaluada: 01172-SAN MARTÍN DE PORRES	Informativo	Baja
+100411	2021-02-17	2021-02-17 22:20:29	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-17 22:20:28] - PID: 100411[202001~202003]	Informativo	Baja
+100412	2021-02-17	2021-02-17 22:24:44	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-17 22:24:44] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100412	2021-02-17	2021-02-17 22:24:44	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-17 22:24:44] - Coopac evaluada: 01172-SAN MARTÍN DE PORRES	Informativo	Baja
+100412	2021-02-17	2021-02-17 22:24:44	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-17 22:24:44] - PID: 100412[202001~202003]	Informativo	Baja
+100413	2021-02-17	2021-02-17 22:36:22	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-17 22:36:22] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100413	2021-02-17	2021-02-17 22:36:22	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-17 22:36:22] - Coopac evaluada: 01172-SAN MARTÍN DE PORRES	Informativo	Baja
+100413	2021-02-17	2021-02-17 22:36:22	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-17 22:36:22] - PID: 100413[202001~202012]	Informativo	Baja
+100414	2021-02-18	2021-02-18 11:42:48	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-02-18 11:42:48] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100414	2021-02-18	2021-02-18 11:42:48	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-02-18 11:42:48] - Coopac evaluada: 01110-LA REHABILITADORA 24	Informativo	Baja
+100414	2021-02-18	2021-02-18 11:42:48	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-02-18 11:42:48] - PID: 100414[201901~202011]	Informativo	Baja
+100415	2021-02-18	2021-02-18 11:45:55	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-02-18 11:45:55] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100415	2021-02-18	2021-02-18 11:45:56	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-02-18 11:45:55] - Coopac evaluada: 01110-LA REHABILITADORA 24	Informativo	Baja
+100415	2021-02-18	2021-02-18 11:45:56	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-02-18 11:45:56] - PID: 100415[201901~202011]	Informativo	Baja
+100415	2021-02-18	2021-02-18 11:45:57	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-02-18 11:45:57] - 1. MÓDULO DE VALIDACIÓN DE BASE DE DATOS CREDITICIAS --------------------------	Informativo	Baja
+100415	2021-02-18	2021-02-18 11:45:57	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-02-18 11:45:57] - Inicio del interrogatorio modulo 1. PID-100415.	Informativo	Baja
+100415	2021-02-18	2021-02-18 11:45:57	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-02-18 11:45:57] - Layer 0. Revisión de pre-requisitos.	Informativo	Baja
+100415	2021-02-18	2021-02-18 11:45:58	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-02-18 11:45:58] -       Resultado: Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100415	2021-02-18	2021-02-18 11:45:58	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-02-18 11:45:58] - Layer 1. Revisión de estructura de tablas	Informativo	Baja
+100416	2021-02-18	2021-02-18 11:50:32	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-02-18 11:50:32] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100416	2021-02-18	2021-02-18 11:50:33	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-02-18 11:50:32] - Coopac evaluada: 01110-LA REHABILITADORA 24	Informativo	Baja
+100416	2021-02-18	2021-02-18 11:50:33	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-02-18 11:50:33] - PID: 100416[201901~202011]	Informativo	Baja
+100416	2021-02-18	2021-02-18 11:50:33	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-02-18 11:50:33] - 1. MÓDULO DE VALIDACIÓN DE BASE DE DATOS CREDITICIAS --------------------------	Informativo	Baja
+100416	2021-02-18	2021-02-18 11:50:33	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-02-18 11:50:33] - Inicio del interrogatorio modulo 1. PID-100416.	Informativo	Baja
+100416	2021-02-18	2021-02-18 11:50:34	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-02-18 11:50:33] - Layer 0. Revisión de pre-requisitos.	Informativo	Baja
+100416	2021-02-18	2021-02-18 11:50:34	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-02-18 11:50:34] -       Resultado: Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100416	2021-02-18	2021-02-18 11:50:35	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-02-18 11:50:34] - Layer 1. Revisión de estructura de tablas	Informativo	Baja
+100417	2021-02-18	2021-02-18 11:55:19	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-02-18 11:55:19] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100417	2021-02-18	2021-02-18 11:55:19	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-02-18 11:55:19] - Coopac evaluada: 01110-LA REHABILITADORA 24	Informativo	Baja
+100417	2021-02-18	2021-02-18 11:55:19	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-02-18 11:55:19] - PID: 100417[201901~202011]	Informativo	Baja
+100417	2021-02-18	2021-02-18 11:55:20	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-02-18 11:55:20] - 1. MÓDULO DE VALIDACIÓN DE BASE DE DATOS CREDITICIAS --------------------------	Informativo	Baja
+100417	2021-02-18	2021-02-18 11:55:20	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-02-18 11:55:20] - Inicio del interrogatorio modulo 1. PID-100417.	Informativo	Baja
+100417	2021-02-18	2021-02-18 11:55:20	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-02-18 11:55:20] - Layer 0. Revisión de pre-requisitos.	Informativo	Baja
+100417	2021-02-18	2021-02-18 11:55:21	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-02-18 11:55:21] -       Resultado: Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100417	2021-02-18	2021-02-18 11:55:21	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-02-18 11:55:21] - Layer 1. Revisión de estructura de tablas	Informativo	Baja
+100417	2021-02-18	2021-02-18 11:58:15	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-02-18 11:58:15] - La validación de Columnas faltantes concluyó con 43 observación(es).	Informativo	Baja
+100417	2021-02-18	2021-02-18 11:58:15	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-02-18 11:58:15] - La validación de Columnas sobrantes concluyó con 44 observación(es).	Informativo	Baja
+100417	2021-02-18	2021-02-18 11:58:16	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-02-18 11:58:16] - La validación de Columnas vacías concluyó con 47 observación(es).	Informativo	Baja
+100417	2021-02-18	2021-02-18 11:58:16	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-02-18 11:58:16] -       Resultado: La revisión de estructura de datos tiene 87 observaciones. Continuar con discreción.	Informativo	Baja
+100417	2021-02-18	2021-02-18 11:58:16	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-02-18 11:58:16] - Layer 2. Validación de operaciones duplicadas.	Informativo	Baja
+100418	2021-02-18	2021-02-18 12:19:59	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-18 12:19:59] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100418	2021-02-18	2021-02-18 12:19:59	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-18 12:19:59] - Coopac evaluada: 01172-SAN MARTÍN DE PORRES	Informativo	Baja
+100418	2021-02-18	2021-02-18 12:20:00	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-18 12:19:59] - PID: 100418[202001~202012]	Informativo	Baja
+100419	2021-02-18	2021-02-18 12:48:40	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-18 12:48:40] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100419	2021-02-18	2021-02-18 12:48:40	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-18 12:48:40] - Coopac evaluada: 01172-SAN MARTÍN DE PORRES	Informativo	Baja
+100419	2021-02-18	2021-02-18 12:48:41	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-18 12:48:40] - PID: 100419[202001~202002]	Informativo	Baja
+100420	2021-02-18	2021-02-18 12:55:45	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-18 12:55:45] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100420	2021-02-18	2021-02-18 12:55:45	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-18 12:55:45] - Coopac evaluada: 01172-SAN MARTÍN DE PORRES	Informativo	Baja
+100420	2021-02-18	2021-02-18 12:55:46	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-18 12:55:45] - PID: 100420[202001~202002]	Informativo	Baja
+100421	2021-02-18	2021-02-18 13:00:57	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-18 13:00:57] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100421	2021-02-18	2021-02-18 13:00:57	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-18 13:00:57] - Coopac evaluada: 01172-SAN MARTÍN DE PORRES	Informativo	Baja
+100421	2021-02-18	2021-02-18 13:00:57	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-18 13:00:57] - PID: 100421[202001~202002]	Informativo	Baja
+100422	2021-02-18	2021-02-18 13:12:28	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-18 13:12:28] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100422	2021-02-18	2021-02-18 13:12:28	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-18 13:12:28] - Coopac evaluada: 01172-SAN MARTÍN DE PORRES	Informativo	Baja
+100422	2021-02-18	2021-02-18 13:12:28	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-18 13:12:28] - PID: 100422[202001~202012]	Informativo	Baja
+100423	2021-02-18	2021-02-18 13:12:55	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-18 13:12:55] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100423	2021-02-18	2021-02-18 13:12:55	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-18 13:12:55] - Coopac evaluada: 01172-SAN MARTÍN DE PORRES	Informativo	Baja
+100423	2021-02-18	2021-02-18 13:12:55	DPACHECO	SAN MARTÍN DE PORRES	test/datatest	[2021-02-18 13:12:55] - PID: 100423[202001~202012]	Informativo	Baja
+100424	2021-02-18	2021-02-18 13:51:22	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-02-18 13:51:21] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100424	2021-02-18	2021-02-18 13:51:22	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-02-18 13:51:22] - Coopac evaluada: 01110-LA REHABILITADORA 24	Informativo	Baja
+100424	2021-02-18	2021-02-18 13:51:22	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-02-18 13:51:22] - PID: 100424[202001~202011]	Informativo	Baja
+100425	2021-02-18	2021-02-18 14:27:50	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 14:27:50] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100425	2021-02-18	2021-02-18 14:27:51	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 14:27:50] - Coopac evaluada: 01120-STO DOMINGO GUZMAN	Informativo	Baja
+100425	2021-02-18	2021-02-18 14:27:51	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 14:27:51] - PID: 100425[202001~202011]	Informativo	Baja
+100426	2021-02-18	2021-02-18 14:28:42	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 14:28:42] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100426	2021-02-18	2021-02-18 14:28:42	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 14:28:42] - Coopac evaluada: 01120-STO DOMINGO GUZMAN	Informativo	Baja
+100426	2021-02-18	2021-02-18 14:28:43	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 14:28:42] - PID: 100426[202001~202012]	Informativo	Baja
+100427	2021-02-18	2021-02-18 14:29:56	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 14:29:55] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100427	2021-02-18	2021-02-18 14:29:56	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 14:29:56] - Coopac evaluada: 01120-STO DOMINGO GUZMAN	Informativo	Baja
+100427	2021-02-18	2021-02-18 14:29:56	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 14:29:56] - PID: 100427[202001~202011]	Informativo	Baja
+100428	2021-02-18	2021-02-18 14:42:36	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 14:42:36] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100428	2021-02-18	2021-02-18 14:42:36	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 14:42:36] - Coopac evaluada: 01183-SAN ISIDRO	Informativo	Baja
+100428	2021-02-18	2021-02-18 14:42:37	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 14:42:36] - PID: 100428[202001~202011]	Informativo	Baja
+100429	2021-02-18	2021-02-18 14:44:16	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 14:44:16] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100429	2021-02-18	2021-02-18 14:44:16	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 14:44:16] - Coopac evaluada: 01183-SAN ISIDRO	Informativo	Baja
+100429	2021-02-18	2021-02-18 14:44:16	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 14:44:16] - PID: 100429[202001~202011]	Informativo	Baja
+100430	2021-02-18	2021-02-18 15:05:11	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 15:05:11] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100430	2021-02-18	2021-02-18 15:05:11	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 15:05:11] - Coopac evaluada: 01183-SAN ISIDRO	Informativo	Baja
+100430	2021-02-18	2021-02-18 15:05:11	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 15:05:11] - PID: 100430[202001~202011]	Informativo	Baja
+100431	2021-02-18	2021-02-18 15:21:04	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 15:21:04] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100431	2021-02-18	2021-02-18 15:21:04	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 15:21:04] - Coopac evaluada: 01183-SAN ISIDRO	Informativo	Baja
+100431	2021-02-18	2021-02-18 15:21:05	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 15:21:05] - PID: 100431[202001~202011]	Informativo	Baja
+100432	2021-02-18	2021-02-18 15:22:08	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 15:22:08] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100432	2021-02-18	2021-02-18 15:22:09	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 15:22:08] - Coopac evaluada: 01183-SAN ISIDRO	Informativo	Baja
+100432	2021-02-18	2021-02-18 15:22:09	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 15:22:09] - PID: 100432[202001~202011]	Informativo	Baja
+100433	2021-02-18	2021-02-18 15:43:17	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 15:43:17] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100433	2021-02-18	2021-02-18 15:43:17	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 15:43:17] - Coopac evaluada: 01183-SAN ISIDRO	Informativo	Baja
+100433	2021-02-18	2021-02-18 15:43:17	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 15:43:17] - PID: 100433[202001~202011]	Informativo	Baja
+100434	2021-02-18	2021-02-18 15:52:43	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 15:52:43] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100434	2021-02-18	2021-02-18 15:52:43	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 15:52:43] - Coopac evaluada: 01183-SAN ISIDRO	Informativo	Baja
+100434	2021-02-18	2021-02-18 15:52:44	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 15:52:43] - PID: 100434[202001~202011]	Informativo	Baja

@@ -47,12 +47,12 @@ analizarReprogramados <- function(idCoopac, fechaInicial, fechaFinal){
     mutate(diffDias = as.numeric(difftime(dmy(FVEG_repro), dmy(FVEG), units = "days")),
            REPRO01  = if_else((dmy(FVEG_repro) > dmy(FVEG))== TRUE &  diffDias >28,
                               "X", "")) %>% 
-    select(PeriodoRepro, CCR, FVEG_repro, FVEG, diffDias, REPRO01, KVI, KVE, KRF, KJU, SKCR) %>%
+    select(PeriodoRepro, CCR, FVEG_repro, FVEG, diffDias, REPRO01, KVI, KVE, KRF, KJU, SKCR) %>% rowwise() %>% 
+    mutate(SKCR = as.numeric(str_remove_all(SKCR, ","))) %>% 
     filter(REPRO01 == "X")
 
   totalesReprograMes <- reprogramados %>% group_by(PeriodoRepro) %>%
-    arrange(PeriodoRepro) %>% 
-    summarise(Total = n(), SaldoColocaciones = sum(as.numeric(SKCR), na.rm = T))
+    summarise(Total = n(), SaldoColocaciones = sum(SKCR, na.rm = T)) %>% arrange(PeriodoRepro) 
 
   lista_data <- list("sabanaBD01" = sabanaBD01, "Reprogramados" = reprogramados, "TotalesporMes" = totalesReprograMes)
 
