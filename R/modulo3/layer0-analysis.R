@@ -77,33 +77,46 @@ getSabana  <- function(agente, archivos, bd) {
 analizarReprogramados <- function(idCoopac){
   
   agente2 <- createAgent(idCoopac,
-                        periodoInicial = "202001",
-                        periodoFinal   = "202002")
+                         periodoInicial = "202001",
+                         periodoFinal   = "202012")
   
-  #a.
-  #b. reprogram. vencidos :
-  sabanaBD01 <- getSabana(agente2, getArchivosExigiblesFromAgent(agente2), "BD01") %>%
-    filter(KVI !=0) %>% 
-    select(Periodo, CCR, FVEG)
+  sabanaBD01 <- getSabana(agente2, getArchivosExigiblesFromAgent(agente2), "BD01")
   
-  creditos <- sabanaBD01 %>% group_by(CCR) %>% filter(n()>1) %>% pull(CCR) %>% unique()
+  analisisSabanaBD01 <-  sabanaBD01 %>%
+    filter(KVI != "0" | KRF != "0") %>% rowwise() %>% 
+    mutate(VENCIDO_AL_202012      = if_else(as.numeric(KVI) > 0, "X", ""),
+           REFINANCIADO_AL_202012 = if_else(as.numeric(KRF) > 0, "X", "")) %>% 
+    select(Periodo, CCR, KVI, KRF, FVEG, VENCIDO_AL_202012, REFINANCIADO_AL_202012)
   
-  reprogramados <- sabanaBD01 %>% filter(CCR %in% creditos[1]) %>% 
-    mutate(Periodo_post = lead(Periodo),
-           FVEG_post    = lead(FVEG))
+  creditos <- analisisSabanaBD01 %>% group_by(CCR) %>% filter(n()>1) %>% pull(CCR) %>% unique()
   
-  for (i in 1:length(creditos)-1) {
+  reprogramados <- analisisSabanaBD01 %>% filter(CCR %in% creditos[1]) %>% 
+    mutate(PeriodoRepro = lead(Periodo),
+           FVEG_repro   = lead(FVEG))
+  
+  for (i in 2:length(creditos)-1) {
 
-    reprogramadosi <- sabanaBD01 %>% filter(CCR %in% creditos[i+1]) %>% 
-      mutate(Periodo_post = lead(Periodo),
-             FVEG_post    = lead(FVEG))
+    reprogramadosi <- analisisSabanaBD01 %>% filter(CCR %in% creditos[i+1]) %>%
+      mutate(PeriodoRepro = lead(Periodo),
+             FVEG_repro   = lead(FVEG))
 
     reprogramados <- reprogramados %>% bind_rows(reprogramadosi)
   }
-  
+
   reprogramados <- reprogramados %>% rowwise() %>% 
-    mutate(Reprogramados = if_else(dmy(FVEG_post) > dmy(FVEG),
-                                   "X", ""))
+    mutate(diffDias = as.numeric(difftime(dmy(FVEG_repro), dmy(FVEG), units = "days")),
+           REPRO01  = if_else((dmy(FVEG_repro) > dmy(FVEG))== TRUE &  diffDias >28,
+                              "X", "")) %>% 
+    select(PeriodoRepro, CCR, FVEG_repro, FVEG, diffDias, REPRO01, KVI, KRF, VENCIDO_AL_202012, REFINANCIADO_AL_202012) %>% 
+    filter(REPRO01 == "X")
+  
+  totalesReprograMes <- tibble(Periodos = reprogramados %>% pull(PeriodoRepro) %>% unique()) %>% rowwise() %>% 
+    mutate(Totales = nrow(reprogramados %>% filter(PeriodoRepro %in% Periodos)))
+  
+  lista_data <- list("sabanaBD01" = sabanaBD01, "Reprogramados" = reprogramados, "TotalesporMes" = totalesReprograMes)
+  
+  write.xlsx(lista_data, 
+             file = paste0(paste0(getwd(), "/test/output/ReprogramadosCartera.xlsx")))
 
   return(reprogramados)
 }
