@@ -82,40 +82,29 @@ analizarReprogramados <- function(idCoopac){
   
   sabanaBD01 <- getSabana(agente2, getArchivosExigiblesFromAgent(agente2), "BD01")
   
-  analisisSabanaBD01 <-  sabanaBD01 %>%
-    filter(KVI != "0" | KRF != "0") %>% rowwise() %>% 
+  reprogramados <-  sabanaBD01 %>%
+    filter(KVI != "0" | KRF != "0") %>% 
+    rowwise() %>% 
     mutate(VENCIDO_AL_202012      = if_else(as.numeric(KVI) > 0, "X", ""),
            REFINANCIADO_AL_202012 = if_else(as.numeric(KRF) > 0, "X", "")) %>% 
-    select(Periodo, CCR, KVI, KRF, FVEG, VENCIDO_AL_202012, REFINANCIADO_AL_202012)
-  
-  creditos <- analisisSabanaBD01 %>% group_by(CCR) %>% filter(n()>1) %>% pull(CCR) %>% unique()
-  
-  reprogramados <- analisisSabanaBD01 %>% filter(CCR %in% creditos[1]) %>% 
+    select(Periodo, CCR, KVI, KRF, FVEG, VENCIDO_AL_202012, REFINANCIADO_AL_202012) %>% 
+    group_by(CCR) %>% filter(n()>1) %>% 
+    arrange(CCR) %>% 
     mutate(PeriodoRepro = lead(Periodo),
-           FVEG_repro   = lead(FVEG))
-  
-  for (i in 2:length(creditos)-1) {
-
-    reprogramadosi <- analisisSabanaBD01 %>% filter(CCR %in% creditos[i+1]) %>%
-      mutate(PeriodoRepro = lead(Periodo),
-             FVEG_repro   = lead(FVEG))
-
-    reprogramados <- reprogramados %>% bind_rows(reprogramadosi)
-  }
-
-  reprogramados <- reprogramados %>% rowwise() %>% 
+           FVEG_repro   = lead(FVEG)) %>% 
+    rowwise() %>% 
     mutate(diffDias = as.numeric(difftime(dmy(FVEG_repro), dmy(FVEG), units = "days")),
            REPRO01  = if_else((dmy(FVEG_repro) > dmy(FVEG))== TRUE &  diffDias >28,
                               "X", "")) %>% 
-    select(PeriodoRepro, CCR, FVEG_repro, FVEG, diffDias, REPRO01, KVI, KRF, VENCIDO_AL_202012, REFINANCIADO_AL_202012) %>% 
+    select(PeriodoRepro, CCR, FVEG_repro, FVEG, diffDias, REPRO01, KVI, KRF, VENCIDO_AL_202012, REFINANCIADO_AL_202012) %>%
     filter(REPRO01 == "X")
   
-  totalesReprograMes <- tibble(Periodos = reprogramados %>% pull(PeriodoRepro) %>% unique()) %>% rowwise() %>% 
+  totalesReprograMes <- tibble(Periodos = reprogramados %>% pull(PeriodoRepro) %>% unique()) %>% rowwise() %>%
     mutate(Totales = nrow(reprogramados %>% filter(PeriodoRepro %in% Periodos)))
-  
+
   lista_data <- list("sabanaBD01" = sabanaBD01, "Reprogramados" = reprogramados, "TotalesporMes" = totalesReprograMes)
-  
-  write.xlsx(lista_data, 
+
+  write.xlsx(lista_data,
              file = paste0(paste0(getwd(), "/test/output/ReprogramadosCartera.xlsx")))
 
   return(reprogramados)
