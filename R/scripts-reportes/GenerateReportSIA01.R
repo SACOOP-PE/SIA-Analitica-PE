@@ -258,7 +258,7 @@ generar_grafico_T1 <- function(agente, numGraf) {
                   ordered=TRUE)
   
   eb$Criticidad <- factor(eb$Criticidad, 
-                          levels=c("Crítico","No Crítico"),
+                          levels=c("Crítico","No crítico"),
                           labels=c("Errores críticos", "Errores no críticos"),
                           ordered = T)
   
