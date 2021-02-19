@@ -2925,3 +2925,34 @@
 100448	2021-02-18	2021-02-18 19:00:38	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 19:00:38] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
 100448	2021-02-18	2021-02-18 19:00:39	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 19:00:38] - Coopac evaluada: 01120-STO DOMINGO GUZMAN	Informativo	Baja
 100448	2021-02-18	2021-02-18 19:00:39	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 19:00:39] - PID: 100448[202001~202012]	Informativo	Baja
+100449	2021-02-18	2021-02-18 23:42:45	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 23:42:45] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100449	2021-02-18	2021-02-18 23:42:45	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 23:42:45] - Coopac evaluada: 01120-STO DOMINGO GUZMAN	Informativo	Baja
+100449	2021-02-18	2021-02-18 23:42:45	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 23:42:45] - PID: 100449[201901~202011]	Informativo	Baja
+100449	2021-02-18	2021-02-18 23:42:46	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 23:42:45] - 1. MÓDULO DE VALIDACIÓN DE BASE DE DATOS CREDITICIAS --------------------------	Informativo	Baja
+100449	2021-02-18	2021-02-18 23:42:46	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 23:42:46] - Inicio del interrogatorio modulo 1. PID-100449.	Informativo	Baja
+100449	2021-02-18	2021-02-18 23:42:46	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 23:42:46] - Layer 0. Revisión de pre-requisitos.	Informativo	Baja
+100449	2021-02-18	2021-02-18 23:42:47	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 23:42:47] -       Resultado: Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100449	2021-02-18	2021-02-18 23:42:47	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 23:42:47] - Layer 1. Revisión de estructura de tablas	Informativo	Baja
+100450	2021-02-18	2021-02-18 23:43:28	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 23:43:28] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100450	2021-02-18	2021-02-18 23:43:28	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 23:43:28] - Coopac evaluada: 01120-STO DOMINGO GUZMAN	Informativo	Baja
+100450	2021-02-18	2021-02-18 23:43:29	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 23:43:29] - PID: 100450[201901~202012]	Informativo	Baja
+100450	2021-02-18	2021-02-18 23:43:29	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 23:43:29] - 1. MÓDULO DE VALIDACIÓN DE BASE DE DATOS CREDITICIAS --------------------------	Informativo	Baja
+100450	2021-02-18	2021-02-18 23:43:30	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 23:43:29] - Inicio del interrogatorio modulo 1. PID-100450.	Informativo	Baja
+100450	2021-02-18	2021-02-18 23:43:30	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 23:43:30] - Layer 0. Revisión de pre-requisitos.	Informativo	Baja
+100450	2021-02-18	2021-02-18 23:43:31	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 23:43:31] -       Resultado: Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100450	2021-02-18	2021-02-18 23:43:31	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 23:43:31] - Layer 1. Revisión de estructura de tablas	Informativo	Baja
+100450	2021-02-18	2021-02-18 23:48:25	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 23:48:25] - La validación de Columnas faltantes concluyó con 72 observación(es).	Informativo	Baja
+100450	2021-02-18	2021-02-18 23:48:25	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 23:48:25] - La validación de Columnas sobrantes concluyó con 72 observación(es).	Informativo	Baja
+100450	2021-02-18	2021-02-18 23:48:25	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 23:48:25] - La validación de Columnas vacías concluyó con 48 observación(es).	Informativo	Baja
+100450	2021-02-18	2021-02-18 23:48:26	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 23:48:25] -       Resultado: La revisión de estructura de datos tiene 144 observaciones. Continuar con discreción.	Informativo	Baja
+100450	2021-02-18	2021-02-18 23:48:26	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 23:48:26] - Layer 2. Validación de operaciones duplicadas.	Informativo	Baja
+100450	2021-02-18	2021-02-18 23:56:24	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 23:56:24] -       Resultado: La validación operaciones duplicadas concluyó con 48 observación(es).	Informativo	Baja
+100450	2021-02-19	2021-02-19 00:08:11	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-19 00:07:51] -       Resultado: La validación de créditos faltantes en la 2B o 4 concluyó con 14 observación(es).	Informativo	Baja
+100450	2021-02-19	2021-02-19 00:08:14	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-19 00:08:11] - Layer 3. Validación de entre BD01/BD02A, BD03A/BD03B.	Informativo	Baja
+100450	2021-02-19	2021-02-19 00:12:23	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-19 00:12:23] -       Resultado: La validación de cruce interno concluyó con 24 observación(es).	Informativo	Baja
+100450	2021-02-19	2021-02-19 00:12:23	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-19 00:12:23] - Layer 4. Validación de campos indviduales.	Informativo	Baja
+100450	2021-02-19	2021-02-19 00:16:20	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-19 00:16:20] -       Resultado: La validación de los campos concluyó con 224 observaciones tipo1.	Informativo	Baja
+100450	2021-02-19	2021-02-19 00:18:53	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-19 00:18:53] -       Resultado: La validación de los campos concluyó con 48 observación(es) tipo2.	Informativo	Baja
+100450	2021-02-19	2021-02-19 00:18:53	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-19 00:18:53] -       Resultado: La revisión errores OM 22269-2020 tiene 272 observaciones.	Informativo	Baja
+100450	2021-02-19	2021-02-19 00:18:53	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-19 00:18:53] - Layer 5. Validación de Cruce Contable a la cartera.	Informativo	Baja
+100450	2021-02-19	2021-02-19 00:22:04	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-19 00:22:04] -       Resultado: Se detectaron 49 error(es) contable(s) en la cartera de créditos pues no cuadra con el balance de comprobación.	Informativo	Baja
