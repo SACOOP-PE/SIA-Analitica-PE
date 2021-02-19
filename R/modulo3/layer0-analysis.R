@@ -38,10 +38,10 @@ analizarReprogramados <- function(idCoopac, fechaInicial, fechaFinal){
   
   reprogramados <- sabanaBD01 %>% 
     rowwise() %>% 
-    select(Periodo, CCR, KVI,KVE, KRF, KJU, FVEG, SKCR) %>% 
+    select(PeriodoI, CCR, KVI,KVE, KRF, KJU, FVEG, SKCR) %>% 
     group_by(CCR) %>% filter(n()>1) %>% 
     arrange(CCR) %>% 
-    mutate(PeriodoRepro = lead(Periodo),
+    mutate(PeriodoRepro = lead(PeriodoI),
            FVEG_repro   = lead(FVEG)) %>% 
     rowwise() %>% 
     mutate(diffDias = as.numeric(difftime(dmy(FVEG_repro), dmy(FVEG), units = "days")),
