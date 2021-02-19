@@ -9,9 +9,12 @@ layer3 <- function(agente, eb){
 
 #' Funciones secundarias: nivel I
 #' validarCruceInterno
+#' validarCreditosFaltantes
+#' 
+#' getSabana()
 #' realizarCruce()
 
-validarCruceInterno <- function(agente, eb){
+validarCruceInterno      <- function(agente, eb){
   carpeta <- getCarpetaFromAgent(agente)
   
   if (length(getPeriodosNoObservados(agente, eb, "CCR")) >0){
@@ -84,7 +87,7 @@ validarCruceInterno <- function(agente, eb){
 
   return(eb)
 }
-validarCreditosFaltantes     <- function(agente, eb) {
+validarCreditosFaltantes <- function(agente, eb) {
   
   archivos <- getArchivosNoObservadosByCols(agente, eb, c("CCR","CCR_C"))
   periodos <- getPeriodosFromAgent(agente)
@@ -154,7 +157,7 @@ validarCreditosFaltantes     <- function(agente, eb) {
 }
 
 
-realizarCruce       <- function(agente, periodo, data1, data2){
+realizarCruce <- function(agente, periodo, data1, data2){
   
   archivo1 <- getRuta(getCarpetaFromAgent(agente), 
                       paste0(paste(getCoopacFromAgent(agente), data1, periodo, sep  = "_"), ".txt"))
@@ -168,7 +171,7 @@ realizarCruce       <- function(agente, periodo, data1, data2){
   
   return(cruce)
 }
-getSabana  <- function(agente, archivos, bd) {
+getSabana     <- function(agente, archivos, bd) {
   
   carpeta          <- getCarpetaFromAgent(agente)
   archivosCreditos <- archivos[str_detect(archivos, bd)]

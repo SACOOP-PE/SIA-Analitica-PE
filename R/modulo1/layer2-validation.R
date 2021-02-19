@@ -3,7 +3,6 @@
 
 layer2 <- function(agente, eb){
   eb <- validarOperacionesDuplicadas(agente, eb)
-  eb <- validarCreditosFaltantes(agente, eb)
   return(eb)
 }
 
