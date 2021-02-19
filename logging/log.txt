@@ -2919,3 +2919,9 @@
 100446	2021-02-18	2021-02-18 17:20:16	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 17:20:16] -       Resultado: La revisión errores OM 22269-2020 tiene 54 observaciones.	Informativo	Baja
 100446	2021-02-18	2021-02-18 17:20:16	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 17:20:16] - Layer 5. Validación de Cruce Contable a la cartera.	Informativo	Baja
 100446	2021-02-18	2021-02-18 17:20:44	DPACHECO	SAN ISIDRO	test/datatest	[2021-02-18 17:20:44] -       Resultado: Se detectaron 32 error(es) contable(s) en la cartera de créditos pues no cuadra con el balance de comprobación.	Informativo	Baja
+100447	2021-02-18	2021-02-18 18:58:21	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 18:58:21] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100447	2021-02-18	2021-02-18 18:58:22	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 18:58:21] - Coopac evaluada: 01120-STO DOMINGO GUZMAN	Informativo	Baja
+100447	2021-02-18	2021-02-18 18:58:22	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 18:58:22] - PID: 100447[202001~202012]	Informativo	Baja
+100448	2021-02-18	2021-02-18 19:00:38	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 19:00:38] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100448	2021-02-18	2021-02-18 19:00:39	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 19:00:38] - Coopac evaluada: 01120-STO DOMINGO GUZMAN	Informativo	Baja
+100448	2021-02-18	2021-02-18 19:00:39	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-18 19:00:39] - PID: 100448[202001~202012]	Informativo	Baja
