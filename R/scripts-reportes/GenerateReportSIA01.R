@@ -243,9 +243,9 @@ getObservaciones   <- function(agente, eb, roweb) {
   
   return(obs)
 }
-generar_grafico_T1 <- function(agente, numGraf) {
+generar_grafico_T1 <- function(idProceso, numGraf) {
   
-  eb <- read_excel(paste0("test/output/resultados_", agente %>% pull(IdProceso), ".xlsx"), sheet = "bucketOficio", 
+  eb <- read_excel(paste0("test/output/resultados_", idProceso, ".xlsx"), sheet = "bucketOficio", 
                    col_types = c("text", "text", "text", "text", "text", "text", "text")) %>% rowwise() %>%
     mutate(dateYear  = substr(Periodo, 1, 4),
            dateMonth = as.integer(substr(Periodo, 5, 6))) %>% 

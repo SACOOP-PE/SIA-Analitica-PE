@@ -11,8 +11,8 @@ layer3 <- function(agente, eb){
 #' validarCruceInterno
 #' validarCreditosFaltantes
 #' 
-#' getSabana()
 #' realizarCruce()
+#' getSabana()
 
 validarCruceInterno      <- function(agente, eb){
   carpeta <- getCarpetaFromAgent(agente)
