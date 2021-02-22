@@ -2956,3 +2956,12 @@
 100450	2021-02-19	2021-02-19 00:18:53	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-19 00:18:53] -       Resultado: La revisión errores OM 22269-2020 tiene 272 observaciones.	Informativo	Baja
 100450	2021-02-19	2021-02-19 00:18:53	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-19 00:18:53] - Layer 5. Validación de Cruce Contable a la cartera.	Informativo	Baja
 100450	2021-02-19	2021-02-19 00:22:04	DPACHECO	STO DOMINGO GUZMAN	test/datatest	[2021-02-19 00:22:04] -       Resultado: Se detectaron 49 error(es) contable(s) en la cartera de créditos pues no cuadra con el balance de comprobación.	Informativo	Baja
+100451	2021-02-21	2021-02-21 19:18:44	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-02-21 19:18:44] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100451	2021-02-21	2021-02-21 19:18:44	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-02-21 19:18:44] - Coopac evaluada: 01106-SAN FRANCISCO 289	Informativo	Baja
+100451	2021-02-21	2021-02-21 19:18:44	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-02-21 19:18:44] - PID: 100451[202001~202012]	Informativo	Baja
+100452	2021-02-22	2021-02-22 09:44:21	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-22 09:44:21] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100452	2021-02-22	2021-02-22 09:44:21	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-22 09:44:21] - Coopac evaluada: 01342-LOS ANDES COTARUSI	Informativo	Baja
+100452	2021-02-22	2021-02-22 09:44:21	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-22 09:44:21] - PID: 100452[202001~202012]	Informativo	Baja
+100453	2021-02-22	2021-02-22 11:32:17	DPACHECO	SN CRISTO DE BAGAZÁN	test/datatest	[2021-02-22 11:32:16] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100453	2021-02-22	2021-02-22 11:32:17	DPACHECO	SN CRISTO DE BAGAZÁN	test/datatest	[2021-02-22 11:32:17] - Coopac evaluada: 01118-SN CRISTO DE BAGAZÁN	Informativo	Baja
+100453	2021-02-22	2021-02-22 11:32:17	DPACHECO	SN CRISTO DE BAGAZÁN	test/datatest	[2021-02-22 11:32:17] - PID: 100453[202001~202011]	Informativo	Baja

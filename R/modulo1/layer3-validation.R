@@ -94,9 +94,9 @@ validarCreditosFaltantes <- function(agente, eb) {
   
   if (periodos[2:length(periodos)] >1) {
     
-    sabanaCartera      <- getSabana(agente, archivos, "BD01")
-    sabanaCronoCance   <- getSabana(agente, archivos, "BD02B")
-    sabanaCarteraCance <- getSabana(agente, archivos, "BD04")
+    sabanaCartera      <- getSabana(agente, archivos, "BD01") %>% select(CCR)
+    sabanaCronoCance   <- getSabana(agente, archivos, "BD02B") %>% select(PeriodoI, CCR_C)
+    sabanaCarteraCance <- getSabana(agente, archivos, "BD04") %>% select(PeriodoI, CCR_C)
     
     validacion <- sabanaCartera %>% 
       group_by(CCR) %>% 
@@ -176,7 +176,7 @@ getSabana     <- function(agente, archivos, bd) {
   carpeta          <- getCarpetaFromAgent(agente)
   archivosCreditos <- archivos[str_detect(archivos, bd)]
   
-  sabana <- evaluarFile(getRuta(carpeta, archivosCreditos[1])) %>%
+  sabana <- quitarVaciosBD(getRuta(carpeta, archivosCreditos[1])) %>%
     mutate(PeriodoI = getAnoMesFromRuta(getRuta(carpeta, archivosCreditos[1])))
   
   if (getPeriodosFromAgent(agente) == 1) {
@@ -197,7 +197,7 @@ getSabana     <- function(agente, archivos, bd) {
   }
   
   for (i in 2:length(archivosCreditos)-1) {
-    sabana <- sabana %>% bind_rows(evaluarFile(getRuta(carpeta, archivosCreditos[i+1])) %>% 
+    sabana <- sabana %>% bind_rows(quitarVaciosBD(getRuta(carpeta, archivosCreditos[i+1])) %>% 
                                      mutate(PeriodoI = getAnoMesFromRuta(getRuta(carpeta, archivosCreditos[i+1]))))
   }
   
