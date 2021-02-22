@@ -97,7 +97,7 @@ validarCreditosFaltantes <- function(agente, eb) {
       length(archivos[str_detect(archivos, "BD02B")] >0) & 
       length(archivos[str_detect(archivos, "BD04")] >0)) {
     
-    sabanaCartera      <- getSabana(agente, archivos, "BD01") %>% select(CCR)
+    sabanaCartera      <- getSabana(agente, archivos, "BD01") %>% select(PeriodoI, CCR)
     sabanaCronoCance   <- getSabana(agente, archivos, "BD02B") %>% select(PeriodoI, CCR_C)
     sabanaCarteraCance <- getSabana(agente, archivos, "BD04") %>% select(PeriodoI, CCR_C)
     
