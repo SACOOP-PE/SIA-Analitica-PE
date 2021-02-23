@@ -2965,3 +2965,26 @@
 100453	2021-02-22	2021-02-22 11:32:17	DPACHECO	SN CRISTO DE BAGAZÁN	test/datatest	[2021-02-22 11:32:16] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
 100453	2021-02-22	2021-02-22 11:32:17	DPACHECO	SN CRISTO DE BAGAZÁN	test/datatest	[2021-02-22 11:32:17] - Coopac evaluada: 01118-SN CRISTO DE BAGAZÁN	Informativo	Baja
 100453	2021-02-22	2021-02-22 11:32:17	DPACHECO	SN CRISTO DE BAGAZÁN	test/datatest	[2021-02-22 11:32:17] - PID: 100453[202001~202011]	Informativo	Baja
+100454	2021-02-22	2021-02-22 18:04:56	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-22 18:04:56] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100454	2021-02-22	2021-02-22 18:04:56	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-22 18:04:56] - Coopac evaluada: 01342-LOS ANDES COTARUSI	Informativo	Baja
+100454	2021-02-22	2021-02-22 18:04:56	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-22 18:04:56] - PID: 100454[201901~202012]	Informativo	Baja
+100454	2021-02-22	2021-02-22 18:04:57	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-22 18:04:57] - 1. MÓDULO DE VALIDACIÓN DE BASE DE DATOS CREDITICIAS --------------------------	Informativo	Baja
+100454	2021-02-22	2021-02-22 18:04:57	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-22 18:04:57] - Inicio del interrogatorio modulo 1. PID-100454.	Informativo	Baja
+100454	2021-02-22	2021-02-22 18:04:57	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-22 18:04:57] - Layer 0. Revisión de pre-requisitos.	Informativo	Baja
+100454	2021-02-22	2021-02-22 18:04:58	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-22 18:04:58] -       Resultado: Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100454	2021-02-22	2021-02-22 18:04:59	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-22 18:04:58] - Layer 1. Revisión de estructura de tablas	Informativo	Baja
+100454	2021-02-22	2021-02-22 18:09:26	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-22 18:09:25] - La validación de Columnas faltantes concluyó con 1 observación(es).	Informativo	Baja
+100454	2021-02-22	2021-02-22 18:09:26	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-22 18:09:26] - La validación de Columnas sobrantes concluyó con 1 observación(es).	Informativo	Baja
+100454	2021-02-22	2021-02-22 18:09:26	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-22 18:09:26] - La validación de Columnas vacías concluyó con 53 observación(es).	Informativo	Baja
+100454	2021-02-22	2021-02-22 18:09:27	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-22 18:09:26] -       Resultado: La revisión de estructura de datos tiene 2 observaciones. Continuar con discreción.	Informativo	Baja
+100454	2021-02-22	2021-02-22 18:09:27	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-22 18:09:27] - Layer 2. Validación de operaciones duplicadas.	Informativo	Baja
+100454	2021-02-22	2021-02-22 18:15:06	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-22 18:15:06] -       Resultado: La validación operaciones duplicadas concluyó con 25 observación(es).	Informativo	Baja
+100454	2021-02-22	2021-02-22 18:15:06	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-22 18:15:06] - Layer 3. Validación de entre BD01/BD02A, BD03A/BD03B.	Informativo	Baja
+100454	2021-02-22	2021-02-22 18:20:08	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-22 18:20:08] -       Resultado: La validación de cruce interno concluyó con 27 observación(es).	Informativo	Baja
+100454	2021-02-22	2021-02-22 18:53:39	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-22 18:53:39] -       Resultado: La validación de créditos faltantes en la 2B o 4 concluyó con 13 observación(es).	Informativo	Baja
+100454	2021-02-22	2021-02-22 18:53:39	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-22 18:53:39] - Layer 4. Validación de campos indviduales.	Informativo	Baja
+100454	2021-02-22	2021-02-22 18:58:49	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-22 18:58:49] -       Resultado: La validación de los campos concluyó con 53 observaciones tipo1.	Informativo	Baja
+100454	2021-02-22	2021-02-22 19:01:23	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-22 19:01:23] -       Resultado: La validación de los campos concluyó con 4 observación(es) tipo2.	Informativo	Baja
+100454	2021-02-22	2021-02-22 19:01:23	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-22 19:01:23] -       Resultado: La revisión errores OM 22269-2020 tiene 57 observaciones.	Informativo	Baja
+100454	2021-02-22	2021-02-22 19:01:24	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-22 19:01:23] - Layer 5. Validación de Cruce Contable a la cartera.	Informativo	Baja
+100454	2021-02-22	2021-02-22 19:05:49	DPACHECO	LOS ANDES COTARUSI	test/datatest	[2021-02-22 19:05:49] -       Resultado: Se detectaron 33 error(es) contable(s) en la cartera de créditos pues no cuadra con el balance de comprobación.	Informativo	Baja
