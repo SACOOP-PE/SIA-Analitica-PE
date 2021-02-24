@@ -3008,3 +3008,23 @@
 100455	2021-02-24	2021-02-24 12:42:15	DPACHECO	AELU	test/datatest	[2021-02-24 12:42:15] -       Resultado: La revisión errores OM 22269-2020 tiene 25 observaciones.	Informativo	Baja
 100455	2021-02-24	2021-02-24 12:42:16	DPACHECO	AELU	test/datatest	[2021-02-24 12:42:15] - Layer 5. Validación de Cruce Contable a la cartera.	Informativo	Baja
 100455	2021-02-24	2021-02-24 12:45:06	DPACHECO	AELU	test/datatest	[2021-02-24 12:45:05] -       Resultado: Se detectaron 102 error(es) contable(s) en la cartera de créditos pues no cuadra con el balance de comprobación.	Informativo	Baja
+100456	2021-02-24	2021-02-24 15:24:53	DPACHECO	AELU	test/datatest	[2021-02-24 15:24:53] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100456	2021-02-24	2021-02-24 15:24:54	DPACHECO	AELU	test/datatest	[2021-02-24 15:24:53] - Coopac evaluada: 01138-AELU	Informativo	Baja
+100456	2021-02-24	2021-02-24 15:24:54	DPACHECO	AELU	test/datatest	[2021-02-24 15:24:54] - PID: 100456[201901~202012]	Informativo	Baja
+100456	2021-02-24	2021-02-24 15:24:54	DPACHECO	AELU	test/datatest	[2021-02-24 15:24:54] - 1. MÓDULO DE VALIDACIÓN DE BASE DE DATOS CREDITICIAS --------------------------	Informativo	Baja
+100456	2021-02-24	2021-02-24 15:24:54	DPACHECO	AELU	test/datatest	[2021-02-24 15:24:54] - Inicio del interrogatorio modulo 1. PID-100456.	Informativo	Baja
+100456	2021-02-24	2021-02-24 15:24:55	DPACHECO	AELU	test/datatest	[2021-02-24 15:24:54] - Layer 0. Revisión de pre-requisitos.	Informativo	Baja
+100456	2021-02-24	2021-02-24 15:24:56	DPACHECO	AELU	test/datatest	[2021-02-24 15:24:56] -       Resultado: Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100456	2021-02-24	2021-02-24 15:24:56	DPACHECO	AELU	test/datatest	[2021-02-24 15:24:56] - Layer 1. Revisión de estructura de tablas	Informativo	Baja
+100456	2021-02-24	2021-02-24 15:27:57	DPACHECO	AELU	test/datatest	[2021-02-24 15:27:57] -       Resultado: Revisión de estructura de datos satisfatoria.	Informativo	Baja
+100456	2021-02-24	2021-02-24 15:27:57	DPACHECO	AELU	test/datatest	[2021-02-24 15:27:57] - Layer 2. Validación de operaciones duplicadas.	Informativo	Baja
+100456	2021-02-24	2021-02-24 15:33:13	DPACHECO	AELU	test/datatest	[2021-02-24 15:33:13] -       Resultado: La validación operaciones duplicadas concluyó sin observaciones.	Informativo	Baja
+100456	2021-02-24	2021-02-24 15:33:13	DPACHECO	AELU	test/datatest	[2021-02-24 15:33:13] - Layer 3. Validación de entre BD01/BD02A, BD03A/BD03B.	Informativo	Baja
+100456	2021-02-24	2021-02-24 15:36:02	DPACHECO	AELU	test/datatest	[2021-02-24 15:36:02] -       Resultado: La validación de cruce interno concluyó con 4 observación(es).	Informativo	Baja
+100456	2021-02-24	2021-02-24 15:39:17	DPACHECO	AELU	test/datatest	[2021-02-24 15:39:16] -       Resultado: La validación de créditos faltantes en la 2B o 4 concluyó con 1 observación(es).	Informativo	Baja
+100456	2021-02-24	2021-02-24 15:39:17	DPACHECO	AELU	test/datatest	[2021-02-24 15:39:17] - Layer 4. Validación de campos indviduales.	Informativo	Baja
+100456	2021-02-24	2021-02-24 15:41:57	DPACHECO	AELU	test/datatest	[2021-02-24 15:41:57] -       Resultado: La validación de los campos concluyó con 25 observaciones tipo1.	Informativo	Baja
+100456	2021-02-24	2021-02-24 15:43:40	DPACHECO	AELU	test/datatest	[2021-02-24 15:43:40] -       Resultado: La validación de los campos concluyó sin observaciones tipo2.	Informativo	Baja
+100456	2021-02-24	2021-02-24 15:43:40	DPACHECO	AELU	test/datatest	[2021-02-24 15:43:40] -       Resultado: La revisión errores OM 22269-2020 tiene 25 observaciones.	Informativo	Baja
+100456	2021-02-24	2021-02-24 15:43:41	DPACHECO	AELU	test/datatest	[2021-02-24 15:43:40] - Layer 5. Validación de Cruce Contable a la cartera.	Informativo	Baja
+100456	2021-02-24	2021-02-24 15:46:29	DPACHECO	AELU	test/datatest	[2021-02-24 15:46:29] -       Resultado: Se detectaron 102 error(es) contable(s) en la cartera de créditos pues no cuadra con el balance de comprobación.	Informativo	Baja
