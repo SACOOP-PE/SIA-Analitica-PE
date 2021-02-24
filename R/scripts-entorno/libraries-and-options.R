@@ -39,8 +39,7 @@ initCuadreContable     <- function(){
              col_types = cols(C1403 = col_double(),
                               C14090702 = col_double(), 
                               C14090701 = col_double(),
-                              C14090901 = col_double(), 
-                              PeriodoId_1 = col_skip()),
+                              C14090901 = col_double()),
              trim_ws = TRUE) %>% return()
 }
 initEstructuraBase     <- function(){ 

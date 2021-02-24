@@ -92,9 +92,34 @@ getColumnasOM <- function(BD){
                        BD04  = {initEstructuraBase() %>% filter(BD == "BD04") %>% pull(CAMPO) %>% list()})
   return(cols_base)
 }
-getColVacia   <- function(ruta, BD = evaluarFile(ruta)){
+getColVacia   <- function(ruta){
+  BD <- evaluarFile(ruta)
+  
   colsVacias <- intersect(BD[sapply(BD, function(x) all(is.na(x)))] %>% colnames(),
                           getColumnasOM(getBDFromRuta(ruta)) %>% unlist())
 
   return(colsVacias)
 }
+
+# validarCamposObligatorios <- function(agente, eb){
+#   
+#   archivos <- getArchivosNoObservadosByCols(agente, eb, c("CCR", "CCR_C", "CODGR",
+#                                                           "NCUO", "CIS",
+#                                                           "DAK", "DAKR", "DGR", "NCPR", "TEA", "PCUO", "NCPA", "TPR", "NRPRG",
+#                                                           "MCUO", "SIC", "SEGS", "TCUO", "DAKC",
+#                                                           "CIS_C", "NCUO_C", "MCUO_C", "SIC_C", "TCUO_C", ""))
+#   
+#   
+#   
+#   
+#   
+# }
+# 
+# getNumOpeVacias <- function(ruta, codigoOpe){
+#   BD <- evaluarFile(ruta)
+#   
+#   n_vacios <- BD %>%
+#     filter(is.na(cgrep(BD, codigoOpe))) %>% nrow()
+#   
+#   return(n_vacios)
+# }

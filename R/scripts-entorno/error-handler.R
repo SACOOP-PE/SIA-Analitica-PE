@@ -12,9 +12,8 @@ getArchivosNoObservadosByCols <- function(agente, eb, cols) {
       rowwise() %>% 
       mutate(filename     = paste0(CodCoopac,"_",BD, "_",Periodo,".txt"),
              verificarCol = if_else(length(intersect(unlist(str_split(txt1, ", ")), cols)) >=1, 
-                                   "TRUE", 
-                                   "FALSE")
-             ) %>%
+                                    "TRUE", 
+                                    "FALSE")) %>%
       filter(verificarCol == "TRUE") %>% 
       pull(filename) %>% unique()
     
