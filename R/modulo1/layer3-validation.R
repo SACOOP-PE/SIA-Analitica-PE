@@ -4,6 +4,7 @@
 layer3 <- function(agente, eb){
   eb <- validarCruceInterno(agente, eb)
   eb <- validarCreditosFaltantes(agente, eb)
+  eb <- validarCruceFechaVencimiento(agente, eb)
   return(eb)
 }
 
@@ -184,6 +185,7 @@ validarCruceFechaVencimiento <- function(agente, eb) {
       select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
     
     eb <- addError(eb, chunk_506)
+    return(eb)
   }
   
   return(eb)
