@@ -47,8 +47,7 @@ interrogateAgent_mod1 <- function(agente){
   addEventLog(agente, paste0("Inicio del interrogatorio modulo 1. PID-", agente %>% pull(IdProceso) %>% first(),"."))
   
   #layer0 ----
-  addEventLog(agente, paste0("Layer 0. Revisión de pre-requisitos."))
-  
+    addEventLog(agente, paste0("Layer 0. Revisión de pre-requisitos."))
     eb <- layer0(agente, eb)
   
     if (nrow(eb) > 0) {
@@ -60,25 +59,21 @@ interrogateAgent_mod1 <- function(agente){
     }
   
   #layer1 ----
-  addEventLog(agente, paste0("Layer 1. Revisión de estructura de tablas"))
-    
+    addEventLog(agente, paste0("Layer 1. Revisión de estructura de tablas"))
     eb <- layer1(agente, eb)
   
   #layer2 ----
-  addEventLog(agente, paste0("Layer 2. Validación de operaciones duplicadas."))
+    addEventLog(agente, paste0("Layer 2. Validación de Cruce Contable a la cartera."))
     eb <- layer2(agente, eb)
     
   #layer3 ----
-  addEventLog(agente, paste0("Layer 3. Validación de entre BD01/BD02A, BD03A/BD03B."))
+    addEventLog(agente, paste0("Layer 3. Validación de consistencia de operaciones."))
     eb <- layer3(agente, eb)
     
   #layer4 ----
   addEventLog(agente, paste0("Layer 4. Validación de campos indviduales."))
     eb <- layer4(agente, eb)
     
-  #layer5 ----
-  addEventLog(agente, paste0("Layer 5. Validación de Cruce Contable a la cartera."))
-    eb <- layer5(agente, eb)
     
   #Fin validación ----
     eb <- eb %>% arrange(Periodo, Cod)

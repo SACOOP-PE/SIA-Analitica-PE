@@ -22,7 +22,7 @@ Cod	Tipo	Descripcion	Categoria	Criticidad
 503	Error	Se identificaron {0} garantía(s) faltante(s) en el registro correspondiente durante el periodo {1}.	Consistencia de operaciones	Crítico
 504	Error	Se identificaron {0} crédito(s) de la cartera a {1}, que no están en la cartera a {2} pero tampoco se encuentra en la BD02B.	Consistencia de operaciones	Crítico
 505	Error	Se identificaron {0} crédito(s) de la cartera a {1}, que no están en la cartera a {2} pero tampoco se encuentran en la BD04.	Consistencia de operaciones	Crítico
-506	Error	Se identificaron {0} crédito(s) en la BD02 donde la Fecha de vencimiento de la cuota (FVEP) de la última couta y la Fecha de vencimiento general de la operación según cronograma original (FVEG) de la BD01 son distintos durante el periodo {1}.	Consistencia de operaciones	Crítico
+506	Error	Se identificaron {0} crédito(s) en la BD02A donde la última Fecha de vencimiento de la cuota (FVEP) y la Fecha de vencimiento general de la operación según cronograma original (FVEG) de la BD01 son distintas durante el periodo {1}.	Consistencia de operaciones	Crítico
 601	Error	Se identificaron {0} crédito(s) con dígitos diferentes o vacíos en el Tipo de documento (TID) en la cartera de créditos durante el periodo {1}. Valores correctos: {2}	Verificación de campos numéricos	No crítico
 602	Error	Se identificaron {0} crédito(s) con dígitos diferentes o vacíos en el Tipo de crédito (TCR) en la cartera de créditos durante el periodo {1}. Valores correctos: {2}	Verificación de campos numéricos	No crítico
 603	Error	Se identificaron {0} crédito(s) con dígitos diferentes o vacíos en la Clasificación del deudor (CAL) en la cartera de créditos durante el periodo {1}. Valores correctos: {2}	Verificación de campos numéricos	No crítico

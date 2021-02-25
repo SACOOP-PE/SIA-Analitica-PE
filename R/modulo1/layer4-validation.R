@@ -113,22 +113,6 @@ validarCampos <- function(agente, eb){
     }
   
   # ----
-    n <- eb %>% filter(Cod %in% c(601:709)) %>% nrow()
-    if (nrow(eb) > 0) {
-      
-      if (n >0) {
-        
-        addEventLog(agente, paste0("      Resultado: La revisión errores OM 22269-2020 tiene ",n," observaciones."))
-      }
-      else {
-        addEventLog(agente, paste0("      Resultado: Revisión de errores OM 22269-2020 fue satisfatoria."))
-      }
-      
-    }
-    else {
-      addEventLog(agente, paste0("      Resultado: Revisión de errores OM 22269-2020 fue satisfatoria."))
-    }
-    
   return(eb)
 }
 
