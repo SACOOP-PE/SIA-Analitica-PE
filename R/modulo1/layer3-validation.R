@@ -14,7 +14,7 @@ layer3 <- function(agente, eb){
 #' realizarCruce()
 #' getSabana()
 
-validarCruceInterno      <- function(agente, eb){
+validarCruceInterno          <- function(agente, eb) {
   carpeta <- getCarpetaFromAgent(agente)
   
   if (length(getPeriodosNoObservados(agente, eb, "CCR")) >0){
@@ -87,7 +87,7 @@ validarCruceInterno      <- function(agente, eb){
 
   return(eb)
 }
-validarCreditosFaltantes <- function(agente, eb) {
+validarCreditosFaltantes     <- function(agente, eb) {
   
   archivos <- getArchivosNoObservadosByCols(agente, eb, c("CCR","CCR_C"))
   periodos <- getPeriodosFromAgent(agente)
@@ -159,9 +159,38 @@ validarCreditosFaltantes <- function(agente, eb) {
   
   return(eb)
 }
+validarCruceFechaVencimiento <- function(agente, eb) {
+  
+  carpeta   <- getCarpetaFromAgent(agente)
+  exigibles <- getArchivosNoObservadosByCols(agente, eb, "CCR")
+  
+  archivosCruce <-  exigibles[str_detect(exigibles, 
+                                         paste(getPeriodosNoObservados(agente, eb, "CCR"), collapse = '|'))]
+  
+  validacion <- tibble(NombreArchivo = archivosCruce[str_detect(archivosCruce, "BD02A")]) %>% rowwise() %>% 
+    mutate(ruta    = getRuta(carpeta, NombreArchivo),
+           BD      = "BD02A",
+           Periodo = getAnoMesFromRuta(toString(ruta)),
+           errorFechaCuota = toString(procesarErroUltimacouta(ruta))) %>% 
+    filter(errorFechaCuota != "")
+  
+  if (nrow(validacion)>0) {
+    chunk_506 <- validacion %>% rowwise() %>% 
+      mutate(CodCoopac = getCoopacFromAgent(agente),
+             IdProceso = getIdProcesoFromAgent(agente),
+             Cod = 506,
+             txt1 = errorFechaCuota,
+             num1 = length(str_split(string=txt1, pattern = ",")[[1]])) %>% 
+      select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
+    
+    eb <- addError(eb, chunk_506)
+  }
+  
+  return(eb)
+}
 
 
-realizarCruce <- function(agente, periodo, data1, data2){
+realizarCruce  <- function(agente, periodo, data1, data2) {
   
   archivo1 <- getRuta(getCarpetaFromAgent(agente), 
                       paste0(paste(getCoopacFromAgent(agente), data1, periodo, sep  = "_"), ".txt"))
@@ -175,7 +204,7 @@ realizarCruce <- function(agente, periodo, data1, data2){
   
   return(cruce)
 }
-getSabana     <- function(agente, archivos, bd) {
+getSabana      <- function(agente, archivos, bd) {
   
   carpeta          <- getCarpetaFromAgent(agente)
   archivosCreditos <- archivos[str_detect(archivos, bd)]
@@ -218,4 +247,23 @@ getSabana     <- function(agente, archivos, bd) {
     return(carteraCanc)
   }
   
+}
+procesarErroUltimacouta <- function(ruta) {
+  
+  cronogramas <- quitarVaciosBD(ruta)
+  cartera     <- quitarVaciosBD(str_replace(ruta, "BD02A", "BD01"))
+  
+  validacion <- cronogramas %>%
+    mutate(NCUO = as.numeric(NCUO)) %>% 
+    group_by(CCR) %>% 
+    arrange(CCR, NCUO) %>% 
+    filter(row_number() == max(row_number())) %>% 
+    mutate(CCR_BD02A = CCR) %>% rowwise() %>% 
+    mutate(verificar = if_else(cartera %>% filter(CCR == CCR_BD02A) %>% pull(FVEG) %>% toString() == FVEP,
+                               "TRUE", "FALSE")) %>% 
+    filter(verificar == "FALSE") %>% 
+    pull(CCR_BD02A)
+ 
+ 
+ return(validacion)
 }
