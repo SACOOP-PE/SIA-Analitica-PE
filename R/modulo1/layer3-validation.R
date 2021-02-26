@@ -253,13 +253,12 @@ validarCruceFechaVencimiento <- function(agente, eb) {
   carpeta   <- getCarpetaFromAgent(agente)
   exigibles <- getArchivosNoObservadosByCols(agente, eb, "CCR")
   
-  archivosCruce <-  exigibles[str_detect(exigibles, 
-                                         paste(getPeriodosNoObservados(agente, eb, "CCR"), collapse = '|'))]
+  archivosCruce <-  exigibles[str_detect(exigibles, paste(getPeriodosNoObservados(agente, eb, "CCR"), collapse = '|'))]
   
   validacion <- tibble(NombreArchivo = archivosCruce[str_detect(archivosCruce, "BD02A")]) %>% rowwise() %>% 
     mutate(ruta    = getRuta(carpeta, NombreArchivo),
            Periodo = getAnoMesFromRuta(ruta),
-           errorFechaCuota = toString(procesarErroUltimacouta(ruta))) %>% 
+           errorFechaCuota = toString(getCreditosDifFechaUltimaCouta(ruta))) %>% 
     filter(errorFechaCuota != "")
   
   if (nrow(validacion)>0) {
@@ -292,27 +291,20 @@ getOperacionesDuplicadas    <- function(ruta) {
    BD <- quitarVaciosBD(ruta)
    
    if (getBDFromRuta(ruta) == "BD01" | getBDFromRuta(ruta) == "BD03A") {
-     operaciones <- BD %>% select(getCodigoBD(getBDFromRuta(ruta))[1]) 
-     duplicados  <- operaciones[duplicated(operaciones), ] %>% unique() %>% pull(getCodigoBD(getBDFromRuta(ruta))[1]) %>% toString()
+     
+     duplicados <- BD %>% group_by(cgrep(BD, getCodigoBD(getBDFromRuta(ruta)))) %>% filter(n() >1) %>% pull(getCodigoBD(getBDFromRuta(ruta))) %>%
+       unique() %>% toString()
      
      return(duplicados)
    }
    if (getBDFromRuta(ruta) == "BD02A") {
-     duplicados <- BD %>%
-       group_by(CCR, NCUO) %>%
-       filter(n() >1) %>%
-       pull(CCR) %>% 
-       unique() %>% toString()
      
+     duplicados <- BD %>% group_by(CCR, NCUO) %>% filter(n() >1) %>% pull(CCR) %>%  unique() %>% toString()
      return(duplicados)
    }
    if (getBDFromRuta(ruta) == "BD02B") {
-     duplicados <- BD %>%
-       group_by(CCR_C, NCUO_C) %>%
-       filter(n() >1) %>%
-       pull(CCR_C) %>% 
-       unique() %>% toString()
      
+     duplicados <- BD %>% group_by(CCR_C, NCUO_C) %>% filter(n() >1) %>% pull(CCR_C) %>% unique() %>% toString()
      return(duplicados)
    }
    else{""}
@@ -324,27 +316,8 @@ getDuplicadosCredCancelados <- function(agente, exigibles) {
   cancelados <- exigibles[str_detect(exigibles, "BD04")]
   
   if (length(cancelados) > 0) {
-    
-    if (length(cancelados) ==1) {
-      
-      dupsCancelados <- quitarVaciosBD(getRuta(carpeta, cancelados[1])) %>% 
-        mutate(PeriodoI = getAnoMesFromRuta(getRuta(carpeta, cancelados[1]))) %>% 
-        select(PeriodoI, CCR_C) %>% 
-        group_by(CCR_C) %>%
-        filter(n() >1)
-      
-      return(dupsCancelados)
-    }
-    
-    else{
-      
-      dupsCancelados <- getSabana(agente, cancelados, "BD04") %>% 
-        select(PeriodoI, CCR_C) %>% 
-        group_by(CCR_C) %>%
-        filter(n() >1)
-      
-      return(dupsCancelados)
-    }
+    dupsCancelados <- getSabana(agente, cancelados, "BD04") %>% select(PeriodoI, CCR_C) %>% group_by(CCR_C) %>% filter(n() >1)
+    return(dupsCancelados)
 
   }
   return("")
@@ -369,7 +342,7 @@ getSaldoTotal               <- function(ruta, opers) {
   return(0)
 }
 
-realizarCruce                  <- function(agente, periodo, data1, data2) {
+realizarCruce <- function(agente, periodo, data1, data2) {
   
   archivo1 <- getRuta(getCarpetaFromAgent(agente), 
                       paste0(paste(getCoopacFromAgent(agente), data1, periodo, sep  = "_"), ".txt"))
@@ -377,14 +350,11 @@ realizarCruce                  <- function(agente, periodo, data1, data2) {
                       paste0(paste(getCoopacFromAgent(agente), data2, periodo, sep  = "_"), ".txt"))
   
   cruce <- setdiff(quitarVaciosBD(archivo1) %>% pull(getCodigoBD(data1)),
-                   quitarVaciosBD(archivo2) %>% pull(getCodigoBD(data2))) %>%
-    unique() %>%
-    toString()
+                   quitarVaciosBD(archivo2) %>% pull(getCodigoBD(data2))) %>% unique() %>% toString()
   
   return(cruce)
 }
-
-getSabana                      <- function(agente, archivos, bd) {
+getSabana     <- function(agente, archivos, bd) {
   
   carpeta          <- getCarpetaFromAgent(agente)
   archivosCreditos <- archivos[str_detect(archivos, bd)]
@@ -392,21 +362,9 @@ getSabana                      <- function(agente, archivos, bd) {
   sabana <- quitarVaciosBD(getRuta(carpeta, archivosCreditos[1])) %>%
     mutate(PeriodoI = getAnoMesFromRuta(getRuta(carpeta, archivosCreditos[1])))
   
-  if (getPeriodosFromAgent(agente) == 1) {
-    
-    if (bd == "BD01") {
-      cartera <- sabana[c(51, 1:50)]
-      return(cartera)
-    }
-    if (bd == "BD02B") {
-      cronoCanc <- sabana[c(18, 1:17)]
-      return(cronoCanc)
-    }
-    if (bd == "BD04") {
-      carteraCanc <- sabana[c(36, 1:35)]
-      return(carteraCanc)
-    }
-    
+  if (length(getPeriodosFromAgent(agente)) == 1) {
+    sabana <- select(sabana, PeriodoI, c(all_of(getColumnasOM(bd)[[1]])))
+    return(sabana)
   }
   
   for (i in 2:length(archivosCreditos)-1) {
@@ -414,21 +372,9 @@ getSabana                      <- function(agente, archivos, bd) {
                                      mutate(PeriodoI = getAnoMesFromRuta(getRuta(carpeta, archivosCreditos[i+1]))))
   }
   
-  if (bd == "BD01") {
-    cartera <- sabana[c(51, 1:50)]
-    return(cartera)
-  }
-  if (bd == "BD02B") {
-    cronoCanc <- sabana[c(18, 1:17)]
-    return(cronoCanc)
-  }
-  if (bd == "BD04") {
-    carteraCanc <- sabana[c(36, 1:35)]
-    return(carteraCanc)
-  }
-  
+  sabana <- select(sabana, PeriodoI, c(all_of(getColumnasOM(bd)[[1]])))
+  return(sabana)
 }
-
 getCreditosDifFechaUltimaCouta <- function(ruta) {
   
   cronogramas <- quitarVaciosBD(ruta)
