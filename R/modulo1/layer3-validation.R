@@ -77,7 +77,7 @@ validarOperacionesVacias     <- function(agente, eb) {
 }
 validarOperacionesDuplicadas <- function(agente, eb) {
   carpeta   <- getCarpetaFromAgent(agente)
-  exigibles <- getArchivosNoObservadosByCols(agente, eb, c("CCR", "CCR_C"))
+  exigibles <- getArchivosNoObservadosByCols(agente, eb, c("CCR", "CCR_C", "SKCR", "VCONS"))
   
   Dups <- tibble(NombreArchivo = exigibles[str_detect(exigibles, paste(c("BD01","BD02A", "BD02B"), collapse = '|'))]) %>% 
     rowwise() %>% 
@@ -303,7 +303,7 @@ validarCreditosFaltantes     <- function(agente, eb) {
 validarCruceFechaVencimiento <- function(agente, eb) {
   
   carpeta   <- getCarpetaFromAgent(agente)
-  exigibles <- getArchivosNoObservadosByCols(agente, eb, "CCR")
+  exigibles <- getArchivosNoObservadosByCols(agente, eb, c("CCR", "NCUO", "FVEG", "FVEP"))
   
   archivosCruce <-  exigibles[str_detect(exigibles, paste(getPeriodosNoObservados(agente, eb, "CCR"), collapse = '|'))]
   
@@ -435,14 +435,15 @@ getSabana     <- function(agente, archivos, bd) {
                                      mutate(PeriodoI = getAnoMesFromRuta(getRuta(carpeta, archivosCreditos[i+1]))))
   }
   
-  sabana <- select(sabana, PeriodoI, c(all_of(getColumnasOM(bd)[[1]])))
+  sabana <- select(sabana, PeriodoI, everything())
   return(sabana)
 }
 #5.
 getCreditosDifFechaUltimaCouta <- function(ruta) {
   
   cronogramas <- quitarVaciosBD(ruta)
-  cartera     <- quitarVaciosBD(str_replace(ruta, "BD02A", "BD01"))
+  cartera     <- quitarVaciosBD(getRuta(default.carpeta, 
+                                        paste(getCoopacFromRuta(ruta), "BD01", getAnoFromRuta(ruta),sep = "_")))
   
   validacion <- cronogramas %>%
     mutate(NCUO = as.numeric(NCUO)) %>% 

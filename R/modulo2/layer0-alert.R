@@ -1,5 +1,4 @@
-####' Script de análisis layer0 
-####' 0. Revisión previa del bucket de errores, y soltar advertencias.
+####' Script de detecccion de altertas layer0.
 
 layer0_Alertas <- function(agente, eb){
   eb <- detectarAlertasPLAFT(agente, eb)
