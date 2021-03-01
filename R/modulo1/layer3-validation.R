@@ -2,6 +2,7 @@
 #' layer3(agente, eb)
 
 layer3 <- function(agente, eb){
+  eb <- validarOperacionesVacias(agente, eb)
   eb <- validarOperacionesDuplicadas(agente, eb)
   eb <- validarCruceInterno(agente, eb)
   eb <- validarCreditosFaltantes(agente, eb)
@@ -10,11 +11,13 @@ layer3 <- function(agente, eb){
 }
 
 #' Funciones secundarias: nivel I
-#' validarOperacionesDuplicadas
-#' validarCruceInterno
-#' validarCreditosFaltantes
-#' validarCruceFechaVencimiento
+#' 1. validarOperacionesVacias
+#' 2. validarOperacionesDuplicadas
+#' 3. validarCruceInterno
+#' 4. validarCreditosFaltantes
+#' 5. validarCruceFechaVencimiento
 #' 
+#' getOperacionesVacias()
 #' getOperacionesDuplicadas()
 #' getDuplicadosCredCancelados()
 #' getSaldoTotal()
@@ -22,6 +25,56 @@ layer3 <- function(agente, eb){
 #' getSabana()
 #' getCreditosDifFechaUltimaCouta()
 
+validarOperacionesVacias     <- function(agente, eb) {
+  
+  exigibles <- getArchivosNoObservadosByCols(agente, eb, c("CCR", "CCR_C", "CODGR"))
+  carpeta   <- getCarpetaFromAgent(agente) 
+  
+  if (length(exigibles) >0) {
+    vacios <- tibble(NombreArchivo = exigibles) %>% 
+      rowwise() %>% 
+      mutate(ruta    = getRuta(carpeta, NombreArchivo),
+             BD      = getBDFromRuta(ruta),
+             Periodo = getAnoMesFromRuta(ruta),
+             nVacios = getOperacionesVacias(ruta)) %>%
+      filter(nVacios != 0)
+    
+    creditosVacios  <- vacios %>% filter(BD %in% c("BD01", "BD02A", "BD02B", "BD04"))
+    garantiasVacios <- vacios %>% filter(BD %in% c("BD03A", "BD03B"))
+    
+    if (nrow(creditosVacios) >0) {
+      chunk_401 <- creditosVacios %>% rowwise() %>% 
+        mutate(CodCoopac = getCoopacFromAgent(agente),
+               IdProceso = getIdProcesoFromAgent(agente),
+               Cod  = 401,
+               num1 = nVacios) %>% 
+        select(CodCoopac, IdProceso, Cod, Periodo, BD, num1)
+      
+      eb <- addError(eb, chunk_401)
+    }
+    if (nrow(garantiasVacios) >0) {
+      chunk_402 <- creditosVacios %>% rowwise() %>% 
+        mutate(CodCoopac = getCoopacFromAgent(agente),
+               IdProceso = getIdProcesoFromAgent(agente),
+               Cod  = 402,
+               num1 = nVacios) %>% 
+        select(CodCoopac, IdProceso, Cod, Periodo, BD, num1)
+      
+      eb <- addError(eb, chunk_402)
+    }
+    
+    n <- eb %>% filter(Cod %in% c(401,402)) %>% nrow()
+    if (n == 0) {
+      addEventLog(agente, paste0("      Resultado: La validación operaciones vacías concluyó sin observaciones."))
+    }
+    else{
+      addEventLog(agente, paste0("      Resultado: La validación operaciones vacías concluyó con ",n," observación(es)."))
+    }
+    
+    return(eb)
+  }
+  return(eb)
+}
 validarOperacionesDuplicadas <- function(agente, eb) {
   carpeta   <- getCarpetaFromAgent(agente)
   exigibles <- getArchivosNoObservadosByCols(agente, eb, c("CCR", "CCR_C"))
@@ -42,47 +95,46 @@ validarOperacionesDuplicadas <- function(agente, eb) {
   dups_BD04  <- getDuplicadosCredCancelados(agente, exigibles) 
   
   if (nrow(dups_BD01) > 0) {
-    chunk_401 <- dups_BD01 %>% rowwise() %>%
+    chunk_403 <- dups_BD01 %>% rowwise() %>%
       mutate(CodCoopac = getCoopacFromAgent(agente),
              IdProceso = getIdProcesoFromAgent(agente),
-             Cod = 401,
+             Cod = 403,
              txt1 = Duplicados,
              num1 = length(str_split(string=txt1 ,pattern = ",")[[1]]),
-             num2 = Saldo
-             ) %>%
+             num2 = Saldo) %>%
       select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1, num2)
 
-    eb <- addError(eb, chunk_401)
+    eb <- addError(eb, chunk_403)
   }
   if (nrow(dups_BD02A) > 0) {
-    chunk_402 <- dups_BD02A %>% rowwise() %>%
+    chunk_404 <- dups_BD02A %>% rowwise() %>%
       mutate(CodCoopac = getCoopacFromAgent(agente),
              IdProceso = getIdProcesoFromAgent(agente),
-             Cod = 402,
+             Cod = 404,
              txt1 = Duplicados,
              num1 = length(str_split(string=txt1 ,pattern = ",")[[1]]),
              num2 = Saldo
              ) %>%
       select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1, num2)
     
-    eb <- addError(eb, chunk_402)
+    eb <- addError(eb, chunk_404)
   }
   if (nrow(dups_BD02B) > 0) {
-    chunk_403 <- dups_BD02B %>% rowwise() %>%
+    chunk_405 <- dups_BD02B %>% rowwise() %>%
       mutate(CodCoopac = getCoopacFromAgent(agente),
              IdProceso = getIdProcesoFromAgent(agente),
-             Cod = 403,
+             Cod = 405,
              txt1 = Duplicados,
              num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])
              ) %>%
       select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
     
-    eb <- addError(eb, chunk_403)
+    eb <- addError(eb, chunk_405)
   }
   if (length(exigibles[str_detect(exigibles, "BD04")]) >0 & nrow(dups_BD04) > 0) {
-    chunk_405 <- tibble(CodCoopac = getCoopacFromAgent(agente),
+    chunk_407 <- tibble(CodCoopac = getCoopacFromAgent(agente),
                         IdProceso = getIdProcesoFromAgent(agente),
-                        Cod     = 405,
+                        Cod     = 407,
                         Periodo = dups_BD04 %>% pull(PeriodoI) %>% first(),
                         BD      = "BD04",
                         txt1 = toString(unique(dups_BD04 %>% pull(CCR_C))),
@@ -90,10 +142,10 @@ validarOperacionesDuplicadas <- function(agente, eb) {
                         num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
       select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, txt2, num1)
     
-    eb <- addError(eb, chunk_405)
+    eb <- addError(eb, chunk_407)
   }
   
-  n <- eb %>% filter(Cod %in% c(401:405)) %>% nrow()
+  n <- eb %>% filter(Cod %in% c(403:407)) %>% nrow()
   if (n == 0) {
     addEventLog(agente, paste0("      Resultado: La validación operaciones duplicadas concluyó sin observaciones."))
   }
@@ -181,7 +233,7 @@ validarCreditosFaltantes     <- function(agente, eb) {
   archivos <- getArchivosNoObservadosByCols(agente, eb, c("CCR","CCR_C"))
   periodos <- getPeriodosFromAgent(agente)
   
-  if (periodos[2:length(periodos)] >1 & 
+  if (length(periodos) <= 2 & 
       length(archivos[str_detect(archivos, "BD01")] >0) & 
       length(archivos[str_detect(archivos, "BD02B")] >0) & 
       length(archivos[str_detect(archivos, "BD04")] >0)) {
@@ -287,6 +339,16 @@ validarCruceFechaVencimiento <- function(agente, eb) {
   return(eb)
 }
 
+
+#1.
+getOperacionesVacias <- function(ruta) {
+  
+  BD     <- evaluarFile(ruta)
+  vacios <- BD %>% filter(is.na(cgrep(BD, getCodigoBD(getBDFromRuta(ruta))))) %>% nrow()
+  
+  return(vacios)
+}
+#2.
 getOperacionesDuplicadas    <- function(ruta) {
    BD <- quitarVaciosBD(ruta)
    
@@ -341,7 +403,7 @@ getSaldoTotal               <- function(ruta, opers) {
   }
   return(0)
 }
-
+#3.
 realizarCruce <- function(agente, periodo, data1, data2) {
   
   archivo1 <- getRuta(getCarpetaFromAgent(agente), 
@@ -354,6 +416,7 @@ realizarCruce <- function(agente, periodo, data1, data2) {
   
   return(cruce)
 }
+#4.
 getSabana     <- function(agente, archivos, bd) {
   
   carpeta          <- getCarpetaFromAgent(agente)
@@ -375,6 +438,7 @@ getSabana     <- function(agente, archivos, bd) {
   sabana <- select(sabana, PeriodoI, c(all_of(getColumnasOM(bd)[[1]])))
   return(sabana)
 }
+#5.
 getCreditosDifFechaUltimaCouta <- function(ruta) {
   
   cronogramas <- quitarVaciosBD(ruta)

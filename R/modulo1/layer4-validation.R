@@ -120,12 +120,13 @@ validarCampos <- function(agente, eb){
 #' Tipo 2: validaciones a campos fecha
 
 quitarVaciosBD <- function(ruta){
-  BD <- evaluarFile(ruta)
+  BD     <- evaluarFile(ruta)
+  codigo <- getCodigoBD(getBDFromRuta(ruta))
   
-  BDSinVacios <- BD %>%
-    filter(is.na(cgrep(BD, getCodigoBD(getBDFromRuta(ruta)))) == FALSE)
+  BD <- BD %>%
+    filter(!is.na(cgrep(BD, codigo)) | cgrep(BD, codigo) != "")
   
-  return(BDSinVacios)
+  return(BD)
 }
 
 # Tipo1 ----

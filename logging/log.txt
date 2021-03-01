@@ -3028,3 +3028,193 @@
 100456	2021-02-24	2021-02-24 15:43:40	DPACHECO	AELU	test/datatest	[2021-02-24 15:43:40] -       Resultado: La revisión errores OM 22269-2020 tiene 25 observaciones.	Informativo	Baja
 100456	2021-02-24	2021-02-24 15:43:41	DPACHECO	AELU	test/datatest	[2021-02-24 15:43:40] - Layer 5. Validación de Cruce Contable a la cartera.	Informativo	Baja
 100456	2021-02-24	2021-02-24 15:46:29	DPACHECO	AELU	test/datatest	[2021-02-24 15:46:29] -       Resultado: Se detectaron 102 error(es) contable(s) en la cartera de créditos pues no cuadra con el balance de comprobación.	Informativo	Baja
+100457	2021-03-01	2021-03-01 10:21:54	DPACHECO	AELU	test/datatest	[2021-03-01 10:21:54] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100457	2021-03-01	2021-03-01 10:21:54	DPACHECO	AELU	test/datatest	[2021-03-01 10:21:54] - Coopac evaluada: 01138-AELU	Informativo	Baja
+100457	2021-03-01	2021-03-01 10:21:55	DPACHECO	AELU	test/datatest	[2021-03-01 10:21:54] - PID: 100457[201901~201902]	Informativo	Baja
+100457	2021-03-01	2021-03-01 10:21:55	DPACHECO	AELU	test/datatest	[2021-03-01 10:21:55] - 1. MÓDULO DE VALIDACIÓN DE BASE DE DATOS CREDITICIAS --------------------------	Informativo	Baja
+100457	2021-03-01	2021-03-01 10:21:55	DPACHECO	AELU	test/datatest	[2021-03-01 10:21:55] - Inicio del interrogatorio modulo 1. PID-100457.	Informativo	Baja
+100457	2021-03-01	2021-03-01 10:21:56	DPACHECO	AELU	test/datatest	[2021-03-01 10:21:55] - Layer 0. Revisión de pre-requisitos.	Informativo	Baja
+100457	2021-03-01	2021-03-01 10:21:58	DPACHECO	AELU	test/datatest	[2021-03-01 10:21:58] -       Resultado: Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100457	2021-03-01	2021-03-01 10:21:58	DPACHECO	AELU	test/datatest	[2021-03-01 10:21:58] - Layer 1. Revisión de estructura de tablas	Informativo	Baja
+100457	2021-03-01	2021-03-01 10:22:13	DPACHECO	AELU	test/datatest	[2021-03-01 10:22:13] -       Resultado: Revisión de estructura de datos satisfatoria.	Informativo	Baja
+100457	2021-03-01	2021-03-01 10:22:14	DPACHECO	AELU	test/datatest	[2021-03-01 10:22:13] - Layer 2. Validación de Cruce Contable a la cartera.	Informativo	Baja
+100457	2021-03-01	2021-03-01 10:22:29	DPACHECO	AELU	test/datatest	[2021-03-01 10:22:29] -       Resultado: Se detectaron 10 error(es) contable(s) en la cartera de créditos pues no cuadra con el balance de comprobación.	Informativo	Baja
+100457	2021-03-01	2021-03-01 10:22:30	DPACHECO	AELU	test/datatest	[2021-03-01 10:22:29] - Layer 3. Validación de consistencia de operaciones.	Informativo	Baja
+100458	2021-03-01	2021-03-01 10:27:13	DPACHECO	AELU	test/datatest	[2021-03-01 10:27:13] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100458	2021-03-01	2021-03-01 10:27:13	DPACHECO	AELU	test/datatest	[2021-03-01 10:27:13] - Coopac evaluada: 01138-AELU	Informativo	Baja
+100458	2021-03-01	2021-03-01 10:27:14	DPACHECO	AELU	test/datatest	[2021-03-01 10:27:14] - PID: 100458[201901~201902]	Informativo	Baja
+100458	2021-03-01	2021-03-01 10:27:14	DPACHECO	AELU	test/datatest	[2021-03-01 10:27:14] - 1. MÓDULO DE VALIDACIÓN DE BASE DE DATOS CREDITICIAS --------------------------	Informativo	Baja
+100458	2021-03-01	2021-03-01 10:27:14	DPACHECO	AELU	test/datatest	[2021-03-01 10:27:14] - Inicio del interrogatorio modulo 1. PID-100458.	Informativo	Baja
+100458	2021-03-01	2021-03-01 10:27:14	DPACHECO	AELU	test/datatest	[2021-03-01 10:27:14] - Layer 0. Revisión de pre-requisitos.	Informativo	Baja
+100458	2021-03-01	2021-03-01 10:27:15	DPACHECO	AELU	test/datatest	[2021-03-01 10:27:15] -       Resultado: Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100458	2021-03-01	2021-03-01 10:27:16	DPACHECO	AELU	test/datatest	[2021-03-01 10:27:15] - Layer 1. Revisión de estructura de tablas	Informativo	Baja
+100458	2021-03-01	2021-03-01 10:27:29	DPACHECO	AELU	test/datatest	[2021-03-01 10:27:29] -       Resultado: Revisión de estructura de datos satisfatoria.	Informativo	Baja
+100458	2021-03-01	2021-03-01 10:27:29	DPACHECO	AELU	test/datatest	[2021-03-01 10:27:29] - Layer 2. Validación de Cruce Contable a la cartera.	Informativo	Baja
+100458	2021-03-01	2021-03-01 10:27:45	DPACHECO	AELU	test/datatest	[2021-03-01 10:27:45] -       Resultado: Se detectaron 10 error(es) contable(s) en la cartera de créditos pues no cuadra con el balance de comprobación.	Informativo	Baja
+100458	2021-03-01	2021-03-01 10:27:45	DPACHECO	AELU	test/datatest	[2021-03-01 10:27:45] - Layer 3. Validación de consistencia de operaciones.	Informativo	Baja
+100459	2021-03-01	2021-03-01 10:28:44	DPACHECO	AELU	test/datatest	[2021-03-01 10:28:44] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100459	2021-03-01	2021-03-01 10:28:44	DPACHECO	AELU	test/datatest	[2021-03-01 10:28:44] - Coopac evaluada: 01138-AELU	Informativo	Baja
+100459	2021-03-01	2021-03-01 10:28:45	DPACHECO	AELU	test/datatest	[2021-03-01 10:28:44] - PID: 100459[201901~201902]	Informativo	Baja
+100459	2021-03-01	2021-03-01 10:28:45	DPACHECO	AELU	test/datatest	[2021-03-01 10:28:45] - 1. MÓDULO DE VALIDACIÓN DE BASE DE DATOS CREDITICIAS --------------------------	Informativo	Baja
+100459	2021-03-01	2021-03-01 10:28:45	DPACHECO	AELU	test/datatest	[2021-03-01 10:28:45] - Inicio del interrogatorio modulo 1. PID-100459.	Informativo	Baja
+100459	2021-03-01	2021-03-01 10:28:45	DPACHECO	AELU	test/datatest	[2021-03-01 10:28:45] - Layer 0. Revisión de pre-requisitos.	Informativo	Baja
+100459	2021-03-01	2021-03-01 10:28:46	DPACHECO	AELU	test/datatest	[2021-03-01 10:28:46] -       Resultado: Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100459	2021-03-01	2021-03-01 10:28:46	DPACHECO	AELU	test/datatest	[2021-03-01 10:28:46] - Layer 1. Revisión de estructura de tablas	Informativo	Baja
+100459	2021-03-01	2021-03-01 10:29:00	DPACHECO	AELU	test/datatest	[2021-03-01 10:29:00] -       Resultado: Revisión de estructura de datos satisfatoria.	Informativo	Baja
+100459	2021-03-01	2021-03-01 10:29:00	DPACHECO	AELU	test/datatest	[2021-03-01 10:29:00] - Layer 2. Validación de Cruce Contable a la cartera.	Informativo	Baja
+100459	2021-03-01	2021-03-01 10:29:16	DPACHECO	AELU	test/datatest	[2021-03-01 10:29:16] -       Resultado: Se detectaron 10 error(es) contable(s) en la cartera de créditos pues no cuadra con el balance de comprobación.	Informativo	Baja
+100459	2021-03-01	2021-03-01 10:29:16	DPACHECO	AELU	test/datatest	[2021-03-01 10:29:16] - Layer 3. Validación de consistencia de operaciones.	Informativo	Baja
+100459	2021-03-01	2021-03-01 10:29:50	DPACHECO	AELU	test/datatest	[2021-03-01 10:29:50] -       Resultado: La validación operaciones duplicadas concluyó sin observaciones.	Informativo	Baja
+100459	2021-03-01	2021-03-01 10:30:03	DPACHECO	AELU	test/datatest	[2021-03-01 10:30:03] -       Resultado: La validación de cruce interno concluyó con 2 observación(es).	Informativo	Baja
+100460	2021-03-01	2021-03-01 10:42:15	DPACHECO	AELU	test/datatest	[2021-03-01 10:42:15] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100460	2021-03-01	2021-03-01 10:42:15	DPACHECO	AELU	test/datatest	[2021-03-01 10:42:15] - Coopac evaluada: 01138-AELU	Informativo	Baja
+100460	2021-03-01	2021-03-01 10:42:16	DPACHECO	AELU	test/datatest	[2021-03-01 10:42:15] - PID: 100460[201901~201902]	Informativo	Baja
+100460	2021-03-01	2021-03-01 10:42:16	DPACHECO	AELU	test/datatest	[2021-03-01 10:42:16] - 1. MÓDULO DE VALIDACIÓN DE BASE DE DATOS CREDITICIAS --------------------------	Informativo	Baja
+100460	2021-03-01	2021-03-01 10:42:16	DPACHECO	AELU	test/datatest	[2021-03-01 10:42:16] - Inicio del interrogatorio modulo 1. PID-100460.	Informativo	Baja
+100460	2021-03-01	2021-03-01 10:42:16	DPACHECO	AELU	test/datatest	[2021-03-01 10:42:16] - Layer 0. Revisión de pre-requisitos.	Informativo	Baja
+100460	2021-03-01	2021-03-01 10:42:17	DPACHECO	AELU	test/datatest	[2021-03-01 10:42:17] -       Resultado: Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100460	2021-03-01	2021-03-01 10:42:18	DPACHECO	AELU	test/datatest	[2021-03-01 10:42:17] - Layer 1. Revisión de estructura de tablas	Informativo	Baja
+100460	2021-03-01	2021-03-01 10:42:33	DPACHECO	AELU	test/datatest	[2021-03-01 10:42:33] -       Resultado: Revisión de estructura de datos satisfatoria.	Informativo	Baja
+100460	2021-03-01	2021-03-01 10:42:33	DPACHECO	AELU	test/datatest	[2021-03-01 10:42:33] - Layer 2. Validación de Cruce Contable a la cartera.	Informativo	Baja
+100460	2021-03-01	2021-03-01 10:42:51	DPACHECO	AELU	test/datatest	[2021-03-01 10:42:50] -       Resultado: Se detectaron 10 error(es) contable(s) en la cartera de créditos pues no cuadra con el balance de comprobación.	Informativo	Baja
+100460	2021-03-01	2021-03-01 10:42:51	DPACHECO	AELU	test/datatest	[2021-03-01 10:42:51] - Layer 3. Validación de consistencia de operaciones.	Informativo	Baja
+100460	2021-03-01	2021-03-01 10:43:25	DPACHECO	AELU	test/datatest	[2021-03-01 10:43:25] -       Resultado: La validación operaciones duplicadas concluyó sin observaciones.	Informativo	Baja
+100460	2021-03-01	2021-03-01 10:43:38	DPACHECO	AELU	test/datatest	[2021-03-01 10:43:38] -       Resultado: La validación de cruce interno concluyó con 2 observación(es).	Informativo	Baja
+100460	2021-03-01	2021-03-01 10:44:16	DPACHECO	AELU	test/datatest	[2021-03-01 10:44:16] -       Resultado: La validación de créditos faltantes en la 2B o 4 concluyó sin observaciones.	Informativo	Baja
+100460	2021-03-01	2021-03-01 10:45:11	DPACHECO	AELU	test/datatest	[2021-03-01 10:45:11] -       Resultado: La validación de cruce de fechas de vencimiento de créditos entre la 2A y la 1 concluyó con 2 observación(es).	Informativo	Baja
+100460	2021-03-01	2021-03-01 10:45:11	DPACHECO	AELU	test/datatest	[2021-03-01 10:45:11] - Layer 4. Validación de campos indviduales.	Informativo	Baja
+100460	2021-03-01	2021-03-01 10:45:24	DPACHECO	AELU	test/datatest	[2021-03-01 10:45:24] -       Resultado: La validación de los campos concluyó con 2 observaciones tipo1.	Informativo	Baja
+100460	2021-03-01	2021-03-01 10:45:33	DPACHECO	AELU	test/datatest	[2021-03-01 10:45:33] -       Resultado: La validación de los campos concluyó sin observaciones tipo2.	Informativo	Baja
+100461	2021-03-01	2021-03-01 11:04:25	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:04:25] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100461	2021-03-01	2021-03-01 11:04:26	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:04:25] - Coopac evaluada: 01110-LA REHABILITADORA 24	Informativo	Baja
+100461	2021-03-01	2021-03-01 11:04:26	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:04:26] - PID: 100461[201901~201902]	Informativo	Baja
+100461	2021-03-01	2021-03-01 11:04:26	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:04:26] - 1. MÓDULO DE VALIDACIÓN DE BASE DE DATOS CREDITICIAS --------------------------	Informativo	Baja
+100461	2021-03-01	2021-03-01 11:04:26	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:04:26] - Inicio del interrogatorio modulo 1. PID-100461.	Informativo	Baja
+100461	2021-03-01	2021-03-01 11:04:27	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:04:26] - Layer 0. Revisión de pre-requisitos.	Informativo	Baja
+100461	2021-03-01	2021-03-01 11:04:28	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:04:28] -       Resultado: Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100461	2021-03-01	2021-03-01 11:04:28	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:04:28] - Layer 1. Revisión de estructura de tablas	Informativo	Baja
+100461	2021-03-01	2021-03-01 11:04:45	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:04:45] - La validación de Columnas faltantes concluyó con 5 observación(es).	Informativo	Baja
+100461	2021-03-01	2021-03-01 11:04:46	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:04:46] - La validación de Columnas sobrantes concluyó con 5 observación(es).	Informativo	Baja
+100461	2021-03-01	2021-03-01 11:04:46	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:04:46] - La validación de Columnas vacías concluyó con 4 observación(es).	Informativo	Baja
+100461	2021-03-01	2021-03-01 11:04:46	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:04:46] -       Resultado: La revisión de estructura de datos tiene 10 observaciones. Continuar con discreción.	Informativo	Baja
+100461	2021-03-01	2021-03-01 11:04:46	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:04:46] - Layer 2. Validación de Cruce Contable a la cartera.	Informativo	Baja
+100461	2021-03-01	2021-03-01 11:05:02	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:05:02] -       Resultado: Se detectaron 16 error(es) contable(s) en la cartera de créditos pues no cuadra con el balance de comprobación.	Informativo	Baja
+100461	2021-03-01	2021-03-01 11:05:02	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:05:02] - Layer 3. Validación de consistencia de operaciones.	Informativo	Baja
+100462	2021-03-01	2021-03-01 11:10:52	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:10:52] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100462	2021-03-01	2021-03-01 11:10:52	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:10:52] - Coopac evaluada: 01110-LA REHABILITADORA 24	Informativo	Baja
+100462	2021-03-01	2021-03-01 11:10:52	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:10:52] - PID: 100462[201901~201902]	Informativo	Baja
+100462	2021-03-01	2021-03-01 11:10:53	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:10:52] - 1. MÓDULO DE VALIDACIÓN DE BASE DE DATOS CREDITICIAS --------------------------	Informativo	Baja
+100462	2021-03-01	2021-03-01 11:10:53	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:10:53] - Inicio del interrogatorio modulo 1. PID-100462.	Informativo	Baja
+100462	2021-03-01	2021-03-01 11:10:53	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:10:53] - Layer 0. Revisión de pre-requisitos.	Informativo	Baja
+100462	2021-03-01	2021-03-01 11:10:54	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:10:54] -       Resultado: Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100462	2021-03-01	2021-03-01 11:10:54	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:10:54] - Layer 1. Revisión de estructura de tablas	Informativo	Baja
+100462	2021-03-01	2021-03-01 11:11:09	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:11:09] - La validación de Columnas faltantes concluyó con 5 observación(es).	Informativo	Baja
+100462	2021-03-01	2021-03-01 11:11:09	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:11:09] - La validación de Columnas sobrantes concluyó con 5 observación(es).	Informativo	Baja
+100462	2021-03-01	2021-03-01 11:11:10	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:11:10] - La validación de Columnas vacías concluyó con 4 observación(es).	Informativo	Baja
+100462	2021-03-01	2021-03-01 11:11:10	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:11:10] -       Resultado: La revisión de estructura de datos tiene 10 observaciones. Continuar con discreción.	Informativo	Baja
+100462	2021-03-01	2021-03-01 11:11:10	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:11:10] - Layer 2. Validación de Cruce Contable a la cartera.	Informativo	Baja
+100462	2021-03-01	2021-03-01 11:11:26	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:11:26] -       Resultado: Se detectaron 16 error(es) contable(s) en la cartera de créditos pues no cuadra con el balance de comprobación.	Informativo	Baja
+100462	2021-03-01	2021-03-01 11:11:26	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:11:26] - Layer 3. Validación de consistencia de operaciones.	Informativo	Baja
+100463	2021-03-01	2021-03-01 11:12:07	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:12:07] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100463	2021-03-01	2021-03-01 11:12:07	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:12:07] - Coopac evaluada: 01110-LA REHABILITADORA 24	Informativo	Baja
+100463	2021-03-01	2021-03-01 11:12:07	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:12:07] - PID: 100463[201901~201902]	Informativo	Baja
+100463	2021-03-01	2021-03-01 11:12:08	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:12:07] - 1. MÓDULO DE VALIDACIÓN DE BASE DE DATOS CREDITICIAS --------------------------	Informativo	Baja
+100463	2021-03-01	2021-03-01 11:12:08	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:12:08] - Inicio del interrogatorio modulo 1. PID-100463.	Informativo	Baja
+100463	2021-03-01	2021-03-01 11:12:08	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:12:08] - Layer 0. Revisión de pre-requisitos.	Informativo	Baja
+100463	2021-03-01	2021-03-01 11:12:09	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:12:09] -       Resultado: Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100463	2021-03-01	2021-03-01 11:12:09	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:12:09] - Layer 1. Revisión de estructura de tablas	Informativo	Baja
+100463	2021-03-01	2021-03-01 11:12:24	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:12:24] - La validación de Columnas faltantes concluyó con 5 observación(es).	Informativo	Baja
+100463	2021-03-01	2021-03-01 11:12:25	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:12:25] - La validación de Columnas sobrantes concluyó con 5 observación(es).	Informativo	Baja
+100463	2021-03-01	2021-03-01 11:12:25	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:12:25] - La validación de Columnas vacías concluyó con 4 observación(es).	Informativo	Baja
+100463	2021-03-01	2021-03-01 11:12:25	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:12:25] -       Resultado: La revisión de estructura de datos tiene 10 observaciones. Continuar con discreción.	Informativo	Baja
+100463	2021-03-01	2021-03-01 11:12:26	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:12:25] - Layer 2. Validación de Cruce Contable a la cartera.	Informativo	Baja
+100463	2021-03-01	2021-03-01 11:12:42	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:12:41] -       Resultado: Se detectaron 16 error(es) contable(s) en la cartera de créditos pues no cuadra con el balance de comprobación.	Informativo	Baja
+100463	2021-03-01	2021-03-01 11:12:42	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:12:42] - Layer 3. Validación de consistencia de operaciones.	Informativo	Baja
+100464	2021-03-01	2021-03-01 11:16:33	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:16:33] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100464	2021-03-01	2021-03-01 11:16:33	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:16:33] - Coopac evaluada: 01110-LA REHABILITADORA 24	Informativo	Baja
+100464	2021-03-01	2021-03-01 11:16:33	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:16:33] - PID: 100464[201901~201902]	Informativo	Baja
+100464	2021-03-01	2021-03-01 11:16:33	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:16:33] - 1. MÓDULO DE VALIDACIÓN DE BASE DE DATOS CREDITICIAS --------------------------	Informativo	Baja
+100464	2021-03-01	2021-03-01 11:16:34	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:16:33] - Inicio del interrogatorio modulo 1. PID-100464.	Informativo	Baja
+100464	2021-03-01	2021-03-01 11:16:34	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:16:34] - Layer 0. Revisión de pre-requisitos.	Informativo	Baja
+100464	2021-03-01	2021-03-01 11:16:35	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:16:35] -       Resultado: Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100464	2021-03-01	2021-03-01 11:16:35	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:16:35] - Layer 1. Revisión de estructura de tablas	Informativo	Baja
+100464	2021-03-01	2021-03-01 11:16:50	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:16:50] - La validación de Columnas faltantes concluyó con 5 observación(es).	Informativo	Baja
+100464	2021-03-01	2021-03-01 11:16:50	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:16:50] - La validación de Columnas sobrantes concluyó con 5 observación(es).	Informativo	Baja
+100464	2021-03-01	2021-03-01 11:16:51	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:16:51] - La validación de Columnas vacías concluyó con 4 observación(es).	Informativo	Baja
+100464	2021-03-01	2021-03-01 11:16:51	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:16:51] -       Resultado: La revisión de estructura de datos tiene 10 observaciones. Continuar con discreción.	Informativo	Baja
+100464	2021-03-01	2021-03-01 11:16:51	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:16:51] - Layer 2. Validación de Cruce Contable a la cartera.	Informativo	Baja
+100464	2021-03-01	2021-03-01 11:17:07	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:17:07] -       Resultado: Se detectaron 16 error(es) contable(s) en la cartera de créditos pues no cuadra con el balance de comprobación.	Informativo	Baja
+100464	2021-03-01	2021-03-01 11:17:07	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:17:07] - Layer 3. Validación de consistencia de operaciones.	Informativo	Baja
+100465	2021-03-01	2021-03-01 11:19:52	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:19:52] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100465	2021-03-01	2021-03-01 11:19:52	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:19:52] - Coopac evaluada: 01110-LA REHABILITADORA 24	Informativo	Baja
+100465	2021-03-01	2021-03-01 11:19:52	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:19:52] - PID: 100465[201901~201903]	Informativo	Baja
+100465	2021-03-01	2021-03-01 11:19:52	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:19:52] - 1. MÓDULO DE VALIDACIÓN DE BASE DE DATOS CREDITICIAS --------------------------	Informativo	Baja
+100465	2021-03-01	2021-03-01 11:19:52	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:19:52] - Inicio del interrogatorio modulo 1. PID-100465.	Informativo	Baja
+100465	2021-03-01	2021-03-01 11:19:52	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:19:52] - Layer 0. Revisión de pre-requisitos.	Informativo	Baja
+100465	2021-03-01	2021-03-01 11:19:53	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:19:53] -       Resultado: Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100465	2021-03-01	2021-03-01 11:19:53	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:19:53] - Layer 1. Revisión de estructura de tablas	Informativo	Baja
+100466	2021-03-01	2021-03-01 11:22:06	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:22:06] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100466	2021-03-01	2021-03-01 11:22:06	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:22:06] - Coopac evaluada: 01110-LA REHABILITADORA 24	Informativo	Baja
+100466	2021-03-01	2021-03-01 11:22:07	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:22:06] - PID: 100466[201901~201903]	Informativo	Baja
+100466	2021-03-01	2021-03-01 11:22:07	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:22:07] - 1. MÓDULO DE VALIDACIÓN DE BASE DE DATOS CREDITICIAS --------------------------	Informativo	Baja
+100466	2021-03-01	2021-03-01 11:22:07	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:22:07] - Inicio del interrogatorio modulo 1. PID-100466.	Informativo	Baja
+100466	2021-03-01	2021-03-01 11:22:07	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:22:07] - Layer 0. Revisión de pre-requisitos.	Informativo	Baja
+100466	2021-03-01	2021-03-01 11:22:08	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:22:08] -       Resultado: Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100466	2021-03-01	2021-03-01 11:22:08	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:22:08] - Layer 1. Revisión de estructura de tablas	Informativo	Baja
+100466	2021-03-01	2021-03-01 11:22:33	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:22:33] - La validación de Columnas faltantes concluyó con 6 observación(es).	Informativo	Baja
+100466	2021-03-01	2021-03-01 11:22:33	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:22:33] - La validación de Columnas sobrantes concluyó con 6 observación(es).	Informativo	Baja
+100466	2021-03-01	2021-03-01 11:22:33	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:22:33] - La validación de Columnas vacías concluyó con 6 observación(es).	Informativo	Baja
+100466	2021-03-01	2021-03-01 11:22:33	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:22:33] -       Resultado: La revisión de estructura de datos tiene 12 observaciones. Continuar con discreción.	Informativo	Baja
+100466	2021-03-01	2021-03-01 11:22:34	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:22:33] - Layer 2. Validación de Cruce Contable a la cartera.	Informativo	Baja
+100466	2021-03-01	2021-03-01 11:22:58	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:22:58] -       Resultado: Se detectaron 23 error(es) contable(s) en la cartera de créditos pues no cuadra con el balance de comprobación.	Informativo	Baja
+100466	2021-03-01	2021-03-01 11:22:59	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:22:58] - Layer 3. Validación de consistencia de operaciones.	Informativo	Baja
+100467	2021-03-01	2021-03-01 11:26:31	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:26:31] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100467	2021-03-01	2021-03-01 11:26:31	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:26:31] - Coopac evaluada: 01110-LA REHABILITADORA 24	Informativo	Baja
+100467	2021-03-01	2021-03-01 11:26:32	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:26:31] - PID: 100467[201901~201903]	Informativo	Baja
+100467	2021-03-01	2021-03-01 11:26:32	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:26:32] - 1. MÓDULO DE VALIDACIÓN DE BASE DE DATOS CREDITICIAS --------------------------	Informativo	Baja
+100467	2021-03-01	2021-03-01 11:26:32	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:26:32] - Inicio del interrogatorio modulo 1. PID-100467.	Informativo	Baja
+100467	2021-03-01	2021-03-01 11:26:32	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:26:32] - Layer 0. Revisión de pre-requisitos.	Informativo	Baja
+100467	2021-03-01	2021-03-01 11:26:33	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:26:33] -       Resultado: Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100467	2021-03-01	2021-03-01 11:26:33	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:26:33] - Layer 1. Revisión de estructura de tablas	Informativo	Baja
+100468	2021-03-01	2021-03-01 11:26:54	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:26:54] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100468	2021-03-01	2021-03-01 11:26:54	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:26:54] - Coopac evaluada: 01110-LA REHABILITADORA 24	Informativo	Baja
+100468	2021-03-01	2021-03-01 11:26:55	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:26:54] - PID: 100468[201901~201902]	Informativo	Baja
+100468	2021-03-01	2021-03-01 11:26:55	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:26:55] - 1. MÓDULO DE VALIDACIÓN DE BASE DE DATOS CREDITICIAS --------------------------	Informativo	Baja
+100468	2021-03-01	2021-03-01 11:26:55	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:26:55] - Inicio del interrogatorio modulo 1. PID-100468.	Informativo	Baja
+100468	2021-03-01	2021-03-01 11:26:56	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:26:55] - Layer 0. Revisión de pre-requisitos.	Informativo	Baja
+100468	2021-03-01	2021-03-01 11:26:57	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:26:56] -       Resultado: Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100468	2021-03-01	2021-03-01 11:26:57	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:26:57] - Layer 1. Revisión de estructura de tablas	Informativo	Baja
+100468	2021-03-01	2021-03-01 11:27:12	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:27:12] - La validación de Columnas faltantes concluyó con 5 observación(es).	Informativo	Baja
+100468	2021-03-01	2021-03-01 11:27:12	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:27:12] - La validación de Columnas sobrantes concluyó con 5 observación(es).	Informativo	Baja
+100468	2021-03-01	2021-03-01 11:27:12	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:27:12] - La validación de Columnas vacías concluyó con 4 observación(es).	Informativo	Baja
+100468	2021-03-01	2021-03-01 11:27:13	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:27:12] -       Resultado: La revisión de estructura de datos tiene 10 observaciones. Continuar con discreción.	Informativo	Baja
+100469	2021-03-01	2021-03-01 11:54:42	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:54:42] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100469	2021-03-01	2021-03-01 11:54:42	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:54:42] - Coopac evaluada: 01110-LA REHABILITADORA 24	Informativo	Baja
+100469	2021-03-01	2021-03-01 11:54:42	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:54:42] - PID: 100469[201901~201902]	Informativo	Baja
+100469	2021-03-01	2021-03-01 11:54:42	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:54:42] - 1. MÓDULO DE VALIDACIÓN DE BASE DE DATOS CREDITICIAS --------------------------	Informativo	Baja
+100469	2021-03-01	2021-03-01 11:54:42	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:54:42] - Inicio del interrogatorio modulo 1. PID-100469.	Informativo	Baja
+100469	2021-03-01	2021-03-01 11:54:43	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:54:43] - Layer 0. Revisión de pre-requisitos.	Informativo	Baja
+100469	2021-03-01	2021-03-01 11:54:44	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:54:44] -       Resultado: Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100469	2021-03-01	2021-03-01 11:54:44	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:54:44] - Layer 1. Revisión de estructura de tablas	Informativo	Baja
+100469	2021-03-01	2021-03-01 11:55:00	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:54:59] - La validación de Columnas faltantes concluyó con 5 observación(es).	Informativo	Baja
+100469	2021-03-01	2021-03-01 11:55:00	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:55:00] - La validación de Columnas sobrantes concluyó con 6 observación(es).	Informativo	Baja
+100469	2021-03-01	2021-03-01 11:55:00	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:55:00] - La validación de Columnas vacías concluyó con 4 observación(es).	Informativo	Baja
+100469	2021-03-01	2021-03-01 11:55:00	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:55:00] -       Resultado: La revisión de estructura de datos tiene 11 observaciones. Continuar con discreción.	Informativo	Baja
+100470	2021-03-01	2021-03-01 11:56:27	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:56:27] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100470	2021-03-01	2021-03-01 11:56:27	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:56:27] - Coopac evaluada: 01110-LA REHABILITADORA 24	Informativo	Baja
+100470	2021-03-01	2021-03-01 11:56:27	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:56:27] - PID: 100470[201901~201902]	Informativo	Baja
+100470	2021-03-01	2021-03-01 11:56:28	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:56:28] - 1. MÓDULO DE VALIDACIÓN DE BASE DE DATOS CREDITICIAS --------------------------	Informativo	Baja
+100470	2021-03-01	2021-03-01 11:56:28	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:56:28] - Inicio del interrogatorio modulo 1. PID-100470.	Informativo	Baja
+100470	2021-03-01	2021-03-01 11:56:28	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:56:28] - Layer 0. Revisión de pre-requisitos.	Informativo	Baja
+100470	2021-03-01	2021-03-01 11:56:29	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:56:29] -       Resultado: Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100470	2021-03-01	2021-03-01 11:56:29	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:56:29] - Layer 1. Revisión de estructura de tablas	Informativo	Baja
+100470	2021-03-01	2021-03-01 11:56:45	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:56:45] - La validación de Columnas faltantes concluyó con 5 observación(es).	Informativo	Baja
+100470	2021-03-01	2021-03-01 11:56:45	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:56:45] - La validación de Columnas sobrantes concluyó con 6 observación(es).	Informativo	Baja
+100470	2021-03-01	2021-03-01 11:56:45	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:56:45] - La validación de Columnas vacías concluyó con 4 observación(es).	Informativo	Baja
+100470	2021-03-01	2021-03-01 11:56:46	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:56:45] -       Resultado: La revisión de estructura de datos tiene 11 observaciones. Continuar con discreción.	Informativo	Baja
+100470	2021-03-01	2021-03-01 11:56:46	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:56:46] - Layer 2. Validación de Cruce Contable a la cartera.	Informativo	Baja
+100470	2021-03-01	2021-03-01 11:57:02	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:57:02] -       Resultado: Se detectaron 16 error(es) contable(s) en la cartera de créditos pues no cuadra con el balance de comprobación.	Informativo	Baja
+100470	2021-03-01	2021-03-01 11:57:03	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:57:02] - Layer 3. Validación de consistencia de operaciones.	Informativo	Baja
+100470	2021-03-01	2021-03-01 11:57:12	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:57:12] -       Resultado: La validación operaciones vacías concluyó con 2 observación(es).	Informativo	Baja
+100470	2021-03-01	2021-03-01 11:57:35	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:57:35] -       Resultado: La validación operaciones duplicadas concluyó con 1 observación(es).	Informativo	Baja
+100470	2021-03-01	2021-03-01 11:57:50	DPACHECO	LA REHABILITADORA 24	test/datatest	[2021-03-01 11:57:50] -       Resultado: La validación de cruce interno concluyó con 4 observación(es).	Informativo	Baja

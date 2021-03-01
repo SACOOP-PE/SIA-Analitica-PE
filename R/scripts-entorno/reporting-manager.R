@@ -18,44 +18,48 @@ formatBucket <- function(eb) {
                                                                                                     "\\Q{1}"  = periodoEscrito(Periodo),
                                                                                                     "\\Q{2}"  = toString(num2))),
                                                                if_else(Cod %in% c(401, 402),
-                                                                       str_replace_all(getDescError(Cod), c("\\Q{0}"  = toString(num1),
-                                                                                                            "\\Q{1}"  = tolower(toString(months(as.Date(paste(substr(Periodo,1,4), substr(Periodo,5,6), "01", sep = "-"))))),
-                                                                                                            "\\Q{2}"  = toString(num2),
-                                                                                                            "\\Q{3}"  = periodoEscrito(Periodo))),
-                                                                       if_else(Cod %in% c(403, 501, 503, 506),
+                                                                       str_replace_all(getDescError(Cod), c("\\Q{0}" = toString(num1),
+                                                                                                            "\\Q{1}" = BD,
+                                                                                                            "\\Q{2}" = periodoEscrito(Periodo))),
+                                                                       if_else(Cod %in% c(403, 404),
                                                                                str_replace_all(getDescError(Cod), c("\\Q{0}"  = toString(num1),
-                                                                                                                    "\\Q{1}"  = periodoEscrito(Periodo))),
-                                                                               if_else(Cod %in% c(404, 502),
+                                                                                                                    "\\Q{1}"  = tolower(toString(months(as.Date(paste(substr(Periodo,1,4), substr(Periodo,5,6), "01", sep = "-"))))),
+                                                                                                                    "\\Q{2}"  = toString(num2),
+                                                                                                                    "\\Q{3}"  = periodoEscrito(Periodo))),
+                                                                               if_else(Cod %in% c(405, 501, 503, 506),
                                                                                        str_replace_all(getDescError(Cod), c("\\Q{0}"  = toString(num1),
-                                                                                                                            "\\Q{1}"  = toString(num2),
-                                                                                                                            "\\Q{2}"  = periodoEscrito(Periodo))),
-                                                                                       if_else(Cod == 405,
+                                                                                                                            "\\Q{1}"  = periodoEscrito(Periodo))),
+                                                                                       if_else(Cod %in% c(406, 502),
                                                                                                str_replace_all(getDescError(Cod), c("\\Q{0}"  = toString(num1),
-                                                                                                                                    "\\Q{1}"  = periodoEscrito(Periodo),
-                                                                                                                                    "\\Q{2}"  = periodoEscrito(txt2))),
-                                                                                               if_else(Cod %in% c(504,505),
+                                                                                                                                    "\\Q{1}"  = toString(num2),
+                                                                                                                                    "\\Q{2}"  = periodoEscrito(Periodo))),
+                                                                                               if_else(Cod == 407,
                                                                                                        str_replace_all(getDescError(Cod), c("\\Q{0}"  = toString(num1),
                                                                                                                                             "\\Q{1}"  = periodoEscrito(Periodo),
                                                                                                                                             "\\Q{2}"  = periodoEscrito(txt2))),
-                                                                                                       if_else(Cod %in% c(601:621),
+                                                                                                       if_else(Cod %in% c(504,505),
                                                                                                                str_replace_all(getDescError(Cod), c("\\Q{0}"  = toString(num1),
                                                                                                                                                     "\\Q{1}"  = periodoEscrito(Periodo),
-                                                                                                                                                    "\\Q{2}"  = txt3)),
-                                                                                                               if_else(Cod == 622,
+                                                                                                                                                    "\\Q{2}"  = periodoEscrito(txt2))),
+                                                                                                               if_else(Cod %in% c(601:621),
                                                                                                                        str_replace_all(getDescError(Cod), c("\\Q{0}"  = toString(num1),
-                                                                                                                                                            "\\Q{1}"  = txt2,
-                                                                                                                                                            "\\Q{2}"  = BD,
-                                                                                                                                                            "\\Q{3}"  = periodoEscrito(Periodo))),
-                                                                                                                       
-                                                                                                                       if_else(Cod %in% c(701:709),
+                                                                                                                                                            "\\Q{1}"  = periodoEscrito(Periodo),
+                                                                                                                                                            "\\Q{2}"  = txt3)),
+                                                                                                                       if_else(Cod == 622,
                                                                                                                                str_replace_all(getDescError(Cod), c("\\Q{0}"  = toString(num1),
-                                                                                                                                                                    "\\Q{1}"  = periodoEscrito(Periodo))),
-                                                                                                                               ""
+                                                                                                                                                                    "\\Q{1}"  = txt2,
+                                                                                                                                                                    "\\Q{2}"  = BD,
+                                                                                                                                                                    "\\Q{3}"  = periodoEscrito(Periodo))),
+                                                                                                                               
+                                                                                                                               if_else(Cod %in% c(701:709),
+                                                                                                                                       str_replace_all(getDescError(Cod), c("\\Q{0}"  = toString(num1),
+                                                                                                                                                                            "\\Q{1}"  = periodoEscrito(Periodo))),
+                                                                                                                                       ""
+                                                                                                                                       )
                                                                                                                                )
                                                                                                                        )
                                                                                                                )
                                                                                                        )
-
                                                                                                )
                                                                                        )
                                                                                )

@@ -100,26 +100,3 @@ getColVacia   <- function(ruta){
 
   return(colsVacias)
 }
-
-# validarCamposObligatorios <- function(agente, eb){
-#   
-#   archivos <- getArchivosNoObservadosByCols(agente, eb, c("CCR", "CCR_C", "CODGR",
-#                                                           "NCUO", "CIS",
-#                                                           "DAK", "DAKR", "DGR", "NCPR", "TEA", "PCUO", "NCPA", "TPR", "NRPRG",
-#                                                           "MCUO", "SIC", "SEGS", "TCUO", "DAKC",
-#                                                           "CIS_C", "NCUO_C", "MCUO_C", "SIC_C", "TCUO_C", ""))
-#   
-#   
-#   
-#   
-#   
-# }
-# 
-# getNumOpeVacias <- function(ruta, codigoOpe){
-#   BD <- evaluarFile(ruta)
-#   
-#   n_vacios <- BD %>%
-#     filter(is.na(cgrep(BD, codigoOpe))) %>% nrow()
-#   
-#   return(n_vacios)
-# }
