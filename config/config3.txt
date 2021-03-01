@@ -12,8 +12,8 @@ Cod	Tipo	Descripcion	Categoria	Criticidad
 306	Error	Los intereses diferidos de la cartera correspondiente al mes de {0} no cuadra con el balance de comprobación durante el periodo de {1}. Diferencia: S/{2}	Verificación contable	Crítico
 307	Error	Las provisiones genéricas de la cartera correspondiente al mes de {0} no cuadra con el balance de comprobación durante el periodo de {1}. Diferencia: S/{2}	Verificación contable	Crítico
 308	Error	Las provisiones específicas de la cartera correspondiente al mes de {0} no cuadra con el balance de comprobación durante el periodo de {1}. Diferencia: S/{2}	Verificación contable	Crítico
-401	Error	Se identificaron {0} crédito(s) en la {1} durante el periodo de {2}.	Consistencia de operaciones	Crítico
-402	Error	Se identificaron {0} garantía(s) en la {1} durante el periodo de {2}.	Consistencia de operaciones	Crítico 
+401	Error	Se identificaron {0} códigos de crédito(s) vacíos en la {1} durante el periodo de {2}.	Consistencia de operaciones	Crítico
+402	Error	Se identificaron {0} códigos de garantía(s) vacíos en la {1} durante el periodo de {2}.	Consistencia de operaciones	Crítico 
 403	Error	Se identificaron {0} crédito(s) duplicado(s) en la cartera (BD01) en el mes de {1} con un saldo de colocaciones por S/ {2} durante el periodo {3}.	Consistencia de operaciones	Crítico
 404	Error	Se identificaron {0} crédito(s) con cronogramas duplicado(s) (BD02A) en el mes de {1} con un saldo de colocaciones por S/ {2} durante el periodo {3}.	Consistencia de operaciones	Crítico
 405	Error	Se identificaron {0} operación(es) de crédito con cronograma(s) cancelado(s) (BD02B) duplicados durante el periodo {1}.	Consistencia de operaciones	Crítico
