@@ -252,7 +252,7 @@ validarCreditosFaltantes     <- function(agente, eb) {
                                          "FALSE", "TRUE"),
              EncontrarCreBD04  = if_else(PeriodoEncontradoBD04 == "",
                                          "FALSE", "TRUE")) %>% 
-      select(PeriodoI, CCR, PeriodoEncontradoBD02B, EncontrarCreBD02B, PeriodoEncontradoBD04, EncontrarCreBD04)
+      select(PeriodoI, CCR, EncontrarCreBD02B, EncontrarCreBD04)
     
     f_BD02B <- validacion %>% filter(EncontrarCreBD02B == "FALSE" & PeriodoI %in% periodos[1:length(periodos)-1]) %>% select(PeriodoI, CCR)
     f_BD04  <- validacion %>% filter(EncontrarCreBD04 == "FALSE" & PeriodoI %in% periodos[1:length(periodos)-1]) %>% select(PeriodoI, CCR)
@@ -387,8 +387,9 @@ getDuplicadosCredCancelados <- function(agente, exigibles) {
 getSaldoTotal               <- function(ruta, opers) {
   if (opers != "" & getBDFromRuta(ruta) != "BD02B") {
     
-    if (getBDFromRuta(ruta) == "BD01" | getBDFromRuta(ruta) == "BD02A") {
-      saldo <- quitarVaciosBD(str_replace(ruta, getBDFromRuta(ruta), "BD01")) %>% 
+    if (getBDFromRuta(ruta) %in% c("BD01", "BD02A")) {
+      saldo <- quitarVaciosBD(getRuta(default.carpeta, 
+                                      paste0(getCoopacFromRuta(ruta), "_BD01_", getAnoFromRuta(ruta), ".txt"))) %>% 
         filter(CCR %in% unlist(str_split(opers, pattern = ", " ))) %>%
         pull(SKCR) %>% as.numeric() %>% sum()
     }
@@ -443,7 +444,7 @@ getCreditosDifFechaUltimaCouta <- function(ruta) {
   
   cronogramas <- quitarVaciosBD(ruta)
   cartera     <- quitarVaciosBD(getRuta(default.carpeta, 
-                                        paste(getCoopacFromRuta(ruta), "BD01", getAnoFromRuta(ruta),sep = "_")))
+                                        paste0(getCoopacFromRuta(ruta), "_BD01_", getAnoFromRuta(ruta), ".txt")))
   
   validacion <- cronogramas %>%
     mutate(NCUO = as.numeric(NCUO)) %>% 
