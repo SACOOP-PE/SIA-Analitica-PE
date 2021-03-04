@@ -188,8 +188,9 @@ validarCruceInterno          <- function(agente, eb) {
                BD  = "BD01",
                txt1 = OpFaltantes_BD02A,
                num1 = length(str_split(string=txt1 ,pattern = ",")[[1]]),
-               num2 = getSaldoTotal(getRuta(carpeta, paste(CodCoopac, "BD01", Periodo, sep = "_")), OpFaltantes_BD02A)
-        ) %>%
+               num2 = getSaldoTotal(getRuta(carpeta, 
+                                            paste0(paste(CodCoopac, "BD01", Periodo, sep  = "_"), ".txt")), 
+                                    OpFaltantes_BD02A)) %>%
         select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1, num2)
       
       eb <- addError(eb, chunk_502)
@@ -210,8 +211,7 @@ validarCruceInterno          <- function(agente, eb) {
                Cod = 503,
                BD  = "BD03B",
                txt1 = GaranFaltantes_BD03A,
-               num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])
-        ) %>%
+               num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
         select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
       
       eb <- addError(eb, chunk_503)
@@ -233,7 +233,7 @@ validarCreditosFaltantes     <- function(agente, eb) {
   archivos <- getArchivosNoObservadosByCols(agente, eb, c("CCR","CCR_C"))
   periodos <- getPeriodosFromAgent(agente)
   
-  if (length(periodos) <= 2 & 
+  if (length(periodos) > 2 & 
       length(archivos[str_detect(archivos, "BD01")] >0) & 
       length(archivos[str_detect(archivos, "BD02B")] >0) & 
       length(archivos[str_detect(archivos, "BD04")] >0)) {
@@ -389,7 +389,7 @@ getSaldoTotal               <- function(ruta, opers) {
     
     if (getBDFromRuta(ruta) %in% c("BD01", "BD02A")) {
       saldo <- quitarVaciosBD(getRuta(default.carpeta, 
-                                      paste0(getCoopacFromRuta(ruta), "_BD01_", getAnoFromRuta(ruta), ".txt"))) %>% 
+                                      paste0(paste(getCoopacFromRuta(ruta), "BD01", getAnoMesFromRuta(ruta), sep  = "_"), ".txt"))) %>% 
         filter(CCR %in% unlist(str_split(opers, pattern = ", " ))) %>%
         pull(SKCR) %>% as.numeric() %>% sum()
     }
@@ -444,7 +444,7 @@ getCreditosDifFechaUltimaCouta <- function(ruta) {
   
   cronogramas <- quitarVaciosBD(ruta)
   cartera     <- quitarVaciosBD(getRuta(default.carpeta, 
-                                        paste0(getCoopacFromRuta(ruta), "_BD01_", getAnoFromRuta(ruta), ".txt")))
+                                        paste0(paste(getCoopacFromRuta(ruta), "BD01", getAnoMesFromRuta(ruta), sep  = "_"), ".txt")))
   
   validacion <- cronogramas %>%
     mutate(NCUO = as.numeric(NCUO)) %>% 
