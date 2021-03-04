@@ -317,24 +317,29 @@ alert1007 <- function(ruta) {
 
 #Alertas Prudenciales ----
 
-getCreditosSinGarantia <- function(agente, periodo) {
+getTipoCreditos <- function(agente, periodo, TipoCredito) {
   
-  credSinGarantias <- setdiff(evaluarFile(getRuta(default.carpeta,paste(getCoopacFromAgent(agente), "BD01", periodo, sep = "_"))) %>% pull(CCR),
-                              evaluarFile(getRuta(default.carpeta,paste(getCoopacFromAgent(agente), "BD03B", periodo, sep = "_"))) %>% pull(CCR))
+  BD01  <- quitarVaciosBD(getRuta(default.carpeta, paste(getCoopacFromAgent(agente), "BD01", periodo, sep = "_")))
+  BD03A <- quitarVaciosBD(getRuta(default.carpeta, paste(getCoopacFromAgent(agente), "BD03A", periodo, sep = "_")))
+  BD03B <- quitarVaciosBD(getRuta(default.carpeta, paste(getCoopacFromAgent(agente), "BD03B", periodo, sep = "_")))
   
-  return(credSinGarantias)
+  garantiasExistentes <- intersect(BD03A %>% pull(CODGR), BD03B %>% pull(CODGR))
+  
+  if (TipoCredito == "SG") {
+    
+    credSinGarantias <- setdiff(BD01 %>% pull(CCR), 
+                                BD03B %>% filter(CODGR %in% garantiasExistentes) %>% pull(CCR))
+    return(credSinGarantias)
+  }
+  if (TipoCredito == "CG") {
+    
+    credConGarantias <- intersect(BD01 %>% filter(CAL %in% c("0","1","2","3","4") ) %>% pull(CCR),
+                                  BD03B %>% filter(CGR %in% c("2","3","4") & CODGR %in% garantiasExistentes) %>% pull(CCR))
+    
+    return(credConGarantias)
+  }
 }
-getCreditosConGarantia <- function(agente, periodo) {
-  
-  credConGarantias <- intersect(evaluarFile(getRuta(default.carpeta,paste(getCoopacFromAgent(agente), "BD01", periodo, sep = "_"))) %>%  
-                                  filter(as.numeric(CAL)>0) %>%
-                                  pull(CCR),
-                                evaluarFile(getRuta(default.carpeta,paste(getCoopacFromAgent(agente), "BD03B", periodo, sep = "_"))) %>%
-                                  filter(CGR !=1 & CGR !=5) %>%
-                                  pull(CCR))
-  
-  return(credConGarantias)
-}
+
 
 asignarProvisionSG <- function(cal, tipoCredito) {
   if (toString(cal) == "0"){
@@ -349,7 +354,7 @@ asignarProvisionSG <- function(cal, tipoCredito) {
                          "13" = 0.7) 
     return(provision)
   }
-  if (toString(cal) > "0"){
+  if (toString(cal) != "0"){
     provision <- if_else(cal == 1, 5,
                          if_else(cal == 2, 25,
                                  if_else(cal == 3, 60, 
@@ -393,7 +398,7 @@ alert2001 <- function(ruta) {
 }
 alert2002 <- function(ruta) {
   quitarVaciosBD(ruta) %>% 
-    filter(as.numeric(MORG) >= as.numeric(SKCR)) %>% pull(CCR) %>%
+    filter(as.numeric(MORG) > as.numeric(SKCR)) %>% pull(CCR) %>%
     return()
 }
 alert2003 <- function(ruta) {
@@ -418,29 +423,29 @@ alert2004 <- function(ruta) {
 alert2005 <- function(ruta) {
   quitarVaciosBD(ruta) %>%
     filter(as.numeric(DAKR) < 0) %>% pull(CCR) %>%
-    return() 
+    return(CCR) 
 }
 alert2006 <- function(ruta) {
   quitarVaciosBD(ruta) %>%
     filter((as.numeric(ESAM) %in% c(3,4,5)) & as.numeric(NCPR) == 1) %>%
-    pull(getCodigoBD("BD01")) %>%
+    pull(CCR) %>%
     return()
 }
 alert2007 <- function(ruta) {
   quitarVaciosBD(ruta) %>%
     filter((CAL %in% c(3,4)) & as.numeric(SIN) > 0) %>%
-    pull(CIS) %>%
+    pull(CCR) %>%
     return()
 }
 alert2008 <- function(ruta) {
   quitarVaciosBD(ruta) %>%
     filter((as.numeric(KRF)> 0 | as.numeric(KVE)> 0 | as.numeric(KJU)> 0) & as.numeric(SIN)> 0) %>%
-    pull(getCodigoBD("BD01")) %>%
+    pull(CCR) %>%
     return()
 }
 alert2009 <- function(ruta) {
   quitarVaciosBD(ruta) %>%
-    filter((CAL %in%  c(0,1)) & as.numeric(KVE) > 0) %>%
+    filter((CAL %in%  c(0,1)) & as.numeric(KVE) > 0 & TCR ) %>%
     pull(CIS) %>%
     return()
 }
@@ -459,7 +464,7 @@ alert2011 <- function(ruta) {
 alert2012 <- function(ruta) {
   quitarVaciosBD(ruta) %>%
     filter(as.numeric(KJU) > 0 & (CAL %in% c(0,1,2))) %>%
-    pull(CIS) %>%
+    pull(CCR) %>%
     return()
 }
 alert2013 <- function(ruta) {
@@ -477,13 +482,13 @@ alert2014 <- function(ruta) {
 alert2015 <- function(ruta, agente) {
   
   quitarVaciosBD(ruta) %>% 
-    filter(CCR %in% getCreditosSinGarantia(agente, getAnoMesFromRuta(ruta))) %>% 
+    filter(CCR %in% getTipoCreditos(agente, getAnoMesFromRuta(ruta)), "SG") %>% 
     rowwise() %>%
     mutate(porcentajeProvision = asignarProvisionSG(as.numeric(CAL),as.numeric(TCR)),
            calcularProvision   = (as.numeric(PCI)/as.numeric(SKCR) *100) %>% round(0)) %>%
     filter(porcentajeProvision != calcularProvision) %>% 
     pull(CCR) %>%
-    return() 
+    return()
 }
 alert2016 <- function(ruta) {
   BD <- quitarVaciosBD(ruta)
@@ -524,11 +529,11 @@ alert2018 <- function(periodo, agente) {
 alert2019 <- function(ruta, agente) {
   
   BD01 <- quitarVaciosBD(ruta) %>% 
-    filter(CCR %in% getCreditosConGarantia(agente, getAnoMesFromRuta(ruta))) %>% 
+    filter(CCR %in% getTipoCreditos(agente, getAnoMesFromRuta(ruta), "CG")) %>% 
     select(CCR, CAL, PCI, SKCR)
   
   BD03B <- quitarVaciosBD(ruta) %>% 
-    filter(CCR %in% getCreditosConGarantia(agente, getAnoMesFromRuta(ruta))) %>% 
+    filter(CCR %in% getTipoCreditos(agente, getAnoMesFromRuta(ruta), "CG")) %>% 
     select(CCR, CGR)
     
   merge(BD01, BD03B, by.x = "CCR", by.y = "CCR") %>% 
