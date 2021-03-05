@@ -317,7 +317,7 @@ alert1007 <- function(ruta) {
 
 #Alertas Prudenciales ----
 
-getTipoCreditos <- function(agente, periodo, TipoCredito) {
+getCreditosSinConGarantia <- function(agente, periodo, TipoCredito) {
   
   BD01  <- quitarVaciosBD(getRuta(default.carpeta, paste(getCoopacFromAgent(agente), "BD01", periodo, sep = "_")))
   BD03A <- quitarVaciosBD(getRuta(default.carpeta, paste(getCoopacFromAgent(agente), "BD03A", periodo, sep = "_")))
@@ -334,15 +334,15 @@ getTipoCreditos <- function(agente, periodo, TipoCredito) {
   if (TipoCredito == "CG") {
     
     credConGarantias <- intersect(BD01 %>% filter(CAL %in% c("0","1","2","3","4") ) %>% pull(CCR),
-                                  BD03B %>% filter(CGR %in% c("2","3","4") & CODGR %in% garantiasExistentes) %>% pull(CCR))
+                                  BD03B %>% filter(CGR %in% c("1","2","3","4") & CODGR %in% garantiasExistentes) %>% pull(CCR))
     
     return(credConGarantias)
   }
 }
 
 
-asignarProvisionSG <- function(cal, tipoCredito) {
-  if (toString(cal) == "0"){
+asignarProvisionSG <- function(cal, diasAtraso, tipoCredito) {
+  if (cal == 0){
     provision <- switch (toString(tipoCredito),
                          "6"  = 0.7,
                          "7"  = 0.7,
@@ -354,21 +354,18 @@ asignarProvisionSG <- function(cal, tipoCredito) {
                          "13" = 0.7) 
     return(provision)
   }
-  if (toString(cal) != "0"){
+  if (cal > 0 & diasAtraso > 90){
     provision <- if_else(cal == 1, 5,
                          if_else(cal == 2, 25,
-                                 if_else(cal == 3, 60, 
+                                 if_else(cal == 3, 60,
                                          if_else(cal == 4, 100, 0))))
     return(provision)
   }
 }
-asignarProvisionCG <- function(cal, claseGarantia) {
+asignarProvisionCG <- function(cal, claseGarantia, tipoCredito) {
   
-  if (claseGarantia == 2) {
-    provision <- 2
-    return(provision)
-  }
-  if (claseGarantia == 3) {
+  if (claseGarantia %in% c(1,5)) {
+    
     provision <- switch (toString(cal),
                          "1" = 1.25,
                          "2" = 6.25,
@@ -376,7 +373,21 @@ asignarProvisionCG <- function(cal, claseGarantia) {
                          "4" = 30)
     return(provision)
   }
-  if (claseGarantia == 4) {
+  if (claseGarantia == 2) {
+    
+    provision <- 1
+    return(provision)
+  }
+  if (claseGarantia == 3 & tipoCredito %in% c(6,7,8,9,10,13)) {
+    
+    provision <- switch (toString(cal),
+                         "1" = 1.25,
+                         "2" = 6.25,
+                         "3" = 15,
+                         "4" = 30)
+    return(provision)
+  }
+  if (claseGarantia == 4 & tipoCredito == 13) {
     provision <- switch (toString(cal),
                          "1" = 2.5,
                          "2" = 12.50,
@@ -384,6 +395,7 @@ asignarProvisionCG <- function(cal, claseGarantia) {
                          "4" = 60)
     return(provision)
   }
+  
 }
 
 alert2000 <- function(ruta) {
@@ -476,7 +488,7 @@ alert2013 <- function(ruta) {
 alert2014 <- function(ruta) {
   quitarVaciosBD(ruta) %>%
     filter(as.numeric(TCR) != 13 & (dmy(BD %>% pull(FVEG)) - dmy(BD %>% pull(FOT))) > 3650) %>%
-    pull(getCodigoBD("BD01")) %>%
+    pull(CCR) %>%
     return()
 }
 alert2015 <- function(ruta, agente) {
@@ -484,9 +496,9 @@ alert2015 <- function(ruta, agente) {
   quitarVaciosBD(ruta) %>% 
     filter(CCR %in% getTipoCreditos(agente, getAnoMesFromRuta(ruta)), "SG") %>% 
     rowwise() %>%
-    mutate(porcentajeProvision = asignarProvisionSG(as.numeric(CAL),as.numeric(TCR)),
-           calcularProvision   = (as.numeric(PCI)/as.numeric(SKCR) *100) %>% round(0)) %>%
-    filter(porcentajeProvision != calcularProvision) %>% 
+    mutate(provisionTeorica = asignarProvisionSG(as.numeric(CAL), as.numeric(DAK), as.numeric(TCR)),
+           provisionReal    = (as.numeric(PCI)/as.numeric(SKCR) *100) %>% round(0)) %>%
+    filter(provisionTeorica < provisionReal) %>% 
     pull(CCR) %>%
     return()
 }
@@ -494,9 +506,7 @@ alert2016 <- function(ruta) {
   BD <- quitarVaciosBD(ruta)
   
   BD %>% 
-    filter(as.numeric(TCR) >=9 & dmy(BD %>% pull(FVEG)) < dmy(BD %>% pull(FOT))) %>%
-    pull(CCR) %>%
-    return() 
+    filter(as.numeric(TCR) >=9 & dmy(BD %>% pull(FVEG)) < dmy(BD %>% pull(FOT))) %>% pull(CCR) %>% return() 
 }
 alert2017 <- function(ruta) {
   # Fecha de pago última cuota cancelada - 
@@ -528,19 +538,17 @@ alert2018 <- function(periodo, agente) {
 }
 alert2019 <- function(ruta, agente) {
   
-  BD01 <- quitarVaciosBD(ruta) %>% 
-    filter(CCR %in% getTipoCreditos(agente, getAnoMesFromRuta(ruta), "CG")) %>% 
+  BD01 <- quitarVaciosBD(ruta) %>% filter(CCR %in% getTipoCreditos(agente, getAnoMesFromRuta(ruta), "CG")) %>% 
     select(CCR, CAL, PCI, SKCR)
   
-  BD03B <- quitarVaciosBD(ruta) %>% 
-    filter(CCR %in% getTipoCreditos(agente, getAnoMesFromRuta(ruta), "CG")) %>% 
+  BD03B <- quitarVaciosBD(ruta) %>% filter(CCR %in% getTipoCreditos(agente, getAnoMesFromRuta(ruta), "CG")) %>% 
     select(CCR, CGR)
     
   merge(BD01, BD03B, by.x = "CCR", by.y = "CCR") %>% 
     rowwise() %>%
-    mutate(porcentajeProvision = asignarProvisionCG(as.numeric(CAL),as.numeric(CGR)),
-           calcularProvision   = (as.numeric(PCI)/as.numeric(SKCR) *100) %>% round(0)) %>%
-    filter(porcentajeProvision != calcularProvision) %>% 
+    mutate(provisionTeorica = asignarProvisionCG(as.numeric(CAL), as.numeric(CGR), as.numeric(TCR)),
+           provisionReal   = (as.numeric(PCI)/as.numeric(SKCR) *100) %>% round(0)) %>%
+    filter(provisionTeorica < provisionReal) %>% 
     pull(CCR) %>% unique() %>% 
     return() 
 }
