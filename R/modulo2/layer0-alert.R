@@ -340,9 +340,8 @@ getCreditosSinConGarantia <- function(agente, periodo, TipoCredito) {
   }
 }
 
-
 asignarProvisionSG <- function(cal, diasAtraso, tipoCredito) {
-  if (cal == 0){
+  if (cal == 0) {
     provision <- switch (toString(tipoCredito),
                          "6"  = 0.7,
                          "7"  = 0.7,
@@ -354,7 +353,7 @@ asignarProvisionSG <- function(cal, diasAtraso, tipoCredito) {
                          "13" = 0.7) 
     return(provision)
   }
-  if (cal > 0 & diasAtraso > 90){
+  if (cal > 0 & diasAtraso > 90) {
     provision <- if_else(cal == 1, 5,
                          if_else(cal == 2, 25,
                                  if_else(cal == 3, 60,
