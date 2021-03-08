@@ -28,8 +28,7 @@ detectarAlertasPrudenciales  <- function(agente, eb){
 
 
 #Funciones secundarias
-procesarAlertas <- function(exigibles, cod, agente, eb){
-
+procesarAlertas             <- function(exigibles, cod, agente, eb){
   carpeta         <- getCarpetaFromAgent(agente)
   exigiblesAlerta <- getArchivosExigiblesAlertas(cod, agente, eb)
   
@@ -82,13 +81,15 @@ procesarAlertas <- function(exigibles, cod, agente, eb){
     }
     return(eb)
   }
-  if (cod == 2018 & length(exigiblesAlerta) >0) {
+  if (cod %in% c(2017, 2018) & length(exigiblesAlerta) >0) {
     
     alertas <- tibble(Periodo = exigiblesAlerta) %>% rowwise() %>% 
       mutate(CodCoopac = getCoopacFromAgent(agente),
              IdProceso = getIdProcesoFromAgent(agente),
              BD        = "BD01",
-             Alert     = alert2018(Periodo, agente) %>% toString()) %>% 
+             Alert     = switch (cod,
+                                 "2017" = alert2017(Periodo, agente),
+                                 "2018" = alert2018(Periodo, agente)) %>% toString()) %>% 
       filter(Alert != "")
     
     if (nrow(alertas) >0) {
@@ -104,7 +105,10 @@ procesarAlertas <- function(exigibles, cod, agente, eb){
   }
 }
 seleccionarAlertasBD        <- function(ruta, cod, agente, eb) {
-  if (cod != 2018) {
+  if (cod %in% c(2017,2018)) {
+    return("")
+  }
+  else {
     if (getBDFromRuta(ruta) == "BD01") {
       
       alerta <- switch (toString(cod),
@@ -128,7 +132,6 @@ seleccionarAlertasBD        <- function(ruta, cod, agente, eb) {
                         "2014"= alert2014(ruta),
                         "2015"= alert2015(ruta, agente),
                         "2016"= alert2016(ruta),
-                        "2017"= alert2017(ruta),
                         "2023"= alert2023(ruta, eb),
                         "2025"= alert2025(ruta))
       return(alerta)
@@ -164,14 +167,10 @@ seleccionarAlertasBD        <- function(ruta, cod, agente, eb) {
       
     } 
   }
-  else {
-    return("")
-  }
 }
 getArchivosExigiblesAlertas <- function(cod, agente, eb) {
   
-  exigibles <- getArchivosNoObservadosByCols(agent, bucket, c("CCR","CCR_C","CODGR"))
-  
+  exigibles        <- getArchivosNoObservadosByCols(agent, bucket, c("CCR","CCR_C","CODGR"))
   exigiblesAlertas <- switch (toString(cod),
                               "1000"= getArchivosNoObservadosByCols(agente, eb, c("UAGE", "MORG")),
                               "1001"= getArchivosNoObservadosByCols(agente, eb, c("SEC", "MORG")),
@@ -199,6 +198,7 @@ getArchivosExigiblesAlertas <- function(cod, agente, eb) {
                               "2015"= getArchivosNoObservadosByCols(agente, eb, c("CAL", "TCR", "PCI", "SKCR")),
                               "2016"= getArchivosNoObservadosByCols(agente, eb, c("TCR","FVEG", "FOT")),
                               "2017"= getArchivosNoObservadosByCols(agente, eb, c("FCAN", "FVEP", "DAKR")),
+                              "2018"= getArchivosNoObservadosByCols(agente, eb, c("MORG", "MCUO")),
                               "2019"= getArchivosNoObservadosByCols(agente, eb, c("CAL", "PCI", "SKCR", "CGR")),
                               "2020"= getArchivosNoObservadosByCols(agente, eb, "NCR"),
                               "2021"= getArchivosNoObservadosByCols(agente, eb, c("FOT_C", "FOCAN_C")),
@@ -220,9 +220,17 @@ getArchivosExigiblesAlertas <- function(cod, agente, eb) {
       exigiblesAlertas <- exigiblesAlertas[str_detect(exigiblesAlertas, "BD02B")]
       return(exigiblesAlertas)
     }
-    if (cod == 2018) {
-      exigiblesAlertas <- getPeriodosNoObservados(agente, eb, "CCR")
-      return(exigiblesAlertas)
+    if (cod %in% c(2017,2018)) {
+      
+      exigiblesAlertas <- exigiblesAlertas[str_detect(exigiblesAlertas, paste(c("BD01","BD02A"), collapse = '|'))]
+      
+      Periodos <- tibble(Periodos = str_extract(exigiblesAlertas, paste(as.character(global.alcance), collapse = '|'))) %>%
+        group_by(Periodos) %>%
+        filter(n() == 2) %>%
+        pull(Periodos) %>% 
+        unique() 
+
+      return(Periodos)
     }
     if (cod %in% c(2015, 2019)) {
       exigiblesAlertas <- exigiblesAlertas[str_detect(exigiblesAlertas, paste(c("BD01","BD03B"), collapse = '|'))]
@@ -316,6 +324,14 @@ alert1007 <- function(ruta) {
 
 
 #Alertas Prudenciales ----
+getCreditosComunes <- function(periodo, agente){
+  creditosComun <- intersect(quitarVaciosBD(getRuta(default.carpeta, paste(getCoopacFromAgent(agente), "BD01", periodo, sep = "_"))) %>%
+                               pull(CCR),
+                             quitarVaciosBD(getRuta(default.carpeta, paste(getCoopacFromAgent(agente), "BD02A", periodo, sep = "_"))) %>%
+                               pull(CCR)) %>% unique()
+  
+  return(creditosComun)
+}
 
 getCreditosSinConGarantia <- function(agente, periodo, TipoCredito) {
   
@@ -507,33 +523,44 @@ alert2016 <- function(ruta) {
   BD %>% 
     filter(as.numeric(TCR) >=9 & dmy(BD %>% pull(FVEG)) < dmy(BD %>% pull(FOT))) %>% pull(CCR) %>% return() 
 }
-alert2017 <- function(ruta) {
-  # Fecha de pago última cuota cancelada - 
-  # fecha de vencimiento última cuota cancelada
-  # 
-  # FCAN - FVEP == DAKR ???
+alert2017 <- function(periodo, agente) {
+  
+  BD01  <- quitarVaciosBD(getRuta(default.carpeta, paste(getCoopacFromAgent(agente), "BD01", periodo, sep = "_"))) %>%
+    filter(CCR %in% getCreditosComunes(periodo, agente)) %>% 
+    select(CCR, FVEG, DAKR)
+  
+  BD02A <- quitarVaciosBD(getRuta(default.carpeta, paste(getCoopacFromAgent(agente), "BD02A", periodo, sep = "_"))) %>% 
+    filter(CCR %in% getCreditosComunes(periodo, agente)) %>%
+    mutate(NCUO = as.numeric(NCUO)) %>% 
+    group_by(CCR) %>% 
+    arrange(CCR, NCUO) %>% 
+    filter(row_number() == max(row_number())) %>% 
+    select(CCR, FCAN)
+  
+  
+  merge(BD01, BD02A, by.x = "CCR", by.y = "CCR") %>% 
+    rowwise() %>% 
+    mutate(diffFechas = as.numeric(difftime(dmy(FCAN), dmy(FVEG), units = "days")),
+           DAKR       = as.numeric(DAKR))%>% 
+    filter(diffFechas != DAKR) %>% 
+    pull(CCR) %>% unique() %>%
+    return()
 }
 alert2018 <- function(periodo, agente) {
   
-  creditosComun <- intersect(quitarVaciosBD(getRuta(default.carpeta, paste(getCoopacFromAgent(agente), "BD01", periodo, sep = "_"))) %>%
-                               pull(CCR),
-                             quitarVaciosBD(getRuta(default.carpeta, paste(getCoopacFromAgent(agente), "BD02A", periodo, sep = "_"))) %>%
-                               pull(CCR)) %>% unique()
-  
   BD01  <- quitarVaciosBD(getRuta(default.carpeta, paste(getCoopacFromAgent(agente), "BD01", periodo, sep = "_"))) %>%
-    filter(CCR %in% creditosComun) %>% 
+    filter(CCR %in% getCreditosComunes(periodo, agente)) %>% 
     select(CCR, MORG)
   
   BD02A <- quitarVaciosBD(getRuta(default.carpeta, paste(getCoopacFromAgent(agente), "BD02A", periodo, sep = "_"))) %>% 
-    filter(CCR %in% creditosComun) %>% 
+    filter(CCR %in% getCreditosComunes(periodo, agente)) %>% 
     select(CCR, MCUO)
   
   merge(BD01, BD02A, by.x = "CCR", by.y = "CCR") %>% 
     filter(MORG > MCUO) %>% 
     mutate(diff = as.numeric(MORG) - as.numeric(MCUO)) %>%
     filter(abs(diff) >100) %>% 
-    pull(CCR) %>% unique() %>% 
-    return()
+    pull(CCR) %>% unique() %>% return()
 }
 alert2019 <- function(ruta, agente) {
   
@@ -548,14 +575,12 @@ alert2019 <- function(ruta, agente) {
     mutate(provisionTeorica = asignarProvisionCG(as.numeric(CAL), as.numeric(CGR), as.numeric(TCR)),
            provisionReal   = (as.numeric(PCI)/as.numeric(SKCR) *100) %>% round(0)) %>%
     filter(provisionTeorica < provisionReal) %>% 
-    pull(CCR) %>% unique() %>% 
-    return() 
+    pull(CCR) %>% unique() %>% return() 
 }
 alert2020 <- function(ruta) {
   quitarVaciosBD(ruta) %>%
     filter(as.numeric(NCR) > 3) %>%
-    pull(CODGR) %>% 
-    return()
+    pull(CODGR) %>% return()
 }
 alert2021 <- function(ruta) {
   quitarVaciosBD(ruta) %>%
@@ -575,10 +600,9 @@ alert2023 <- function(ruta, eb) {
   
   if (length(saldosCols) >0) {
     alertSaldos <- tibble(Columna = saldosCols) %>% rowwise() %>%
-      mutate(verificarSaldos = BD %>% 
-                                filter(as.numeric(cgrep(BD, Columna)[[1]]) <0) %>% 
-                                pull(CCR) %>% toString()) %>%
-      filter(verificarSaldos != "")
+      mutate(verificarSaldos = BD %>% filter(as.numeric(cgrep(BD, Columna)[[1]]) <0) %>% pull(CCR) %>% toString()) %>%
+      filter(verificarSaldos != "") %>% 
+      pull(verificarSaldos)
     
     return(alertSaldos)
   }
