@@ -119,10 +119,8 @@ getCodigoBD                   <- function(BD){
 getLogObject     <- function(path){
   read_delim(path, "\t", escape_double = FALSE,col_types = cols(Categoria = col_character(), 
                                                                 Coopac = col_character(), Criticidad = col_character(), 
-                                                                Descripcion = col_character(),  Carpeta = col_character(), Fecha = col_character(), 
-                                                                Hora = col_character(), 
-                                                                IdProceso = col_integer(),
-                                                                Usuario = col_character()), 
+                                                                Descripcion = col_character(), Carpeta = col_character(), Fecha = col_character(), 
+                                                                Hora = col_character(), IdProceso = col_integer(), Usuario = col_character()), 
              locale = locale(encoding = "ISO-8859-1"), trim_ws = TRUE) %>% return()
 }
 getNextIdProceso <- function(logObject){
