@@ -41,10 +41,9 @@ validarCampos <- function(agente, eb){
     }
   
    # errores 622
-    exigiblesError622 <- intersect(getArchivosNoObservadosByCols(agente, eb, c("TID", "NID", "TID_C", "NID_C")),
-                                   exigibles[str_detect(exigibles, paste(c("BD01","BD04"), collapse = '|'))])
-  
-    error622  <- tibble(Archivo = exigiblesError622) %>% rowwise() %>%
+    error622  <- tibble(Archivo = intersect(exigibles[str_detect(exigibles, paste(c("BD01","BD04"), collapse = '|'))],
+                                            getArchivosNoObservadosByCols(agente, eb, c("TID", "NID", "TID_C", "NID_C")))) %>% 
+      rowwise() %>%
       mutate(ruta      = getRuta(getCarpetaFromAgent(agente), Archivo),
              verificar = procesarErrorDocumentoIdent(ruta),
              Cod       = 622) %>%
@@ -83,7 +82,8 @@ validarCampos <- function(agente, eb){
     }
   
    # error 709
-    error709 <- tibble(Archivo = intersect(exigibles[str_detect(exigibles, "BD01")], getArchivosNoObservadosByCols(agent, eb, "FOT"))) %>%
+    error709 <- tibble(Archivo = intersect(exigibles[str_detect(exigibles, "BD01")], 
+                                           getArchivosNoObservadosByCols(agent, eb, "FOT"))) %>%
       rowwise() %>%
       mutate(ruta      = getRuta(getCarpetaFromAgent(agente), Archivo),
              verificar = procesarErrorFechaDesembolso(ruta) %>% unique() %>% toString(),

@@ -12,7 +12,6 @@ generar_reporte_T1 <- function(idProceso) {
     resumenValidacion <- "El proceso de validación concluyó satisfactoriamente. Las observaciones deben ser sometidas a revisión por el analista SACOOP. Se identificaron {0} errores, de las cuales {1} con errores críticos, ello da como resultado {2} archivos inconsistentes."
   }
   
-  
   # Head & cols ----
   
   myhead.left <- "SUPERINTENDENCIA ADJUNTA DE COOPERATIVAS"
@@ -201,19 +200,19 @@ generar_reporte_T1 <- function(idProceso) {
   writeData(wb, 2, "RESUMEN DE ARCHIVOS SEGÚN BD-CRITICIDAD", 2, 33)
   addStyle(wb, 2, myhead.centerGrafico.style, cols = 2:8, rows = 33)
   
-  ##plots----
+  ## plots----
   print(generar_grafico_T1(idProceso, 1))
   insertPlot(wb, "Estado de archivos", startCol = 2, startRow = 6, fileType = "png",  width = 36.20, height = 12.21 ,units = "cm")
   
   print(generar_grafico_T1(idProceso, 2))
   insertPlot(wb, "Estado de archivos", startCol = 2, startRow = 35, fileType = "png",  width = 56.20, height = 12.21 ,units = "cm")
   
-  ##detalle por cada error ----
-  numObs <- which((bucket$Cod %in% c(201:203, 301:308)) == FALSE)
+  ## detalle por cada error ----
+  numObs <- which((bucket$Cod %in% c(201:203, 301:308, 401, 402)) == FALSE)
 
-  for (i in 1:nrow(filter(bucket,(Cod %in% c(201:203, 301:308)) == FALSE))){
+  for (i in 1:nrow(filter(bucket,(Cod %in% c(201:203, 301:308, 401, 402)) == FALSE))){
 
-    nombreSheet <- filter(bucket,(Cod %in% c(201:203, 301:308)) == FALSE)[i,] %>% select(BD, Cod, Periodo) %>%
+    nombreSheet <- filter(bucket,(Cod %in% c(201:203, 301:308, 401, 402)) == FALSE)[i,] %>% select(BD, Cod, Periodo) %>%
       apply(1, paste, collapse = "-" )
 
     addWorksheet(wb, nombreSheet)
@@ -222,21 +221,21 @@ generar_reporte_T1 <- function(idProceso) {
                                                                                        row = 1,
                                                                                        text = "Ver más detalle"))
 
-    writeData(wb, i+2, getObservaciones(agent, bucket, i), startRow = 4, colNames = T, rowNames = F)
+    writeData(wb, i+2, getObservaciones(bucket, i), startRow = 4, colNames = T, rowNames = F)
   }
   
   # Save file xlsx ----
   saveWorkbook(wb, paste0("test/output/SIA_Report_T1","_", idProceso, ".xlsx"), overwrite = TRUE)
   file.show(paste0("test/output/SIA_Report_T1","_", idProceso, ".xlsx"))
 }
-getObservaciones   <- function(agente, eb, roweb) {
+getObservaciones   <- function(eb, roweb) {
   
-  eb <- eb %>% filter((Cod %in% c(201:203, 301:308)) == FALSE) %>% rowwise() %>%
+  eb <- eb %>% filter((Cod %in% c(201:203, 301:308, 401, 402)) == FALSE) %>% rowwise() %>%
     mutate(filename = paste0(CodCoopac, "_",BD ,"_" ,Periodo, ".txt")) %>%
     select(Cod, filename, txt1)
   
   operaciones <- unlist(eb[roweb,] %>% pull(txt1) %>% str_split(", "))
-  ruta        <- getRuta(getCarpetaFromAgent(agente), eb[roweb,] %>% pull(filename))
+  ruta        <- getRuta(default.carpeta, eb[roweb,] %>% pull(filename))
   
   obs <- quitarVaciosBD(ruta) %>%
     filter(cgrep(quitarVaciosBD(ruta), getCodigoBD(getBDFromRuta(ruta)))[[1]] %in% operaciones)
