@@ -3241,3 +3241,23 @@
 100471	2021-03-09	2021-03-09 09:58:41	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-03-09 09:58:41] - Layer 4. Validación de campos indviduales.	Informativo	Baja
 100471	2021-03-09	2021-03-09 10:00:48	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-03-09 10:00:47] -       Resultado: La validación de los campos concluyó con 210 observaciones tipo1.	Informativo	Baja
 100471	2021-03-09	2021-03-09 10:01:57	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-03-09 10:01:57] -       Resultado: La validación de los campos concluyó con 183 observación(es) tipo2.	Informativo	Baja
+100472	2021-03-09	2021-03-09 15:55:07	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-03-09 15:55:07] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100472	2021-03-09	2021-03-09 15:55:07	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-03-09 15:55:07] - Coopac evaluada: 01106-SAN FRANCISCO 289	Informativo	Baja
+100472	2021-03-09	2021-03-09 15:55:07	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-03-09 15:55:07] - PID: 100472[202011~202011]	Informativo	Baja
+100472	2021-03-09	2021-03-09 15:55:08	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-03-09 15:55:08] - 1. MÓDULO DE VALIDACIÓN DE BASE DE DATOS CREDITICIAS --------------------------	Informativo	Baja
+100472	2021-03-09	2021-03-09 15:55:08	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-03-09 15:55:08] - Inicio del interrogatorio modulo 1. PID-100472.	Informativo	Baja
+100472	2021-03-09	2021-03-09 15:55:08	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-03-09 15:55:08] - Layer 0. Revisión de pre-requisitos.	Informativo	Baja
+100472	2021-03-09	2021-03-09 15:55:09	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-03-09 15:55:09] -       Resultado: Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100472	2021-03-09	2021-03-09 15:55:10	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-03-09 15:55:09] - Layer 1. Revisión de estructura de tablas	Informativo	Baja
+100472	2021-03-09	2021-03-09 15:55:14	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-03-09 15:55:14] - La validación de Columnas vacías concluyó con 3 observación(es).	Informativo	Baja
+100472	2021-03-09	2021-03-09 15:55:14	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-03-09 15:55:14] -       Resultado: Revisión de estructura de datos satisfatoria.	Informativo	Baja
+100472	2021-03-09	2021-03-09 15:55:15	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-03-09 15:55:14] - Layer 2. Validación de Cruce Contable a la cartera.	Informativo	Baja
+100472	2021-03-09	2021-03-09 15:55:23	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-03-09 15:55:23] -       Resultado: La validación del cruce contable fue satifactoria.	Informativo	Baja
+100472	2021-03-09	2021-03-09 15:55:23	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-03-09 15:55:23] - Layer 3. Validación de consistencia de operaciones.	Informativo	Baja
+100472	2021-03-09	2021-03-09 15:55:26	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-03-09 15:55:26] -       Resultado: La validación operaciones vacías concluyó con 8 observación(es).	Informativo	Baja
+100472	2021-03-09	2021-03-09 15:55:31	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-03-09 15:55:31] -       Resultado: La validación operaciones duplicadas concluyó sin observaciones.	Informativo	Baja
+100472	2021-03-09	2021-03-09 15:55:36	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-03-09 15:55:35] -       Resultado: La validación de cruce interno concluyó con 1 observación(es).	Informativo	Baja
+100472	2021-03-09	2021-03-09 15:56:06	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-03-09 15:56:06] -       Resultado: La validación de cruce de fechas de vencimiento de créditos entre la 2A y la 1 concluyó con 1 observación(es).	Informativo	Baja
+100472	2021-03-09	2021-03-09 15:56:06	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-03-09 15:56:06] - Layer 4. Validación de campos indviduales.	Informativo	Baja
+100472	2021-03-09	2021-03-09 15:56:14	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-03-09 15:56:14] -       Resultado: La validación de los campos concluyó con 2 observaciones tipo1.	Informativo	Baja
+100472	2021-03-09	2021-03-09 15:56:17	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-03-09 15:56:17] -       Resultado: La validación de los campos concluyó con 1 observación(es) tipo2.	Informativo	Baja

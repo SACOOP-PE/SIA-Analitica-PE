@@ -372,7 +372,7 @@ getDuplicadosCredCancelados <- function(agente, exigibles) {
   cancelados <- exigibles[str_detect(exigibles, "BD04")]
   
   if (length(cancelados) > 0) {
-    dupsCancelados <- getSabana(cancelados, "BD04") %>% select(PeriodoI, CCR_C) %>% group_by(CCR_C) %>% filter(n() >1)
+    dupsCancelados <- getSabana(agente, cancelados, "BD04") %>% select(PeriodoI, CCR_C) %>% group_by(CCR_C) %>% filter(n() >1)
     return(dupsCancelados)
   }
   return("")
@@ -409,7 +409,7 @@ realizarCruce <- function(agente, periodo, data1, data2) {
   return(cruce)
 }
 #4.
-getSabana     <- function(archivos, bd) {
+getSabana     <- function(agente, archivos, bd) {
   
   archivosCreditos <- archivos[str_detect(archivos, bd)]
   
@@ -421,13 +421,16 @@ getSabana     <- function(archivos, bd) {
     return(sabana)
   }
   
-  for (i in 2:length(archivosCreditos)-1) {
-    sabana <- sabana %>% bind_rows(quitarVaciosBD(getRuta(default.carpeta, archivosCreditos[i+1])) %>% 
-                                     mutate(PeriodoI = getAnoMesFromRuta(getRuta(default.carpeta, archivosCreditos[i+1]))))
+  else {
+    
+    for (i in 2:length(archivosCreditos)-1) {
+      sabana <- sabana %>% bind_rows(quitarVaciosBD(getRuta(default.carpeta, archivosCreditos[i+1])) %>% 
+                                       mutate(PeriodoI = getAnoMesFromRuta(getRuta(default.carpeta, archivosCreditos[i+1]))))
+    }
+    
+    sabana <- select(sabana, PeriodoI, everything())
+    return(sabana)
   }
-  
-  sabana <- select(sabana, PeriodoI, everything())
-  return(sabana)
 }
 #5.
 getCreditosDifFechaUltimaCouta <- function(ruta) {
