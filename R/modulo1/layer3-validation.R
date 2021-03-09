@@ -91,7 +91,6 @@ validarOperacionesDuplicadas <- function(agente, eb) {
   dups_BD01  <- Dups %>% filter(BD == "BD01")
   dups_BD02A <- Dups %>% filter(BD == "BD02A")
   dups_BD02B <- Dups %>% filter(BD == "BD02B")
-  
   dups_BD04  <- getDuplicadosCredCancelados(agente, exigibles) 
   
   if (nrow(dups_BD01) > 0) {
@@ -297,18 +296,15 @@ validarCreditosFaltantes     <- function(agente, eb) {
     
     return(eb)
   }
-  
   return(eb)
 }
 validarCruceFechaVencimiento <- function(agente, eb) {
-  
-  carpeta   <- getCarpetaFromAgent(agente)
-  exigibles <- getArchivosNoObservadosByCols(agente, eb, c("CCR", "NCUO", "FVEG", "FVEP"))
-  
+
+  exigibles     <- getArchivosNoObservadosByCols(agente, eb, c("CCR", "NCUO", "FVEG", "FVEP"))
   archivosCruce <-  exigibles[str_detect(exigibles, paste(getPeriodosNoObservados(agente, eb, "CCR"), collapse = '|'))]
   
   validacion <- tibble(NombreArchivo = archivosCruce[str_detect(archivosCruce, "BD02A")]) %>% rowwise() %>% 
-    mutate(ruta    = getRuta(carpeta, NombreArchivo),
+    mutate(ruta    = getRuta(default.carpeta, NombreArchivo),
            Periodo = getAnoMesFromRuta(ruta),
            errorFechaCuota = toString(getCreditosDifFechaUltimaCouta(ruta))) %>% 
     filter(errorFechaCuota != "")
@@ -335,7 +331,6 @@ validarCruceFechaVencimiento <- function(agente, eb) {
     
     return(eb)
   }
-  
   return(eb)
 }
 
@@ -374,30 +369,26 @@ getOperacionesDuplicadas    <- function(ruta) {
 }
 getDuplicadosCredCancelados <- function(agente, exigibles) {
   
-  carpeta    <- getCarpetaFromAgent(agente)
   cancelados <- exigibles[str_detect(exigibles, "BD04")]
   
   if (length(cancelados) > 0) {
-    dupsCancelados <- getSabana(agente, cancelados, "BD04") %>% select(PeriodoI, CCR_C) %>% group_by(CCR_C) %>% filter(n() >1)
+    dupsCancelados <- getSabana(cancelados, "BD04") %>% select(PeriodoI, CCR_C) %>% group_by(CCR_C) %>% filter(n() >1)
     return(dupsCancelados)
-
   }
   return("")
 }
 getSaldoTotal               <- function(ruta, opers) {
   if (opers != "" & getBDFromRuta(ruta) != "BD02B") {
     
+    operaciones <- unlist(str_split(opers, pattern = ", " ))
+    
     if (getBDFromRuta(ruta) %in% c("BD01", "BD02A")) {
       saldo <- quitarVaciosBD(getRuta(default.carpeta, 
                                       paste0(paste(getCoopacFromRuta(ruta), "BD01", getAnoMesFromRuta(ruta), sep  = "_"), ".txt"))) %>% 
-        filter(CCR %in% unlist(str_split(opers, pattern = ", " ))) %>%
-        pull(SKCR) %>% as.numeric() %>% sum()
+        filter(CCR %in% operaciones) %>% pull(SKCR) %>% as.numeric() %>% sum()
     }
     else {
-      saldo <- quitarVaciosBD(ruta) %>% 
-        filter(CODGR %in% unlist(str_split(opers, pattern = ", " ))) %>%
-        pull(VCONS) %>%
-        unique() %>% as.numeric() %>% sum()
+      saldo <- quitarVaciosBD(ruta) %>% filter(CODGR %in% operaciones) %>% pull(VCONS) %>% unique() %>% as.numeric() %>% sum()
     }
     
     return(saldo)
@@ -418,13 +409,12 @@ realizarCruce <- function(agente, periodo, data1, data2) {
   return(cruce)
 }
 #4.
-getSabana     <- function(agente, archivos, bd) {
+getSabana     <- function(archivos, bd) {
   
-  carpeta          <- getCarpetaFromAgent(agente)
   archivosCreditos <- archivos[str_detect(archivos, bd)]
   
-  sabana <- quitarVaciosBD(getRuta(carpeta, archivosCreditos[1])) %>%
-    mutate(PeriodoI = getAnoMesFromRuta(getRuta(carpeta, archivosCreditos[1])))
+  sabana <- quitarVaciosBD(getRuta(default.carpeta, archivosCreditos[1])) %>%
+    mutate(PeriodoI = getAnoMesFromRuta(getRuta(default.carpeta, archivosCreditos[1])))
   
   if (length(getPeriodosFromAgent(agente)) == 1) {
     sabana <- select(sabana, PeriodoI, c(all_of(getColumnasOM(bd)[[1]])))
@@ -432,8 +422,8 @@ getSabana     <- function(agente, archivos, bd) {
   }
   
   for (i in 2:length(archivosCreditos)-1) {
-    sabana <- sabana %>% bind_rows(quitarVaciosBD(getRuta(carpeta, archivosCreditos[i+1])) %>% 
-                                     mutate(PeriodoI = getAnoMesFromRuta(getRuta(carpeta, archivosCreditos[i+1]))))
+    sabana <- sabana %>% bind_rows(quitarVaciosBD(getRuta(default.carpeta, archivosCreditos[i+1])) %>% 
+                                     mutate(PeriodoI = getAnoMesFromRuta(getRuta(default.carpeta, archivosCreditos[i+1]))))
   }
   
   sabana <- select(sabana, PeriodoI, everything())
