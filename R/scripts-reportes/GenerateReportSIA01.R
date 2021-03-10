@@ -98,7 +98,7 @@ generar_reporte_T1 <- function(idProceso) {
   # CreateWorkbook ----
   wb <- createWorkbook()
   addCreator(wb, "PROYECTO SIA SACOOP")
-  addWorksheet(wb, "Reporte de Validación BD", gridLines = F)
+  addWorksheet(wb, "Reporte de Validación BDCC", gridLines = F)
   
   modifyBaseFont(wb, fontSize = 11, fontColour = "black", 
                  fontName = "Arial Narrow")
@@ -200,29 +200,27 @@ generar_reporte_T1 <- function(idProceso) {
   writeData(wb, 2, "RESUMEN DE ARCHIVOS SEGÚN BD-CRITICIDAD", 2, 33)
   addStyle(wb, 2, myhead.centerGrafico.style, cols = 2:8, rows = 33)
   
-  ## plots----
-  print(generar_grafico_T1(idProceso, 1))
-  insertPlot(wb, "Estado de archivos", startCol = 2, startRow = 6, fileType = "png",  width = 36.20, height = 12.21 ,units = "cm")
+   ## plots ----
+   print(generar_grafico_T1(idProceso, 1))
+   insertPlot(wb, "Estado de archivos", startCol = 2, startRow = 6, fileType = "png",  width = 36.20, height = 12.21 ,units = "cm")
   
-  print(generar_grafico_T1(idProceso, 2))
-  insertPlot(wb, "Estado de archivos", startCol = 2, startRow = 35, fileType = "png",  width = 56.20, height = 12.21 ,units = "cm")
+   print(generar_grafico_T1(idProceso, 2))
+   insertPlot(wb, "Estado de archivos", startCol = 2, startRow = 35, fileType = "png",  width = 56.20, height = 12.21 ,units = "cm")
   
-  ## detalle por cada error ----
-  numObs <- which((bucket$Cod %in% c(201:203, 301:308, 401, 402)) == FALSE)
+   ## detalle por cada error ----
+   numObs <- which((bucket$Cod %in% c(201:203, 301:308, 401, 402)) == FALSE)
 
-  for (i in 1:nrow(filter(bucket,(Cod %in% c(201:203, 301:308, 401, 402)) == FALSE))){
+   for (i in 1:nrow(filter(bucket,(Cod %in% c(201:203, 301:308, 401, 402)) == FALSE))) {
+     nombreSheet <- filter(bucket,(Cod %in% c(201:203, 301:308, 401, 402)) == FALSE)[i,] %>% select(BD, Cod, Periodo) %>%
+       apply(1, paste, collapse = "-" )
 
-    nombreSheet <- filter(bucket,(Cod %in% c(201:203, 301:308, 401, 402)) == FALSE)[i,] %>% select(BD, Cod, Periodo) %>%
-      apply(1, paste, collapse = "-" )
-
-    addWorksheet(wb, nombreSheet)
-    writeFormula(wb, i+2, startRow = 2, x= makeHyperlinkString(sheet = "Reporte de Validación BD", row = 1, text = "Volver"))
-    writeFormula(wb, 1, startRow = 17+numObs[i], startCol = 17, x= makeHyperlinkString(sheet = nombreSheet,
-                                                                                       row = 1,
-                                                                                       text = "Ver más detalle"))
-
-    writeData(wb, i+2, getObservaciones(bucket, i), startRow = 4, colNames = T, rowNames = F)
-  }
+     addWorksheet(wb, nombreSheet)
+     writeFormula(wb, i+2, startRow = 2, x= makeHyperlinkString(sheet = "Reporte de Validación BDCC", row = 1, text = "Volver"))
+     writeFormula(wb, 1, startRow = 17+numObs[i], startCol = 17, x= makeHyperlinkString(sheet = nombreSheet,
+                                                                                        row = 1,
+                                                                                        text = "Ver más detalle"))
+     writeData(wb, i+2, getObservaciones(bucket, i), startRow = 4, colNames = T, rowNames = F)
+    }
   
   # Save file xlsx ----
   saveWorkbook(wb, paste0("test/output/SIA_Report_T1","_", idProceso, ".xlsx"), overwrite = TRUE)
