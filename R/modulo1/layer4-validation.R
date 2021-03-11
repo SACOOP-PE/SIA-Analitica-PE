@@ -119,16 +119,6 @@ validarCampos <- function(agente, eb){
 #' Tipo 1: validaciones a campos numericos
 #' Tipo 2: validaciones a campos fecha
 
-quitarVaciosBD <- function(ruta){
-  BD     <- evaluarFile(ruta)
-  codigo <- getCodigoBD(getBDFromRuta(ruta))
-  
-  BD <- BD %>%
-    filter(!is.na(cgrep(BD, codigo)) | cgrep(BD, codigo) != "")
-  
-  return(BD)
-}
-
 # Tipo1 ----
 getDigitosBD01  <- function(campo){
   digitos <- switch (campo,
@@ -266,8 +256,8 @@ procesarErrorDocumentoIdent <- function(ruta){
     verificar_documento <- BD %>% rowwise() %>%
       mutate(detectarError = validarDocumentoIdent(TID, NID)) %>%
       filter(detectarError == "FALSE") %>%
-      pull(getCodigoBD(getBDFromRuta(ruta))) %>% 
-      unique() %>% replace_na("")  %>% toString()
+      pull(CCR) %>% 
+      unique() %>% toString()
     
     return(verificar_documento)
   }
@@ -276,14 +266,14 @@ procesarErrorDocumentoIdent <- function(ruta){
     verificar_documento <- BD %>% rowwise() %>%
       mutate(detectarError = validarDocumentoIdent(TID_C, NID_C)) %>%
       filter(detectarError == "FALSE") %>%
-      pull(getCodigoBD(getBDFromRuta(ruta))) %>%
-      unique() %>% replace_na("") %>% toString()
+      pull(CCR) %>%
+      unique() %>% toString()
     
     return(verificar_documento)
   }
 }
 
-# Tipo2----
+# Tipo2 ----
 #BD01, BD02A, BD02B, BD04 
 getColsErrorT2 <- function(ruta){
   cols <- switch (getBDFromRuta(ruta),
@@ -307,7 +297,7 @@ getCodErrorT2  <- function(ruta, campo){
   
   return(cod)
 }
-
+  
 procesarErroresT2 <- function(agente, ruta, eb){
   BDCC <- quitarVaciosBD(ruta)
   
@@ -316,7 +306,7 @@ procesarErroresT2 <- function(agente, ruta, eb){
       rowwise() %>%
       mutate(BD        = getBDFromRuta(ruta),
              verificar = BDCC %>% 
-                            filter(dmy(cgrep(BDCC, Columna)[[1]]) %>% is.na() == TRUE) %>% 
+                            filter(is.na(dmy(cgrep(BDCC, Columna)[[1]]))) %>% 
                             pull(getCodigoBD(BD)) %>% unique() %>% toString(),
              Cod       = getCodErrorT2(ruta, Columna)) %>% 
       filter(verificar != "")
@@ -346,11 +336,8 @@ getFechaCorte                <- function(ruta){
   return(fecha_corte)
 }
 procesarErrorFechaDesembolso <- function(ruta){
-  BD <- quitarVaciosBD(ruta) 
-  
-  error <- BD %>%
-    filter((dmy(BD %>% pull(FOT)) > getFechaCorte(ruta)) == TRUE) %>% 
-    pull(getCodigoBD("BD01")) %>% replace_na("")
-  
-  return(error)
+  quitarVaciosBD(ruta) %>%
+    filter(!is.na(FOT) & dmy(FOT) > getFechaCorte(ruta)) %>% 
+    pull(CCR) %>% 
+    return()
 }

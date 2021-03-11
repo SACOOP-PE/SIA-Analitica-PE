@@ -13,11 +13,10 @@ layer1 <- function(agente, eb){
 #' getColVacia()
 
 validarColumnas <- function(agente, eb){
-  carpeta   <- getCarpetaFromAgent(agente)
   exigibles <- getArchivosExigiblesFromAgent(agente) 
   
   tbl1_ctrl1 <- tibble(NombreArchivo = exigibles) %>% rowwise() %>%
-    mutate(ruta      = getRuta(carpeta, NombreArchivo),
+    mutate(ruta      = getRuta(default.carpeta, NombreArchivo),
            CodCoopac = getCoopacFromAgent(agente),
            IdProceso = getIdProcesoFromAgent(agente),
            BD        = getBDFromRuta(ruta),
@@ -63,7 +62,6 @@ validarColumnas <- function(agente, eb){
     eb <- addError(eb, chunk_203)
   }
   
-  
   n <- nrow(eb %>% filter(Cod %in% c(201, 202)))
     
   if (nrow(eb) > 0) {
@@ -82,21 +80,15 @@ validarColumnas <- function(agente, eb){
   return(eb)
 }
   
-getColumnasOM <- function(BD){ 
-  cols_base <- switch (BD,
-                       BD01  = {initEstructuraBase() %>% filter(BD == "BD01") %>% pull(CAMPO) %>% list()},
-                       BD02A = {initEstructuraBase() %>% filter(BD == "BD02A") %>% pull(CAMPO) %>% list()},
-                       BD02B = {initEstructuraBase() %>% filter(BD == "BD02B") %>% pull(CAMPO) %>% list()},
-                       BD03A = {initEstructuraBase() %>% filter(BD == "BD03A") %>% pull(CAMPO) %>% list()},
-                       BD03B = {initEstructuraBase() %>% filter(BD == "BD03B") %>% pull(CAMPO) %>% list()},
-                       BD04  = {initEstructuraBase() %>% filter(BD == "BD04") %>% pull(CAMPO) %>% list()})
-  return(cols_base)
+getColumnasOM <- function(bd){ 
+  cols <- initEstructuraBase() %>% filter(BD == bd) %>% pull(CAMPO) %>% list()
+  return(cols)
 }
 getColVacia   <- function(ruta){
   BD <- evaluarFile(ruta)
   
-  colsVacias <- intersect(BD[sapply(BD, function(x) all(is.na(x)))] %>% colnames(),
-                          getColumnasOM(getBDFromRuta(ruta)) %>% unlist())
+  colsVacias <- intersect(colnames(BD[sapply(BD, function(x) all(is.na(x)))]),
+                          unlist(getColumnasOM(getBDFromRuta(ruta))))
 
   return(colsVacias)
 }

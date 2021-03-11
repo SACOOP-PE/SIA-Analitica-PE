@@ -258,59 +258,57 @@ getOcupacionesAltoRiesgo <- function(ruta){
   if (getBDFromRuta(ruta) != "BD01") {
     quitarVaciosBD(str_replace(ruta, getBDFromRuta(ruta), "BD01")) %>% 
       filter(OSD %in% c(1, 2, 5, 9)) %>%
-      pull(getCodigoBD("BD01")) %>%
+      pull(CCR) %>%
       return()
   }
   else{
     quitarVaciosBD(ruta) %>% 
       filter(OSD %in% c(1, 2, 5, 9)) %>%
-      pull(getCodigoBD("BD01")) %>%
+      pull(CCR) %>%
       return()
   }
 }
 
 alert1000 <- function(ruta) {
-  
-  alerta <- quitarVaciosBD(ruta) %>% 
-             filter(as.numeric(UAGE) %in% c() & as.numeric(MORG) > 13889) %>%
-             pull(getCodigoBD("BD01"))
-  
-  return(alerta)
+  quitarVaciosBD(ruta) %>% 
+    filter(as.numeric(UAGE) %in% c() & as.numeric(MORG) > 13889) %>%
+    pull(CCR) %>% 
+    return()
 }
 alert1001 <- function(ruta) {
   quitarVaciosBD(ruta) %>% 
     filter(as.numeric(SEC) %in% c(3,6,8,9,10) & as.numeric(MORG) > 27778) %>%
-    pull(getCodigoBD("BD01")) %>% 
+    pull(CCR) %>% 
     return()
 }
 alert1002 <- function(ruta) {
   quitarVaciosBD(ruta) %>% 
     filter(CCR %in% getOcupacionesAltoRiesgo(ruta) & as.numeric(MORG) > 138889) %>%
-    pull(getCodigoBD("BD01")) %>%
+    pull(CCR) %>%
     return()
 }
 alert1003 <- function(ruta) {
   quitarVaciosBD(ruta) %>% 
     filter(CCR %in% getOcupacionesAltoRiesgo(ruta) & as.numeric(TCUO) > 27778) %>%
-    pull(getCodigoBD("BD02A")) %>% unique() %>% 
+    pull(CCR) %>% unique() %>% 
     return()
 }
 alert1004 <- function(ruta) {
   quitarVaciosBD(ruta) %>% 
     filter(CCR_C %in% getOcupacionesAltoRiesgo(ruta) & as.numeric(TCUO_C) > 27778) %>%
-    pull(getCodigoBD("BD02B")) %>% unique() %>% 
+    pull(CCR_C) %>% unique() %>% 
     return()
 }
 alert1005 <- function(ruta) {
   quitarVaciosBD(ruta) %>%
     filter(as.numeric(FOCAN_C) == 1 & as.numeric(MCT_C) > 27778) %>%
-    pull(getCodigoBD("BD04")) %>% unique()
+    pull(CCR_C) %>% unique()
     return()
 }
 alert1006 <- function(ruta) {
   quitarVaciosBD(ruta) %>% 
-    filter(as.numeric(MCT_C) > 277778 & (dmy(BD %>% pull(FCAN_C)) - dmy(BD %>% pull(FOT_C))) > 30) %>%
-    pull(getCodigoBD("BD04")) %>% unique() %>% 
+    filter(as.numeric(MCT_C) > 277778 & as.numeric(difftime(dmy(FCAN_C), dmy(FOT_C), units = "days")) > 30) %>%
+    pull(CCR_C) %>% unique() %>% 
     return()
 }
 alert1007 <- function(ruta) {

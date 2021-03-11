@@ -2,7 +2,6 @@
 #' layer2(agente, eb)
 #' 
 layer2 <- function(agente, eb){
-  
   eb <- validarCruceContable(agente, eb)
   return(eb)
 }
@@ -143,18 +142,14 @@ getAnoMesContableFromAgente <- function(agente) {
 }
 
 validarCruceContable <- function(agente, eb){
-  carpeta   <- getCarpetaFromAgent(agente)
-  exigibles <- getArchivosNoObservadosByCols(agente, eb, c("CCR",
-                                                           "KVI", "KVE", "KRF", "KJU",
-                                                           "SIN", "SID", "CAL", "PCI"))
-  
+  exigibles     <- getArchivosNoObservadosByCols(agente, eb, c("CCR","KVI", "KVE", "KRF", "KJU", "SIN", "SID", "CAL", "PCI"))
   exigiblesBD01 <- exigibles[str_detect(exigibles, "BD01")]
   
   tbl_cruce_BC <- tibble(NombreArchivo = exigiblesBD01[str_detect(exigiblesBD01, 
                                                                   paste(getAnoMesContableFromAgente(agente), collapse = '|'))]) %>%
     rowwise() %>%
-    mutate(Ruta    = getRuta(carpeta, NombreArchivo),
-           Periodo = getAnoMesFromRuta(toString(Ruta)),
+    mutate(Ruta    = getRuta(default.carpeta, NombreArchivo),
+           Periodo = getAnoMesFromRuta(Ruta),
            KVI_SISCOR   = getSaldoVigenteSiscor(agente, Periodo),
            KVE_SISCOR   = getSaldoVencidoSiscor(agente, Periodo),
            KRF_SISCOR   = getSaldoRefinanciadoSiscor(agente, Periodo),
@@ -188,7 +183,6 @@ validarCruceContable <- function(agente, eb){
            Periodo   = Periodo,
            BD        = "BD01",
            num2      = Saldo)
-  
   
   eb <- eb %>% addError(tbl_cruce_BC %>% 
                           filter(Cod %in% c(301:308)) %>% 

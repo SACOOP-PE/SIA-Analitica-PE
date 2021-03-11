@@ -28,12 +28,11 @@ layer3 <- function(agente, eb){
 validarOperacionesVacias     <- function(agente, eb) {
   
   exigibles <- getArchivosNoObservadosByCols(agente, eb, c("CCR", "CCR_C", "CODGR"))
-  carpeta   <- getCarpetaFromAgent(agente) 
   
   if (length(exigibles) >0) {
     vacios <- tibble(NombreArchivo = exigibles) %>% 
       rowwise() %>% 
-      mutate(ruta    = getRuta(carpeta, NombreArchivo),
+      mutate(ruta    = getRuta(default.carpeta, NombreArchivo),
              BD      = getBDFromRuta(ruta),
              Periodo = getAnoMesFromRuta(ruta),
              nVacios = getOperacionesVacias(ruta)) %>%
@@ -76,12 +75,11 @@ validarOperacionesVacias     <- function(agente, eb) {
   return(eb)
 }
 validarOperacionesDuplicadas <- function(agente, eb) {
-  carpeta   <- getCarpetaFromAgent(agente)
   exigibles <- getArchivosNoObservadosByCols(agente, eb, c("CCR", "CCR_C", "SKCR", "VCONS"))
   
   Dups <- tibble(NombreArchivo = exigibles[str_detect(exigibles, paste(c("BD01","BD02A", "BD02B"), collapse = '|'))]) %>% 
     rowwise() %>% 
-    mutate(ruta       = getRuta(carpeta, NombreArchivo),
+    mutate(ruta       = getRuta(default.carpeta, NombreArchivo),
            BD         = getBDFromRuta(ruta),
            Periodo    = getAnoMesFromRuta(toString(ruta)),
            Duplicados = getOperacionesDuplicadas(ruta),
@@ -155,9 +153,8 @@ validarOperacionesDuplicadas <- function(agente, eb) {
   return(eb)
 }
 validarCruceInterno          <- function(agente, eb) {
-  carpeta <- getCarpetaFromAgent(agente)
   
-  if (length(getPeriodosNoObservados(agente, eb, "CCR")) >0){
+  if (length(getPeriodosNoObservados(agente, eb, "CCR")) >0) {
     
     cruce1 <- tibble(Periodo   = getPeriodosNoObservados(agente, eb, "CCR")) %>% rowwise() %>%
       mutate(OpFaltantes_BD01  = realizarCruce(agente, Periodo, "BD02A", "BD01"),
@@ -173,8 +170,7 @@ validarCruceInterno          <- function(agente, eb) {
                Cod = 501,
                BD  = "BD02A",
                txt1 = OpFaltantes_BD01,
-               num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])
-        ) %>%
+               num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
         select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
       
       eb <- addError(eb, chunk_501)
@@ -187,8 +183,7 @@ validarCruceInterno          <- function(agente, eb) {
                BD  = "BD01",
                txt1 = OpFaltantes_BD02A,
                num1 = length(str_split(string=txt1 ,pattern = ",")[[1]]),
-               num2 = getSaldoTotal(getRuta(carpeta, 
-                                            paste0(paste(CodCoopac, "BD01", Periodo, sep  = "_"), ".txt")), 
+               num2 = getSaldoTotal(getRuta(default.carpeta, paste0(paste(CodCoopac, "BD01", Periodo, sep  = "_"), ".txt")), 
                                     OpFaltantes_BD02A)) %>%
         select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1, num2)
       
@@ -196,7 +191,7 @@ validarCruceInterno          <- function(agente, eb) {
     }
   }
   
-  if (length(getPeriodosNoObservados(agente, eb, "CODGR")) >0){
+  if (length(getPeriodosNoObservados(agente, eb, "CODGR")) >0) {
     
     cruce2 <- tibble(Periodo = getPeriodosNoObservados(agente, eb, "CODGR")) %>% rowwise() %>%
       mutate(GaranFaltantes_BD03A = realizarCruce(agente, Periodo, "BD03B", "BD03A"))
@@ -229,17 +224,21 @@ validarCruceInterno          <- function(agente, eb) {
 }
 validarCreditosFaltantes     <- function(agente, eb) {
   
-  archivos <- getArchivosNoObservadosByCols(agente, eb, c("CCR","CCR_C"))
-  periodos <- getPeriodosFromAgent(agente)
+  archivos         <- getArchivosNoObservadosByCols(agente, eb, c("CCR","CCR_C"))
+  periodos         <- getPeriodosFromAgent(agente)
+  periodosComparar <- tibble(Periodos = str_extract(archivos[str_detect(archivos, paste(c("BD01","BD02B","BD04"), collapse = '|'))],
+                                                    paste(as.character(getPeriodosFromAgent(agente)), collapse = '|'))) %>%
+    group_by(Periodos) %>% filter(n() == 3) %>% pull(Periodos) %>%unique()
   
   if (length(periodos) > 2 & 
+      length(periodosComparar) > 2 &
       length(archivos[str_detect(archivos, "BD01")] >0) & 
       length(archivos[str_detect(archivos, "BD02B")] >0) & 
       length(archivos[str_detect(archivos, "BD04")] >0)) {
     
-    sabanaCartera      <- getSabana(agente, archivos, "BD01") %>% select(PeriodoI, CCR)
-    sabanaCronoCance   <- getSabana(agente, archivos, "BD02B") %>% select(PeriodoI, CCR_C)
-    sabanaCarteraCance <- getSabana(agente, archivos, "BD04") %>% select(PeriodoI, CCR_C)
+    sabanaCartera      <- getSabana(agente, archivos, "BD01") %>% select(PeriodoI, CCR) %>% filter(PeriodoI %in% periodosComparar)
+    sabanaCronoCance   <- getSabana(agente, archivos, "BD02B") %>% select(PeriodoI, CCR_C) %>% filter(PeriodoI %in% periodosComparar)
+    sabanaCarteraCance <- getSabana(agente, archivos, "BD04") %>% select(PeriodoI, CCR_C) %>% filter(PeriodoI %in% periodosComparar)
     
     validacion <- sabanaCartera %>% 
       group_by(CCR) %>% 

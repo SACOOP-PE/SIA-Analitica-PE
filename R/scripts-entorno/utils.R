@@ -7,7 +7,6 @@ getRuta           <- function(carpeta, filename){
                             recursive =  TRUE)
   
   return((lista_rutas[str_detect(lista_rutas, filename)])[1])
-  
 }
 getAnoFromRuta    <- function(ruta){
   if (is.na(ruta) | ruta == "" ) {
@@ -47,6 +46,14 @@ evaluarFile             <- function(ruta){
                    col_types = cols(.default = "c"), locale = locale(encoding = "ISO-8859-1"), progress = F)
   
   colnames(BD) <- toupper(str_replace(colnames(BD), " ", "_"))
+  
+  return(BD)
+}
+quitarVaciosBD          <- function(ruta){
+  BD     <- evaluarFile(ruta)
+  codigo <- getCodigoBD(getBDFromRuta(ruta))
+  
+  BD <- BD %>% filter(!is.na(cgrep(BD, codigo)) | cgrep(BD, codigo) != "")
   
   return(BD)
 }
