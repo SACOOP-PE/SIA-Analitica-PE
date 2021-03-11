@@ -134,6 +134,7 @@ seleccionarAlertasBD        <- function(ruta, cod, agente, eb) {
                         "2014"= alert2014(ruta),
                         "2015"= alert2015(ruta, agente),
                         "2016"= alert2016(ruta),
+                        "2019"= alert2019(ruta, agente),
                         "2023"= alert2023(ruta, eb),
                         "2025"= alert2025(ruta))
       return(alerta)
@@ -149,7 +150,6 @@ seleccionarAlertasBD        <- function(ruta, cod, agente, eb) {
     }
     if (getBDFromRuta(ruta) == "BD03A") {
       alerta <- switch (toString(cod),
-                        "2019"= alert2019(ruta, agente),
                         "2020"= alert2020(ruta),
                         "2026"= alert2026(ruta))
       return(alerta)
@@ -347,7 +347,7 @@ getCreditosSinConGarantia <- function(agente, periodo, TipoCredito) {
   }
   if (TipoCredito == "CG") {
     
-    credConGarantias <- intersect(BD01 %>% filter(as.numeric(CAL) %in% c(1,2,3,4) & as.numeric(TCR) %in% c(6,7,8,9,10,13)) %>% pull(CCR),
+    credConGarantias <- intersect(BD01 %>% filter(as.numeric(CAL) %in% c(1,2,3,4) & as.numeric(TCR) %in% c(6,7,8,9,10,11,12,13)) %>% pull(CCR),
                                   BD03B %>% filter(as.numeric(CGR) %in% c(1,2,3,4,5) & CODGR %in% garantiasExistentes) %>% pull(CCR))
     
     return(credConGarantias)
@@ -367,7 +367,7 @@ asignarProvisionSG <- function(cal, tipoCredito) {
                          "13" = 0.7) 
     return(provision)
   }
-  if (cal > 0) {
+  if (cal >= 1) {
     provision <- if_else(cal == 1, 5,
                          if_else(cal == 2, 25,
                                  if_else(cal == 3, 60,
@@ -378,7 +378,6 @@ asignarProvisionSG <- function(cal, tipoCredito) {
 asignarProvisionCG <- function(cal, claseGarantia, tipoCredito) {
   
   if (claseGarantia %in% c(1,5)) {
-    
     provision <- switch (toString(cal),
                          "1" = 1.25,
                          "2" = 6.25,
@@ -406,6 +405,10 @@ asignarProvisionCG <- function(cal, claseGarantia, tipoCredito) {
                          "3" = 30,
                          "4" = 60)
     return(provision)
+  }
+  if ((claseGarantia == 4 & tipoCredito !=13) | (claseGarantia == 3 & tipoCredito %in% c(11,12))) {
+    provisión <- 0
+    return(provisión) 
   }
 }
 
@@ -562,8 +565,11 @@ alert2019 <- function(ruta, agente) {
     
   merge(BD01, BD03B, by.x = "CCR", by.y = "CCR") %>% 
     rowwise() %>%
-    mutate(provisionTeorica = asignarProvisionCG(as.numeric(CAL), as.numeric(CGR), as.numeric(TCR)) %>% toString(),
-           provisionReal    = (as.numeric(PCI)/as.numeric(SKCR) *100) %>% round(2)) %>% return()
+    mutate(provisionTeorica = asignarProvisionCG(as.numeric(CAL), as.numeric(CGR), as.numeric(TCR)),
+           provisionReal    = (as.numeric(PCI)/as.numeric(SKCR) *100) %>% round(2)) %>% 
+    filter(provisionTeorica !=0, provisionTeorica > provisionReal) %>% 
+    pull(CCR) %>% 
+    return()
 }
 alert2020 <- function(ruta) {
   quitarVaciosBD(ruta) %>%
