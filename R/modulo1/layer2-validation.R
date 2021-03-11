@@ -141,69 +141,73 @@ getAnoMesContableFromAgente <- function(agente) {
    return()
 }
 
-validarCruceContable <- function(agente, eb){
+validarCruceContable <- function(agente, eb) {
   exigibles     <- getArchivosNoObservadosByCols(agente, eb, c("CCR","KVI", "KVE", "KRF", "KJU", "SIN", "SID", "CAL", "PCI"))
   exigiblesBD01 <- exigibles[str_detect(exigibles, "BD01")]
   
-  tbl_cruce_BC <- tibble(NombreArchivo = exigiblesBD01[str_detect(exigiblesBD01, 
-                                                                  paste(getAnoMesContableFromAgente(agente), collapse = '|'))]) %>%
-    rowwise() %>%
-    mutate(Ruta    = getRuta(default.carpeta, NombreArchivo),
-           Periodo = getAnoMesFromRuta(Ruta),
-           KVI_SISCOR   = getSaldoVigenteSiscor(agente, Periodo),
-           KVE_SISCOR   = getSaldoVencidoSiscor(agente, Periodo),
-           KRF_SISCOR   = getSaldoRefinanciadoSiscor(agente, Periodo),
-           KJU_SISCOR   = getSaldoCobranzaJudicialSiscor(agente, Periodo),
-           SIN_SISCOR   = getSaldoRendimientoDevengadoSiscor(agente, Periodo),
-           SID_SISCOR   = getSaldoInteresesDiferidosSiscor(agente, Periodo),
-           PCI_GEN_SISCOR = getSaldoProvisionesGenericasSiscor(agente, Periodo),
-           PCI_ESP_SISCOR = getSaldoProvisionesEspecificasSiscor(agente, Periodo),
-           KVI_BDCC     = getSaldoVigenteBDCC(evaluarFile(Ruta)),
-           KVE_BDCC     = getSaldoVencidoBDCC(evaluarFile(Ruta)),
-           KRF_BDCC     = getSaldoRefinanciadoBDCC(evaluarFile(Ruta)),
-           KJU_BDCC     = getSaldoCobranzaJudicialBDCC(evaluarFile(Ruta)),
-           SIN_BDCC     = getSaldoRendimientoDevengadoBDCC(evaluarFile(Ruta)),
-           SID_BDCC     = getSaldoInteresesDiferidosBDCC(evaluarFile(Ruta)),
-           PCI_GEN_BDCC = getSaldoProvisionesGenericasBDCC(evaluarFile(Ruta)),
-           PCI_ESP_BDCC = getSaldoProvisionesEspecificasBDCC(evaluarFile(Ruta)),
-           diff_KVI      = (KVI_SISCOR - KVI_BDCC) %>% round(.,2),
-           diff_KVE      = (KVE_SISCOR - KVE_BDCC) %>% round(.,2),
-           diff_KRF      = (KRF_SISCOR - KRF_BDCC) %>% round(.,2),
-           diff_KJU      = (KJU_SISCOR - KJU_BDCC) %>% round(.,2),
-           diff_SIN      = (SIN_SISCOR - SIN_BDCC) %>% round(.,2),
-           diff_SID      = (SID_SISCOR - SID_BDCC) %>% round(.,2),
-           diff_PCIGEN   = (PCI_GEN_SISCOR - PCI_GEN_BDCC) %>% round(.,2),
-           diff_PCIESP   = (PCI_ESP_SISCOR - PCI_ESP_BDCC) %>% round(.,2)) %>% 
-    pivot_longer(starts_with("diff"), names_to = "Capital", values_to = "Saldo") %>%
-    rowwise() %>% 
-    mutate(CodCoopac = getCoopacFromAgent(agente),
-           IdProceso = getIdProcesoFromAgent(agente),
-           Cod       = if_else(abs(Saldo)> 100,
-                               getCodErrorContable(str_split(Capital, "_")[[1]][2]), 0),
-           Periodo   = Periodo,
-           BD        = "BD01",
-           num2      = Saldo)
-  
-  eb <- eb %>% addError(tbl_cruce_BC %>% 
-                          filter(Cod %in% c(301:308)) %>% 
-                          select(CodCoopac, IdProceso, Cod, Periodo, BD, num2))
-  
-  
-  n <- nrow(eb %>% filter(Cod %in% c(301:308)))
+  if (length(exigiblesBD01) >0) {
     
-  if (nrow(eb) > 0) {
+    tbl_cruce_BC <- tibble(NombreArchivo = exigiblesBD01[str_detect(exigiblesBD01, 
+                                                                    paste(getAnoMesContableFromAgente(agente), collapse = '|'))]) %>%
+      rowwise() %>%
+      mutate(Ruta    = getRuta(default.carpeta, NombreArchivo),
+             Periodo = getAnoMesFromRuta(toString(Ruta)),
+             KVI_SISCOR   = getSaldoVigenteSiscor(agente, Periodo),
+             KVE_SISCOR   = getSaldoVencidoSiscor(agente, Periodo),
+             KRF_SISCOR   = getSaldoRefinanciadoSiscor(agente, Periodo),
+             KJU_SISCOR   = getSaldoCobranzaJudicialSiscor(agente, Periodo),
+             SIN_SISCOR   = getSaldoRendimientoDevengadoSiscor(agente, Periodo),
+             SID_SISCOR   = getSaldoInteresesDiferidosSiscor(agente, Periodo),
+             PCI_GEN_SISCOR = getSaldoProvisionesGenericasSiscor(agente, Periodo),
+             PCI_ESP_SISCOR = getSaldoProvisionesEspecificasSiscor(agente, Periodo),
+             KVI_BDCC     = getSaldoVigenteBDCC(evaluarFile(Ruta)),
+             KVE_BDCC     = getSaldoVencidoBDCC(evaluarFile(Ruta)),
+             KRF_BDCC     = getSaldoRefinanciadoBDCC(evaluarFile(Ruta)),
+             KJU_BDCC     = getSaldoCobranzaJudicialBDCC(evaluarFile(Ruta)),
+             SIN_BDCC     = getSaldoRendimientoDevengadoBDCC(evaluarFile(Ruta)),
+             SID_BDCC     = getSaldoInteresesDiferidosBDCC(evaluarFile(Ruta)),
+             PCI_GEN_BDCC = getSaldoProvisionesGenericasBDCC(evaluarFile(Ruta)),
+             PCI_ESP_BDCC = getSaldoProvisionesEspecificasBDCC(evaluarFile(Ruta)),
+             diff_KVI      = (KVI_SISCOR - KVI_BDCC) %>% round(.,2),
+             diff_KVE      = (KVE_SISCOR - KVE_BDCC) %>% round(.,2),
+             diff_KRF      = (KRF_SISCOR - KRF_BDCC) %>% round(.,2),
+             diff_KJU      = (KJU_SISCOR - KJU_BDCC) %>% round(.,2),
+             diff_SIN      = (SIN_SISCOR - SIN_BDCC) %>% round(.,2),
+             diff_SID      = (SID_SISCOR - SID_BDCC) %>% round(.,2),
+             diff_PCIGEN   = (PCI_GEN_SISCOR - PCI_GEN_BDCC) %>% round(.,2),
+             diff_PCIESP   = (PCI_ESP_SISCOR - PCI_ESP_BDCC) %>% round(.,2)) %>% 
+      pivot_longer(starts_with("diff"), names_to = "Capital", values_to = "Saldo") %>%
+      rowwise() %>% 
+      mutate(CodCoopac = getCoopacFromAgent(agente),
+             IdProceso = getIdProcesoFromAgent(agente),
+             Cod       = if_else(abs(Saldo)> 100,
+                                 getCodErrorContable(str_split(Capital, "_")[[1]][2]), 0),
+             Periodo   = Periodo,
+             BD        = "BD01",
+             num2      = Saldo)
     
-    if (n > 0) {
-      addEventLog(agente, paste0("      Resultado: Se detectaron ", n," error(es) contable(s) en la cartera de créditos pues no cuadra con el balance de comprobación."))
+    eb <- eb %>% addError(tbl_cruce_BC %>% 
+                            filter(Cod %in% c(301:308)) %>% 
+                            select(CodCoopac, IdProceso, Cod, Periodo, BD, num2))
+    
+    
+    n <- nrow(eb %>% filter(Cod %in% c(301:308)))
+    
+    if (nrow(eb) > 0) {
+      
+      if (n > 0) {
+        addEventLog(agente, paste0("      Resultado: Se detectaron ", n," error(es) contable(s) en la cartera de créditos pues no cuadra con el balance de comprobación."))
+      }
+      else { 
+        addEventLog(agente, paste0("      Resultado: La validación del cruce contable fue satifactoria."))
+      }
+      
     }
     else { 
-      addEventLog(agente, paste0("      Resultado: La validación del cruce contable fue satifactoria."))
+      addEventLog(agente, paste0("      Resultado: No se detectaron errores contables a la cartera de créditos."))
     }
     
+    return(eb)
   }
-  else { 
-    addEventLog(agente, paste0("      Resultado: No se detectaron errores contables a la cartera de créditos."))
-  }
-  
   return(eb)
 }
