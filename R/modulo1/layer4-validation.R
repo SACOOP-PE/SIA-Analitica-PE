@@ -266,7 +266,7 @@ procesarErrorDocumentoIdent <- function(ruta){
     verificar_documento <- BD %>% rowwise() %>%
       mutate(detectarError = validarDocumentoIdent(TID_C, NID_C)) %>%
       filter(detectarError == "FALSE") %>%
-      pull(CCR) %>%
+      pull(CCR_C) %>%
       unique() %>% toString()
     
     return(verificar_documento)
