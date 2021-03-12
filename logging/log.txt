@@ -3284,3 +3284,26 @@
 100473	2021-03-10	2021-03-10 09:37:58	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-03-10 09:37:58] - Layer 4. Validación de campos indviduales.	Informativo	Baja
 100473	2021-03-10	2021-03-10 09:38:12	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-03-10 09:38:12] -       Resultado: La validación de los campos concluyó con 27 observaciones tipo1.	Informativo	Baja
 100473	2021-03-10	2021-03-10 09:38:21	DPACHECO	SAN FRANCISCO 289	test/datatest	[2021-03-10 09:38:20] -       Resultado: La validación de los campos concluyó con 24 observación(es) tipo2.	Informativo	Baja
+100475	2021-03-11	2021-03-11 18:20:57	DPACHECO	COOPAC TOQUEPALA	test/datatest	[2021-03-11 18:20:57] -       Resultado: La validación de cruce interno concluyó con 17 observación(es).	Informativo	Baja
+100476	2021-03-12	2021-03-12 09:09:48	DPACHECO	COOPAC TOQUEPALA	test/datatest	[2021-03-12 09:09:48] - ---------------------------- VALIDADOR SIA 1.4.2021 --------------------------	Informativo	Baja
+100476	2021-03-12	2021-03-12 09:09:48	DPACHECO	COOPAC TOQUEPALA	test/datatest	[2021-03-12 09:09:48] - Coopac evaluada: 01328-COOPAC TOQUEPALA	Informativo	Baja
+100476	2021-03-12	2021-03-12 09:09:49	DPACHECO	COOPAC TOQUEPALA	test/datatest	[2021-03-12 09:09:49] - PID: 100476[201901~202012]	Informativo	Baja
+100476	2021-03-12	2021-03-12 09:09:49	DPACHECO	COOPAC TOQUEPALA	test/datatest	[2021-03-12 09:09:49] - 1. MÓDULO DE VALIDACIÓN DE BASE DE DATOS CREDITICIAS --------------------------	Informativo	Baja
+100476	2021-03-12	2021-03-12 09:09:49	DPACHECO	COOPAC TOQUEPALA	test/datatest	[2021-03-12 09:09:49] - Inicio del interrogatorio modulo 1. PID-100476.	Informativo	Baja
+100476	2021-03-12	2021-03-12 09:09:50	DPACHECO	COOPAC TOQUEPALA	test/datatest	[2021-03-12 09:09:49] - Layer 0. Revisión de pre-requisitos.	Informativo	Baja
+100476	2021-03-12	2021-03-12 09:09:51	DPACHECO	COOPAC TOQUEPALA	test/datatest	[2021-03-12 09:09:51] -       Resultado: Revisión de pre-requisitos satisfactoria.	Informativo	Baja
+100476	2021-03-12	2021-03-12 09:09:51	DPACHECO	COOPAC TOQUEPALA	test/datatest	[2021-03-12 09:09:51] - Layer 1. Revisión de estructura de tablas	Informativo	Baja
+100476	2021-03-12	2021-03-12 09:11:23	DPACHECO	COOPAC TOQUEPALA	test/datatest	[2021-03-12 09:11:23] - La validación de Columnas faltantes concluyó con 91 observación(es).	Informativo	Baja
+100476	2021-03-12	2021-03-12 09:11:23	DPACHECO	COOPAC TOQUEPALA	test/datatest	[2021-03-12 09:11:23] - La validación de Columnas sobrantes concluyó con 91 observación(es).	Informativo	Baja
+100476	2021-03-12	2021-03-12 09:11:23	DPACHECO	COOPAC TOQUEPALA	test/datatest	[2021-03-12 09:11:23] - La validación de Columnas vacías concluyó con 89 observación(es).	Informativo	Baja
+100476	2021-03-12	2021-03-12 09:11:24	DPACHECO	COOPAC TOQUEPALA	test/datatest	[2021-03-12 09:11:23] -       Resultado: La revisión de estructura de datos tiene 182 observaciones. Continuar con discreción.	Informativo	Baja
+100476	2021-03-12	2021-03-12 09:11:24	DPACHECO	COOPAC TOQUEPALA	test/datatest	[2021-03-12 09:11:24] - Layer 2. Validación de Cruce Contable a la cartera.	Informativo	Baja
+100476	2021-03-12	2021-03-12 09:11:24	DPACHECO	COOPAC TOQUEPALA	test/datatest	[2021-03-12 09:11:24] - Layer 3. Validación de consistencia de operaciones.	Informativo	Baja
+100476	2021-03-12	2021-03-12 09:12:15	DPACHECO	COOPAC TOQUEPALA	test/datatest	[2021-03-12 09:12:15] -       Resultado: La validación operaciones vacías concluyó con 1 observación(es).	Informativo	Baja
+100476	2021-03-12	2021-03-12 09:13:33	DPACHECO	COOPAC TOQUEPALA	test/datatest	[2021-03-12 09:13:33] -       Resultado: La validación operaciones duplicadas concluyó sin observaciones.	Informativo	Baja
+100476	2021-03-12	2021-03-12 09:14:58	DPACHECO	COOPAC TOQUEPALA	test/datatest	[2021-03-12 09:14:58] -       Resultado: La validación de cruce interno concluyó con 17 observación(es).	Informativo	Baja
+100476	2021-03-12	2021-03-12 09:16:51	DPACHECO	COOPAC TOQUEPALA	test/datatest	[2021-03-12 09:16:51] -       Resultado: La validación de créditos faltantes en la 2B o 4 concluyó con 6 observación(es).	Informativo	Baja
+100476	2021-03-12	2021-03-12 09:20:50	DPACHECO	COOPAC TOQUEPALA	test/datatest	[2021-03-12 09:20:50] -       Resultado: La validación de cruce de fechas de vencimiento de créditos entre la 2A y la 1 concluyó con 22 observación(es).	Informativo	Baja
+100476	2021-03-12	2021-03-12 09:20:50	DPACHECO	COOPAC TOQUEPALA	test/datatest	[2021-03-12 09:20:50] - Layer 4. Validación de campos indviduales.	Informativo	Baja
+100476	2021-03-12	2021-03-12 09:22:16	DPACHECO	COOPAC TOQUEPALA	test/datatest	[2021-03-12 09:22:16] -       Resultado: La validación de los campos concluyó con 133 observaciones tipo1.	Informativo	Baja
+100476	2021-03-12	2021-03-12 09:23:06	DPACHECO	COOPAC TOQUEPALA	test/datatest	[2021-03-12 09:23:06] -       Resultado: La validación de los campos concluyó con 6 observación(es) tipo2.	Informativo	Baja
