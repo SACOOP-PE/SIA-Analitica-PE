@@ -228,7 +228,7 @@ validarCreditosFaltantes     <- function(agente, eb) {
   periodos         <- getPeriodosFromAgent(agente)
   periodosComparar <- tibble(Periodos = str_extract(archivos[str_detect(archivos, paste(c("BD01","BD02B","BD04"), collapse = '|'))],
                                                     paste(as.character(getPeriodosFromAgent(agente)), collapse = '|'))) %>%
-    group_by(Periodos) %>% filter(n() == 3) %>% pull(Periodos) %>%unique()
+    group_by(Periodos) %>% filter(n() == 3) %>% pull(Periodos) %>% unique()
   
   if (length(periodos) > 2 & 
       length(periodosComparar) > 2 &

@@ -209,5 +209,22 @@ validarCruceContable <- function(agente, eb) {
     
     return(eb)
   }
+  
+  n <- nrow(eb %>% filter(Cod %in% c(301:308)))
+  
+  if (nrow(eb) > 0) {
+    
+    if (n > 0) {
+      addEventLog(agente, paste0("      Resultado: Se detectaron ", n," error(es) contable(s) en la cartera de créditos pues no cuadra con el balance de comprobación."))
+    }
+    else { 
+      addEventLog(agente, paste0("      Resultado: La validación del cruce contable fue satifactoria."))
+    }
+    
+  }
+  else { 
+    addEventLog(agente, paste0("      Resultado: No se detectaron errores contables a la cartera de créditos."))
+  }
+  
   return(eb)
 }
