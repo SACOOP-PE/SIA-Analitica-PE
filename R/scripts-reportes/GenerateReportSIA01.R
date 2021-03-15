@@ -1,11 +1,12 @@
-generar_reporte_T1 <- function(idProceso) {
+generar_reporte_T1 <- function(idProceso, eb) {
   
-  eb <- read_excel(paste0("test/output/resultados_", idProceso, ".xlsx"), sheet = "bucketOficio", 
-                   col_types = c("text", "text", "text", "text", "text", "text", "text"))
-  agente <- read_excel(paste0("test/output/resultados_", idProceso, ".xlsx"), sheet = "agente",
-                       col_types = c("text", "text", "text", "text", "text", "text", "text", "text", "text","text"))
+  #Import Results ----
+  ebFormat <- read_excel(paste0("test/output/resultados_", idProceso, ".xlsx"), sheet = "bucketOficio", 
+                         col_types = c("text", "text", "text", "text", "text", "text", "text"))
+  agente   <- read_excel(paste0("test/output/resultados_", idProceso, ".xlsx"), sheet = "agente",
+                         col_types = c("text", "text", "text", "text", "text", "text", "text", "text", "text","text"))
   
-  if (nrow(eb %>% filter(Cod %in% c(101,102))) >0) {
+  if (nrow(ebFormat %>% filter(Cod %in% c(101,102))) >0) {
     resumenValidacion <- "El proceso de validación no concluyó satisfactoriamente. {0}, de las cuales tienen criticidad ALTA, ello da como resultado {1} archivos inconsistentes."
   }
   else{
@@ -39,13 +40,12 @@ generar_reporte_T1 <- function(idProceso) {
   myhead.txt1 <- paste0(agente %>% pull(NombreCoopac) %>% first()," (",agente %>% pull(Coopac) %>% first(),")")
   myhead.txt2 <- paste0("Nivel ", agente %>% pull(NivelCoopac) %>% first())
   myhead.txt3 <- if_else(nrow(eb %>% filter(Cod %in% c(101,102))) >0,
-                         str_replace_all(resumenValidacion, c("\\Q{0}" = eb %>% pull(Descripcion) %>% toString(),
+                         str_replace_all(resumenValidacion, c("\\Q{0}" = ebFormat %>% pull(Descripcion) %>% toString(),
                                                               "\\Q{1}" = bucket %>% pull(num1) %>% sum() %>% toString())),
-                         str_replace_all(resumenValidacion, c("\\Q{0}" = toString(nrow(eb)),
-                                                              "\\Q{1}" = toString(nrow(eb %>% filter(Criticidad == "Crítico"))),
-                                                              "\\Q{2}" = eb %>% 
-                                                                mutate(filename = paste0(agente %>% pull(Coopac), "_",BD ,"_" ,Periodo, ".txt")) %>% 
-                                                                pull(filename) %>% unique() %>% length() %>% toString())))
+                         str_replace_all(resumenValidacion, c("\\Q{0}" = toString(nrow(ebFormat)),
+                                                              "\\Q{1}" = toString(nrow(ebFormat %>% filter(Criticidad == "Crítico"))),
+                                                              "\\Q{2}" = ebFormat %>% mutate(filename = paste0(agente %>% pull(Coopac), "_",BD ,"_" ,Periodo, ".txt")) %>% 
+                                                                                        pull(filename) %>% unique() %>% length() %>% toString())))
   myhead.txt4 <- agente %>% pull(PeriodoInicial) %>% first()
   myhead.txt5 <- agente %>% pull(PeriodoFinal) %>% first()
   myhead.txt6 <- format(Sys.time(), "%d/%m/%Y")
@@ -166,23 +166,22 @@ generar_reporte_T1 <- function(idProceso) {
   
   addStyle(wb, 1, bucket.head.style, cols =3:17, rows = 17)
   
-  setRowHeights(wb, 1, 18:(nrow(eb)+18), heights = 33.7)
-  writeData(wb, 1, eb %>% select(Periodo, BD, Cod, Descripcion), 3, 18, colNames = F, rowNames = F)
-  writeData(wb, 1, eb %>% select(Categoria), 14, 18, colNames = F, rowNames = F)
-  writeData(wb, 1, eb %>% select(Criticidad), 16, 18, colNames = F, rowNames = F)
-  addStyle(wb, 1, bucket.body.style  , cols =3:17, rows = 18:(18+(nrow(eb)-1)), gridExpand = T)
+  setRowHeights(wb, 1, 18:(nrow(ebFormat)+18), heights = 33.7)
+  writeData(wb, 1, ebFormat %>% select(Periodo, BD, Cod, Descripcion), 3, 18, colNames = F, rowNames = F)
+  writeData(wb, 1, ebFormat %>% select(Categoria), 14, 18, colNames = F, rowNames = F)
+  writeData(wb, 1, ebFormat %>% select(Criticidad), 16, 18, colNames = F, rowNames = F)
+  addStyle(wb, 1, bucket.body.style, cols =3:17, rows = 18:(18+(nrow(ebFormat)-1)), gridExpand = T)
   conditionalFormatting(wb, 1,
                         cols = 16,
-                        rows = 18:(18+(nrow(eb)-1)),
+                        rows = 18:(18+(nrow(ebFormat)-1)),
                         type = "notContains",
                         rule = "No", 
                         style = createStyle(fontColour = "#9C0006", textDecoration = "bold"))
-  
   img <- "R/scripts-reportes/logo-sbs.png"
   insertImage(wb, 1, img, startRow = 1, startCol = 16, width = 1.90, height = 0.90)
   setColWidths(wb, 1, 1:2, widths = 5.2)
 
-  if (nrow(eb %>% filter(Cod %in% c(101,102))) >0) {
+  if (nrow(ebFormat %>% filter(Cod %in% c(101,102))) >0) {
     saveWorkbook(wb, "test/output/SIA_Report_T1.xlsx", overwrite = TRUE)
     file.show("test/output/SIA_Report_T1.xlsx")
     return(wb)
@@ -208,18 +207,22 @@ generar_reporte_T1 <- function(idProceso) {
    insertPlot(wb, "Estado de archivos", startCol = 2, startRow = 35, fileType = "png",  width = 56.20, height = 12.21 ,units = "cm")
   
    ## detalle por cada error ----
-   numObs <- which((bucket$Cod %in% c(201:203, 301:308, 401, 402)) == FALSE)
-
-   for (i in 1:nrow(filter(bucket,(Cod %in% c(201:203, 301:308, 401, 402)) == FALSE))) {
-     nombreSheet <- filter(bucket,(Cod %in% c(201:203, 301:308, 401, 402)) == FALSE)[i,] %>% select(BD, Cod, Periodo) %>%
+   numObs <- which((eb$Cod %in% c(201:203, 301:308, 401, 402)) == FALSE)
+   
+   for (i in 1:nrow(filter(eb,(Cod %in% c(201:203, 301:308, 401, 402)) == FALSE))) {
+     
+     nombreSheet <- filter(eb,(Cod %in% c(201:203, 301:308, 401, 402)) == FALSE)[i,] %>% select(BD, Cod, Periodo) %>%
        apply(1, paste, collapse = "-" )
 
      addWorksheet(wb, nombreSheet)
-     writeFormula(wb, i+2, startRow = 2, x= makeHyperlinkString(sheet = "Reporte de Validación BDCC", row = 1, text = "Volver"))
+     writeFormula(wb, i+2, startRow = 2, x= makeHyperlinkString(sheet = "Reporte de Validación BDCC", 
+                                                                row   = 17+numObs[i],
+                                                                col   = 17, 
+                                                                text  = "Volver"))
      writeFormula(wb, 1, startRow = 17+numObs[i], startCol = 17, x= makeHyperlinkString(sheet = nombreSheet,
-                                                                                        row = 1,
-                                                                                        text = "Ver más detalle"))
-     writeData(wb, i+2, getObservaciones(bucket, i), startRow = 4, colNames = T, rowNames = F)
+                                                                                        row   = 4,
+                                                                                        text  = "Ver Detalle"))
+     writeData(wb, i+2, getObservaciones(eb, i), startRow = 4, colNames = T, rowNames = F)
     }
   
   # Save file xlsx ----
@@ -229,14 +232,14 @@ generar_reporte_T1 <- function(idProceso) {
 getObservaciones   <- function(eb, roweb) {
   
   eb <- eb %>% filter((Cod %in% c(201:203, 301:308, 401, 402)) == FALSE) %>% rowwise() %>%
-    mutate(filename = paste0(CodCoopac, "_",BD ,"_" ,Periodo, ".txt")) %>%
+    mutate(filename = paste0(CodCoopac, "_", BD , "_" , Periodo, ".txt")) %>%
     select(Cod, filename, txt1)
   
   operaciones <- unlist(eb[roweb,] %>% pull(txt1) %>% str_split(", "))
   ruta        <- getRuta(default.carpeta, eb[roweb,] %>% pull(filename))
   
-  obs <- quitarVaciosBD(ruta) %>%
-    filter(cgrep(quitarVaciosBD(ruta), getCodigoBD(getBDFromRuta(ruta)))[[1]] %in% operaciones)
+  BDCC <- quitarVaciosBD(ruta)
+  obs  <- BDCC %>% filter(cgrep(BDCC, getCodigoBD(getBDFromRuta(ruta)))[[1]] %in% operaciones)
   
   return(obs)
 }

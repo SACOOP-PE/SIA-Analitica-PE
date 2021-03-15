@@ -6,7 +6,7 @@ formatBucket <- function(eb) {
            Descripcion = replaceString(getDescFinal(Cod, Periodo, BD, txt1, txt2, txt3, num1, num2, num3), num1, Cod),
            Categoria   = getCateError(Cod),
            Criticidad  = getCritError(Cod),
-           Tipo        = "Error") %>% 
+           Tipo        = if_else(Cod <=709, "Error", "Alerta")) %>% 
     select(Periodo, BD, Cod, Tipo, Descripcion, Categoria, Criticidad) %>% 
     arrange(Periodo, Cod)
   
@@ -15,16 +15,13 @@ formatBucket <- function(eb) {
 
 #Descr larga
 getDescError   <- function(CodError) {
-  descr <- initRepositorioErrores() %>% filter(Cod == CodError) %>% pull(Descripcion)
-  return(descr)
+  initRepositorioErrores() %>% filter(Cod == CodError) %>% pull(Descripcion) %>% return()
 }
 getCateError   <- function(CodError) {
-  categoria <- initRepositorioErrores() %>% filter(Cod == CodError) %>% pull(Categoria)
-  return(categoria)
+  initRepositorioErrores() %>% filter(Cod == CodError) %>% pull(Categoria) %>% return()
 }
 getCritError   <- function(CodError) {
-  criticidad <- initRepositorioErrores() %>% filter(Cod == CodError) %>% pull(Criticidad)
-  return(criticidad)
+  initRepositorioErrores() %>% filter(Cod == CodError) %>% pull(Criticidad) %>% return()
 }
 
 replaceString  <- function(desc, num1, cod) {
@@ -126,8 +123,8 @@ pad2            <- function(n) {
 }
 periodoEscrito  <- function(periodo) { 
   base <- tibble(MES = c(1:12),
-                 ESCRITO = c("enero","febrero","marzo","abril","mayo","junio","julio","agosto","setiembre","octubre","noviembre", "diciembre"))
-  m <- base %>% filter(pad2(MES) %in% substr(periodo,5,6)) %>% pull(ESCRITO)
+                 ESCRITO = c("enero","febrero","marzo","abril","mayo","junio","julio","agosto","setiembre","octubre","noviembre","diciembre"))
+  m    <- base %>% filter(pad2(MES) %in% substr(periodo,5,6)) %>% pull(ESCRITO)
   
   return(paste(m, "del", substr(periodo, 1, 4)))
 }
@@ -137,8 +134,5 @@ saveOutputs <- function(agente, ebFormat) {
   list_of_datasets <- list("agente" = agente, "bucketOficio" = ebFormat)
   
   write.xlsx(list_of_datasets, 
-             file = paste0(paste0(getwd(), "/test/output/"),
-                           paste0("resultados_",
-                                  getIdProcesoFromAgent(agente),
-                           ".xlsx")))
+             file = paste0(getwd(), "/test/output/resultados_", getIdProcesoFromAgent(agente), ".xlsx"))
 }

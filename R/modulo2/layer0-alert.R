@@ -1,7 +1,7 @@
 ####' Script de detecccion de altertas layer0.
 
 layer0_Alertas <- function(agente, eb){
-  eb <- detectarAlertasPLAFT(agente, eb)
+  # eb <- detectarAlertasPLAFT(agente, eb)
   eb <- detectarAlertasPrudenciales(agente, eb)
   
   return(eb)
@@ -64,22 +64,26 @@ procesarAlertas             <- function(cod, agente, eb) {
         pull(Periodos) %>% 
         unique()
       
-      alertas <- tibble(Periodo = Periodos) %>% rowwise() %>% 
-        mutate(CodCoopac = getCoopacFromAgent(agente),
-               IdProceso = getIdProcesoFromAgent(agente),
-               BD    = "BD01",
-               ruta  = getRuta(carpeta, paste0(getCoopacFromAgent(agente), "_BD01_", Periodo, ".txt")),
-               Alert = seleccionarAlertasBD(ruta, cod, agente, eb) %>% toString()) %>% 
-        filter(Alert != "")
-      
-      if (nrow(alertas) >0) {
-        chunkAlert <- alertas %>% rowwise() %>% 
-          mutate(Cod  = cod,
-                 txt1 = Alert,
-                 num1 = length(str_split(string=txt1, pattern = ",")[[1]])) %>%  
-          select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
+      if (length(Periodos) >0) {
         
-        eb <- eb %>% addError(chunkAlert)
+        alertas <- tibble(Periodo = Periodos) %>% rowwise() %>% 
+          mutate(CodCoopac = getCoopacFromAgent(agente),
+                 IdProceso = getIdProcesoFromAgent(agente),
+                 BD    = "BD01",
+                 ruta  = getRuta(carpeta, paste0(CodCoopac, "_BD01_", Periodo, ".txt")),
+                 Alert = seleccionarAlertasBD(ruta, cod, agente, eb) %>% toString()) %>% 
+          filter(Alert != "")
+        
+        if (nrow(alertas) >0) {
+          chunkAlert <- alertas %>% rowwise() %>% 
+            mutate(Cod  = cod,
+                   txt1 = Alert,
+                   num1 = length(str_split(string=txt1, pattern = ",")[[1]])) %>%  
+            select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
+          
+          eb <- eb %>% addError(chunkAlert)
+        }
+        return(eb)
       }
       return(eb)
     }
@@ -106,7 +110,6 @@ procesarAlertas             <- function(cod, agente, eb) {
       }
       return(eb)
     }
-    return(eb)
   }
   return(eb)
 }
@@ -255,8 +258,7 @@ getArchivosExigiblesAlertas <- function(cod, agente, eb) {
     }
 }
 getDescAlerta               <- function(cod) {
-  descr <- initRepositorioAlertas() %>% filter(Cod == cod) %>% pull(Descripcion)
-  return(descr)
+  initRepositorioAlertas() %>% filter(Cod == cod) %>% pull(Descripcion) %>% return()
 }
 
 #Alertas PLAFT ----
@@ -415,37 +417,32 @@ asignarProvisionCG <- function(cal, claseGarantia, tipoCredito) {
     provisión <- 0
     return(provisión) 
   }
+  
+  provisión <- 0
+  return(provisión)
 }
 
 alert2000 <- function(ruta) {
   quitarVaciosBD(ruta) %>% 
-    filter(as.numeric(TEA) < 1) %>% pull(CCR) %>% 
-    return()
+    filter(as.numeric(TEA) < 1) %>% pull(CCR) %>% return()
 }
 alert2001 <- function(ruta) {
   quitarVaciosBD(ruta) %>% 
-    filter(as.numeric(DGR) > 90) %>% pull(CCR) %>% 
-    return() 
+    filter(as.numeric(DGR) > 90) %>% pull(CCR) %>% return() 
 }
 alert2002 <- function(ruta) {
   quitarVaciosBD(ruta) %>% 
-    filter(as.numeric(MORG) > as.numeric(SKCR)) %>% pull(CCR) %>%
-    return()
+    filter(as.numeric(MORG) > as.numeric(SKCR)) %>% pull(CCR) %>% return()
 }
 alert2003 <- function(ruta) {
   quitarVaciosBD(ruta) %>%
-    filter(CAL %in% c(3,4) & (as.numeric(KRF)> 0 | as.numeric(KJU)> 0) & as.numeric(SIN)> 0) %>%
-    pull(CCR) %>%
+    filter(CAL %in% c(3,4) & (as.numeric(KRF)> 0 | as.numeric(KJU)> 0) & as.numeric(SIN)> 0) %>% pull(CCR) %>%
     return() 
 }
 alert2004 <- function(ruta) {
   
-  alerta <- quitarVaciosBD(ruta) %>% group_by(CIS) %>% filter(n() >1) %>% 
-    summarise(numCal = n_distinct(CAL)) %>% 
-    filter(numCal >1) %>% 
-    pull(CIS)
-  
-  return(alerta)
+  quitarVaciosBD(ruta) %>% group_by(CIS) %>% filter(n() >1) %>% 
+    summarise(numCal = n_distinct(CAL)) %>% filter(numCal >1) %>% pull(CIS) %>% return()
 }
 alert2005 <- function(ruta) {
   quitarVaciosBD(ruta) %>%
@@ -453,15 +450,12 @@ alert2005 <- function(ruta) {
 }
 alert2006 <- function(ruta) {
   quitarVaciosBD(ruta) %>%
-    filter((as.numeric(ESAM) %in% c(3,4,5)) & as.numeric(NCPR) == 1) %>%
-    pull(CCR) %>%
+    filter((as.numeric(ESAM) %in% c(3,4,5)) & as.numeric(NCPR) == 1) %>% pull(CCR) %>%
     return()
 }
 alert2007 <- function(ruta) {
   quitarVaciosBD(ruta) %>%
-    filter(as.numeric(CAL) %in% c(3,4) & as.numeric(SIN) > 0) %>%
-    pull(CCR) %>%
-    return()
+    filter(as.numeric(CAL) %in% c(3,4) & as.numeric(SIN) > 0) %>% pull(CCR) %>% return()
 }
 alert2008 <- function(ruta) {
   quitarVaciosBD(ruta) %>%
@@ -476,21 +470,13 @@ alert2009 <- function(ruta) {
     return()
 }
 alert2010 <- function(ruta) {
-  quitarVaciosBD(ruta) %>%
-    filter(as.numeric(CAL) %in% c(3,4) & as.numeric(KVI) > 0) %>%
-    pull(CIS) %>%
-    return()
+  quitarVaciosBD(ruta) %>% filter(as.numeric(CAL) %in% c(3,4) & as.numeric(KVI) > 0) %>% pull(CIS) %>% return()
 }
 alert2011 <- function(ruta) {
-  quitarVaciosBD(ruta) %>%
-    filter(as.numeric(DAK) > 120 & as.numeric(KJU) == 0) %>%
-    pull(CCR) %>%
-    return()
+  quitarVaciosBD(ruta) %>% filter(as.numeric(DAK) > 120 & as.numeric(KJU) == 0) %>% pull(CCR) %>%return()
 }
 alert2012 <- function(ruta) {
-  quitarVaciosBD(ruta) %>%
-    filter(as.numeric(KJU) > 0 & as.numeric(CAL) %in% c(0,1,2)) %>%
-    pull(CCR) %>%
+  quitarVaciosBD(ruta) %>% filter(as.numeric(KJU) > 0 & as.numeric(CAL) %in% c(0,1,2)) %>% pull(CCR) %>%
     return()
 }
 alert2013 <- function(ruta) {
@@ -507,91 +493,103 @@ alert2014 <- function(ruta) {
 }
 alert2015 <- function(ruta, agente) {
   
-  quitarVaciosBD(ruta) %>% 
-    filter(CCR %in% getCreditosSinConGarantia(agente, getAnoMesFromRuta(ruta), "SG")) %>% 
-    rowwise() %>%
-    mutate(provisionTeorica = asignarProvisionSG(as.numeric(CAL), as.numeric(TCR)),
-           provisionReal    = (as.numeric(PCI)/as.numeric(SKCR) *100) %>% round(0)) %>%
-    filter(provisionTeorica < provisionReal) %>% 
-    pull(CCR) %>%
-    return()
+  creditosComunes <- getCreditosSinConGarantia(agente, getAnoMesFromRuta(ruta), "SG")
+  
+  if (length(creditosComunes)>0) {
+    
+   alerta <- quitarVaciosBD(ruta) %>% 
+      filter(CCR %in% getCreditosSinConGarantia(agente, getAnoMesFromRuta(ruta), "SG")) %>% 
+      rowwise() %>%
+      mutate(provisionTeorica = asignarProvisionSG(as.numeric(CAL), as.numeric(TCR)),
+             provisionReal    = (as.numeric(PCI)/as.numeric(SKCR) *100) %>% round(0)) %>%
+      filter(provisionTeorica < provisionReal) %>% 
+      pull(CCR)
+   
+   return(alerta)
+  }
+  return("")
 }
 alert2016 <- function(ruta) {
-  quitarVaciosBD(ruta) %>% 
-    filter(as.numeric(TCR) >=9 & dmy(FVEG) < dmy(FOT)) %>% pull(CCR) %>% return() 
+  quitarVaciosBD(ruta) %>% filter(as.numeric(TCR) >=9 & dmy(FVEG) < dmy(FOT)) %>% pull(CCR) %>% return() 
 }
 alert2017 <- function(periodo, agente) {
   
-  BD01  <- quitarVaciosBD(getRuta(default.carpeta, paste(getCoopacFromAgent(agente), "BD01", periodo, sep = "_"))) %>%
-    filter(CCR %in% getCreditosComunes(periodo, agente)) %>% 
-    select(CCR, FVEG, DAKR)
+  creditosComunes <- getCreditosComunes(periodo, agente)
   
-  BD02A <- quitarVaciosBD(getRuta(default.carpeta, paste(getCoopacFromAgent(agente), "BD02A", periodo, sep = "_"))) %>% 
-    filter(CCR %in% getCreditosComunes(periodo, agente)) %>%
-    mutate(NCUO = as.numeric(NCUO)) %>% 
-    group_by(CCR) %>% 
-    arrange(CCR, NCUO) %>% 
-    filter(row_number() == max(row_number())) %>% 
-    select(CCR, FCAN)
-  
-  merge(BD01, BD02A, by.x = "CCR", by.y = "CCR") %>% 
-    rowwise() %>% 
-    mutate(DAKR_teorico = as.numeric(difftime(dmy(FCAN), dmy(FVEG), units = "days")),
-           DAKR_real    = as.numeric(DAKR))%>% 
-    filter(DAKR_teorico != DAKR_real) %>% 
-    pull(CCR) %>% unique() %>%
-    return()
+  if (length(creditosComunes)> 0) {
+    
+    BD01  <- quitarVaciosBD(getRuta(default.carpeta, paste(getCoopacFromAgent(agente), "BD01", periodo, sep = "_"))) %>%
+      filter(CCR %in% creditosComunes) %>% select(CCR, FVEG, DAKR)
+    
+    BD02A <- quitarVaciosBD(getRuta(default.carpeta, paste(getCoopacFromAgent(agente), "BD02A", periodo, sep = "_"))) %>% 
+      filter(CCR %in% creditosComunes) %>%
+      mutate(NCUO = as.numeric(NCUO)) %>% 
+      group_by(CCR) %>% 
+      arrange(CCR, NCUO) %>% 
+      filter(row_number() == max(row_number())) %>% select(CCR, FCAN)
+    
+    alerta <- merge(BD01, BD02A, by.x = "CCR", by.y = "CCR") %>% 
+      rowwise() %>% 
+      mutate(DAKR_teorico = as.numeric(difftime(dmy(FCAN), dmy(FVEG), units = "days")),
+             DAKR_real    = as.numeric(DAKR))%>% 
+      filter(DAKR_teorico != DAKR_real) %>% pull(CCR) %>% unique()
+    
+    return(alerta)
+  }
+  return("")
 }
 alert2018 <- function(periodo, agente) {
   
-  BD01  <- quitarVaciosBD(getRuta(default.carpeta, paste(getCoopacFromAgent(agente), "BD01", periodo, sep = "_"))) %>%
-    filter(CCR %in% getCreditosComunes(periodo, agente)) %>% 
-    select(CCR, MORG)
+  creditosComunes <- getCreditosComunes(periodo, agente)
   
-  BD02A <- quitarVaciosBD(getRuta(default.carpeta, paste(getCoopacFromAgent(agente), "BD02A", periodo, sep = "_"))) %>% 
-    filter(CCR %in% getCreditosComunes(periodo, agente)) %>% 
-    select(CCR, MCUO)
-  
-  merge(BD01, BD02A, by.x = "CCR", by.y = "CCR") %>% 
-    filter(MORG > MCUO) %>% 
-    mutate(diff = as.numeric(MORG) - as.numeric(MCUO)) %>%
-    filter(abs(diff) >100) %>% 
-    pull(CCR) %>% unique() %>% return()
+  if (length(creditosComunes)> 0) {
+    
+    BD01  <- quitarVaciosBD(getRuta(default.carpeta, paste(getCoopacFromAgent(agente), "BD01", periodo, sep = "_"))) %>%
+      filter(CCR %in% creditosComunes) %>% select(CCR, MORG)
+    
+    BD02A <- quitarVaciosBD(getRuta(default.carpeta, paste(getCoopacFromAgent(agente), "BD02A", periodo, sep = "_"))) %>% 
+      filter(CCR %in% creditosComunes) %>% select(CCR, MCUO)
+    
+    alerta <- merge(BD01, BD02A, by.x = "CCR", by.y = "CCR") %>% 
+      filter(MORG > MCUO) %>% 
+      mutate(diff = as.numeric(MORG) - as.numeric(MCUO)) %>%
+      filter(abs(diff) >100) %>% 
+      pull(CCR) %>% unique()
+    
+    return(alerta)
+  }
+  return("")
 }
 alert2019 <- function(ruta, agente) {
   
-  BD01 <- quitarVaciosBD(ruta) %>% 
-    filter(CCR %in% getCreditosSinConGarantia(agente, getAnoMesFromRuta(ruta), "CG")) %>% 
-    select(CCR, CAL, PCI, SKCR, TCR)
+  creditosComunes <- getCreditosSinConGarantia(agente, getAnoMesFromRuta(ruta), "CG")
   
-  BD03B <- quitarVaciosBD(getRuta(default.carpeta, paste(getCoopacFromAgent(agente), "BD03B", getAnoMesFromRuta(ruta), sep = "_"))) %>%
-    filter(CCR %in% getCreditosSinConGarantia(agente, getAnoMesFromRuta(ruta), "CG")) %>% 
-    select(CCR, CGR)
+  if (length(creditosComunes)>0) {
     
-  merge(BD01, BD03B, by.x = "CCR", by.y = "CCR") %>% 
-    rowwise() %>%
-    mutate(provisionTeorica = asignarProvisionCG(as.numeric(CAL), as.numeric(CGR), as.numeric(TCR)),
-           provisionReal    = (as.numeric(PCI)/as.numeric(SKCR) *100) %>% round(2)) %>% 
-    filter(provisionTeorica !=0, provisionTeorica > provisionReal) %>% 
-    pull(CCR) %>% 
-    return()
+    BD01 <- quitarVaciosBD(ruta) %>% filter(CCR %in% creditosComunes) %>% select(CCR, CAL, PCI, SKCR, TCR)
+    
+    BD03B <- quitarVaciosBD(getRuta(default.carpeta, paste(getCoopacFromAgent(agente), "BD03B", getAnoMesFromRuta(ruta), sep = "_"))) %>%
+      filter(CCR %in% creditosComunes) %>% select(CCR, CGR)
+    
+    alerta <- merge(BD01, BD03B, by.x = "CCR", by.y = "CCR") %>% 
+      rowwise() %>%
+      mutate(provisionTeorica = asignarProvisionCG(as.numeric(CAL), as.numeric(CGR), as.numeric(TCR)),
+             provisionReal    = (as.numeric(PCI)/as.numeric(SKCR) *100) %>% round(2)) %>% 
+      filter(provisionTeorica !=0, provisionTeorica > provisionReal) %>% 
+      pull(CCR)
+    
+    return(alerta)
+  }
+  return("")
 }
 alert2020 <- function(ruta) {
-  quitarVaciosBD(ruta) %>%
-    filter(as.numeric(NCR) > 3) %>%
-    pull(CODGR) %>% return()
+  quitarVaciosBD(ruta) %>% filter(as.numeric(NCR) > 3) %>% pull(CODGR) %>% return()
 }
 alert2021 <- function(ruta) {
-  quitarVaciosBD(ruta) %>%
-    filter(dmy(FOT_C) == dmy(FCAN_C)) %>% 
-    pull(CCR_C) %>%
-    return()
+  quitarVaciosBD(ruta) %>% filter(dmy(FOT_C) == dmy(FCAN_C)) %>% pull(CCR_C) %>% return()
 }
 alert2022 <- function(ruta) {
-  quitarVaciosBD(ruta) %>%
-    filter(as.numeric(NCPR_C) == as.numeric(NCPA_C)) %>%
-    pull(CCR_C) %>%
-    return()
+  quitarVaciosBD(ruta) %>% filter(as.numeric(NCPR_C) == as.numeric(NCPA_C)) %>% pull(CCR_C) %>% return()
 }
 alert2023 <- function(ruta, eb) {
   BD         <- quitarVaciosBD(ruta)
@@ -609,21 +607,21 @@ alert2023 <- function(ruta, eb) {
 }
 alert2024 <- function(periodo, agente) {
   
-  quitarVaciosBD(getRuta(default.carpeta, paste(getCoopacFromAgent(agente), "BD01", periodo, sep = "_"))) %>%
-    filter(CCR %in% getCreditosComunes(periodo, agente) & as.numeric(ESAM) < 5 & (as.numeric(NCPR) == 0 | as.numeric(PCUO)  == 0)) %>% 
-    pull(CCR) %>% 
-    return()
+  creditosComunes <- getCreditosComunes(periodo, agente)
+  
+  if (length(creditosComunes)> 0) {
+    
+    alerta <-   quitarVaciosBD(getRuta(default.carpeta, paste(getCoopacFromAgent(agente), "BD01", periodo, sep = "_"))) %>%
+      filter(CCR %in% creditosComunes & as.numeric(ESAM) < 5 & (as.numeric(NCPR) == 0 | as.numeric(PCUO)  == 0)) %>% 
+      pull(CCR)
+    
+    return(alerta)
+  }
+  return("")
 }
 alert2025 <- function(ruta) {
-  quitarVaciosBD(ruta) %>%
-    filter((as.numeric(KVE) > 0 & as.numeric(DAK) == 0)) %>% 
-    pull (CCR) %>% 
-    return()
+  quitarVaciosBD(ruta) %>% filter((as.numeric(KVE) > 0 & as.numeric(DAK) == 0)) %>% pull (CCR) %>% return()
 }
 alert2026 <- function(ruta) {
-  quitarVaciosBD(ruta) %>% 
-    filter(as.numeric(NCR) > 0, as.numeric(NRCL) == 0) %>%
-    pull(CODGR) %>%
-    unique() %>% 
-    return()
+  quitarVaciosBD(ruta) %>% filter(as.numeric(NCR) > 0, as.numeric(NRCL) == 0) %>% pull(CODGR) %>% unique() %>% return()
 }
