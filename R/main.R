@@ -19,19 +19,20 @@ source("R/modulo1/layer3-validation.R")
 source("R/modulo1/layer4-validation.R")
 
 # 2. Módulo de alertas regulatorias
-# source("R/modulo2/layer0-alert.R")
+source("R/modulo2/layer0-alert.R")
 
 # 3. Módulo de analisis crediticio
-# source("R/modulo3/layer0-analysis.R")
+source("R/modulo3/layer0-analysis.R")
 
 ##### Create agent -----
-agent <- createAgent(idCoopac = "01106",
-                     periodoInicial = "202011",
-                     periodoFinal   = "202011")
+agent <- createAgent(idCoopac       = "01328",
+                     periodoInicial = "202001",
+                     periodoFinal   = "202004")
 
 ##### Interrogar Modulo 1
-bucket <- interrogateAgent_mod1(agent)
+bucketErrores <- interrogateAgent_mod1(agent)
+bucketAlertas <- interrogateAgent_mod2(agent, bucketErrores)
 
 ##### Reporting -----
-saveOutputs(closeAgent(agent, bucket), formatBucket(bucket))
-generar_reporte_T1(getIdProcesoFromAgent(agent))
+saveOutputs(closeAgent(agent, bucketErrores), formatBucket(bucketErrores))
+generar_reporte_T1(getIdProcesoFromAgent(agent), bucketErrores)

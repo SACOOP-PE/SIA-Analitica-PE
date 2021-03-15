@@ -43,7 +43,6 @@ interrogateAgent_mod1 <- function(agente){
   eb <- createBucket(agente)
    
   addEventLog(agente, paste0("1. MÓDULO DE VALIDACIÓN DE BASE DE DATOS CREDITICIAS --------------------------")) 
-  
   addEventLog(agente, paste0("Inicio del interrogatorio modulo 1. PID-", agente %>% pull(IdProceso) %>% first(),"."))
   
   #layer0 ----
@@ -82,10 +81,15 @@ interrogateAgent_mod1 <- function(agente){
 interrogateAgent_mod2 <- function(agente, eb){
 
   addEventLog(agente, paste0("2. MÓDULO DE DECTECCIÓN DE ALERTAS DE BASE DE DATOS CREDITICIAS --------------------------"))
-  
   addEventLog(agente, paste0("Inicio del interrogatorio modulo 2. PID-", agente %>% pull(IdProceso) %>% first(),"."))
 
-  #layer0 ----
+  if (nrow(eb) > 0) {
+    #layer0 ----
+    addEventLog(agente, paste0("Layer 1. Revisión alertas Regulatorias"))
+    eb <- layer0_Alertas(agente, eb) %>% filter(Cod %in% c(1000:2026)) %>% arrange(Periodo, Cod)
+    return(eb)
+  }
+  return(eb)
 }
 interrogateAgent_mod3 <- function(agente, eb){
   
