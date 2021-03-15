@@ -1,7 +1,7 @@
 #' Funciones principales
 #' layer2(agente, eb)
 #' 
-layer2 <- function(agente, eb){
+layer2 <- function(agente, eb) {
   eb <- validarCruceContable(agente, eb)
   return(eb)
 }
@@ -51,15 +51,7 @@ getSaldoInteresesDiferidosSiscor     <- function(agente, periodo) {
 }
 getSaldoProvisionesGenericasSiscor   <- function(agente, periodo) {
   initCuadreContable() %>% rowwise() %>% 
-    mutate(diferidos = sum(C14090202, 
-                           C14090302, 
-                           C14090402, 
-                           C14090702, 
-                           C14090902, 
-                           C14091002,
-                           C14091102,
-                           C14091202,
-                           C14091302,
+    mutate(diferidos = sum(C14090202,C14090302,C14090402,C14090702,C14090902,C14091002,C14091102,C14091202,C14091302,
                            na.rm = T) * -1) %>% 
     filter(str_sub(as.character(PeriodoId),1,6) == periodo, 
            CodigoEntidad == getCoopacFromAgent(agente)) %>% 
@@ -68,15 +60,7 @@ getSaldoProvisionesGenericasSiscor   <- function(agente, periodo) {
 }
 getSaldoProvisionesEspecificasSiscor <- function(agente, periodo) {
   initCuadreContable() %>% rowwise() %>% 
-    mutate(diferidos = sum(C14090201, 
-                           C14090301, 
-                           C14090401, 
-                           C14090701, 
-                           C14090901, 
-                           C14091001,
-                           C14091101,
-                           C14091201,
-                           C14091301,
+    mutate(diferidos = sum(C14090201,C14090301,C14090401,C14090701,C14090901,C14091001,C14091101,C14091201,C14091301,
                            na.rm = T) * -1) %>% 
     filter(str_sub(as.character(PeriodoId),1,6) == periodo, 
            CodigoEntidad == getCoopacFromAgent(agent)) %>% 
@@ -104,17 +88,11 @@ getSaldoInteresesDiferidosBDCC     <- function(bd01) {
 } 
 getSaldoProvisionesGenericasBDCC   <- function(bd01) {
   bd01 %>%  
-    filter(as.double(CAL) %in% c(0)) %>% 
-    pull(PCI) %>% 
-    as.double(.) %>% 
-    sum(na.rm = T)
+    filter(as.double(CAL) %in% c(0)) %>% pull(PCI) %>% as.double(.) %>% sum(na.rm = T)
 }
 getSaldoProvisionesEspecificasBDCC <- function(bd01) {
   bd01 %>% 
-    filter(as.double(CAL) %in% c(1,2,3,4)) %>% 
-    pull(PCI) %>% 
-    as.double(.) %>% 
-    sum(na.rm = T)
+    filter(as.double(CAL) %in% c(1,2,3,4)) %>% pull(PCI) %>% as.double(.) %>% sum(na.rm = T)
 }
 
 getCodErrorContable         <- function(nameCapital) {
@@ -137,7 +115,7 @@ getAnoMesContableFromAgente <- function(agente) {
    filter(CodigoEntidad == getCoopacFromAgent(agente)) %>% 
    pull(PeriodoId) %>% unique()
  
- periodoContables[which(as.numeric(periodoContables)<= as.numeric(agent %>% pull(PeriodoFinal)))] %>%
+ periodoContables[which(as.numeric(periodoContables)<= as.numeric(agente %>% pull(PeriodoFinal)))] %>%
    return()
 }
 
@@ -180,8 +158,7 @@ validarCruceContable <- function(agente, eb) {
       rowwise() %>% 
       mutate(CodCoopac = getCoopacFromAgent(agente),
              IdProceso = getIdProcesoFromAgent(agente),
-             Cod       = if_else(abs(Saldo)> 100,
-                                 getCodErrorContable(str_split(Capital, "_")[[1]][2]), 0),
+             Cod       = if_else(abs(Saldo)> 100, getCodErrorContable(str_split(Capital, "_")[[1]][2]), 0),
              Periodo   = Periodo,
              BD        = "BD01",
              num2      = Saldo)
@@ -209,22 +186,7 @@ validarCruceContable <- function(agente, eb) {
     
     return(eb)
   }
-  
-  n <- nrow(eb %>% filter(Cod %in% c(301:308)))
-  
-  if (nrow(eb) > 0) {
-    
-    if (n > 0) {
-      addEventLog(agente, paste0("      Resultado: Se detectaron ", n," error(es) contable(s) en la cartera de créditos pues no cuadra con el balance de comprobación."))
-    }
-    else { 
-      addEventLog(agente, paste0("      Resultado: La validación del cruce contable fue satifactoria."))
-    }
-    
-  }
-  else { 
-    addEventLog(agente, paste0("      Resultado: No se detectaron errores contables a la cartera de créditos."))
-  }
-  
+
+  addEventLog(agente, paste0("      Resultado: No se detectaron errores contables a la cartera de créditos."))
   return(eb)
 }

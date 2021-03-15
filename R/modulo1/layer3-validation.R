@@ -72,84 +72,91 @@ validarOperacionesVacias     <- function(agente, eb) {
     
     return(eb)
   }
+  
+  addEventLog(agente, paste0("      Resultado: La validación operaciones vacías concluyó sin observaciones."))
   return(eb)
 }
 validarOperacionesDuplicadas <- function(agente, eb) {
   exigibles <- getArchivosNoObservadosByCols(agente, eb, c("CCR", "CCR_C", "SKCR", "VCONS"))
   
-  Dups <- tibble(NombreArchivo = exigibles[str_detect(exigibles, paste(c("BD01","BD02A", "BD02B"), collapse = '|'))]) %>% 
-    rowwise() %>% 
-    mutate(ruta       = getRuta(default.carpeta, NombreArchivo),
-           BD         = getBDFromRuta(ruta),
-           Periodo    = getAnoMesFromRuta(toString(ruta)),
-           Duplicados = getOperacionesDuplicadas(ruta),
-           Saldo      = getSaldoTotal(ruta, Duplicados)) %>%
-    filter(Duplicados != "")
-
-  dups_BD01  <- Dups %>% filter(BD == "BD01")
-  dups_BD02A <- Dups %>% filter(BD == "BD02A")
-  dups_BD02B <- Dups %>% filter(BD == "BD02B")
-  dups_BD04  <- getDuplicadosCredCancelados(agente, exigibles) 
-  
-  if (nrow(dups_BD01) > 0) {
-    chunk_403 <- dups_BD01 %>% rowwise() %>%
-      mutate(CodCoopac = getCoopacFromAgent(agente),
-             IdProceso = getIdProcesoFromAgent(agente),
-             Cod = 403,
-             txt1 = Duplicados,
-             num1 = length(str_split(string=txt1 ,pattern = ",")[[1]]),
-             num2 = Saldo) %>%
-      select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1, num2)
-
-    eb <- addError(eb, chunk_403)
-  }
-  if (nrow(dups_BD02A) > 0) {
-    chunk_404 <- dups_BD02A %>% rowwise() %>%
-      mutate(CodCoopac = getCoopacFromAgent(agente),
-             IdProceso = getIdProcesoFromAgent(agente),
-             Cod = 404,
-             txt1 = Duplicados,
-             num1 = length(str_split(string=txt1 ,pattern = ",")[[1]]),
-             num2 = Saldo
-             ) %>%
-      select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1, num2)
+  if (length(exigibles) >0) {
+    Dups <- tibble(NombreArchivo = exigibles[str_detect(exigibles, paste(c("BD01","BD02A", "BD02B"), collapse = '|'))]) %>% 
+      rowwise() %>% 
+      mutate(ruta       = getRuta(default.carpeta, NombreArchivo),
+             BD         = getBDFromRuta(ruta),
+             Periodo    = getAnoMesFromRuta(toString(ruta)),
+             Duplicados = getOperacionesDuplicadas(ruta),
+             Saldo      = getSaldoTotal(ruta, Duplicados)) %>%
+      filter(Duplicados != "")
     
-    eb <- addError(eb, chunk_404)
-  }
-  if (nrow(dups_BD02B) > 0) {
-    chunk_405 <- dups_BD02B %>% rowwise() %>%
-      mutate(CodCoopac = getCoopacFromAgent(agente),
-             IdProceso = getIdProcesoFromAgent(agente),
-             Cod = 405,
-             txt1 = Duplicados,
-             num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])
-             ) %>%
-      select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
+    dups_BD01  <- Dups %>% filter(BD == "BD01")
+    dups_BD02A <- Dups %>% filter(BD == "BD02A")
+    dups_BD02B <- Dups %>% filter(BD == "BD02B")
+    dups_BD04  <- getDuplicadosCredCancelados(agente, exigibles) 
     
-    eb <- addError(eb, chunk_405)
-  }
-  if (length(exigibles[str_detect(exigibles, "BD04")]) >0 & nrow(dups_BD04) > 0) {
-    chunk_407 <- tibble(CodCoopac = getCoopacFromAgent(agente),
-                        IdProceso = getIdProcesoFromAgent(agente),
-                        Cod     = 407,
-                        Periodo = dups_BD04 %>% pull(PeriodoI) %>% first(),
-                        BD      = "BD04",
-                        txt1 = toString(unique(dups_BD04 %>% pull(CCR_C))),
-                        txt2 = toString(unique(dups_BD04 %>% pull(PeriodoI))),
-                        num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
-      select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, txt2, num1)
+    if (nrow(dups_BD01) > 0) {
+      chunk_403 <- dups_BD01 %>% rowwise() %>%
+        mutate(CodCoopac = getCoopacFromAgent(agente),
+               IdProceso = getIdProcesoFromAgent(agente),
+               Cod = 403,
+               txt1 = Duplicados,
+               num1 = length(str_split(string=txt1 ,pattern = ",")[[1]]),
+               num2 = Saldo) %>%
+        select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1, num2)
+      
+      eb <- addError(eb, chunk_403)
+    }
+    if (nrow(dups_BD02A) > 0) {
+      chunk_404 <- dups_BD02A %>% rowwise() %>%
+        mutate(CodCoopac = getCoopacFromAgent(agente),
+               IdProceso = getIdProcesoFromAgent(agente),
+               Cod = 404,
+               txt1 = Duplicados,
+               num1 = length(str_split(string=txt1 ,pattern = ",")[[1]]),
+               num2 = Saldo
+        ) %>%
+        select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1, num2)
+      
+      eb <- addError(eb, chunk_404)
+    }
+    if (nrow(dups_BD02B) > 0) {
+      chunk_405 <- dups_BD02B %>% rowwise() %>%
+        mutate(CodCoopac = getCoopacFromAgent(agente),
+               IdProceso = getIdProcesoFromAgent(agente),
+               Cod = 405,
+               txt1 = Duplicados,
+               num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])
+        ) %>%
+        select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
+      
+      eb <- addError(eb, chunk_405)
+    }
+    if (length(exigibles[str_detect(exigibles, "BD04")]) >0 & nrow(dups_BD04) > 0) {
+      chunk_407 <- tibble(CodCoopac = getCoopacFromAgent(agente),
+                          IdProceso = getIdProcesoFromAgent(agente),
+                          Cod     = 407,
+                          Periodo = dups_BD04 %>% pull(PeriodoI) %>% first(),
+                          BD      = "BD04",
+                          txt1 = toString(unique(dups_BD04 %>% pull(CCR_C))),
+                          txt2 = toString(unique(dups_BD04 %>% pull(PeriodoI))),
+                          num1 = length(str_split(string=txt1 ,pattern = ",")[[1]])) %>%
+        select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, txt2, num1)
+      
+      eb <- addError(eb, chunk_407)
+    }
     
-    eb <- addError(eb, chunk_407)
+    n <- eb %>% filter(Cod %in% c(403:407)) %>% nrow()
+    if (n == 0) {
+      addEventLog(agente, paste0("      Resultado: La validación operaciones duplicadas concluyó sin observaciones."))
+    }
+    else{
+      addEventLog(agente, paste0("      Resultado: La validación operaciones duplicadas concluyó con ",n," observación(es)."))
+    }
+    
+    return(eb)
   }
   
-  n <- eb %>% filter(Cod %in% c(403:407)) %>% nrow()
-  if (n == 0) {
-    addEventLog(agente, paste0("      Resultado: La validación operaciones duplicadas concluyó sin observaciones."))
-  }
-  else{
-    addEventLog(agente, paste0("      Resultado: La validación operaciones duplicadas concluyó con ",n," observación(es)."))
-  }
-  
+  addEventLog(agente, paste0("      Resultado: La validación operaciones duplicadas concluyó sin observaciones."))
   return(eb)
 }
 validarCruceInterno          <- function(agente, eb) {
@@ -295,6 +302,8 @@ validarCreditosFaltantes     <- function(agente, eb) {
     
     return(eb)
   }
+  
+  addEventLog(agente, paste0("      Resultado: La validación de créditos faltantes en la 2B o 4 concluyó sin observaciones."))
   return(eb)
 }
 validarCruceFechaVencimiento <- function(agente, eb) {
@@ -302,34 +311,40 @@ validarCruceFechaVencimiento <- function(agente, eb) {
   exigibles     <- getArchivosNoObservadosByCols(agente, eb, c("CCR", "NCUO", "FVEG", "FVEP"))
   archivosCruce <-  exigibles[str_detect(exigibles, paste(getPeriodosNoObservados(agente, eb, "CCR"), collapse = '|'))]
   
-  validacion <- tibble(NombreArchivo = archivosCruce[str_detect(archivosCruce, "BD02A")]) %>% rowwise() %>% 
-    mutate(ruta    = getRuta(default.carpeta, NombreArchivo),
-           Periodo = getAnoMesFromRuta(ruta),
-           errorFechaCuota = toString(getCreditosDifFechaUltimaCouta(ruta))) %>% 
-    filter(errorFechaCuota != "")
-  
-  if (nrow(validacion)>0) {
-    chunk_506 <- validacion %>% rowwise() %>% 
-      mutate(CodCoopac = getCoopacFromAgent(agente),
-             IdProceso = getIdProcesoFromAgent(agente),
-             BD   = "BD02A",
-             Cod  = 506,
-             txt1 = errorFechaCuota,
-             num1 = length(str_split(string=txt1, pattern = ",")[[1]])) %>% 
-      select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
+  if (length(archivosCruce)>0) {
     
-    eb <- addError(eb, chunk_506)
+    validacion <- tibble(NombreArchivo = archivosCruce[str_detect(archivosCruce, "BD02A")]) %>% rowwise() %>% 
+      mutate(ruta    = getRuta(default.carpeta, NombreArchivo),
+             Periodo = getAnoMesFromRuta(ruta),
+             errorFechaCuota = toString(getCreditosDifFechaUltimaCouta(ruta))) %>% 
+      filter(errorFechaCuota != "")
     
-    n <- eb %>% filter(Cod == 506) %>% nrow()
-    if (n == 0) {
-      addEventLog(agente, paste0("      Resultado: La validación de cruce de fechas de vencimiento de créditos entre la 2A y la 1 concluyó sin observaciones."))
+    if (nrow(validacion)>0) {
+      chunk_506 <- validacion %>% rowwise() %>% 
+        mutate(CodCoopac = getCoopacFromAgent(agente),
+               IdProceso = getIdProcesoFromAgent(agente),
+               BD   = "BD02A",
+               Cod  = 506,
+               txt1 = errorFechaCuota,
+               num1 = length(str_split(string=txt1, pattern = ",")[[1]])) %>% 
+        select(CodCoopac, IdProceso, Cod, Periodo, BD, txt1, num1)
+      
+      eb <- addError(eb, chunk_506)
+      
+      n <- eb %>% filter(Cod == 506) %>% nrow()
+      if (n == 0) {
+        addEventLog(agente, paste0("      Resultado: La validación de cruce de fechas de vencimiento de créditos entre la 2A y la 1 concluyó sin observaciones."))
+      }
+      else{
+        addEventLog(agente, paste0("      Resultado: La validación de cruce de fechas de vencimiento de créditos entre la 2A y la 1 concluyó con ",n," observación(es)."))
+      }
+      
+      return(eb)
     }
-    else{
-      addEventLog(agente, paste0("      Resultado: La validación de cruce de fechas de vencimiento de créditos entre la 2A y la 1 concluyó con ",n," observación(es)."))
-    }
-    
     return(eb)
   }
+  
+  addEventLog(agente, paste0("      Resultado: La validación de cruce de fechas de vencimiento de créditos entre la 2A y la 1 concluyó sin observaciones."))
   return(eb)
 }
 
